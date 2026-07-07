@@ -126,14 +126,10 @@ class MainActivity : AppCompatActivity() {
         // Tabs
         val tabLatest = findViewById<MaterialButton>(R.id.tabLatest)
         val tabPopular = findViewById<MaterialButton>(R.id.tabPopular)
-        val tabArabic = findViewById<MaterialButton>(R.id.tabArabic)
-        val tabEnglish = findViewById<MaterialButton>(R.id.tabEnglish)
 
         val tabs = mapOf(
             "latest" to tabLatest,
             "popular" to tabPopular,
-            "arabic" to tabArabic,
-            "english" to tabEnglish
         )
 
         fun setActiveTab(active: String) {
@@ -157,14 +153,6 @@ class MainActivity : AppCompatActivity() {
         tabPopular.setOnClickListener {
             if (currentTab == "popular") return@setOnClickListener
             currentTab = "popular"; currentPage = 1; setActiveTab(currentTab); loadManga()
-        }
-        tabArabic.setOnClickListener {
-            if (currentTab == "arabic") return@setOnClickListener
-            currentTab = "arabic"; currentPage = 1; setActiveTab(currentTab); loadManga()
-        }
-        tabEnglish.setOnClickListener {
-            if (currentTab == "english") return@setOnClickListener
-            currentTab = "english"; currentPage = 1; setActiveTab(currentTab); loadManga()
         }
 
         // Navigation drawer
@@ -218,8 +206,7 @@ class MainActivity : AppCompatActivity() {
             val result = withContext(Dispatchers.IO) {
                 when (currentTab) {
                     "popular" -> repository.getPopularManga(currentPage)
-                    "arabic" -> repository.getArabicManga(currentPage)
-                    "english" -> repository.getEnglishManga(currentPage)
+                    "popular" -> repository.getPopularManga(currentPage)
                     else -> repository.getLatestManga(currentPage)
                 }
             }
@@ -278,8 +265,7 @@ class MainActivity : AppCompatActivity() {
             val result = withContext(Dispatchers.IO) {
                 when (currentTab) {
                     "popular" -> repository.getPopularManga(currentPage)
-                    "arabic" -> repository.getArabicManga(currentPage)
-                    "english" -> repository.getEnglishManga(currentPage)
+                    "popular" -> repository.getPopularManga(currentPage)
                     else -> repository.getLatestManga(currentPage)
                 }
             }
