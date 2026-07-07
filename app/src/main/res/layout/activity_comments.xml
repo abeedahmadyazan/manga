@@ -6,7 +6,6 @@
     android:orientation="vertical"
     android:background="@color/background_dark">
 
-    <!-- Header -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="56dp"
@@ -37,7 +36,6 @@
             android:layout_marginStart="8dp" />
     </LinearLayout>
 
-    <!-- Sort tabs -->
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/sortTabs"
         android:layout_width="match_parent"
@@ -64,7 +62,6 @@
             android:text="الأكثر تفاعل" />
     </com.google.android.material.tabs.TabLayout>
 
-    <!-- Comments list -->
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -90,14 +87,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="لا توجد تعليقات بعد. كن أول من يعلق!"
+            android:text="لا توجد تعليقات بعد"
             android:textColor="@color/text_secondary"
             android:textSize="14sp"
             android:visibility="gone"
             android:padding="32dp" />
     </FrameLayout>
 
-    <!-- Comment input -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
