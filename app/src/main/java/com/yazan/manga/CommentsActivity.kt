@@ -15,7 +15,6 @@ import com.google.android.material.tabs.TabLayout
 import com.yazan.manga.data.AuthManager
 import com.yazan.manga.data.CommentsManager
 import com.yazan.manga.data.ReportsManager
-import com.yazan.manga.ui.CommentsAdapter
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -28,12 +27,12 @@ class CommentsActivity : AppCompatActivity() {
     private lateinit var commentInput: android.widget.EditText
     private lateinit var sendBtn: MaterialButton
     private lateinit var sortTabs: TabLayout
-    private lateinit var adapter: CommentsAdapter
 
     private var contextId: String = ""
     private var contextType: String = "manga"
     private var contextTitle: String = ""
     private var currentSort: String = "newest"
+    private var currentComments: MutableList<CommentsManager.Comment> = mutableListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,7 +48,6 @@ class CommentsActivity : AppCompatActivity() {
 
     private fun initViews() {
         findViewById<TextView>(R.id.commentsTitle).text = "💬 $contextTitle"
-
         recyclerView = findViewById(R.id.commentsRecyclerView)
         loadingIndicator = findViewById(R.id.loadingIndicator)
         emptyText = findViewById(R.id.emptyText)
@@ -58,21 +56,6 @@ class CommentsActivity : AppCompatActivity() {
         sortTabs = findViewById(R.id.sortTabs)
 
         findViewById<ImageButton>(R.id.btnBack).setOnClickListener { finish() }
-
-        adapter = CommentsAdapter(
-            currentUser = AuthManager.getCurrentUser(this),
-            onLike = { id -> CommentsManager.toggleLike(this, id); loadComments() },
-            onDislike = { id -> CommentsManager.toggleDislike(this, id); loadComments() },
-            onDelete = { id -> confirmDelete(id) },
-            onEdit = { id, text -> CommentsManager.editComment(this, id, text); loadComments() },
-            onBan = { id -> confirmBan(id) },
-            onSuspend = { email, reason -> showSuspendDuration(email, reason) },
-            onReport = { id, text -> showReportDialog(id, text) },
-            onOpenReplies = { comment -> openRepliesScreen(comment) },
-            onViewProfile = { email -> openUserProfile(email) }
-        )
-        recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.adapter = adapter
 
         sendBtn.setOnClickListener {
             val text = commentInput.text.toString().trim()
@@ -86,7 +69,7 @@ class CommentsActivity : AppCompatActivity() {
                     2 -> "likes"
                     else -> "newest"
                 }
-                loadComments()
+                renderComments()
             }
             override fun onTabUnselected(tab: TabLayout.Tab) {}
             override fun onTabReselected(tab: TabLayout.Tab) {}
@@ -96,121 +79,89 @@ class CommentsActivity : AppCompatActivity() {
     private fun sendComment(text: String) {
         val user = AuthManager.getCurrentUser(this)
         if (user == null) {
-            android.widget.Toast.makeText(this, "يجب تسجيل الدخول أولاً", android.widget.Toast.LENGTH_SHORT).show()
+            android.widget.Toast.makeText(this, "يجب تسجيل الدخول", android.widget.Toast.LENGTH_SHORT).show()
             return
         }
 
-        loadingIndicator.visibility = View.VISIBLE
-        lifecycleScope.launch {
-            val error = withContext(Dispatchers.IO) {
-                CommentsManager.addComment(this@CommentsActivity, contextId, contextType, text, null)
+        val cd = CommentsManager.checkCooldown(this)
+        if (!cd.allowed) {
+            android.widget.Toast.makeText(this, "انتظر ${cd.secondsLeft} ثانية", android.widget.Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        if (contextType == "chapter") {
+            if (!CommentsManager.checkChapterLimit(this, contextId, user.email)) {
+                android.widget.Toast.makeText(this, "وصلت للحد الأقصى (2 تعليقات/فصل)", android.widget.Toast.LENGTH_SHORT).show()
+                return
             }
-            loadingIndicator.visibility = View.GONE
-            if (error != null) {
-                android.widget.Toast.makeText(this@CommentsActivity, error, android.widget.Toast.LENGTH_LONG).show()
-            } else {
-                commentInput.text.clear()
-                loadComments()
-            }
+        }
+
+        val error = CommentsManager.addComment(this, contextId, contextType, text, null)
+        if (error != null) {
+            android.widget.Toast.makeText(this, error, android.widget.Toast.LENGTH_LONG).show()
+        } else {
+            commentInput.text.clear()
+            loadComments()
         }
     }
 
     private fun loadComments() {
-        lifecycleScope.launch {
-            val (topLevel, replies) = withContext(Dispatchers.IO) {
-                val all = CommentsManager.getComments(this@CommentsActivity, contextId)
-                val top = all.filter { it.parentId == null }
-                val sorted = CommentsManager.sortComments(top, currentSort)
-                val repsMap = all.filter { it.parentId != null }.groupBy { it.parentId!! }
-                Pair(sorted, repsMap)
+        currentComments = CommentsManager.getComments(this, contextId).toMutableList()
+        renderComments()
+    }
+
+    private fun renderComments() {
+        if (currentComments.isEmpty()) {
+            emptyText.visibility = View.VISIBLE
+            recyclerView.visibility = View.GONE
+            return
+        }
+
+        emptyText.visibility = View.GONE
+        recyclerView.visibility = View.VISIBLE
+        recyclerView.layoutManager = LinearLayoutManager(this)
+
+        val sorted = CommentsManager.sortComments(currentComments.filter { it.parentId == null }, currentSort)
+        val user = AuthManager.getCurrentUser(this)
+
+        recyclerView.adapter = object : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+            override fun onCreateViewHolder(parent: android.view.ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+                val tv = TextView(parent.context).apply {
+                    setPadding(32, 32, 32, 32)
+                    setTextColor(getColor(R.color.white))
+                    textSize = 13f
+                }
+                return object : RecyclerView.ViewHolder(tv) {}
             }
-            if (topLevel.isEmpty()) {
-                emptyText.visibility = View.VISIBLE
-                recyclerView.visibility = View.GONE
-            } else {
-                emptyText.visibility = View.GONE
-                recyclerView.visibility = View.VISIBLE
-                adapter.submitList(topLevel, replies)
+
+            override fun getItemCount() = sorted.size
+
+            override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+                val c = sorted[position]
+                val sdf = java.text.SimpleDateFormat("yyyy-MM-dd HH:mm", java.util.Locale.getDefault())
+                val liked = user != null && c.likes.contains(user.email)
+                val isOwner = user?.email == c.authorEmail
+                val canDelete = isOwner || (user?.isAdmin == true)
+
+                var text = "${if (c.isAdmin) "👑 " else ""}${c.authorName}\n${c.text}\n👍 ${c.likes.size} | 👎 ${c.dislikes.size} | ${sdf.format(java.util.Date(c.createdAt))}"
+                if (canDelete) text += "\n[احذف]"
+
+                (holder.itemView as TextView).text = text
+
+                holder.itemView.setOnClickListener {
+                    if (canDelete) {
+                        AlertDialog.Builder(this@CommentsActivity)
+                            .setTitle("حذف التعليق")
+                            .setMessage("هل تريد حذف هذا التعليق؟")
+                            .setPositiveButton("حذف") { _, _ ->
+                                CommentsManager.deleteComment(this@CommentsActivity, c.id)
+                                loadComments()
+                            }
+                            .setNegativeButton("إلغاء", null)
+                            .show()
+                    }
+                }
             }
         }
-    }
-
-    private fun confirmDelete(commentId: String) {
-        AlertDialog.Builder(this)
-            .setTitle("حذف التعليق")
-            .setMessage("هل أنت متأكد من حذف هذا التعليق؟")
-            .setPositiveButton("حذف") { _, _ ->
-                CommentsManager.deleteComment(this, commentId)
-                loadComments()
-            }
-            .setNegativeButton("إلغاء", null)
-            .show()
-    }
-
-    private fun confirmBan(commentId: String) {
-        AlertDialog.Builder(this)
-            .setTitle("حظر المستخدم")
-            .setMessage("سيتم حظر هذا المستخدم وحذف كل تعليقاته. متابعة؟")
-            .setPositiveButton("حظر") { _, _ ->
-                val error = CommentsManager.banUser(this, commentId)
-                if (error != null) {
-                    android.widget.Toast.makeText(this, error, android.widget.Toast.LENGTH_SHORT).show()
-                } else {
-                    android.widget.Toast.makeText(this, "تم حظر المستخدم", android.widget.Toast.LENGTH_SHORT).show()
-                    loadComments()
-                }
-            }
-            .setNegativeButton("إلغاء", null)
-            .show()
-    }
-
-    private fun showSuspendDuration(email: String, reason: String) {
-        val options = arrayOf("إيقاف يومين", "إيقاف أسبوع", "إيقاف شهر", "إيقاف دائم")
-        AlertDialog.Builder(this)
-            .setTitle("مدة الإيقاف")
-            .setItems(options) { _, which ->
-                val days = when (which) { 0 -> 2; 1 -> 7; 2 -> 30; else -> 0 }
-                val err = AuthManager.suspendUser(this, email, days, reason)
-                if (err == null) {
-                    android.widget.Toast.makeText(this, "تم إيقاف الحساب", android.widget.Toast.LENGTH_SHORT).show()
-                    loadComments()
-                } else {
-                    android.widget.Toast.makeText(this, err, android.widget.Toast.LENGTH_SHORT).show()
-                }
-            }
-            .setNegativeButton("إلغاء", null)
-            .show()
-    }
-
-    private fun showReportDialog(commentId: String, commentText: String) {
-        val reasons = arrayOf("إساءة", "محتوى غير لائق", "سبام", "تحرش", "أخرى")
-        AlertDialog.Builder(this)
-            .setTitle("الإبلاغ عن التعليق")
-            .setItems(reasons) { _, which ->
-                val reason = reasons[which]
-                val err = ReportsManager.reportComment(this, commentId, commentText, reason)
-                if (err == null) {
-                    android.widget.Toast.makeText(this, "تم إرسال البلاغ، شكراً لك", android.widget.Toast.LENGTH_SHORT).show()
-                } else {
-                    android.widget.Toast.makeText(this, err, android.widget.Toast.LENGTH_SHORT).show()
-                }
-            }
-            .setNegativeButton("إلغاء", null)
-            .show()
-    }
-
-    private fun openRepliesScreen(comment: CommentsManager.Comment) {
-        val intent = android.content.Intent(this, RepliesActivity::class.java)
-        intent.putExtra("parent_id", comment.id)
-        intent.putExtra("context_id", contextId)
-        intent.putExtra("context_type", contextType)
-        intent.putExtra("parent_author", comment.authorName)
-        startActivity(intent)
-    }
-
-    private fun openUserProfile(email: String) {
-        val intent = android.content.Intent(this, UserProfileActivity::class.java)
-        intent.putExtra("user_email", email)
-        startActivity(intent)
     }
 }
