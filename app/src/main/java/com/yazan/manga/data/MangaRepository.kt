@@ -251,36 +251,44 @@ class MangaRepository {
                 .header("Accept", "application/json")
                 .build()
             
+            var shouldBreak = false
             try {
-                client.newCall(req).execute().use { resp ->
-                    if (!resp.isSuccessful) break
-                    val body = resp.body?.string() ?: break
-                    val json = JsonParser.parseString(body).asJsonObject
-                    val data = json.getAsJsonArray("data") ?: break
-                    total = json.get("total")?.asInt ?: break
-                    
-                    for (i in 0 until data.size()) {
-                        val ch = data[i].asJsonObject
-                        val chId = ch.get("id").asString
-                        val attrs = ch.getAsJsonObject("attributes")
-                        val num = attrs.get("chapter")?.asString ?: continue
-                        val lang = attrs.get("translatedLanguage")?.asString ?: ""
-                        val title = attrs.get("title")?.asString ?: ""
-                        val publishAt = attrs.get("publishAt")?.asString ?: ""
-                        
-                        allChapters.add(chId to mapOf(
-                            "num" to num,
-                            "lang" to lang,
-                            "title" to title,
-                            "date" to publishAt
-                        ))
-                    }
-                    
-                    if (data.size() < limit) break
+                val resp = client.newCall(req).execute()
+                if (!resp.isSuccessful) {
+                    resp.close()
+                    break
                 }
+                val body = resp.body?.string()
+                resp.close()
+                if (body.isNullOrEmpty()) break
+                
+                val json = JsonParser.parseString(body).asJsonObject
+                val data = json.getAsJsonArray("data")
+                if (data == null) break
+                total = json.get("total")?.asInt ?: break
+                
+                for (i in 0 until data.size()) {
+                    val ch = data[i].asJsonObject
+                    val chId = ch.get("id").asString
+                    val attrs = ch.getAsJsonObject("attributes")
+                    val num = attrs.get("chapter")?.asString ?: continue
+                    val lang = attrs.get("translatedLanguage")?.asString ?: ""
+                    val title = attrs.get("title")?.asString ?: ""
+                    val publishAt = attrs.get("publishAt")?.asString ?: ""
+                    
+                    allChapters.add(chId to mapOf(
+                        "num" to num,
+                        "lang" to lang,
+                        "title" to title,
+                        "date" to publishAt
+                    ))
+                }
+                
+                if (data.size() < limit) shouldBreak = true
             } catch (e: Exception) {
-                break
+                shouldBreak = true
             }
+            if (shouldBreak) break
             offset += limit
         }
         
@@ -339,14 +347,9 @@ class MangaRepository {
         }
     }
 
-    // ===== 3asq chapters (fallback - try on phone) =====
+    // ===== 3asq chapters (not used - 3asq blocked by Cloudflare) =====
     suspend fun get3asqChapters(slug: String): Result<List<MangaChapter>> {
-        return try {
-            val chapters = com.yazan.manga.data.fetch3asqChapters(slug)
-            Result.success(chapters)
-        } catch (e: Exception) {
-            Result.failure(e)
-        }
+        return Result.failure(Exception("3asq غير متاح"))
     }
 
     private fun formatDate(iso: String): String {
