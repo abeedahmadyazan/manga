@@ -193,13 +193,14 @@ class MangaRepository {
             
             // 2. Try to get Arabic chapters from 3asq
             val slug = getSlugForId(id) ?: guessSlug(enTitle, title)
-            val asqChapters = try { get3asqChapters(slug) } catch (e: Exception) { null }
+            val asqChapters = try { fetch3asqChaptersInternal(slug) } catch (e: Exception) { null }
             
             // 3. If 3asq has chapters, use them (Arabic!)
             // Otherwise use MangaDex (might have Arabic chapters too)
             val chapters = if (!asqChapters.isNullOrEmpty()) {
-                Log.d(TAG, "Using 3asq chapters: ${asqChapters.size} for slug=$slug")
-                asqChapters
+                val safeChapters = asqChapters!!
+                Log.d(TAG, "Using 3asq chapters: ${safeChapters.size} for slug=$slug")
+                safeChapters
             } else {
                 Log.d(TAG, "3asq failed, using MangaDex chapters for $id")
                 getMangaDexChapters(id)
@@ -236,7 +237,7 @@ class MangaRepository {
     }
 
     // ===== 3asq chapters via Netlify API =====
-    private fun get3asqChapters(slug: String): List<MangaChapter>? {
+    private fun fetch3asqChaptersInternal(slug: String): List<MangaChapter>? {
         return try {
             val req = Request.Builder().url("$ASQ_API/chapters?slug=$slug")
                 .header("Accept", "application/json").build()
@@ -375,7 +376,7 @@ class MangaRepository {
     }
 
     suspend fun get3asqChapters(slug: String): Result<List<MangaChapter>> {
-        val result = get3asqChapters(slug as String) ?: return Result.failure(Exception("3asq unavailable"))
+        val result = fetch3asqChaptersInternal(slug) ?: return Result.failure(Exception("3asq unavailable"))
         return Result.success(result)
     }
 
