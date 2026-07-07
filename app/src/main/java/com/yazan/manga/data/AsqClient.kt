@@ -292,7 +292,7 @@ object AsqClient {
                 "<div\\s+class=\"post-title\">[\\s\\S]*?<a[^>]*>([^<]+)</a>",
                 Pattern.CASE_INSENSITIVE
             )
-            val title = titleP.matcher(block).let { mm ->
+            val title: String = titleP.matcher(block).let { mm ->
                 if (mm.find()) mm.group(1)?.trim() ?: slug
             } ?: slug
 
@@ -300,7 +300,7 @@ object AsqClient {
                 "<img[^>]+src=\"([^\"]+)\"",
                 Pattern.CASE_INSENSITIVE
             )
-            val cover = coverP.matcher(block).let { mm ->
+            val cover: String = coverP.matcher(block).let { mm ->
                 if (mm.find()) mm.group(1) ?: ""
             } ?: ""
 
