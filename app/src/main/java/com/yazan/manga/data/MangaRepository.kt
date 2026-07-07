@@ -151,13 +151,13 @@ class MangaRepository {
 
             // Try 3asq chapters first (Arabic, One Piece 1187)
             val asqSlug = guess3asqSlug(title)
-            val asqChapters = try { get3asqChapters(asqSlug) } catch (e: Exception) { null }
+            val asqChapters = try { fetch3asqChaptersInternal(asqSlug) } catch (e: Exception) { null }
 
             // Get MangaDex chapters as fallback
             val mdChapters = getMangaDexChapters(id)
 
             // Use 3asq if available, otherwise MangaDex
-            val chapters = if (!asqChapters.isNullOrEmpty()) asqChapters else mdChapters
+            val chapters = if (!asqChapters.isNullOrEmpty()) asqChapters!! else mdChapters
 
             Result.success(MangaDetails(id = id, title = title, cover = cover, description = description, author = author, artist = author, status = status, genres = genres, chapters = chapters, source = if (!asqChapters.isNullOrEmpty()) "3asq" else "mangadex", latestChapter = null))
         } catch (e: Exception) {
@@ -187,7 +187,7 @@ class MangaRepository {
     }
 
     // ===== 3asq chapters via Netlify API =====
-    private fun get3asqChapters(slug: String): List<MangaChapter>? {
+    private fun fetch3asqChaptersInternal(slug: String): List<MangaChapter>? {
         return try {
             val req = Request.Builder().url("$ASQ_API/chapters?slug=$slug").header("Accept", "application/json").build()
             client.newCall(req).execute().use { resp ->
@@ -298,7 +298,7 @@ class MangaRepository {
     }
 
     suspend fun get3asqChapters(slug: String): Result<List<MangaChapter>> {
-        val result = get3asqChapters(slug as String) ?: return Result.failure(Exception("3asq unavailable"))
+        val result = fetch3asqChaptersInternal(slug) ?: return Result.failure(Exception("3asq unavailable"))
         return Result.success(result)
     }
 
