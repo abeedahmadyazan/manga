@@ -4,10 +4,16 @@ import java.text.SimpleDateFormat
 import java.util.Locale
 import java.util.TimeZone
 
+/**
+ * Repository that calls MangaDex API directly.
+ * - Paginates chapters (for One Piece with 1100+ chapters)
+ * - Returns Result<T> for clean error handling
+ */
 class MangaRepository {
 
     private val api = MangaApiClient.api
 
+    // ===== Latest Arabic manga =====
     suspend fun getLatestManga(page: Int = 1): Result<List<MangaListItem>> {
         return try {
             val offset = (page - 1) * 20
@@ -18,6 +24,7 @@ class MangaRepository {
         }
     }
 
+    // ===== Popular Arabic manga =====
     suspend fun getPopularManga(page: Int = 1): Result<List<MangaListItem>> {
         return try {
             val offset = (page - 1) * 20
@@ -28,6 +35,7 @@ class MangaRepository {
         }
     }
 
+    // ===== Arabic-only manga (latest Arabic translations) =====
     suspend fun getArabicManga(page: Int = 1): Result<List<MangaListItem>> {
         return try {
             val offset = (page - 1) * 20
@@ -38,6 +46,7 @@ class MangaRepository {
         }
     }
 
+    // ===== English-only manga (latest English translations) =====
     suspend fun getEnglishManga(page: Int = 1): Result<List<MangaListItem>> {
         return try {
             val offset = (page - 1) * 20
@@ -48,6 +57,7 @@ class MangaRepository {
         }
     }
 
+    // ===== Search Arabic manga =====
     suspend fun searchManga(query: String, page: Int = 1): Result<List<MangaListItem>> {
         return try {
             val offset = (page - 1) * 20
@@ -58,6 +68,7 @@ class MangaRepository {
         }
     }
 
+    // ===== Manga details with chapters =====
     suspend fun getMangaDetails(id: String): Result<MangaDetails> {
         return try {
             val mangaResponse = api.getMangaDetails(id)
@@ -90,6 +101,7 @@ class MangaRepository {
         }
     }
 
+    // ===== Chapter pages =====
     suspend fun getChapterPages(chapter: MangaChapter): Result<List<ChapterPage>> {
         return try {
             val response = api.getChapterPages(chapter.id)
@@ -106,6 +118,8 @@ class MangaRepository {
             Result.failure(e)
         }
     }
+
+    // ===== Helpers: MangaDex -> UI models =====
 
     private fun MangaDexManga.toListItem(): MangaListItem {
         return MangaListItem(
@@ -156,13 +170,19 @@ class MangaRepository {
     }
 
     private fun MangaDexChapter.toChapter(): MangaChapter {
+        val groupName = relationships
+            .filter { it.type == "scanlation_group" }
+            .joinToString("، ") { it.attributes?.name ?: "" }
+            .ifEmpty { null }
+
         return MangaChapter(
             id = id,
             number = attributes.chapter ?: "",
             title = attributes.title ?: "",
             date = formatDate(attributes.publishAt ?: attributes.createdAt),
             source = "mangadex",
-            externalUrl = attributes.externalUrl
+            externalUrl = attributes.externalUrl,
+            groupName = groupName
         )
     }
 
