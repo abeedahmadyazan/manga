@@ -54,7 +54,7 @@ class MangaDetailsActivity : AppCompatActivity() {
         setContentView(R.layout.activity_manga_details)
 
         repository = MangaRepository()
-        mangaSlug = intent.getStringExtra("manga_slug") ?: ""
+        mangaSlug = intent.getStringExtra("manga_id") ?: ""
         mangaTitle = intent.getStringExtra("manga_title") ?: ""
         mangaCover = intent.getStringExtra("manga_cover") ?: ""
 
@@ -89,7 +89,7 @@ class MangaDetailsActivity : AppCompatActivity() {
         btnShare.setOnClickListener {
             val shareIntent = Intent(Intent.ACTION_SEND).apply {
                 type = "text/plain"
-                putExtra(Intent.EXTRA_TEXT, "https://3asq.pro/manga/$mangaSlug/\n$mangaTitle")
+                putExtra(Intent.EXTRA_TEXT, "$mangaTitle\nمانجا")
             }
             startActivity(Intent.createChooser(shareIntent, "مشاركة عبر"))
         }
@@ -161,7 +161,7 @@ class MangaDetailsActivity : AppCompatActivity() {
         }
 
         // Subtitle shows source
-        altTitleText.text = "via 3asq.pro"
+        altTitleText.text = "مانجا عربية"
 
         chaptersCountText.text = "${data.chapters.size} فصل"
         chapterAdapter.submitList(data.chapters)
