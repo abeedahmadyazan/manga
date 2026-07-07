@@ -171,12 +171,12 @@ class MainActivity : AppCompatActivity() {
         navigationView.setNavigationItemSelectedListener { item ->
             drawerLayout.closeDrawer(GravityCompat.START)
             when (item.itemId) {
-                R.id.menu_profile -> startActivity(Intent(this, ProfileActivity::class.java))
-                R.id.menu_settings -> startActivity(Intent(this, SettingsActivity::class.java))
-                R.id.menu_favorites -> Toast.makeText(this, "قريباً", Toast.LENGTH_SHORT).show()
-                R.id.menu_history -> Toast.makeText(this, "قريباً", Toast.LENGTH_SHORT).show()
-                R.id.menu_downloads -> Toast.makeText(this, "قريباً", Toast.LENGTH_SHORT).show()
-                R.id.menu_about -> Toast.makeText(this, "تطبيق مانجا v1.0", Toast.LENGTH_SHORT).show()
+                R.id.menuProfile -> startActivity(Intent(this, ProfileActivity::class.java))
+                R.id.menuSettings -> startActivity(Intent(this, SettingsActivity::class.java))
+                R.id.menuFavorites -> Toast.makeText(this, "قريباً", Toast.LENGTH_SHORT).show()
+                R.id.menuHistory -> Toast.makeText(this, "قريباً", Toast.LENGTH_SHORT).show()
+                R.id.menuDownloads -> Toast.makeText(this, "قريباً", Toast.LENGTH_SHORT).show()
+                R.id.menuAbout -> Toast.makeText(this, "تطبيق مانجا v1.0", Toast.LENGTH_SHORT).show()
             }
             true
         }
