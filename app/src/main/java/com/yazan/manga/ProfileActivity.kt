@@ -1,7 +1,7 @@
 package com.yazan.manga
 
-import android.app.Activity
 import android.content.Intent
+import android.app.Activity
 import android.os.Bundle
 import android.view.View
 import android.widget.EditText
@@ -32,6 +32,7 @@ class ProfileActivity : AppCompatActivity() {
     private lateinit var tvUsername: TextView
     private lateinit var tvEmail: TextView
     private lateinit var tvAdminBadge: TextView
+    private lateinit var etEmail: EditText
     private lateinit var btnLogin: MaterialButton
     private lateinit var btnLogout: MaterialButton
     private lateinit var btnChangeUsername: MaterialButton
@@ -42,7 +43,6 @@ class ProfileActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
 
-        // Configure Google Sign-In
         val gso = AuthManager.getGoogleSignInOptions(this)
         googleSignInClient = GoogleSignIn.getClient(this, gso)
         firebaseAuth = FirebaseAuth.getInstance()
@@ -56,6 +56,7 @@ class ProfileActivity : AppCompatActivity() {
         tvUsername = findViewById(R.id.tvUsername)
         tvEmail = findViewById(R.id.tvEmail)
         tvAdminBadge = findViewById(R.id.tvAdminBadge)
+        etEmail = findViewById(R.id.etEmail)
         btnLogin = findViewById(R.id.btnLogin)
         btnLogout = findViewById(R.id.btnLogout)
         btnChangeUsername = findViewById(R.id.btnChangeUsername)
@@ -166,6 +167,7 @@ class ProfileActivity : AppCompatActivity() {
             tvEmail.text = "📧 ${user.email}"
             tvEmail.visibility = View.VISIBLE
             tvAdminBadge.visibility = if (user.isAdmin) View.VISIBLE else View.GONE
+            etEmail.visibility = View.GONE
             btnLogin.visibility = View.GONE
             btnLogout.visibility = View.VISIBLE
             btnChangeUsername.visibility = View.VISIBLE
@@ -175,6 +177,7 @@ class ProfileActivity : AppCompatActivity() {
             tvUsername.visibility = View.GONE
             tvEmail.visibility = View.GONE
             tvAdminBadge.visibility = View.GONE
+            etEmail.visibility = View.VISIBLE
             btnLogin.visibility = View.VISIBLE
             btnLogout.visibility = View.GONE
             btnChangeUsername.visibility = View.GONE
