@@ -1,33 +1,77 @@
 package com.yazan.manga.data
 
-import retrofit2.http.Body
 import retrofit2.http.GET
-import retrofit2.http.POST
+import retrofit2.http.Path
 import retrofit2.http.Query
 
-/**
- * Retrofit API interface for the manga website's API.
- * Base URL: https://manga-app-yazan.netlify.app
- */
 interface MangaApiService {
 
-    // GET /api/manga/list?type=latest&page=1
-    @GET("api/manga/list")
-    suspend fun getMangaList(
-        @Query("type") type: String = "latest",
-        @Query("page") page: Int = 1,
-        @Query("query") query: String = ""
-    ): MangaListResponse
+    @GET("manga")
+    suspend fun getLatestArabic(
+        @Query("limit") limit: Int = 20,
+        @Query("offset") offset: Int = 0,
+        @Query("availableTranslatedLanguage[]") lang: String = "ar",
+        @Query("order[latestUploadedChapter]") order: String = "desc",
+        @Query("includes[]") includes: String = "cover_art",
+        @Query("contentRating[]") safe: String = "safe",
+        @Query("contentRating[]") suggestive: String = "suggestive"
+    ): MangaDexListResponse
 
-    // GET /api/manga/details?id=xxx
-    @GET("api/manga/details")
+    @GET("manga")
+    suspend fun getLatestEnglish(
+        @Query("limit") limit: Int = 20,
+        @Query("offset") offset: Int = 0,
+        @Query("availableTranslatedLanguage[]") lang: String = "en",
+        @Query("order[latestUploadedChapter]") order: String = "desc",
+        @Query("includes[]") includes: String = "cover_art",
+        @Query("contentRating[]") safe: String = "safe",
+        @Query("contentRating[]") suggestive: String = "suggestive"
+    ): MangaDexListResponse
+
+    @GET("manga")
+    suspend fun getPopularArabic(
+        @Query("limit") limit: Int = 20,
+        @Query("offset") offset: Int = 0,
+        @Query("availableTranslatedLanguage[]") lang: String = "ar",
+        @Query("order[followedCount]") order: String = "desc",
+        @Query("includes[]") includes: String = "cover_art",
+        @Query("contentRating[]") safe: String = "safe",
+        @Query("contentRating[]") suggestive: String = "suggestive"
+    ): MangaDexListResponse
+
+    @GET("manga")
+    suspend fun searchArabic(
+        @Query("title") title: String,
+        @Query("limit") limit: Int = 20,
+        @Query("offset") offset: Int = 0,
+        @Query("availableTranslatedLanguage[]") lang: String = "ar",
+        @Query("order[relevance]") order: String = "desc",
+        @Query("includes[]") includes: String = "cover_art",
+        @Query("contentRating[]") safe: String = "safe",
+        @Query("contentRating[]") suggestive: String = "suggestive"
+    ): MangaDexListResponse
+
+    @GET("manga/{id}")
     suspend fun getMangaDetails(
-        @Query("id") id: String
-    ): MangaDetails
+        @Path("id") id: String,
+        @Query("includes[]") author: String = "author",
+        @Query("includes[]") artist: String = "artist",
+        @Query("includes[]") cover: String = "cover_art"
+    ): MangaDexMangaResponse
 
-    // POST /api/manga/chapter/pages  (body = chapter JSON)
-    @POST("api/manga/chapter/pages")
+    @GET("manga/{id}/feed")
+    suspend fun getMangaChapters(
+        @Path("id") id: String,
+        @Query("limit") limit: Int = 100,
+        @Query("offset") offset: Int = 0,
+        @Query("translatedLanguage[]") lang: String = "ar",
+        @Query("order[chapter]") order: String = "desc",
+        @Query("contentRating[]") safe: String = "safe",
+        @Query("contentRating[]") suggestive: String = "suggestive"
+    ): MangaDexChaptersResponse
+
+    @GET("at-home/server/{chapterId}")
     suspend fun getChapterPages(
-        @Body chapter: MangaChapter
-    ): ChapterPagesResponse
+        @Path("chapterId") chapterId: String
+    ): MangaDexChapterPagesResponse
 }
