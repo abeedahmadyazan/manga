@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/background_dark"
+    android:fitsSystemWindows="true"
+    android:layoutDirection="rtl">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingTop="36dp"
+        android:paddingHorizontal="12dp"
+        android:paddingBottom="10dp"
+        android:background="@color/background_dark">
+
+        <ImageButton
+            android:id="@+id/btnBack"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_back"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:tint="@color/text_primary"
+            android:contentDescription="رجوع"
+            tools:ignore="UseAppTint,HardcodedText" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="👑 لوحة المشرف"
+            android:textColor="@color/text_primary"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginStart="10dp"
+            tools:ignore="HardcodedText" />
+    </LinearLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="🚨 البلاغات المعلقة"
+                android:textColor="@color/primary"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:id="@+id/reportsEmpty"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="لا توجد بلاغات معلقة"
+                android:textColor="@color/text_secondary"
+                android:textSize="13sp"
+                android:padding="16dp"
+                android:gravity="center"
+                tools:ignore="HardcodedText" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/reportsRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false"
+                android:padding="8dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="⏸️ الحسابات الموقوفة"
+                android:textColor="@color/primary"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:id="@+id/suspendedUsersText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/text_secondary"
+                android:textSize="13sp"
+                android:padding="16dp"
+                android:lineSpacingExtra="4dp" />
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</LinearLayout>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="none">
+        <item
+            android:id="@+id/menuFavorites"
+            android:icon="@drawable/ic_bookmark"
+            android:title="المفضلة" />
+        <item
+            android:id="@+id/menuHistory"
+            android:icon="@drawable/ic_history"
+            android:title="سجل القراءة" />
+        <item
+            android:id="@+id/menuDownloads"
+            android:icon="@drawable/ic_download"
+            android:title="التنزيلات" />
+    </group>
+
+    <group android:checkableBehavior="none">
+        <item
+            android:id="@+id/menuProfile"
+            android:icon="@drawable/ic_person"
+            android:title="الملف الشخصي" />
+        <item
+            android:id="@+id/menuSettings"
+            android:icon="@drawable/ic_settings"
+            android:title="الإعدادات" />
+        <item
+            android:id="@+id/menuAbout"
+            android:icon="@drawable/ic_info"
+            android:title="عن التطبيق" />
+    </group>
+
+</menu>

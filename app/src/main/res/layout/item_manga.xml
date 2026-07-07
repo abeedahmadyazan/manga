@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="6dp"
+    app:cardBackgroundColor="@color/surface"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="3dp"
+    app:strokeWidth="0dp"
+    android:foreground="?attr/selectableItemBackground"
+    android:clickable="true"
+    android:focusable="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Cover image — fixed height to approximate 2:3 ratio in grid -->
+        <ImageView
+            android:id="@+id/mangaCover"
+            android:layout_width="match_parent"
+            android:layout_height="210dp"
+            android:scaleType="centerCrop"
+            android:adjustViewBounds="true"
+            android:background="@color/surface_light"
+            android:contentDescription="غلاف المانجا"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/mangaTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:text="Manga Title"
+            android:textColor="@color/text_primary"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:minHeight="40dp"
+            tools:ignore="HardcodedText" />
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

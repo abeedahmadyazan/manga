@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    android:background="@color/background_dark"
+    android:layoutDirection="rtl">
+
+    <!-- ============ Top bar ============ -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingTop="36dp"
+        android:paddingHorizontal="12dp"
+        android:paddingBottom="10dp">
+
+        <ImageButton
+            android:id="@+id/btnBack"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_back"
+            android:contentDescription="رجوع"
+            android:tint="@color/text_primary"
+            tools:ignore="HardcodedText,UseAppTint" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="10dp"
+            android:text="الإعدادات"
+            android:textColor="@color/text_primary"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            tools:ignore="HardcodedText" />
+    </LinearLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Section: Reading -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="القراءة"
+                android:textColor="@color/primary"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                tools:ignore="HardcodedText" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="@color/surface"
+                app:cardCornerRadius="14dp"
+                app:cardElevation="1dp"
+                app:strokeWidth="0dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:divider="@drawable/divider_line"
+                    android:showDividers="middle">
+
+                    <!-- Dark mode -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:padding="16dp">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="الوضع الليلي"
+                                android:textColor="@color/text_primary"
+                                android:textSize="15sp"
+                                android:textStyle="bold"
+                                tools:ignore="HardcodedText" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="2dp"
+                                android:text="واجهة داكنة مريحة للقراءة"
+                                android:textColor="@color/text_muted"
+                                android:textSize="12sp"
+                                tools:ignore="HardcodedText" />
+                        </LinearLayout>
+
+                        <androidx.appcompat.widget.SwitchCompat
+                            android:id="@+id/switchDarkMode"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checked="true" />
+                    </LinearLayout>
+
+                    <!-- Data saver -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:padding="16dp">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="حفظ البيانات"
+                                android:textColor="@color/text_primary"
+                                android:textSize="15sp"
+                                android:textStyle="bold"
+                                tools:ignore="HardcodedText" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="2dp"
+                                android:text="جودة أقل للصور لتوفير البيانات"
+                                android:textColor="@color/text_muted"
+                                android:textSize="12sp"
+                                tools:ignore="HardcodedText" />
+                        </LinearLayout>
+
+                        <androidx.appcompat.widget.SwitchCompat
+                            android:id="@+id/switchDataSaver"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checked="true" />
+                    </LinearLayout>
+
+                    <!-- Auto-download -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:padding="16dp">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="التحميل التلقائي"
+                                android:textColor="@color/text_primary"
+                                android:textSize="15sp"
+                                android:textStyle="bold"
+                                tools:ignore="HardcodedText" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="2dp"
+                                android:text="تحميل الفصول الجديدة تلقائياً"
+                                android:textColor="@color/text_muted"
+                                android:textSize="12sp"
+                                tools:ignore="HardcodedText" />
+                        </LinearLayout>
+
+                        <androidx.appcompat.widget.SwitchCompat
+                            android:id="@+id/switchAutoDownload"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checked="false" />
+                    </LinearLayout>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Section: Notifications -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="22dp"
+                android:layout_marginBottom="8dp"
+                android:text="الإشعارات"
+                android:textColor="@color/primary"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                tools:ignore="HardcodedText" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="@color/surface"
+                app:cardCornerRadius="14dp"
+                app:cardElevation="1dp"
+                app:strokeWidth="0dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:padding="16dp">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="إشعارات الفصول الجديدة"
+                            android:textColor="@color/text_primary"
+                            android:textSize="15sp"
+                            android:textStyle="bold"
+                            tools:ignore="HardcodedText" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:text="تنبيهك عند نزول فصول جديدة"
+                            android:textColor="@color/text_muted"
+                            android:textSize="12sp"
+                            tools:ignore="HardcodedText" />
+                    </LinearLayout>
+
+                    <androidx.appcompat.widget.SwitchCompat
+                        android:id="@+id/switchNotifications"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- About -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="22dp"
+                android:layout_marginBottom="8dp"
+                android:text="عن التطبيق"
+                android:textColor="@color/primary"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                tools:ignore="HardcodedText" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="@color/surface"
+                app:cardCornerRadius="14dp"
+                app:cardElevation="1dp"
+                app:strokeWidth="0dp">
+
+                <TextView
+                    android:id="@+id/tvAbout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp"
+                    android:text="تطبيق مانجا v1.0.0\nمصدر البيانات: 3asq.pro\n© 2026"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="13sp"
+                    android:lineSpacingExtra="3dp"
+                    tools:ignore="HardcodedText" />
+            </com.google.android.material.card.MaterialCardView>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="24dp" />
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</LinearLayout>
