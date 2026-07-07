@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/swipeRefresh"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
         android:background="@color/background_dark">
 
+        <!-- Top bar -->
         <LinearLayout
             android:id="@+id/topBar"
             android:layout_width="match_parent"
@@ -35,16 +34,38 @@
                 android:layout_height="0dp"
                 android:layout_weight="1" />
 
-            <ImageButton
-                android:id="@+id/btnProfile"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:src="@android:drawable/ic_menu_my_calendar"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:tint="@color/white"
-                android:layout_marginEnd="8dp"
-                android:contentDescription="حسابي" />
+            <!-- Tab buttons -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/tabLatest"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:text="الأحدث"
+                android:textSize="12sp"
+                android:minWidth="0dp"
+                android:paddingHorizontal="16dp"
+                app:cornerRadius="18dp"
+                xmlns:app="http://schemas.android.com/apk/res-auto" />
 
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/tabPopular"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:text="الأكثر مشاهدة"
+                android:textSize="12sp"
+                android:textColor="@color/text_secondary"
+                android:minWidth="0dp"
+                android:paddingHorizontal="16dp"
+                android:layout_marginStart="8dp"
+                app:cornerRadius="18dp"
+                xmlns:app="http://schemas.android.com/apk/res-auto" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <!-- Search button -->
             <ImageButton
                 android:id="@+id/btnSearch"
                 android:layout_width="40dp"
@@ -55,6 +76,7 @@
                 android:contentDescription="بحث" />
         </LinearLayout>
 
+        <!-- Search bar (hidden by default) -->
         <LinearLayout
             android:id="@+id/searchBar"
             android:layout_width="match_parent"
@@ -92,107 +114,36 @@
                 android:contentDescription="إغلاق" />
         </LinearLayout>
 
-        <FrameLayout
+        <!-- Manga grid -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/mangaRecyclerView"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1">
+            android:layout_height="match_parent"
+            android:layout_marginTop="56dp"
+            android:clipToPadding="false"
+            android:padding="8dp" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/mangaRecyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:clipToPadding="false"
-                android:padding="8dp"
-                android:paddingBottom="80dp" />
+        <!-- Loading indicator -->
+        <ProgressBar
+            android:id="@+id/loadingIndicator"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_gravity="center"
+            android:indeterminateTint="@color/primary"
+            android:visibility="gone" />
 
-            <ProgressBar
-                android:id="@+id/loadingIndicator"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_gravity="center"
-                android:indeterminateTint="@color/primary"
-                android:visibility="gone" />
+        <!-- Error text -->
+        <TextView
+            android:id="@+id/errorText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textColor="@color/text_secondary"
+            android:textSize="14sp"
+            android:gravity="center"
+            android:padding="32dp"
+            android:visibility="gone" />
 
-            <TextView
-                android:id="@+id/errorText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:textColor="@color/text_secondary"
-                android:textSize="14sp"
-                android:gravity="center"
-                android:padding="32dp"
-                android:visibility="gone" />
-        </FrameLayout>
-
-        <LinearLayout
-            android:id="@+id/bottomTabs"
-            android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:paddingHorizontal="8dp"
-            android:background="@color/background_dark"
-            android:elevation="8dp">
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/tabLatest"
-                style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
-                android:layout_width="0dp"
-                android:layout_height="36dp"
-                android:layout_weight="1"
-                android:text="الأحدث"
-                android:textSize="11sp"
-                android:minWidth="0dp"
-                android:paddingHorizontal="4dp"
-                app:cornerRadius="18dp" />
-
-            <View android:layout_width="4dp" android:layout_height="0dp" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/tabPopular"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                android:layout_width="0dp"
-                android:layout_height="36dp"
-                android:layout_weight="1"
-                android:text="شهرة"
-                android:textSize="11sp"
-                android:textColor="@color/text_secondary"
-                android:minWidth="0dp"
-                android:paddingHorizontal="4dp"
-                app:cornerRadius="18dp" />
-
-            <View android:layout_width="4dp" android:layout_height="0dp" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/tabArabic"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                android:layout_width="0dp"
-                android:layout_height="36dp"
-                android:layout_weight="1"
-                android:text="🇸🇦 عربي"
-                android:textSize="11sp"
-                android:textColor="@color/text_secondary"
-                android:minWidth="0dp"
-                android:paddingHorizontal="4dp"
-                app:cornerRadius="18dp" />
-
-            <View android:layout_width="4dp" android:layout_height="0dp" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/tabEnglish"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                android:layout_width="0dp"
-                android:layout_height="36dp"
-                android:layout_weight="1"
-                android:text="🇬🇧 إنجليزي"
-                android:textSize="11sp"
-                android:textColor="@color/text_secondary"
-                android:minWidth="0dp"
-                android:paddingHorizontal="4dp"
-                app:cornerRadius="18dp" />
-        </LinearLayout>
-
-    </LinearLayout>
+    </FrameLayout>
 
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
