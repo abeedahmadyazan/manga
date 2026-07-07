@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "561976290856",
+    "project_id": "manga-app-9c6a1",
+    "storage_bucket": "manga-app-9c6a1.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:561976290856:android:cc7f5061baf2d3ef58cf1d",
+        "android_client_info": {
+          "package_name": "com.yazan.manga"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "561976290856-mkfmpgn8avr4d891oliu3sboq9anln30.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAJWWiaAhNBNUhT7fZWg1xQK1biT2THTo8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "561976290856-mkfmpgn8avr4d891oliu3sboq9anln30.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,48 @@
+package com.yazan.manga.ui
+
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
+import com.yazan.manga.R
+import com.yazan.manga.data.MangaChapter
+
+class ChapterAdapter(
+    private val items: List<MangaChapter> = emptyList(),
+    private val onClick: (MangaChapter) -> Unit
+) : RecyclerView.Adapter<ChapterAdapter.ChapterVH>() {
+
+    fun submitList(newItems: List<MangaChapter>) {
+        (items as? MutableList)?.let {
+            it.clear()
+            it.addAll(newItems)
+            notifyDataSetChanged()
+        }
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChapterVH {
+        val view = LayoutInflater.from(parent.context)
+            .inflate(R.layout.item_chapter, parent, false)
+        return ChapterVH(view)
+    }
+
+    override fun onBindViewHolder(holder: ChapterVH, position: Int) {
+        holder.bind(items[position])
+    }
+
+    override fun getItemCount(): Int = items.size
+
+    inner class ChapterVH(view: View) : RecyclerView.ViewHolder(view) {
+        private val number: TextView = view.findViewById(R.id.chapterNumber)
+        private val title: TextView = view.findViewById(R.id.chapterTitle)
+        private val date: TextView = view.findViewById(R.id.chapterDate)
+
+        fun bind(ch: MangaChapter) {
+            number.text = ch.number
+            title.text = ch.title.ifEmpty { "الفصل ${ch.number}" }
+            date.text = ch.date.ifEmpty { "الفصل ${ch.number}" }
+            itemView.setOnClickListener { onClick(ch) }
+        }
+    }
+}
