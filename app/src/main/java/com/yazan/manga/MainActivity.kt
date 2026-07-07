@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var adapter: MangaAdapter
 
     private val repository = MangaRepository()
-    private var currentTab = "latest"
+    private var currentTab = "latest"  // "latest" or "top"
     private var currentPage = 1
     private var isLoading = false
 
@@ -48,6 +48,7 @@ class MainActivity : AppCompatActivity() {
         errorText = findViewById(R.id.errorText)
 
         adapter = MangaAdapter { manga ->
+            // Open manga details
             val intent = Intent(this, MangaDetailsActivity::class.java)
             intent.putExtra("manga_id", manga.id)
             intent.putExtra("manga_title", manga.title)
@@ -58,6 +59,7 @@ class MainActivity : AppCompatActivity() {
         recyclerView.layoutManager = GridLayoutManager(this, 3)
         recyclerView.adapter = adapter
 
+        // Pagination - load more when scrolled to bottom
         recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(rv: RecyclerView, dx: Int, dy: Int) {
                 if (dy <= 0 || isLoading) return
@@ -68,75 +70,40 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
+        // Swipe to refresh
         swipeRefresh.setOnRefreshListener {
             currentPage = 1
             loadManga()
         }
         swipeRefresh.setColorSchemeResources(R.color.primary)
 
+        // Tab buttons
         val tabLatest = findViewById<MaterialButton>(R.id.tabLatest)
         val tabPopular = findViewById<MaterialButton>(R.id.tabPopular)
-        val tabArabic = findViewById<MaterialButton>(R.id.tabArabic)
-        val tabEnglish = findViewById<MaterialButton>(R.id.tabEnglish)
-
-        val tabs = mapOf(
-            "latest" to tabLatest,
-            "popular" to tabPopular,
-            "arabic" to tabArabic,
-            "english" to tabEnglish
-        )
-
-        fun setActiveTab(active: String) {
-            tabs.forEach { (key, btn) ->
-                if (key == active) {
-                    btn.setBackgroundColor(getColor(R.color.primary))
-                    btn.setTextColor(getColor(R.color.white))
-                } else {
-                    btn.setBackgroundColor(getColor(R.color.surface))
-                    btn.setTextColor(getColor(R.color.text_secondary))
-                }
-            }
-        }
-
-        setActiveTab(currentTab)
 
         tabLatest.setOnClickListener {
             if (currentTab == "latest") return@setOnClickListener
             currentTab = "latest"
             currentPage = 1
-            setActiveTab(currentTab)
+            tabLatest.setBackgroundColor(getColor(R.color.primary))
+            tabLatest.setTextColor(getColor(R.color.white))
+            tabPopular.setBackgroundColor(getColor(R.color.surface))
+            tabPopular.setTextColor(getColor(R.color.text_secondary))
             loadManga()
         }
 
         tabPopular.setOnClickListener {
-            if (currentTab == "popular") return@setOnClickListener
-            currentTab = "popular"
+            if (currentTab == "top") return@setOnClickListener
+            currentTab = "top"
             currentPage = 1
-            setActiveTab(currentTab)
+            tabPopular.setBackgroundColor(getColor(R.color.primary))
+            tabPopular.setTextColor(getColor(R.color.white))
+            tabLatest.setBackgroundColor(getColor(R.color.surface))
+            tabLatest.setTextColor(getColor(R.color.text_secondary))
             loadManga()
         }
 
-        tabArabic.setOnClickListener {
-            if (currentTab == "arabic") return@setOnClickListener
-            currentTab = "arabic"
-            currentPage = 1
-            setActiveTab(currentTab)
-            loadManga()
-        }
-
-        tabEnglish.setOnClickListener {
-            if (currentTab == "english") return@setOnClickListener
-            currentTab = "english"
-            currentPage = 1
-            setActiveTab(currentTab)
-            loadManga()
-        }
-
-        val btnProfile = findViewById<ImageButton>(R.id.btnProfile)
-        btnProfile.setOnClickListener {
-            startActivity(Intent(this, ProfileActivity::class.java))
-        }
-
+        // Search button
         val btnSearch = findViewById<ImageButton>(R.id.btnSearch)
         val searchBar = findViewById<LinearLayout>(R.id.searchBar)
         val searchInput = findViewById<android.widget.EditText>(R.id.searchInput)
@@ -180,11 +147,10 @@ class MainActivity : AppCompatActivity() {
 
         lifecycleScope.launch {
             val result = withContext(Dispatchers.IO) {
-                when (currentTab) {
-                    "popular" -> repository.getPopularManga(currentPage)
-                    "arabic" -> repository.getArabicManga(currentPage)
-                    "english" -> repository.getEnglishManga(currentPage)
-                    else -> repository.getLatestManga(currentPage)
+                if (currentTab == "top") {
+                    repository.getPopularManga(currentPage)
+                } else {
+                    repository.getLatestManga(currentPage)
                 }
             }
 
@@ -240,11 +206,10 @@ class MainActivity : AppCompatActivity() {
 
         lifecycleScope.launch {
             val result = withContext(Dispatchers.IO) {
-                when (currentTab) {
-                    "popular" -> repository.getPopularManga(currentPage)
-                    "arabic" -> repository.getArabicManga(currentPage)
-                    "english" -> repository.getEnglishManga(currentPage)
-                    else -> repository.getLatestManga(currentPage)
+                if (currentTab == "top") {
+                    repository.getPopularManga(currentPage)
+                } else {
+                    repository.getLatestManga(currentPage)
                 }
             }
 
