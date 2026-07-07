@@ -134,25 +134,8 @@ object AuthManager {
      * Note: This requires the user to add a Web Client ID in Firebase Console.
      */
     private fun readWebClientId(context: Context): String? {
-        return try {
-            val inputStream = context.assets.open("google-services.json")
-            val json = inputStream.bufferedReader().use { it.readText() }
-            val jsonObject = JSONObject(json)
-            val client = jsonObject.getJSONArray("client").getJSONObject(0)
-            val oauthClient = client.optJSONArray("oauth_client")
-            if (oauthClient != null && oauthClient.length() > 0) {
-                for (i in 0 until oauthClient.length()) {
-                    val oauth = oauthClient.getJSONObject(i)
-                    val clientId = oauth.optString("client_id", "")
-                    if (clientId.contains("apps.googleusercontent.com")) {
-                        return clientId
-                    }
-                }
-            }
-            null
-        } catch (e: Exception) {
-            null
-        }
+        // Web Client ID from Firebase Console (oauth_client type 3)
+        return "561976290856-mkfmpgn8avr4d891oliu3sboq9anln30.apps.googleusercontent.com"
     }
 
     /**
