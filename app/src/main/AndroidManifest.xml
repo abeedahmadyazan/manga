@@ -34,6 +34,21 @@
             android:parentActivityName=".MangaDetailsActivity"
             android:configChanges="orientation|screenSize" />
 
+        <activity
+            android:name=".ProfileActivity"
+            android:parentActivityName=".MainActivity"
+            android:configChanges="orientation|screenSize" />
+
+        <activity
+            android:name=".CommentsActivity"
+            android:parentActivityName=".MangaDetailsActivity"
+            android:configChanges="orientation|screenSize" />
+
+        <activity
+            android:name=".AdminPanelActivity"
+            android:parentActivityName=".ProfileActivity"
+            android:configChanges="orientation|screenSize" />
+
     </application>
 
 </manifest>
