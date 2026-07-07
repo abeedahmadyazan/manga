@@ -8,13 +8,11 @@
     android:fitsSystemWindows="true"
     android:background="@color/background_dark">
 
-    <!-- Main content -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <!-- Top bar -->
         <LinearLayout
             android:id="@+id/topBar"
             android:layout_width="match_parent"
@@ -56,7 +54,6 @@
                 android:contentDescription="بحث" />
         </LinearLayout>
 
-        <!-- Search bar (hidden by default) -->
         <LinearLayout
             android:id="@+id/searchBar"
             android:layout_width="match_parent"
@@ -94,7 +91,6 @@
                 android:layout_marginStart="8dp" />
         </LinearLayout>
 
-        <!-- Tabs -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="44dp"
@@ -110,7 +106,7 @@
                 android:layout_height="32dp"
                 android:layout_weight="1"
                 android:text="الأحدث"
-                android:textSize="11sp"
+                android:textSize="12sp"
                 android:minWidth="0dp"
                 android:paddingHorizontal="4dp"
                 app:cornerRadius="16dp" />
@@ -123,45 +119,14 @@
                 android:layout_width="0dp"
                 android:layout_height="32dp"
                 android:layout_weight="1"
-                android:text="شهرة"
-                android:textSize="11sp"
-                android:textColor="@color/text_secondary"
-                android:minWidth="0dp"
-                android:paddingHorizontal="4dp"
-                app:cornerRadius="16dp" />
-
-            <View android:layout_width="4dp" android:layout_height="0dp" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/tabArabic"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                android:layout_width="0dp"
-                android:layout_height="32dp"
-                android:layout_weight="1"
-                android:text="عربي"
-                android:textSize="11sp"
-                android:textColor="@color/text_secondary"
-                android:minWidth="0dp"
-                android:paddingHorizontal="4dp"
-                app:cornerRadius="16dp" />
-
-            <View android:layout_width="4dp" android:layout_height="0dp" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/tabEnglish"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                android:layout_width="0dp"
-                android:layout_height="32dp"
-                android:layout_weight="1"
-                android:text="إنجليزي"
-                android:textSize="11sp"
+                android:text="الأكثر شهرة"
+                android:textSize="12sp"
                 android:textColor="@color/text_secondary"
                 android:minWidth="0dp"
                 android:paddingHorizontal="4dp"
                 app:cornerRadius="16dp" />
         </LinearLayout>
 
-        <!-- Manga grid -->
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -201,7 +166,6 @@
         </FrameLayout>
     </LinearLayout>
 
-    <!-- Navigation Drawer -->
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/navigationView"
         android:layout_width="280dp"
