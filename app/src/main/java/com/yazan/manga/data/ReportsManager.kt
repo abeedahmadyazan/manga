@@ -5,10 +5,6 @@ import org.json.JSONArray
 import org.json.JSONObject
 import java.util.UUID
 
-/**
- * Reports Manager — handles user reports on comments/users.
- * Admin can review and dismiss or take action.
- */
 object ReportsManager {
 
     private const val PREFS_NAME = "manga_reports"
@@ -18,11 +14,11 @@ object ReportsManager {
         val id: String,
         val commentId: String,
         val commentText: String,
-        val reportedBy: String,  // email
+        val reportedBy: String,
         val reportedByName: String,
         val reason: String,
         val reportedAt: Long,
-        val status: String  // "pending", "dismissed", "actioned"
+        val status: String
     )
 
     fun reportComment(
@@ -33,7 +29,6 @@ object ReportsManager {
     ): String? {
         val user = AuthManager.getCurrentUser(context) ?: return "يجب تسجيل الدخول"
 
-        // Prevent duplicate reports from same user
         val existing = getAllReports(context)
         if (existing.any { it.commentId == commentId && it.reportedBy == user.email }) {
             return "لقد أبلغت عن هذا التعليق مسبقاً"
@@ -53,7 +48,7 @@ object ReportsManager {
         val list = getAllReports(context).toMutableList()
         list.add(report)
         saveReports(context, list)
-        return null // success
+        return null
     }
 
     fun getAllReports(context: Context): List<Report> {
@@ -81,42 +76,20 @@ object ReportsManager {
         return getAllReports(context).filter { it.status == "pending" }
     }
 
-    fun dismissReport(context: Context, reportId: String): String? {
-        val user = AuthManager.getCurrentUser(context) ?: return "يجب تسجيل الدخول"
-        if (!user.isAdmin) return "هذا الإجراء للمشرف فقط"
-
-        val list = getAllReports(context).toMutableList()
-        val idx = list.indexOfFirst { it.id == reportId }
-        if (idx < 0) return "البلاغ غير موجود"
-        list[idx] = list[idx].copy(status = "dismissed")
-        saveReports(context, list)
-        return null
-    }
-
-    fun actionReport(context: Context, reportId: String): String? {
-        val user = AuthManager.getCurrentUser(context) ?: return "يجب تسجيل الدخول"
-        if (!user.isAdmin) return "هذا الإجراء للمشرف فقط"
-
-        val list = getAllReports(context).toMutableList()
-        val idx = list.indexOfFirst { it.id == reportId }
-        if (idx < 0) return "البلاغ غير موجود"
-        list[idx] = list[idx].copy(status = "actioned")
-        saveReports(context, list)
-        return null
-    }
-
     private fun saveReports(context: Context, list: List<Report>) {
         val arr = JSONArray()
-        list.forEach { r -> arr.put(JSONObject().apply {
-            put("id", r.id)
-            put("commentId", r.commentId)
-            put("commentText", r.commentText)
-            put("reportedBy", r.reportedBy)
-            put("reportedByName", r.reportedByName)
-            put("reason", r.reason)
-            put("reportedAt", r.reportedAt)
-            put("status", r.status)
-        })}
+        list.forEach { r ->
+            arr.put(JSONObject().apply {
+                put("id", r.id)
+                put("commentId", r.commentId)
+                put("commentText", r.commentText)
+                put("reportedBy", r.reportedBy)
+                put("reportedByName", r.reportedByName)
+                put("reason", r.reason)
+                put("reportedAt", r.reportedAt)
+                put("status", r.status)
+            })
+        }
         context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
             .edit().putString(KEY_REPORTS, arr.toString()).apply()
     }
