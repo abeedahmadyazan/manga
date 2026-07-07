@@ -5,45 +5,32 @@ import org.json.JSONArray
 import org.json.JSONObject
 import java.util.UUID
 
-/**
- * Comments Manager with full features:
- * - Comments for manga (general) and chapters
- * - Replies to comments
- * - Like / Dislike (toggle, one per user)
- * - Delete comment (owner or admin)
- * - Edit comment (owner only)
- * - Rate limiting: 60 seconds between comments/replies
- * - Max 2 comments per chapter (must delete one to add more)
- * - Ban users (admin only)
- * - Sort: newest / oldest / most liked
- */
 object CommentsManager {
 
     private const val PREFS_NAME = "manga_comments"
     private const val KEY_COMMENTS = "all_comments"
     private const val KEY_LAST_COMMENT_TIME = "last_comment_time"
-    private const val COOLDOWN_MS = 60_000L  // 60 seconds
+    private const val COOLDOWN_MS = 60_000L
     private const val MAX_PER_CHAPTER = 2
 
     data class Comment(
         val id: String,
-        val context: String,        // manga ID or chapter ID
-        val contextType: String,    // "manga" or "chapter"
+        val context: String,
+        val contextType: String,
         val authorName: String,
         val authorEmail: String,
         val authorDeviceId: String,
         val isAdmin: Boolean,
         val text: String,
-        val parentId: String?,      // null = top-level, else = reply
-        val likes: MutableList<String>,   // list of user emails who liked
-        val dislikes: MutableList<String>, // list of user emails who disliked
+        val parentId: String?,
+        val likes: MutableList<String>,
+        val dislikes: MutableList<String>,
         val createdAt: Long,
         val editedAt: Long?
     )
 
     data class CooldownResult(val allowed: Boolean, val secondsLeft: Int)
 
-    /** Check if user can comment (cooldown) */
     fun checkCooldown(context: Context): CooldownResult {
         val prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
         val last = prefs.getLong(KEY_LAST_COMMENT_TIME, 0)
@@ -56,7 +43,6 @@ object CommentsManager {
         return CooldownResult(true, 0)
     }
 
-    /** Check if user can comment on a chapter (max 2 per chapter) */
     fun checkChapterLimit(context: Context, chapterId: String, userEmail: String): Boolean {
         val comments = getAllComments(context)
         val count = comments.filter {
@@ -68,26 +54,21 @@ object CommentsManager {
         return count < MAX_PER_CHAPTER
     }
 
-    /** Add a comment or reply */
     fun addComment(
         context: Context,
         contextId: String,
-        contextType: String,  // "manga" or "chapter"
+        contextType: String,
         text: String,
         parentId: String? = null
     ): String? {
         val user = AuthManager.getCurrentUser(context) ?: return "يجب تسجيل الدخول"
 
-        // Cooldown check
         val cd = checkCooldown(context)
-        if (!cd.allowed) {
-            return "انتظر ${cd.secondsLeft} ثانية قبل التعليق مرة أخرى"
-        }
+        if (!cd.allowed) return "انتظر ${cd.secondsLeft} ثانية"
 
-        // Chapter limit check (only for top-level chapter comments)
         if (contextType == "chapter" && parentId == null) {
             if (!checkChapterLimit(context, contextId, user.email)) {
-                return "وصلت للحد الأقصى ($MAX_PER_CHAPTER تعليقات لكل فصل). احذف تعليقاً لتضيف جديداً."
+                return "وصلت للحد الأقصى ($MAX_PER_CHAPTER تعليقات لكل فصل)"
             }
         }
 
@@ -111,11 +92,10 @@ object CommentsManager {
         comments.add(comment)
         saveComments(context, comments)
 
-        // Update last comment time
         context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
             .edit().putLong(KEY_LAST_COMMENT_TIME, System.currentTimeMillis()).apply()
 
-        return null // success
+        return null
     }
 
     fun getComments(context: Context, contextId: String): List<Comment> {
@@ -128,7 +108,6 @@ object CommentsManager {
 
     fun deleteComment(context: Context, commentId: String): Boolean {
         val comments = getAllComments(context).toMutableList()
-        // Delete comment + all its replies
         comments.removeAll { it.id == commentId || it.parentId == commentId }
         saveComments(context, comments)
         return true
@@ -181,7 +160,6 @@ object CommentsManager {
         return null
     }
 
-    /** Ban a user by device ID (admin only) */
     fun banUser(context: Context, commentId: String): String? {
         val user = AuthManager.getCurrentUser(context) ?: return "يجب تسجيل الدخول"
         if (!user.isAdmin) return "هذا الإجراء للمشرف فقط"
@@ -191,22 +169,19 @@ object CommentsManager {
         if (target.isAdmin) return "لا يمكن حظر مشرف"
 
         AuthManager.banDevice(context, target.authorDeviceId)
-        // Delete all comments by this user
         val filtered = comments.filterNot { it.authorDeviceId == target.authorDeviceId }
         saveComments(context, filtered)
         return null
     }
 
-    // === Sorting ===
     fun sortComments(comments: List<Comment>, sortBy: String): List<Comment> {
         return when (sortBy) {
             "oldest" -> comments.sortedBy { it.createdAt }
             "likes" -> comments.sortedByDescending { it.likes.size - it.dislikes.size }
-            else -> comments.sortedByDescending { it.createdAt }  // newest
+            else -> comments.sortedByDescending { it.createdAt }
         }
     }
 
-    // === Storage ===
     private fun getAllComments(context: Context): List<Comment> {
         val prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
         val json = prefs.getString(KEY_COMMENTS, "[]") ?: "[]"
