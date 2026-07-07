@@ -292,17 +292,19 @@ object AsqClient {
                 "<div\\s+class=\"post-title\">[\\s\\S]*?<a[^>]*>([^<]+)</a>",
                 Pattern.CASE_INSENSITIVE
             )
-            val title: String = titleP.matcher(block).let { mm ->
-                if (mm.find()) mm.group(1)?.trim() ?: slug
-            } ?: slug
+            val title: String = run {
+                val mm = titleP.matcher(block)
+                if (mm.find()) mm.group(1)?.trim() ?: slug else slug
+            }
 
             val coverP = Pattern.compile(
                 "<img[^>]+src=\"([^\"]+)\"",
                 Pattern.CASE_INSENSITIVE
             )
-            val cover: String = coverP.matcher(block).let { mm ->
-                if (mm.find()) mm.group(1) ?: ""
-            } ?: ""
+            val cover: String = run {
+                val mm = coverP.matcher(block)
+                if (mm.find()) mm.group(1) ?: "" else ""
+            }
 
             items.add(
                 MangaListItem(
