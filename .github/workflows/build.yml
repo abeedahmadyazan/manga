@@ -34,14 +34,12 @@ jobs:
       run: |
         if [ -n "$RELEASE_KEYSTORE" ]; then
           echo "$RELEASE_KEYSTORE" | base64 -d > manga-release.keystore
-          echo "Keystore decoded: $(wc -c < manga-release.keystore) bytes"
           echo "KEYSTORE_FILE=$(pwd)/manga-release.keystore" >> $GITHUB_ENV
           echo "KEYSTORE_PASSWORD=$RELEASE_KEYSTORE_PASSWORD" >> $GITHUB_ENV
           echo "KEY_ALIAS=manga" >> $GITHUB_ENV
           echo "KEY_PASSWORD=$RELEASE_KEY_PASSWORD" >> $GITHUB_ENV
-          echo "Release keystore configured."
         else
-          echo "No release keystore secret found - falling back to debug signing."
+          echo "No keystore secret found"
         fi
 
     - name: Build Debug APK
@@ -66,7 +64,7 @@ jobs:
       uses: softprops/action-gh-release@v2
       with:
         tag_name: v1.0.${{ github.run_number }}
-        name: Manga App Build #${{ github.run_number }}
+        name: Manga App Build ${{ github.run_number }}
         files: |
           app/build/outputs/apk/debug/app-debug.apk
           app/build/outputs/apk/release/app-release.apk
