@@ -80,7 +80,7 @@ object SpamFilter {
         }
 
         // Excessive emoji
-        val emojiCount = trimmed.count { it.codePointAt(0) > 0x1F000 }
+        val emojiCount = trimmed.codePoints().filter { it > 0x1F000 }.count().toInt()
         if (emojiCount > 5) {
             return "الرجاء عدم استخدام الإيموجي بكثرة"
         }
