@@ -225,6 +225,43 @@ class MainActivity : AppCompatActivity() {
             drawerLayout.closeDrawer(GravityCompat.START)
             startActivity(Intent(this, ProfileActivity::class.java))
         }
+
+        // Bottom navigation
+        val bottomNav = findViewById<com.google.android.material.bottomnavigation.BottomNavigationView>(R.id.bottomNav)
+        bottomNav.selectedItemId = R.id.navHome
+        bottomNav.setOnItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.navHome -> {
+                    // Already home — just close the drawer if open
+                    true
+                }
+                R.id.navLists -> {
+                    val user = com.yazan.manga.data.AuthManager.getCurrentUser(this)
+                    if (user == null) {
+                        Toast.makeText(this, "سجّل الدخول أولاً", Toast.LENGTH_SHORT).show()
+                        false
+                    } else {
+                        showCustomListsDialog(user.email)
+                        false // don't actually select — we open a dialog instead
+                    }
+                }
+                R.id.navHistory -> {
+                    val user = com.yazan.manga.data.AuthManager.getCurrentUser(this)
+                    if (user == null) {
+                        Toast.makeText(this, "سجّل الدخول أولاً", Toast.LENGTH_SHORT).show()
+                        false
+                    } else {
+                        startActivity(Intent(this, HistoryActivity::class.java))
+                        false // we leave the screen, no need to mark selected
+                    }
+                }
+                R.id.navProfile -> {
+                    startActivity(Intent(this, ProfileActivity::class.java))
+                    false
+                }
+                else -> false
+            }
+        }
     }
 
     override fun onResume() {

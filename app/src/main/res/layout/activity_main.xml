@@ -205,6 +205,18 @@
                 android:padding="32dp"
                 android:visibility="gone" />
         </FrameLayout>
+
+        <!-- Bottom navigation (quick-access to home / lists / history / profile) -->
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottomNav"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/background_dark"
+            app:menu="@menu/bottom_nav_menu"
+            app:itemIconTint="@color/bottom_nav_color"
+            app:itemTextColor="@color/bottom_nav_color"
+            app:labelVisibilityMode="labeled"
+            app:itemRippleColor="@color/surface_light" />
     </LinearLayout>
 
     <com.google.android.material.navigation.NavigationView
