@@ -146,6 +146,41 @@ class ReaderActivity : AppCompatActivity() {
         loadingIndicator.visibility = View.VISIBLE
         errorText.visibility = View.GONE
 
+        // If this is a local chapter (opened from Downloads), read pages
+        // directly from disk — no network fetch needed.
+        val localPages = intent.getStringArrayExtra("local_pages")
+        if (chapter.source == "local" || localPages != null) {
+            loadingIndicator.visibility = View.GONE
+            val pagesList = localPages?.toList().orEmpty()
+            if (pagesList.isEmpty()) {
+                errorText.text = "تعذّر العثور على الصفحات المحمّلة"
+                errorText.visibility = View.VISIBLE
+                pageCounter.text = "0 / 0"
+            } else {
+                pages = pagesList
+                currentPageIndex = 0
+                pageSeekBar.max = pages.size - 1
+                showPage(0)
+            }
+            return
+        }
+
+        // Otherwise: check if the chapter has been downloaded previously.
+        // If so, read from disk instead of hitting the network.
+        if (mangaSlug.isNotBlank() && currentChapterNumber.isNotBlank() &&
+            com.yazan.manga.data.DownloadManager.isChapterDownloaded(this, mangaSlug, currentChapterNumber)) {
+            val cached = com.yazan.manga.data.DownloadManager.getDownloadedPages(this, mangaSlug, currentChapterNumber)
+            if (cached.isNotEmpty()) {
+                loadingIndicator.visibility = View.GONE
+                pages = cached
+                currentPageIndex = 0
+                pageSeekBar.max = pages.size - 1
+                showPage(0)
+                return
+            }
+        }
+
+        // Default: fetch from the network.
         lifecycleScope.launch {
             val result = withContext(Dispatchers.IO) {
                 repository.getChapterPages(chapter)

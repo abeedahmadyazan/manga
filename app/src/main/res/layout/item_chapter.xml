@@ -82,6 +82,18 @@
             android:tint="@color/text_secondary"
             tools:ignore="HardcodedText,UseAppTint" />
 
+        <!-- Download button (changes icon based on download state) -->
+        <ImageButton
+            android:id="@+id/btnChapterDownload"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="4dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_download"
+            android:contentDescription="تحميل"
+            android:tint="@color/text_secondary"
+            tools:ignore="HardcodedText,UseAppTint" />
+
     </LinearLayout>
 
 </com.google.android.material.card.MaterialCardView>

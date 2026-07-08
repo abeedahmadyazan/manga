@@ -117,7 +117,8 @@ class MangaDetailsActivity : AppCompatActivity() {
 
         chapterAdapter = ChapterAdapter(
             onClick = { chapter -> openReader(chapter) },
-            onCommentsClick = { chapter -> openChapterComments(chapter) }
+            onCommentsClick = { chapter -> openChapterComments(chapter) },
+            mangaIdProvider = { mangaSlug }
         )
         chaptersRecyclerView.layoutManager = LinearLayoutManager(this)
         chaptersRecyclerView.adapter = chapterAdapter

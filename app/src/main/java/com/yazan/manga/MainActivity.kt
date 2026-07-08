@@ -196,7 +196,7 @@ class MainActivity : AppCompatActivity() {
                         startActivity(Intent(this, HistoryActivity::class.java))
                     }
                 }
-                R.id.menuDownloads -> Toast.makeText(this, "قريباً", Toast.LENGTH_SHORT).show()
+                R.id.menuDownloads -> startActivity(Intent(this, DownloadsActivity::class.java))
                 R.id.menuAbout -> Toast.makeText(this, "تطبيق مانجا v1.0", Toast.LENGTH_SHORT).show()
                 R.id.menuShare -> {
                     val shareIntent = Intent(Intent.ACTION_SEND).apply {
