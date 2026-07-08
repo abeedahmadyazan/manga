@@ -66,6 +66,29 @@ object AuthManager {
         val suspendedAt: Long
     )
 
+    /**
+     * Check if a user is an admin by looking up their UID in the 'admins'
+     * Firestore collection. Returns true if the UID exists as a document.
+     *
+     * Falls back to the hardcoded ADMIN_EMAIL if Firestore is unreachable
+     * (so the app still works during development / offline).
+     */
+    fun checkAdminFromCloud(uid: String, email: String, callback: (Boolean) -> Unit) {
+        try {
+            val db = com.google.firebase.firestore.FirebaseFirestore.getInstance()
+            db.collection("admins").document(uid).get()
+                .addOnSuccessListener { doc ->
+                    callback(doc.exists())
+                }
+                .addOnFailureListener {
+                    // Firestore failed — fall back to hardcoded admin email
+                    callback(email == ADMIN_EMAIL)
+                }
+        } catch (e: Exception) {
+            callback(email == ADMIN_EMAIL)
+        }
+    }
+
     fun getDeviceId(context: Context): String {
         val prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
         prefs.getString(KEY_DEVICE_ID, null)?.let { return it }
