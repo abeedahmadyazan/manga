@@ -102,11 +102,20 @@ class CommentsActivity : AppCompatActivity() {
 
     private fun startListening() {
         loadingIndicator.visibility = View.VISIBLE
-        listener = CloudCommentsManager.listenToComments(contextId) { comments ->
-            loadingIndicator.visibility = View.GONE
-            allComments = comments
-            updateList()
-        }
+        listener = CloudCommentsManager.listenToComments(
+            contextId = contextId,
+            onUpdate = { comments ->
+                loadingIndicator.visibility = View.GONE
+                swipeRefresh.isRefreshing = false
+                allComments = comments
+                updateList()
+            },
+            onError = { e ->
+                loadingIndicator.visibility = View.GONE
+                swipeRefresh.isRefreshing = false
+                Toast.makeText(this, "تعذّر تحميل التعليقات: ${e.message}", Toast.LENGTH_LONG).show()
+            }
+        )
     }
 
     private fun updateList() {
@@ -141,7 +150,21 @@ class CommentsActivity : AppCompatActivity() {
 
     private fun confirmDelete(commentId: String) {
         AlertDialog.Builder(this).setTitle("حذف التعليق").setMessage("هل تريد الحذف؟")
-            .setPositiveButton("حذف") { _, _ -> CloudCommentsManager.deleteComment(commentId) {} }
+            .setPositiveButton("حذف") { _, _ ->
+                CloudCommentsManager.deleteComment(commentId) { success ->
+                    runOnUiThread {
+                        if (success) {
+                            Toast.makeText(this, "تم الحذف", Toast.LENGTH_SHORT).show()
+                            // The real-time listener will refresh the list automatically.
+                            // As a fallback, also remove it locally in case the listener is slow.
+                            allComments = allComments.filterNot { it.id == commentId || it.parentId == commentId }
+                            updateList()
+                        } else {
+                            Toast.makeText(this, "فشل الحذف", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }
+            }
             .setNegativeButton("إلغاء", null).show()
     }
 
@@ -296,7 +319,7 @@ class CommentsAdapter(
                 author.text = cu.name
                 avatar.text = cu.name.firstOrNull()?.uppercaseChar()?.toString() ?: "?"
             }
-            // Show the avatar image if available
+            // Show the avatar image if available (circular)
             val b64 = cu?.avatarBase64
             if (!b64.isNullOrEmpty()) {
                 try {
@@ -305,7 +328,11 @@ class CommentsAdapter(
                     if (bmp != null) {
                         avatar.visibility = View.GONE
                         avatarImg.visibility = View.VISIBLE
-                        avatarImg.setImageBitmap(bmp)
+                        // Use Glide with circleCrop() to render the avatar as a circle
+                        com.bumptech.glide.Glide.with(itemView.context)
+                            .load(bmp)
+                            .circleCrop()
+                            .into(avatarImg)
                     }
                 } catch (_: Exception) {}
             }

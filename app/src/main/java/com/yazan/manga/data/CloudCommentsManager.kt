@@ -3,7 +3,6 @@ package com.yazan.manga.data
 import android.content.Context
 import android.util.Log
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ListenerRegistration
 
 object CloudCommentsManager {
@@ -57,17 +56,23 @@ object CloudCommentsManager {
             }
     }
 
-    fun listenToComments(contextId: String, onUpdate: (List<Comment>) -> Unit): ListenerRegistration {
+    fun listenToComments(
+        contextId: String,
+        onUpdate: (List<Comment>) -> Unit,
+        onError: ((Exception) -> Unit)? = null
+    ): ListenerRegistration {
         return db.collection("comments")
             .whereEqualTo("contextId", contextId)
-            .orderBy("createdAt", Query.Direction.DESCENDING)
+            // NOTE: no orderBy() here — it requires a composite index on Firestore.
+            // We sort locally instead to avoid index-not-found errors.
             .addSnapshotListener { snapshot, error ->
                 if (error != null) {
                     Log.e(TAG, "Listen error: ${error.message}")
+                    onError?.invoke(error)
                     // DON'T clear the list on error - keep existing comments
                     return@addSnapshotListener
                 }
-                
+
                 val comments = mutableListOf<Comment>()
                 snapshot?.documents?.forEach { doc ->
                     val c = Comment(
@@ -86,6 +91,8 @@ object CloudCommentsManager {
                     )
                     comments.add(c)
                 }
+                // Sort locally (descending by createdAt) to replace the removed orderBy()
+                comments.sortByDescending { it.createdAt }
                 onUpdate(comments)
             }
     }
@@ -218,13 +225,17 @@ object CloudCommentsManager {
     /**
      * Listen to ALL unresolved reports (for the admin panel).
      */
-    fun listenToReports(onUpdate: (List<Report>) -> Unit): ListenerRegistration {
+    fun listenToReports(
+        onUpdate: (List<Report>) -> Unit,
+        onError: ((Exception) -> Unit)? = null
+    ): ListenerRegistration {
         return db.collection("reports")
             .whereEqualTo("resolved", false)
-            .orderBy("createdAt", Query.Direction.DESCENDING)
+            // Sort locally to avoid needing a composite index
             .addSnapshotListener { snapshot, error ->
                 if (error != null) {
                     Log.e(TAG, "Reports listen error: ${error.message}")
+                    onError?.invoke(error)
                     return@addSnapshotListener
                 }
                 val reports = mutableListOf<Report>()
@@ -246,6 +257,7 @@ object CloudCommentsManager {
                         resolvedAt = doc.getLong("resolvedAt")
                     ))
                 }
+                reports.sortByDescending { it.createdAt }
                 onUpdate(reports)
             }
     }

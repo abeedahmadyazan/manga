@@ -67,11 +67,19 @@ class RepliesActivity : AppCompatActivity() {
     }
 
     private fun startListening() {
-        // loading
-        listener = CloudCommentsManager.listenToComments(contextId) { comments ->
-                        allReplies = comments.filter { it.parentId == parentId }
-            renderReplies()
-        }
+        swipeRefresh.isRefreshing = true
+        listener = CloudCommentsManager.listenToComments(
+            contextId = contextId,
+            onUpdate = { comments ->
+                swipeRefresh.isRefreshing = false
+                allReplies = comments.filter { it.parentId == parentId }
+                renderReplies()
+            },
+            onError = { e ->
+                swipeRefresh.isRefreshing = false
+                Toast.makeText(this, "تعذّر تحميل الردود: ${e.message}", Toast.LENGTH_LONG).show()
+            }
+        )
     }
 
     private fun sendReply(text: String) {
@@ -152,7 +160,11 @@ class RepliesActivity : AppCompatActivity() {
                                     if (bmp != null) {
                                         avatar.visibility = View.GONE
                                         avatarImg.visibility = View.VISIBLE
-                                        avatarImg.setImageBitmap(bmp)
+                                        // Circular avatar via Glide
+                                        com.bumptech.glide.Glide.with(this@RepliesActivity)
+                                            .load(bmp)
+                                            .circleCrop()
+                                            .into(avatarImg)
                                     }
                                 } catch (_: Exception) {}
                             }
@@ -170,7 +182,20 @@ class RepliesActivity : AppCompatActivity() {
                 btnDelete.setOnClickListener {
                     AlertDialog.Builder(this@RepliesActivity)
                         .setTitle("حذف الرد").setMessage("هل تريد الحذف؟")
-                        .setPositiveButton("حذف") { _, _ -> CloudCommentsManager.deleteComment(r.id) {} }
+                        .setPositiveButton("حذف") { _, _ ->
+                            CloudCommentsManager.deleteComment(r.id) { success ->
+                                runOnUiThread {
+                                    if (success) {
+                                        Toast.makeText(this@RepliesActivity, "تم الحذف", Toast.LENGTH_SHORT).show()
+                                        // Remove locally as a fallback; the listener will also refresh
+                                        allReplies = allReplies.filterNot { it.id == r.id }
+                                        renderReplies()
+                                    } else {
+                                        Toast.makeText(this@RepliesActivity, "فشل الحذف", Toast.LENGTH_SHORT).show()
+                                    }
+                                }
+                            }
+                        }
                         .setNegativeButton("إلغاء", null).show()
                 }
                 btnReport.setOnClickListener {
