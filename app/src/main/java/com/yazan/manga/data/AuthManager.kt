@@ -289,12 +289,29 @@ object AuthManager {
         val prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
         val current = getCurrentUser(context) ?: return "يجب تسجيل الدخول"
 
-        val clean = newUsername.trim()
-        if (!clean.startsWith("@") || clean.length < 3 || clean.length > 20) {
-            return "اسم المستخدم يجب أن يبدأ بـ @ ويكون 3-20 حرف"
+        // Normalize: ensure it starts with @, lowercase
+        var clean = newUsername.trim().lowercase()
+        if (!clean.startsWith("@")) clean = "@$clean"
+
+        // Instagram-style rules:
+        //  - Must start with @
+        //  - Only letters (a-z), numbers (0-9), and underscores (_)
+        //  - No punctuation, spaces, or special characters
+        //  - Minimum 3 characters AFTER the @ (so total length >= 4)
+        //  - Maximum 20 characters total
+        val handle = clean.removePrefix("@")
+        if (handle.length < 3) {
+            return "اسم المستخدم يجب أن يكون 3 أحرف على الأقل"
         }
-        if (!clean.matches(Regex("^@[a-zA-Z0-9_]+$"))) {
-            return "اسم المستخدم يجب أن يحتوي على أحرف إنجليزية وأرقام فقط"
+        if (clean.length > 20) {
+            return "اسم المستخدم طويل جداً (حد أقصى 20 حرف)"
+        }
+        if (!handle.matches(Regex("^[a-z0-9_]+$"))) {
+            return "اسم المستخدم يجب أن يحتوي على أحرف إنجليزية وأرقام و_ فقط"
+        }
+        // Instagram doesn't allow underscores at the start
+        if (handle.startsWith("_")) {
+            return "اسم المستخدم لا يمكن أن يبدأ بـ _"
         }
 
         if (!isUsernameAvailable(context, clean, current.email)) {
@@ -323,7 +340,7 @@ object AuthManager {
         val current = getCurrentUser(context) ?: return "يجب تسجيل الدخول"
 
         val clean = newName.trim()
-        if (clean.isEmpty()) return "الاسم لا يمكن أن يكون فارغاً"
+        if (clean.length < 3) return "الاسم يجب أن يكون 3 أحرف على الأقل"
         if (clean.length > 30) return "الاسم طويل جداً (حد أقصى 30 حرف)"
 
         // Admin keeps the admin suffix
