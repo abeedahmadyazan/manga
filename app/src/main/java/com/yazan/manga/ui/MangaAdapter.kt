@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -45,14 +46,35 @@ class MangaAdapter(
         private val cover: ImageView = view.findViewById(R.id.mangaCover)
         private val title: TextView = view.findViewById(R.id.mangaTitle)
         private val btnRemove: ImageButton = view.findViewById(R.id.btnRemoveFromList)
+        private val ratingChip: LinearLayout = view.findViewById(R.id.ratingChip)
+        private val tvRating: TextView = view.findViewById(R.id.tvRating)
+        private val tvStatus: TextView = view.findViewById(R.id.tvStatus)
 
         fun bind(item: MangaListItem) {
             title.text = item.title
 
+            // Rating chip — only show if rating is non-null and > 0
+            val rating = item.rating
+            if (rating != null && rating > 0.0) {
+                ratingChip.visibility = View.VISIBLE
+                tvRating.text = String.format("%.1f", rating)
+            } else {
+                ratingChip.visibility = View.GONE
+            }
+
+            // Status badge — only show if non-empty
+            val status = item.status
+            if (!status.isNullOrBlank()) {
+                tvStatus.visibility = View.VISIBLE
+                tvStatus.text = normalizeStatus(status)
+            } else {
+                tvStatus.visibility = View.GONE
+            }
+
             Glide.with(cover.context)
                 .load(item.cover)
                 .centerCrop()
-                .placeholder(R.color.surface)
+                .placeholder(R.color.surface_light)
                 .into(cover)
 
             itemView.setOnClickListener { onClick(item) }
@@ -64,6 +86,18 @@ class MangaAdapter(
                 btnRemove.setOnClickListener { onRemoveClick.invoke(item) }
             } else {
                 btnRemove.visibility = View.GONE
+            }
+        }
+
+        /** Translate raw status strings (en/ar) to a short Arabic label. */
+        private fun normalizeStatus(raw: String): String {
+            val v = raw.trim().lowercase()
+            return when {
+                v.contains("ongoing") || v.contains("مستمر") -> "مستمرة"
+                v.contains("completed") || v.contains("منته") || v.contains("مكتمل") -> "منتهية"
+                v.contains("hiatus") || v.contains("متوقف") || v.contains("متوقفة") -> "متوقفة"
+                v.contains("cancelled") || v.contains("ملغ") -> "ملغاة"
+                else -> raw
             }
         }
     }
