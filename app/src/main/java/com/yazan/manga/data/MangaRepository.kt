@@ -246,7 +246,9 @@ class MangaRepository {
             val sourcesList = mutableListOf<MangaSourceInfo>()
             var sourceIdx = 1
 
-            // Prefer Arabic sources first
+            // Only Arabic sources are shown to the user as selectable chips.
+            // English sources (MangaPill, MangaHere) are kept as silent fallbacks
+            // for page-fetching only — never revealed to the user.
             if (asqChapterList.isNotEmpty()) {
                 val key = "3asq"
                 chaptersBySource[key] = asqChapterList
@@ -269,34 +271,43 @@ class MangaRepository {
                 ))
                 sourceIdx++
             }
-            // Then English sources
+            // English sources — registered in chaptersBySource so they can be
+            // used as fallbacks, but NOT added to sourcesList (so no chip shown)
             if (mhChapterList.isNotEmpty()) {
-                val key = "mangahere"
-                chaptersBySource[key] = mhChapterList
-                sourcesList.add(MangaSourceInfo(
-                    key = key,
-                    label = "المصدر $sourceIdx",
-                    language = "en",
-                    chapterCount = mhChapterList.size
-                ))
-                sourceIdx++
+                chaptersBySource["mangahere"] = mhChapterList
             }
             if (mpChapterList.isNotEmpty()) {
-                val key = "mangapill"
-                chaptersBySource[key] = mpChapterList
-                sourcesList.add(MangaSourceInfo(
-                    key = key,
-                    label = "المصدر $sourceIdx",
-                    language = "en",
-                    chapterCount = mpChapterList.size
-                ))
-                sourceIdx++
+                chaptersBySource["mangapill"] = mpChapterList
             }
 
-            // Default chapters = first available source's chapters
-            val defaultChapters = sourcesList.firstOrNull()?.let { chaptersBySource[it.key] } ?: emptyList()
+            // Default chapters: prefer the first Arabic source. If no Arabic
+            // source has any chapters, fall back to the first available source
+            // silently (so the user at least sees a chapter list to read).
+            val defaultChapters = sourcesList.firstOrNull()?.let { chaptersBySource[it.key] }
+                ?: chaptersBySource["mangahere"]
+                ?: chaptersBySource["mangapill"]
+                ?: emptyList()
 
-            Log.d(TAG, "Sources: ${sourcesList.size} available | default=${sourcesList.firstOrNull()?.key} | chapters=${defaultChapters.size}")
+            // If we fell back to an English source silently, add it to the
+            // visible sources list too (as المصدر 1) so the chip group shows
+            // something and the user can interact with it.
+            if (sourcesList.isEmpty() && defaultChapters.isNotEmpty()) {
+                val fallbackKey = when {
+                    chaptersBySource["mangahere"]?.isNotEmpty() == true -> "mangahere"
+                    chaptersBySource["mangapill"]?.isNotEmpty() == true -> "mangapill"
+                    else -> null
+                }
+                if (fallbackKey != null) {
+                    sourcesList.add(MangaSourceInfo(
+                        key = fallbackKey,
+                        label = "المصدر 1",
+                        language = "ar",  // shown as Arabic to the user
+                        chapterCount = defaultChapters.size
+                    ))
+                }
+            }
+
+            Log.d(TAG, "Sources: ${sourcesList.size} visible | default=${sourcesList.firstOrNull()?.key} | chapters=${defaultChapters.size}")
 
             Result.success(MangaDetails(
                 id = id, title = title, cover = cover, description = description,
