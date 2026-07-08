@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YZ MANGA - اقرأ المانجا بالعربية</title>
+    <meta name="description" content="YZ MANGA - تطبيق قراءة المانجا المترجمة بالعربية. ون بيس، جوجوتسو كايسن، ناروتو والمزيد">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="icon" href="app-icon.png" type="image/png">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --bg: #0a0a0f;
+            --surface: #1a1a24;
+            --surface-light: #242432;
+            --surface-elevated: #2a2a36;
+            --primary: #10b981;
+            --primary-dark: #059669;
+            --primary-light: #34d399;
+            --accent: #8b5cf6;
+            --accent-dark: #7c3aed;
+            --text: #ffffff;
+            --text-secondary: #9ca3af;
+            --text-muted: #6b7280;
+            --danger: #ef4444;
+            --star: #fbbf24;
+            --gradient: linear-gradient(135deg, #10b981, #059669);
+            --gradient-accent: linear-gradient(135deg, #8b5cf6, #7c3aed);
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Tajawal', 'Noto Sans Arabic', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* ===== NAVBAR ===== */
+        .navbar {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            padding: 1rem 2rem;
+            background: rgba(10,10,15,0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--text);
+            text-decoration: none;
+        }
+
+        .nav-logo .logo-mark {
+            width: 36px; height: 36px;
+            background: var(--gradient);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            color: white;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover { color: var(--primary); }
+
+        .nav-download {
+            background: var(--gradient);
+            color: white !important;
+            padding: 8px 20px;
+            border-radius: 10px;
+            font-weight: 700;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 6rem 2rem 3rem;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: 
+                radial-gradient(circle at 25% 30%, rgba(16,185,129,0.12) 0%, transparent 50%),
+                radial-gradient(circle at 75% 40%, rgba(139,92,246,0.10) 0%, transparent 50%),
+                radial-gradient(circle at 50% 80%, rgba(16,185,129,0.08) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: 
+                linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
+            background-size: 50px 50px;
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+        }
+
+        .app-icon-hero {
+            width: 140px;
+            height: 140px;
+            margin: 0 auto 2rem;
+            border-radius: 32px;
+            box-shadow: 0 25px 70px rgba(16,185,129,0.35);
+            animation: float 4s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(2deg); }
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(16,185,129,0.15);
+            border: 1px solid rgba(16,185,129,0.3);
+            color: var(--primary-light);
+            padding: 6px 16px;
+            border-radius: 100px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #fff 30%, var(--primary) 70%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -2px;
+        }
+
+        .hero p {
+            font-size: 1.4rem;
+            color: var(--text-secondary);
+            margin-bottom: 2.5rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: var(--gradient);
+            color: white;
+            padding: 20px 56px;
+            border-radius: 18px;
+            font-size: 1.4rem;
+            font-weight: bold;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+            box-shadow: 0 12px 45px rgba(16,185,129,0.4);
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .download-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%; left: 50%;
+            width: 0; height: 0;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.2);
+            transform: translate(-50%,-50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .download-btn:hover::before {
+            width: 400px; height: 400px;
+        }
+
+        .download-btn:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 18px 55px rgba(16,185,129,0.5);
+        }
+
+        .download-btn:active { transform: translateY(0); }
+
+        .version-info {
+            margin-top: 1.2rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .version-info span { margin: 0 8px; }
+
+        /* ===== SCREENSHOTS ===== */
+        .screenshots {
+            padding: 6rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.8rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+            margin-bottom: 4rem;
+        }
+
+        .screenshots-scroll {
+            display: flex;
+            gap: 2rem;
+            overflow-x: auto;
+            padding: 1rem 0 2rem;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .screenshots-scroll::-webkit-scrollbar { height: 8px; }
+        .screenshots-scroll::-webkit-scrollbar-track { background: var(--surface); border-radius: 4px; }
+        .screenshots-scroll::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 4px; }
+
+        .screenshot-item {
+            flex-shrink: 0;
+            width: 280px;
+            scroll-snap-align: center;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.4);
+            transition: transform 0.3s;
+            border: 1px solid rgba(255,255,255,0.08);
+            background: var(--surface);
+        }
+
+        .screenshot-item:hover {
+            transform: scale(1.05) translateY(-5px);
+        }
+
+        .screenshot-item img {
+            width: 100%;
+            display: block;
+        }
+
+        .screenshot-caption {
+            padding: 1rem;
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        /* ===== STATS ===== */
+        .stats {
+            padding: 4rem 2rem;
+            background: linear-gradient(180deg, var(--surface) 0%, var(--bg) 100%);
+        }
+
+        .stats-grid {
+            display: flex;
+            justify-content: center;
+            gap: 4rem;
+            flex-wrap: wrap;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 3.5rem;
+            font-weight: 900;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: block;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin-top: 0.3rem;
+        }
+
+        /* ===== FEATURES ===== */
+        .features {
+            padding: 6rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .feature-card {
+            background: var(--surface);
+            border-radius: 24px;
+            padding: 2.5rem 2rem;
+            text-align: center;
+            transition: all 0.3s;
+            border: 1px solid rgba(255,255,255,0.05);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: var(--gradient);
+            transform: scaleX(0);
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            background: var(--surface-light);
+            border-color: rgba(16,185,129,0.2);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+        }
+
+        .feature-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .feature-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1.2rem;
+            display: inline-block;
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover .feature-icon {
+            transform: scale(1.1);
+        }
+
+        .feature-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+            color: var(--text);
+        }
+
+        .feature-card p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+        }
+
+        /* ===== INSTALL ===== */
+        .install {
+            padding: 6rem 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .step {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+            background: var(--surface);
+            padding: 2rem;
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: all 0.3s;
+        }
+
+        .step:hover {
+            background: var(--surface-light);
+            border-color: rgba(16,185,129,0.15);
+            transform: translateX(-5px);
+        }
+
+        .step-number {
+            background: var(--gradient);
+            color: white;
+            width: 48px;
+            height: 48px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 1.3rem;
+            flex-shrink: 0;
+        }
+
+        .step-content h3 {
+            color: var(--text);
+            margin-bottom: 0.3rem;
+            font-size: 1.2rem;
+        }
+
+        .step-content p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* ===== CTA ===== */
+        .cta {
+            padding: 5rem 2rem;
+            text-align: center;
+            background: 
+                radial-gradient(circle at center, rgba(16,185,129,0.1) 0%, transparent 70%);
+        }
+
+        .cta h2 {
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+        }
+
+        .cta p {
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            color: var(--text-muted);
+            border-top: 1px solid rgba(255,255,255,0.05);
+            font-size: 0.95rem;
+        }
+
+        footer p { margin-bottom: 0.5rem; }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.8rem; }
+            .hero p { font-size: 1.1rem; }
+            .section-title { font-size: 2rem; }
+            .section-subtitle { font-size: 1rem; }
+            .stats-grid { gap: 2rem; }
+            .stat-number { font-size: 2.5rem; }
+            .download-btn { padding: 16px 40px; font-size: 1.2rem; }
+            .app-icon-hero { width: 100px; height: 100px; }
+        }
+
+        /* ===== SCROLL ANIMATION ===== */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s, transform 0.6s;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+<!-- ===== NAVBAR ===== -->
+<nav class="navbar">
+    <a href="#" class="nav-logo">
+        <span class="logo-mark">YZ</span>
+        YZ MANGA
+    </a>
+    <div class="nav-links">
+        <a href="#screenshots">لقطات</a>
+        <a href="#features">المميزات</a>
+        <a href="#install">التثبيت</a>
+        <a href="#download" class="nav-download">تحميل</a>
+    </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="download">
+    <div class="hero-content">
+        <img src="app-icon.png" alt="YZ MANGA" class="app-icon-hero">
+        <div class="hero-badge">✦ الإصدار الجديد متاح الآن</div>
+        <h1>YZ MANGA</h1>
+        <p>اقرأ آلاف المانجا المترجمة بالعربية على هاتفك<br>ون بيس، جوجوتسو كايسن، ناروتو والمزيد</p>
+        <a href="https://github.com/abeedahmadyazan/mangaapp/releases/latest/download/app-debug.apk" class="download-btn">
+            ⬇ تحميل التطبيق
+        </a>
+        <div class="version-info">
+            <span>الإصدار 1.0.183</span> •
+            <span>~12 ميجابايت</span> •
+            <span>Android 7+</span>
+        </div>
+    </div>
+</section>
+
+<!-- ===== SCREENSHOTS ===== -->
+<section class="screenshots" id="screenshots">
+    <h2 class="section-title">لقطات من التطبيق</h2>
+    <p class="section-subtitle">شوف التطبيق قبل ما تحمله</p>
+    <div class="screenshots-scroll">
+        <div class="screenshot-item">
+            <img src="screenshot1.jpg" alt="الصفحة الرئيسية">
+            <div class="screenshot-caption">الصفحة الرئيسية</div>
+        </div>
+        <div class="screenshot-item">
+            <img src="screenshot2.jpg" alt="تفاصيل المانجا">
+            <div class="screenshot-caption">تفاصيل المانجا</div>
+        </div>
+        <div class="screenshot-item">
+            <img src="screenshot3.jpg" alt="قارئ المانجا">
+            <div class="screenshot-caption">قارئ المانجا</div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== STATS ===== -->
+<section class="stats">
+    <div class="stats-grid">
+        <div class="stat-item">
+            <span class="stat-number">1000+</span>
+            <span class="stat-label">مانجا متاحة</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-number">1187</span>
+            <span class="stat-label">فصل ون بيس</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-number">4</span>
+            <span class="stat-label">مصادر مانجا</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-number">5MB</span>
+            <span class="stat-label">حجم خفيف</span>
+        </div>
+    </div>
+</section>
+
+<!-- ===== FEATURES ===== -->
+<section class="features" id="features">
+    <h2 class="section-title">لماذا YZ MANGA؟</h2>
+    <p class="section-subtitle">كل ما تحتاجه في تطبيق واحد</p>
+    <div class="features-grid">
+        <div class="feature-card">
+            <div class="feature-icon">📚</div>
+            <h3>مكتبة ضخمة</h3>
+            <p>آلاف المانجا المترجمة بالعربية مع تحديثات مستمرة يومياً</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">🔀</div>
+            <h3>مصادر متعددة</h3>
+            <p>4 مصادر للمانجا تضمن توفر الفصول وسرعة التحميل</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">💬</div>
+            <h3>تعليقات تفاعلية</h3>
+            <p>نظام تعليقات كامل مع إعجاب، ردود، تعديل، وتقارير</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">📥</div>
+            <h3>تحميل أوفلاين</h3>
+            <p>حمّل الفصول واقرأها بدون إنترنت في أي وقت وأي مكان</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">⭐</div>
+            <h3>قوائم مخصصة</h3>
+            <p>المفضلة، أتابع لاحقاً، أرغب بمتابعتها، وأنهيتها</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">🔒</div>
+            <h3>حماية متقدمة</h3>
+            <p>حماية من الاختراق والـ DDoS مع تشفير كامل للبيانات</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">🎨</div>
+            <h3>تصميم أنيق</h3>
+            <p>واجهة عصرية بخط عربي مخصص ووضع ليلي مريح</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">👤</div>
+            <h3>حسابات Google</h3>
+            <p>سجل دخول بحساب Google واحفظ بياناتك على السحابة</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">⚡</div>
+            <h3>سريع وخفيف</h3>
+            <p>تطبيق خفيف 5 ميجا فقط مع تحميل فوري وcache ذكي</p>
+        </div>
+    </div>
+</section>
+
+<!-- ===== INSTALL ===== -->
+<section class="install" id="install">
+    <h2 class="section-title">طريقة التثبيت</h2>
+    <p class="section-subtitle">4 خطوات بسيطة</p>
+    <div class="step">
+        <div class="step-number">1</div>
+        <div class="step-content">
+            <h3>حمّل الملف</h3>
+            <p>اضغط على زر التحميل بالأعلى لتنزيل ملف APK على هاتفك</p>
+        </div>
+    </div>
+    <div class="step">
+        <div class="step-number">2</div>
+        <div class="step-content">
+            <h3>اسمح بالتثبيت</h3>
+            <p>افتح الملف واسمح بتثبيت التطبيقات من مصادر غير معروفة</p>
+        </div>
+    </div>
+    <div class="step">
+        <div class="step-number">3</div>
+        <div class="step-content">
+            <h3>ثبّت واستمتع</h3>
+            <p>اضغط تثبيت وانتظر حتى ينتهي، ثم افتح التطبيق</p>
+        </div>
+    </div>
+    <div class="step">
+        <div class="step-number">4</div>
+        <div class="step-content">
+            <h3>سجّل دخول</h3>
+            <p>سجّل دخول بحساب Google للمشاركة بالتعليقات والقوائم المخصصة</p>
+        </div>
+    </div>
+</section>
+
+<!-- ===== CTA ===== -->
+<section class="cta">
+    <h2>جاهز تبدأ القراءة؟</h2>
+    <p>حمّل التطبيق الآن وابدأ رحلتك مع المانجا</p>
+    <a href="https://github.com/abeedahmadyazan/mangaapp/releases/latest/download/app-debug.apk" class="download-btn">
+        ⬇ تحميل مجاني
+    </a>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+    <p><strong>YZ MANGA</strong> — صُنع بحب لعشاق المانجا العربية</p>
+    <p>الإصدار 1.0.183 | Android 7.0+ | ~12 ميجابايت</p>
+</footer>
+
+<!-- ===== SCROLL ANIMATION ===== -->
+<script>
+    // Fade-in animation on scroll
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.feature-card, .step, .screenshot-item, .stat-item').forEach(el => {
+        el.classList.add('fade-in');
+        observer.observe(el);
+    });
+</script>
+
+</body>
+</html>
