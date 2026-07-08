@@ -19,6 +19,7 @@ import com.yazan.manga.data.CommentsManager
 import com.yazan.manga.ui.CommentsAdapter
 
 class CommentsActivity : AppCompatActivity() {
+    private lateinit var swipeRefresh: androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var loadingIndicator: ProgressBar
@@ -66,6 +67,9 @@ class CommentsActivity : AppCompatActivity() {
         emptyText = findViewById(R.id.emptyText)
         commentInput = findViewById(R.id.commentInput)
         sendBtn = findViewById(R.id.btnSendComment)
+        swipeRefresh = findViewById(R.id.swipeRefresh)
+        swipeRefresh.setOnRefreshListener { loadComments(); swipeRefresh.isRefreshing = false }
+        swipeRefresh.setColorSchemeResources(R.color.primary)
         replyBanner = findViewById(R.id.replyBanner)
         replyLabel = findViewById(R.id.replyLabel)
         btnCancelReply = findViewById(R.id.btnCancelReply)
