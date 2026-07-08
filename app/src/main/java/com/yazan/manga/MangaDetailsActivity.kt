@@ -161,7 +161,7 @@ class MangaDetailsActivity : AppCompatActivity() {
         }
 
         // Subtitle shows source
-        altTitleText.text = "مانجا عربية"
+        altTitleText.visibility = View.GONE
 
         chaptersCountText.text = "${data.chapters.size} فصل"
         chapterAdapter.submitList(data.chapters)
