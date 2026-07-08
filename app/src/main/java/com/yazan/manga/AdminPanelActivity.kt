@@ -42,10 +42,17 @@ class AdminPanelActivity : AppCompatActivity() {
     }
 
     private fun startListeningToReports() {
-        reportsListener = CloudCommentsManager.listenToReports { reports ->
-            reportsList = reports
-            renderReports()
-        }
+        reportsListener = CloudCommentsManager.listenToReports(
+            onUpdate = { reports ->
+                reportsList = reports
+                renderReports()
+            },
+            onError = { e ->
+                runOnUiThread {
+                    Toast.makeText(this, "تعذّر تحميل البلاغات: ${e.message}", Toast.LENGTH_LONG).show()
+                }
+            }
+        )
     }
 
     private fun renderReports() {
