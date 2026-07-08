@@ -4,22 +4,35 @@
     <color name="background_dark">#0a0a0f</color>
     <color name="surface">#1a1a24</color>
     <color name="surface_light">#242432</color>
+    <color name="surface_elevated">#2a2a36</color>
 
     <!-- Brand -->
     <color name="primary">#10b981</color>          <!-- emerald green -->
     <color name="primary_dark">#059669</color>
+    <color name="primary_light">#34d399</color>
     <color name="accent">#8b5cf6</color>           <!-- purple -->
+    <color name="accent_dark">#7c3aed</color>
 
     <!-- Text -->
     <color name="text_primary">#ffffff</color>
     <color name="text_secondary">#9ca3af</color>
     <color name="text_muted">#6b7280</color>
 
+    <!-- Status colors (for manga status badges) -->
+    <color name="status_ongoing">#10b981</color>    <!-- green - مستمرة -->
+    <color name="status_completed">#3b82f6</color>  <!-- blue - منتهية -->
+    <color name="status_hiatus">#f59e0b</color>     <!-- amber - متوقفة -->
+    <color name="status_cancelled">#ef4444</color>  <!-- red - ملغاة -->
+
     <!-- States -->
     <color name="danger">#ef4444</color>
     <color name="warning">#f59e0b</color>
     <color name="success">#10b981</color>
+    <color name="info">#3b82f6</color>
     <color name="divider">#2a2a3a</color>
+
+    <!-- Rating star -->
+    <color name="star">#fbbf24</color>
 
     <!-- Google brand -->
     <color name="google_blue">#4285F4</color>
@@ -29,8 +42,13 @@
     <color name="black">#000000</color>
     <color name="gray">#6b7280</color>
     <color name="overlay_dark">#80000000</color>
+    <color name="overlay_darker">#cc000000</color>
     <color name="gradient_top">#00000000</color>
     <color name="gradient_bottom">#cc000000</color>
+
+    <!-- Skeleton shimmer base colors -->
+    <color name="skeleton_base">#1f1f2a</color>
+    <color name="skeleton_highlight">#2d2d3d</color>
 
     <!-- Legacy aliases kept for older refs -->
     <color name="surface_lighter">#242432</color>

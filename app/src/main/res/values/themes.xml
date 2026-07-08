@@ -17,6 +17,10 @@
         <item name="android:windowTranslucentNavigation">false</item>
         <item name="android:fitsSystemWindows">true</item>
         <item name="android:windowLayoutInDisplayCutoutMode">shortEdges</item>
+
+        <!-- Apply Tajawal Arabic font globally to all text in the app -->
+        <item name="android:fontFamily">@font/tajawal</item>
+        <item name="fontFamily">@font/tajawal</item>
     </style>
 
     <style name="Theme.MangaApp.Transparent" parent="Theme.MangaApp">
