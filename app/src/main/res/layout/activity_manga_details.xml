@@ -395,7 +395,7 @@
                         tools:ignore="HardcodedText" />
 
                     <TextView
-                        android:id="@+id/tvChapters"
+                        android:id="@+id/tvChaptersHeader"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="0 فصل"

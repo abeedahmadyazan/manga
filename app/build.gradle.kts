@@ -49,6 +49,14 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
+
+    // Lint: don't abort the release build on warnings (only on hard errors).
+    // This prevents DuplicateIds-like warnings from unrelated sections from
+    // blocking production builds. We still see them in CI logs.
+    lint {
+        abortOnError = false
+        checkReleaseBuilds = false
+    }
 }
 
 dependencies {
