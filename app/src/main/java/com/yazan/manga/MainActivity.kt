@@ -64,13 +64,15 @@ class MainActivity : AppCompatActivity() {
         loadingIndicator = findViewById(R.id.loadingIndicator)
         errorText = findViewById(R.id.errorText)
 
-        adapter = MangaAdapter { manga ->
-            val intent = Intent(this, MangaDetailsActivity::class.java)
-            intent.putExtra("manga_id", manga.id)
-            intent.putExtra("manga_title", manga.title)
-            intent.putExtra("manga_cover", manga.cover)
-            startActivity(intent)
-        }
+        adapter = MangaAdapter(
+            onClick = { manga ->
+                val intent = Intent(this, MangaDetailsActivity::class.java)
+                intent.putExtra("manga_id", manga.id)
+                intent.putExtra("manga_title", manga.title)
+                intent.putExtra("manga_cover", manga.cover)
+                startActivity(intent)
+            }
+        )
 
         recyclerView.layoutManager = GridLayoutManager(this, 3)
         recyclerView.adapter = adapter
