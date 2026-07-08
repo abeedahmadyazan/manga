@@ -139,25 +139,29 @@ object AuthManager {
     }
 
     /**
-     * Bootstrap the admin role: if this is the FIRST user to sign in (i.e.
-     * the 'admins' collection is empty), promote them to admin automatically.
+     * Bootstrap the admin role: ONLY promote the user if their email matches
+     * the hardcoded admin email (XOR-decoded). This prevents ANY other user
+     * from becoming admin.
      *
-     * This is a one-time operation — once any admin exists, this function
-     * does nothing. The Firestore rules also enforce that only existing
-     * admins can create new admin documents.
-     *
-     * Call this once during sign-in, after the user has been created.
+     * This is safe because:
+     * 1. Only the specific admin email gets promoted
+     * 2. The email is XOR-obfuscated (not visible in APK)
+     * 3. Once promoted, the admin doc stays in Firestore
      */
     fun bootstrapFirstAdmin(context: Context) {
         val user = getCurrentUser(context) ?: return
         val firebaseUser = com.google.firebase.auth.FirebaseAuth.getInstance().currentUser
         val uid = firebaseUser?.uid ?: return
+
+        // SECURITY CHECK: Only promote if the email matches the admin email.
+        // This is the critical fix — without it, every user becomes admin!
+        if (user.email != getAdminEmail()) {
+            android.util.Log.d("AuthManager", "Bootstrap: not admin email, skipping")
+            return
+        }
+
         try {
             val db = com.google.firebase.firestore.FirebaseFirestore.getInstance()
-            // Try to create the admin doc directly. The rules allow this if:
-            // - User is signed in (they are)
-            // - The doc is for their own UID
-            // If the doc already exists, set() will just update it (harmless).
             val adminDoc = hashMapOf(
                 "email" to user.email,
                 "role" to "admin",
@@ -165,13 +169,12 @@ object AuthManager {
             )
             db.collection("admins").document(uid).set(adminDoc)
                 .addOnSuccessListener {
-                    // Update the local user object
                     val updatedUser = user.copy(isAdmin = true)
                     val prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
                     prefs.edit().putString(KEY_USER, serializeUser(updatedUser)).apply()
                     saveUser(context, updatedUser)
                     uploadUserToCloud(context)
-                    android.util.Log.d("AuthManager", "Bootstrap: user promoted to admin")
+                    android.util.Log.d("AuthManager", "Bootstrap: admin promoted")
                 }
                 .addOnFailureListener { e ->
                     android.util.Log.w("AuthManager", "Bootstrap failed: ${e.message}")

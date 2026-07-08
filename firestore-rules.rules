@@ -27,8 +27,11 @@ service cloud.firestore {
     // =============================================================
     match /admins/{uid} {
       allow read, list: if isSignedIn();
-      allow create: if isSignedIn() && request.auth.uid == uid;
-      allow update, delete: if isAdmin();
+      // STRICT: only existing admins can create/update/delete admin docs.
+      // This prevents any user from self-promoting.
+      // The first admin doc must be created manually in Firebase Console
+      // (one-time setup). After that, only admins can add new admins.
+      allow create, update, delete: if isAdmin();
     }
 
     // =============================================================
