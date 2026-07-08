@@ -179,7 +179,14 @@ class MainActivity : AppCompatActivity() {
                         showCustomListsDialog(user.email)
                     }
                 }
-                R.id.menuHistory -> Toast.makeText(this, "قريباً", Toast.LENGTH_SHORT).show()
+                R.id.menuHistory -> {
+                    val user = com.yazan.manga.data.AuthManager.getCurrentUser(this)
+                    if (user == null) {
+                        Toast.makeText(this, "سجّل الدخول أولاً", Toast.LENGTH_SHORT).show()
+                    } else {
+                        startActivity(Intent(this, HistoryActivity::class.java))
+                    }
+                }
                 R.id.menuDownloads -> Toast.makeText(this, "قريباً", Toast.LENGTH_SHORT).show()
                 R.id.menuAbout -> Toast.makeText(this, "تطبيق مانجا v1.0", Toast.LENGTH_SHORT).show()
             }

@@ -107,8 +107,10 @@
                 android:layout_weight="1"
                 android:text="الأحدث"
                 android:textSize="12sp"
+                android:textColor="@color/white"
                 android:minWidth="0dp"
                 android:paddingHorizontal="4dp"
+                app:backgroundTint="@color/surface"
                 app:cornerRadius="16dp" />
 
             <View android:layout_width="4dp" android:layout_height="0dp" />

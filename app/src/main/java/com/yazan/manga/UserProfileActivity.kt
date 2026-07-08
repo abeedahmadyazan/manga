@@ -65,7 +65,12 @@ class UserProfileActivity : AppCompatActivity() {
     }
 
     private fun displayUser(name: String, username: String, avatar: String, isAdmin: Boolean) {
-        findViewById<TextView>(R.id.tvName).text = name
+        // Strip any legacy '(مشرف)' suffix — the badge is shown separately
+        val cleanName = name
+            .removeSuffix(" (مشرف)")
+            .removeSuffix("(مشرف)")
+            .trim()
+        findViewById<TextView>(R.id.tvName).text = cleanName
         findViewById<TextView>(R.id.tvUsername).text = username
         findViewById<TextView>(R.id.tvAdminBadge).visibility = if (isAdmin) View.VISIBLE else View.GONE
         // DON'T show email!

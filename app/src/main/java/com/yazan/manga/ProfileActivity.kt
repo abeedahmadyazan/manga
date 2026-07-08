@@ -345,7 +345,13 @@ class ProfileActivity : AppCompatActivity() {
                 avatarLetter.visibility = View.VISIBLE
             }
 
-            tvName.text = user.name
+            // Strip any legacy '(مشرف)' suffix from the name — the admin badge
+            // (green pill) is shown separately, so the name should be clean.
+            val displayName = user.name
+                .removeSuffix(" (مشرف)")
+                .removeSuffix("(مشرف)")
+                .trim()
+            tvName.text = displayName
             tvUsername.text = "@${user.username.removePrefix("@")}"
             // Show the email ONLY on the owner's own profile (this activity
             // is only opened for the current user, not for viewing others).

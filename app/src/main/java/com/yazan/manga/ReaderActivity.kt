@@ -12,6 +12,7 @@ import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.yazan.manga.data.MangaChapter
 import com.yazan.manga.data.MangaRepository
+import com.yazan.manga.data.ReadingHistoryManager
 import com.yazan.manga.ui.ZoomableImageView
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -162,6 +163,17 @@ class ReaderActivity : AppCompatActivity() {
                     currentPageIndex = 0
                     pageSeekBar.max = pages.size - 1
                     showPage(0)
+                    // Record this chapter in the user's cloud reading history
+                    ReadingHistoryManager.recordChapterRead(this@ReaderActivity,
+                        ReadingHistoryManager.HistoryEntry(
+                            mangaId = mangaSlug,
+                            mangaTitle = intent.getStringExtra("manga_title") ?: "",
+                            mangaCover = intent.getStringExtra("manga_cover") ?: "",
+                            chapterId = currentChapterId,
+                            chapterNumber = currentChapterNumber,
+                            chapterTitle = chapter?.title ?: ""
+                        )
+                    )
                 }
             }.onFailure {
                 errorText.text = "حدث خطأ أثناء تحميل الفصل. حاول مرة أخرى لاحقاً."
