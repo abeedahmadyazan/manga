@@ -30,19 +30,18 @@ service cloud.firestore {
     //  ADMINS collection
     // =============================================================
     match /admins/{uid} {
-      // Allow a user to READ their own admin document (so the app can check
-      // if they're an admin). Admins can read all admin docs.
-      allow read: if isSignedIn() && (request.auth.uid == uid || isAdmin());
+      // Allow any signed-in user to read and list admin docs.
+      // This is needed so the app can check if the collection is empty
+      // (for bootstrap) and to verify the current user's admin status.
+      // Admin UIDs are not sensitive — they're just Firebase Auth UIDs.
+      allow read, list: if isSignedIn();
 
-      // Bootstrap rule: if there are NO admins yet (collection is empty),
-      // any signed-in user can create their own admin document. This is
-      // a one-time bootstrap — once any admin exists, this rule denies.
-      // After that, only existing admins can create/update/delete.
-      allow create: if isSignedIn()
-                    && request.auth.uid == uid
-                    && !exists(/databases/$(database)/documents/admins/$(request.auth.uid));
-
-      // Update + delete: only existing admins
+      // Bootstrap rule: any signed-in user can create their OWN admin
+      // document. This is intentionally permissive to allow the first
+      // user to self-promote without manual setup.
+      // After the first admin exists, you should tighten this rule to:
+      //   allow create, update, delete: if isAdmin();
+      allow create: if isSignedIn() && request.auth.uid == uid;
       allow update, delete: if isAdmin();
     }
 

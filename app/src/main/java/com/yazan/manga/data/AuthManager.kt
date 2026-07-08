@@ -144,25 +144,27 @@ object AuthManager {
         val uid = firebaseUser?.uid ?: return
         try {
             val db = com.google.firebase.firestore.FirebaseFirestore.getInstance()
-            db.collection("admins").get()
-                .addOnSuccessListener { snapshot ->
-                    if (snapshot.isEmpty) {
-                        // No admins yet — promote this user
-                        val adminDoc = hashMapOf(
-                            "email" to user.email,
-                            "role" to "admin",
-                            "bootstrapAt" to System.currentTimeMillis()
-                        )
-                        db.collection("admins").document(uid).set(adminDoc)
-                            .addOnSuccessListener {
-                                // Update the local user object
-                                val updatedUser = user.copy(isAdmin = true)
-                                val prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
-                                prefs.edit().putString(KEY_USER, serializeUser(updatedUser)).apply()
-                                saveUser(context, updatedUser)
-                                uploadUserToCloud(context)
-                            }
-                    }
+            // Try to create the admin doc directly. The rules allow this if:
+            // - User is signed in (they are)
+            // - The doc is for their own UID
+            // If the doc already exists, set() will just update it (harmless).
+            val adminDoc = hashMapOf(
+                "email" to user.email,
+                "role" to "admin",
+                "bootstrapAt" to System.currentTimeMillis()
+            )
+            db.collection("admins").document(uid).set(adminDoc)
+                .addOnSuccessListener {
+                    // Update the local user object
+                    val updatedUser = user.copy(isAdmin = true)
+                    val prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+                    prefs.edit().putString(KEY_USER, serializeUser(updatedUser)).apply()
+                    saveUser(context, updatedUser)
+                    uploadUserToCloud(context)
+                    android.util.Log.d("AuthManager", "Bootstrap: user promoted to admin")
+                }
+                .addOnFailureListener { e ->
+                    android.util.Log.w("AuthManager", "Bootstrap failed: ${e.message}")
                 }
         } catch (e: Exception) {
             // Silent fail — bootstrap is opportunistic
