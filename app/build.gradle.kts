@@ -21,11 +21,16 @@ android {
         // Secrets (RELEASE_KEYSTORE, RELEASE_KEYSTORE_PASSWORD,
         // RELEASE_KEY_PASSWORD). The keystore is base64-encoded in the
         // secret and decoded by the GitHub Actions workflow before build.
+        // If KEYSTORE_FILE env var is not set, the release build falls back
+        // to the debug keystore (handled in buildTypes below).
         create("release") {
-            storeFile = file(System.getenv("KEYSTORE_FILE") ?: "manga-release.keystore")
-            storePassword = System.getenv("KEYSTORE_PASSWORD") ?: ""
-            keyAlias = System.getenv("KEY_ALIAS") ?: "manga"
-            keyPassword = System.getenv("KEY_PASSWORD") ?: ""
+            val keystoreFile = System.getenv("KEYSTORE_FILE")
+            if (keystoreFile != null) {
+                storeFile = file(keystoreFile)
+                storePassword = System.getenv("KEYSTORE_PASSWORD") ?: ""
+                keyAlias = System.getenv("KEY_ALIAS") ?: "manga"
+                keyPassword = System.getenv("KEY_PASSWORD") ?: ""
+            }
         }
         getByName("debug") {
             // Use the default debug keystore — this makes the APK consistently
@@ -45,7 +50,7 @@ android {
                 "proguard-rules.pro"
             )
             // Sign with the release keystore if available (CI env), otherwise
-            // fall back to debug (local dev builds).
+            // fall back to debug (local dev builds or CI without secrets).
             signingConfig = if (System.getenv("KEYSTORE_FILE") != null) {
                 signingConfigs.getByName("release")
             } else {
