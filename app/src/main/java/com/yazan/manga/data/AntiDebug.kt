@@ -161,7 +161,7 @@ object AntiDebug {
                 Application.getProcessName()
             } else {
                 val pid = Process.myPid()
-                val am = getAppContext()?.getSystemService(Context.ACTIVITY_SERVICE) as? ActivityManager
+                val am = appContext?.getSystemService(Context.ACTIVITY_SERVICE) as? ActivityManager
                 am?.runningAppProcesses?.firstOrNull { it.pid == pid }?.processName ?: ""
             }
         } catch (e: Exception) { "" }
