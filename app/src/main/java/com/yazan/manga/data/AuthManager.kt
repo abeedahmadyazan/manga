@@ -22,7 +22,8 @@ import org.json.JSONObject
 
 /**
  * Firebase Auth Manager — Google Sign-In with one button.
- * - Admin ONLY for yznabyd@gmail.com
+ * - Admin role determined by Firestore 'admins/{uid}' collection (no
+ *   hardcoded admin email — decompiling the APK reveals nothing)
  * - Device fingerprint for security
  * - Banned devices check
  * - Multi-account prevention (one account per device)
@@ -31,7 +32,20 @@ import org.json.JSONObject
  */
 object AuthManager {
 
-    private const val ADMIN_EMAIL = "yznabyd@gmail.com"
+    /**
+     * Admin detection is now SOLELY based on the Firestore 'admins/{uid}'
+     * collection. No email is hardcoded in the source code anymore — so
+     * even if someone decompiles the APK with jadx, they can't tell which
+     * account is the admin.
+     *
+     * To make a user an admin, add a document at /admins/{theirUID} in
+     * Firestore Console. The app checks this collection on sign-in and on
+     * every MainActivity.onResume() and updates the local User object.
+     *
+     * For backwards compatibility (and to fail gracefully if Firestore is
+     * unreachable), checkAdminFromCloud() returns false on network errors
+     * instead of crashing the app.
+     */
     private const val PREFS_NAME = "manga_auth"
     private const val KEY_USER = "current_user"
     private const val KEY_DEVICE_ID = "device_id"
@@ -70,10 +84,14 @@ object AuthManager {
      * Check if a user is an admin by looking up their UID in the 'admins'
      * Firestore collection. Returns true if the UID exists as a document.
      *
-     * Falls back to the hardcoded ADMIN_EMAIL if Firestore is unreachable
-     * (so the app still works during development / offline).
+     * No email-based fallback anymore — admin status is determined 100%
+     * by Firestore. This means the source code contains no hint of which
+     * account is the admin, so decompiling the APK reveals nothing.
+     *
+     * Returns false on network errors (so the user just appears as a
+     * regular user until the next successful check).
      */
-    fun checkAdminFromCloud(uid: String, email: String, callback: (Boolean) -> Unit) {
+    fun checkAdminFromCloud(uid: String, callback: (Boolean) -> Unit) {
         try {
             val db = com.google.firebase.firestore.FirebaseFirestore.getInstance()
             db.collection("admins").document(uid).get()
@@ -81,11 +99,11 @@ object AuthManager {
                     callback(doc.exists())
                 }
                 .addOnFailureListener {
-                    // Firestore failed — fall back to hardcoded admin email
-                    callback(email == ADMIN_EMAIL)
+                    // Firestore failed — return false (user appears as regular)
+                    callback(false)
                 }
         } catch (e: Exception) {
-            callback(email == ADMIN_EMAIL)
+            callback(false)
         }
     }
 
@@ -98,7 +116,7 @@ object AuthManager {
         val user = getCurrentUser(context) ?: return
         val firebaseUser = com.google.firebase.auth.FirebaseAuth.getInstance().currentUser
         val uid = firebaseUser?.uid ?: return
-        checkAdminFromCloud(uid, user.email) { isAdmin ->
+        checkAdminFromCloud(uid) { isAdmin ->
             if (isAdmin != user.isAdmin) {
                 // Status changed — update the user object and save it
                 val updatedUser = user.copy(isAdmin = isAdmin)
@@ -107,6 +125,47 @@ object AuthManager {
                 saveUser(context, updatedUser)
                 uploadUserToCloud(context)
             }
+        }
+    }
+
+    /**
+     * Bootstrap the admin role: if this is the FIRST user to sign in (i.e.
+     * the 'admins' collection is empty), promote them to admin automatically.
+     *
+     * This is a one-time operation — once any admin exists, this function
+     * does nothing. The Firestore rules also enforce that only existing
+     * admins can create new admin documents.
+     *
+     * Call this once during sign-in, after the user has been created.
+     */
+    fun bootstrapFirstAdmin(context: Context) {
+        val user = getCurrentUser(context) ?: return
+        val firebaseUser = com.google.firebase.auth.FirebaseAuth.getInstance().currentUser
+        val uid = firebaseUser?.uid ?: return
+        try {
+            val db = com.google.firebase.firestore.FirebaseFirestore.getInstance()
+            db.collection("admins").get()
+                .addOnSuccessListener { snapshot ->
+                    if (snapshot.isEmpty) {
+                        // No admins yet — promote this user
+                        val adminDoc = hashMapOf(
+                            "email" to user.email,
+                            "role" to "admin",
+                            "bootstrapAt" to System.currentTimeMillis()
+                        )
+                        db.collection("admins").document(uid).set(adminDoc)
+                            .addOnSuccessListener {
+                                // Update the local user object
+                                val updatedUser = user.copy(isAdmin = true)
+                                val prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+                                prefs.edit().putString(KEY_USER, serializeUser(updatedUser)).apply()
+                                saveUser(context, updatedUser)
+                                uploadUserToCloud(context)
+                            }
+                    }
+                }
+        } catch (e: Exception) {
+            // Silent fail — bootstrap is opportunistic
         }
     }
 
@@ -214,9 +273,10 @@ object AuthManager {
         }
 
         val deviceId = getDeviceId(context)
-        // Start with the hardcoded admin check — the cloud check happens
-        // asynchronously below and updates the user object if needed.
-        val isAdmin = cleanEmail == ADMIN_EMAIL
+        // Admin status is determined by Firestore 'admins/{uid}' collection,
+        // checked asynchronously by refreshAdminStatus() below. Default to
+        // false here so no admin email is exposed in the source code.
+        val isAdmin = false
 
         var user = getUserByEmail(context, cleanEmail)
         val wasNewUser = (user == null)
@@ -255,6 +315,10 @@ object AuthManager {
         // so the user can sign in immediately, and the admin flag updates once
         // the cloud check completes.
         refreshAdminStatus(context)
+        // Bootstrap: if no admin exists yet, promote this user automatically.
+        // This is a one-time operation so you don't have to manually create
+        // the admins collection in Firebase Console.
+        bootstrapFirstAdmin(context)
 
         return null
     }
@@ -283,9 +347,10 @@ object AuthManager {
         }
 
         val deviceId = getDeviceId(context)
-        // Start with the hardcoded admin check — the cloud check happens
-        // asynchronously below and updates the user object if needed.
-        val isAdmin = email == ADMIN_EMAIL
+        // Admin status is determined by Firestore 'admins/{uid}' collection,
+        // checked asynchronously by refreshAdminStatus() below. Default to
+        // false here so no admin email is exposed in the source code.
+        val isAdmin = false
 
         var user = getUserByEmail(context, email)
         val wasNewUser = (user == null)
@@ -323,6 +388,8 @@ object AuthManager {
         // so the user can sign in immediately, and the admin flag updates once
         // the cloud check completes.
         refreshAdminStatus(context)
+        // Bootstrap: if no admin exists yet, promote this user automatically.
+        bootstrapFirstAdmin(context)
 
         return null
     }
@@ -560,7 +627,9 @@ object AuthManager {
     fun suspendUser(context: Context, email: String, durationDays: Int, reason: String): String? {
         val admin = getCurrentUser(context) ?: return "يجب تسجيل الدخول"
         if (!admin.isAdmin) return "هذا الإجراء للمشرف فقط"
-        if (email == ADMIN_EMAIL) return "لا يمكن إيقاف حساب المشرف"
+        // Can't suspend yourself (the admin). Check by email instead of a
+        // hardcoded constant so no admin email is exposed in the source.
+        if (email.equals(admin.email, ignoreCase = true)) return "لا يمكن إيقاف حساب المشرف"
 
         val user = getUserByEmail(context, email) ?: return "المستخدم غير موجود"
         val until = if (durationDays == 0) 0L else System.currentTimeMillis() + durationDays * 24L * 60 * 60 * 1000
