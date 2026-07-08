@@ -48,6 +48,11 @@
             android:configChanges="orientation|screenSize" />
 
         <activity
+            android:name=".RepliesActivity"
+            android:parentActivityName=".CommentsActivity"
+            android:configChanges="orientation|screenSize" />
+
+        <activity
             android:name=".CommentsActivity"
             android:parentActivityName=".MangaDetailsActivity"
             android:configChanges="orientation|screenSize"
