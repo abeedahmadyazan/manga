@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var adapter: MangaAdapter
     private var skeletonAdapter: com.yazan.manga.ui.SkeletonAdapter? = null
 
-    private val repository = MangaRepository()
+    private val repository = MangaRepository(this)
     private var currentTab = "latest"
     private var currentPage = 1
     private var isLoading = false

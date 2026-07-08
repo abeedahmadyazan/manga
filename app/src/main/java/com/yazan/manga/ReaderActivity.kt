@@ -49,7 +49,7 @@ class ReaderActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_reader)
 
-        repository = MangaRepository()
+        repository = MangaRepository(this)
 
         currentChapterId = intent.getStringExtra("chapter_id") ?: ""
         currentChapterNumber = intent.getStringExtra("chapter_number") ?: ""

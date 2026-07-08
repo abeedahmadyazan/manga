@@ -1,5 +1,6 @@
 package com.yazan.manga.data
 
+import android.content.Context
 import android.util.Log
 import com.google.gson.JsonParser
 import okhttp3.OkHttpClient
@@ -9,7 +10,7 @@ import java.util.Locale
 import java.util.TimeZone
 import java.util.concurrent.TimeUnit
 
-class MangaRepository {
+class MangaRepository(private val appContext: Context? = null) {
 
     private val client = OkHttpClient.Builder()
         .connectTimeout(15, TimeUnit.SECONDS)
@@ -29,28 +30,75 @@ class MangaRepository {
     private val mpChapterUrlCache = mutableMapOf<String, MutableMap<String, String>>()
 
     suspend fun getLatestManga(page: Int = 1): Result<List<MangaListItem>> {
+        // Try cache first
+        appContext?.let { ctx ->
+            CacheManager.getCachedMangaList(ctx, "latest", page)?.let { cached ->
+                Log.d(TAG, "Latest page $page: cache hit (${cached.size} items)")
+                return Result.success(cached)
+            }
+        }
+        // Rate-limit check
+        if (!DDoSProtection.tryAcquire(DDoSProtection.Action.MANGA_LIST)) {
+            return Result.failure(Exception("تم تجاوز الحد المسموح. حاول لاحقاً."))
+        }
         return try {
             val offset = (page - 1) * 20
             val url = "https://api.mangadex.org/manga?limit=20&offset=$offset&availableTranslatedLanguage[]=ar&order[latestUploadedChapter]=desc&includes[]=cover_art&contentRating[]=safe&contentRating[]=suggestive"
-            Result.success(fetchList(url))
-        } catch (e: Exception) { Result.failure(e) }
+            val items = fetchList(url)
+            DDoSProtection.reportSuccess()
+            appContext?.let { CacheManager.cacheMangaList(it, "latest", page, items) }
+            Result.success(items)
+        } catch (e: Exception) {
+            DDoSProtection.reportFailure()
+            Result.failure(e)
+        }
     }
 
     suspend fun getPopularManga(page: Int = 1): Result<List<MangaListItem>> {
+        appContext?.let { ctx ->
+            CacheManager.getCachedMangaList(ctx, "popular", page)?.let { cached ->
+                Log.d(TAG, "Popular page $page: cache hit (${cached.size} items)")
+                return Result.success(cached)
+            }
+        }
+        if (!DDoSProtection.tryAcquire(DDoSProtection.Action.MANGA_LIST)) {
+            return Result.failure(Exception("تم تجاوز الحد المسموح. حاول لاحقاً."))
+        }
         return try {
             val offset = (page - 1) * 20
             val url = "https://api.mangadex.org/manga?limit=20&offset=$offset&availableTranslatedLanguage[]=ar&order[followedCount]=desc&includes[]=cover_art&contentRating[]=safe&contentRating[]=suggestive"
-            Result.success(fetchList(url))
-        } catch (e: Exception) { Result.failure(e) }
+            val items = fetchList(url)
+            DDoSProtection.reportSuccess()
+            appContext?.let { CacheManager.cacheMangaList(it, "popular", page, items) }
+            Result.success(items)
+        } catch (e: Exception) {
+            DDoSProtection.reportFailure()
+            Result.failure(e)
+        }
     }
 
     suspend fun searchManga(query: String, page: Int = 1): Result<List<MangaListItem>> {
+        appContext?.let { ctx ->
+            CacheManager.getCachedSearchResults(ctx, query)?.let { cached ->
+                Log.d(TAG, "Search '$query': cache hit (${cached.size} items)")
+                return Result.success(cached)
+            }
+        }
+        if (!DDoSProtection.tryAcquire(DDoSProtection.Action.MANGA_SEARCH)) {
+            return Result.failure(Exception("تم تجاوز حد البحث. حاول لاحقاً."))
+        }
         return try {
             val offset = (page - 1) * 20
             val encoded = java.net.URLEncoder.encode(query, "UTF-8")
             val url = "https://api.mangadex.org/manga?title=$encoded&limit=20&offset=$offset&availableTranslatedLanguage[]=ar&order[relevance]=desc&includes[]=cover_art&contentRating[]=safe&contentRating[]=suggestive"
-            Result.success(fetchList(url))
-        } catch (e: Exception) { Result.failure(e) }
+            val items = fetchList(url)
+            DDoSProtection.reportSuccess()
+            appContext?.let { CacheManager.cacheSearchResults(it, query, items) }
+            Result.success(items)
+        } catch (e: Exception) {
+            DDoSProtection.reportFailure()
+            Result.failure(e)
+        }
     }
 
     private fun fetchList(url: String): List<MangaListItem> {
@@ -101,14 +149,35 @@ class MangaRepository {
     }
 
     suspend fun getMangaDetails(id: String): Result<MangaDetails> {
+        // Try cache first (24h TTL)
+        appContext?.let { ctx ->
+            CacheManager.getCachedMangaDetails(ctx, id)?.let { cached ->
+                Log.d(TAG, "Details $id: cache hit")
+                return Result.success(cached)
+            }
+        }
+        if (!DDoSProtection.tryAcquire(DDoSProtection.Action.MANGA_DETAILS)) {
+            return Result.failure(Exception("تم تجاوز الحد المسموح. حاول لاحقاً."))
+        }
         return try {
-            // 1. Get manga details from MangaDex
-            val req = Request.Builder().url("https://api.mangadex.org/manga/$id?includes[]=cover_art&includes[]=author").header("User-Agent", UA).header("Accept", "application/json").build()
-            var title = "بدون عنوان"; var enTitle = ""; var cover = ""; var author = ""; var description = ""; var status = "ongoing"; var genres = listOf<String>()
-            client.newCall(req).execute().use { resp ->
-                if (!resp.isSuccessful) return@use
-                val body = resp.body?.string() ?: return@use
-                val root = JsonParser.parseString(body)
+            val details = fetchMangaDetailsFromNetwork(id)
+            DDoSProtection.reportSuccess()
+            appContext?.let { CacheManager.cacheMangaDetails(it, id, details) }
+            Result.success(details)
+        } catch (e: Exception) {
+            DDoSProtection.reportFailure()
+            Result.failure(e)
+        }
+    }
+
+    private fun fetchMangaDetailsFromNetwork(id: String): MangaDetails = try {
+        // 1. Get manga details from MangaDex
+        val req = Request.Builder().url("https://api.mangadex.org/manga/$id?includes[]=cover_art&includes[]=author").header("User-Agent", UA).header("Accept", "application/json").build()
+        var title = "بدون عنوان"; var enTitle = ""; var cover = ""; var author = ""; var description = ""; var status = "ongoing"; var genres = listOf<String>()
+        client.newCall(req).execute().use { resp ->
+            if (!resp.isSuccessful) return@use
+            val body = resp.body?.string() ?: return@use
+            val root = JsonParser.parseString(body)
                 if (!root.isJsonObject) return@use
                 val data = root.asJsonObject.getAsJsonObject("data") ?: return@use
                 val attrs = data.getAsJsonObject("attributes") ?: return@use
@@ -309,7 +378,7 @@ class MangaRepository {
 
             Log.d(TAG, "Sources: ${sourcesList.size} visible | default=${sourcesList.firstOrNull()?.key} | chapters=${defaultChapters.size}")
 
-            Result.success(MangaDetails(
+            MangaDetails(
                 id = id, title = title, cover = cover, description = description,
                 author = author, artist = author, status = status, genres = genres,
                 chapters = defaultChapters,
@@ -317,8 +386,8 @@ class MangaRepository {
                 latestChapter = null,
                 sources = sourcesList,
                 chaptersBySource = chaptersBySource
-            ))
-        } catch (e: Exception) { Result.failure(e) }
+            )
+        } catch (e: Exception) { throw e }
     }
 
     /**

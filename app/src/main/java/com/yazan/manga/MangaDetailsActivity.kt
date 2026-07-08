@@ -59,7 +59,7 @@ class MangaDetailsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_manga_details)
 
-        repository = MangaRepository()
+        repository = MangaRepository(this)
         mangaSlug = intent.getStringExtra("manga_id") ?: ""
         mangaTitle = intent.getStringExtra("manga_title") ?: ""
         mangaCover = intent.getStringExtra("manga_cover") ?: ""

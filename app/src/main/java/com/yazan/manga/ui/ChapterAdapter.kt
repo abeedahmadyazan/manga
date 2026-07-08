@@ -117,7 +117,7 @@ class ChapterAdapter(
             // even if the user scrolls away or leaves the activity, because we
             // want downloads to complete in the background.
             downloadJob = kotlinx.coroutines.GlobalScope.launch(Dispatchers.Main) {
-                val repo = MangaRepository()
+                val repo = MangaRepository(ctx)
                 val result = withContext(Dispatchers.IO) {
                     // First: fetch the page URLs from the network
                     val pagesResult = repo.getChapterPages(ch)
