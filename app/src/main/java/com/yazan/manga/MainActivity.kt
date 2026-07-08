@@ -142,14 +142,21 @@ class MainActivity : AppCompatActivity() {
         )
 
         fun setActiveTab(active: String) {
+            val activeDrawable = android.graphics.drawable.GradientDrawable().apply {
+                cornerRadius = 18f * resources.displayMetrics.density
+                setColor(getColor(R.color.primary))
+            }
             tabs.forEach { (key, btn) ->
                 if (key == active) {
-                    // Use surface color (same as the rest of the UI) — no green
-                    btn.setBackgroundColor(getColor(R.color.surface))
-                    btn.setTextColor(getColor(R.color.primary))
+                    // Active: filled green pill, white bold text
+                    btn.background = activeDrawable
+                    btn.setTextColor(getColor(R.color.white))
+                    btn.typeface = android.graphics.Typeface.DEFAULT_BOLD
                 } else {
-                    btn.setBackgroundColor(getColor(R.color.background_dark))
+                    // Inactive: transparent, secondary text
+                    btn.background = null
                     btn.setTextColor(getColor(R.color.text_secondary))
+                    btn.typeface = android.graphics.Typeface.DEFAULT
                 }
             }
         }
