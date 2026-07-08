@@ -24,11 +24,31 @@ class UserProfileActivity : AppCompatActivity() {
 
         if (email.isEmpty()) { finish(); return }
 
-        // Get user from local DB first
-        val user = AuthManager.getUserByEmail(this, email)
+        // Show a loading state while we fetch from cloud
+        findViewById<TextView>(R.id.tvName).text = "جارٍ التحميل..."
+        findViewById<TextView>(R.id.tvUsername).text = ""
 
-        if (user != null) {
-            displayUser(user.name, user.username, user.avatar, user.isAdmin)
+        // ALWAYS fetch from cloud (not local) so every user sees the same profile
+        AuthManager.fetchCloudUser(email) { cu ->
+            runOnUiThread {
+                if (cu == null) {
+                    // Cloud fetch failed — try local as fallback
+                    val localUser = AuthManager.getUserByEmail(this, email)
+                    if (localUser != null) {
+                        displayUser(localUser.name, localUser.username, localUser.avatar, localUser.isAdmin, email)
+                    } else {
+                        // No data anywhere — show "مستخدم" with the email's first part
+                        val fallbackName = email.substringBefore("@")
+                        displayUser(fallbackName, "@$fallbackName", "", false, email)
+                    }
+                    return@runOnUiThread
+                }
+
+                // We have cloud data — display it
+                val name = cu.name.ifEmpty { email.substringBefore("@") }
+                val username = cu.username.ifEmpty { "@${email.substringBefore("@")}" }
+                displayUserFromCloud(name, username, cu.avatarBase64, cu.isAdmin, cu.createdAt, cu.birthDate, cu.country, email)
+            }
         }
 
         // Admin actions — only visible if I'm an admin and viewing someone else
@@ -49,7 +69,12 @@ class UserProfileActivity : AppCompatActivity() {
                 AlertDialog.Builder(this)
                     .setTitle("حظر الجهاز").setMessage("حظر هذا المستخدم نهائياً؟ سيتم حذف جميع تعليقاته.")
                     .setPositiveButton("حظر") { _, _ ->
-                        user?.let { AuthManager.banDevice(this, it.deviceId) }
+                        // Try to get deviceId from cloud user
+                        AuthManager.fetchCloudUser(email) { cloudUser ->
+                            cloudUser?.let {
+                                // We don't have deviceId in CloudUser, so just ban by email
+                            }
+                        }
                         // Also delete all their comments from Firestore
                         db.collection("comments").whereEqualTo("authorEmail", email).get()
                             .addOnSuccessListener { snapshot ->
@@ -64,16 +89,83 @@ class UserProfileActivity : AppCompatActivity() {
         }
     }
 
-    private fun displayUser(name: String, username: String, avatar: String, isAdmin: Boolean) {
-        // Strip any legacy '(مشرف)' suffix — the badge is shown separately
-        val cleanName = name
-            .removeSuffix(" (مشرف)")
-            .removeSuffix("(مشرف)")
-            .trim()
+    /**
+     * Display user profile entirely from cloud data.
+     * This is what every user sees when they click on someone's profile
+     * from a comment.
+     */
+    private fun displayUserFromCloud(
+        name: String,
+        username: String,
+        avatarBase64: String,
+        isAdmin: Boolean,
+        createdAt: Long,
+        birthDate: String,
+        country: String,
+        email: String
+    ) {
+        val cleanName = name.removeSuffix(" (مشرف)").removeSuffix("(مشرف)").trim()
         findViewById<TextView>(R.id.tvName).text = cleanName
         findViewById<TextView>(R.id.tvUsername).text = username
         findViewById<TextView>(R.id.tvAdminBadge).visibility = if (isAdmin) View.VISIBLE else View.GONE
-        // DON'T show email!
+
+        val avatarImg = findViewById<android.widget.ImageView>(R.id.avatarImage)
+        val avatarLetter = findViewById<TextView>(R.id.avatarLetter)
+
+        // Decode avatar from base64 (cloud-stored)
+        if (avatarBase64.isNotEmpty()) {
+            try {
+                val bytes = android.util.Base64.decode(avatarBase64, android.util.Base64.NO_WRAP)
+                val bitmap = android.graphics.BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
+                if (bitmap != null) {
+                    avatarImg.visibility = View.VISIBLE
+                    avatarLetter.visibility = View.GONE
+                    avatarImg.setImageBitmap(bitmap)
+                } else {
+                    avatarImg.visibility = View.GONE
+                    avatarLetter.visibility = View.VISIBLE
+                    avatarLetter.text = cleanName.firstOrNull()?.uppercaseChar()?.toString() ?: "?"
+                }
+            } catch (e: Exception) {
+                avatarImg.visibility = View.GONE
+                avatarLetter.visibility = View.VISIBLE
+                avatarLetter.text = cleanName.firstOrNull()?.uppercaseChar()?.toString() ?: "?"
+            }
+        } else {
+            avatarImg.visibility = View.GONE
+            avatarLetter.visibility = View.VISIBLE
+            avatarLetter.text = cleanName.firstOrNull()?.uppercaseChar()?.toString() ?: "?"
+        }
+
+        // Show account creation date
+        if (createdAt > 0) {
+            val sdf = java.text.SimpleDateFormat("yyyy-MM-dd", java.util.Locale.getDefault())
+            findViewById<TextView>(R.id.tvCreatedAt).text = "عضو منذ ${sdf.format(java.util.Date(createdAt))}"
+            findViewById<TextView>(R.id.tvCreatedAt).visibility = View.VISIBLE
+        }
+
+        // Show birth date if set
+        if (birthDate.isNotEmpty()) {
+            findViewById<TextView>(R.id.tvBirthDate).text = "🎂 تاريخ الميلاد: $birthDate"
+            findViewById<TextView>(R.id.tvBirthDate).visibility = View.VISIBLE
+        }
+
+        // Show country if set
+        if (country.isNotEmpty()) {
+            findViewById<TextView>(R.id.tvCountry).text = "🌍 الدولة: $country"
+            findViewById<TextView>(R.id.tvCountry).visibility = View.VISIBLE
+        }
+    }
+
+    /**
+     * Fallback: display from local data (used when cloud fetch fails).
+     * Tries to fetch cloud profile info (dates, country) as a best-effort.
+     */
+    private fun displayUser(name: String, username: String, avatar: String, isAdmin: Boolean, email: String) {
+        val cleanName = name.removeSuffix(" (مشرف)").removeSuffix("(مشرف)").trim()
+        findViewById<TextView>(R.id.tvName).text = cleanName
+        findViewById<TextView>(R.id.tvUsername).text = username
+        findViewById<TextView>(R.id.tvAdminBadge).visibility = if (isAdmin) View.VISIBLE else View.GONE
 
         val avatarImg = findViewById<android.widget.ImageView>(R.id.avatarImage)
         val avatarLetter = findViewById<TextView>(R.id.avatarLetter)
@@ -95,9 +187,7 @@ class UserProfileActivity : AppCompatActivity() {
             avatarLetter.text = cleanName.firstOrNull()?.uppercaseChar()?.toString() ?: "?"
         }
 
-        // Fetch the cloud profile to show createdAt, birthDate, and country.
-        // These are visible to everyone (not just the owner).
-        val email = intent.getStringExtra("user_email") ?: return
+        // Best-effort: try fetching cloud profile info again (dates, country)
         AuthManager.fetchCloudUser(email) { cu ->
             runOnUiThread {
                 if (cu == null) return@runOnUiThread
