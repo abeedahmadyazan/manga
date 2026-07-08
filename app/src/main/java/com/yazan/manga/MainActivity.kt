@@ -144,10 +144,11 @@ class MainActivity : AppCompatActivity() {
         fun setActiveTab(active: String) {
             tabs.forEach { (key, btn) ->
                 if (key == active) {
-                    btn.setBackgroundColor(getColor(R.color.primary))
-                    btn.setTextColor(getColor(R.color.white))
-                } else {
+                    // Use surface color (same as the rest of the UI) — no green
                     btn.setBackgroundColor(getColor(R.color.surface))
+                    btn.setTextColor(getColor(R.color.primary))
+                } else {
+                    btn.setBackgroundColor(getColor(R.color.background_dark))
                     btn.setTextColor(getColor(R.color.text_secondary))
                 }
             }
@@ -208,6 +209,18 @@ class MainActivity : AppCompatActivity() {
 
     private fun updateMenuHeader() {
         val headerView = navigationView.getHeaderView(0)
+        // Add top padding equal to the status bar height so the header sits
+        // below the status bar (clock/notifications), not behind it.
+        val resourceId = resources.getIdentifier("status_bar_height", "dimen", "android")
+        if (resourceId > 0) {
+            val statusBarHeight = resources.getDimensionPixelSize(resourceId)
+            headerView.setPadding(
+                headerView.paddingLeft,
+                statusBarHeight + (20 * resources.displayMetrics.density).toInt(),
+                headerView.paddingRight,
+                headerView.paddingBottom
+            )
+        }
         val user = AuthManager.getCurrentUser(this)
         val tvName = headerView.findViewById<TextView>(R.id.menuUserName)
         val tvEmail = headerView.findViewById<TextView>(R.id.menuUserEmail)

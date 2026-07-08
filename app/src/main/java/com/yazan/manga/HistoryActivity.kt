@@ -2,18 +2,18 @@ package com.yazan.manga
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
-import android.widget.ImageButton
-import android.widget.ProgressBar
+import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.google.firebase.firestore.ListenerRegistration
 import com.yazan.manga.data.AuthManager
 import com.yazan.manga.data.ReadingHistoryManager
-import com.yazan.manga.ui.MangaAdapter
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -21,9 +21,8 @@ import java.util.Locale
 class HistoryActivity : AppCompatActivity() {
 
     private lateinit var recyclerView: RecyclerView
-    private lateinit var loadingIndicator: ProgressBar
-    private lateinit var emptyText: TextView
     private var listener: ListenerRegistration? = null
+    private val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault())
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,21 +30,20 @@ class HistoryActivity : AppCompatActivity() {
 
         val user = AuthManager.getCurrentUser(this)
         if (user == null) {
-            Toast.makeText(this, "سجّل الدخول أولاً", Toast.LENGTH_SHORT).show()
+            android.widget.Toast.makeText(this, "سجّل الدخول أولاً", android.widget.Toast.LENGTH_SHORT).show()
             finish()
             return
         }
 
         findViewById<TextView>(R.id.listTitle).text = "سجل القراءة"
-        findViewById<ImageButton>(R.id.btnBack).setOnClickListener { finish() }
-
-        // Hide the tabs (reuse the manga_list layout)
+        findViewById<android.widget.ImageButton>(R.id.btnBack).setOnClickListener { finish() }
         findViewById<com.google.android.material.tabs.TabLayout>(R.id.listTabs).visibility = View.GONE
 
         recyclerView = findViewById(R.id.mangaRecyclerView)
-        loadingIndicator = findViewById(R.id.loadingIndicator)
-        emptyText = findViewById(R.id.emptyText)
+        val loadingIndicator = findViewById<android.widget.ProgressBar>(R.id.loadingIndicator)
+        val emptyText = findViewById<TextView>(R.id.emptyText)
 
+        // Use a vertical list (not a grid) so the cards are compact
         recyclerView.layoutManager = LinearLayoutManager(this)
 
         loadingIndicator.visibility = View.VISIBLE
@@ -60,33 +58,54 @@ class HistoryActivity : AppCompatActivity() {
                 } else {
                     emptyText.visibility = View.GONE
                     recyclerView.visibility = View.VISIBLE
-                    // Show as a list of manga (deduplicated by mangaId)
-                    val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault())
-                    val items = entries.map {
-                        com.yazan.manga.data.MangaListItem(
-                            id = it.mangaId,
-                            title = "${it.mangaTitle} — الفصل ${it.chapterNumber}",
-                            cover = it.mangaCover
-                        )
+                    recyclerView.adapter = HistoryAdapter(entries) { entry ->
+                        val intent = Intent(this, MangaDetailsActivity::class.java)
+                        intent.putExtra("manga_id", entry.mangaId)
+                        intent.putExtra("manga_title", entry.mangaTitle)
+                        intent.putExtra("manga_cover", entry.mangaCover)
+                        startActivity(intent)
                     }
-                    val adapter = MangaAdapter(
-                        onClick = { entry ->
-                            val intent = Intent(this, MangaDetailsActivity::class.java)
-                            intent.putExtra("manga_id", entry.id)
-                            intent.putExtra("manga_title", entry.title.substringBefore(" — "))
-                            intent.putExtra("manga_cover", entry.cover)
-                            startActivity(intent)
-                        }
-                    )
-                    recyclerView.adapter = adapter
-                    adapter.submitList(items)
                 }
             },
             onError = {
                 loadingIndicator.visibility = View.GONE
-                Toast.makeText(this, "تعذّر تحميل السجل", Toast.LENGTH_SHORT).show()
+                android.widget.Toast.makeText(this, "تعذّر تحميل السجل", android.widget.Toast.LENGTH_SHORT).show()
             }
         )
+    }
+
+    /** Compact horizontal-card adapter for history entries. */
+    private inner class HistoryAdapter(
+        private val items: List<ReadingHistoryManager.HistoryEntry>,
+        private val onClick: (ReadingHistoryManager.HistoryEntry) -> Unit
+    ) : RecyclerView.Adapter<HistoryAdapter.VH>() {
+
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {
+            val v = LayoutInflater.from(parent.context).inflate(R.layout.item_history, parent, false)
+            return VH(v)
+        }
+
+        override fun onBindViewHolder(holder: VH, position: Int) = holder.bind(items[position])
+        override fun getItemCount() = items.size
+
+        inner class VH(v: View) : RecyclerView.ViewHolder(v) {
+            private val cover: ImageView = v.findViewById(R.id.historyCover)
+            private val title: TextView = v.findViewById(R.id.historyTitle)
+            private val chapter: TextView = v.findViewById(R.id.historyChapter)
+            private val time: TextView = v.findViewById(R.id.historyTime)
+
+            fun bind(entry: ReadingHistoryManager.HistoryEntry) {
+                title.text = entry.mangaTitle
+                chapter.text = "الفصل ${entry.chapterNumber}"
+                time.text = sdf.format(Date(entry.readAt))
+                Glide.with(cover.context)
+                    .load(entry.mangaCover)
+                    .centerCrop()
+                    .placeholder(R.color.surface)
+                    .into(cover)
+                itemView.setOnClickListener { onClick(entry) }
+            }
+        }
     }
 
     override fun onDestroy() {
