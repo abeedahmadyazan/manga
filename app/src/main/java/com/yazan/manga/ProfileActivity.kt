@@ -85,7 +85,6 @@ class ProfileActivity : AppCompatActivity() {
             updateUI()
             Toast.makeText(this, "تم تسجيل الخروج", Toast.LENGTH_SHORT).show()
         }
-        btnChangeUsername.setOnClickListener { showChangeUsernameDialog() }
         btnChangeUsername.setOnClickListener {
             showChangeUsernameDialog()
         }
