@@ -76,13 +76,18 @@ class MangaListActivity : AppCompatActivity() {
 
         findViewById<ImageButton>(R.id.btnBack).setOnClickListener { finish() }
 
-        adapter = MangaAdapter { entry ->
-            val intent = Intent(this, MangaDetailsActivity::class.java)
-            intent.putExtra("manga_id", entry.id)
-            intent.putExtra("manga_title", entry.title)
-            intent.putExtra("manga_cover", entry.cover)
-            startActivity(intent)
-        }
+        adapter = MangaAdapter(
+            onClick = { entry ->
+                val intent = Intent(this, MangaDetailsActivity::class.java)
+                intent.putExtra("manga_id", entry.id)
+                intent.putExtra("manga_title", entry.title)
+                intent.putExtra("manga_cover", entry.cover)
+                startActivity(intent)
+            },
+            onRemoveClick = { entry ->
+                confirmRemove(entry.id, entry.title)
+            }
+        )
         recyclerView.layoutManager = GridLayoutManager(this, 3)
         recyclerView.adapter = adapter
 
@@ -145,6 +150,20 @@ class MangaListActivity : AppCompatActivity() {
             recyclerView.visibility = View.VISIBLE
         }
         adapter.submitList(mangaSummaries)
+    }
+
+    /** Shows a confirmation dialog, then removes the manga from the current list. */
+    private fun confirmRemove(mangaId: String, mangaTitle: String) {
+        androidx.appcompat.app.AlertDialog.Builder(this)
+            .setTitle("إزالة من القائمة")
+            .setMessage("هل تريد إزالة \"$mangaTitle\" من ${currentListType.label}؟")
+            .setPositiveButton("إزالة") { _, _ ->
+                MangaListsManager.removeFromList(this, email, currentListType, mangaId)
+                Toast.makeText(this, "تمت الإزالة", Toast.LENGTH_SHORT).show()
+                // The real-time listener will refresh the list automatically.
+            }
+            .setNegativeButton("إلغاء", null)
+            .show()
     }
 
     override fun onDestroy() {

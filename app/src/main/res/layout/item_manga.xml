@@ -14,36 +14,57 @@
     android:clickable="true"
     android:focusable="true">
 
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="wrap_content">
 
-        <!-- Cover image — fixed height to approximate 2:3 ratio in grid -->
-        <ImageView
-            android:id="@+id/mangaCover"
-            android:layout_width="match_parent"
-            android:layout_height="210dp"
-            android:scaleType="centerCrop"
-            android:adjustViewBounds="true"
-            android:background="@color/surface_light"
-            android:contentDescription="غلاف المانجا"
-            tools:ignore="HardcodedText" />
-
-        <TextView
-            android:id="@+id/mangaTitle"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="8dp"
-            android:text="Manga Title"
-            android:textColor="@color/text_primary"
-            android:textSize="13sp"
-            android:textStyle="bold"
-            android:maxLines="2"
-            android:ellipsize="end"
-            android:gravity="center"
-            android:minHeight="40dp"
-            tools:ignore="HardcodedText" />
-    </LinearLayout>
+            android:orientation="vertical">
+
+            <!-- Cover image — fixed height to approximate 2:3 ratio in grid -->
+            <ImageView
+                android:id="@+id/mangaCover"
+                android:layout_width="match_parent"
+                android:layout_height="210dp"
+                android:scaleType="centerCrop"
+                android:adjustViewBounds="true"
+                android:background="@color/surface_light"
+                android:contentDescription="غلاف المانجا"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:id="@+id/mangaTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:text="Manga Title"
+                android:textColor="@color/text_primary"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                android:maxLines="2"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:minHeight="40dp"
+                tools:ignore="HardcodedText" />
+        </LinearLayout>
+
+        <!-- Remove button (top-end corner) — only shown in custom-list screens -->
+        <ImageButton
+            android:id="@+id/btnRemoveFromList"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_gravity="top|end"
+            android:layout_margin="6dp"
+            android:background="@drawable/bg_circle_button"
+            android:src="@android:drawable/ic_menu_close_clear_cancel"
+            android:scaleType="center"
+            android:padding="6dp"
+            android:tint="@color/white"
+            android:contentDescription="إزالة من القائمة"
+            android:visibility="gone"
+            tools:ignore="UseAppTint,HardcodedText" />
+    </FrameLayout>
 
 </com.google.android.material.card.MaterialCardView>

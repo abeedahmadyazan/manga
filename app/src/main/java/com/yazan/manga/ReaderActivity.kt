@@ -100,13 +100,16 @@ class ReaderActivity : AppCompatActivity() {
 
         // Zoom controls — these adjust the base scale. When zoomed in >1x,
         // the user can drag/pan the image with one finger.
+        // Zoom IN: +0.5x per tap (max 5x)
+        // Zoom OUT: -0.25x per tap (min 0.5x) — a smaller step so the user
+        // can nudge the image slightly smaller ("إبعاد حبة للورا")
         btnZoomIn.setOnClickListener {
             zoomLevel = (zoomLevel + 0.5f).coerceAtMost(5.0f)
             pageImage.scaleX = zoomLevel
             pageImage.scaleY = zoomLevel
         }
         btnZoomOut.setOnClickListener {
-            zoomLevel = (zoomLevel - 0.5f).coerceAtLeast(1.0f)
+            zoomLevel = (zoomLevel - 0.25f).coerceAtLeast(0.5f)
             pageImage.scaleX = zoomLevel
             pageImage.scaleY = zoomLevel
             if (zoomLevel == 1.0f) {

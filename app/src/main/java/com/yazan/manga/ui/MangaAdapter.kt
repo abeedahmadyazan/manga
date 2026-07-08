@@ -3,6 +3,7 @@ package com.yazan.manga.ui
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -12,7 +13,8 @@ import com.yazan.manga.data.MangaListItem
 
 class MangaAdapter(
     private val items: MutableList<MangaListItem> = mutableListOf(),
-    private val onClick: (MangaListItem) -> Unit
+    private val onClick: (MangaListItem) -> Unit,
+    private val onRemoveClick: ((MangaListItem) -> Unit)? = null
 ) : RecyclerView.Adapter<MangaAdapter.MangaVH>() {
 
     fun submitList(newItems: List<MangaListItem>) {
@@ -42,6 +44,7 @@ class MangaAdapter(
     inner class MangaVH(view: View) : RecyclerView.ViewHolder(view) {
         private val cover: ImageView = view.findViewById(R.id.mangaCover)
         private val title: TextView = view.findViewById(R.id.mangaTitle)
+        private val btnRemove: ImageButton = view.findViewById(R.id.btnRemoveFromList)
 
         fun bind(item: MangaListItem) {
             title.text = item.title
@@ -53,6 +56,15 @@ class MangaAdapter(
                 .into(cover)
 
             itemView.setOnClickListener { onClick(item) }
+
+            // Show the remove button only if a remove callback was provided
+            // (i.e. only in MangaListActivity, not in MainActivity/search).
+            if (onRemoveClick != null) {
+                btnRemove.visibility = View.VISIBLE
+                btnRemove.setOnClickListener { onRemoveClick.invoke(item) }
+            } else {
+                btnRemove.visibility = View.GONE
+            }
         }
     }
 }
