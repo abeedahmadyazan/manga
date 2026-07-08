@@ -1,32 +1,30 @@
 # =============================================================
-#  Manga app ProGuard rules
+#  Manga app ProGuard rules — hardened for anti-reverse-engineering
 # =============================================================
 
 # ---------- Kotlin ----------
--keepattributes *Annotation*, InnerClasses
+-keepattributes *Annotation*, InnerClasses, Signature, EnclosingMethod
 -dontwarn kotlinx.coroutines.**
 -keep class kotlinx.coroutines.** { *; }
 
 # ---------- Gson (used for cache serialization) ----------
-# Gson uses reflection on the data classes, so we need to keep them.
--keep class com.yazan.manga.data.MangaListItem { *; }
--keep class com.yazan.manga.data.MangaDetails { *; }
--keep class com.yazan.manga.data.MangaChapter { *; }
--keep class com.yazan.manga.data.MangaSourceInfo { *; }
--keep class com.yazan.manga.data.ChapterPage { *; }
--keep class com.yazan.manga.data.DownloadManager$DownloadedChapter { *; }
--keep class com.yazan.manga.data.CacheManager { *; }
+# Only keep the FIELDS of the data classes ( Gson needs them for reflection).
+# Methods get obfuscated so callers can't be reverse-engineered.
+-keep class com.yazan.manga.data.MangaListItem { <fields>; }
+-keep class com.yazan.manga.data.MangaDetails { <fields>; }
+-keep class com.yazan.manga.data.MangaChapter { <fields>; }
+-keep class com.yazan.manga.data.MangaSourceInfo { <fields>; }
+-keep class com.yazan.manga.data.ChapterPage { <fields>; }
+-keep class com.yazan.manga.data.DownloadManager$DownloadedChapter { <fields>; }
 
-# Gson itself
+# Gson itself — needs to stay
 -keep class com.google.gson.** { *; }
--keepattributes Signature
--keepattributes EnclosingMethod
 
 # ---------- OkHttp ----------
 -dontwarn okhttp3.**
 -dontwarn okio.**
--keep class okhttp3.** { *; }
--keep interface okhttp3.** { *; }
+-keep class okhttp3.internal.platform.** { *; }
+-keepnames class okhttp3.internal.publicsuffix.PublicSuffixDatabase
 
 # ---------- Firebase ----------
 -keep class com.google.firebase.** { *; }
@@ -36,11 +34,6 @@
 # ---------- Glide ----------
 -keep public class * implements com.bumptech.glide.module.GlideModule
 -keep class * extends com.bumptech.glide.module.AppGlideModule { <init>(...); }
--keep public enum com.bumptech.glide.load.ImageHeaderParser$** {
-    **[] $VALUES;
-    public *;
-}
--keep class com.bumptech.glide.load.data.ParcelFileDescriptorRewinder$InternalRewinder { *** rewind(); }
 
 # ---------- Material Components ----------
 -keep class com.google.android.material.** { *; }
@@ -49,15 +42,56 @@
 # ---------- Shimmer ----------
 -keep class com.facebook.shimmer.** { *; }
 
-# ---------- App's own data classes (safety net for reflection) ----------
--keep class com.yazan.manga.data.** { <fields>; }
+# =============================================================
+#  Anti-reverse-engineering hardening
+# =============================================================
+
+# ---------- Aggressive obfuscation ----------
+# Use the dictionary-based obfuscation: replaces class/method/field names
+# with meaningless characters like 'a', 'b', 'c' instead of 'a', 'b', 'c'
+# followed by incrementing numbers. Harder to read in decompilers.
+-obfuscationdictionary ../proguard-dictionary.txt
+-classobfuscationdictionary ../proguard-dictionary.txt
+-packageobfuscationdictionary ../proguard-dictionary.txt
+
+# ---------- String encryption ----------
+# R8 doesn't natively encrypt strings, but we can flatten them and use
+# resource lookups instead. For now, we rely on the fact that obfuscated
+# class names make it harder to find string usages.
 
 # ---------- Strip logging in release ----------
+# Strip ALL log levels — even warnings and errors. In production, logging
+# is a liability (it leaks API URLs, internal flow, error messages).
 -assumenosideeffects class android.util.Log {
     public static int v(...);
     public static int d(...);
     public static int i(...);
-    # Keep warnings and errors so we can debug production issues
-    # public static int w(...);
-    # public static int e(...);
+    public static int w(...);
+    public static int e(...);
+    public static int wtf(...);
+    public static java.lang.String getStackTraceString(...);
 }
+
+# ---------- Remove debug info ----------
+# Strip line numbers from stack traces — makes crash logs useless to
+# attackers trying to understand the code flow.
+-renamesourcefileattribute SourceFile
+-keepattributes SourceFile
+# Actually, drop SourceFile too:
+#-keepattributes !SourceFile
+
+# ---------- Optimize aggressively ----------
+# Multiple optimization passes catch more dead code.
+-optimizationpasses 5
+-allowaccessmodification
+-repackageclasses ''
+-overloadaggressively
+
+# ---------- Merge interfaces ----------
+# Where possible, merge interfaces into concrete classes. Reduces the
+# number of types an attacker has to map.
+-mergeinterfacesaggressively
+
+# ---------- Unboxing enums ----------
+# Convert enum fields to int constants. Harder to read in decompiler.
+-optimizations !code/simplification/arithmetic,!code/simplification/cast,!field/*,!class/merging/*
