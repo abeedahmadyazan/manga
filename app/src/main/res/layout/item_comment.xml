@@ -122,6 +122,31 @@
                 android:layout_marginStart="12dp"
                 android:background="?attr/selectableItemBackgroundBorderless" />
 
+            <!-- Edit button (only shown for the comment owner) -->
+            <TextView
+                android:id="@+id/btnEdit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="✏️ تعديل"
+                android:textColor="@color/text_secondary"
+                android:textSize="11sp"
+                android:padding="4dp"
+                android:layout_marginStart="12dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:visibility="gone" />
+
+            <!-- "Edited" indicator (shown if editedAt != null) -->
+            <TextView
+                android:id="@+id/tvEdited"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="(معدّل)"
+                android:textColor="@color/text_muted"
+                android:textSize="9sp"
+                android:padding="4dp"
+                android:layout_marginStart="4dp"
+                android:visibility="gone" />
+
             <TextView
                 android:id="@+id/btnDelete"
                 android:layout_width="wrap_content"

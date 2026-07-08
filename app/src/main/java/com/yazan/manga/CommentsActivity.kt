@@ -93,7 +93,8 @@ class CommentsActivity : AppCompatActivity() {
             val intent = Intent(this, UserProfileActivity::class.java)
             intent.putExtra("user_email", email)
             startActivity(intent)
-        }
+        },
+            onEdit = { c -> showEditDialog(c) }
         )
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = adapter
@@ -181,6 +182,86 @@ class CommentsActivity : AppCompatActivity() {
             .setNegativeButton("إلغاء", null).show()
     }
 
+    /**
+     * Show a dialog to edit a comment. Enforces the same 60-second cooldown
+     * as posting a new comment (shares the same cooldown timer).
+     */
+    private fun showEditDialog(comment: CloudCommentsManager.Comment) {
+        // Admin bypasses cooldown
+        val user = AuthManager.getCurrentUser(this)
+        if (user == null) {
+            Toast.makeText(this, "يجب تسجيل الدخول", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        if (!user.isAdmin) {
+            // Check the 60-second cooldown (same as posting)
+            com.google.firebase.firestore.FirebaseFirestore.getInstance()
+                .collection("comment_cooldowns").document(user.email).get()
+                .addOnSuccessListener { doc ->
+                    val lastAt = doc.getLong("lastCommentAt") ?: 0L
+                    val diff = System.currentTimeMillis() - lastAt
+                    if (diff < 60_000L) {
+                        val left = ((60_000L - diff) / 1000).toInt()
+                        runOnUiThread {
+                            Toast.makeText(this, "انتظر $left ثانية قبل التعديل", Toast.LENGTH_SHORT).show()
+                        }
+                    } else {
+                        runOnUiThread { showEditDialogInternal(comment, user) }
+                    }
+                }
+                .addOnFailureListener { runOnUiThread { showEditDialogInternal(comment, user) } }
+        } else {
+            showEditDialogInternal(comment, user)
+        }
+    }
+
+    private fun showEditDialogInternal(comment: CloudCommentsManager.Comment, user: AuthManager.User) {
+        val input = EditText(this).apply {
+            setText(comment.text)
+            setSelection(comment.text.length)
+            setSingleLine(false)
+            maxLines = 4
+            setPadding(40, 30, 40, 30)
+        }
+
+        AlertDialog.Builder(this)
+            .setTitle("تعديل التعليق")
+            .setView(input)
+            .setPositiveButton("حفظ") { _, _ ->
+                val newText = input.text.toString().trim()
+                if (newText.isEmpty()) {
+                    Toast.makeText(this, "التعليق فارغ", Toast.LENGTH_SHORT).show()
+                    return@setPositiveButton
+                }
+                if (newText.length > 500) {
+                    Toast.makeText(this, "التعليق طويل جداً", Toast.LENGTH_SHORT).show()
+                    return@setPositiveButton
+                }
+                if (newText == comment.text) {
+                    Toast.makeText(this, "لم تتغير أي شي", Toast.LENGTH_SHORT).show()
+                    return@setPositiveButton
+                }
+
+                CloudCommentsManager.editComment(comment.id, newText) { success ->
+                    runOnUiThread {
+                        if (success) {
+                            Toast.makeText(this, "تم التعديل", Toast.LENGTH_SHORT).show()
+                            // Update the cooldown timer so the next edit/comment
+                            // also has to wait 60 seconds.
+                            com.google.firebase.firestore.FirebaseFirestore.getInstance()
+                                .collection("comment_cooldowns").document(user.email)
+                                .set(mapOf("lastCommentAt" to System.currentTimeMillis()))
+                        } else {
+                            Toast.makeText(this, "فشل التعديل", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }
+            }
+            .setNegativeButton("إلغاء", null)
+            .show()
+    }
+
     private fun confirmBan(email: String, name: String) {
         AlertDialog.Builder(this).setTitle("حظر المستخدم").setMessage("حظر $name؟")
             .setPositiveButton("حظر") { _, _ -> CloudCommentsManager.banUser(email, this) {} }
@@ -231,7 +312,8 @@ class CommentsAdapter(
     private val onDelete: (CloudCommentsManager.Comment) -> Unit,
     private val onBan: (CloudCommentsManager.Comment) -> Unit,
     private val onReport: (CloudCommentsManager.Comment) -> Unit,
-    private val onProfile: (String) -> Unit
+    private val onProfile: (String) -> Unit,
+    private val onEdit: (CloudCommentsManager.Comment) -> Unit
 ) : RecyclerView.Adapter<CommentsAdapter.VH>() {
 
     private val items = mutableListOf<CloudCommentsManager.Comment>()
@@ -265,31 +347,38 @@ class CommentsAdapter(
         private val btnLike = v.findViewById<TextView>(R.id.btnLike)
         private val btnDislike = v.findViewById<TextView>(R.id.btnDislike)
         private val btnReply = v.findViewById<TextView>(R.id.btnReply)
+        private val btnEdit = v.findViewById<TextView>(R.id.btnEdit)
+        private val tvEdited = v.findViewById<TextView>(R.id.tvEdited)
         private val btnDelete = v.findViewById<TextView>(R.id.btnDelete)
         private val btnReport = v.findViewById<TextView>(R.id.btnReport)
 
         fun bind(c: CloudCommentsManager.Comment) {
-            // Default: show the first letter
-            avatar.text = c.authorName.firstOrNull()?.uppercaseChar()?.toString() ?: "?"
+            // FIX: Don't show the OLD cached name/avatar at all.
+            // Instead, show a neutral placeholder while we fetch the cloud
+            // profile. This prevents the "flash of old data" the user was
+            // seeing on screen.
+            avatar.text = "?"
             avatar.visibility = View.VISIBLE
             avatarImg.visibility = View.GONE
+            avatarImg.setImageDrawable(null) // CRITICAL: clear old image
+
             // For admins: show the name inside the green pill badge, and hide
             // the plain author TextView so nobody can impersonate an admin by
             // adding '(مشرف)' to their own name.
             if (c.isAdmin) {
-                adminBadge.text = c.authorName
+                adminBadge.text = c.authorName  // temporary; will be overwritten by cloud profile
                 adminBadge.visibility = View.VISIBLE
                 author.visibility = View.GONE
             } else {
                 adminBadge.visibility = View.GONE
                 author.visibility = View.VISIBLE
-                author.text = c.authorName
+                author.text = c.authorName  // temporary; will be overwritten by cloud profile
             }
             time.text = com.yazan.manga.data.relativeTime(c.createdAt)
             text.text = c.text
             btnLike.text = "👍 ${c.likes.size}"
             btnDislike.text = "👎 ${c.dislikes.size}"
-            
+
             val liked = currentUser != null && c.likes.contains(currentUser.email)
             val disliked = currentUser != null && c.dislikes.contains(currentUser.email)
             btnLike.alpha = if (liked) 1f else 0.5f
@@ -298,6 +387,10 @@ class CommentsAdapter(
             val isOwner = currentUser?.email == c.authorEmail
             val canDelete = isOwner || (currentUser?.isAdmin == true)
             btnDelete.visibility = if (canDelete) View.VISIBLE else View.GONE
+            // Show edit button only for the comment owner
+            btnEdit.visibility = if (isOwner) View.VISIBLE else View.GONE
+            // Show "edited" indicator if the comment was edited
+            tvEdited.visibility = if (c.editedAt != null) View.VISIBLE else View.GONE
             // Show the report button for any logged-in user who isn't the comment owner
             // AND isn't an admin (you can't report admins)
             btnReport.visibility = if (currentUser != null && !isOwner && !c.isAdmin) View.VISIBLE else View.GONE
@@ -305,13 +398,14 @@ class CommentsAdapter(
             btnLike.setOnClickListener { onLike(c) }
             btnDislike.setOnClickListener { onDislike(c) }
             btnReply.setOnClickListener { onReply(c) }
+            btnEdit.setOnClickListener { onEdit(c) }
             btnDelete.setOnClickListener { onDelete(c) }
             btnReport.setOnClickListener { onReport(c) }
-            
+
             author.setOnClickListener { onProfile(c.authorEmail) }
             avatar.setOnClickListener { onProfile(c.authorEmail) }
             avatarImg.setOnClickListener { onProfile(c.authorEmail) }
-            
+
             // Fetch the latest name + avatar from the cloud (so changes are visible to everyone)
             loadCloudProfile(c)
 
