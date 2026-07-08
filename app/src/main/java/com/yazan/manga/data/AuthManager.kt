@@ -89,6 +89,27 @@ object AuthManager {
         }
     }
 
+    /**
+     * Refresh the current user's admin status from Firestore.
+     * Called after sign-in to update the local user object if the user has
+     * been granted admin privileges via the 'admins' collection.
+     */
+    fun refreshAdminStatus(context: Context) {
+        val user = getCurrentUser(context) ?: return
+        val firebaseUser = com.google.firebase.auth.FirebaseAuth.getInstance().currentUser
+        val uid = firebaseUser?.uid ?: return
+        checkAdminFromCloud(uid, user.email) { isAdmin ->
+            if (isAdmin != user.isAdmin) {
+                // Status changed — update the user object and save it
+                val updatedUser = user.copy(isAdmin = isAdmin)
+                val prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+                prefs.edit().putString(KEY_USER, serializeUser(updatedUser)).apply()
+                saveUser(context, updatedUser)
+                uploadUserToCloud(context)
+            }
+        }
+    }
+
     fun getDeviceId(context: Context): String {
         val prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
         prefs.getString(KEY_DEVICE_ID, null)?.let { return it }
@@ -193,6 +214,8 @@ object AuthManager {
         }
 
         val deviceId = getDeviceId(context)
+        // Start with the hardcoded admin check — the cloud check happens
+        // asynchronously below and updates the user object if needed.
         val isAdmin = cleanEmail == ADMIN_EMAIL
 
         var user = getUserByEmail(context, cleanEmail)
@@ -227,6 +250,12 @@ object AuthManager {
             uploadUserToCloud(context)
         }
 
+        // Async admin check: if the user's UID exists in the 'admins' Firestore
+        // collection, mark them as admin. This runs after the synchronous flow
+        // so the user can sign in immediately, and the admin flag updates once
+        // the cloud check completes.
+        refreshAdminStatus(context)
+
         return null
     }
 
@@ -254,6 +283,8 @@ object AuthManager {
         }
 
         val deviceId = getDeviceId(context)
+        // Start with the hardcoded admin check — the cloud check happens
+        // asynchronously below and updates the user object if needed.
         val isAdmin = email == ADMIN_EMAIL
 
         var user = getUserByEmail(context, email)
@@ -286,6 +317,12 @@ object AuthManager {
         restoreUserFromCloud(context) {
             uploadUserToCloud(context)
         }
+
+        // Async admin check: if the user's UID exists in the 'admins' Firestore
+        // collection, mark them as admin. This runs after the synchronous flow
+        // so the user can sign in immediately, and the admin flag updates once
+        // the cloud check completes.
+        refreshAdminStatus(context)
 
         return null
     }

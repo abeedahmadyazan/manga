@@ -273,6 +273,9 @@ class MainActivity : AppCompatActivity() {
         val resourceId = resources.getIdentifier("status_bar_height", "dimen", "android")
         val statusBarHeight = if (resourceId > 0) resources.getDimensionPixelSize(resourceId) else 0
         navigationView.setPadding(0, statusBarHeight, 0, 0)
+        // Refresh the user's admin status from Firestore (in case they were
+        // granted/revoked admin from another device or by another admin).
+        com.yazan.manga.data.AuthManager.refreshAdminStatus(this)
         updateMenuHeader()
     }
 
