@@ -16,12 +16,11 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.tabs.TabLayout
+import com.google.firebase.firestore.ListenerRegistration
 import com.yazan.manga.data.AuthManager
-import com.yazan.manga.data.CommentsManager
-import com.yazan.manga.data.ReportsManager
+import com.yazan.manga.data.CloudCommentsManager
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class CommentsActivity : AppCompatActivity() {
 
@@ -37,7 +36,8 @@ class CommentsActivity : AppCompatActivity() {
     private var contextType: String = "manga"
     private var contextTitle: String = ""
     private var currentSort: String = "newest"
-    private var currentComments: MutableList<CommentsManager.Comment> = mutableListOf()
+    private var allComments: List<CloudCommentsManager.Comment> = emptyList()
+    private var listener: ListenerRegistration? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,7 +48,7 @@ class CommentsActivity : AppCompatActivity() {
         contextTitle = intent.getStringExtra("context_title") ?: "تعليقات"
 
         initViews()
-        loadComments()
+        startListening()
     }
 
     private fun initViews() {
@@ -63,7 +63,7 @@ class CommentsActivity : AppCompatActivity() {
 
         findViewById<ImageButton>(R.id.btnBack).setOnClickListener { finish() }
 
-        swipeRefresh.setOnRefreshListener { loadComments(); swipeRefresh.isRefreshing = false }
+        swipeRefresh.setOnRefreshListener { swipeRefresh.isRefreshing = false }
         swipeRefresh.setColorSchemeResources(R.color.primary)
 
         sendBtn.setOnClickListener {
@@ -81,69 +81,126 @@ class CommentsActivity : AppCompatActivity() {
         })
     }
 
+    private fun startListening() {
+        loadingIndicator.visibility = View.VISIBLE
+        listener = CloudCommentsManager.listenToComments(contextId) { comments ->
+            loadingIndicator.visibility = View.GONE
+            allComments = comments
+            renderComments()
+        }
+    }
+
     private fun sendComment(text: String) {
         val user = AuthManager.getCurrentUser(this)
         if (user == null) { Toast.makeText(this, "يجب تسجيل الدخول", Toast.LENGTH_SHORT).show(); return }
 
-        val cd = CommentsManager.checkCooldown(this)
-        if (!cd.allowed) { Toast.makeText(this, "انتظر ${cd.secondsLeft} ثانية", Toast.LENGTH_SHORT).show(); return }
-
-        if (contextType == "chapter" && !CommentsManager.checkChapterLimit(this, contextId, user.email)) {
-            Toast.makeText(this, "وصلت للحد الأقصى (2 تعليقات/فصل)", Toast.LENGTH_SHORT).show(); return
+        sendBtn.isEnabled = false
+        CloudCommentsManager.addComment(this, contextId, contextType, text, null) { success, error ->
+            sendBtn.isEnabled = true
+            if (success) {
+                commentInput.text.clear()
+                Toast.makeText(this, "تم إرسال التعليق", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(this, error ?: "فشل الإرسال", Toast.LENGTH_LONG).show()
+            }
         }
-
-        val error = CommentsManager.addComment(this, contextId, contextType, text, null)
-        if (error != null) Toast.makeText(this, error, Toast.LENGTH_LONG).show()
-        else { commentInput.text.clear(); loadComments() }
-    }
-
-    private fun loadComments() {
-        currentComments = CommentsManager.getComments(this, contextId).toMutableList()
-        renderComments()
     }
 
     private fun renderComments() {
-        if (currentComments.isEmpty()) { emptyText.visibility = View.VISIBLE; recyclerView.visibility = View.GONE; return }
-        emptyText.visibility = View.GONE; recyclerView.visibility = View.VISIBLE
-        recyclerView.layoutManager = LinearLayoutManager(this)
+        val topLevel = allComments.filter { it.parentId == null }
+        val sorted = when (currentSort) {
+            "oldest" -> topLevel.sortedBy { it.createdAt }
+            "likes" -> topLevel.sortedByDescending { it.likes.size - it.dislikes.size }
+            else -> topLevel.sortedByDescending { it.createdAt }
+        }
 
-        val sorted = CommentsManager.sortComments(currentComments.filter { it.parentId == null }, currentSort)
+        if (sorted.isEmpty()) {
+            emptyText.visibility = View.VISIBLE
+            recyclerView.visibility = View.GONE
+            return
+        }
+
+        emptyText.visibility = View.GONE
+        recyclerView.visibility = View.VISIBLE
+        recyclerView.layoutManager = LinearLayoutManager(this)
         val user = AuthManager.getCurrentUser(this)
 
         recyclerView.adapter = object : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             override fun onCreateViewHolder(parent: android.view.ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-                val tv = TextView(parent.context).apply { setPadding(32, 24, 32, 24); setTextColor(getColor(R.color.white)); textSize = 13f }
+                val tv = TextView(parent.context).apply {
+                    setPadding(32, 24, 32, 24)
+                    setTextColor(getColor(R.color.white))
+                    textSize = 13f
+                }
                 return object : RecyclerView.ViewHolder(tv) {}
             }
+
             override fun getItemCount() = sorted.size
+
             override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
                 val c = sorted[position]
+                val replies = allComments.filter { it.parentId == c.id }
                 val sdf = java.text.SimpleDateFormat("yyyy-MM-dd HH:mm", java.util.Locale.getDefault())
-                val liked = user != null && c.likes.contains(user.email)
                 val isOwner = user?.email == c.authorEmail
                 val canDelete = isOwner || (user?.isAdmin == true)
-                var text = "${if (c.isAdmin) "👑 " else ""}${c.authorName}\n${c.text}\n👍 ${c.likes.size} | 👎 ${c.dislikes.size} | ${sdf.format(java.util.Date(c.createdAt))}"
+
+                var text = "${if (c.isAdmin) "👑 " else ""}${c.authorName}\n${c.text}\n👍 ${c.likes.size} | 👎 ${c.dislikes.size} | 💬 ${replies.size} رد | ${sdf.format(java.util.Date(c.createdAt))}${if (c.editedAt != null) " (معدّل)" else ""}"
                 if (canDelete) text += "\n[احذف]"
 
                 (holder.itemView as TextView).text = text
+
                 holder.itemView.setOnClickListener {
-                    if (canDelete) {
-                        AlertDialog.Builder(this@CommentsActivity)
-                            .setTitle("حذف التعليق").setMessage("هل تريد حذف هذا التعليق؟")
-                            .setPositiveButton("حذف") { _, _ -> CommentsManager.deleteComment(this@CommentsActivity, c.id); loadComments() }
-                            .setNegativeButton("إلغاء", null).show()
-                    }
+                    val options = mutableListOf("💬 رد")
+                    if (canDelete) options.add("🗑️ حذف")
+                    if (user != null && !isOwner) options.add("👍 إعجاب")
+                    if (user != null && !isOwner) options.add("👎 عدم إعجاب")
+                    if (user?.isAdmin == true && !c.isAdmin) options.add("🚫 حظر")
+
+                    AlertDialog.Builder(this@CommentsActivity)
+                        .setItems(options.toTypedArray()) { _, which ->
+                            val action = options[which]
+                            when {
+                                action.startsWith("💬") -> openReplies(c.id, c.authorName)
+                                action.startsWith("🗑️") -> {
+                                    AlertDialog.Builder(this@CommentsActivity)
+                                        .setTitle("حذف").setMessage("هل تريد الحذف؟")
+                                        .setPositiveButton("حذف") { _, _ ->
+                                            CloudCommentsManager.deleteComment(c.id) { ok ->
+                                                if (!ok) Toast.makeText(this@CommentsActivity, "فشل الحذف", Toast.LENGTH_SHORT).show()
+                                            }
+                                        }.setNegativeButton("إلغاء", null).show()
+                                }
+                                action.startsWith("👍") -> {
+                                    user?.let { CloudCommentsManager.toggleLike(c.id, it.email, true) {} }
+                                }
+                                action.startsWith("👎") -> {
+                                    user?.let { CloudCommentsManager.toggleLike(c.id, it.email, false) {} }
+                                }
+                                action.startsWith("🚫") -> {
+                                    AlertDialog.Builder(this@CommentsActivity)
+                                        .setTitle("حظر المستخدم").setMessage("حظر ${c.authorName} وحذف تعليقاته؟")
+                                        .setPositiveButton("حظر") { _, _ ->
+                                            CloudCommentsManager.banUser(c.authorEmail, this@CommentsActivity) {}
+                                        }.setNegativeButton("إلغاء", null).show()
+                                }
+                            }
+                        }.show()
                 }
             }
         }
     }
 
-    private fun openRepliesScreen(commentId: String, authorName: String) {
+    private fun openReplies(commentId: String, authorName: String) {
         val intent = Intent(this, RepliesActivity::class.java)
         intent.putExtra("parent_id", commentId)
         intent.putExtra("context_id", contextId)
         intent.putExtra("context_type", contextType)
         intent.putExtra("parent_author", authorName)
         startActivity(intent)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        listener?.remove()
     }
 }
