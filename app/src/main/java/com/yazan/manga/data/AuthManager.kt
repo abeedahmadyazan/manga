@@ -955,6 +955,11 @@ object AuthManager {
                     val cloudBirthDate = doc.getString("birthDate") ?: ""
                     val cloudCountry = doc.getString("country") ?: ""
                     val cloudIsAdmin = doc.getBoolean("isAdmin") ?: false
+                    // Always re-check admin status from the XOR-encoded email.
+                    // This is the source of truth — even if the cloud doc has
+                    // isAdmin=false (e.g. from an older version), the email
+                    // check will correctly identify the admin.
+                    val actualIsAdmin = email == getAdminEmail() || cloudIsAdmin
                     val cloudCreatedAt = doc.getLong("createdAt") ?: 0L
 
                     // If we have no local user at all (reinstall case),
@@ -963,7 +968,7 @@ object AuthManager {
                         email = email,
                         name = cloudName.ifEmpty { email.substringBefore("@") },
                         username = cloudUsername.ifEmpty { "@${email.substringBefore("@")}" },
-                        isAdmin = cloudIsAdmin,
+                        isAdmin = actualIsAdmin,
                         deviceId = getDeviceId(context),
                         createdAt = cloudCreatedAt,
                         lastUsernameChange = 0L,
@@ -998,9 +1003,9 @@ object AuthManager {
                         changed = true
                     }
 
-                    // Restore admin status from cloud
-                    if (cloudIsAdmin != current.isAdmin) {
-                        updated = updated.copy(isAdmin = cloudIsAdmin)
+                    // Restore admin status — always use actualIsAdmin (email-based)
+                    if (actualIsAdmin != current.isAdmin) {
+                        updated = updated.copy(isAdmin = actualIsAdmin)
                         changed = true
                     }
 
