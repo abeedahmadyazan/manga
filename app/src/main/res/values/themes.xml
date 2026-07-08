@@ -21,11 +21,22 @@
         <!-- Apply Tajawal Arabic font globally to all text in the app -->
         <item name="android:fontFamily">@font/tajawal</item>
         <item name="fontFamily">@font/tajawal</item>
+
+        <!-- Smooth fade-in/slide-up transition when opening new activities -->
+        <item name="android:windowAnimationStyle">@style/Animation.MangaApp.Activity</item>
     </style>
 
     <style name="Theme.MangaApp.Transparent" parent="Theme.MangaApp">
         <item name="android:windowTranslucentStatus">true</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
+    </style>
+
+    <!-- Activity transition: subtle fade + slight slide-up -->
+    <style name="Animation.MangaApp.Activity" parent="@android:style/Animation.Activity">
+        <item name="android:activityOpenEnterAnimation">@anim/activity_enter</item>
+        <item name="android:activityOpenExitAnimation">@anim/activity_exit</item>
+        <item name="android:activityCloseEnterAnimation">@anim/activity_enter</item>
+        <item name="android:activityCloseExitAnimation">@anim/activity_exit</item>
     </style>
 
 </resources>
