@@ -1,6 +1,7 @@
 package com.yazan.manga.data
 
 import android.app.ActivityManager
+import android.app.Application
 import android.content.Context
 import android.os.Build
 import android.os.Debug
