@@ -30,72 +30,107 @@ object CloudCommentsManager {
             return
         }
 
-        // Check if the user is currently suspended in the cloud (banned_users/{email})
-        db.collection("banned_users").document(user.email).get()
-            .addOnSuccessListener { banDoc ->
-                if (banDoc.exists()) {
-                    val until = banDoc.getLong("until") ?: 0L
-                    if (until == 0L) {
-                        callback(false, "تم إيقاف حسابك بشكل دائم")
-                        return@addOnSuccessListener
-                    }
-                    if (until > System.currentTimeMillis()) {
-                        val remainingMs = until - System.currentTimeMillis()
-                        val remainingText = when {
-                            remainingMs < 60 * 60 * 1000 -> "${remainingMs / 60000} دقيقة"
-                            remainingMs < 24 * 60 * 60 * 1000 -> "${remainingMs / (60 * 60 * 1000)} ساعة"
-                            else -> "${remainingMs / (24 * 60 * 60 * 1000)} يوم"
-                        }
-                        callback(false, "تم إيقاف حسابك. متبقي: $remainingText")
-                        return@addOnSuccessListener
-                    }
-                    // Ban expired — clean it up
-                    db.collection("banned_users").document(user.email).delete()
+        // Admin bypasses ALL restrictions: no 60-second cooldown, no chapter
+        // limit, no ban check. Admins can post unlimited comments.
+        if (user.isAdmin) {
+            postCommentToCloud(user, contextId, contextType, text, parentId, callback)
+            return
+        }
+
+        // For non-admins: check the 60-second cooldown (stored in Firestore
+        // so it's enforced across all devices, not just locally).
+        db.collection("comment_cooldowns").document(user.email).get()
+            .addOnSuccessListener { cdDoc ->
+                val lastCommentAt = cdDoc.getLong("lastCommentAt") ?: 0L
+                val now = System.currentTimeMillis()
+                val diff = now - lastCommentAt
+                if (diff < 60_000L) {
+                    val left = ((60_000L - diff) / 1000).toInt()
+                    callback(false, "انتظر $left ثانية قبل التعليق مرة أخرى")
+                    return@addOnSuccessListener
                 }
 
-                val comment = hashMapOf(
-                    "contextId" to contextId,
-                    "contextType" to contextType,
-                    "authorName" to user.name,
-                    "authorEmail" to user.email,
-                    "isAdmin" to user.isAdmin,
-                    "text" to text.trim(),
-                    "parentId" to parentId,
-                    "likes" to emptyList<String>(),
-                    "dislikes" to emptyList<String>(),
-                    "createdAt" to System.currentTimeMillis(),
-                    "editedAt" to null
-                )
+                // Check if the user is currently suspended in the cloud (banned_users/{email})
+                db.collection("banned_users").document(user.email).get()
+                    .addOnSuccessListener { banDoc ->
+                        if (banDoc.exists()) {
+                            val until = banDoc.getLong("until") ?: 0L
+                            if (until == 0L) {
+                                callback(false, "تم إيقاف حسابك بشكل دائم")
+                                return@addOnSuccessListener
+                            }
+                            if (until > now) {
+                                val remainingMs = until - now
+                                val remainingText = when {
+                                    remainingMs < 60 * 60 * 1000 -> "${remainingMs / 60000} دقيقة"
+                                    remainingMs < 24 * 60 * 60 * 1000 -> "${remainingMs / (60 * 60 * 1000)} ساعة"
+                                    else -> "${remainingMs / (24 * 60 * 60 * 1000)} يوم"
+                                }
+                                callback(false, "تم إيقاف حسابك. متبقي: $remainingText")
+                                return@addOnSuccessListener
+                            }
+                            // Ban expired — clean it up
+                            db.collection("banned_users").document(user.email).delete()
+                        }
 
-                db.collection("comments")
-                    .add(comment)
-                    .addOnSuccessListener { doc ->
-                        Log.d(TAG, "Comment added: ${doc.id}")
-                        callback(true, null)
+                        postCommentToCloud(user, contextId, contextType, text, parentId) { success, err ->
+                            if (success) {
+                                // Update the cooldown timestamp in the cloud
+                                db.collection("comment_cooldowns").document(user.email)
+                                    .set(mapOf("lastCommentAt" to System.currentTimeMillis()))
+                            }
+                            callback(success, err)
+                        }
                     }
                     .addOnFailureListener {
-                        callback(false, "حدث خطأ")
+                        // If the ban check fails, still allow the comment (don't block legit users)
+                        postCommentToCloud(user, contextId, contextType, text, parentId) { success, err ->
+                            if (success) {
+                                db.collection("comment_cooldowns").document(user.email)
+                                    .set(mapOf("lastCommentAt" to System.currentTimeMillis()))
+                            }
+                            callback(success, err)
+                        }
                     }
             }
             .addOnFailureListener {
-                // If the ban check fails, still allow the comment (don't block legit users)
-                val comment = hashMapOf(
-                    "contextId" to contextId,
-                    "contextType" to contextType,
-                    "authorName" to user.name,
-                    "authorEmail" to user.email,
-                    "isAdmin" to user.isAdmin,
-                    "text" to text.trim(),
-                    "parentId" to parentId,
-                    "likes" to emptyList<String>(),
-                    "dislikes" to emptyList<String>(),
-                    "createdAt" to System.currentTimeMillis(),
-                    "editedAt" to null
-                )
-                db.collection("comments").add(comment)
-                    .addOnSuccessListener { callback(true, null) }
-                    .addOnFailureListener { callback(false, "حدث خطأ") }
+                // If the cooldown check fails, still allow the comment
+                postCommentToCloud(user, contextId, contextType, text, parentId) { success, err ->
+                    if (success) {
+                        db.collection("comment_cooldowns").document(user.email)
+                            .set(mapOf("lastCommentAt" to System.currentTimeMillis()))
+                    }
+                    callback(success, err)
+                }
             }
+    }
+
+    /** Posts the comment to Firestore — shared by the admin and non-admin paths. */
+    private fun postCommentToCloud(
+        user: AuthManager.User,
+        contextId: String,
+        contextType: String,
+        text: String,
+        parentId: String?,
+        callback: (Boolean, String?) -> Unit
+    ) {
+        val comment = hashMapOf(
+            "contextId" to contextId,
+            "contextType" to contextType,
+            "authorName" to user.name,
+            "authorEmail" to user.email,
+            "isAdmin" to user.isAdmin,
+            "text" to text.trim(),
+            "parentId" to parentId,
+            "likes" to emptyList<String>(),
+            "dislikes" to emptyList<String>(),
+            "createdAt" to System.currentTimeMillis(),
+            "editedAt" to null
+        )
+        db.collection("comments")
+            .add(comment)
+            .addOnSuccessListener { callback(true, null) }
+            .addOnFailureListener { callback(false, "حدث خطأ") }
     }
 
     fun listenToComments(

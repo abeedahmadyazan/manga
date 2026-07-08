@@ -101,16 +101,15 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/tabLatest"
-                style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                 android:layout_width="0dp"
                 android:layout_height="32dp"
                 android:layout_weight="1"
                 android:text="الأحدث"
                 android:textSize="12sp"
-                android:textColor="@color/white"
+                android:textColor="@color/text_secondary"
                 android:minWidth="0dp"
                 android:paddingHorizontal="4dp"
-                app:backgroundTint="@color/surface"
                 app:cornerRadius="16dp" />
 
             <View android:layout_width="4dp" android:layout_height="0dp" />

@@ -190,6 +190,8 @@ class MangaDetailsActivity : AppCompatActivity() {
         intent.putExtra("chapter_source", chapter.source)
         intent.putExtra("chapter_url", chapter.externalUrl ?: "")
         intent.putExtra("manga_slug", mangaSlug)
+        intent.putExtra("manga_title", mangaTitle)
+        intent.putExtra("manga_cover", mangaCover)
         startActivity(intent)
     }
 
