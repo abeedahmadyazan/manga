@@ -29,8 +29,7 @@ class RepliesActivity : AppCompatActivity() {
     private lateinit var emptyText: TextView
     private lateinit var replyInput: EditText
     private lateinit var sendBtn: MaterialButton
-    private lateinit var progressBar: ProgressBar
-
+    
     private var parentId: String = ""
     private var contextId: String = ""
     private var contextType: String = ""
@@ -53,8 +52,7 @@ class RepliesActivity : AppCompatActivity() {
         emptyText = findViewById(R.id.emptyText)
         replyInput = findViewById(R.id.replyInput)
         sendBtn = findViewById(R.id.btnSendReply)
-        progressBar = findViewById(R.id.repliesProgressBar)
-
+        
         findViewById<ImageButton>(R.id.btnBack).setOnClickListener { finish() }
 
         swipeRefresh.setOnRefreshListener { swipeRefresh.isRefreshing = false }
@@ -69,10 +67,9 @@ class RepliesActivity : AppCompatActivity() {
     }
 
     private fun startListening() {
-        progressBar.visibility = View.VISIBLE
+        // loading
         listener = CloudCommentsManager.listenToComments(contextId) { comments ->
-            progressBar.visibility = View.GONE
-            allReplies = comments.filter { it.parentId == parentId }
+                        allReplies = comments.filter { it.parentId == parentId }
             renderReplies()
         }
     }
