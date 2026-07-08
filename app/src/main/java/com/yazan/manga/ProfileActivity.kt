@@ -55,6 +55,7 @@ class ProfileActivity : AppCompatActivity() {
     private lateinit var btnLogout: MaterialButton
     private lateinit var btnChangeName: MaterialButton
     private lateinit var btnChangeUsername: MaterialButton
+    private lateinit var btnEditProfileInfo: MaterialButton
     private lateinit var btnAdminPanel: MaterialButton
     private lateinit var statsContainer: View
     private var listsListener: ListenerRegistration? = null
@@ -91,7 +92,7 @@ class ProfileActivity : AppCompatActivity() {
         btnLogout = findViewById(R.id.btnLogout)
         btnChangeName = findViewById(R.id.btnChangeName)
         btnChangeUsername = findViewById(R.id.btnChangeUsername)
-        val btnEditProfileInfo = findViewById<MaterialButton>(R.id.btnEditProfileInfo)
+        btnEditProfileInfo = findViewById(R.id.btnEditProfileInfo)
         btnAdminPanel = findViewById(R.id.btnAdminPanel)
         statsContainer = findViewById(R.id.statsContainer)
 
