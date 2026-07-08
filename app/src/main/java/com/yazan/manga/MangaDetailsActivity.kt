@@ -126,7 +126,7 @@ class MangaDetailsActivity : AppCompatActivity() {
         val btnSort = findViewById<MaterialButton>(R.id.btnSortChapters)
         btnSort.setOnClickListener {
             chaptersDescending = !chaptersDescending
-            btnSort.text = if (chaptersDescending) "ترتيب: الأحدث" else "ترتيب: الأقدم"
+            btnSort.text = if (chaptersDescending) "الأحدث" else "الأقدم"
             details?.let { displayChapters(it.chapters) }
         }
 

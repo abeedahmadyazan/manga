@@ -95,14 +95,26 @@ class HistoryActivity : AppCompatActivity() {
             private val time: TextView = v.findViewById(R.id.historyTime)
 
             fun bind(entry: ReadingHistoryManager.HistoryEntry) {
-                title.text = entry.mangaTitle
+                // Use mangaTitle if available; otherwise fall back to the
+                // chapter title (which includes the manga name in older entries).
+                val title = if (entry.mangaTitle.isNotEmpty()) {
+                    "${entry.mangaTitle} — الفصل ${entry.chapterNumber}"
+                } else {
+                    entry.chapterTitle
+                }
+                title.text = title
                 chapter.text = "الفصل ${entry.chapterNumber}"
                 time.text = sdf.format(Date(entry.readAt))
-                Glide.with(cover.context)
-                    .load(entry.mangaCover)
-                    .centerCrop()
-                    .placeholder(R.color.surface)
-                    .into(cover)
+                // Only load the cover if the URL is non-empty
+                if (entry.mangaCover.isNotEmpty()) {
+                    Glide.with(cover.context)
+                        .load(entry.mangaCover)
+                        .centerCrop()
+                        .placeholder(R.color.surface)
+                        .into(cover)
+                } else {
+                    cover.setImageResource(R.color.surface_light)
+                }
                 itemView.setOnClickListener { onClick(entry) }
             }
         }

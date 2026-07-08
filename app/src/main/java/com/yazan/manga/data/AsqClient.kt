@@ -539,7 +539,7 @@ object AsqClient {
             val num = raw.toFloatOrNull()?.toInt() ?: raw.toIntOrNull() ?: 0
             return num
         }
-        // Fallback: try Chapters field
+        // Fallback 1: try Chapters field
         val cp = Pattern.compile(
             ">Chapters</h5>[\\s\\S]*?<div\\s+class=\"summary-content\">\\s*(\\d+)",
             Pattern.CASE_INSENSITIVE
@@ -548,7 +548,20 @@ object AsqClient {
         if (cm.find()) {
             return cm.group(1)?.toIntOrNull() ?: 0
         }
-        return 0
+        // Fallback 2: find the highest numeric chapter link on the page
+        // (some manga don't have btn-read-first but do have chapter links).
+        val chapterPattern = Pattern.compile(
+            "href=\"https?://3asq\\.pro/manga/[\\w-]+/(\\d+(?:\\.\\d+)?)/\"",
+            Pattern.CASE_INSENSITIVE
+        )
+        val chapterMatcher = chapterPattern.matcher(html)
+        var maxChapter = 0
+        while (chapterMatcher.find()) {
+            val raw = chapterMatcher.group(1) ?: continue
+            val num = raw.toFloatOrNull()?.toInt() ?: raw.toIntOrNull() ?: continue
+            if (num > maxChapter) maxChapter = num
+        }
+        return maxChapter
     }
 
     /** Extract a labeled post-content_item field by its Arabic heading. */
