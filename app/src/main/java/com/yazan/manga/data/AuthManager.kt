@@ -882,6 +882,7 @@ object AuthManager {
                         name = doc.getString("name") ?: "مستخدم",
                         username = doc.getString("username") ?: "",
                         avatarBase64 = doc.getString("avatarBase64") ?: "",
+                        isAdmin = doc.getBoolean("isAdmin") ?: false,
                         birthDate = doc.getString("birthDate") ?: "",
                         country = doc.getString("country") ?: "",
                         createdAt = doc.getLong("createdAt") ?: 0L
@@ -1060,6 +1061,7 @@ object AuthManager {
         val name: String,
         val username: String,
         val avatarBase64: String,
+        val isAdmin: Boolean = false,
         val birthDate: String = "",
         val country: String = "",
         val createdAt: Long = 0L
