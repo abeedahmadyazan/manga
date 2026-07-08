@@ -26,23 +26,6 @@ jobs:
       with:
         gradle-version: '8.9'
 
-    - name: Print Debug SHA-1
-      run: |
-        echo "=========================================="
-        echo "=== DEBUG SHA-1 FINGERPRINT: ==="
-        echo "=========================================="
-        keytool -list -v -keystore ~/.android/debug.keystore -alias androiddebugkey -storepass android -keypass android 2>/dev/null | grep "SHA1:" || echo "No debug keystore found"
-        echo "=========================================="
-        echo "Add this SHA-1 to Firebase Console -> Project Settings -> Your apps -> Android app -> SHA-1"
-        echo "=========================================="
-
-    - name: Decode release keystore
-      env:
-        RELEASE_KEYSTORE: ${{ secrets.RELEASE_KEYSTORE }}
-        RELEASE_KEYSTORE_PASSWORD: ${{ secrets.RELEASE_KEYSTORE_PASSWORD }}
-        RELEASE_KEY_PASSWORD: ${{ secrets.RELEASE_KEY_PASSWORD }}
-      run: echo "Keystore step placeholder"
-
     - name: Build Debug APK
       run: gradle assembleDebug --stacktrace
 
