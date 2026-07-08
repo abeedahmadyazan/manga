@@ -46,23 +46,26 @@ class MangaApp : Application() {
             .build()
         db.firestoreSettings = settings
 
-        // Sign in anonymously on app start. This guarantees a Firebase Auth
-        // UID is always available, so Firestore rules that check
-        // `request.auth != null` will pass.
+        // Sign in anonymously on app start. This is OPTIONAL — if it fails,
+        // the app still works (just without cloud sync). The Account Picker
+        // fallback in ProfileActivity handles the case where Google Sign-In
+        // doesn't work.
         //
-        // If the user later signs in with Google, the anonymous account is
-        // upgraded (same UID is kept, just gets Google credentials linked).
+        // We keep this because it helps when Anonymous is enabled in Firebase
+        // Console — gives a UID so Firestore rules pass.
         val firebaseAuth = FirebaseAuth.getInstance()
         if (firebaseAuth.currentUser == null) {
-            firebaseAuth.signInAnonymously()
-                .addOnSuccessListener {
-                    android.util.Log.d("MangaApp", "Anonymous auth success: UID=${it.user?.uid}")
-                }
-                .addOnFailureListener { e ->
-                    android.util.Log.w("MangaApp", "Anonymous auth failed: ${e.message}")
-                }
-        } else {
-            android.util.Log.d("MangaApp", "Already signed in: UID=${firebaseAuth.currentUser?.uid}")
+            try {
+                firebaseAuth.signInAnonymously()
+                    .addOnSuccessListener {
+                        android.util.Log.d("MangaApp", "Anonymous auth success: UID=${it.user?.uid}")
+                    }
+                    .addOnFailureListener { e ->
+                        android.util.Log.w("MangaApp", "Anonymous auth failed (this is OK): ${e.message}")
+                    }
+            } catch (e: Exception) {
+                android.util.Log.w("MangaApp", "Anonymous auth exception: ${e.message}")
+            }
         }
     }
 }

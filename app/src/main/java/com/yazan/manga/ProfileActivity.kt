@@ -189,7 +189,7 @@ class ProfileActivity : AppCompatActivity() {
             }
             RC_SIGN_IN -> {
                 if (resultCode != Activity.RESULT_OK) {
-                    Toast.makeText(this, "تم إلغاء تسجيل الدخول", Toast.LENGTH_SHORT).show()
+                    showAccountPicker()
                     return
                 }
                 try {
@@ -198,15 +198,12 @@ class ProfileActivity : AppCompatActivity() {
                     if (account != null && account.idToken != null) {
                         firebaseAuthWithGoogle(account.idToken!!)
                     } else if (account != null && account.email != null) {
-                        // Got the account but no idToken — link the email to the
-                        // existing anonymous account instead of falling back to
-                        // a non-Firebase path.
                         loginWithEmail(account.email!!, account.displayName ?: account.email!!.split("@")[0])
                     } else {
-                        Toast.makeText(this, "فشل تسجيل الدخول", Toast.LENGTH_SHORT).show()
+                        showAccountPicker()
                     }
                 } catch (e: ApiException) {
-                    Toast.makeText(this, "فشل المصادقة: ${e.statusCode}", Toast.LENGTH_SHORT).show()
+                    showAccountPicker()
                 }
             }
             RC_ACCOUNT_PICKER -> {
