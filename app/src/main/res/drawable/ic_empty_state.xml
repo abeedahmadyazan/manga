@@ -1,0 +1,58 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="120dp"
+    android:height="120dp"
+    android:viewportWidth="120"
+    android:viewportHeight="120">
+    <!-- Book/manga outline -->
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="@color/text_muted"
+        android:strokeWidth="2.5"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M30,30 L30,90 L60,86 L60,34 Z" />
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="@color/text_muted"
+        android:strokeWidth="2.5"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M90,30 L90,90 L60,86 L60,34 Z" />
+    <!-- Pages lines -->
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="@color/text_muted"
+        android:strokeWidth="1.5"
+        android:strokeLineCap="round"
+        android:pathData="M38,45 L52,43" />
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="@color/text_muted"
+        android:strokeWidth="1.5"
+        android:strokeLineCap="round"
+        android:pathData="M38,55 L52,53" />
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="@color/text_muted"
+        android:strokeWidth="1.5"
+        android:strokeLineCap="round"
+        android:pathData="M68,43 L82,45" />
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="@color/text_muted"
+        android:strokeWidth="1.5"
+        android:strokeLineCap="round"
+        android:pathData="M68,53 L82,55" />
+    <!-- Magnifying glass (search-like) -->
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="@color/primary"
+        android:strokeWidth="3"
+        android:strokeLineCap="round"
+        android:pathData="M88,78 L100,90" />
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="@color/primary"
+        android:strokeWidth="3"
+        android:pathData="M75,72 m-12,0 a12,12 0 1,0 24,0 a12,12 0 1,0 -24,0" />
+</vector>

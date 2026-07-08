@@ -137,50 +137,144 @@
                     </LinearLayout>
                 </FrameLayout>
 
-                <!-- ============ Meta row ============ -->
+                <!-- ============ Stat row (rating / chapters / status) ============ -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="14dp"
+                    android:paddingTop="16dp"
+                    android:paddingBottom="4dp"
+                    android:weightSum="3">
+
+                    <!-- Rating stat -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:background="@color/surface"
+                        android:padding="10dp"
+                        android:layout_marginEnd="6dp">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="★"
+                                android:textColor="@color/star"
+                                android:textSize="16sp" />
+
+                            <TextView
+                                android:id="@+id/tvRating"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="4dp"
+                                android:text="0"
+                                android:textColor="@color/text_primary"
+                                android:textSize="18sp"
+                                android:textStyle="bold"
+                                tools:ignore="HardcodedText" />
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:text="التقييم"
+                            android:textColor="@color/text_muted"
+                            android:textSize="11sp"
+                            tools:ignore="HardcodedText" />
+                    </LinearLayout>
+
+                    <!-- Chapters stat -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:background="@color/surface"
+                        android:padding="10dp"
+                        android:layout_marginEnd="6dp">
+
+                        <TextView
+                            android:id="@+id/tvChapters"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="0"
+                            android:textColor="@color/text_primary"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            tools:ignore="HardcodedText" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:text="فصل"
+                            android:textColor="@color/text_muted"
+                            android:textSize="11sp"
+                            tools:ignore="HardcodedText" />
+                    </LinearLayout>
+
+                    <!-- Status stat -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:background="@color/surface"
+                        android:padding="10dp">
+
+                        <TextView
+                            android:id="@+id/tvStatus"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="مستمرة"
+                            android:textColor="@color/status_ongoing"
+                            android:textSize="15sp"
+                            android:textStyle="bold"
+                            tools:ignore="HardcodedText" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:text="الحالة"
+                            android:textColor="@color/text_muted"
+                            android:textSize="11sp"
+                            tools:ignore="HardcodedText" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!-- Author row (below stats) -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:gravity="center_vertical"
                     android:paddingHorizontal="16dp"
-                    android:paddingTop="14dp"
+                    android:paddingTop="10dp"
                     android:paddingBottom="4dp">
-
-                    <TextView
-                        android:id="@+id/tvStatus"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingHorizontal="12dp"
-                        android:paddingVertical="6dp"
-                        android:background="@drawable/bg_status_badge"
-                        android:text="مستمرة"
-                        android:textColor="@color/white"
-                        android:textSize="12sp"
-                        android:textStyle="bold"
-                        tools:ignore="HardcodedText" />
 
                     <TextView
                         android:id="@+id/tvAuthor"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:layout_marginStart="10dp"
                         android:text="المؤلف: —"
                         android:textColor="@color/text_secondary"
                         android:textSize="13sp"
                         android:maxLines="1"
                         android:ellipsize="end"
-                        tools:ignore="HardcodedText" />
-
-                    <TextView
-                        android:id="@+id/tvRating"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="⭐ 0"
-                        android:textColor="@color/warning"
-                        android:textSize="13sp"
-                        android:textStyle="bold"
                         tools:ignore="HardcodedText" />
                 </LinearLayout>
 

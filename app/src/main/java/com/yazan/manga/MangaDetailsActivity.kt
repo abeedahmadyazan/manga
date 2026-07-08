@@ -167,8 +167,14 @@ class MangaDetailsActivity : AppCompatActivity() {
                 .into(coverImg)
         }
         authorText.text = "المؤلف: ${data.author.ifEmpty { "غير معروف" }}"
-        statusText.text = data.status.ifEmpty { "مستمرة" }
-        ratingText.text = data.rating?.let { "⭐ $it" } ?: "⭐ —"
+        // Status: keep label short + color-code it
+        val rawStatus = data.status.ifEmpty { "مستمرة" }
+        statusText.text = normalizeStatus(rawStatus)
+        statusText.setTextColor(getStatusColor(rawStatus))
+        // Rating: just the number (the ★ is in the layout)
+        ratingText.text = data.rating?.let {
+            if (it >= 10) "10" else String.format("%.1f", it)
+        } ?: "—"
         descriptionText.text = data.description.ifEmpty { "لا يوجد وصف" }
 
         // Genres as chips
@@ -189,14 +195,39 @@ class MangaDetailsActivity : AppCompatActivity() {
         altTitleText.visibility = View.GONE
 
         if (data.chapters.isEmpty()) {
-            chaptersCountText.text = "لا توجد فصول بعد"
+            chaptersCountText.text = "0"
             chapterAdapter.submitList(emptyList())
             btnRead.visibility = View.GONE
         } else {
-            chaptersCountText.text = "${data.chapters.size} فصل"
+            chaptersCountText.text = data.chapters.size.toString()
             displayChapters(data.chapters)
             btnRead.visibility = View.VISIBLE
         }
+    }
+
+    /** Translate raw status strings (en/ar) to short Arabic labels. */
+    private fun normalizeStatus(raw: String): String {
+        val v = raw.trim().lowercase()
+        return when {
+            v.contains("ongoing") || v.contains("مستمر") -> "مستمرة"
+            v.contains("completed") || v.contains("منته") || v.contains("مكتمل") -> "منتهية"
+            v.contains("hiatus") || v.contains("متوقف") || v.contains("متوقفة") -> "متوقفة"
+            v.contains("cancelled") || v.contains("ملغ") -> "ملغاة"
+            else -> raw
+        }
+    }
+
+    /** Get the color resource for a status string. */
+    private fun getStatusColor(raw: String): Int {
+        val v = raw.trim().lowercase()
+        val resId = when {
+            v.contains("ongoing") || v.contains("مستمر") || v.isEmpty() -> R.color.status_ongoing
+            v.contains("completed") || v.contains("منته") || v.contains("مكتمل") -> R.color.status_completed
+            v.contains("hiatus") || v.contains("متوقف") || v.contains("متوقفة") -> R.color.status_hiatus
+            v.contains("cancelled") || v.contains("ملغ") -> R.color.status_cancelled
+            else -> R.color.status_ongoing
+        }
+        return getColor(resId)
     }
 
     /** Display the chapter list in the current sort order (newest/oldest first). */
