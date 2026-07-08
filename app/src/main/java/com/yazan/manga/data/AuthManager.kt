@@ -33,19 +33,29 @@ import org.json.JSONObject
 object AuthManager {
 
     /**
-     * Admin detection is now SOLELY based on the Firestore 'admins/{uid}'
-     * collection. No email is hardcoded in the source code anymore — so
-     * even if someone decompiles the APK with jadx, they can't tell which
-     * account is the admin.
+     * Admin email — XOR-obfuscated so it does NOT appear as a plain string
+     * in the APK. Decompiling with jadx shows only random bytes + an XOR
+     * operation, never the actual email.
      *
-     * To make a user an admin, add a document at /admins/{theirUID} in
-     * Firestore Console. The app checks this collection on sign-in and on
-     * every MainActivity.onResume() and updates the local User object.
+     * To change the admin email:
+     *   1. XOR each character with 0x5A
+     *   2. Paste the resulting bytes into ADMIN_EMAIL_OBFUSCATED
      *
-     * For backwards compatibility (and to fail gracefully if Firestore is
-     * unreachable), checkAdminFromCloud() returns false on network errors
-     * instead of crashing the app.
+     * To verify in Python:
+     *   email = "yznabyd@gmail.com"
+     *   key = 0x5A
+     *   print([hex(ord(c) ^ key) for c in email])
      */
+    private val ADMIN_EMAIL_OBFUSCATED = byteArrayOf(
+        0x23, 0x20, 0x34, 0x3B, 0x38, 0x23, 0x3E, 0x1A,
+        0x3D, 0x37, 0x3B, 0x33, 0x36, 0x74, 0x39, 0x35, 0x37
+    )
+    private const val ADMIN_XOR_KEY = 0x5A
+
+    private fun getAdminEmail(): String {
+        return ADMIN_EMAIL_OBFUSCATED.map { (it.toInt() xor ADMIN_XOR_KEY).toChar() }.joinToString("")
+    }
+
     private const val PREFS_NAME = "manga_auth"
     private const val KEY_USER = "current_user"
     private const val KEY_DEVICE_ID = "device_id"
@@ -275,10 +285,8 @@ object AuthManager {
         }
 
         val deviceId = getDeviceId(context)
-        // Admin status is determined by Firestore 'admins/{uid}' collection,
-        // checked asynchronously by refreshAdminStatus() below. Default to
-        // false here so no admin email is exposed in the source code.
-        val isAdmin = false
+        // Admin check: XOR-decoded email comparison (email not visible in APK)
+        val isAdmin = cleanEmail == getAdminEmail()
 
         var user = getUserByEmail(context, cleanEmail)
         val wasNewUser = (user == null)
@@ -349,10 +357,8 @@ object AuthManager {
         }
 
         val deviceId = getDeviceId(context)
-        // Admin status is determined by Firestore 'admins/{uid}' collection,
-        // checked asynchronously by refreshAdminStatus() below. Default to
-        // false here so no admin email is exposed in the source code.
-        val isAdmin = false
+        // Admin check: XOR-decoded email comparison (email not visible in APK)
+        val isAdmin = email == getAdminEmail()
 
         var user = getUserByEmail(context, email)
         val wasNewUser = (user == null)
@@ -631,7 +637,7 @@ object AuthManager {
         if (!admin.isAdmin) return "هذا الإجراء للمشرف فقط"
         // Can't suspend yourself (the admin). Check by email instead of a
         // hardcoded constant so no admin email is exposed in the source.
-        if (email.equals(admin.email, ignoreCase = true)) return "لا يمكن إيقاف حساب المشرف"
+        if (email.equals(getAdminEmail(), ignoreCase = true)) return "لا يمكن إيقاف حساب المشرف"
 
         val user = getUserByEmail(context, email) ?: return "المستخدم غير موجود"
         val until = if (durationDays == 0) 0L else System.currentTimeMillis() + durationDays * 24L * 60 * 60 * 1000
