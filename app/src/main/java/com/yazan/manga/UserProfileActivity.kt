@@ -37,16 +37,16 @@ class UserProfileActivity : AppCompatActivity() {
             .get()
             .addOnSuccessListener { snapshot ->
                 val count = snapshot.size()
-                findViewById<TextView>(R.id.tvProfileCommentsCount).text = count.toString()
+                findViewById<TextView>(R.id.tvCommentsCount).text = count.toString()
             }
 
         // Admin actions
         val currentUser = AuthManager.getCurrentUser(this)
         if (currentUser?.isAdmin == true && email != currentUser.email) {
-            findViewById<com.google.android.material.button.MaterialButton>(R.id.btnSuspendUser).visibility = View.VISIBLE
+            findViewById<com.google.android.material.button.MaterialButton>(R.id.btnSuspend).visibility = View.VISIBLE
             findViewById<com.google.android.material.button.MaterialButton>(R.id.btnBanDevice).visibility = View.VISIBLE
 
-            findViewById<com.google.android.material.button.MaterialButton>(R.id.btnSuspendUser).setOnClickListener {
+            findViewById<com.google.android.material.button.MaterialButton>(R.id.btnSuspend).setOnClickListener {
                 showSuspendDialog(email)
             }
             findViewById<com.google.android.material.button.MaterialButton>(R.id.btnBanDevice).setOnClickListener {
@@ -69,13 +69,13 @@ class UserProfileActivity : AppCompatActivity() {
     }
 
     private fun displayUser(name: String, username: String, email: String, avatar: String, isAdmin: Boolean) {
-        findViewById<TextView>(R.id.tvProfileName).text = name
-        findViewById<TextView>(R.id.tvProfileUsername).text = username
+        findViewById<TextView>(R.id.tvName).text = name
+        findViewById<TextView>(R.id.tvUsername).text = username
         findViewById<TextView>(R.id.tvAdminBadge).visibility = if (isAdmin) View.VISIBLE else View.GONE
         // DON'T show email!
         
-        val avatarImg = findViewById<android.widget.ImageView>(R.id.profileAvatar)
-        val avatarLetter = findViewById<TextView>(R.id.profileAvatarLetter)
+        val avatarImg = findViewById<android.widget.ImageView>(R.id.avatarImage)
+        val avatarLetter = findViewById<TextView>(R.id.avatarLetter)
         
         if (avatar.isNotEmpty()) {
             avatarImg.visibility = View.VISIBLE
