@@ -140,6 +140,7 @@ class MangaRepository {
 
             // 4. Merge: 3asq list + MangaDex chapters (prefer MangaDex for reliability)
             val chapters = if (!asqChapters.isNullOrEmpty()) {
+                Log.d(TAG, "Using 3asq: ${asqChapters!!.size} chapters")
                 // Use 3asq chapter list (1187), but mark which ones have MangaDex backup
                 asqChapters.map { asqCh ->
                     val mdId = mdChapterCache[Pair(id, asqCh.number)]
