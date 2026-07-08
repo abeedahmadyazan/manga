@@ -206,7 +206,8 @@ class MainActivity : AppCompatActivity() {
         val tvLetter = headerView.findViewById<TextView>(R.id.menuAvatarLetter)
         if (user != null) {
             tvName.text = user.name
-            tvEmail.text = user.email
+            // Don't show the email in the drawer — only the username
+            tvEmail.text = "@${user.username.removePrefix("@")}"
             // Show the avatar image if available, otherwise the first letter
             val avatarFile = user.avatar.takeIf { it.isNotEmpty() }?.let { java.io.File(it) }
             if (avatarFile != null && avatarFile.exists()) {
@@ -258,7 +259,6 @@ class MainActivity : AppCompatActivity() {
             val result = withContext(Dispatchers.IO) {
                 when (currentTab) {
                     "popular" -> repository.getPopularManga(currentPage)
-                    "popular" -> repository.getPopularManga(currentPage)
                     else -> repository.getLatestManga(currentPage)
                 }
             }
@@ -268,14 +268,26 @@ class MainActivity : AppCompatActivity() {
             isLoading = false
 
             result.onSuccess { items ->
-                if (items.isEmpty()) {
-                    errorText.text = "لا توجد مانجا"
-                    errorText.visibility = View.VISIBLE
+                if (items.isEmpty() && currentPage == 1) {
+                    // Only show "no manga" if it's page 1 AND we have no cached items
+                    if (adapter.itemCount == 0) {
+                        errorText.text = "لا توجد مانجا"
+                        errorText.visibility = View.VISIBLE
+                    }
+                    // If we have cached items, keep them — don't clear the list
+                } else {
+                    errorText.visibility = View.GONE
+                    adapter.submitList(items)
                 }
-                adapter.submitList(items)
-            }.onFailure { e ->
-                errorText.text = "حدث خطأ أثناء التحميل"
-                errorText.visibility = View.VISIBLE
+            }.onFailure {
+                // On error, keep the existing list — don't clear it.
+                // Only show the error if there's nothing to show.
+                if (adapter.itemCount == 0) {
+                    errorText.text = "حدث خطأ أثناء التحميل"
+                    errorText.visibility = View.VISIBLE
+                } else {
+                    Toast.makeText(this@MainActivity, "تعذّر التحديث", Toast.LENGTH_SHORT).show()
+                }
             }
         }
     }

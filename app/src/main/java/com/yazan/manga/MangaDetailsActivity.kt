@@ -170,9 +170,15 @@ class MangaDetailsActivity : AppCompatActivity() {
         // Subtitle shows source
         altTitleText.visibility = View.GONE
 
-        chaptersCountText.text = "${data.chapters.size} فصل"
-        chapterAdapter.submitList(data.chapters)
-        btnRead.visibility = if (data.chapters.isEmpty()) View.GONE else View.VISIBLE
+        if (data.chapters.isEmpty()) {
+            chaptersCountText.text = "لا توجد فصول بعد"
+            chapterAdapter.submitList(emptyList())
+            btnRead.visibility = View.GONE
+        } else {
+            chaptersCountText.text = "${data.chapters.size} فصل"
+            chapterAdapter.submitList(data.chapters)
+            btnRead.visibility = View.VISIBLE
+        }
     }
 
     private fun openReader(chapter: MangaChapter) {

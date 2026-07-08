@@ -5,14 +5,14 @@ import android.os.Bundle
 import android.view.View
 import android.widget.ImageButton
 import android.widget.ProgressBar
+import android.widget.SeekBar
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.yazan.manga.data.MangaChapter
 import com.yazan.manga.data.MangaRepository
-import com.yazan.manga.ui.ReaderAdapter
+import com.yazan.manga.ui.ZoomableImageView
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -20,22 +20,28 @@ import kotlinx.coroutines.withContext
 class ReaderActivity : AppCompatActivity() {
 
     private lateinit var repository: MangaRepository
-    private lateinit var adapter: ReaderAdapter
 
-    private lateinit var pagesRecyclerView: RecyclerView
+    private lateinit var pageImage: ZoomableImageView
     private lateinit var loadingIndicator: ProgressBar
     private lateinit var errorText: TextView
     private lateinit var chapterTitleText: TextView
     private lateinit var pageCounter: TextView
     private lateinit var btnZoomIn: ImageButton
     private lateinit var btnZoomOut: ImageButton
+    private lateinit var btnPrevPage: ImageButton
+    private lateinit var btnNextPage: ImageButton
+    private lateinit var pageSeekBar: SeekBar
     private lateinit var topBarOverlay: View
+    private lateinit var bottomBar: View
 
     private var currentChapter: MangaChapter? = null
     private var currentChapterId: String = ""
     private var currentChapterNumber: String = ""
     private var chapterUrl: String = ""
     private var mangaSlug: String = ""
+
+    private var pages: List<String> = emptyList()
+    private var currentPageIndex: Int = 0
     private var zoomLevel = 1.0f
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -66,14 +72,18 @@ class ReaderActivity : AppCompatActivity() {
     }
 
     private fun initViews() {
-        pagesRecyclerView = findViewById(R.id.pagesRecyclerView)
+        pageImage = findViewById(R.id.pageImage)
         loadingIndicator = findViewById(R.id.loadingIndicator)
         errorText = findViewById(R.id.errorText)
         chapterTitleText = findViewById(R.id.chapterTitle)
         pageCounter = findViewById(R.id.pageCounter)
         btnZoomIn = findViewById(R.id.btnZoomIn)
         btnZoomOut = findViewById(R.id.btnZoomOut)
+        btnPrevPage = findViewById(R.id.btnPrevPage)
+        btnNextPage = findViewById(R.id.btnNextPage)
+        pageSeekBar = findViewById(R.id.pageSeekBar)
         topBarOverlay = findViewById(R.id.topBarOverlay)
+        bottomBar = findViewById(R.id.bottomBar)
 
         chapterTitleText.text = "الفصل $currentChapterNumber"
 
@@ -88,41 +98,43 @@ class ReaderActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        // Zoom controls
+        // Zoom controls — these adjust the base scale. When zoomed in >1x,
+        // the user can drag/pan the image with one finger.
         btnZoomIn.setOnClickListener {
-            zoomLevel = (zoomLevel + 0.25f).coerceAtMost(3.0f)
-            applyZoom()
+            zoomLevel = (zoomLevel + 0.5f).coerceAtMost(5.0f)
+            pageImage.scaleX = zoomLevel
+            pageImage.scaleY = zoomLevel
         }
         btnZoomOut.setOnClickListener {
-            zoomLevel = (zoomLevel - 0.25f).coerceAtLeast(0.5f)
-            applyZoom()
+            zoomLevel = (zoomLevel - 0.5f).coerceAtLeast(1.0f)
+            pageImage.scaleX = zoomLevel
+            pageImage.scaleY = zoomLevel
+            if (zoomLevel == 1.0f) {
+                pageImage.resetZoom()
+            }
         }
 
-        adapter = ReaderAdapter()
-        pagesRecyclerView.layoutManager = LinearLayoutManager(this)
-        pagesRecyclerView.adapter = adapter
+        // Page navigation
+        btnPrevPage.setOnClickListener { goToPage(currentPageIndex - 1) }
+        btnNextPage.setOnClickListener { goToPage(currentPageIndex + 1) }
 
-        pagesRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrolled(rv: RecyclerView, dx: Int, dy: Int) {
-                val lm = rv.layoutManager as LinearLayoutManager
-                val visible = lm.findFirstVisibleItemPosition() + 1
-                pageCounter.text = "$visible / ${adapter.itemCount}"
-                // Auto-hide top bar on fast scroll down, show on scroll up
-                if (dy > 30) topBarOverlay.animate().alpha(0f).setDuration(200).start()
-                else if (dy < -10) topBarOverlay.animate().alpha(1f).setDuration(200).start()
+        // SeekBar
+        pageSeekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+                if (fromUser && pages.isNotEmpty()) {
+                    goToPage(progress)
+                }
             }
+            override fun onStartTrackingTouch(seekBar: SeekBar?) {}
+            override fun onStopTrackingTouch(seekBar: SeekBar?) {}
         })
 
-        // Tap to toggle top bar
-        pagesRecyclerView.setOnClickListener {
-            topBarOverlay.animate()
-                .alpha(if (topBarOverlay.alpha == 0f) 1f else 0f)
-                .setDuration(200).start()
+        // Tap to toggle top + bottom bars
+        pageImage.setOnClickListener {
+            val targetAlpha = if (topBarOverlay.alpha == 0f) 1f else 0f
+            topBarOverlay.animate().alpha(targetAlpha).setDuration(200).start()
+            bottomBar.animate().alpha(targetAlpha).setDuration(200).start()
         }
-    }
-
-    private fun applyZoom() {
-        adapter.setZoom(zoomLevel)
     }
 
     private fun loadPages() {
@@ -137,20 +149,40 @@ class ReaderActivity : AppCompatActivity() {
 
             loadingIndicator.visibility = View.GONE
 
-            result.onSuccess { pages ->
-                if (pages.isEmpty()) {
+            result.onSuccess { pageList ->
+                if (pageList.isEmpty()) {
                     errorText.text = "لا توجد صفحات لهذا الفصل"
                     errorText.visibility = View.VISIBLE
                     pageCounter.text = "0 / 0"
                 } else {
-                    adapter.submitList(pages)
-                    pageCounter.text = "1 / ${pages.size}"
+                    pages = pageList.map { it.url }
+                    currentPageIndex = 0
+                    pageSeekBar.max = pages.size - 1
+                    showPage(0)
                 }
             }.onFailure {
-                // Show a generic error message — never expose the real cause to the user
                 errorText.text = "حدث خطأ أثناء تحميل الفصل. حاول مرة أخرى لاحقاً."
                 errorText.visibility = View.VISIBLE
             }
         }
+    }
+
+    private fun showPage(index: Int) {
+        if (index < 0 || index >= pages.size) return
+        currentPageIndex = index
+        pageCounter.text = "${index + 1} / ${pages.size}"
+        pageSeekBar.progress = index
+        // Reset zoom when changing pages
+        zoomLevel = 1.0f
+        pageImage.scaleX = 1.0f
+        pageImage.scaleY = 1.0f
+        pageImage.resetZoom()
+
+        Glide.with(this).load(pages[index]).into(pageImage)
+    }
+
+    private fun goToPage(index: Int) {
+        if (index < 0 || index >= pages.size) return
+        showPage(index)
     }
 }

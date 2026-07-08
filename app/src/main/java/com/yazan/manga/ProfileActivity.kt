@@ -347,8 +347,10 @@ class ProfileActivity : AppCompatActivity() {
 
             tvName.text = user.name
             tvUsername.text = "@${user.username.removePrefix("@")}"
-            // Hide the email for privacy — never shown on the profile screen
-            tvEmail.visibility = View.GONE
+            // Show the email ONLY on the owner's own profile (this activity
+            // is only opened for the current user, not for viewing others).
+            tvEmail.visibility = View.VISIBLE
+            tvEmail.text = user.email
             tvAdminBadge.visibility = if (user.isAdmin) View.VISIBLE else View.GONE
 
             // Stats — manga lists from the cloud (real-time)
