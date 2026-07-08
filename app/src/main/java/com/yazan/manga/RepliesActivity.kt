@@ -175,7 +175,7 @@ class RepliesActivity : AppCompatActivity() {
                 val isOwner = user?.email == r.authorEmail
                 val canDelete = isOwner || (user?.isAdmin == true)
                 btnDelete.visibility = if (canDelete) View.VISIBLE else View.GONE
-                btnReport.visibility = if (user != null && !isOwner) View.VISIBLE else View.GONE
+                btnReport.visibility = if (user != null && !isOwner && !r.isAdmin) View.VISIBLE else View.GONE
 
                 btnLike.setOnClickListener { user?.let { CloudCommentsManager.toggleLike(r.id, it.email, true) {} } }
                 btnDislike.setOnClickListener { user?.let { CloudCommentsManager.toggleLike(r.id, it.email, false) {} } }

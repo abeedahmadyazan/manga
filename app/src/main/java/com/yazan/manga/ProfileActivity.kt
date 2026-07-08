@@ -118,10 +118,10 @@ class ProfileActivity : AppCompatActivity() {
         btnAdminPanel.setOnClickListener { startActivity(Intent(this, AdminPanelActivity::class.java)) }
 
         // Make the 4 list cards open MangaListActivity for the corresponding list
-        findViewById<View>(R.id.cardFavorites).setOnClickListener { openList("favorites") }
-        findViewById<View>(R.id.cardWatchLater).setOnClickListener { openList("watchLater") }
-        findViewById<View>(R.id.cardWantToWatch).setOnClickListener { openList("wantToWatch") }
-        findViewById<View>(R.id.cardCompleted).setOnClickListener { openList("completed") }
+        findViewById<View>(R.id.cardFavorites).setOnClickListener { openList(0) }
+        findViewById<View>(R.id.cardWatchLater).setOnClickListener { openList(1) }
+        findViewById<View>(R.id.cardWantToWatch).setOnClickListener { openList(2) }
+        findViewById<View>(R.id.cardCompleted).setOnClickListener { openList(3) }
     }
 
     private fun tryGoogleSignIn() {
@@ -246,15 +246,15 @@ class ProfileActivity : AppCompatActivity() {
         }
     }
 
-    private fun openList(listType: String) {
+    private fun openList(tabIndex: Int) {
         val user = AuthManager.getCurrentUser(this)
         if (user == null) {
             Toast.makeText(this, "سجّل الدخول أولاً", Toast.LENGTH_SHORT).show()
             return
         }
         val intent = Intent(this, MangaListActivity::class.java)
-        intent.putExtra("list_type", listType)
         intent.putExtra("user_email", user.email)
+        intent.putExtra("initial_tab", tabIndex)
         startActivity(intent)
     }
 

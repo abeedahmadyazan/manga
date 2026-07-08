@@ -218,13 +218,12 @@ class MainActivity : AppCompatActivity() {
             "👀 أرغب بمتابعتها",
             "✅ أنهيتها"
         )
-        val listTypes = arrayOf("favorites", "watchLater", "wantToWatch", "completed")
         androidx.appcompat.app.AlertDialog.Builder(this)
             .setTitle("قوائمي المخصصة")
             .setItems(options) { _, which ->
                 val intent = Intent(this, MangaListActivity::class.java)
-                intent.putExtra("list_type", listTypes[which])
                 intent.putExtra("user_email", email)
+                intent.putExtra("initial_tab", which)
                 startActivity(intent)
             }
             .setNegativeButton("إلغاء", null)

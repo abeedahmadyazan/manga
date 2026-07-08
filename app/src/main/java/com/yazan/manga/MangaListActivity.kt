@@ -10,44 +10,43 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.tabs.TabLayout
 import com.google.firebase.firestore.ListenerRegistration
 import com.yazan.manga.data.AuthManager
 import com.yazan.manga.data.MangaListsManager
 import com.yazan.manga.ui.MangaAdapter
 
 /**
- * Displays the manga entries in a specific user list (favorites / watch later /
- * want to watch / completed). The list is loaded from Firestore in real-time.
+ * Full-page custom-lists screen with 4 tabs:
+ *   ⭐ المفضلة | 📚 أتابع لاحقاً | 👀 أرغب بمتابعتها | ✅ أنهيتها
  *
- * Intent extras:
- *   - list_type (String) — one of: "favorites", "watchLater", "wantToWatch", "completed"
- *   - user_email (String, optional) — defaults to the current user
+ * All lists are cloud-backed (Firestore user_lists/{email}) and update in real-time.
  */
 class MangaListActivity : AppCompatActivity() {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var loadingIndicator: ProgressBar
+    private lateinit var emptyState: View
     private lateinit var emptyText: TextView
-    private lateinit var titleText: TextView
+    private lateinit var tabs: TabLayout
 
     private lateinit var adapter: MangaAdapter
     private var listener: ListenerRegistration? = null
 
-    private var listType: MangaListsManager.ListType = MangaListsManager.ListType.FAVORITES
     private var email: String = ""
+    private var currentListType: MangaListsManager.ListType = MangaListsManager.ListType.FAVORITES
+
+    // Map tab index → list type
+    private val tabListTypes = arrayOf(
+        MangaListsManager.ListType.FAVORITES,
+        MangaListsManager.ListType.WATCH_LATER,
+        MangaListsManager.ListType.WANT_TO_WATCH,
+        MangaListsManager.ListType.COMPLETED
+    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_manga_list)
-
-        // Parse the list type
-        val typeKey = intent.getStringExtra("list_type") ?: "favorites"
-        listType = when (typeKey) {
-            "watchLater" -> MangaListsManager.ListType.WATCH_LATER
-            "wantToWatch" -> MangaListsManager.ListType.WANT_TO_WATCH
-            "completed" -> MangaListsManager.ListType.COMPLETED
-            else -> MangaListsManager.ListType.FAVORITES
-        }
 
         // Email: default to current user
         email = intent.getStringExtra("user_email") ?: ""
@@ -61,21 +60,23 @@ class MangaListActivity : AppCompatActivity() {
             email = user.email
         }
 
-        initViews()
+        // Optional: pre-select a tab (default = 0 = favorites)
+        val initialTab = intent.getIntExtra("initial_tab", 0)
+
+        initViews(initialTab)
         startListening()
     }
 
-    private fun initViews() {
+    private fun initViews(initialTab: Int) {
         recyclerView = findViewById(R.id.mangaRecyclerView)
         loadingIndicator = findViewById(R.id.loadingIndicator)
+        emptyState = findViewById(R.id.emptyState)
         emptyText = findViewById(R.id.emptyText)
-        titleText = findViewById(R.id.listTitle)
+        tabs = findViewById(R.id.listTabs)
 
-        titleText.text = listType.label
         findViewById<ImageButton>(R.id.btnBack).setOnClickListener { finish() }
 
         adapter = MangaAdapter { entry ->
-            // Open manga details
             val intent = Intent(this, MangaDetailsActivity::class.java)
             intent.putExtra("manga_id", entry.id)
             intent.putExtra("manga_title", entry.title)
@@ -84,6 +85,21 @@ class MangaListActivity : AppCompatActivity() {
         }
         recyclerView.layoutManager = GridLayoutManager(this, 3)
         recyclerView.adapter = adapter
+
+        // Select the initial tab
+        if (initialTab in 0..3) {
+            tabs.getTabAt(initialTab)?.select()
+            currentListType = tabListTypes[initialTab]
+        }
+
+        tabs.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            override fun onTabSelected(tab: TabLayout.Tab) {
+                currentListType = tabListTypes[tab.position]
+                renderCurrentList()
+            }
+            override fun onTabUnselected(tab: TabLayout.Tab) {}
+            override fun onTabReselected(tab: TabLayout.Tab) {}
+        })
     }
 
     private fun startListening() {
@@ -93,35 +109,42 @@ class MangaListActivity : AppCompatActivity() {
             email = email,
             onUpdate = { lists ->
                 loadingIndicator.visibility = View.GONE
-                val entries = when (listType) {
-                    MangaListsManager.ListType.FAVORITES -> lists.favorites
-                    MangaListsManager.ListType.WATCH_LATER -> lists.watchLater
-                    MangaListsManager.ListType.WANT_TO_WATCH -> lists.wantToWatch
-                    MangaListsManager.ListType.COMPLETED -> lists.completed
-                }
-                // Convert MangaEntry → MangaListItem for the adapter
-                val mangaSummaries = entries.map {
-                    com.yazan.manga.data.MangaListItem(
-                        id = it.id,
-                        title = it.title,
-                        cover = it.cover
-                    )
-                }
-                if (mangaSummaries.isEmpty()) {
-                    emptyText.visibility = View.VISIBLE
-                    recyclerView.visibility = View.GONE
-                    emptyText.text = "لا توجد مانجا في ${listType.label} بعد"
-                } else {
-                    emptyText.visibility = View.GONE
-                    recyclerView.visibility = View.VISIBLE
-                }
-                adapter.submitList(mangaSummaries)
+                // Cache the full lists and render the currently-selected tab
+                cachedLists = lists
+                renderCurrentList()
             },
             onError = {
                 loadingIndicator.visibility = View.GONE
                 Toast.makeText(this, "تعذّر تحميل القائمة", Toast.LENGTH_SHORT).show()
             }
         )
+    }
+
+    private var cachedLists: MangaListsManager.UserLists = MangaListsManager.UserLists()
+
+    private fun renderCurrentList() {
+        val entries = when (currentListType) {
+            MangaListsManager.ListType.FAVORITES -> cachedLists.favorites
+            MangaListsManager.ListType.WATCH_LATER -> cachedLists.watchLater
+            MangaListsManager.ListType.WANT_TO_WATCH -> cachedLists.wantToWatch
+            MangaListsManager.ListType.COMPLETED -> cachedLists.completed
+        }
+        val mangaSummaries = entries.map {
+            com.yazan.manga.data.MangaListItem(
+                id = it.id,
+                title = it.title,
+                cover = it.cover
+            )
+        }
+        if (mangaSummaries.isEmpty()) {
+            emptyState.visibility = View.VISIBLE
+            recyclerView.visibility = View.GONE
+            emptyText.text = "لا توجد مانجا في ${currentListType.label} بعد"
+        } else {
+            emptyState.visibility = View.GONE
+            recyclerView.visibility = View.VISIBLE
+        }
+        adapter.submitList(mangaSummaries)
     }
 
     override fun onDestroy() {

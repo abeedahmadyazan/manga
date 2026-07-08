@@ -276,7 +276,8 @@ class CommentsAdapter(
             val canDelete = isOwner || (currentUser?.isAdmin == true)
             btnDelete.visibility = if (canDelete) View.VISIBLE else View.GONE
             // Show the report button for any logged-in user who isn't the comment owner
-            btnReport.visibility = if (currentUser != null && !isOwner) View.VISIBLE else View.GONE
+            // AND isn't an admin (you can't report admins)
+            btnReport.visibility = if (currentUser != null && !isOwner && !c.isAdmin) View.VISIBLE else View.GONE
 
             btnLike.setOnClickListener { onLike(c) }
             btnDislike.setOnClickListener { onDislike(c) }

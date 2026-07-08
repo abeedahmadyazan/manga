@@ -29,30 +29,72 @@ object CloudCommentsManager {
             callback(false, "يجب تسجيل الدخول")
             return
         }
-        
-        val comment = hashMapOf(
-            "contextId" to contextId,
-            "contextType" to contextType,
-            "authorName" to user.name,
-            "authorEmail" to user.email,
-            "isAdmin" to user.isAdmin,
-            "text" to text.trim(),
-            "parentId" to parentId,
-            "likes" to emptyList<String>(),
-            "dislikes" to emptyList<String>(),
-            "createdAt" to System.currentTimeMillis(),
-            "editedAt" to null
-        )
-        
-        db.collection("comments")
-            .add(comment)
-            .addOnSuccessListener { doc ->
-                Log.d(TAG, "Comment added: ${doc.id}")
-                callback(true, null)
+
+        // Check if the user is currently suspended in the cloud (banned_users/{email})
+        db.collection("banned_users").document(user.email).get()
+            .addOnSuccessListener { banDoc ->
+                if (banDoc.exists()) {
+                    val until = banDoc.getLong("until") ?: 0L
+                    if (until == 0L) {
+                        callback(false, "تم إيقاف حسابك بشكل دائم")
+                        return@addOnSuccessListener
+                    }
+                    if (until > System.currentTimeMillis()) {
+                        val remainingMs = until - System.currentTimeMillis()
+                        val remainingText = when {
+                            remainingMs < 60 * 60 * 1000 -> "${remainingMs / 60000} دقيقة"
+                            remainingMs < 24 * 60 * 60 * 1000 -> "${remainingMs / (60 * 60 * 1000)} ساعة"
+                            else -> "${remainingMs / (24 * 60 * 60 * 1000)} يوم"
+                        }
+                        callback(false, "تم إيقاف حسابك. متبقي: $remainingText")
+                        return@addOnSuccessListener
+                    }
+                    // Ban expired — clean it up
+                    db.collection("banned_users").document(user.email).delete()
+                }
+
+                val comment = hashMapOf(
+                    "contextId" to contextId,
+                    "contextType" to contextType,
+                    "authorName" to user.name,
+                    "authorEmail" to user.email,
+                    "isAdmin" to user.isAdmin,
+                    "text" to text.trim(),
+                    "parentId" to parentId,
+                    "likes" to emptyList<String>(),
+                    "dislikes" to emptyList<String>(),
+                    "createdAt" to System.currentTimeMillis(),
+                    "editedAt" to null
+                )
+
+                db.collection("comments")
+                    .add(comment)
+                    .addOnSuccessListener { doc ->
+                        Log.d(TAG, "Comment added: ${doc.id}")
+                        callback(true, null)
+                    }
+                    .addOnFailureListener {
+                        callback(false, "حدث خطأ")
+                    }
             }
-            .addOnFailureListener { e ->
-                Log.e(TAG, "Error adding comment: ${e.message}")
-                callback(false, "حدث خطأ")
+            .addOnFailureListener {
+                // If the ban check fails, still allow the comment (don't block legit users)
+                val comment = hashMapOf(
+                    "contextId" to contextId,
+                    "contextType" to contextType,
+                    "authorName" to user.name,
+                    "authorEmail" to user.email,
+                    "isAdmin" to user.isAdmin,
+                    "text" to text.trim(),
+                    "parentId" to parentId,
+                    "likes" to emptyList<String>(),
+                    "dislikes" to emptyList<String>(),
+                    "createdAt" to System.currentTimeMillis(),
+                    "editedAt" to null
+                )
+                db.collection("comments").add(comment)
+                    .addOnSuccessListener { callback(true, null) }
+                    .addOnFailureListener { callback(false, "حدث خطأ") }
             }
     }
 

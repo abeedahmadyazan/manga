@@ -28,30 +28,26 @@ class UserProfileActivity : AppCompatActivity() {
         val user = AuthManager.getUserByEmail(this, email)
 
         if (user != null) {
-            displayUser(user.name, user.username, "", user.avatar, user.isAdmin)
+            displayUser(user.name, user.username, user.avatar, user.isAdmin)
         }
 
-        // Get comment count from Firestore
-        db.collection("comments")
-            .whereEqualTo("authorEmail", email)
-            .get()
-            .addOnSuccessListener { snapshot ->
-                val count = snapshot.size()
-                findViewById<TextView>(R.id.tvCommentsCount).text = count.toString()
-            }
-
-        // Admin actions
+        // Admin actions — only visible if I'm an admin and viewing someone else
         val currentUser = AuthManager.getCurrentUser(this)
-        if (currentUser?.isAdmin == true && email != currentUser.email) {
+        val canAdmin = currentUser?.isAdmin == true && email != currentUser.email
+
+        if (canAdmin) {
             findViewById<com.google.android.material.button.MaterialButton>(R.id.btnSuspend).visibility = View.VISIBLE
             findViewById<com.google.android.material.button.MaterialButton>(R.id.btnBanDevice).visibility = View.VISIBLE
 
+            // Suspend button → show duration options (1 hour / 1 day / 1 week / permanent)
             findViewById<com.google.android.material.button.MaterialButton>(R.id.btnSuspend).setOnClickListener {
                 showSuspendDialog(email)
             }
+
+            // Ban device → permanent device ban + delete all comments
             findViewById<com.google.android.material.button.MaterialButton>(R.id.btnBanDevice).setOnClickListener {
                 AlertDialog.Builder(this)
-                    .setTitle("حظر الجهاز").setMessage("حظر هذا المستخدم نهائياً؟")
+                    .setTitle("حظر الجهاز").setMessage("حظر هذا المستخدم نهائياً؟ سيتم حذف جميع تعليقاته.")
                     .setPositiveButton("حظر") { _, _ ->
                         user?.let { AuthManager.banDevice(this, it.deviceId) }
                         // Also delete all their comments from Firestore
@@ -68,19 +64,26 @@ class UserProfileActivity : AppCompatActivity() {
         }
     }
 
-    private fun displayUser(name: String, username: String, email: String, avatar: String, isAdmin: Boolean) {
+    private fun displayUser(name: String, username: String, avatar: String, isAdmin: Boolean) {
         findViewById<TextView>(R.id.tvName).text = name
         findViewById<TextView>(R.id.tvUsername).text = username
         findViewById<TextView>(R.id.tvAdminBadge).visibility = if (isAdmin) View.VISIBLE else View.GONE
         // DON'T show email!
-        
+
         val avatarImg = findViewById<android.widget.ImageView>(R.id.avatarImage)
         val avatarLetter = findViewById<TextView>(R.id.avatarLetter)
-        
+
         if (avatar.isNotEmpty()) {
-            avatarImg.visibility = View.VISIBLE
-            avatarLetter.visibility = View.GONE
-            Glide.with(this).load(avatar).circleCrop().into(avatarImg)
+            val avatarFile = java.io.File(avatar)
+            if (avatarFile.exists()) {
+                avatarImg.visibility = View.VISIBLE
+                avatarLetter.visibility = View.GONE
+                Glide.with(this).load(avatar).circleCrop().into(avatarImg)
+            } else {
+                avatarImg.visibility = View.GONE
+                avatarLetter.visibility = View.VISIBLE
+                avatarLetter.text = name.firstOrNull()?.uppercaseChar()?.toString() ?: "?"
+            }
         } else {
             avatarImg.visibility = View.GONE
             avatarLetter.visibility = View.VISIBLE
@@ -88,20 +91,58 @@ class UserProfileActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Suspend a user for a chosen duration. Stores the suspension in Firestore
+     * (banned_users collection) so it persists across app updates and affects
+     * the user on all devices.
+     */
     private fun showSuspendDialog(email: String) {
-        val options = arrayOf("إيقاف يومين", "إيقاف أسبوع", "إيقاف شهر", "إيقاف دائم")
+        val options = arrayOf(
+            "⏰ إيقاف ساعة واحدة",
+            "📅 إيقاف يوم واحد",
+            "🗓️ إيقاف أسبوع",
+            "♾️ إيقاف دائم"
+        )
         AlertDialog.Builder(this)
             .setTitle("إيقاف الحساب")
             .setItems(options) { _, which ->
-                val days = when (which) { 0 -> 2; 1 -> 7; 2 -> 30; else -> 0 }
-                val input = android.widget.EditText(this)
-                input.hint = "سبب الإيقاف"
-                AlertDialog.Builder(this).setTitle("سبب الإيقاف").setView(input)
+                // Duration in milliseconds. 0 = permanent.
+                val durationMs: Long = when (which) {
+                    0 -> 60 * 60 * 1000L          // 1 hour
+                    1 -> 24 * 60 * 60 * 1000L      // 1 day
+                    2 -> 7 * 24 * 60 * 60 * 1000L  // 1 week
+                    else -> 0L                      // permanent
+                }
+                val reasonInput = android.widget.EditText(this)
+                reasonInput.hint = "سبب الإيقاف"
+                AlertDialog.Builder(this).setTitle("سبب الإيقاف").setView(reasonInput)
                     .setPositiveButton("إيقاف") { _, _ ->
-                        val reason = input.text.toString().ifEmpty { "مخالفة القوانين" }
-                        AuthManager.suspendUser(this, email, days, reason)
-                        Toast.makeText(this, "تم الإيقاف", Toast.LENGTH_SHORT).show()
+                        val reason = reasonInput.text.toString().ifEmpty { "مخالفة القوانين" }
+                        suspendUserInCloud(email, durationMs, reason)
                     }.setNegativeButton("إلغاء", null).show()
             }.setNegativeButton("إلغاء", null).show()
+    }
+
+    /**
+     * Write the suspension to Firestore so it's enforced on every device.
+     * Document: banned_users/{email} → { email, until, reason, bannedAt }
+     * until = 0 means permanent.
+     */
+    private fun suspendUserInCloud(email: String, durationMs: Long, reason: String) {
+        val now = System.currentTimeMillis()
+        val until = if (durationMs == 0L) 0L else now + durationMs
+        val data = mapOf(
+            "email" to email,
+            "until" to until,
+            "reason" to reason,
+            "bannedAt" to now
+        )
+        db.collection("banned_users").document(email).set(data)
+            .addOnSuccessListener {
+                Toast.makeText(this, "تم الإيقاف", Toast.LENGTH_SHORT).show()
+            }
+            .addOnFailureListener {
+                Toast.makeText(this, "حدث خطأ", Toast.LENGTH_SHORT).show()
+            }
     }
 }
