@@ -193,14 +193,14 @@ object AuthManager {
             .putString(KEY_LINKED_EMAIL, cleanEmail)
             .apply()
 
-        // Always sync with the cloud — the cloud is the source of truth for
-        // name/username/avatar. This handles both:
-        //  - fresh installs (wasNewUser=true): restore everything
-        //  - updates (wasNewUser=false): pull any changes made from another device
-        restoreUserFromCloud(context)
-
-        // Upload profile to cloud so other users see the latest name/avatar
-        uploadUserToCloud(context)
+        // Restore from cloud FIRST (async), then upload the (now-correct) local
+        // profile. We can't just call them in sequence because both are async —
+        // instead, restoreUserFromCloud calls uploadUserToCloud itself once the
+        // cloud data is applied, so we never overwrite the cloud with stale data.
+        restoreUserFromCloud(context) {
+            // After restore, upload the merged local profile back to the cloud
+            uploadUserToCloud(context)
+        }
 
         return null
     }
@@ -255,14 +255,12 @@ object AuthManager {
             .putString(KEY_LINKED_EMAIL, email)
             .apply()
 
-        // Always sync with the cloud — the cloud is the source of truth for
-        // name/username/avatar. This handles both:
-        //  - fresh installs (wasNewUser=true): restore everything
-        //  - updates (wasNewUser=false): pull any changes made from another device
-        restoreUserFromCloud(context)
-
-        // Upload profile to cloud so other users see the latest name/avatar
-        uploadUserToCloud(context)
+        // Restore from cloud FIRST (async), then upload the (now-correct) local
+        // profile. restoreUserFromCloud calls uploadUserToCloud itself once the
+        // cloud data is applied, so we never overwrite the cloud with stale data.
+        restoreUserFromCloud(context) {
+            uploadUserToCloud(context)
+        }
 
         return null
     }
@@ -575,20 +573,37 @@ object AuthManager {
     fun uploadUserToCloud(context: Context) {
         val user = getCurrentUser(context) ?: return
         try {
-            // Read the local avatar file (if any) and encode it as base64
-            val avatarBase64 = if (user.avatar.isNotEmpty()) {
-                val file = File(user.avatar)
-                if (file.exists()) {
-                    try {
+            // Read the local avatar file (if any) and encode it as base64.
+            // Only local file paths are supported — HTTP URLs (e.g. from Google
+            // Sign-In) can't be read directly and are skipped.
+            val avatarBase64: String? = if (user.avatar.isNotEmpty() && !user.avatar.startsWith("http")) {
+                try {
+                    val file = File(user.avatar)
+                    if (file.exists()) {
                         val bitmap = BitmapFactory.decodeFile(file.absolutePath)
                         if (bitmap != null) {
+                            // Downscale to max 256px to keep the base64 small
+                            val maxDim = 256
+                            val scaled = if (bitmap.width > maxDim || bitmap.height > maxDim) {
+                                val scale = minOf(maxDim.toFloat() / bitmap.width, maxDim.toFloat() / bitmap.height)
+                                Bitmap.createScaledBitmap(
+                                    bitmap,
+                                    (bitmap.width * scale).toInt().coerceAtLeast(1),
+                                    (bitmap.height * scale).toInt().coerceAtLeast(1),
+                                    true
+                                )
+                            } else bitmap
                             val stream = ByteArrayOutputStream()
-                            bitmap.compress(Bitmap.CompressFormat.JPEG, 70, stream)
+                            scaled.compress(Bitmap.CompressFormat.JPEG, 70, stream)
+                            if (scaled !== bitmap) scaled.recycle()
                             bitmap.recycle()
                             Base64.encodeToString(stream.toByteArray(), Base64.NO_WRAP)
                         } else null
-                    } catch (e: Exception) { null }
-                } else null
+                    } else null
+                } catch (e: Exception) {
+                    Log.w("AuthManager", "uploadUserToCloud: avatar encode failed", e)
+                    null
+                }
             } else null
 
             val data = hashMapOf(
