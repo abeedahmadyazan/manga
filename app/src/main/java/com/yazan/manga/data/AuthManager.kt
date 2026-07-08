@@ -795,6 +795,7 @@ object AuthManager {
     // ============================================================
 
     private const val USERS_COLLECTION = "users"
+    private const val UID_INDEX_COLLECTION = "user_uids"  // maps Firebase UID → email
     private val cloudDb by lazy { FirebaseFirestore.getInstance() }
 
     /**
@@ -852,6 +853,16 @@ object AuthManager {
             )
             cloudDb.collection(USERS_COLLECTION).document(user.email).set(data)
                 .addOnFailureListener { Log.w("AuthManager", "uploadUserToCloud failed", it) }
+
+            // Also save the UID → email mapping so we can restore the profile
+            // by UID (which is always available via Firebase Auth) even when the
+            // local SharedPreferences are gone (e.g. after reinstall).
+            val firebaseUser = FirebaseAuth.getInstance().currentUser
+            if (firebaseUser != null) {
+                cloudDb.collection(UID_INDEX_COLLECTION).document(firebaseUser.uid)
+                    .set(mapOf("email" to user.email))
+                    .addOnFailureListener { Log.w("AuthManager", "UID index save failed", it) }
+            }
         } catch (e: Exception) {
             Log.w("AuthManager", "uploadUserToCloud exception", e)
         }
@@ -892,13 +903,33 @@ object AuthManager {
         // Try to get the email from the local user first (fast path)
         var email = getCurrentUser(context)?.email ?: ""
 
-        // If no local user, try to get the email from Firebase Auth.
-        // This handles the case where the app was reinstalled — the local
-        // SharedPreferences are gone, but Firebase Auth session might still
-        // be active (or anonymous auth created a new UID we can use).
+        // If no local user, try to get the email from Firebase Auth directly.
         if (email.isEmpty()) {
             val firebaseUser = FirebaseAuth.getInstance().currentUser
             email = firebaseUser?.email ?: ""
+        }
+
+        // If still no email, try the UID → email index in Firestore.
+        // This is the KEY fix: even if local data is gone AND Firebase Auth
+        // has no email (anonymous user), we can still find the email by
+        // looking up the UID in the user_uids collection.
+        if (email.isEmpty()) {
+            val firebaseUser = FirebaseAuth.getInstance().currentUser
+            val uid = firebaseUser?.uid
+            if (uid != null) {
+                cloudDb.collection(UID_INDEX_COLLECTION).document(uid).get()
+                    .addOnSuccessListener { indexDoc ->
+                        val indexedEmail = indexDoc.getString("email") ?: ""
+                        if (indexedEmail.isNotEmpty()) {
+                            // Got the email from the index — now restore the profile
+                            restoreProfileByEmail(context, indexedEmail, onRestored)
+                        } else {
+                            onRestored?.invoke(false)
+                        }
+                    }
+                    .addOnFailureListener { onRestored?.invoke(false) }
+                return
+            }
         }
 
         if (email.isEmpty()) {
@@ -906,6 +937,10 @@ object AuthManager {
             return
         }
 
+        restoreProfileByEmail(context, email, onRestored)
+    }
+
+    private fun restoreProfileByEmail(context: Context, email: String, onRestored: ((Boolean) -> Unit)?) {
         try {
             cloudDb.collection(USERS_COLLECTION).document(email).get()
                 .addOnSuccessListener { doc ->

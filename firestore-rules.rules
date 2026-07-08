@@ -35,6 +35,14 @@ service cloud.firestore {
     }
 
     // =============================================================
+    //  UID → Email index (for restoring profile after reinstall)
+    // =============================================================
+    match /user_uids/{uid} {
+      allow read: if isSignedIn();
+      allow write: if isSignedIn() && request.auth.uid == uid;
+    }
+
+    // =============================================================
     //  User profiles
     // =============================================================
     match /users/{email} {
