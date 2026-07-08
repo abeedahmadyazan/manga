@@ -15,8 +15,10 @@ import com.bumptech.glide.Glide
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
+import com.yazan.manga.data.AuthManager
 import com.yazan.manga.data.MangaChapter
 import com.yazan.manga.data.MangaDetails
+import com.yazan.manga.data.MangaListsManager
 import com.yazan.manga.data.MangaRepository
 import com.yazan.manga.ui.ChapterAdapter
 import kotlinx.coroutines.Dispatchers
@@ -44,6 +46,7 @@ class MangaDetailsActivity : AppCompatActivity() {
     private lateinit var errorText: TextView
     private lateinit var btnRead: MaterialButton
     private lateinit var btnShare: ImageButton
+    private lateinit var btnAddToList: ImageButton
 
     private var mangaSlug: String = ""
     private var mangaTitle: String = ""
@@ -77,6 +80,7 @@ class MangaDetailsActivity : AppCompatActivity() {
         errorText = findViewById(R.id.errorText)
         btnRead = findViewById(R.id.btnRead)
         btnShare = findViewById(R.id.btnShare)
+        btnAddToList = findViewById(R.id.btnAddToList)
 
         titleText.text = mangaTitle
         Glide.with(this).load(mangaCover)
@@ -93,6 +97,9 @@ class MangaDetailsActivity : AppCompatActivity() {
             }
             startActivity(Intent.createChooser(shareIntent, "مشاركة عبر"))
         }
+
+        // Add to a custom list (favorites / watch later / want to watch / completed)
+        btnAddToList.setOnClickListener { showAddToListDialog() }
 
         chapterAdapter = ChapterAdapter(
             onClick = { chapter -> openReader(chapter) },
@@ -127,7 +134,7 @@ class MangaDetailsActivity : AppCompatActivity() {
                 details = data
                 displayDetails(data)
             }.onFailure { e ->
-                errorText.text = "فشل تحميل التفاصيل: ${e.message}"
+                errorText.text = "حدث خطأ أثناء تحميل التفاصيل"
                 errorText.visibility = View.VISIBLE
             }
         }
@@ -186,5 +193,30 @@ class MangaDetailsActivity : AppCompatActivity() {
         intent.putExtra("context_type", "chapter")
         intent.putExtra("context_title", "الفصل ${chapter.number}")
         startActivity(intent)
+    }
+
+    private fun showAddToListDialog() {
+        val user = AuthManager.getCurrentUser(this)
+        if (user == null) {
+            android.widget.Toast.makeText(this, "سجّل الدخول أولاً", android.widget.Toast.LENGTH_SHORT).show()
+            return
+        }
+        val entry = MangaListsManager.MangaEntry(
+            id = mangaSlug,
+            title = mangaTitle,
+            cover = mangaCover
+        )
+        val options = MangaListsManager.ListType.values().map { it.label }.toTypedArray()
+        val checked = intArrayOf(0)
+        androidx.appcompat.app.AlertDialog.Builder(this)
+            .setTitle("إضافة لقائمة")
+            .setSingleChoiceItems(options, checked[0]) { _, which -> checked[0] = which }
+            .setPositiveButton("إضافة") { _, _ ->
+                val type = MangaListsManager.ListType.values()[checked[0]]
+                MangaListsManager.addToList(this, user.email, type, entry)
+                android.widget.Toast.makeText(this, "تمت الإضافة إلى ${type.label}", android.widget.Toast.LENGTH_SHORT).show()
+            }
+            .setNegativeButton("إلغاء", null)
+            .show()
     }
 }

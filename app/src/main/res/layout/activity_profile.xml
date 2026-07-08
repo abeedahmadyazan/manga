@@ -155,129 +155,190 @@
                 android:drawableTint="@color/text_muted"
                 tools:ignore="UseAppTint" />
 
-            <!-- ============ Stats grid ============ -->
+            <!-- ============ Manga lists (pie chart + 4 cards) ============ -->
             <LinearLayout
                 android:id="@+id/statsContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
+                android:orientation="vertical"
                 android:layout_marginTop="22dp"
-                android:weightSum="3"
                 android:visibility="gone">
 
-                <com.google.android.material.card.MaterialCardView
-                    android:layout_width="0dp"
+                <!-- Pie chart -->
+                <com.yazan.manga.ui.PieChartView
+                    android:id="@+id/pieChart"
+                    android:layout_width="160dp"
+                    android:layout_height="160dp"
+                    android:layout_gravity="center" />
+
+                <!-- 2x2 grid of list counts -->
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_marginHorizontal="4dp"
-                    app:cardBackgroundColor="@color/surface"
-                    app:cardCornerRadius="14dp"
-                    app:cardElevation="1dp"
-                    app:strokeWidth="0dp">
+                    android:orientation="horizontal"
+                    android:layout_marginTop="16dp"
+                    android:weightSum="2">
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:gravity="center"
-                        android:padding="14dp">
+                        android:layout_weight="1"
+                        android:layout_marginHorizontal="4dp"
+                        app:cardBackgroundColor="@color/surface"
+                        app:cardCornerRadius="14dp"
+                        app:cardElevation="1dp"
+                        app:strokeWidth="0dp">
 
-                        <TextView
-                            android:id="@+id/tvStatComments"
-                            android:layout_width="wrap_content"
+                        <LinearLayout
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="0"
-                            android:textColor="@color/primary"
-                            android:textSize="22sp"
-                            android:textStyle="bold"
-                            tools:ignore="HardcodedText" />
+                            android:orientation="vertical"
+                            android:gravity="center"
+                            android:padding="14dp">
 
-                        <TextView
-                            android:layout_width="wrap_content"
+                            <TextView
+                                android:id="@+id/tvStatFavorites"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="0"
+                                android:textColor="#10b981"
+                                android:textSize="22sp"
+                                android:textStyle="bold"
+                                tools:ignore="HardcodedText" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:text="المفضلة"
+                                android:textColor="@color/text_secondary"
+                                android:textSize="12sp"
+                                tools:ignore="HardcodedText" />
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginHorizontal="4dp"
+                        app:cardBackgroundColor="@color/surface"
+                        app:cardCornerRadius="14dp"
+                        app:cardElevation="1dp"
+                        app:strokeWidth="0dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-                            android:text="تعليقات"
-                            android:textColor="@color/text_secondary"
-                            android:textSize="12sp"
-                            tools:ignore="HardcodedText" />
-                    </LinearLayout>
-                </com.google.android.material.card.MaterialCardView>
+                            android:orientation="vertical"
+                            android:gravity="center"
+                            android:padding="14dp">
 
-                <com.google.android.material.card.MaterialCardView
-                    android:layout_width="0dp"
+                            <TextView
+                                android:id="@+id/tvStatWatchLater"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="0"
+                                android:textColor="#8b5cf6"
+                                android:textSize="22sp"
+                                android:textStyle="bold"
+                                tools:ignore="HardcodedText" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:text="أتابع لاحقاً"
+                                android:textColor="@color/text_secondary"
+                                android:textSize="12sp"
+                                tools:ignore="HardcodedText" />
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_marginHorizontal="4dp"
-                    app:cardBackgroundColor="@color/surface"
-                    app:cardCornerRadius="14dp"
-                    app:cardElevation="1dp"
-                    app:strokeWidth="0dp">
+                    android:orientation="horizontal"
+                    android:layout_marginTop="8dp"
+                    android:weightSum="2">
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:gravity="center"
-                        android:padding="14dp">
+                        android:layout_weight="1"
+                        android:layout_marginHorizontal="4dp"
+                        app:cardBackgroundColor="@color/surface"
+                        app:cardCornerRadius="14dp"
+                        app:cardElevation="1dp"
+                        app:strokeWidth="0dp">
 
-                        <TextView
-                            android:id="@+id/tvStatFavorites"
-                            android:layout_width="wrap_content"
+                        <LinearLayout
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="0"
-                            android:textColor="@color/accent"
-                            android:textSize="22sp"
-                            android:textStyle="bold"
-                            tools:ignore="HardcodedText" />
+                            android:orientation="vertical"
+                            android:gravity="center"
+                            android:padding="14dp">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-                            android:text="المفضلة"
-                            android:textColor="@color/text_secondary"
-                            android:textSize="12sp"
-                            tools:ignore="HardcodedText" />
-                    </LinearLayout>
-                </com.google.android.material.card.MaterialCardView>
+                            <TextView
+                                android:id="@+id/tvStatWantToWatch"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="0"
+                                android:textColor="#f59e0b"
+                                android:textSize="22sp"
+                                android:textStyle="bold"
+                                tools:ignore="HardcodedText" />
 
-                <com.google.android.material.card.MaterialCardView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_marginHorizontal="4dp"
-                    app:cardBackgroundColor="@color/surface"
-                    app:cardCornerRadius="14dp"
-                    app:cardElevation="1dp"
-                    app:strokeWidth="0dp">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:text="أرغب بمتابعتها"
+                                android:textColor="@color/text_secondary"
+                                android:textSize="12sp"
+                                tools:ignore="HardcodedText" />
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:gravity="center"
-                        android:padding="14dp">
+                        android:layout_weight="1"
+                        android:layout_marginHorizontal="4dp"
+                        app:cardBackgroundColor="@color/surface"
+                        app:cardCornerRadius="14dp"
+                        app:cardElevation="1dp"
+                        app:strokeWidth="0dp">
 
-                        <TextView
-                            android:id="@+id/tvStatHistory"
-                            android:layout_width="wrap_content"
+                        <LinearLayout
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="0"
-                            android:textColor="@color/warning"
-                            android:textSize="22sp"
-                            android:textStyle="bold"
-                            tools:ignore="HardcodedText" />
+                            android:orientation="vertical"
+                            android:gravity="center"
+                            android:padding="14dp">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-                            android:text="سجل القراءة"
-                            android:textColor="@color/text_secondary"
-                            android:textSize="12sp"
-                            tools:ignore="HardcodedText" />
-                    </LinearLayout>
-                </com.google.android.material.card.MaterialCardView>
+                            <TextView
+                                android:id="@+id/tvStatCompleted"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="0"
+                                android:textColor="#3b82f6"
+                                android:textSize="22sp"
+                                android:textStyle="bold"
+                                tools:ignore="HardcodedText" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:text="أنهيتها"
+                                android:textColor="@color/text_secondary"
+                                android:textSize="12sp"
+                                tools:ignore="HardcodedText" />
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+                </LinearLayout>
             </LinearLayout>
 
             <!-- ============ Login button (Google styled) ============ -->

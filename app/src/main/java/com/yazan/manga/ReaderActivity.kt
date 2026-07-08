@@ -146,8 +146,9 @@ class ReaderActivity : AppCompatActivity() {
                     adapter.submitList(pages)
                     pageCounter.text = "1 / ${pages.size}"
                 }
-            }.onFailure { e ->
-                errorText.text = "فشل تحميل الصفحات: ${e.message}"
+            }.onFailure {
+                // Show a generic error message — never expose the real cause to the user
+                errorText.text = "حدث خطأ أثناء تحميل الفصل. حاول مرة أخرى لاحقاً."
                 errorText.visibility = View.VISIBLE
             }
         }

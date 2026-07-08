@@ -50,7 +50,7 @@ class AdminPanelActivity : AppCompatActivity() {
             },
             onError = { e ->
                 runOnUiThread {
-                    Toast.makeText(this, "تعذّر تحميل البلاغات: ${e.message}", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this, "تعذّر تحميل البلاغات", Toast.LENGTH_LONG).show()
                 }
             }
         )

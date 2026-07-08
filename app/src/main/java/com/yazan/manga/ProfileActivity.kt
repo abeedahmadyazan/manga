@@ -20,8 +20,10 @@ import com.google.android.gms.common.api.ApiException
 import com.google.android.material.button.MaterialButton
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.firestore.ListenerRegistration
 import com.yazan.manga.data.AuthManager
-import com.yazan.manga.data.CommentsManager
+import com.yazan.manga.data.MangaListsManager
+import com.yazan.manga.ui.PieChartView
 
 class ProfileActivity : AppCompatActivity() {
 
@@ -41,15 +43,18 @@ class ProfileActivity : AppCompatActivity() {
     private lateinit var tvUsername: TextView
     private lateinit var tvEmail: TextView
     private lateinit var tvAdminBadge: TextView
-    private lateinit var tvStatComments: TextView
+    private lateinit var pieChart: PieChartView
     private lateinit var tvStatFavorites: TextView
-    private lateinit var tvStatHistory: TextView
+    private lateinit var tvStatWatchLater: TextView
+    private lateinit var tvStatWantToWatch: TextView
+    private lateinit var tvStatCompleted: TextView
     private lateinit var btnLogin: MaterialButton
     private lateinit var btnLogout: MaterialButton
     private lateinit var btnChangeName: MaterialButton
     private lateinit var btnChangeUsername: MaterialButton
     private lateinit var btnAdminPanel: MaterialButton
     private lateinit var statsContainer: View
+    private var listsListener: ListenerRegistration? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,9 +76,11 @@ class ProfileActivity : AppCompatActivity() {
         tvUsername = findViewById(R.id.tvUsername)
         tvEmail = findViewById(R.id.tvEmail)
         tvAdminBadge = findViewById(R.id.tvAdminBadge)
-        tvStatComments = findViewById(R.id.tvStatComments)
+        pieChart = findViewById(R.id.pieChart)
         tvStatFavorites = findViewById(R.id.tvStatFavorites)
-        tvStatHistory = findViewById(R.id.tvStatHistory)
+        tvStatWatchLater = findViewById(R.id.tvStatWatchLater)
+        tvStatWantToWatch = findViewById(R.id.tvStatWantToWatch)
+        tvStatCompleted = findViewById(R.id.tvStatCompleted)
         btnLogin = findViewById(R.id.btnLogin)
         btnLogout = findViewById(R.id.btnLogout)
         btnChangeName = findViewById(R.id.btnChangeName)
@@ -128,7 +135,7 @@ class ProfileActivity : AppCompatActivity() {
             )
             startActivityForResult(intent, RC_ACCOUNT_PICKER)
         } catch (e: Exception) {
-            Toast.makeText(this, "فشل تسجيل الدخول: ${e.message}", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "فشل تسجيل الدخول", Toast.LENGTH_LONG).show()
         }
     }
 
@@ -220,7 +227,8 @@ class ProfileActivity : AppCompatActivity() {
             }
             updateUI()
         } else {
-            Toast.makeText(this, error, Toast.LENGTH_LONG).show()
+            // Show a generic error — never expose the real cause to the user
+            Toast.makeText(this, "حدث خطأ أثناء تسجيل الدخول", Toast.LENGTH_LONG).show()
             AuthManager.logout(this)
             updateUI()
         }
@@ -308,17 +316,22 @@ class ProfileActivity : AppCompatActivity() {
             tvEmail.visibility = View.GONE
             tvAdminBadge.visibility = if (user.isAdmin) View.VISIBLE else View.GONE
 
-            // Stats — comments count is best-effort from CloudCommentsManager if available,
-            // otherwise fall back to local CommentsManager.
-            try {
-                val commentsCount = CommentsManager.getAllComments(this)
-                    .count { it.authorEmail == user.email }
-                tvStatComments.text = commentsCount.toString()
-            } catch (e: Exception) {
-                tvStatComments.text = "0"
+            // Stats — manga lists from the cloud (real-time)
+            listsListener?.remove()
+            listsListener = MangaListsManager.listenToMyLists(user.email) { lists ->
+                runOnUiThread {
+                    tvStatFavorites.text = lists.favorites.size.toString()
+                    tvStatWatchLater.text = lists.watchLater.size.toString()
+                    tvStatWantToWatch.text = lists.wantToWatch.size.toString()
+                    tvStatCompleted.text = lists.completed.size.toString()
+                    pieChart.setCounts(
+                        lists.favorites.size,
+                        lists.watchLater.size,
+                        lists.wantToWatch.size,
+                        lists.completed.size
+                    )
+                }
             }
-            tvStatFavorites.text = "0"
-            tvStatHistory.text = "0"
             statsContainer.visibility = View.VISIBLE
 
             btnLogin.visibility = View.GONE
@@ -348,5 +361,11 @@ class ProfileActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         updateUI()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        listsListener?.remove()
+        listsListener = null
     }
 }

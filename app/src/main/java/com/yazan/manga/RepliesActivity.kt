@@ -77,7 +77,7 @@ class RepliesActivity : AppCompatActivity() {
             },
             onError = { e ->
                 swipeRefresh.isRefreshing = false
-                Toast.makeText(this, "تعذّر تحميل الردود: ${e.message}", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "تعذّر تحميل الردود", Toast.LENGTH_LONG).show()
             }
         )
     }
@@ -93,7 +93,7 @@ class RepliesActivity : AppCompatActivity() {
                 replyInput.text.clear()
                 Toast.makeText(this, "تم إرسال الرد", Toast.LENGTH_SHORT).show()
             } else {
-                Toast.makeText(this, error ?: "فشل", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "حدث خطأ", Toast.LENGTH_LONG).show()
             }
         }
     }
@@ -208,7 +208,7 @@ class RepliesActivity : AppCompatActivity() {
                             CloudCommentsManager.reportComment(this@RepliesActivity, r, "رد", reasons[checked[0]]) { success, error ->
                                 runOnUiThread {
                                     if (success) Toast.makeText(this@RepliesActivity, "تم إرسال البلاغ", Toast.LENGTH_SHORT).show()
-                                    else Toast.makeText(this@RepliesActivity, error ?: "فشل", Toast.LENGTH_LONG).show()
+                                    else Toast.makeText(this@RepliesActivity, "حدث خطأ", Toast.LENGTH_LONG).show()
                                 }
                             }
                         }

@@ -113,7 +113,7 @@ class CommentsActivity : AppCompatActivity() {
             onError = { e ->
                 loadingIndicator.visibility = View.GONE
                 swipeRefresh.isRefreshing = false
-                Toast.makeText(this, "تعذّر تحميل التعليقات: ${e.message}", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "تعذّر تحميل التعليقات", Toast.LENGTH_LONG).show()
             }
         )
     }
@@ -144,7 +144,7 @@ class CommentsActivity : AppCompatActivity() {
         CloudCommentsManager.addComment(this, contextId, contextType, text, null) { success, error ->
             sendBtn.isEnabled = true
             if (success) commentInput.text.clear()
-            else Toast.makeText(this, error ?: "فشل", Toast.LENGTH_LONG).show()
+            else Toast.makeText(this, "حدث خطأ", Toast.LENGTH_LONG).show()
         }
     }
 
@@ -190,7 +190,7 @@ class CommentsActivity : AppCompatActivity() {
                 CloudCommentsManager.reportComment(this, comment, contextTitle, reason) { success, error ->
                     runOnUiThread {
                         if (success) Toast.makeText(this, "تم إرسال البلاغ للمشرف", Toast.LENGTH_SHORT).show()
-                        else Toast.makeText(this, error ?: "فشل الإرسال", Toast.LENGTH_LONG).show()
+                        else Toast.makeText(this, "حدث خطأ", Toast.LENGTH_LONG).show()
                     }
                 }
             }

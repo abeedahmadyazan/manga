@@ -52,7 +52,7 @@ object CloudCommentsManager {
             }
             .addOnFailureListener { e ->
                 Log.e(TAG, "Error adding comment: ${e.message}")
-                callback(false, e.message)
+                callback(false, "حدث خطأ")
             }
     }
 
@@ -217,9 +217,9 @@ object CloudCommentsManager {
                 db.collection("reports")
                     .add(report)
                     .addOnSuccessListener { callback(true, null) }
-                    .addOnFailureListener { e -> callback(false, e.message) }
+                    .addOnFailureListener { e -> callback(false, "حدث خطأ") }
             }
-            .addOnFailureListener { e -> callback(false, e.message) }
+            .addOnFailureListener { e -> callback(false, "حدث خطأ") }
     }
 
     /**

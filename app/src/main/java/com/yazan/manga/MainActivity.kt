@@ -43,6 +43,12 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // Apply the saved dark mode setting on startup
+        val prefs = getSharedPreferences("settings", android.content.Context.MODE_PRIVATE)
+        androidx.appcompat.app.AppCompatDelegate.setDefaultNightMode(
+            if (prefs.getBoolean("dark_mode", true)) androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_YES
+            else androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_NO
+        )
         setContentView(R.layout.activity_main)
 
         initViews()
@@ -222,7 +228,7 @@ class MainActivity : AppCompatActivity() {
                 }
                 adapter.submitList(items)
             }.onFailure { e ->
-                errorText.text = "فشل التحميل: ${e.message}"
+                errorText.text = "حدث خطأ أثناء التحميل"
                 errorText.visibility = View.VISIBLE
             }
         }
@@ -250,7 +256,7 @@ class MainActivity : AppCompatActivity() {
                 }
                 adapter.submitList(items)
             }.onFailure { e ->
-                errorText.text = "فشل البحث: ${e.message}"
+                errorText.text = "حدث خطأ أثناء البحث"
                 errorText.visibility = View.VISIBLE
             }
         }

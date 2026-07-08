@@ -286,7 +286,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="16dp"
-                    android:text="تطبيق مانجا v1.0.0\nمصدر البيانات: 3asq.pro\n© 2026"
+                    android:text="تطبيق مانجا v1.0.0\n© 2026"
                     android:textColor="@color/text_secondary"
                     android:textSize="13sp"
                     android:lineSpacingExtra="3dp"
