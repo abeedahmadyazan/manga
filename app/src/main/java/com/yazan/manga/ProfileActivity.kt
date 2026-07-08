@@ -91,7 +91,7 @@ class ProfileActivity : AppCompatActivity() {
         }
 
         // Profile picture
-        avatar.setOnClickListener {
+        avatarImage.setOnClickListener {
             val intent = Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
             startActivityForResult(intent, RC_IMAGE_PICK)
         }
@@ -124,7 +124,7 @@ class ProfileActivity : AppCompatActivity() {
         try {
             val prefs = getSharedPreferences("manga_prefs", MODE_PRIVATE)
             prefs.edit().putString("profile_image", uri.toString()).apply()
-            com.bumptech.glide.Glide.with(this).load(uri).circleCrop().into(avatar)
+            com.bumptech.glide.Glide.with(this).load(uri).circleCrop().into(avatarImage)
             Toast.makeText(this, "تم تحديث الصورة", Toast.LENGTH_SHORT).show()
         } catch (e: Exception) {
             Toast.makeText(this, "فشل تحميل الصورة", Toast.LENGTH_SHORT).show()
@@ -247,15 +247,15 @@ class ProfileActivity : AppCompatActivity() {
             val prefs = getSharedPreferences("manga_prefs", MODE_PRIVATE)
             val imageUri = prefs.getString("profile_image", null)
             if (imageUri != null) {
-                com.bumptech.glide.Glide.with(this).load(android.net.Uri.parse(imageUri)).circleCrop().into(avatar)
+                com.bumptech.glide.Glide.with(this).load(android.net.Uri.parse(imageUri)).circleCrop().into(avatarImage)
             }
             // Avatar
             val first = user.name.firstOrNull()?.uppercaseChar()?.toString() ?: "U"
             avatarLetter.text = first
             avatarLetter.visibility = View.VISIBLE
-            if (user.avatar.isNotEmpty()) {
+            if (user.avatarImage.isNotEmpty()) {
                 avatarImage.visibility = View.VISIBLE
-                Glide.with(this).load(user.avatar).circleCrop().into(avatarImage)
+                Glide.with(this).load(user.avatarImage).circleCrop().into(avatarImage)
             } else {
                 avatarImage.visibility = View.GONE
             }
