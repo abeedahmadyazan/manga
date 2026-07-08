@@ -41,6 +41,8 @@ class MangaDetailsActivity : AppCompatActivity() {
     private lateinit var chaptersCountText: TextView
     private lateinit var descriptionText: TextView
     private lateinit var genresGroup: ChipGroup
+    private lateinit var sourcesGroup: ChipGroup
+    private lateinit var sourcesContainer: View
     private lateinit var chaptersRecyclerView: RecyclerView
     private lateinit var loadingIndicator: ProgressBar
     private lateinit var errorText: TextView
@@ -76,6 +78,8 @@ class MangaDetailsActivity : AppCompatActivity() {
         chaptersCountText = findViewById(R.id.tvChapters)
         descriptionText = findViewById(R.id.tvDescription)
         genresGroup = findViewById(R.id.genresChipGroup)
+        sourcesGroup = findViewById(R.id.sourcesChipGroup)
+        sourcesContainer = findViewById(R.id.sourcesContainer)
         chaptersRecyclerView = findViewById(R.id.chaptersRecyclerView)
         loadingIndicator = findViewById(R.id.loadingIndicator)
         errorText = findViewById(R.id.errorText)
@@ -193,6 +197,52 @@ class MangaDetailsActivity : AppCompatActivity() {
 
         // Subtitle shows source
         altTitleText.visibility = View.GONE
+
+        // Build source chips. Each chip is labeled "المصدر 1", "المصدر 2", ...
+        // (per the user's request — never reveal the real upstream provider).
+        // Each chip's tag holds the source key, so when the user picks it we
+        // can swap the chapter list from chaptersBySource.
+        sourcesGroup.removeAllViews()
+        if (data.sources.size > 1) {
+            sourcesContainer.visibility = View.VISIBLE
+            data.sources.forEachIndexed { idx, src ->
+                val chip = Chip(this).apply {
+                    // Label: "المصدر 1 (عربي) · 64 فصل" — short and informative
+                    val langLabel = if (src.language == "ar") "عربي" else "إنجليزي"
+                    text = "${src.label} · $langLabel · ${src.chapterCount}"
+                    isClickable = true
+                    isCheckable = true
+                    tag = src.key
+                    setChipBackgroundColorResource(R.color.surface_light)
+                    setTextColor(getColor(R.color.text_primary))
+                    textSize = 12f
+                    // Highlight the first source as selected by default
+                    isChecked = idx == 0
+                }
+                chip.setOnClickListener {
+                    // Mark this chip as selected, deselect the rest
+                    for (i in 0 until sourcesGroup.childCount) {
+                        val other = sourcesGroup.getChildAt(i) as Chip
+                        other.isChecked = (other === chip)
+                    }
+                    // Swap chapter list
+                    val key = chip.tag as? String
+                    val chaptersForSource = data.chaptersBySource[key].orEmpty()
+                    chapterAdapter.submitList(emptyList())  // clear first to reset scroll
+                    if (chaptersForSource.isNotEmpty()) {
+                        chaptersCountText.text = chaptersForSource.size.toString()
+                        displayChapters(chaptersForSource)
+                        btnRead.visibility = View.VISIBLE
+                    } else {
+                        chaptersCountText.text = "0"
+                        btnRead.visibility = View.GONE
+                    }
+                }
+                sourcesGroup.addView(chip)
+            }
+        } else {
+            sourcesContainer.visibility = View.GONE
+        }
 
         if (data.chapters.isEmpty()) {
             chaptersCountText.text = "0"

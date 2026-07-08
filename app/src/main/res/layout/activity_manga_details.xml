@@ -345,6 +345,35 @@
                     app:iconTint="@color/white"
                     tools:ignore="HardcodedText" />
 
+                <!-- ============ Sources chip group ============ -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingHorizontal="14dp"
+                    android:paddingTop="14dp"
+                    android:paddingBottom="2dp"
+                    android:visibility="gone"
+                    android:id="@+id/sourcesContainer">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="المصادر المتاحة"
+                        android:textColor="@color/text_secondary"
+                        android:textSize="12sp"
+                        android:layout_marginBottom="6dp"
+                        tools:ignore="HardcodedText" />
+
+                    <com.google.android.material.chip.ChipGroup
+                        android:id="@+id/sourcesChipGroup"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:singleSelection="true"
+                        app:chipSpacingHorizontal="6dp"
+                        app:chipSpacingVertical="4dp" />
+                </LinearLayout>
+
                 <!-- ============ Chapter list header ============ -->
                 <LinearLayout
                     android:layout_width="match_parent"

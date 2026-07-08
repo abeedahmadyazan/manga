@@ -176,13 +176,8 @@ class MangaRepository {
                 null
             }
 
-            // 3b. MangaPill fallback — used when:
-            //   - 3asq returned no chapters OR
-            //   - 3asq returned chapters but they're old (Cloudflare-blocked on read)
-            // We don't know in advance which 3asq chapters will work, so we
-            // fetch MangaPill chapters up-front and store their URL paths in a
-            // cache. When 3asq fails to deliver pages for a chapter, we fall
-            // back to MangaPill.
+            // 3b. MangaPill fallback — fetch chapter list so we can show it
+            // as a source AND use it as a fallback for chapter pages.
             val mpMangaId = MangaPillClient.findMangaId(enTitle.ifBlank { title })
             val mpChapters = if (mpMangaId != null) {
                 MangaPillClient.fetchChapterList(mpMangaId)
@@ -196,39 +191,122 @@ class MangaRepository {
                 Log.d(TAG, "MangaPill: ${mpChapters.size} chapters available for $enTitle")
             }
 
-            // 4. Merge: 3asq list + MangaDex chapters (prefer MangaDex for reliability)
-            val chapters = if (!asqChapters.isNullOrEmpty()) {
-                Log.d(TAG, "Using 3asq: ${asqChapters!!.size} chapters")
-                // Use 3asq chapter list (1187), but mark which ones have MangaDex backup
-                asqChapters.map { asqCh ->
-                    val mdId = mdChapterCache[Pair(id, asqCh.number)]
-                    if (mdId != null) {
-                        // Use MangaDex ID (more reliable)
-                        MangaChapter(id = mdId, number = asqCh.number, title = asqCh.title, date = asqCh.date, source = "mangadex")
-                    } else {
-                        // Use 3asq (might work for recent chapters)
-                        asqCh
-                    }
-                }
-            } else if (mdChapters.isNotEmpty()) {
-                mdChapters
-            } else if (mpChapters.isNotEmpty()) {
-                // No Arabic chapters anywhere — use MangaPill (English)
-                Log.d(TAG, "Using MangaPill fallback: ${mpChapters.size} chapters (English)")
-                mpChapters.map { (num, urlPath) ->
-                    MangaChapter(
-                        id = urlPath,  // store the full URL path in id
-                        number = num,
-                        title = "Chapter $num",
-                        date = "",
-                        source = "mangapill"
-                    )
-                }
-            } else {
-                emptyList()
+            // 3c. MangaHere — additional English source for chapter listing.
+            // We use MangaHere's chapter list (often more complete than
+            // MangaPill's) but route page requests through MangaPill because
+            // MangaHere loads images via JS.
+            val mhSlug = MangaHereClient.findMangaSlug(enTitle.ifBlank { title })
+            val mhChapters = if (mhSlug != null) {
+                MangaHereClient.fetchChapterList(mhSlug)
+            } else emptyList()
+            // Cache MangaHere URL paths too — when the user picks the MangaHere
+            // source, we look up the chapter number in mpUrlCache (MangaPill)
+            // to fetch the actual images.
+            if (mhChapters.isNotEmpty()) {
+                Log.d(TAG, "MangaHere: ${mhChapters.size} chapters available for $enTitle")
             }
 
-            Result.success(MangaDetails(id = id, title = title, cover = cover, description = description, author = author, artist = author, status = status, genres = genres, chapters = chapters, source = "mangadex", latestChapter = null))
+            // ============================================================
+            // 4. Build the multi-source model.
+            // Each source is exposed to the user under a generic label
+            // ("المصدر 1", "المصدر 2", ...) without revealing the upstream
+            // provider. The user picks one; we look up the chapters for
+            // that source from chaptersBySource.
+            // ============================================================
+
+            // Build chapter lists per source.
+            val asqChapterList: List<MangaChapter> = (asqChapters ?: emptyList()).map { asqCh ->
+                val mdId = mdChapterCache[Pair(id, asqCh.number)]
+                if (mdId != null) {
+                    MangaChapter(id = mdId, number = asqCh.number, title = asqCh.title, date = asqCh.date, source = "mangadex")
+                } else {
+                    asqCh
+                }
+            }
+            val mdChapterList: List<MangaChapter> = mdChapters
+            val mpChapterList: List<MangaChapter> = mpChapters.map { (num, urlPath) ->
+                MangaChapter(id = urlPath, number = num, title = "Chapter $num", date = "", source = "mangapill")
+            }
+            val mhChapterList: List<MangaChapter> = mhChapters.map { (num, _) ->
+                // Reuse MangaPill's URL cache for the actual page fetch, but
+                // mark the chapter as mangahere so the chip knows it's the
+                // MangaHere listing. When the user opens this chapter, the
+                // Reader will look up the same chapter number in
+                // mpChapterUrlCache to fetch pages from MangaPill.
+                MangaChapter(
+                    id = "mangahere-$id-$num",
+                    number = num,
+                    title = "Chapter $num",
+                    date = "",
+                    source = "mangahere"
+                )
+            }
+
+            val chaptersBySource = mutableMapOf<String, List<MangaChapter>>()
+            val sourcesList = mutableListOf<MangaSourceInfo>()
+            var sourceIdx = 1
+
+            // Prefer Arabic sources first
+            if (asqChapterList.isNotEmpty()) {
+                val key = "3asq"
+                chaptersBySource[key] = asqChapterList
+                sourcesList.add(MangaSourceInfo(
+                    key = key,
+                    label = "المصدر $sourceIdx",
+                    language = "ar",
+                    chapterCount = asqChapterList.size
+                ))
+                sourceIdx++
+            }
+            if (mdChapterList.isNotEmpty()) {
+                val key = "mangadex"
+                chaptersBySource[key] = mdChapterList
+                sourcesList.add(MangaSourceInfo(
+                    key = key,
+                    label = "المصدر $sourceIdx",
+                    language = "ar",
+                    chapterCount = mdChapterList.size
+                ))
+                sourceIdx++
+            }
+            // Then English sources
+            if (mhChapterList.isNotEmpty()) {
+                val key = "mangahere"
+                chaptersBySource[key] = mhChapterList
+                sourcesList.add(MangaSourceInfo(
+                    key = key,
+                    label = "المصدر $sourceIdx",
+                    language = "en",
+                    chapterCount = mhChapterList.size
+                ))
+                sourceIdx++
+            }
+            if (mpChapterList.isNotEmpty()) {
+                val key = "mangapill"
+                chaptersBySource[key] = mpChapterList
+                sourcesList.add(MangaSourceInfo(
+                    key = key,
+                    label = "المصدر $sourceIdx",
+                    language = "en",
+                    chapterCount = mpChapterList.size
+                ))
+                sourceIdx++
+            }
+
+            // Default chapters = first available source's chapters
+            val defaultChapters = sourcesList.firstOrNull()?.let { chaptersBySource[it.key] } ?: emptyList()
+
+            Log.d(TAG, "Sources: ${sourcesList.size} available | default=${sourcesList.firstOrNull()?.key} | chapters=${defaultChapters.size}")
+
+            Result.success(MangaDetails(
+                id = id, title = title, cover = cover, description = description,
+                author = author, artist = author, status = status, genres = genres,
+                chapters = defaultChapters,
+                source = "mangadex",
+                latestChapter = null,
+                sources = sourcesList,
+                chaptersBySource = chaptersBySource
+            ))
         } catch (e: Exception) { Result.failure(e) }
     }
 
@@ -409,6 +487,16 @@ class MangaRepository {
                     Result.failure(Exception("تعذّر تحميل صفحات الفصل"))
                 } else {
                     Result.success(pages.mapIndexed { i, url -> ChapterPage(index = i, url = url) })
+                }
+            } else if (chapter.source == "mangahere") {
+                // MangaHere listing — fetch pages from MangaPill (same chapter
+                // number). MangaHere's HTML loads images via JS, so we can't
+                // scrape them directly.
+                val mpPages = fetchMangaPillPagesForChapter(chapter)
+                if (mpPages.isNotEmpty()) {
+                    Result.success(mpPages)
+                } else {
+                    Result.failure(Exception("تعذّر تحميل صفحات الفصل"))
                 }
             } else {
                 // MangaDex
