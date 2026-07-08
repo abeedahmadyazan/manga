@@ -318,20 +318,23 @@ class ProfileActivity : AppCompatActivity() {
 
             // Stats — manga lists from the cloud (real-time)
             listsListener?.remove()
-            listsListener = MangaListsManager.listenToMyLists(user.email) { lists ->
-                runOnUiThread {
-                    tvStatFavorites.text = lists.favorites.size.toString()
-                    tvStatWatchLater.text = lists.watchLater.size.toString()
-                    tvStatWantToWatch.text = lists.wantToWatch.size.toString()
-                    tvStatCompleted.text = lists.completed.size.toString()
-                    pieChart.setCounts(
-                        lists.favorites.size,
-                        lists.watchLater.size,
-                        lists.wantToWatch.size,
-                        lists.completed.size
-                    )
+            listsListener = MangaListsManager.listenToMyLists(
+                email = user.email,
+                onUpdate = { lists ->
+                    runOnUiThread {
+                        tvStatFavorites.text = lists.favorites.size.toString()
+                        tvStatWatchLater.text = lists.watchLater.size.toString()
+                        tvStatWantToWatch.text = lists.wantToWatch.size.toString()
+                        tvStatCompleted.text = lists.completed.size.toString()
+                        pieChart.setCounts(
+                            lists.favorites.size,
+                            lists.watchLater.size,
+                            lists.wantToWatch.size,
+                            lists.completed.size
+                        )
+                    }
                 }
-            }
+            )
             statsContainer.visibility = View.VISIBLE
 
             btnLogin.visibility = View.GONE
