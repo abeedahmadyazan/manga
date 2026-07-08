@@ -97,12 +97,12 @@ class HistoryActivity : AppCompatActivity() {
             fun bind(entry: ReadingHistoryManager.HistoryEntry) {
                 // Use mangaTitle if available; otherwise fall back to the
                 // chapter title (which includes the manga name in older entries).
-                val title = if (entry.mangaTitle.isNotEmpty()) {
+                val displayTitle = if (entry.mangaTitle.isNotEmpty()) {
                     "${entry.mangaTitle} — الفصل ${entry.chapterNumber}"
                 } else {
                     entry.chapterTitle
                 }
-                title.text = title
+                title.text = displayTitle
                 chapter.text = "الفصل ${entry.chapterNumber}"
                 time.text = sdf.format(Date(entry.readAt))
                 // Only load the cover if the URL is non-empty
