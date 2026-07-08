@@ -116,6 +116,12 @@ class ProfileActivity : AppCompatActivity() {
         btnChangeAvatar.setOnClickListener(openPicker)
 
         btnAdminPanel.setOnClickListener { startActivity(Intent(this, AdminPanelActivity::class.java)) }
+
+        // Make the 4 list cards open MangaListActivity for the corresponding list
+        findViewById<View>(R.id.cardFavorites).setOnClickListener { openList("favorites") }
+        findViewById<View>(R.id.cardWatchLater).setOnClickListener { openList("watchLater") }
+        findViewById<View>(R.id.cardWantToWatch).setOnClickListener { openList("wantToWatch") }
+        findViewById<View>(R.id.cardCompleted).setOnClickListener { openList("completed") }
     }
 
     private fun tryGoogleSignIn() {
@@ -232,6 +238,18 @@ class ProfileActivity : AppCompatActivity() {
             AuthManager.logout(this)
             updateUI()
         }
+    }
+
+    private fun openList(listType: String) {
+        val user = AuthManager.getCurrentUser(this)
+        if (user == null) {
+            Toast.makeText(this, "سجّل الدخول أولاً", Toast.LENGTH_SHORT).show()
+            return
+        }
+        val intent = Intent(this, MangaListActivity::class.java)
+        intent.putExtra("list_type", listType)
+        intent.putExtra("user_email", user.email)
+        startActivity(intent)
     }
 
     private fun showChangeNameDialog() {

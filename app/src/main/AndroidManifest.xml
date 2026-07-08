@@ -33,6 +33,11 @@
             android:windowSoftInputMode="adjustResize" />
 
         <activity
+            android:name=".MangaListActivity"
+            android:parentActivityName=".MainActivity"
+            android:configChanges="orientation|screenSize" />
+
+        <activity
             android:name=".ReaderActivity"
             android:parentActivityName=".MangaDetailsActivity"
             android:configChanges="orientation|screenSize" />

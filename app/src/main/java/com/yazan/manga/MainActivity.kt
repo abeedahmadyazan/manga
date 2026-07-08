@@ -167,7 +167,18 @@ class MainActivity : AppCompatActivity() {
             when (item.itemId) {
                 R.id.menuProfile -> startActivity(Intent(this, ProfileActivity::class.java))
                 R.id.menuSettings -> startActivity(Intent(this, SettingsActivity::class.java))
-                R.id.menuFavorites -> Toast.makeText(this, "قريباً", Toast.LENGTH_SHORT).show()
+                R.id.menuFavorites -> {
+                    // Open the favorites list (cloud-backed)
+                    val user = com.yazan.manga.data.AuthManager.getCurrentUser(this)
+                    if (user == null) {
+                        Toast.makeText(this, "سجّل الدخول أولاً", Toast.LENGTH_SHORT).show()
+                    } else {
+                        val intent = Intent(this, MangaListActivity::class.java)
+                        intent.putExtra("list_type", "favorites")
+                        intent.putExtra("user_email", user.email)
+                        startActivity(intent)
+                    }
+                }
                 R.id.menuHistory -> Toast.makeText(this, "قريباً", Toast.LENGTH_SHORT).show()
                 R.id.menuDownloads -> Toast.makeText(this, "قريباً", Toast.LENGTH_SHORT).show()
                 R.id.menuAbout -> Toast.makeText(this, "تطبيق مانجا v1.0", Toast.LENGTH_SHORT).show()

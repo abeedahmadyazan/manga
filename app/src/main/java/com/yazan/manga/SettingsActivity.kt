@@ -2,6 +2,7 @@ package com.yazan.manga
 
 import android.content.Context
 import android.os.Bundle
+import android.view.View
 import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
@@ -19,7 +20,7 @@ class SettingsActivity : AppCompatActivity() {
 
         val prefs = getSharedPreferences("settings", Context.MODE_PRIVATE)
 
-        // Dark mode — actually apply it via AppCompatDelegate
+        // Dark mode — the ONLY active setting. Actually applies via AppCompatDelegate.
         findViewById<SwitchCompat>(R.id.switchDarkMode).apply {
             isChecked = prefs.getBoolean("dark_mode", true)
             setOnCheckedChangeListener { _, isChecked ->
@@ -32,41 +33,22 @@ class SettingsActivity : AppCompatActivity() {
             }
         }
 
-        // Data saver — affects image quality in the reader (handled by SettingsProvider)
-        findViewById<SwitchCompat>(R.id.switchDataSaver).apply {
-            isChecked = prefs.getBoolean("data_saver", true)
-            setOnCheckedChangeListener { _, isChecked ->
-                prefs.edit().putBoolean("data_saver", isChecked).apply()
-                toast("حفظ البيانات: ${if (isChecked) "مفعل" else "معطل"}")
-            }
-        }
+        // Hide the other toggles — only dark mode is enabled for now
+        findViewById<View>(R.id.switchDataSaver)?.visibility = View.GONE
+        findViewById<View>(R.id.switchAutoDownload)?.visibility = View.GONE
+        findViewById<View>(R.id.switchNotifications)?.visibility = View.GONE
+        // Also hide the row labels (find their parent rows and hide them too)
+        // The switches are inside card rows — hide the parent cards
+        findViewById<View>(R.id.switchDataSaver)?.parent?.let { (it as? View)?.visibility = View.GONE }
+        findViewById<View>(R.id.switchAutoDownload)?.parent?.let { (it as? View)?.visibility = View.GONE }
+        findViewById<View>(R.id.switchNotifications)?.parent?.let { (it as? View)?.visibility = View.GONE }
 
-        // Auto-download — download new chapters automatically when available
-        findViewById<SwitchCompat>(R.id.switchAutoDownload).apply {
-            isChecked = prefs.getBoolean("auto_download", false)
-            setOnCheckedChangeListener { _, isChecked ->
-                prefs.edit().putBoolean("auto_download", isChecked).apply()
-                toast("التحميل التلقائي: ${if (isChecked) "مفعل" else "معطل"}")
-            }
-        }
-
-        // Notifications — chapter notifications (respects this toggle)
-        findViewById<SwitchCompat>(R.id.switchNotifications).apply {
-            isChecked = prefs.getBoolean("notifications", true)
-            setOnCheckedChangeListener { _, isChecked ->
-                prefs.edit().putBoolean("notifications", isChecked).apply()
-                toast("الإشعارات: ${if (isChecked) "مفعل" else "معطل"}")
-            }
-        }
-
-        // About — no data source mentioned (privacy)
-        findViewById<TextView>(R.id.tvAbout).text =
-            "تطبيق مانجا v1.0.0\n© 2026"
+        // About — no data source mentioned
+        findViewById<TextView>(R.id.tvAbout).text = "تطبيق مانجا v1.0.0\n© 2026"
     }
 
     override fun onResume() {
         super.onResume()
-        // Re-apply dark mode setting when returning to this activity
         val prefs = getSharedPreferences("settings", Context.MODE_PRIVATE)
         AppCompatDelegate.setDefaultNightMode(
             if (prefs.getBoolean("dark_mode", true)) AppCompatDelegate.MODE_NIGHT_YES
@@ -76,24 +58,5 @@ class SettingsActivity : AppCompatActivity() {
 
     private fun toast(msg: String) {
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
-    }
-
-    companion object {
-        /** Helper for other activities to check settings. */
-        fun isDataSaverOn(context: Context): Boolean =
-            context.getSharedPreferences("settings", Context.MODE_PRIVATE)
-                .getBoolean("data_saver", true)
-
-        fun isAutoDownloadOn(context: Context): Boolean =
-            context.getSharedPreferences("settings", Context.MODE_PRIVATE)
-                .getBoolean("auto_download", false)
-
-        fun isNotificationsOn(context: Context): Boolean =
-            context.getSharedPreferences("settings", Context.MODE_PRIVATE)
-                .getBoolean("notifications", true)
-
-        fun isDarkModeOn(context: Context): Boolean =
-            context.getSharedPreferences("settings", Context.MODE_PRIVATE)
-                .getBoolean("dark_mode", true)
     }
 }
