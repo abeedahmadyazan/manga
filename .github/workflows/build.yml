@@ -27,12 +27,7 @@ jobs:
         gradle-version: '8.9'
 
     - name: Decode release keystore
-      run: |
-        echo "${{ secrets.RELEASE_KEYSTORE }}" | base64 -d > manga-release.keystore
-        echo "KEYSTORE_FILE=$(pwd)/manga-release.keystore" >> $GITHUB_ENV
-        echo "KEYSTORE_PASSWORD=${{ secrets.RELEASE_KEYSTORE_PASSWORD }}" >> $GITHUB_ENV
-        echo "KEY_ALIAS=manga" >> $GITHUB_ENV
-        echo "KEY_PASSWORD=${{ secrets.RELEASE_KEY_PASSWORD }}" >> $GITHUB_ENV
+      run: echo "Keystore step placeholder"
 
     - name: Build Debug APK
       run: gradle assembleDebug --stacktrace
