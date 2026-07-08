@@ -437,7 +437,6 @@ class MainActivity : AppCompatActivity() {
             val result = withContext(Dispatchers.IO) {
                 when (currentTab) {
                     "popular" -> repository.getPopularManga(currentPage)
-                    "popular" -> repository.getPopularManga(currentPage)
                     else -> repository.getLatestManga(currentPage)
                 }
             }

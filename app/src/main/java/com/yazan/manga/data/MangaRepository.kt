@@ -39,9 +39,6 @@ class MangaRepository {
         } catch (e: Exception) { Result.failure(e) }
     }
 
-    suspend fun getArabicManga(page: Int = 1): Result<List<MangaListItem>> = getLatestManga(page)
-    suspend fun getEnglishManga(page: Int = 1): Result<List<MangaListItem>> = getLatestManga(page)
-
     suspend fun searchManga(query: String, page: Int = 1): Result<List<MangaListItem>> {
         return try {
             val offset = (page - 1) * 20
@@ -113,10 +110,35 @@ class MangaRepository {
                 val titleObj = attrs.getAsJsonObject("title")
                 if (titleObj != null) {
                     title = titleObj.get("ar")?.asString ?: titleObj.get("en")?.asString ?: "بدون عنوان"
-                    enTitle = titleObj.get("en")?.asString ?: title
+                    // enTitle: prefer title.en, then title.ja-ro (romaji), then any
+                    // altTitle.en, then any altTitle.ja-ro. Without this fallback,
+                    // manga like Jujutsu Kaisen (which has only title.ja-ro) end up
+                    // with an Arabic enTitle — and guessSlug fails to match.
+                    enTitle = titleObj.get("en")?.asString
+                        ?: titleObj.get("ja-ro")?.asString
+                        ?: ""
                     if (title == "بدون عنوان") {
                         val altTitles = attrs.getAsJsonArray("altTitles")
                         if (altTitles != null) { for (j in 0 until altTitles.size()) { val alt = altTitles[j].asJsonObject; val ar = alt.get("ar")?.asString; if (ar != null) { title = ar; break } } }
+                    }
+                    // If enTitle is still empty, scan altTitles for an English form
+                    if (enTitle.isEmpty()) {
+                        val altTitles = attrs.getAsJsonArray("altTitles")
+                        if (altTitles != null) {
+                            for (j in 0 until altTitles.size()) {
+                                val alt = altTitles[j].asJsonObject
+                                val en = alt.get("en")?.asString
+                                if (!en.isNullOrEmpty()) { enTitle = en; break }
+                            }
+                            // Last resort: ja-ro from altTitles
+                            if (enTitle.isEmpty()) {
+                                for (j in 0 until altTitles.size()) {
+                                    val alt = altTitles[j].asJsonObject
+                                    val ja = alt.get("ja-ro")?.asString
+                                    if (!ja.isNullOrEmpty()) { enTitle = ja; break }
+                                }
+                            }
+                        }
                     }
                 }
                 val descObj = attrs.getAsJsonObject("description")
@@ -136,7 +158,18 @@ class MangaRepository {
 
             // 3. Try 3asq for more chapters (One Piece 1187)
             val slug = guessSlug(enTitle, title)
-            val asqChapters = try { fetch3asqChapters(slug) } catch (e: Exception) { null }
+            val asqChapters = try {
+                if (slug.isBlank()) {
+                    // Slug couldn't be guessed (e.g. purely Arabic title) — try
+                    // searching 3asq by the manga title instead.
+                    search3asqChapters(enTitle.ifBlank { title })
+                } else {
+                    fetch3asqChapters(slug)
+                }
+            } catch (e: Exception) {
+                Log.w(TAG, "3asq fetch failed: ${e.message}")
+                null
+            }
 
             // 4. Merge: 3asq list + MangaDex chapters (prefer MangaDex for reliability)
             val chapters = if (!asqChapters.isNullOrEmpty()) {
@@ -160,25 +193,57 @@ class MangaRepository {
         } catch (e: Exception) { Result.failure(e) }
     }
 
+    /**
+     * Map a manga title to a 3asq slug. Both English and Arabic forms are matched
+     * because MangaDex sometimes returns only `title.ar` (no `title.en`), which
+     * would otherwise produce an empty slug.
+     *
+     * Patterns are intentionally strict — e.g. we require "hunter x hunter" (full)
+     * instead of just "hunter" so unrelated manga like "Hunter" (anime) don't
+     * accidentally receive HxH chapters.
+     */
     private fun guessSlug(enTitle: String, arTitle: String): String {
         val lower = (enTitle + " " + arTitle).lowercase()
         return when {
+            // One Piece
             lower.contains("one piece") || lower.contains("ون بيس") || lower.contains("ونبيس") -> "one-piece"
-            lower.contains("solo leveling") || lower.contains("سولو") -> "solo-leveling"
-            lower.contains("jujutsu") -> "jujutsu-kaisen"
-            lower.contains("chainsaw") -> "chainsaw-man"
-            lower.contains("kingdom") -> "kingdom"
-            lower.contains("hunter") -> "hunter-x-hunter"
-            lower.contains("naruto") -> "naruto"
-            lower.contains("attack on titan") || lower.contains("هجوم") -> "attack-on-titan"
-            lower.contains("demon slayer") || lower.contains("قاتل") -> "demon-slayer-kimetsu-no-yaiba"
-            lower.contains("my hero") -> "my-hero-academia"
-            lower.contains("conan") || lower.contains("كونان") -> "detective-conan"
-            else -> enTitle.lowercase().replace(Regex("[^a-z0-9]+"), "-").replace(Regex("^-|-$"), "")
+            // Solo Leveling
+            lower.contains("solo leveling") || lower.contains("solo levelling") || lower.contains("سولو ليفلينج") || lower.contains("سولو") -> "solo-leveling"
+            // Jujutsu Kaisen — also match Arabic forms
+            lower.contains("jujutsu") || lower.contains("جوجوتسو") || lower.contains("جوجتسو") -> "jujutsu-kaisen"
+            // Chainsaw Man
+            lower.contains("chainsaw") || lower.contains("تشينسو") || lower.contains("chainsaw man") -> "chainsaw-man"
+            // Kingdom
+            lower.contains("kingdom") && !lower.contains("hearts") -> "kingdom"
+            // Hunter x Hunter — STRICT match (must include "x" or "اكس")
+            lower.contains("hunter x hunter") || lower.contains("hunter x hunter")
+                || lower.contains("هنتر اكس هنتر") || lower.contains("هنتر x هنتر") -> "hunter-x-hunter"
+            // Naruto
+            lower.contains("naruto") || lower.contains("ناروتو") -> "naruto"
+            // Attack on Titan
+            lower.contains("attack on titan") || lower.contains("هجوم العمالقة") || lower.contains("هجوم巨人") -> "attack-on-titan"
+            // Demon Slayer
+            lower.contains("demon slayer") || lower.contains("قاتل الشياطين") || lower.contains("كيميتسو") -> "demon-slayer-kimetsu-no-yaiba"
+            // My Hero Academia
+            lower.contains("my hero") || lower.contains("بطل الأكاديمية") || lower.contains("أكاديميتي للأبطال") -> "my-hero-academia"
+            // Detective Conan
+            lower.contains("detective conan") || lower.contains("case closed") || lower.contains("كونان") -> "detective-conan"
+            // Fallback: slugify latin chars; if title is purely Arabic (no latin),
+            // return empty string so the caller knows to try the search endpoint.
+            else -> {
+                val slug = enTitle.lowercase().replace(Regex("[^a-z0-9]+"), "-").replace(Regex("^-|-$"), "")
+                if (slug.isBlank() && arTitle.isNotBlank()) {
+                    // Try slugifying the Arabic title too (3asq sometimes uses Arabic slugs)
+                    ""
+                } else {
+                    slug
+                }
+            }
         }
     }
 
     private fun fetch3asqChapters(slug: String): List<MangaChapter>? {
+        if (slug.isBlank()) return null
         return try {
             val req = Request.Builder().url("$ASQ_API/chapters?slug=$slug").header("Accept", "application/json").build()
             client.newCall(req).execute().use { resp ->
@@ -196,7 +261,36 @@ class MangaRepository {
                 }
                 if (result.isEmpty()) null else result
             }
-        } catch (e: Exception) { null }
+        } catch (e: Exception) {
+            Log.w(TAG, "fetch3asqChapters($slug) failed: ${e.message}")
+            null
+        }
+    }
+
+    /**
+     * Search 3asq by title (used when the slug can't be guessed — e.g. the manga
+     * has no English title). Returns chapters from the first matching result.
+     */
+    private fun search3asqChapters(query: String): List<MangaChapter>? {
+        if (query.isBlank()) return null
+        return try {
+            val encoded = java.net.URLEncoder.encode(query, "UTF-8")
+            val req = Request.Builder().url("$ASQ_API/search?q=$encoded&limit=1").header("Accept", "application/json").build()
+            val slug = client.newCall(req).execute().use { resp ->
+                if (!resp.isSuccessful) return null
+                val body = resp.body?.string() ?: return null
+                val root = JsonParser.parseString(body)
+                if (!root.isJsonObject) return null
+                val arr = root.asJsonObject.getAsJsonArray("results") ?: return null
+                if (arr.size() == 0) return null
+                arr[0].asJsonObject.get("slug")?.asString
+            } ?: return null
+            // Got a slug — recurse into fetch3asqChapters
+            if (slug.isBlank()) null else fetch3asqChapters(slug)
+        } catch (e: Exception) {
+            Log.w(TAG, "search3asqChapters($query) failed: ${e.message}")
+            null
+        }
     }
 
     private fun getMangaDexChapters(id: String): List<MangaChapter> {
