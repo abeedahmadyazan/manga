@@ -87,12 +87,34 @@ class UserProfileActivity : AppCompatActivity() {
             } else {
                 avatarImg.visibility = View.GONE
                 avatarLetter.visibility = View.VISIBLE
-                avatarLetter.text = name.firstOrNull()?.uppercaseChar()?.toString() ?: "?"
+                avatarLetter.text = cleanName.firstOrNull()?.uppercaseChar()?.toString() ?: "?"
             }
         } else {
             avatarImg.visibility = View.GONE
             avatarLetter.visibility = View.VISIBLE
-            avatarLetter.text = name.firstOrNull()?.uppercaseChar()?.toString() ?: "?"
+            avatarLetter.text = cleanName.firstOrNull()?.uppercaseChar()?.toString() ?: "?"
+        }
+
+        // Fetch the cloud profile to show createdAt, birthDate, and country.
+        // These are visible to everyone (not just the owner).
+        val email = intent.getStringExtra("user_email") ?: return
+        AuthManager.fetchCloudUser(email) { cu ->
+            runOnUiThread {
+                if (cu == null) return@runOnUiThread
+                if (cu.createdAt > 0) {
+                    val sdf = java.text.SimpleDateFormat("yyyy-MM-dd", java.util.Locale.getDefault())
+                    findViewById<TextView>(R.id.tvCreatedAt).text = "عضو منذ ${sdf.format(java.util.Date(cu.createdAt))}"
+                    findViewById<TextView>(R.id.tvCreatedAt).visibility = View.VISIBLE
+                }
+                if (cu.birthDate.isNotEmpty()) {
+                    findViewById<TextView>(R.id.tvBirthDate).text = "🎂 تاريخ الميلاد: ${cu.birthDate}"
+                    findViewById<TextView>(R.id.tvBirthDate).visibility = View.VISIBLE
+                }
+                if (cu.country.isNotEmpty()) {
+                    findViewById<TextView>(R.id.tvCountry).text = "🌍 الدولة: ${cu.country}"
+                    findViewById<TextView>(R.id.tvCountry).visibility = View.VISIBLE
+                }
+            }
         }
     }
 

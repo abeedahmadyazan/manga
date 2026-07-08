@@ -147,7 +147,7 @@ class RepliesActivity : AppCompatActivity() {
                     author.visibility = View.VISIBLE
                     author.text = r.authorName
                 }
-                time.text = sdf.format(Date(r.createdAt))
+                time.text = com.yazan.manga.data.relativeTime(r.createdAt)
                 text.text = r.text
                 btnLike.text = "👍 ${r.likes.size}"
                 btnDislike.text = "👎 ${r.dislikes.size}"

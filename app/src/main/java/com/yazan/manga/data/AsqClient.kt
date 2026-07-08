@@ -340,28 +340,36 @@ object AsqClient {
 
     private fun parseChaptersFromHtml(html: String, slug: String): List<MangaChapter> {
         val list = mutableListOf<MangaChapter>()
-        // Look for <a href="https://3asq.pro/manga/{slug}/{num}/" class="btn-link">
+        // Look for chapter links in various formats:
+        //  1. https://3asq.pro/manga/{slug}/{num}/
+        //  2. https://3asq.pro/manga/{slug}/{chapter-slug}/
+        //  3. <li class="wp-manga-chapter"> ... <a href="...">Chapter X</a>
+        // We extract whatever comes after /manga/{slug}/ as the chapter identifier.
         val pattern = Pattern.compile(
-            "href=\"https?://3asq\\.pro/manga/" + Pattern.quote(slug) + "/(\\d+(?:\\.\\d+)?)/\"",
+            "href=\"https?://3asq\\.pro/manga/" + Pattern.quote(slug) + "/([^\"]+)/\"",
             Pattern.CASE_INSENSITIVE
         )
         val m = pattern.matcher(html)
         val seen = mutableSetOf<String>()
         while (m.find()) {
-            val num = m.group(1) ?: continue
-            if (!seen.add(num)) continue
+            val raw = m.group(1) ?: continue
+            // Skip non-chapter URLs (like the manga page itself, reviews, etc.)
+            if (raw == "feed" || raw == "reviews" || raw.startsWith("?")) continue
+            if (!seen.add(raw)) continue
+            // Use the raw identifier as the chapter number/title
+            val displayNum = raw.toFloatOrNull()?.toInt()?.toString() ?: raw
             list.add(
                 MangaChapter(
-                    id = "3asq-${slug}-$num",
-                    number = num,
-                    title = "الفصل $num",
+                    id = "3asq-${slug}-$raw",
+                    number = displayNum,
+                    title = "الفصل $displayNum",
                     date = "",
                     source = MangaSource.ASQ.value,
-                    externalUrl = "$BASE_URL/manga/$slug/$num/"
+                    externalUrl = "$BASE_URL/manga/$slug/$raw/"
                 )
             )
         }
-        // Sort by number descending (newest first)
+        // Sort by number descending (newest first) — numeric chapters first
         return list.sortedByDescending { it.number.toFloatOrNull() ?: 0f }
     }
 

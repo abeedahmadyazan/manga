@@ -155,6 +155,45 @@
                 android:drawableTint="@color/text_muted"
                 tools:ignore="UseAppTint" />
 
+            <!-- Account creation date -->
+            <TextView
+                android:id="@+id/tvCreatedAt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="4dp"
+                android:text=""
+                android:textColor="@color/text_muted"
+                android:textSize="12sp"
+                android:visibility="gone"
+                tools:ignore="HardcodedText" />
+
+            <!-- Optional: birth date (only shown if set) -->
+            <TextView
+                android:id="@+id/tvBirthDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="4dp"
+                android:text=""
+                android:textColor="@color/text_secondary"
+                android:textSize="12sp"
+                android:visibility="gone"
+                tools:ignore="HardcodedText" />
+
+            <!-- Optional: country (only shown if set) -->
+            <TextView
+                android:id="@+id/tvCountry"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="4dp"
+                android:text=""
+                android:textColor="@color/text_secondary"
+                android:textSize="12sp"
+                android:visibility="gone"
+                tools:ignore="HardcodedText" />
+
             <!-- ============ Manga lists (pie chart + 4 cards) ============ -->
             <LinearLayout
                 android:id="@+id/statsContainer"
@@ -417,6 +456,24 @@ android:id="@+id/cardCompleted"
                 android:layout_height="48dp"
                 android:layout_marginTop="8dp"
                 android:text="تغيير اسم المستخدم"
+                android:textColor="@color/text_primary"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:background="@drawable/bg_secondary_button"
+                app:backgroundTint="@null"
+                app:icon="@drawable/ic_edit"
+                app:iconGravity="textStart"
+                app:iconTint="@color/text_primary"
+                android:visibility="gone"
+                tools:ignore="HardcodedText" />
+
+            <!-- ============ Edit profile info (birth date + country) ============ -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnEditProfileInfo"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginTop="8dp"
+                android:text="تعديل المعلومات الشخصية"
                 android:textColor="@color/text_primary"
                 android:textSize="14sp"
                 android:textStyle="bold"

@@ -53,7 +53,9 @@ object AuthManager {
         val createdAt: Long,
         val lastUsernameChange: Long,
         val avatar: String,
-        val bio: String
+        val bio: String,
+        val birthDate: String = "",
+        val country: String = ""
     )
 
     data class SuspendedUser(
@@ -401,6 +403,28 @@ object AuthManager {
         return null
     }
 
+    /** Update the user's optional birth date (format: yyyy-MM-dd, or empty to clear). */
+    fun updateBirthDate(context: Context, birthDate: String): String? {
+        val prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+        val current = getCurrentUser(context) ?: return "يجب تسجيل الدخول"
+        val updated = current.copy(birthDate = birthDate.trim())
+        saveUser(context, updated)
+        prefs.edit().putString(KEY_USER, serializeUser(updated)).apply()
+        uploadUserToCloud(context)
+        return null
+    }
+
+    /** Update the user's optional country. */
+    fun updateCountry(context: Context, country: String): String? {
+        val prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+        val current = getCurrentUser(context) ?: return "يجب تسجيل الدخول"
+        val updated = current.copy(country = country.trim())
+        saveUser(context, updated)
+        prefs.edit().putString(KEY_USER, serializeUser(updated)).apply()
+        uploadUserToCloud(context)
+        return null
+    }
+
     /**
      * Update the current user's avatar.
      * Copies the picked image from the (temporary) content URI into the app's
@@ -530,7 +554,9 @@ object AuthManager {
                 createdAt = o.getLong("createdAt"),
                 lastUsernameChange = if (o.has("lastUsernameChange")) o.getLong("lastUsernameChange") else 0L,
                 avatar = if (o.has("avatar")) o.getString("avatar") else "",
-                bio = if (o.has("bio")) o.getString("bio") else ""
+                bio = if (o.has("bio")) o.getString("bio") else "",
+                birthDate = if (o.has("birthDate")) o.getString("birthDate") else "",
+                country = if (o.has("country")) o.getString("country") else ""
             ))
         }
         return list
@@ -551,6 +577,8 @@ object AuthManager {
             put("lastUsernameChange", u.lastUsernameChange)
             put("avatar", u.avatar)
             put("bio", u.bio)
+            put("birthDate", u.birthDate)
+            put("country", u.country)
         })}
         context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
             .edit().putString(KEY_USERS_DB, arr.toString()).apply()
@@ -598,6 +626,8 @@ object AuthManager {
             put("lastUsernameChange", u.lastUsernameChange)
             put("avatar", u.avatar)
             put("bio", u.bio)
+            put("birthDate", u.birthDate)
+            put("country", u.country)
         }.toString()
     }
 
@@ -613,7 +643,9 @@ object AuthManager {
                 createdAt = o.getLong("createdAt"),
                 lastUsernameChange = if (o.has("lastUsernameChange")) o.getLong("lastUsernameChange") else 0L,
                 avatar = if (o.has("avatar")) o.getString("avatar") else "",
-                bio = if (o.has("bio")) o.getString("bio") else ""
+                bio = if (o.has("bio")) o.getString("bio") else "",
+                birthDate = if (o.has("birthDate")) o.getString("birthDate") else "",
+                country = if (o.has("country")) o.getString("country") else ""
             )
         } catch (e: Exception) { null }
     }
@@ -673,6 +705,9 @@ object AuthManager {
                 "username" to user.username,
                 "isAdmin" to user.isAdmin,
                 "avatarBase64" to (avatarBase64 ?: ""),
+                "birthDate" to user.birthDate,
+                "country" to user.country,
+                "createdAt" to user.createdAt,
                 "lastUpdated" to System.currentTimeMillis()
             )
             cloudDb.collection(USERS_COLLECTION).document(user.email).set(data)
@@ -695,7 +730,10 @@ object AuthManager {
                         email = doc.getString("email") ?: email,
                         name = doc.getString("name") ?: "مستخدم",
                         username = doc.getString("username") ?: "",
-                        avatarBase64 = doc.getString("avatarBase64") ?: ""
+                        avatarBase64 = doc.getString("avatarBase64") ?: "",
+                        birthDate = doc.getString("birthDate") ?: "",
+                        country = doc.getString("country") ?: "",
+                        createdAt = doc.getLong("createdAt") ?: 0L
                     ))
                 }
                 .addOnFailureListener { onResult(null) }
@@ -726,6 +764,8 @@ object AuthManager {
                     val cloudName = doc.getString("name")
                     val cloudUsername = doc.getString("username")
                     val cloudAvatarBase64 = doc.getString("avatarBase64") ?: ""
+                    val cloudBirthDate = doc.getString("birthDate") ?: ""
+                    val cloudCountry = doc.getString("country") ?: ""
 
                     var updated = current
                     var changed = false
@@ -739,6 +779,18 @@ object AuthManager {
                     // Always restore the username from the cloud
                     if (!cloudUsername.isNullOrEmpty() && cloudUsername != current.username) {
                         updated = updated.copy(username = cloudUsername)
+                        changed = true
+                    }
+
+                    // Restore birthDate if the cloud has it
+                    if (cloudBirthDate != current.birthDate) {
+                        updated = updated.copy(birthDate = cloudBirthDate)
+                        changed = true
+                    }
+
+                    // Restore country if the cloud has it
+                    if (cloudCountry != current.country) {
+                        updated = updated.copy(country = cloudCountry)
                         changed = true
                     }
 
@@ -792,6 +844,9 @@ object AuthManager {
         val email: String,
         val name: String,
         val username: String,
-        val avatarBase64: String
+        val avatarBase64: String,
+        val birthDate: String = "",
+        val country: String = "",
+        val createdAt: Long = 0L
     )
 }

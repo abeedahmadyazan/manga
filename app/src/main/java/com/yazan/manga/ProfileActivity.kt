@@ -42,6 +42,9 @@ class ProfileActivity : AppCompatActivity() {
     private lateinit var tvName: TextView
     private lateinit var tvUsername: TextView
     private lateinit var tvEmail: TextView
+    private lateinit var tvCreatedAt: TextView
+    private lateinit var tvBirthDate: TextView
+    private lateinit var tvCountry: TextView
     private lateinit var tvAdminBadge: TextView
     private lateinit var pieChart: PieChartView
     private lateinit var tvStatFavorites: TextView
@@ -75,6 +78,9 @@ class ProfileActivity : AppCompatActivity() {
         tvName = findViewById(R.id.tvName)
         tvUsername = findViewById(R.id.tvUsername)
         tvEmail = findViewById(R.id.tvEmail)
+        tvCreatedAt = findViewById(R.id.tvCreatedAt)
+        tvBirthDate = findViewById(R.id.tvBirthDate)
+        tvCountry = findViewById(R.id.tvCountry)
         tvAdminBadge = findViewById(R.id.tvAdminBadge)
         pieChart = findViewById(R.id.pieChart)
         tvStatFavorites = findViewById(R.id.tvStatFavorites)
@@ -85,6 +91,7 @@ class ProfileActivity : AppCompatActivity() {
         btnLogout = findViewById(R.id.btnLogout)
         btnChangeName = findViewById(R.id.btnChangeName)
         btnChangeUsername = findViewById(R.id.btnChangeUsername)
+        val btnEditProfileInfo = findViewById<MaterialButton>(R.id.btnEditProfileInfo)
         btnAdminPanel = findViewById(R.id.btnAdminPanel)
         statsContainer = findViewById(R.id.statsContainer)
 
@@ -101,6 +108,9 @@ class ProfileActivity : AppCompatActivity() {
         }
         btnChangeUsername.setOnClickListener {
             showChangeUsernameDialog()
+        }
+        btnEditProfileInfo.setOnClickListener {
+            showEditProfileInfoDialog()
         }
 
         // Profile picture — both the avatar image and the dedicated camera button open the picker
@@ -290,6 +300,41 @@ class ProfileActivity : AppCompatActivity() {
             .show()
     }
 
+    private fun showEditProfileInfoDialog() {
+        val user = AuthManager.getCurrentUser(this) ?: return
+        val birthInput = EditText(this).apply {
+            setText(user.birthDate)
+            hint = "تاريخ الميلاد (yyyy-MM-dd) — اختياري"
+            setPadding(40, 24, 40, 24)
+            inputType = android.text.InputType.TYPE_CLASS_TEXT
+        }
+        val countryInput = EditText(this).apply {
+            setText(user.country)
+            hint = "الدولة — اختياري"
+            setPadding(40, 24, 40, 24)
+            inputType = android.text.InputType.TYPE_CLASS_TEXT
+        }
+        val container = android.widget.LinearLayout(this).apply {
+            orientation = android.widget.LinearLayout.VERTICAL
+            setPadding(20, 16, 20, 0)
+            addView(birthInput)
+            addView(countryInput)
+        }
+        AlertDialog.Builder(this)
+            .setTitle("تعديل المعلومات الشخصية")
+            .setView(container)
+            .setPositiveButton("حفظ") { _, _ ->
+                val birth = birthInput.text.toString().trim()
+                val country = countryInput.text.toString().trim()
+                AuthManager.updateBirthDate(this, birth)
+                AuthManager.updateCountry(this, country)
+                Toast.makeText(this, "تم تحديث المعلومات", Toast.LENGTH_SHORT).show()
+                updateUI()
+            }
+            .setNegativeButton("إلغاء", null)
+            .show()
+    }
+
     private fun showChangeUsernameDialog() {
         val user = AuthManager.getCurrentUser(this) ?: return
         val input = EditText(this).apply {
@@ -359,6 +404,27 @@ class ProfileActivity : AppCompatActivity() {
             tvEmail.text = user.email
             tvAdminBadge.visibility = if (user.isAdmin) View.VISIBLE else View.GONE
 
+            // Account creation date
+            val sdf = java.text.SimpleDateFormat("yyyy-MM-dd", java.util.Locale.getDefault())
+            tvCreatedAt.text = "عضو منذ ${sdf.format(java.util.Date(user.createdAt))}"
+            tvCreatedAt.visibility = View.VISIBLE
+
+            // Optional birth date (only shown if set)
+            if (user.birthDate.isNotEmpty()) {
+                tvBirthDate.text = "🎂 تاريخ الميلاد: ${user.birthDate}"
+                tvBirthDate.visibility = View.VISIBLE
+            } else {
+                tvBirthDate.visibility = View.GONE
+            }
+
+            // Optional country (only shown if set)
+            if (user.country.isNotEmpty()) {
+                tvCountry.text = "🌍 الدولة: ${user.country}"
+                tvCountry.visibility = View.VISIBLE
+            } else {
+                tvCountry.visibility = View.GONE
+            }
+
             // Stats — manga lists from the cloud (real-time)
             listsListener?.remove()
             listsListener = MangaListsManager.listenToMyLists(
@@ -384,6 +450,7 @@ class ProfileActivity : AppCompatActivity() {
             btnLogout.visibility = View.VISIBLE
             btnChangeName.visibility = View.VISIBLE
             btnChangeUsername.visibility = View.VISIBLE
+            btnEditProfileInfo.visibility = View.VISIBLE
             btnChangeAvatar.visibility = View.VISIBLE
             btnAdminPanel.visibility = if (user.isAdmin) View.VISIBLE else View.GONE
         } else {
@@ -400,6 +467,7 @@ class ProfileActivity : AppCompatActivity() {
             btnLogout.visibility = View.GONE
             btnChangeName.visibility = View.GONE
             btnChangeUsername.visibility = View.GONE
+            btnEditProfileInfo.visibility = View.GONE
             btnAdminPanel.visibility = View.GONE
         }
     }

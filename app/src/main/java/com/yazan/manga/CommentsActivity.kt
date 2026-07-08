@@ -272,7 +272,7 @@ class CommentsAdapter(
                 author.visibility = View.VISIBLE
                 author.text = c.authorName
             }
-            time.text = sdf.format(Date(c.createdAt))
+            time.text = com.yazan.manga.data.relativeTime(c.createdAt)
             text.text = c.text
             btnLike.text = "👍 ${c.likes.size}"
             btnDislike.text = "👎 ${c.dislikes.size}"
