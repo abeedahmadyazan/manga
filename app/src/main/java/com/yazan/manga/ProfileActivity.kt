@@ -45,6 +45,7 @@ class ProfileActivity : AppCompatActivity() {
     private lateinit var tvStatHistory: TextView
     private lateinit var btnLogin: MaterialButton
     private lateinit var btnLogout: MaterialButton
+    private lateinit var btnChangeName: MaterialButton
     private lateinit var btnChangeUsername: MaterialButton
     private lateinit var btnAdminPanel: MaterialButton
     private lateinit var statsContainer: View
@@ -73,6 +74,7 @@ class ProfileActivity : AppCompatActivity() {
         tvStatHistory = findViewById(R.id.tvStatHistory)
         btnLogin = findViewById(R.id.btnLogin)
         btnLogout = findViewById(R.id.btnLogout)
+        btnChangeName = findViewById(R.id.btnChangeName)
         btnChangeUsername = findViewById(R.id.btnChangeUsername)
         btnAdminPanel = findViewById(R.id.btnAdminPanel)
         statsContainer = findViewById(R.id.statsContainer)
@@ -84,6 +86,9 @@ class ProfileActivity : AppCompatActivity() {
             AuthManager.logout(this)
             updateUI()
             Toast.makeText(this, "تم تسجيل الخروج", Toast.LENGTH_SHORT).show()
+        }
+        btnChangeName.setOnClickListener {
+            showChangeNameDialog()
         }
         btnChangeUsername.setOnClickListener {
             showChangeUsernameDialog()
@@ -120,13 +125,14 @@ class ProfileActivity : AppCompatActivity() {
     }
 
     private fun saveProfileImage(uri: android.net.Uri) {
-        try {
-            val prefs = getSharedPreferences("manga_prefs", MODE_PRIVATE)
-            prefs.edit().putString("profile_image", uri.toString()).apply()
-            com.bumptech.glide.Glide.with(this).load(uri).circleCrop().into(avatarImage)
+        // Copy the image into internal storage so it survives app restarts
+        // and permission revocation (the old URI-based approach broke after restart).
+        val savedPath = AuthManager.setAvatar(this, uri)
+        if (savedPath != null) {
             Toast.makeText(this, "تم تحديث الصورة", Toast.LENGTH_SHORT).show()
-        } catch (e: Exception) {
-            Toast.makeText(this, "فشل تحميل الصورة", Toast.LENGTH_SHORT).show()
+            updateUI()
+        } else {
+            Toast.makeText(this, "فشل حفظ الصورة", Toast.LENGTH_LONG).show()
         }
     }
 
@@ -212,6 +218,38 @@ class ProfileActivity : AppCompatActivity() {
         }
     }
 
+    private fun showChangeNameDialog() {
+        val user = AuthManager.getCurrentUser(this) ?: return
+        // Strip the admin suffix when showing the current name
+        val currentName = user.name.removeSuffix(" (مشرف)")
+        val input = EditText(this).apply {
+            setText(currentName)
+            setSelection(currentName.length)
+            hint = "اكتب اسمك الجديد"
+            setPadding(40, 24, 40, 24)
+        }
+        AlertDialog.Builder(this)
+            .setTitle("تغيير الاسم")
+            .setMessage("الاسم الذي يظهر للآخرين على تعليقاتك وملفك الشخصي.")
+            .setView(input)
+            .setPositiveButton("حفظ") { _, _ ->
+                val newName = input.text.toString().trim()
+                if (newName.isEmpty()) {
+                    Toast.makeText(this, "الاسم لا يمكن أن يكون فارغاً", Toast.LENGTH_SHORT).show()
+                    return@setPositiveButton
+                }
+                val err = AuthManager.changeName(this, newName)
+                if (err == null) {
+                    Toast.makeText(this, "تم تحديث الاسم", Toast.LENGTH_SHORT).show()
+                    updateUI()
+                } else {
+                    Toast.makeText(this, err, Toast.LENGTH_LONG).show()
+                }
+            }
+            .setNegativeButton("إلغاء", null)
+            .show()
+    }
+
     private fun showChangeUsernameDialog() {
         val user = AuthManager.getCurrentUser(this) ?: return
         val input = EditText(this).apply {
@@ -242,38 +280,42 @@ class ProfileActivity : AppCompatActivity() {
         val user = AuthManager.getCurrentUser(this)
 
         if (user != null) {
-            // Load profile image
-            val prefs = getSharedPreferences("manga_prefs", MODE_PRIVATE)
-            val imageUri = prefs.getString("profile_image", null)
-            if (imageUri != null) {
-                com.bumptech.glide.Glide.with(this).load(android.net.Uri.parse(imageUri)).circleCrop().into(avatarImage)
-            }
-            // Avatar
+            // Avatar — show image if available, otherwise the letter.
             val first = user.name.firstOrNull()?.uppercaseChar()?.toString() ?: "U"
             avatarLetter.text = first
-            avatarLetter.visibility = View.VISIBLE
             if (user.avatar.isNotEmpty()) {
                 avatarImage.visibility = View.VISIBLE
-                Glide.with(this).load(user.avatar).circleCrop().into(avatarImage)
+                avatarLetter.visibility = View.GONE
+                Glide.with(this).load(user.avatar).circleCrop()
+                    .placeholder(R.drawable.bg_avatar_gradient)
+                    .into(avatarImage)
             } else {
                 avatarImage.visibility = View.GONE
+                avatarLetter.visibility = View.VISIBLE
             }
 
             tvName.text = user.name
             tvUsername.text = "@${user.username.removePrefix("@")}"
-            tvEmail.text = user.email
+            // Hide the email for privacy — never shown on the profile screen
+            tvEmail.visibility = View.GONE
             tvAdminBadge.visibility = if (user.isAdmin) View.VISIBLE else View.GONE
 
-            // Stats
-            val commentsCount = CommentsManager.getAllComments(this)
-                .count { it.authorEmail == user.email }
-            tvStatComments.text = commentsCount.toString()
+            // Stats — comments count is best-effort from CloudCommentsManager if available,
+            // otherwise fall back to local CommentsManager.
+            try {
+                val commentsCount = CommentsManager.getAllComments(this)
+                    .count { it.authorEmail == user.email }
+                tvStatComments.text = commentsCount.toString()
+            } catch (e: Exception) {
+                tvStatComments.text = "0"
+            }
             tvStatFavorites.text = "0"
             tvStatHistory.text = "0"
             statsContainer.visibility = View.VISIBLE
 
             btnLogin.visibility = View.GONE
             btnLogout.visibility = View.VISIBLE
+            btnChangeName.visibility = View.VISIBLE
             btnChangeUsername.visibility = View.VISIBLE
             btnAdminPanel.visibility = if (user.isAdmin) View.VISIBLE else View.GONE
         } else {
@@ -282,11 +324,12 @@ class ProfileActivity : AppCompatActivity() {
             avatarImage.visibility = View.GONE
             tvName.text = "زائر"
             tvUsername.text = ""
-            tvEmail.text = ""
+            tvEmail.visibility = View.GONE
             tvAdminBadge.visibility = View.GONE
             statsContainer.visibility = View.GONE
             btnLogin.visibility = View.VISIBLE
             btnLogout.visibility = View.GONE
+            btnChangeName.visibility = View.GONE
             btnChangeUsername.visibility = View.GONE
             btnAdminPanel.visibility = View.GONE
         }

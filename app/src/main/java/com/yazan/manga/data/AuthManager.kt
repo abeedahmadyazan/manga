@@ -1,12 +1,17 @@
 package com.yazan.manga.data
 
 import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.net.Uri
 import android.provider.Settings
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
+import java.io.File
+import java.io.FileOutputStream
 import java.security.MessageDigest
 import org.json.JSONArray
 import org.json.JSONObject
@@ -284,6 +289,79 @@ object AuthManager {
         saveUser(context, updated)
         prefs.edit().putString(KEY_USER, serializeUser(updated)).apply()
         return null
+    }
+
+    /**
+     * Change the user's display name (الاسم الظاهر).
+     * No cooldown on name changes (unlike @username).
+     */
+    fun changeName(context: Context, newName: String): String? {
+        val prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+        val current = getCurrentUser(context) ?: return "يجب تسجيل الدخول"
+
+        val clean = newName.trim()
+        if (clean.isEmpty()) return "الاسم لا يمكن أن يكون فارغاً"
+        if (clean.length > 30) return "الاسم طويل جداً (حد أقصى 30 حرف)"
+
+        // Admin keeps the admin suffix
+        val finalName = if (current.isAdmin && !clean.contains("مشرف")) {
+            "$clean (مشرف)"
+        } else {
+            clean
+        }
+
+        val updated = current.copy(name = finalName)
+        saveUser(context, updated)
+        prefs.edit().putString(KEY_USER, serializeUser(updated)).apply()
+        return null
+    }
+
+    /**
+     * Update the current user's avatar.
+     * Copies the picked image from the (temporary) content URI into the app's
+     * internal storage so it survives app restarts and permission revocation.
+     * Returns the absolute path of the saved file, or null on failure.
+     */
+    fun setAvatar(context: Context, sourceUri: Uri): String? {
+        val current = getCurrentUser(context) ?: return null
+        return try {
+            // Read & downscale the bitmap from the source URI
+            val input = context.contentResolver.openInputStream(sourceUri) ?: return null
+            val bitmap: Bitmap? = BitmapFactory.decodeStream(input)
+            input.close()
+            if (bitmap == null) return null
+
+            // Downscale to max 256px (profile avatars don't need to be huge)
+            val maxDim = 256
+            val scaled = if (bitmap.width > maxDim || bitmap.height > maxDim) {
+                val scale = minOf(maxDim.toFloat() / bitmap.width, maxDim.toFloat() / bitmap.height)
+                Bitmap.createScaledBitmap(
+                    bitmap,
+                    (bitmap.width * scale).toInt().coerceAtLeast(1),
+                    (bitmap.height * scale).toInt().coerceAtLeast(1),
+                    true
+                )
+            } else bitmap
+
+            // Save to internal storage (always accessible — no permission needed)
+            val avatarFile = File(context.filesDir, "avatar_${current.email.replace("@", "_at_")}.jpg")
+            val out = FileOutputStream(avatarFile)
+            scaled.compress(Bitmap.CompressFormat.JPEG, 85, out)
+            out.close()
+
+            // If we created a new scaled bitmap, recycle it
+            if (scaled !== bitmap) scaled.recycle()
+            bitmap.recycle()
+
+            val savedPath = avatarFile.absolutePath
+            val updated = current.copy(avatar = savedPath)
+            saveUser(context, updated)
+            context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+                .edit().putString(KEY_USER, serializeUser(updated)).apply()
+            savedPath
+        } catch (e: Exception) {
+            null
+        }
     }
 
     fun getCurrentUser(context: Context): User? {

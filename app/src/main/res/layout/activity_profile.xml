@@ -300,7 +300,25 @@
                 android:visibility="gone"
                 tools:ignore="HardcodedText" />
 
-            <!-- ============ Change username ============ -->
+            <!-- ============ Change name (display name) ============ -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnChangeName"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginTop="8dp"
+                android:text="تغيير الاسم"
+                android:textColor="@color/text_primary"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:background="@drawable/bg_secondary_button"
+                app:backgroundTint="@null"
+                app:icon="@drawable/ic_edit"
+                app:iconGravity="textStart"
+                app:iconTint="@color/text_primary"
+                android:visibility="gone"
+                tools:ignore="HardcodedText" />
+
+            <!-- ============ Change username (@handle) ============ -->
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnChangeUsername"
                 android:layout_width="match_parent"
