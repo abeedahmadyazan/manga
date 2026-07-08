@@ -176,7 +176,7 @@ object AuthManager {
             val uniqueUsername = generateUniqueUsername(context, displayName)
             user = User(
                 email = cleanEmail,
-                name = if (isAdmin) "يزان (مشرف)" else displayName,
+                name = if (isAdmin) "يزان" else displayName,
                 username = uniqueUsername,
                 isAdmin = isAdmin,
                 deviceId = deviceId,
@@ -238,7 +238,7 @@ object AuthManager {
             val uniqueUsername = generateUniqueUsername(context, baseName)
             user = User(
                 email = email,
-                name = if (isAdmin) "يزان (مشرف)" else baseName,
+                name = if (isAdmin) "يزان" else baseName,
                 username = uniqueUsername,
                 isAdmin = isAdmin,
                 deviceId = deviceId,
@@ -285,9 +285,39 @@ object AuthManager {
         return users.none { it.username == username && it.email != exceptEmail }
     }
 
-    fun changeUsername(context: Context, newUsername: String): String? {
+    /**
+     * Cloud-based username availability check. Queries the 'users' collection
+     * in Firestore to see if any OTHER user (different email) has this username.
+     * This prevents duplicate usernames across devices — the local check alone
+     * can't see users on other phones.
+     */
+    fun isUsernameAvailableInCloud(username: String, exceptEmail: String, onResult: (Boolean) -> Unit) {
+        try {
+            cloudDb.collection(USERS_COLLECTION)
+                .whereEqualTo("username", username)
+                .get()
+                .addOnSuccessListener { snapshot ->
+                    // Available if no docs, or the only doc is the current user's own
+                    val available = snapshot.isEmpty ||
+                        snapshot.documents.all { it.id == exceptEmail }
+                    onResult(available)
+                }
+                .addOnFailureListener { onResult(true) } // on failure, allow (don't block)
+        } catch (e: Exception) {
+            onResult(true)
+        }
+    }
+
+    /**
+     * Change username — now async because it checks the cloud for uniqueness.
+     * Calls onResult(null) on success, or onResult(errorMessage) on failure.
+     */
+    fun changeUsername(context: Context, newUsername: String, onResult: (String?) -> Unit) {
         val prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
-        val current = getCurrentUser(context) ?: return "يجب تسجيل الدخول"
+        val current = getCurrentUser(context) ?: run {
+            onResult("يجب تسجيل الدخول")
+            return
+        }
 
         // Normalize: ensure it starts with @, lowercase
         var clean = newUsername.trim().lowercase()
@@ -297,38 +327,55 @@ object AuthManager {
         //  - Must start with @
         //  - Only letters (a-z), numbers (0-9), and underscores (_)
         //  - No punctuation, spaces, or special characters
-        //  - Minimum 3 characters AFTER the @ (so total length >= 4)
+        //  - Minimum 3 characters AFTER the @
         //  - Maximum 20 characters total
         val handle = clean.removePrefix("@")
         if (handle.length < 3) {
-            return "اسم المستخدم يجب أن يكون 3 أحرف على الأقل"
+            onResult("اسم المستخدم يجب أن يكون 3 أحرف على الأقل")
+            return
         }
         if (clean.length > 20) {
-            return "اسم المستخدم طويل جداً (حد أقصى 20 حرف)"
+            onResult("اسم المستخدم طويل جداً (حد أقصى 20 حرف)")
+            return
         }
         if (!handle.matches(Regex("^[a-z0-9_]+$"))) {
-            return "اسم المستخدم يجب أن يحتوي على أحرف إنجليزية وأرقام و_ فقط"
+            onResult("اسم المستخدم يجب أن يحتوي على أحرف إنجليزية وأرقام و_ فقط")
+            return
         }
-        // Instagram doesn't allow underscores at the start
         if (handle.startsWith("_")) {
-            return "اسم المستخدم لا يمكن أن يبدأ بـ _"
+            onResult("اسم المستخدم لا يمكن أن يبدأ بـ _")
+            return
         }
 
-        if (!isUsernameAvailable(context, clean, current.email)) {
-            return "اسم المستخدم محجوز، جرب اسماً آخر"
-        }
-
+        // Cooldown check (local, 30 days)
         val now = System.currentTimeMillis()
         if (current.lastUsernameChange > 0 && (now - current.lastUsernameChange) < USERNAME_COOLDOWN_MS) {
             val daysLeft = ((USERNAME_COOLDOWN_MS - (now - current.lastUsernameChange)) / (24 * 60 * 60 * 1000)).toInt() + 1
-            return "يمكنك تغيير اسم المستخدم مرة كل 30 يوم. باقي $daysLeft يوم"
+            onResult("يمكنك تغيير اسم المستخدم مرة كل 30 يوم. باقي $daysLeft يوم")
+            return
         }
 
-        val updated = current.copy(username = clean, lastUsernameChange = now)
-        saveUser(context, updated)
-        prefs.edit().putString(KEY_USER, serializeUser(updated)).apply()
-        uploadUserToCloud(context)
-        return null
+        // Cloud uniqueness check — this is what prevents two users on different
+        // devices from having the same username.
+        isUsernameAvailableInCloud(clean, current.email) { available ->
+            if (!available) {
+                onResult("اسم المستخدم محجوز، جرب اسماً آخر")
+                return@isUsernameAvailableInCloud
+            }
+
+            // Local uniqueness (legacy check, in case the cloud check missed something)
+            if (!isUsernameAvailable(context, clean, current.email)) {
+                onResult("اسم المستخدم محجوز، جرب اسماً آخر")
+                return@isUsernameAvailableInCloud
+            }
+
+            // All checks passed — save
+            val updated = current.copy(username = clean, lastUsernameChange = now)
+            saveUser(context, updated)
+            prefs.edit().putString(KEY_USER, serializeUser(updated)).apply()
+            uploadUserToCloud(context)
+            onResult(null)
+        }
     }
 
     /**
@@ -343,12 +390,9 @@ object AuthManager {
         if (clean.length < 3) return "الاسم يجب أن يكون 3 أحرف على الأقل"
         if (clean.length > 30) return "الاسم طويل جداً (حد أقصى 30 حرف)"
 
-        // Admin keeps the admin suffix
-        val finalName = if (current.isAdmin && !clean.contains("مشرف")) {
-            "$clean (مشرف)"
-        } else {
-            clean
-        }
+        // Admin badge is shown separately (the green pill), so we don't
+        // add '(مشرف)' to the name itself.
+        val finalName = clean
 
         val updated = current.copy(name = finalName)
         saveUser(context, updated)

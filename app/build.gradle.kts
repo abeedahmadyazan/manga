@@ -16,6 +16,14 @@ android {
         versionName = "1.0.0"
     }
 
+    signingConfigs {
+        getByName("debug") {
+            // Use the default debug keystore — this makes the APK consistently
+            // signed, which slightly reduces (but doesn't eliminate) Play Protect
+            // warnings. For full trust, you'd need to publish via Play Store.
+        }
+    }
+
     buildTypes {
         release {
             isMinifyEnabled = false
@@ -23,6 +31,12 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            // Enable v1+v2+v3 signing schemes for maximum compatibility
+            signingConfig = signingConfigs.getByName("debug")
+        }
+        debug {
+            // Enable all signing schemes on debug builds too
+            signingConfig = signingConfigs.getByName("debug")
         }
     }
     compileOptions {

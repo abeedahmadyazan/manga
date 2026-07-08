@@ -261,7 +261,7 @@ class ProfileActivity : AppCompatActivity() {
     private fun showChangeNameDialog() {
         val user = AuthManager.getCurrentUser(this) ?: return
         // Strip the admin suffix when showing the current name
-        val currentName = user.name.removeSuffix(" (مشرف)")
+        val currentName = user.name
         val input = EditText(this).apply {
             setText(currentName)
             setSelection(currentName.length)
@@ -298,22 +298,33 @@ class ProfileActivity : AppCompatActivity() {
             hint = "@username"
             setPadding(40, 24, 40, 24)
         }
-        AlertDialog.Builder(this)
+        val dialog = AlertDialog.Builder(this)
             .setTitle("تغيير اسم المستخدم")
             .setMessage("يمكنك تغيير اسم المستخدم مرة كل 30 يوم.")
             .setView(input)
-            .setPositiveButton("حفظ") { _, _ ->
+            .setPositiveButton("حفظ", null) // set to null so it doesn't auto-dismiss
+            .setNegativeButton("إلغاء", null)
+            .create()
+
+        dialog.setOnShowListener {
+            dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener {
                 val newUsername = input.text.toString().trim()
-                val err = AuthManager.changeUsername(this, newUsername)
-                if (err == null) {
-                    Toast.makeText(this, "تم تغيير اسم المستخدم", Toast.LENGTH_SHORT).show()
-                    updateUI()
-                } else {
-                    Toast.makeText(this, err, Toast.LENGTH_LONG).show()
+                // Show a loading toast while checking the cloud
+                Toast.makeText(this, "جارٍ التحقق...", Toast.LENGTH_SHORT).show()
+                AuthManager.changeUsername(this, newUsername) { err ->
+                    runOnUiThread {
+                        if (err == null) {
+                            Toast.makeText(this, "تم تغيير اسم المستخدم", Toast.LENGTH_SHORT).show()
+                            updateUI()
+                            dialog.dismiss()
+                        } else {
+                            Toast.makeText(this, err, Toast.LENGTH_LONG).show()
+                        }
+                    }
                 }
             }
-            .setNegativeButton("إلغاء", null)
-            .show()
+        }
+        dialog.show()
     }
 
     private fun updateUI() {

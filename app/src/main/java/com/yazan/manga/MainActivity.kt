@@ -16,6 +16,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.bumptech.glide.Glide
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.navigation.NavigationView
 import com.yazan.manga.data.AuthManager
@@ -201,12 +202,29 @@ class MainActivity : AppCompatActivity() {
         val user = AuthManager.getCurrentUser(this)
         val tvName = headerView.findViewById<TextView>(R.id.menuUserName)
         val tvEmail = headerView.findViewById<TextView>(R.id.menuUserEmail)
+        val imgAvatar = headerView.findViewById<android.widget.ImageView>(R.id.menuAvatar)
+        val tvLetter = headerView.findViewById<TextView>(R.id.menuAvatarLetter)
         if (user != null) {
             tvName.text = user.name
             tvEmail.text = user.email
+            // Show the avatar image if available, otherwise the first letter
+            val avatarFile = user.avatar.takeIf { it.isNotEmpty() }?.let { java.io.File(it) }
+            if (avatarFile != null && avatarFile.exists()) {
+                imgAvatar.visibility = View.VISIBLE
+                tvLetter.visibility = View.GONE
+                imgAvatar.imageTintList = null // clear the white tint so the photo shows
+                imgAvatar.setPadding(0, 0, 0, 0)
+                Glide.with(this).load(user.avatar).circleCrop().into(imgAvatar)
+            } else {
+                imgAvatar.visibility = View.GONE
+                tvLetter.visibility = View.VISIBLE
+                tvLetter.text = user.name.firstOrNull()?.uppercaseChar()?.toString() ?: "؟"
+            }
         } else {
             tvName.text = "زائر"
             tvEmail.text = "اضغط لتسجيل الدخول"
+            imgAvatar.visibility = View.VISIBLE
+            tvLetter.visibility = View.GONE
         }
     }
 
