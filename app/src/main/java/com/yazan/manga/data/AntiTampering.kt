@@ -34,18 +34,15 @@ object AntiTampering {
     /**
      * The expected SHA-256 of the app's signing certificate, hex-encoded.
      *
-     * For the debug keystore (which the GitHub Actions build uses), this is
-     * the well-known Android debug cert hash. For production, you'd set
-     * this to your release cert hash.
+     * This is the SHA-256 of our production release keystore (alias "manga").
+     * If someone re-signs the APK with a different key (re-packaging attack),
+     * this check fails and sync features get disabled.
      *
-     * To compute the hash of your release keystore:
+     * To compute the hash for a new keystore:
      *   keytool -list -v -keystore manga-release.keystore -alias manga \
      *     -storepass YOUR_PASS | grep SHA256
-     *
-     * For now we leave it empty (= accept any signature). When you generate
-     * a release keystore, fill it in.
      */
-    private const val EXPECTED_CERT_SHA256: String = ""
+    private const val EXPECTED_CERT_SHA256: String = "eaf8316349e3cb7afb9bb7cb563963ac12f5447dc096afae2982ba9fd7344a80"
 
     /**
      * Returns true if the app's signing certificate matches the expected hash

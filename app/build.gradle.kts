@@ -17,6 +17,16 @@ android {
     }
 
     signingConfigs {
+        // Production release signing: uses the keystore stored in GitHub
+        // Secrets (RELEASE_KEYSTORE, RELEASE_KEYSTORE_PASSWORD,
+        // RELEASE_KEY_PASSWORD). The keystore is base64-encoded in the
+        // secret and decoded by the GitHub Actions workflow before build.
+        create("release") {
+            storeFile = file(System.getenv("KEYSTORE_FILE") ?: "manga-release.keystore")
+            storePassword = System.getenv("KEYSTORE_PASSWORD") ?: ""
+            keyAlias = System.getenv("KEY_ALIAS") ?: "manga"
+            keyPassword = System.getenv("KEY_PASSWORD") ?: ""
+        }
         getByName("debug") {
             // Use the default debug keystore — this makes the APK consistently
             // signed, which slightly reduces (but doesn't eliminate) Play Protect
@@ -34,8 +44,13 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
-            // Enable v1+v2+v3 signing schemes for maximum compatibility
-            signingConfig = signingConfigs.getByName("debug")
+            // Sign with the release keystore if available (CI env), otherwise
+            // fall back to debug (local dev builds).
+            signingConfig = if (System.getenv("KEYSTORE_FILE") != null) {
+                signingConfigs.getByName("release")
+            } else {
+                signingConfigs.getByName("debug")
+            }
         }
         debug {
             // Enable all signing schemes on debug builds too

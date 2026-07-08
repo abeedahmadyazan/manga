@@ -26,6 +26,26 @@ jobs:
       with:
         gradle-version: '8.9'
 
+    - name: Decode release keystore
+      run: |
+        # Decode the base64-encoded keystore from GitHub Secrets and place it
+        # in the project root so build.gradle.kts can find it via env var.
+        if [ -n "$RELEASE_KEYSTORE" ]; then
+          echo "$RELEASE_KEYSTORE" | base64 -d > manga-release.keystore
+          echo "Keystore decoded: $(wc -c < manga-release.keystore) bytes"
+          echo "KEYSTORE_FILE=$(pwd)/manga-release.keystore" >> $GITHUB_ENV
+          echo "KEYSTORE_PASSWORD=$RELEASE_KEYSTORE_PASSWORD" >> $GITHUB_ENV
+          echo "KEY_ALIAS=manga" >> $GITHUB_ENV
+          echo "KEY_PASSWORD=$RELEASE_KEY_PASSWORD" >> $GITHUB_ENV
+          echo "Release keystore configured."
+        else
+          echo "No release keystore secret found — falling back to debug signing."
+        fi
+      env:
+        RELEASE_KEYSTORE: ${{ secrets.RELEASE_KEYSTORE }}
+        RELEASE_KEYSTORE_PASSWORD: ${{ secrets.RELEASE_KEYSTORE_PASSWORD }}
+        RELEASE_KEY_PASSWORD: ${{ secrets.RELEASE_KEY_PASSWORD }}
+
     - name: Build Debug APK
       run: gradle assembleDebug --stacktrace
 
