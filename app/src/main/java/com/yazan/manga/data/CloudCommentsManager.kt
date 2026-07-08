@@ -64,7 +64,7 @@ object CloudCommentsManager {
             .addSnapshotListener { snapshot, error ->
                 if (error != null) {
                     Log.e(TAG, "Listen error: ${error.message}")
-                    onUpdate(emptyList())
+                    // DON'T clear the list on error - keep existing comments
                     return@addSnapshotListener
                 }
                 
