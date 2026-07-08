@@ -75,7 +75,11 @@ class CommentsActivity : AppCompatActivity() {
             onReply = { c -> openReplies(c.id, c.authorName) },
             onDelete = { c -> confirmDelete(c.id) },
             onBan = { c -> confirmBan(c.authorEmail, c.authorName) },
-            onProfile = { email -> /* TODO: open profile */ }
+            onProfile = { email ->
+            val intent = Intent(this, UserProfileActivity::class.java)
+            intent.putExtra("user_email", email)
+            startActivity(intent)
+        }
         )
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = adapter
