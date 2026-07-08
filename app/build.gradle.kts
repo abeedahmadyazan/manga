@@ -64,6 +64,9 @@ dependencies {
     implementation("com.google.code.gson:gson:2.11.0")
     implementation("com.github.bumptech.glide:glide:4.16.0")
 
+    // Shimmer — skeleton loading placeholders
+    implementation("com.facebook.shimmer:shimmer:0.5.0")
+
     // Firebase
     implementation(platform("com.google.firebase:firebase-bom:33.4.0"))
     implementation("com.google.firebase:firebase-auth")

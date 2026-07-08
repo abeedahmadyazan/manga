@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.facebook.shimmer.ShimmerFrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="@color/surface"
+        app:cardCornerRadius="14dp"
+        app:cardElevation="0dp"
+        app:strokeWidth="0dp"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Skeleton cover -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="220dp"
+                android:background="@color/skeleton_base" />
+
+            <!-- Skeleton title bar (we don't strictly need it because the title
+                 is overlaid on the cover in the real card, but a small placeholder
+                 at the bottom of the cover keeps the visual height consistent) -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0dp" />
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+</com.facebook.shimmer.ShimmerFrameLayout>

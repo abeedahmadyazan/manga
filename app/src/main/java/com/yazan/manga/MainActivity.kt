@@ -36,6 +36,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var loadingIndicator: ProgressBar
     private lateinit var errorText: TextView
     private lateinit var adapter: MangaAdapter
+    private var skeletonAdapter: com.yazan.manga.ui.SkeletonAdapter? = null
 
     private val repository = MangaRepository()
     private var currentTab = "latest"
@@ -293,7 +294,13 @@ class MainActivity : AppCompatActivity() {
     private fun loadManga() {
         if (isLoading) return
         isLoading = true
-        loadingIndicator.visibility = View.VISIBLE
+
+        // Show skeleton only when loading from scratch (page 1, no items yet)
+        if (currentPage == 1 && adapter.itemCount == 0) {
+            showSkeleton()
+        } else {
+            loadingIndicator.visibility = View.VISIBLE
+        }
         errorText.visibility = View.GONE
 
         lifecycleScope.launch {
@@ -304,6 +311,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }
 
+            hideSkeleton()
             loadingIndicator.visibility = View.GONE
             swipeRefresh.isRefreshing = false
             isLoading = false
@@ -333,10 +341,31 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    /** Swap the recycler's adapter to a 9-cell skeleton grid and start shimmer. */
+    private fun showSkeleton() {
+        if (skeletonAdapter == null) {
+            skeletonAdapter = com.yazan.manga.ui.SkeletonAdapter(count = 9)
+        }
+        recyclerView.adapter = skeletonAdapter
+    }
+
+    /** Restore the real manga adapter so the recycler is ready to show real data. */
+    private fun hideSkeleton() {
+        if (recyclerView.adapter !== adapter) {
+            recyclerView.adapter = adapter
+        }
+    }
+
     private fun searchManga(query: String) {
         if (isLoading) return
         isLoading = true
-        loadingIndicator.visibility = View.VISIBLE
+
+        // Show skeleton for fresh searches (no items yet from previous search)
+        if (adapter.itemCount == 0) {
+            showSkeleton()
+        } else {
+            loadingIndicator.visibility = View.VISIBLE
+        }
         errorText.visibility = View.GONE
 
         lifecycleScope.launch {
@@ -344,6 +373,7 @@ class MainActivity : AppCompatActivity() {
                 repository.searchManga(query)
             }
 
+            hideSkeleton()
             loadingIndicator.visibility = View.GONE
             swipeRefresh.isRefreshing = false
             isLoading = false
