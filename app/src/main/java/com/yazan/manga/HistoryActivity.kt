@@ -96,7 +96,13 @@ class HistoryActivity : AppCompatActivity() {
                     entry.chapterTitle
                 }
                 title.text = displayTitle
-                chapter.text = "الفصل ${entry.chapterNumber}"
+                // Show the chapter title (e.g. "الفصل 1181") — use the actual
+                // chapter title if it has a name, otherwise the number.
+                chapter.text = if (entry.chapterTitle.isNotEmpty() && entry.chapterTitle != "الفصل ${entry.chapterNumber}") {
+                    entry.chapterTitle
+                } else {
+                    "الفصل ${entry.chapterNumber}"
+                }
                 time.text = sdf.format(Date(entry.readAt))
                 itemView.setOnClickListener { onClick(entry) }
             }

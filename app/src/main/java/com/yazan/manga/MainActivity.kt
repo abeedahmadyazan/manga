@@ -204,6 +204,12 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
+        // Position the drawer content below the top bar (status bar + 56dp toolbar)
+        // so the first menu item aligns roughly with the 'مانجا' title.
+        val resourceId = resources.getIdentifier("status_bar_height", "dimen", "android")
+        val statusBarHeight = if (resourceId > 0) resources.getDimensionPixelSize(resourceId) else 0
+        val toolbarHeight = (56 * resources.displayMetrics.density).toInt()
+        navigationView.setPadding(0, statusBarHeight + toolbarHeight, 0, 0)
         updateMenuHeader()
     }
 
