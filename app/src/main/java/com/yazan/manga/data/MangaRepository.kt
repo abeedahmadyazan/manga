@@ -30,14 +30,12 @@ class MangaRepository(private val appContext: Context? = null) {
     private val mpChapterUrlCache = mutableMapOf<String, MutableMap<String, String>>()
 
     suspend fun getLatestManga(page: Int = 1): Result<List<MangaListItem>> {
-        // Try cache first
+        // Try cache first (1h TTL)
         appContext?.let { ctx ->
             CacheManager.getCachedMangaList(ctx, "latest", page)?.let { cached ->
-                Log.d(TAG, "Latest page $page: cache hit (${cached.size} items)")
                 return Result.success(cached)
             }
         }
-        // Rate-limit check
         if (!DDoSProtection.tryAcquire(DDoSProtection.Action.MANGA_LIST)) {
             return Result.failure(Exception("تم تجاوز الحد المسموح. حاول لاحقاً."))
         }
@@ -57,7 +55,6 @@ class MangaRepository(private val appContext: Context? = null) {
     suspend fun getPopularManga(page: Int = 1): Result<List<MangaListItem>> {
         appContext?.let { ctx ->
             CacheManager.getCachedMangaList(ctx, "popular", page)?.let { cached ->
-                Log.d(TAG, "Popular page $page: cache hit (${cached.size} items)")
                 return Result.success(cached)
             }
         }
@@ -80,7 +77,6 @@ class MangaRepository(private val appContext: Context? = null) {
     suspend fun searchManga(query: String, page: Int = 1): Result<List<MangaListItem>> {
         appContext?.let { ctx ->
             CacheManager.getCachedSearchResults(ctx, query)?.let { cached ->
-                Log.d(TAG, "Search '$query': cache hit (${cached.size} items)")
                 return Result.success(cached)
             }
         }
@@ -159,25 +155,27 @@ class MangaRepository(private val appContext: Context? = null) {
         if (!DDoSProtection.tryAcquire(DDoSProtection.Action.MANGA_DETAILS)) {
             return Result.failure(Exception("تم تجاوز الحد المسموح. حاول لاحقاً."))
         }
-        return try {
-            val details = fetchMangaDetailsFromNetwork(id)
+        val result = getMangaDetailsFromNetwork(id)
+        if (result.isSuccess) {
             DDoSProtection.reportSuccess()
-            appContext?.let { CacheManager.cacheMangaDetails(it, id, details) }
-            Result.success(details)
-        } catch (e: Exception) {
+            result.getOrNull()?.let { details ->
+                appContext?.let { CacheManager.cacheMangaDetails(it, id, details) }
+            }
+        } else {
             DDoSProtection.reportFailure()
-            Result.failure(e)
         }
+        return result
     }
 
-    private fun fetchMangaDetailsFromNetwork(id: String): MangaDetails = try {
-        // 1. Get manga details from MangaDex
-        val req = Request.Builder().url("https://api.mangadex.org/manga/$id?includes[]=cover_art&includes[]=author").header("User-Agent", UA).header("Accept", "application/json").build()
-        var title = "بدون عنوان"; var enTitle = ""; var cover = ""; var author = ""; var description = ""; var status = "ongoing"; var genres = listOf<String>()
-        client.newCall(req).execute().use { resp ->
-            if (!resp.isSuccessful) return@use
-            val body = resp.body?.string() ?: return@use
-            val root = JsonParser.parseString(body)
+    private fun getMangaDetailsFromNetwork(id: String): Result<MangaDetails> {
+        return try {
+            // 1. Get manga details from MangaDex
+            val req = Request.Builder().url("https://api.mangadex.org/manga/$id?includes[]=cover_art&includes[]=author").header("User-Agent", UA).header("Accept", "application/json").build()
+            var title = "بدون عنوان"; var enTitle = ""; var cover = ""; var author = ""; var description = ""; var status = "ongoing"; var genres = listOf<String>()
+            client.newCall(req).execute().use { resp ->
+                if (!resp.isSuccessful) return@use
+                val body = resp.body?.string() ?: return@use
+                val root = JsonParser.parseString(body)
                 if (!root.isJsonObject) return@use
                 val data = root.asJsonObject.getAsJsonObject("data") ?: return@use
                 val attrs = data.getAsJsonObject("attributes") ?: return@use
@@ -378,7 +376,7 @@ class MangaRepository(private val appContext: Context? = null) {
 
             Log.d(TAG, "Sources: ${sourcesList.size} visible | default=${sourcesList.firstOrNull()?.key} | chapters=${defaultChapters.size}")
 
-            MangaDetails(
+            Result.success(MangaDetails(
                 id = id, title = title, cover = cover, description = description,
                 author = author, artist = author, status = status, genres = genres,
                 chapters = defaultChapters,
@@ -386,8 +384,8 @@ class MangaRepository(private val appContext: Context? = null) {
                 latestChapter = null,
                 sources = sourcesList,
                 chaptersBySource = chaptersBySource
-            )
-        } catch (e: Exception) { throw e }
+            ))
+        } catch (e: Exception) { Result.failure(e) }
     }
 
     /**
