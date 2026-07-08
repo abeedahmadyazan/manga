@@ -260,8 +260,18 @@ class CommentsAdapter(
             avatar.text = c.authorName.firstOrNull()?.uppercaseChar()?.toString() ?: "?"
             avatar.visibility = View.VISIBLE
             avatarImg.visibility = View.GONE
-            adminBadge.visibility = if (c.isAdmin) View.VISIBLE else View.GONE
-            author.text = c.authorName
+            // For admins: show the name inside the green pill badge, and hide
+            // the plain author TextView so nobody can impersonate an admin by
+            // adding '(مشرف)' to their own name.
+            if (c.isAdmin) {
+                adminBadge.text = c.authorName
+                adminBadge.visibility = View.VISIBLE
+                author.visibility = View.GONE
+            } else {
+                adminBadge.visibility = View.GONE
+                author.visibility = View.VISIBLE
+                author.text = c.authorName
+            }
             time.text = sdf.format(Date(c.createdAt))
             text.text = c.text
             btnLike.text = "👍 ${c.likes.size}"
@@ -315,9 +325,14 @@ class CommentsAdapter(
         }
 
         private fun applyProfile(c: CloudCommentsManager.Comment, cu: AuthManager.CloudUser?) {
-            // Update the displayed name if the cloud has a newer one
+            // Update the displayed name if the cloud has a newer one — in the
+            // correct place (green pill for admins, plain text for others).
             if (!cu?.name.isNullOrEmpty() && cu!!.name != c.authorName) {
-                author.text = cu.name
+                if (c.isAdmin) {
+                    adminBadge.text = cu.name
+                } else {
+                    author.text = cu.name
+                }
                 avatar.text = cu.name.firstOrNull()?.uppercaseChar()?.toString() ?: "?"
             }
             // Show the avatar image if available (circular)

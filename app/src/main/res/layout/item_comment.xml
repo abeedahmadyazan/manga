@@ -42,15 +42,22 @@
             android:orientation="horizontal"
             android:gravity="center_vertical">
 
+            <!-- Admin name shown in a green pill so nobody can impersonate
+                 an admin by just writing '(مشرف)' in their name. -->
             <TextView
                 android:id="@+id/commentAdminBadge"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="👑"
-                android:textSize="10sp"
-                android:layout_marginEnd="4dp"
+                android:background="@drawable/bg_admin_name_pill"
+                android:paddingHorizontal="8dp"
+                android:paddingVertical="2dp"
+                android:layout_marginEnd="6dp"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                android:textStyle="bold"
                 android:visibility="gone" />
 
+            <!-- For non-admins, the author name is a plain TextView. -->
             <TextView
                 android:id="@+id/commentAuthor"
                 android:layout_width="wrap_content"

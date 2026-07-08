@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:paddingHorizontal="20dp"
-    android:paddingTop="56dp"
+    android:paddingTop="80dp"
     android:paddingBottom="20dp"
     android:background="@drawable/bg_header_gradient"
     android:clickable="true"

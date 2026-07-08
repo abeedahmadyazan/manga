@@ -137,8 +137,16 @@ class RepliesActivity : AppCompatActivity() {
                 avatar.text = r.authorName.firstOrNull()?.uppercaseChar()?.toString() ?: "?"
                 avatar.visibility = View.VISIBLE
                 avatarImg.visibility = View.GONE
-                adminBadge.visibility = if (r.isAdmin) View.VISIBLE else View.GONE
-                author.text = r.authorName
+                // Admin: name in green pill; non-admin: plain text
+                if (r.isAdmin) {
+                    adminBadge.text = r.authorName
+                    adminBadge.visibility = View.VISIBLE
+                    author.visibility = View.GONE
+                } else {
+                    adminBadge.visibility = View.GONE
+                    author.visibility = View.VISIBLE
+                    author.text = r.authorName
+                }
                 time.text = sdf.format(Date(r.createdAt))
                 text.text = r.text
                 btnLike.text = "👍 ${r.likes.size}"
@@ -149,8 +157,13 @@ class RepliesActivity : AppCompatActivity() {
                 AuthManager.fetchCloudUser(r.authorEmail) { cu ->
                     runOnUiThread {
                         if (cu != null) {
+                            // Update the name in the correct place (pill for admin, plain for others)
                             if (cu.name.isNotEmpty() && cu.name != r.authorName) {
-                                author.text = cu.name
+                                if (r.isAdmin) {
+                                    adminBadge.text = cu.name
+                                } else {
+                                    author.text = cu.name
+                                }
                                 avatar.text = cu.name.firstOrNull()?.uppercaseChar()?.toString() ?: "?"
                             }
                             if (cu.avatarBase64.isNotEmpty()) {
