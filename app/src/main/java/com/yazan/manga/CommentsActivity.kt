@@ -75,6 +75,7 @@ class CommentsActivity : AppCompatActivity() {
             onReply = { c -> openReplies(c.id, c.authorName) },
             onDelete = { c -> confirmDelete(c.id) },
             onBan = { c -> confirmBan(c.authorEmail, c.authorName) },
+            onReport = { c -> showReportDialog(c) },
             onProfile = { email ->
             val intent = Intent(this, UserProfileActivity::class.java)
             intent.putExtra("user_email", email)
@@ -150,6 +151,30 @@ class CommentsActivity : AppCompatActivity() {
             .setNegativeButton("إلغاء", null).show()
     }
 
+    private fun showReportDialog(comment: CloudCommentsManager.Comment) {
+        val reasons = arrayOf(
+            "محتوى مسيء أو غير لائق",
+            "إهانة أو تحرش",
+            "سبام أو تكرار",
+            "مخالفة أخرى"
+        )
+        val checked = intArrayOf(0)
+        AlertDialog.Builder(this)
+            .setTitle("الإبلاغ عن تعليق ${comment.authorName}")
+            .setSingleChoiceItems(reasons, checked[0]) { _, which -> checked[0] = which }
+            .setPositiveButton("إرسال البلاغ") { _, _ ->
+                val reason = reasons[checked[0]]
+                CloudCommentsManager.reportComment(this, comment, contextTitle, reason) { success, error ->
+                    runOnUiThread {
+                        if (success) Toast.makeText(this, "تم إرسال البلاغ للمشرف", Toast.LENGTH_SHORT).show()
+                        else Toast.makeText(this, error ?: "فشل الإرسال", Toast.LENGTH_LONG).show()
+                    }
+                }
+            }
+            .setNegativeButton("إلغاء", null)
+            .show()
+    }
+
     private fun openReplies(commentId: String, authorName: String) {
         val intent = Intent(this, RepliesActivity::class.java)
         intent.putExtra("parent_id", commentId)
@@ -169,6 +194,7 @@ class CommentsAdapter(
     private val onReply: (CloudCommentsManager.Comment) -> Unit,
     private val onDelete: (CloudCommentsManager.Comment) -> Unit,
     private val onBan: (CloudCommentsManager.Comment) -> Unit,
+    private val onReport: (CloudCommentsManager.Comment) -> Unit,
     private val onProfile: (String) -> Unit
 ) : RecyclerView.Adapter<CommentsAdapter.VH>() {
 
@@ -201,6 +227,7 @@ class CommentsAdapter(
         private val btnDislike = v.findViewById<TextView>(R.id.btnDislike)
         private val btnReply = v.findViewById<TextView>(R.id.btnReply)
         private val btnDelete = v.findViewById<TextView>(R.id.btnDelete)
+        private val btnReport = v.findViewById<TextView>(R.id.btnReport)
 
         fun bind(c: CloudCommentsManager.Comment) {
             avatar.text = c.authorName.firstOrNull()?.uppercaseChar()?.toString() ?: "?"
@@ -219,11 +246,14 @@ class CommentsAdapter(
             val isOwner = currentUser?.email == c.authorEmail
             val canDelete = isOwner || (currentUser?.isAdmin == true)
             btnDelete.visibility = if (canDelete) View.VISIBLE else View.GONE
+            // Show the report button for any logged-in user who isn't the comment owner
+            btnReport.visibility = if (currentUser != null && !isOwner) View.VISIBLE else View.GONE
 
             btnLike.setOnClickListener { onLike(c) }
             btnDislike.setOnClickListener { onDislike(c) }
             btnReply.setOnClickListener { onReply(c) }
             btnDelete.setOnClickListener { onDelete(c) }
+            btnReport.setOnClickListener { onReport(c) }
             
             author.setOnClickListener { onProfile(c.authorEmail) }
             avatar.setOnClickListener { onProfile(c.authorEmail) }

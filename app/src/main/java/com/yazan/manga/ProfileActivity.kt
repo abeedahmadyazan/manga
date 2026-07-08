@@ -36,6 +36,7 @@ class ProfileActivity : AppCompatActivity() {
 
     private lateinit var avatarImage: android.widget.ImageView
     private lateinit var avatarLetter: TextView
+    private lateinit var btnChangeAvatar: ImageButton
     private lateinit var tvName: TextView
     private lateinit var tvUsername: TextView
     private lateinit var tvEmail: TextView
@@ -65,6 +66,7 @@ class ProfileActivity : AppCompatActivity() {
     private fun initViews() {
         avatarImage = findViewById(R.id.avatarImage)
         avatarLetter = findViewById(R.id.avatarLetter)
+        btnChangeAvatar = findViewById(R.id.btnChangeAvatar)
         tvName = findViewById(R.id.tvName)
         tvUsername = findViewById(R.id.tvUsername)
         tvEmail = findViewById(R.id.tvEmail)
@@ -94,11 +96,17 @@ class ProfileActivity : AppCompatActivity() {
             showChangeUsernameDialog()
         }
 
-        // Profile picture
-        avatarImage.setOnClickListener {
+        // Profile picture — both the avatar image and the dedicated camera button open the picker
+        val openPicker = View.OnClickListener {
+            if (AuthManager.getCurrentUser(this) == null) {
+                Toast.makeText(this, "سجّل الدخول أولاً", Toast.LENGTH_SHORT).show()
+                return@OnClickListener
+            }
             val intent = Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
             startActivityForResult(intent, RC_IMAGE_PICK)
         }
+        avatarImage.setOnClickListener(openPicker)
+        btnChangeAvatar.setOnClickListener(openPicker)
 
         btnAdminPanel.setOnClickListener { startActivity(Intent(this, AdminPanelActivity::class.java)) }
     }
@@ -317,11 +325,13 @@ class ProfileActivity : AppCompatActivity() {
             btnLogout.visibility = View.VISIBLE
             btnChangeName.visibility = View.VISIBLE
             btnChangeUsername.visibility = View.VISIBLE
+            btnChangeAvatar.visibility = View.VISIBLE
             btnAdminPanel.visibility = if (user.isAdmin) View.VISIBLE else View.GONE
         } else {
             avatarLetter.text = "ز"
             avatarLetter.visibility = View.VISIBLE
             avatarImage.visibility = View.GONE
+            btnChangeAvatar.visibility = View.GONE
             tvName.text = "زائر"
             tvUsername.text = ""
             tvEmail.visibility = View.GONE

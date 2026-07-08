@@ -79,6 +79,21 @@
                     android:textSize="48sp"
                     android:textStyle="bold"
                     tools:ignore="HardcodedText" />
+
+                <!-- Camera overlay button (bottom-end corner) — visible only when logged in -->
+                <ImageButton
+                    android:id="@+id/btnChangeAvatar"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:layout_gravity="bottom|end"
+                    android:background="@drawable/bg_circle_button"
+                    android:src="@drawable/ic_edit"
+                    android:scaleType="center"
+                    android:padding="8dp"
+                    android:tint="@color/white"
+                    android:contentDescription="تغيير الصورة"
+                    android:visibility="gone"
+                    tools:ignore="HardcodedText,UseAppTint" />
             </FrameLayout>
 
             <!-- Name + admin badge -->

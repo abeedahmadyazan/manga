@@ -123,6 +123,7 @@ class RepliesActivity : AppCompatActivity() {
                 val btnDislike = holder.itemView.findViewById<TextView>(R.id.btnDislike)
                 val btnReply = holder.itemView.findViewById<TextView>(R.id.btnReply)
                 val btnDelete = holder.itemView.findViewById<TextView>(R.id.btnDelete)
+                val btnReport = holder.itemView.findViewById<TextView>(R.id.btnReport)
 
                 avatar.text = r.authorName.firstOrNull()?.uppercaseChar()?.toString() ?: "?"
                 adminBadge.visibility = if (r.isAdmin) View.VISIBLE else View.GONE
@@ -136,6 +137,7 @@ class RepliesActivity : AppCompatActivity() {
                 val isOwner = user?.email == r.authorEmail
                 val canDelete = isOwner || (user?.isAdmin == true)
                 btnDelete.visibility = if (canDelete) View.VISIBLE else View.GONE
+                btnReport.visibility = if (user != null && !isOwner) View.VISIBLE else View.GONE
 
                 btnLike.setOnClickListener { user?.let { CloudCommentsManager.toggleLike(r.id, it.email, true) {} } }
                 btnDislike.setOnClickListener { user?.let { CloudCommentsManager.toggleLike(r.id, it.email, false) {} } }
@@ -143,6 +145,22 @@ class RepliesActivity : AppCompatActivity() {
                     AlertDialog.Builder(this@RepliesActivity)
                         .setTitle("حذف الرد").setMessage("هل تريد الحذف؟")
                         .setPositiveButton("حذف") { _, _ -> CloudCommentsManager.deleteComment(r.id) {} }
+                        .setNegativeButton("إلغاء", null).show()
+                }
+                btnReport.setOnClickListener {
+                    val reasons = arrayOf("محتوى مسيء أو غير لائق", "إهانة أو تحرش", "سبام أو تكرار", "مخالفة أخرى")
+                    val checked = intArrayOf(0)
+                    AlertDialog.Builder(this@RepliesActivity)
+                        .setTitle("الإبلاغ عن رد ${r.authorName}")
+                        .setSingleChoiceItems(reasons, checked[0]) { _, which -> checked[0] = which }
+                        .setPositiveButton("إرسال البلاغ") { _, _ ->
+                            CloudCommentsManager.reportComment(this@RepliesActivity, r, "رد", reasons[checked[0]]) { success, error ->
+                                runOnUiThread {
+                                    if (success) Toast.makeText(this@RepliesActivity, "تم إرسال البلاغ", Toast.LENGTH_SHORT).show()
+                                    else Toast.makeText(this@RepliesActivity, error ?: "فشل", Toast.LENGTH_LONG).show()
+                                }
+                            }
+                        }
                         .setNegativeButton("إلغاء", null).show()
                 }
 

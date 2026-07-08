@@ -139,4 +139,151 @@ object CloudCommentsManager {
                     .addOnFailureListener { callback(false) }
             }
     }
+
+    // ============================================================
+    //  Reports (cloud-backed so the admin sees them from any device)
+    // ============================================================
+
+    data class Report(
+        val id: String = "",
+        val commentId: String = "",
+        val commentText: String = "",
+        val commentContextId: String = "",
+        val commentContextTitle: String = "",
+        val reportedEmail: String = "",
+        val reportedName: String = "",
+        val reportedByEmail: String = "",
+        val reportedByName: String = "",
+        val reason: String = "",
+        val createdAt: Long = System.currentTimeMillis(),
+        val resolved: Boolean = false,
+        val resolvedBy: String? = null,
+        val resolvedAt: Long? = null
+    )
+
+    /**
+     * Report a comment. One report per user per comment (enforced by checking
+     * existing reports with the same commentId + reportedByEmail).
+     */
+    fun reportComment(
+        context: Context,
+        comment: Comment,
+        contextTitle: String,
+        reason: String,
+        callback: (Boolean, String?) -> Unit
+    ) {
+        val user = AuthManager.getCurrentUser(context) ?: run {
+            callback(false, "يجب تسجيل الدخول")
+            return
+        }
+        if (user.email == comment.authorEmail) {
+            callback(false, "لا يمكنك الإبلاغ عن تعليقك")
+            return
+        }
+
+        // Check if already reported by this user
+        db.collection("reports")
+            .whereEqualTo("commentId", comment.id)
+            .whereEqualTo("reportedByEmail", user.email)
+            .get()
+            .addOnSuccessListener { existing ->
+                if (!existing.isEmpty) {
+                    callback(false, "لقد بلّغت عن هذا التعليق مسبقاً")
+                    return@addOnSuccessListener
+                }
+
+                val report = hashMapOf(
+                    "commentId" to comment.id,
+                    "commentText" to comment.text,
+                    "commentContextId" to comment.contextId,
+                    "commentContextTitle" to contextTitle,
+                    "reportedEmail" to comment.authorEmail,
+                    "reportedName" to comment.authorName,
+                    "reportedByEmail" to user.email,
+                    "reportedByName" to user.name,
+                    "reason" to reason.trim(),
+                    "createdAt" to System.currentTimeMillis(),
+                    "resolved" to false,
+                    "resolvedBy" to null,
+                    "resolvedAt" to null
+                )
+                db.collection("reports")
+                    .add(report)
+                    .addOnSuccessListener { callback(true, null) }
+                    .addOnFailureListener { e -> callback(false, e.message) }
+            }
+            .addOnFailureListener { e -> callback(false, e.message) }
+    }
+
+    /**
+     * Listen to ALL unresolved reports (for the admin panel).
+     */
+    fun listenToReports(onUpdate: (List<Report>) -> Unit): ListenerRegistration {
+        return db.collection("reports")
+            .whereEqualTo("resolved", false)
+            .orderBy("createdAt", Query.Direction.DESCENDING)
+            .addSnapshotListener { snapshot, error ->
+                if (error != null) {
+                    Log.e(TAG, "Reports listen error: ${error.message}")
+                    return@addSnapshotListener
+                }
+                val reports = mutableListOf<Report>()
+                snapshot?.documents?.forEach { doc ->
+                    reports.add(Report(
+                        id = doc.id,
+                        commentId = doc.getString("commentId") ?: "",
+                        commentText = doc.getString("commentText") ?: "",
+                        commentContextId = doc.getString("commentContextId") ?: "",
+                        commentContextTitle = doc.getString("commentContextTitle") ?: "",
+                        reportedEmail = doc.getString("reportedEmail") ?: "",
+                        reportedName = doc.getString("reportedName") ?: "",
+                        reportedByEmail = doc.getString("reportedByEmail") ?: "",
+                        reportedByName = doc.getString("reportedByName") ?: "",
+                        reason = doc.getString("reason") ?: "",
+                        createdAt = doc.getLong("createdAt") ?: 0,
+                        resolved = doc.getBoolean("resolved") ?: false,
+                        resolvedBy = doc.getString("resolvedBy"),
+                        resolvedAt = doc.getLong("resolvedAt")
+                    ))
+                }
+                onUpdate(reports)
+            }
+    }
+
+    /**
+     * Mark a report as resolved (admin only). Optionally delete the reported comment.
+     */
+    fun resolveReport(
+        reportId: String,
+        adminEmail: String,
+        deleteComment: Boolean,
+        commentId: String,
+        callback: (Boolean) -> Unit
+    ) {
+        val updates = mapOf(
+            "resolved" to true,
+            "resolvedBy" to adminEmail,
+            "resolvedAt" to System.currentTimeMillis()
+        )
+        db.collection("reports").document(reportId)
+            .update(updates)
+            .addOnSuccessListener {
+                if (deleteComment) {
+                    db.collection("comments").document(commentId)
+                        .delete()
+                        .addOnCompleteListener { callback(true) }
+                } else {
+                    callback(true)
+                }
+            }
+            .addOnFailureListener { callback(false) }
+    }
+
+    /** Delete a report (admin only, e.g. if it's invalid). */
+    fun deleteReport(reportId: String, callback: (Boolean) -> Unit) {
+        db.collection("reports").document(reportId)
+            .delete()
+            .addOnSuccessListener { callback(true) }
+            .addOnFailureListener { callback(false) }
+    }
 }
