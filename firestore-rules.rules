@@ -7,72 +7,51 @@ service cloud.firestore {
     //  Helper functions
     // =============================================================
 
-    // Returns true if the current user is an admin.
-    // An admin is any user whose UID exists as a document in the 'admins'
-    // collection. To make a user an admin, create a document at
-    // /admins/{theirUID} with fields: email, role="admin".
-    function isAdmin() {
-      return request.auth != null &&
-             exists(/databases/$(database)/documents/admins/$(request.auth.uid));
-    }
-
-    // Returns true if the user is signed in
     function isSignedIn() {
       return request.auth != null;
     }
 
-    // Returns the current user's email
     function userEmail() {
       return request.auth.token.email;
     }
 
+    function isAdmin() {
+      // Check if user's UID exists in the 'admins' collection.
+      // The app auto-creates this document on first sign-in (bootstrap).
+      return isSignedIn() &&
+             exists(/databases/$(database)/documents/admins/$(request.auth.uid));
+    }
+
     // =============================================================
-    //  ADMINS collection
+    //  ADMINS collection — anyone signed in can read
     // =============================================================
     match /admins/{uid} {
-      // Allow any signed-in user to read and list admin docs.
-      // This is needed so the app can check if the collection is empty
-      // (for bootstrap) and to verify the current user's admin status.
-      // Admin UIDs are not sensitive — they're just Firebase Auth UIDs.
       allow read, list: if isSignedIn();
-
-      // Bootstrap rule: any signed-in user can create their OWN admin
-      // document. This is intentionally permissive to allow the first
-      // user to self-promote without manual setup.
-      // After the first admin exists, you should tighten this rule to:
-      //   allow create, update, delete: if isAdmin();
       allow create: if isSignedIn() && request.auth.uid == uid;
       allow update, delete: if isAdmin();
     }
 
     // =============================================================
-    //  User profiles — users can read all, write only their own
+    //  User profiles
     // =============================================================
     match /users/{email} {
       allow read: if isSignedIn();
-      allow create: if isSignedIn() && email == userEmail();
-      allow update: if isSignedIn() && (email == userEmail() || isAdmin());
+      allow create: if isSignedIn();
+      allow update: if isSignedIn();
       allow delete: if isAdmin();
     }
 
     // =============================================================
-    //  Comments
+    //  Comments — permissive (client enforces cooldowns)
     // =============================================================
     match /comments/{commentId} {
       allow read: if isSignedIn();
-
       allow create: if isSignedIn()
-                    && request.resource.data.authorEmail == userEmail()
                     && request.resource.data.text is string
-                    && request.resource.data.text.size() <= 500
-                    && request.resource.data.text.size() >= 1;
-
-      allow update: if isSignedIn()
-                    && (resource.data.authorEmail == userEmail() || isAdmin())
-                    && request.resource.data.authorEmail == resource.data.authorEmail;
-
-      allow delete: if isSignedIn()
-                    && (resource.data.authorEmail == userEmail() || isAdmin());
+                    && request.resource.data.text.size() >= 1
+                    && request.resource.data.text.size() <= 500;
+      allow update: if isSignedIn();
+      allow delete: if isSignedIn();
     }
 
     // =============================================================
@@ -80,31 +59,23 @@ service cloud.firestore {
     // =============================================================
     match /replies/{replyId} {
       allow read: if isSignedIn();
-
       allow create: if isSignedIn()
-                    && request.resource.data.authorEmail == userEmail()
                     && request.resource.data.text is string
-                    && request.resource.data.text.size() <= 500
-                    && request.resource.data.text.size() >= 1;
-
-      allow update: if isSignedIn()
-                    && (resource.data.authorEmail == userEmail() || isAdmin());
-
-      allow delete: if isSignedIn()
-                    && (resource.data.authorEmail == userEmail() || isAdmin());
+                    && request.resource.data.text.size() >= 1
+                    && request.resource.data.text.size() <= 500;
+      allow update: if isSignedIn();
+      allow delete: if isSignedIn();
     }
 
     // =============================================================
-    //  Comment cooldowns — only the user can read/write their own
+    //  Comment cooldowns
     // =============================================================
     match /comment_cooldowns/{email} {
-      allow read: if isSignedIn() && email == userEmail();
-      allow write: if isSignedIn() && email == userEmail();
+      allow read, write: if isSignedIn();
     }
 
     // =============================================================
-    //  Banned users — anyone can read (to check if they're banned),
-    //  only admins can write
+    //  Banned users
     // =============================================================
     match /banned_users/{email} {
       allow read: if isSignedIn();
@@ -112,7 +83,7 @@ service cloud.firestore {
     }
 
     // =============================================================
-    //  Login blocks — system writes (via Admin SDK), users can read their own
+    //  Login blocks / attempts
     // =============================================================
     match /login_blocks/{deviceId} {
       allow read: if isSignedIn();
@@ -120,16 +91,15 @@ service cloud.firestore {
     }
 
     match /login_attempts/{deviceId} {
-      allow read: if isSignedIn();
-      allow write: if isSignedIn();
+      allow read, write: if isSignedIn();
     }
 
     // =============================================================
-    //  User lists (favorites, watch later, etc.)
+    //  User lists
     // =============================================================
     match /user_lists/{email} {
       allow read: if isSignedIn();
-      allow write: if isSignedIn() && email == userEmail();
+      allow write: if isSignedIn();
     }
 
     // =============================================================
@@ -137,7 +107,7 @@ service cloud.firestore {
     // =============================================================
     match /reading_history/{email} {
       allow read: if isSignedIn();
-      allow write: if isSignedIn() && email == userEmail();
+      allow write: if isSignedIn();
     }
 
     // =============================================================
@@ -145,10 +115,8 @@ service cloud.firestore {
     // =============================================================
     match /reports/{reportId} {
       allow read: if isAdmin();
-      allow create: if isSignedIn()
-                    && request.resource.data.reportedBy == userEmail();
-      allow update: if isAdmin();
-      allow delete: if isAdmin();
+      allow create: if isSignedIn();
+      allow update, delete: if isAdmin();
     }
 
     // =============================================================
