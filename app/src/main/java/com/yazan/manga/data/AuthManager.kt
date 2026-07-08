@@ -5,11 +5,15 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.provider.Settings
+import android.util.Base64
+import android.util.Log
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.firestore.FirebaseFirestore
+import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
 import java.security.MessageDigest
@@ -188,6 +192,9 @@ object AuthManager {
             .putString(KEY_LINKED_EMAIL, cleanEmail)
             .apply()
 
+        // Upload profile to cloud so other users see the latest name/avatar
+        uploadUserToCloud(context)
+
         return null
     }
 
@@ -240,6 +247,9 @@ object AuthManager {
             .putString(KEY_LINKED_EMAIL, email)
             .apply()
 
+        // Upload profile to cloud so other users see the latest name/avatar
+        uploadUserToCloud(context)
+
         return null
     }
 
@@ -288,6 +298,7 @@ object AuthManager {
         val updated = current.copy(username = clean, lastUsernameChange = now)
         saveUser(context, updated)
         prefs.edit().putString(KEY_USER, serializeUser(updated)).apply()
+        uploadUserToCloud(context)
         return null
     }
 
@@ -313,6 +324,7 @@ object AuthManager {
         val updated = current.copy(name = finalName)
         saveUser(context, updated)
         prefs.edit().putString(KEY_USER, serializeUser(updated)).apply()
+        uploadUserToCloud(context)
         return null
     }
 
@@ -358,6 +370,7 @@ object AuthManager {
             saveUser(context, updated)
             context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
                 .edit().putString(KEY_USER, serializeUser(updated)).apply()
+            uploadUserToCloud(context)
             savedPath
         } catch (e: Exception) {
             null
@@ -531,4 +544,79 @@ object AuthManager {
             )
         } catch (e: Exception) { null }
     }
+
+    // ============================================================
+    //  Cloud sync (Firestore) — so name/username/avatar are visible to all
+    // ============================================================
+
+    private const val USERS_COLLECTION = "users"
+    private val cloudDb by lazy { FirebaseFirestore.getInstance() }
+
+    /**
+     * Upload the current user's profile (name, username, avatar as base64 thumbnail)
+     * to Firestore so other users see the latest name/username/avatar on comments.
+     *
+     * The avatar is uploaded as a small base64 JPEG (≤ ~80KB) to fit in Firestore.
+     */
+    fun uploadUserToCloud(context: Context) {
+        val user = getCurrentUser(context) ?: return
+        try {
+            // Read the local avatar file (if any) and encode it as base64
+            val avatarBase64 = if (user.avatar.isNotEmpty()) {
+                val file = File(user.avatar)
+                if (file.exists()) {
+                    try {
+                        val bitmap = BitmapFactory.decodeFile(file.absolutePath)
+                        if (bitmap != null) {
+                            val stream = ByteArrayOutputStream()
+                            bitmap.compress(Bitmap.CompressFormat.JPEG, 70, stream)
+                            bitmap.recycle()
+                            Base64.encodeToString(stream.toByteArray(), Base64.NO_WRAP)
+                        } else null
+                    } catch (e: Exception) { null }
+                } else null
+            } else null
+
+            val data = hashMapOf(
+                "email" to user.email,
+                "name" to user.name,
+                "username" to user.username,
+                "isAdmin" to user.isAdmin,
+                "avatarBase64" to (avatarBase64 ?: ""),
+                "lastUpdated" to System.currentTimeMillis()
+            )
+            cloudDb.collection(USERS_COLLECTION).document(user.email).set(data)
+                .addOnFailureListener { Log.w("AuthManager", "uploadUserToCloud failed", it) }
+        } catch (e: Exception) {
+            Log.w("AuthManager", "uploadUserToCloud exception", e)
+        }
+    }
+
+    /**
+     * Fetch a user's cloud profile by email (used by CommentsAdapter to load the
+     * latest avatar for a comment author).
+     */
+    fun fetchCloudUser(email: String, onResult: (CloudUser?) -> Unit) {
+        try {
+            cloudDb.collection(USERS_COLLECTION).document(email).get()
+                .addOnSuccessListener { doc ->
+                    if (!doc.exists()) { onResult(null); return@addOnSuccessListener }
+                    onResult(CloudUser(
+                        email = doc.getString("email") ?: email,
+                        name = doc.getString("name") ?: "مستخدم",
+                        username = doc.getString("username") ?: "",
+                        avatarBase64 = doc.getString("avatarBase64") ?: ""
+                    ))
+                }
+                .addOnFailureListener { onResult(null) }
+        } catch (e: Exception) { onResult(null) }
+    }
+
+    /** Lightweight cloud-only user profile (for avatars on comments). */
+    data class CloudUser(
+        val email: String,
+        val name: String,
+        val username: String,
+        val avatarBase64: String
+    )
 }

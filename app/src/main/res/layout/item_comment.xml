@@ -19,6 +19,16 @@
         android:textSize="14sp"
         android:textStyle="bold" />
 
+    <!-- Avatar image (shown when the commenter has a cloud-uploaded photo) -->
+    <ImageView
+        android:id="@+id/commentAvatarImage"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:scaleType="centerCrop"
+        android:background="@drawable/bg_avatar"
+        android:visibility="gone"
+        android:contentDescription="صورة المعلّق" />
+
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"

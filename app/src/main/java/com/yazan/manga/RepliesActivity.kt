@@ -115,6 +115,7 @@ class RepliesActivity : AppCompatActivity() {
             override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
                 val r = allReplies[position]
                 val avatar = holder.itemView.findViewById<TextView>(R.id.commentAvatar)
+                val avatarImg = holder.itemView.findViewById<android.widget.ImageView>(R.id.commentAvatarImage)
                 val adminBadge = holder.itemView.findViewById<TextView>(R.id.commentAdminBadge)
                 val author = holder.itemView.findViewById<TextView>(R.id.commentAuthor)
                 val time = holder.itemView.findViewById<TextView>(R.id.commentTime)
@@ -126,6 +127,8 @@ class RepliesActivity : AppCompatActivity() {
                 val btnReport = holder.itemView.findViewById<TextView>(R.id.btnReport)
 
                 avatar.text = r.authorName.firstOrNull()?.uppercaseChar()?.toString() ?: "?"
+                avatar.visibility = View.VISIBLE
+                avatarImg.visibility = View.GONE
                 adminBadge.visibility = if (r.isAdmin) View.VISIBLE else View.GONE
                 author.text = r.authorName
                 time.text = sdf.format(Date(r.createdAt))
@@ -133,6 +136,29 @@ class RepliesActivity : AppCompatActivity() {
                 btnLike.text = "👍 ${r.likes.size}"
                 btnDislike.text = "👎 ${r.dislikes.size}"
                 btnReply.visibility = View.GONE
+
+                // Fetch the latest name + avatar from the cloud
+                AuthManager.fetchCloudUser(r.authorEmail) { cu ->
+                    runOnUiThread {
+                        if (cu != null) {
+                            if (cu.name.isNotEmpty() && cu.name != r.authorName) {
+                                author.text = cu.name
+                                avatar.text = cu.name.firstOrNull()?.uppercaseChar()?.toString() ?: "?"
+                            }
+                            if (cu.avatarBase64.isNotEmpty()) {
+                                try {
+                                    val bytes = android.util.Base64.decode(cu.avatarBase64, android.util.Base64.NO_WRAP)
+                                    val bmp = android.graphics.BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
+                                    if (bmp != null) {
+                                        avatar.visibility = View.GONE
+                                        avatarImg.visibility = View.VISIBLE
+                                        avatarImg.setImageBitmap(bmp)
+                                    }
+                                } catch (_: Exception) {}
+                            }
+                        }
+                    }
+                }
 
                 val isOwner = user?.email == r.authorEmail
                 val canDelete = isOwner || (user?.isAdmin == true)
@@ -166,6 +192,7 @@ class RepliesActivity : AppCompatActivity() {
 
                 author.setOnClickListener { openUserProfile(r.authorEmail) }
                 avatar.setOnClickListener { openUserProfile(r.authorEmail) }
+                avatarImg.setOnClickListener { openUserProfile(r.authorEmail) }
             }
         }
     }

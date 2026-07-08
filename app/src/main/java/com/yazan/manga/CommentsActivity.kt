@@ -201,6 +201,8 @@ class CommentsAdapter(
     private val items = mutableListOf<CloudCommentsManager.Comment>()
     private val repliesMap = mutableMapOf<String, List<CloudCommentsManager.Comment>>()
     private val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault())
+    // Cache of cloud profiles: email -> (name, avatarBase64). Avoids refetching on every scroll.
+    private val cloudProfiles = mutableMapOf<String, AuthManager.CloudUser?>()
 
     fun updateList(top: List<CloudCommentsManager.Comment>, replies: Map<String, List<CloudCommentsManager.Comment>>) {
         items.clear(); items.addAll(top)
@@ -219,6 +221,7 @@ class CommentsAdapter(
 
     inner class VH(v: View) : RecyclerView.ViewHolder(v) {
         private val avatar = v.findViewById<TextView>(R.id.commentAvatar)
+        private val avatarImg = v.findViewById<android.widget.ImageView>(R.id.commentAvatarImage)
         private val adminBadge = v.findViewById<TextView>(R.id.commentAdminBadge)
         private val author = v.findViewById<TextView>(R.id.commentAuthor)
         private val time = v.findViewById<TextView>(R.id.commentTime)
@@ -230,7 +233,10 @@ class CommentsAdapter(
         private val btnReport = v.findViewById<TextView>(R.id.btnReport)
 
         fun bind(c: CloudCommentsManager.Comment) {
+            // Default: show the first letter
             avatar.text = c.authorName.firstOrNull()?.uppercaseChar()?.toString() ?: "?"
+            avatar.visibility = View.VISIBLE
+            avatarImg.visibility = View.GONE
             adminBadge.visibility = if (c.isAdmin) View.VISIBLE else View.GONE
             author.text = c.authorName
             time.text = sdf.format(Date(c.createdAt))
@@ -257,10 +263,51 @@ class CommentsAdapter(
             
             author.setOnClickListener { onProfile(c.authorEmail) }
             avatar.setOnClickListener { onProfile(c.authorEmail) }
+            avatarImg.setOnClickListener { onProfile(c.authorEmail) }
             
+            // Fetch the latest name + avatar from the cloud (so changes are visible to everyone)
+            loadCloudProfile(c)
+
             itemView.setOnLongClickListener {
                 if (currentUser?.isAdmin == true && !c.isAdmin) { onBan(c); true }
                 else false
+            }
+        }
+
+        /** Fetch the commenter's cloud profile (name + avatar) and update the view. */
+        private fun loadCloudProfile(c: CloudCommentsManager.Comment) {
+            // If we already have it cached, apply it immediately
+            cloudProfiles[c.authorEmail]?.let { applyProfile(c, it); return }
+            // Mark as "fetching" with null so we don't refetch
+            cloudProfiles[c.authorEmail] = null
+            AuthManager.fetchCloudUser(c.authorEmail) { cu ->
+                cloudProfiles[c.authorEmail] = cu
+                // Only rebind if this VH is still showing the same comment
+                if (bindingAdapterPosition != RecyclerView.NO_POSITION &&
+                    items.getOrNull(bindingAdapterPosition)?.id == c.id) {
+                    applyProfile(c, cu)
+                }
+            }
+        }
+
+        private fun applyProfile(c: CloudCommentsManager.Comment, cu: AuthManager.CloudUser?) {
+            // Update the displayed name if the cloud has a newer one
+            if (!cu?.name.isNullOrEmpty() && cu!!.name != c.authorName) {
+                author.text = cu.name
+                avatar.text = cu.name.firstOrNull()?.uppercaseChar()?.toString() ?: "?"
+            }
+            // Show the avatar image if available
+            val b64 = cu?.avatarBase64
+            if (!b64.isNullOrEmpty()) {
+                try {
+                    val bytes = android.util.Base64.decode(b64, android.util.Base64.NO_WRAP)
+                    val bmp = android.graphics.BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
+                    if (bmp != null) {
+                        avatar.visibility = View.GONE
+                        avatarImg.visibility = View.VISIBLE
+                        avatarImg.setImageBitmap(bmp)
+                    }
+                } catch (_: Exception) {}
             }
         }
     }
