@@ -168,15 +168,12 @@ class MainActivity : AppCompatActivity() {
                 R.id.menuProfile -> startActivity(Intent(this, ProfileActivity::class.java))
                 R.id.menuSettings -> startActivity(Intent(this, SettingsActivity::class.java))
                 R.id.menuFavorites -> {
-                    // Open the favorites list (cloud-backed)
+                    // Open a dialog with the 4 custom lists
                     val user = com.yazan.manga.data.AuthManager.getCurrentUser(this)
                     if (user == null) {
                         Toast.makeText(this, "سجّل الدخول أولاً", Toast.LENGTH_SHORT).show()
                     } else {
-                        val intent = Intent(this, MangaListActivity::class.java)
-                        intent.putExtra("list_type", "favorites")
-                        intent.putExtra("user_email", user.email)
-                        startActivity(intent)
+                        showCustomListsDialog(user.email)
                     }
                 }
                 R.id.menuHistory -> Toast.makeText(this, "قريباً", Toast.LENGTH_SHORT).show()
@@ -211,6 +208,27 @@ class MainActivity : AppCompatActivity() {
             tvName.text = "زائر"
             tvEmail.text = "اضغط لتسجيل الدخول"
         }
+    }
+
+    /** Shows a dialog with the 4 custom lists, then opens the selected one. */
+    private fun showCustomListsDialog(email: String) {
+        val options = arrayOf(
+            "⭐ المفضلة",
+            "📚 أتابع لاحقاً",
+            "👀 أرغب بمتابعتها",
+            "✅ أنهيتها"
+        )
+        val listTypes = arrayOf("favorites", "watchLater", "wantToWatch", "completed")
+        androidx.appcompat.app.AlertDialog.Builder(this)
+            .setTitle("قوائمي المخصصة")
+            .setItems(options) { _, which ->
+                val intent = Intent(this, MangaListActivity::class.java)
+                intent.putExtra("list_type", listTypes[which])
+                intent.putExtra("user_email", email)
+                startActivity(intent)
+            }
+            .setNegativeButton("إلغاء", null)
+            .show()
     }
 
     private fun loadManga() {
