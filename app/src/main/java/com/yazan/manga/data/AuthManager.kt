@@ -193,12 +193,11 @@ object AuthManager {
             .putString(KEY_LINKED_EMAIL, cleanEmail)
             .apply()
 
-        // If this was a fresh local profile (e.g. after app update/reinstall wiped
-        // SharedPreferences), restore the saved name/username/avatar from the cloud
-        // so the user doesn't lose their customizations.
-        if (wasNewUser) {
-            restoreUserFromCloud(context)
-        }
+        // Always sync with the cloud — the cloud is the source of truth for
+        // name/username/avatar. This handles both:
+        //  - fresh installs (wasNewUser=true): restore everything
+        //  - updates (wasNewUser=false): pull any changes made from another device
+        restoreUserFromCloud(context)
 
         // Upload profile to cloud so other users see the latest name/avatar
         uploadUserToCloud(context)
@@ -256,12 +255,11 @@ object AuthManager {
             .putString(KEY_LINKED_EMAIL, email)
             .apply()
 
-        // If this was a fresh local profile (e.g. after app update/reinstall wiped
-        // SharedPreferences), restore the saved name/username/avatar from the cloud
-        // so the user doesn't lose their customizations.
-        if (wasNewUser) {
-            restoreUserFromCloud(context)
-        }
+        // Always sync with the cloud — the cloud is the source of truth for
+        // name/username/avatar. This handles both:
+        //  - fresh installs (wasNewUser=true): restore everything
+        //  - updates (wasNewUser=false): pull any changes made from another device
+        restoreUserFromCloud(context)
 
         // Upload profile to cloud so other users see the latest name/avatar
         uploadUserToCloud(context)
@@ -636,58 +634,80 @@ object AuthManager {
      *
      * Runs async — updates the local user + store when the cloud data arrives.
      */
-    fun restoreUserFromCloud(context: Context) {
-        val current = getCurrentUser(context) ?: return
+    fun restoreUserFromCloud(context: Context, onRestored: ((Boolean) -> Unit)? = null) {
+        val current = getCurrentUser(context) ?: run {
+            onRestored?.invoke(false)
+            return
+        }
         try {
             cloudDb.collection(USERS_COLLECTION).document(current.email).get()
                 .addOnSuccessListener { doc ->
-                    if (!doc.exists()) return@addOnSuccessListener
+                    if (!doc.exists()) {
+                        onRestored?.invoke(false)
+                        return@addOnSuccessListener
+                    }
 
                     val cloudName = doc.getString("name")
                     val cloudUsername = doc.getString("username")
                     val cloudAvatarBase64 = doc.getString("avatarBase64") ?: ""
 
                     var updated = current
+                    var changed = false
 
-                    // Restore name if the cloud has a different (custom) one
+                    // Always restore the name from the cloud (cloud is source of truth)
                     if (!cloudName.isNullOrEmpty() && cloudName != current.name) {
                         updated = updated.copy(name = cloudName)
+                        changed = true
                     }
 
-                    // Restore username if the cloud has a custom one
+                    // Always restore the username from the cloud
                     if (!cloudUsername.isNullOrEmpty() && cloudUsername != current.username) {
                         updated = updated.copy(username = cloudUsername)
+                        changed = true
                     }
 
-                    // Restore avatar: decode base64 → save to internal storage → set path
-                    if (cloudAvatarBase64.isNotEmpty() && updated.avatar.isEmpty()) {
-                        try {
-                            val bytes = Base64.decode(cloudAvatarBase64, Base64.NO_WRAP)
-                            val bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
-                            if (bitmap != null) {
-                                val avatarFile = File(context.filesDir, "avatar_${current.email.replace("@", "_at_")}.jpg")
-                                val out = FileOutputStream(avatarFile)
-                                bitmap.compress(Bitmap.CompressFormat.JPEG, 85, out)
-                                out.close()
-                                bitmap.recycle()
-                                updated = updated.copy(avatar = avatarFile.absolutePath)
+                    // Restore avatar: decode base64 → save to internal storage → set path.
+                    // We overwrite the local avatar if the cloud has one AND either:
+                    //  - the local avatar path is empty, OR
+                    //  - the local avatar file doesn't exist anymore (e.g. after reinstall)
+                    if (cloudAvatarBase64.isNotEmpty()) {
+                        val localAvatarFile = updated.avatar.takeIf { it.isNotEmpty() }?.let { File(it) }
+                        val localAvatarMissing = localAvatarFile == null || !localAvatarFile.exists()
+                        if (localAvatarMissing) {
+                            try {
+                                val bytes = Base64.decode(cloudAvatarBase64, Base64.NO_WRAP)
+                                val bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
+                                if (bitmap != null) {
+                                    val avatarFile = File(context.filesDir, "avatar_${current.email.replace("@", "_at_")}.jpg")
+                                    val out = FileOutputStream(avatarFile)
+                                    bitmap.compress(Bitmap.CompressFormat.JPEG, 85, out)
+                                    out.close()
+                                    bitmap.recycle()
+                                    updated = updated.copy(avatar = avatarFile.absolutePath)
+                                    changed = true
+                                }
+                            } catch (e: Exception) {
+                                Log.w("AuthManager", "restoreUserFromCloud: avatar decode failed", e)
                             }
-                        } catch (e: Exception) {
-                            Log.w("AuthManager", "restoreUserFromCloud: avatar decode failed", e)
                         }
                     }
 
-                    // If anything changed, save locally + update the store
-                    if (updated != current) {
+                    // If anything changed, save locally + update the current-user cache
+                    if (changed) {
                         saveUser(context, updated)
                         context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
                             .edit().putString(KEY_USER, serializeUser(updated)).apply()
                         Log.d("AuthManager", "restoreUserFromCloud: restored name/username/avatar")
                     }
+                    onRestored?.invoke(changed)
                 }
-                .addOnFailureListener { Log.w("AuthManager", "restoreUserFromCloud failed", it) }
+                .addOnFailureListener {
+                    Log.w("AuthManager", "restoreUserFromCloud failed", it)
+                    onRestored?.invoke(false)
+                }
         } catch (e: Exception) {
             Log.w("AuthManager", "restoreUserFromCloud exception", e)
+            onRestored?.invoke(false)
         }
     }
 

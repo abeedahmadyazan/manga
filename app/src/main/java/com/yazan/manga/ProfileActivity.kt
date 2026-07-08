@@ -232,6 +232,12 @@ class ProfileActivity : AppCompatActivity() {
                 Toast.makeText(this, "تم تسجيل الدخول بنجاح", Toast.LENGTH_SHORT).show()
             }
             updateUI()
+            // After login, the cloud sync (restoreUserFromCloud) runs async.
+            // Re-run updateUI after a short delay so the restored name/username/avatar
+            // are reflected in the UI.
+            android.os.Handler(android.os.Looper.getMainLooper()).postDelayed({
+                updateUI()
+            }, 1500)
         } else {
             // Show a generic error — never expose the real cause to the user
             Toast.makeText(this, "حدث خطأ أثناء تسجيل الدخول", Toast.LENGTH_LONG).show()
@@ -382,6 +388,17 @@ class ProfileActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         updateUI()
+        // If the user is logged in, try to pull the latest profile from the cloud.
+        // This ensures the profile screen always shows the current name/username/avatar
+        // even if they were changed from another device.
+        val user = AuthManager.getCurrentUser(this)
+        if (user != null) {
+            AuthManager.restoreUserFromCloud(this) { changed ->
+                if (changed) {
+                    runOnUiThread { updateUI() }
+                }
+            }
+        }
     }
 
     override fun onDestroy() {
