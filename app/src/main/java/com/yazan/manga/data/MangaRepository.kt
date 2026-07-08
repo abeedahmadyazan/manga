@@ -23,6 +23,11 @@ class MangaRepository {
     // Cache: maps chapter number -> MangaDex chapter ID (for Arabic chapters)
     private val mdChapterCache = mutableMapOf<Pair<String, String>, String>()
 
+    // Cache: maps manga id -> MangaPill manga id (numeric)
+    private val mpMangaIdCache = mutableMapOf<String, String>()
+    // Cache: maps manga id -> (chapter number -> MangaPill chapter URL path)
+    private val mpChapterUrlCache = mutableMapOf<String, MutableMap<String, String>>()
+
     suspend fun getLatestManga(page: Int = 1): Result<List<MangaListItem>> {
         return try {
             val offset = (page - 1) * 20
@@ -171,6 +176,26 @@ class MangaRepository {
                 null
             }
 
+            // 3b. MangaPill fallback — used when:
+            //   - 3asq returned no chapters OR
+            //   - 3asq returned chapters but they're old (Cloudflare-blocked on read)
+            // We don't know in advance which 3asq chapters will work, so we
+            // fetch MangaPill chapters up-front and store their URL paths in a
+            // cache. When 3asq fails to deliver pages for a chapter, we fall
+            // back to MangaPill.
+            val mpMangaId = MangaPillClient.findMangaId(enTitle.ifBlank { title })
+            val mpChapters = if (mpMangaId != null) {
+                MangaPillClient.fetchChapterList(mpMangaId)
+            } else emptyList()
+            // Cache: chapter number -> MangaPill chapter URL path
+            val mpUrlCache = mutableMapOf<String, String>()
+            mpChapters.forEach { (num, url) -> mpUrlCache[num] = url }
+            mpMangaIdCache[id] = mpMangaId ?: ""
+            mpChapterUrlCache[id] = mpUrlCache
+            if (mpChapters.isNotEmpty()) {
+                Log.d(TAG, "MangaPill: ${mpChapters.size} chapters available for $enTitle")
+            }
+
             // 4. Merge: 3asq list + MangaDex chapters (prefer MangaDex for reliability)
             val chapters = if (!asqChapters.isNullOrEmpty()) {
                 Log.d(TAG, "Using 3asq: ${asqChapters!!.size} chapters")
@@ -185,8 +210,22 @@ class MangaRepository {
                         asqCh
                     }
                 }
-            } else {
+            } else if (mdChapters.isNotEmpty()) {
                 mdChapters
+            } else if (mpChapters.isNotEmpty()) {
+                // No Arabic chapters anywhere — use MangaPill (English)
+                Log.d(TAG, "Using MangaPill fallback: ${mpChapters.size} chapters (English)")
+                mpChapters.map { (num, urlPath) ->
+                    MangaChapter(
+                        id = urlPath,  // store the full URL path in id
+                        number = num,
+                        title = "Chapter $num",
+                        date = "",
+                        source = "mangapill"
+                    )
+                }
+            } else {
+                emptyList()
             }
 
             Result.success(MangaDetails(id = id, title = title, cover = cover, description = description, author = author, artist = author, status = status, genres = genres, chapters = chapters, source = "mangadex", latestChapter = null))
@@ -356,8 +395,21 @@ class MangaRepository {
                         }
                     }
                 }
-                // 3asq failed, no fallback (MangaDex ID not available)
+                // 3asq failed — try MangaPill fallback (English, but better than nothing)
+                val mpPages = fetchMangaPillPagesForChapter(chapter)
+                if (mpPages.isNotEmpty()) {
+                    Log.d(TAG, "Falling back to MangaPill for chapter ${chapter.number}")
+                    return Result.success(mpPages)
+                }
                 Result.failure(Exception("هذا الفصل غير متاح حالياً"))
+            } else if (chapter.source == "mangapill") {
+                // Direct MangaPill fetch — chapter.id holds the URL path
+                val pages = MangaPillClient.fetchChapterPages(chapter.id)
+                if (pages.isEmpty()) {
+                    Result.failure(Exception("تعذّر تحميل صفحات الفصل"))
+                } else {
+                    Result.success(pages.mapIndexed { i, url -> ChapterPage(index = i, url = url) })
+                }
             } else {
                 // MangaDex
                 val req = Request.Builder().url("https://api.mangadex.org/at-home/server/${chapter.id}").header("User-Agent", UA).header("Accept", "application/json").build()
@@ -376,6 +428,26 @@ class MangaRepository {
                 }
             }
         } catch (e: Exception) { Result.failure(e) }
+    }
+
+    /**
+     * Look up the MangaPill chapter URL for the given chapter number (using the
+     * cache populated in getMangaDetails), then fetch its pages. Returns empty
+     * list if no MangaPill data is available for this manga.
+     */
+    private fun fetchMangaPillPagesForChapter(chapter: MangaChapter): List<ChapterPage> {
+        // We need the manga id to look up the cache. 3asq chapter ids are
+        // "3asq-{slug}-{num}" — we don't have the manga's MangaDex id here.
+        // So we look through all cached entries; the chapter number is the key.
+        val num = chapter.number
+        for ((_, urlMap) in mpChapterUrlCache) {
+            val urlPath = urlMap[num] ?: urlMap[num.trimStart('0')] ?: continue
+            val urls = MangaPillClient.fetchChapterPages(urlPath)
+            if (urls.isNotEmpty()) {
+                return urls.mapIndexed { i, url -> ChapterPage(index = i, url = url) }
+            }
+        }
+        return emptyList()
     }
 
     suspend fun getMangaDetailsAllLanguages(id: String): Result<MangaDetails> = getMangaDetails(id)
