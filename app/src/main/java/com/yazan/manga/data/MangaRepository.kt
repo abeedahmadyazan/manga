@@ -203,7 +203,7 @@ class MangaRepository {
         var offset = 0; val limit = 100; var total = Int.MAX_VALUE
         while (offset < total && offset < 5000) {
             try {
-                val url = "https://api.mangadex.org/manga/$id/feed?limit=$limit&offset=$offset&order[chapter]=desc&contentRating[]=safe&contentRating[]=suggestive"
+                val url = "https://api.mangadex.org/manga/$id/feed?limit=$limit&offset=$offset&translatedLanguage[]=ar&order[chapter]=desc&contentRating[]=safe&contentRating[]=suggestive"
                 val req = Request.Builder().url(url).header("User-Agent", UA).header("Accept", "application/json").build()
                 val resp = client.newCall(req).execute()
                 if (!resp.isSuccessful) { resp.close(); break }
@@ -218,7 +218,7 @@ class MangaRepository {
                         val ch = data[i].asJsonObject
                         val attrs = ch.getAsJsonObject("attributes") ?: continue
                         val lang = attrs.get("translatedLanguage")?.asString ?: ""
-                        if (lang == "ar" || lang == "en") {
+                        if (lang == "ar") {  // Arabic ONLY
                             val chId = ch.get("id").asString
                             val num = attrs.get("chapter")?.asString ?: continue
                             val pub = attrs.get("publishAt")?.asString ?: ""
