@@ -70,8 +70,21 @@ class CommentsActivity : AppCompatActivity() {
 
         adapter = CommentsAdapter(
             currentUser = AuthManager.getCurrentUser(this),
-            onLike = { c -> AuthManager.getCurrentUser(this)?.let { CloudCommentsManager.toggleLike(c.id, it.email, true) {} } },
-            onDislike = { c -> AuthManager.getCurrentUser(this)?.let { CloudCommentsManager.toggleLike(c.id, it.email, false) {} } },
+            onLike = { c ->
+                // Bot protection: ignore rapid taps
+                if (com.yazan.manga.data.BotProtection.checkLikeTap()) {
+                    AuthManager.getCurrentUser(this)?.let { CloudCommentsManager.toggleLike(c.id, it.email, true) {} }
+                } else {
+                    Toast.makeText(this, "مهلاً، توقف قليلاً", Toast.LENGTH_SHORT).show()
+                }
+            },
+            onDislike = { c ->
+                if (com.yazan.manga.data.BotProtection.checkLikeTap()) {
+                    AuthManager.getCurrentUser(this)?.let { CloudCommentsManager.toggleLike(c.id, it.email, false) {} }
+                } else {
+                    Toast.makeText(this, "مهلاً، توقف قليلاً", Toast.LENGTH_SHORT).show()
+                }
+            },
             onReply = { c -> openReplies(c.id, c.authorName) },
             onDelete = { c -> confirmDelete(c.id) },
             onBan = { c -> confirmBan(c.authorEmail, c.authorName) },

@@ -209,6 +209,18 @@ class MainActivity : AppCompatActivity() {
 
     private fun updateMenuHeader() {
         val headerView = navigationView.getHeaderView(0)
+        // Add top padding equal to the status bar height so the header sits
+        // below the status bar (clock/notifications), not behind it.
+        val resourceId = resources.getIdentifier("status_bar_height", "dimen", "android")
+        if (resourceId > 0) {
+            val statusBarHeight = resources.getDimensionPixelSize(resourceId)
+            headerView.setPadding(
+                headerView.paddingLeft,
+                statusBarHeight,
+                headerView.paddingRight,
+                headerView.paddingBottom
+            )
+        }
         val user = AuthManager.getCurrentUser(this)
         val tvName = headerView.findViewById<TextView>(R.id.menuUserName)
         val tvEmail = headerView.findViewById<TextView>(R.id.menuUserEmail)

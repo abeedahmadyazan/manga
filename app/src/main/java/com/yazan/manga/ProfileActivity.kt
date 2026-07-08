@@ -136,11 +136,21 @@ class ProfileActivity : AppCompatActivity() {
     }
 
     private fun tryGoogleSignIn() {
-        try {
-            val signInIntent = googleSignInClient.signInIntent
-            startActivityForResult(signInIntent, RC_SIGN_IN)
-        } catch (e: Exception) {
-            showAccountPicker()
+        // Check if this device is blocked from login (bot protection)
+        val deviceId = com.yazan.manga.data.AuthManager.getDeviceId(this)
+        com.yazan.manga.data.BotProtection.checkLoginBlock(deviceId) { block ->
+            runOnUiThread {
+                if (block.blocked) {
+                    Toast.makeText(this, block.reason, Toast.LENGTH_LONG).show()
+                } else {
+                    try {
+                        val signInIntent = googleSignInClient.signInIntent
+                        startActivityForResult(signInIntent, RC_SIGN_IN)
+                    } catch (e: Exception) {
+                        showAccountPicker()
+                    }
+                }
+            }
         }
     }
 
@@ -243,6 +253,9 @@ class ProfileActivity : AppCompatActivity() {
                 Toast.makeText(this, "تم تسجيل الدخول بنجاح", Toast.LENGTH_SHORT).show()
             }
             updateUI()
+            // Clear any failed-login attempts on successful login
+            val deviceId = com.yazan.manga.data.AuthManager.getDeviceId(this)
+            com.yazan.manga.data.BotProtection.clearLoginAttempts(deviceId)
             // After login, the cloud sync (restoreUserFromCloud) runs async.
             // Re-run updateUI after a short delay so the restored name/username/avatar
             // are reflected in the UI.
@@ -252,6 +265,9 @@ class ProfileActivity : AppCompatActivity() {
         } else {
             // Show a generic error — never expose the real cause to the user
             Toast.makeText(this, "حدث خطأ أثناء تسجيل الدخول", Toast.LENGTH_LONG).show()
+            // Record the failed attempt for bot protection
+            val deviceId = com.yazan.manga.data.AuthManager.getDeviceId(this)
+            com.yazan.manga.data.BotProtection.recordFailedLogin(deviceId)
             AuthManager.logout(this)
             updateUI()
         }
@@ -303,31 +319,52 @@ class ProfileActivity : AppCompatActivity() {
 
     private fun showEditProfileInfoDialog() {
         val user = AuthManager.getCurrentUser(this) ?: return
-        val birthInput = EditText(this).apply {
-            setText(user.birthDate)
-            hint = "تاريخ الميلاد (yyyy-MM-dd) — اختياري"
-            setPadding(40, 24, 40, 24)
-            inputType = android.text.InputType.TYPE_CLASS_TEXT
-        }
         val countryInput = EditText(this).apply {
             setText(user.country)
             hint = "الدولة — اختياري"
             setPadding(40, 24, 40, 24)
             inputType = android.text.InputType.TYPE_CLASS_TEXT
         }
+        val birthDateBtn = android.widget.Button(this).apply {
+            text = if (user.birthDate.isNotEmpty())
+                "🎂 تاريخ الميلاد: ${user.birthDate}"
+            else
+                "🎂 تحديد تاريخ الميلاد (اختياري)"
+            background = getDrawable(R.drawable.bg_secondary_button)
+            setTextColor(getColor(R.color.text_primary))
+        }
+        var selectedBirthDate = user.birthDate
+        birthDateBtn.setOnClickListener {
+            val cal = java.util.Calendar.getInstance()
+            // Parse existing date if set
+            if (selectedBirthDate.isNotEmpty()) {
+                try {
+                    val parts = selectedBirthDate.split("-")
+                    cal.set(parts[0].toInt(), parts[1].toInt() - 1, parts[2].toInt())
+                } catch (_: Exception) {}
+            }
+            android.app.DatePickerDialog(this,
+                { _, year, month, day ->
+                    selectedBirthDate = String.format("%04d-%02d-%02d", year, month + 1, day)
+                    birthDateBtn.text = "🎂 تاريخ الميلاد: $selectedBirthDate"
+                },
+                cal.get(java.util.Calendar.YEAR),
+                cal.get(java.util.Calendar.MONTH),
+                cal.get(java.util.Calendar.DAY_OF_MONTH)
+            ).show()
+        }
         val container = android.widget.LinearLayout(this).apply {
             orientation = android.widget.LinearLayout.VERTICAL
             setPadding(20, 16, 20, 0)
-            addView(birthInput)
+            addView(birthDateBtn)
             addView(countryInput)
         }
         AlertDialog.Builder(this)
             .setTitle("تعديل المعلومات الشخصية")
             .setView(container)
             .setPositiveButton("حفظ") { _, _ ->
-                val birth = birthInput.text.toString().trim()
                 val country = countryInput.text.toString().trim()
-                AuthManager.updateBirthDate(this, birth)
+                AuthManager.updateBirthDate(this, selectedBirthDate)
                 AuthManager.updateCountry(this, country)
                 Toast.makeText(this, "تم تحديث المعلومات", Toast.LENGTH_SHORT).show()
                 updateUI()

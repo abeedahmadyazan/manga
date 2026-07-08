@@ -190,8 +190,20 @@ class RepliesActivity : AppCompatActivity() {
                 btnDelete.visibility = if (canDelete) View.VISIBLE else View.GONE
                 btnReport.visibility = if (user != null && !isOwner && !r.isAdmin) View.VISIBLE else View.GONE
 
-                btnLike.setOnClickListener { user?.let { CloudCommentsManager.toggleLike(r.id, it.email, true) {} } }
-                btnDislike.setOnClickListener { user?.let { CloudCommentsManager.toggleLike(r.id, it.email, false) {} } }
+                btnLike.setOnClickListener {
+                    if (com.yazan.manga.data.BotProtection.checkLikeTap()) {
+                        user?.let { CloudCommentsManager.toggleLike(r.id, it.email, true) {} }
+                    } else {
+                        Toast.makeText(this@RepliesActivity, "مهلاً، توقف قليلاً", Toast.LENGTH_SHORT).show()
+                    }
+                }
+                btnDislike.setOnClickListener {
+                    if (com.yazan.manga.data.BotProtection.checkLikeTap()) {
+                        user?.let { CloudCommentsManager.toggleLike(r.id, it.email, false) {} }
+                    } else {
+                        Toast.makeText(this@RepliesActivity, "مهلاً، توقف قليلاً", Toast.LENGTH_SHORT).show()
+                    }
+                }
                 btnDelete.setOnClickListener {
                     AlertDialog.Builder(this@RepliesActivity)
                         .setTitle("حذف الرد").setMessage("هل تريد الحذف؟")

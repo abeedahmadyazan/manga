@@ -74,7 +74,7 @@ object AsqClient {
         val rating = extractRating(html)
         val latestChapter = extractLatestChapter(html)
 
-        val chapters = if (latestChapter > 0) {
+        var chapters = if (latestChapter > 0) {
             // Generate 1..latest chapters (descending — newest first).
             (latestChapter downTo 1).map { num ->
                 MangaChapter(
@@ -87,8 +87,18 @@ object AsqClient {
                 )
             }
         } else {
-            // Fallback: scrape whatever chapter links appear in the page.
+            // Fallback 1: scrape whatever chapter links appear in the page.
             parseChaptersFromHtml(html, slug)
+        }
+
+        // Fallback 2: if no chapters found, try the AJAX endpoint used by
+        // the WordPress Manga theme (Madara). Many manga pages load their
+        // chapter list dynamically via AJAX, so the links aren't in the HTML.
+        if (chapters.isEmpty()) {
+            val ajaxHtml = get("$BASE_URL/manga/$slug/ajax/chapters/")
+            if (ajaxHtml != null) {
+                chapters = parseChaptersFromHtml(ajaxHtml, slug)
+            }
         }
 
         return MangaDetails(

@@ -37,8 +37,14 @@ class ZoomableImageView @JvmOverloads constructor(
     private var lastTouchX = 0f
     private var lastTouchY = 0f
 
-    // Multiplier to make panning feel faster/more responsive
-    private val panSpeedMultiplier = 1.8f
+    // Multiplier to make panning feel faster/more responsive — scales with
+    // the zoom level so high zoom = faster pan (less finger travel needed).
+    private fun panSpeedMultiplier(): Float {
+        // At scale=1, multiplier is 1.5x. At scale=5, it's ~3.5x.
+        // This prevents the jitter at low zoom (where small finger movements
+        // would otherwise cause large jumps) while keeping high zoom responsive.
+        return (1.0f + (scaleX - 1.0f) * 0.5f).coerceIn(1.0f, 3.5f)
+    }
 
     private val gestureDetector = GestureDetector(context, object : GestureDetector.SimpleOnGestureListener() {
         override fun onDoubleTap(e: MotionEvent): Boolean {
@@ -72,8 +78,8 @@ class ZoomableImageView @JvmOverloads constructor(
                 if (scaleX > 1.0f && event.pointerCount == 1) {
                     parent?.requestDisallowInterceptTouchEvent(true)
                     // Apply the speed multiplier so panning is faster
-                    val dx = (event.x - lastTouchX) * panSpeedMultiplier
-                    val dy = (event.y - lastTouchY) * panSpeedMultiplier
+                    val dx = (event.x - lastTouchX) * panSpeedMultiplier()
+                    val dy = (event.y - lastTouchY) * panSpeedMultiplier()
                     posX += dx
                     posY += dy
                     lastTouchX = event.x

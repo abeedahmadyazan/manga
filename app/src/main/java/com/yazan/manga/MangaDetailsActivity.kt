@@ -51,6 +51,7 @@ class MangaDetailsActivity : AppCompatActivity() {
     private var mangaSlug: String = ""
     private var mangaTitle: String = ""
     private var mangaCover: String = ""
+    private var chaptersDescending: Boolean = true  // default: newest first
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -101,6 +102,15 @@ class MangaDetailsActivity : AppCompatActivity() {
         // Add to a custom list (favorites / watch later / want to watch / completed)
         btnAddToList.setOnClickListener { showAddToListDialog() }
 
+        // General manga comments (separate from per-chapter comments)
+        findViewById<ImageButton>(R.id.btnMangaComments).setOnClickListener {
+            val intent = Intent(this, CommentsActivity::class.java)
+            intent.putExtra("context_id", mangaSlug)
+            intent.putExtra("context_type", "manga")
+            intent.putExtra("context_title", mangaTitle)
+            startActivity(intent)
+        }
+
         chapterAdapter = ChapterAdapter(
             onClick = { chapter -> openReader(chapter) },
             onCommentsClick = { chapter -> openChapterComments(chapter) }
@@ -110,6 +120,14 @@ class MangaDetailsActivity : AppCompatActivity() {
 
         btnRead.setOnClickListener {
             details?.chapters?.lastOrNull()?.let { openReader(it) }
+        }
+
+        // Chapter sort toggle
+        val btnSort = findViewById<MaterialButton>(R.id.btnSortChapters)
+        btnSort.setOnClickListener {
+            chaptersDescending = !chaptersDescending
+            btnSort.text = if (chaptersDescending) "ترتيب: الأحدث" else "ترتيب: الأقدم"
+            details?.let { displayChapters(it.chapters) }
         }
 
         findViewById<SwipeRefreshLayout>(R.id.swipeRefresh).setOnRefreshListener {
@@ -176,9 +194,19 @@ class MangaDetailsActivity : AppCompatActivity() {
             btnRead.visibility = View.GONE
         } else {
             chaptersCountText.text = "${data.chapters.size} فصل"
-            chapterAdapter.submitList(data.chapters)
+            displayChapters(data.chapters)
             btnRead.visibility = View.VISIBLE
         }
+    }
+
+    /** Display the chapter list in the current sort order (newest/oldest first). */
+    private fun displayChapters(chapters: List<MangaChapter>) {
+        val sorted = if (chaptersDescending) {
+            chapters.sortedByDescending { it.number.toFloatOrNull() ?: 0f }
+        } else {
+            chapters.sortedBy { it.number.toFloatOrNull() ?: 0f }
+        }
+        chapterAdapter.submitList(sorted)
     }
 
     private fun openReader(chapter: MangaChapter) {

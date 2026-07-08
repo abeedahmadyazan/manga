@@ -50,51 +50,80 @@ object CloudCommentsManager {
                     return@addOnSuccessListener
                 }
 
-                // Check if the user is currently suspended in the cloud (banned_users/{email})
-                db.collection("banned_users").document(user.email).get()
-                    .addOnSuccessListener { banDoc ->
-                        if (banDoc.exists()) {
-                            val until = banDoc.getLong("until") ?: 0L
-                            if (until == 0L) {
-                                callback(false, "تم إيقاف حسابك بشكل دائم")
+                // Check the per-context comment limit (max 2 top-level comments
+                // per context — chapter or manga — per user).
+                if (parentId == null) {
+                    db.collection("comments")
+                        .whereEqualTo("contextId", contextId)
+                        .whereEqualTo("authorEmail", user.email)
+                        .whereEqualTo("parentId", null)
+                        .get()
+                        .addOnSuccessListener { snap ->
+                            if (snap.size() >= 2) {
+                                callback(false, "وصلت للحد الأقصى (تعليقان لكل فصل/مانجا). احذف تعليقاً لتكتب جديداً.")
                                 return@addOnSuccessListener
                             }
-                            if (until > now) {
-                                val remainingMs = until - now
-                                val remainingText = when {
-                                    remainingMs < 60 * 60 * 1000 -> "${remainingMs / 60000} دقيقة"
-                                    remainingMs < 24 * 60 * 60 * 1000 -> "${remainingMs / (60 * 60 * 1000)} ساعة"
-                                    else -> "${remainingMs / (24 * 60 * 60 * 1000)} يوم"
-                                }
-                                callback(false, "تم إيقاف حسابك. متبقي: $remainingText")
-                                return@addOnSuccessListener
-                            }
-                            // Ban expired — clean it up
-                            db.collection("banned_users").document(user.email).delete()
+                            // Continue with ban check
+                            proceedWithBanCheck(user, contextId, contextType, text, parentId, callback)
                         }
-
-                        postCommentToCloud(user, contextId, contextType, text, parentId) { success, err ->
-                            if (success) {
-                                // Update the cooldown timestamp in the cloud
-                                db.collection("comment_cooldowns").document(user.email)
-                                    .set(mapOf("lastCommentAt" to System.currentTimeMillis()))
-                            }
-                            callback(success, err)
+                        .addOnFailureListener {
+                            // If the count check fails, still allow
+                            proceedWithBanCheck(user, contextId, contextType, text, parentId, callback)
                         }
-                    }
-                    .addOnFailureListener {
-                        // If the ban check fails, still allow the comment (don't block legit users)
-                        postCommentToCloud(user, contextId, contextType, text, parentId) { success, err ->
-                            if (success) {
-                                db.collection("comment_cooldowns").document(user.email)
-                                    .set(mapOf("lastCommentAt" to System.currentTimeMillis()))
-                            }
-                            callback(success, err)
-                        }
-                    }
+                } else {
+                    // Replies don't count toward the 2-comment limit
+                    proceedWithBanCheck(user, contextId, contextType, text, parentId, callback)
+                }
             }
             .addOnFailureListener {
                 // If the cooldown check fails, still allow the comment
+                proceedWithBanCheck(user, contextId, contextType, text, parentId, callback)
+            }
+    }
+
+    private fun proceedWithBanCheck(
+        user: AuthManager.User,
+        contextId: String,
+        contextType: String,
+        text: String,
+        parentId: String?,
+        callback: (Boolean, String?) -> Unit
+    ) {
+        val now = System.currentTimeMillis()
+        // Check if the user is currently suspended in the cloud (banned_users/{email})
+        db.collection("banned_users").document(user.email).get()
+            .addOnSuccessListener { banDoc ->
+                if (banDoc.exists()) {
+                    val until = banDoc.getLong("until") ?: 0L
+                    if (until == 0L) {
+                        callback(false, "تم إيقاف حسابك بشكل دائم")
+                        return@addOnSuccessListener
+                    }
+                    if (until > now) {
+                        val remainingMs = until - now
+                        val remainingText = when {
+                            remainingMs < 60 * 60 * 1000 -> "${remainingMs / 60000} دقيقة"
+                            remainingMs < 24 * 60 * 60 * 1000 -> "${remainingMs / (60 * 60 * 1000)} ساعة"
+                            else -> "${remainingMs / (24 * 60 * 60 * 1000)} يوم"
+                        }
+                        callback(false, "تم إيقاف حسابك. متبقي: $remainingText")
+                        return@addOnSuccessListener
+                    }
+                    // Ban expired — clean it up
+                    db.collection("banned_users").document(user.email).delete()
+                }
+
+                postCommentToCloud(user, contextId, contextType, text, parentId) { success, err ->
+                    if (success) {
+                        // Update the cooldown timestamp in the cloud
+                        db.collection("comment_cooldowns").document(user.email)
+                            .set(mapOf("lastCommentAt" to System.currentTimeMillis()))
+                    }
+                    callback(success, err)
+                }
+            }
+            .addOnFailureListener {
+                // If the ban check fails, still allow the comment (don't block legit users)
                 postCommentToCloud(user, contextId, contextType, text, parentId) { success, err ->
                     if (success) {
                         db.collection("comment_cooldowns").document(user.email)

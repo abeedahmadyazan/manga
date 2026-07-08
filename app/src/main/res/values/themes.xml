@@ -3,8 +3,8 @@
 
     <style name="Theme.MangaApp" parent="Theme.MaterialComponents.NoActionBar">
         <item name="colorPrimary">@color/primary</item>
-        <item name="colorPrimaryVariant">@color/primary_dark</item>
-        <item name="colorPrimaryDark">@color/primary_dark</item>
+        <item name="colorPrimaryVariant">@color/background_dark</item>
+        <item name="colorPrimaryDark">@color/background_dark</item>
         <item name="colorSecondary">@color/accent</item>
         <item name="colorAccent">@color/primary</item>
         <item name="colorOnPrimary">@color/white</item>
