@@ -5,12 +5,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.google.firebase.firestore.ListenerRegistration
 import com.yazan.manga.data.AuthManager
 import com.yazan.manga.data.ReadingHistoryManager
@@ -43,7 +41,6 @@ class HistoryActivity : AppCompatActivity() {
         val loadingIndicator = findViewById<android.widget.ProgressBar>(R.id.loadingIndicator)
         val emptyText = findViewById<TextView>(R.id.emptyText)
 
-        // Use a vertical list (not a grid) so the cards are compact
         recyclerView.layoutManager = LinearLayoutManager(this)
 
         loadingIndicator.visibility = View.VISIBLE
@@ -74,7 +71,6 @@ class HistoryActivity : AppCompatActivity() {
         )
     }
 
-    /** Compact horizontal-card adapter for history entries. */
     private inner class HistoryAdapter(
         private val items: List<ReadingHistoryManager.HistoryEntry>,
         private val onClick: (ReadingHistoryManager.HistoryEntry) -> Unit
@@ -89,32 +85,19 @@ class HistoryActivity : AppCompatActivity() {
         override fun getItemCount() = items.size
 
         inner class VH(v: View) : RecyclerView.ViewHolder(v) {
-            private val cover: ImageView = v.findViewById(R.id.historyCover)
             private val title: TextView = v.findViewById(R.id.historyTitle)
             private val chapter: TextView = v.findViewById(R.id.historyChapter)
             private val time: TextView = v.findViewById(R.id.historyTime)
 
             fun bind(entry: ReadingHistoryManager.HistoryEntry) {
-                // Use mangaTitle if available; otherwise fall back to the
-                // chapter title (which includes the manga name in older entries).
                 val displayTitle = if (entry.mangaTitle.isNotEmpty()) {
-                    "${entry.mangaTitle} — الفصل ${entry.chapterNumber}"
+                    entry.mangaTitle
                 } else {
                     entry.chapterTitle
                 }
                 title.text = displayTitle
                 chapter.text = "الفصل ${entry.chapterNumber}"
                 time.text = sdf.format(Date(entry.readAt))
-                // Only load the cover if the URL is non-empty
-                if (entry.mangaCover.isNotEmpty()) {
-                    Glide.with(cover.context)
-                        .load(entry.mangaCover)
-                        .centerCrop()
-                        .placeholder(R.color.surface)
-                        .into(cover)
-                } else {
-                    cover.setImageResource(R.color.surface_light)
-                }
                 itemView.setOnClickListener { onClick(entry) }
             }
         }

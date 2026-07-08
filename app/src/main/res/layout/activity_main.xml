@@ -172,6 +172,7 @@
         android:layout_width="280dp"
         android:layout_height="match_parent"
         android:layout_gravity="start"
+        android:fitsSystemWindows="true"
         android:background="@color/background_dark"
         app:headerLayout="@layout/drawer_header"
         app:menu="@menu/drawer_menu"
