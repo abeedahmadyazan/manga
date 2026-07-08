@@ -20,6 +20,8 @@ class MangaRepository(private val appContext: Context? = null) {
     private val TAG = "MangaRepo"
     private val UA = "MangaApp/1.0 (Android)"
     private val ASQ_API = "https://3asq-api.netlify.app/.netlify/functions"
+    private val CORS_PROXY = "https://proxy.cors.sh/"
+    private val ASQ_BASE = "https://3asq.pro"
 
     // Cache: maps chapter number -> MangaDex chapter ID (for Arabic chapters)
     private val mdChapterCache = mutableMapOf<Pair<String, String>, String>()
@@ -439,15 +441,16 @@ class MangaRepository(private val appContext: Context? = null) {
 
     private fun fetch3asqChapters(slug: String): List<MangaChapter>? {
         if (slug.isBlank()) return null
-        return try {
+        // Try the Netlify proxy first (fast, JSON)
+        val proxyResult = try {
             val req = Request.Builder().url("$ASQ_API/chapters?slug=$slug").header("Accept", "application/json").build()
             client.newCall(req).execute().use { resp ->
-                if (!resp.isSuccessful) return null
-                val body = resp.body?.string() ?: return null
+                if (!resp.isSuccessful) return@use null
+                val body = resp.body?.string() ?: return@use null
                 val root = JsonParser.parseString(body)
-                if (!root.isJsonObject) return null
-                val arr = root.asJsonObject.getAsJsonArray("chapters") ?: return null
-                if (arr.size() == 0) return null
+                if (!root.isJsonObject) return@use null
+                val arr = root.asJsonObject.getAsJsonArray("chapters") ?: return@use null
+                if (arr.size() == 0) return@use null
                 val result = mutableListOf<MangaChapter>()
                 for (i in 0 until arr.size()) {
                     val ch = arr[i].asJsonObject
@@ -456,8 +459,56 @@ class MangaRepository(private val appContext: Context? = null) {
                 }
                 if (result.isEmpty()) null else result
             }
+        } catch (e: Exception) { null }
+
+        if (proxyResult != null) return proxyResult
+
+        // Fallback: scrape 3asq.pro directly via CORS proxy
+        // This bypasses Cloudflare by going through proxy.cors.sh
+        return scrape3asqChaptersDirect(slug)
+    }
+
+    /**
+     * Scrape 3asq.pro chapter list directly via a CORS proxy.
+     * This is the NEW method that bypasses Cloudflare.
+     */
+    private fun scrape3asqChaptersDirect(slug: String): List<MangaChapter>? {
+        return try {
+            val url = "${CORS_PROXY}${ASQ_BASE}/manga/$slug/"
+            val req = Request.Builder()
+                .url(url)
+                .header("User-Agent", UA)
+                .header("Origin", ASQ_BASE)
+                .header("Accept", "text/html")
+                .build()
+            client.newCall(req).execute().use { resp ->
+                if (!resp.isSuccessful) return null
+                val html = resp.body?.string() ?: return null
+                // Find all chapter links: /manga/{slug}/{number}/
+                val pattern = java.util.regex.Pattern.compile(
+                    "/manga/$slug/(\\d+(?:\\.\\d+)?)/"
+                )
+                val matcher = pattern.matcher(html)
+                val result = mutableListOf<MangaChapter>()
+                val seen = mutableSetOf<String>()
+                while (matcher.find()) {
+                    val num = matcher.group(1) ?: continue
+                    if (seen.add(num)) {
+                        result.add(MangaChapter(
+                            id = "3asq-$slug-$num",
+                            number = num,
+                            title = "الفصل $num",
+                            date = "",
+                            source = "3asq"
+                        ))
+                    }
+                }
+                // Sort by chapter number descending (newest first)
+                result.sortedByDescending { it.number.toFloatOrNull() ?: 0f }
+                if (result.isEmpty()) null else result
+            }
         } catch (e: Exception) {
-            Log.w(TAG, "fetch3asqChapters($slug) failed: ${e.message}")
+            Log.w(TAG, "scrape3asqChaptersDirect($slug) failed: ${e.message}")
             null
         }
     }
@@ -551,7 +602,13 @@ class MangaRepository(private val appContext: Context? = null) {
                         }
                     }
                 }
-                // 3asq failed — try MangaPill fallback (English, but better than nothing)
+                // 3asq proxy failed — try scraping 3asq.pro directly via CORS proxy
+                val directPages = scrape3asqPagesDirect(slug, num)
+                if (directPages.isNotEmpty()) {
+                    Log.d(TAG, "Got ${directPages.size} pages from 3asq direct (CORS proxy)")
+                    return Result.success(directPages)
+                }
+                // 3asq direct also failed — try MangaPill fallback (English)
                 val mpPages = fetchMangaPillPagesForChapter(chapter)
                 if (mpPages.isNotEmpty()) {
                     Log.d(TAG, "Falling back to MangaPill for chapter ${chapter.number}")
@@ -601,6 +658,47 @@ class MangaRepository(private val appContext: Context? = null) {
      * cache populated in getMangaDetails), then fetch its pages. Returns empty
      * list if no MangaPill data is available for this manga.
      */
+    /**
+     * Scrape 3asq.pro chapter pages directly via CORS proxy.
+     * Bypasses Cloudflare by going through proxy.cors.sh.
+     * Returns Arabic manga pages — this is the primary method now.
+     */
+    private fun scrape3asqPagesDirect(slug: String, chapterNum: String): List<ChapterPage> {
+        return try {
+            val url = "${CORS_PROXY}${ASQ_BASE}/manga/$slug/$chapterNum/"
+            val req = Request.Builder()
+                .url(url)
+                .header("User-Agent", UA)
+                .header("Origin", ASQ_BASE)
+                .header("Accept", "text/html")
+                .build()
+            client.newCall(req).execute().use { resp ->
+                if (!resp.isSuccessful) return emptyList()
+                val html = resp.body?.string() ?: return emptyList()
+                // Find all image URLs inside reading-content div
+                // Pattern: src="https://3asq.pro/wp-content/uploads/WP-manga/data/..."
+                val pattern = java.util.regex.Pattern.compile(
+                    "(?:src|data-src)=\"(https://3asq\\.pro/wp-content/uploads/WP-manga/data/[^\"]+\\.(?:jpg|jpeg|png|webp))\""
+                )
+                val matcher = pattern.matcher(html)
+                val pages = mutableListOf<ChapterPage>()
+                val seen = mutableSetOf<String>()
+                var index = 0
+                while (matcher.find()) {
+                    val imgUrl = matcher.group(1) ?: continue
+                    if (seen.add(imgUrl)) {
+                        pages.add(ChapterPage(index = index, url = imgUrl))
+                        index++
+                    }
+                }
+                pages
+            }
+        } catch (e: Exception) {
+            Log.w(TAG, "scrape3asqPagesDirect($slug, $chapterNum) failed: ${e.message}")
+            emptyList()
+        }
+    }
+
     private fun fetchMangaPillPagesForChapter(chapter: MangaChapter): List<ChapterPage> {
         // We need the manga id to look up the cache. 3asq chapter ids are
         // "3asq-{slug}-{num}" — we don't have the manga's MangaDex id here.
