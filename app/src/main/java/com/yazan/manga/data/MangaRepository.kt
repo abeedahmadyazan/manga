@@ -577,11 +577,12 @@ class MangaRepository(private val appContext: Context? = null) {
     suspend fun getChapterPages(chapter: MangaChapter): Result<List<ChapterPage>> {
         return try {
             if (chapter.source == "3asq") {
-                // Try 3asq first
+                // Extract slug and chapter number from the chapter id
+                // Format: "3asq-{slug}-{num}"
                 val parts = chapter.id.split("-")
-                if (parts.size >= 3) {
-                    val num = parts.last()
-                    val slug = parts.dropLast(1).joinToString("-").removePrefix("3asq-")
+                val num = parts.lastOrNull() ?: ""
+                val slug = if (parts.size >= 3) parts.dropLast(1).joinToString("-").removePrefix("3asq-") else ""
+                if (slug.isNotBlank() && num.isNotBlank()) {
                     val req = Request.Builder().url("$ASQ_API/pages?slug=$slug&chapter=$num").header("Accept", "application/json").build()
                     client.newCall(req).execute().use { resp ->
                         if (resp.isSuccessful) {
