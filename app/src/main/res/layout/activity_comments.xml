@@ -1,235 +1,135 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
     android:orientation="vertical"
     android:background="@color/background_dark"
-    android:layoutDirection="rtl">
+    android:fitsSystemWindows="true">
 
-    <!-- ============ Top bar ============ -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:layout_height="56dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingHorizontal="16dp"
         android:background="@color/background_dark"
-        android:paddingTop="36dp">
+        android:elevation="4dp">
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <ImageButton
+            android:id="@+id/btnBack"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@android:drawable/ic_media_previous"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:tint="@color/white"
+            android:contentDescription="رجوع" />
+
+        <TextView
+            android:id="@+id/commentsTitle"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:paddingHorizontal="12dp"
-            android:paddingBottom="10dp">
-
-            <ImageButton
-                android:id="@+id/btnBack"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:src="@drawable/ic_back"
-                android:contentDescription="رجوع"
-                android:tint="@color/text_primary"
-                tools:ignore="HardcodedText,UseAppTint" />
-
-            <TextView
-                android:id="@+id/commentsTitle"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginStart="10dp"
-                android:text="💬 التعليقات"
-                android:textColor="@color/text_primary"
-                android:textSize="17sp"
-                android:textStyle="bold"
-                tools:ignore="HardcodedText" />
-
-            <TextView
-                android:id="@+id/commentsCount"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="0"
-                android:textColor="@color/primary"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                tools:ignore="HardcodedText" />
-        </LinearLayout>
-
-        <!-- Sort segmented control -->
-        <LinearLayout
-            android:id="@+id/sortContainer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingHorizontal="12dp"
-            android:paddingBottom="10dp"
-            android:weightSum="3">
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnSortNewest"
-                android:layout_width="0dp"
-                android:layout_height="36dp"
-                android:layout_weight="1"
-                android:layout_marginHorizontal="3dp"
-                android:text="الأحدث"
-                android:textSize="12sp"
-                android:textStyle="bold"
-                android:background="@drawable/bg_tab_active"
-                app:backgroundTint="@null"
-                android:textColor="@color/white"
-                tools:ignore="HardcodedText" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnSortOldest"
-                android:layout_width="0dp"
-                android:layout_height="36dp"
-                android:layout_weight="1"
-                android:layout_marginHorizontal="3dp"
-                android:text="الأقدم"
-                android:textSize="12sp"
-                android:textStyle="bold"
-                android:background="@drawable/bg_tab_inactive"
-                app:backgroundTint="@null"
-                android:textColor="@color/text_secondary"
-                tools:ignore="HardcodedText" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnSortLikes"
-                android:layout_width="0dp"
-                android:layout_height="36dp"
-                android:layout_weight="1"
-                android:layout_marginHorizontal="3dp"
-                android:text="الأكثر إعجاباً"
-                android:textSize="11sp"
-                android:textStyle="bold"
-                android:background="@drawable/bg_tab_inactive"
-                app:backgroundTint="@null"
-                android:textColor="@color/text_secondary"
-                tools:ignore="HardcodedText" />
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/divider" />
+            android:layout_weight="1"
+            android:text="💬 تعليقات"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginStart="8dp" />
     </LinearLayout>
 
-    <!-- ============ Comments list ============ -->
-    <FrameLayout
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/sortTabs"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_height="40dp"
+        android:background="@color/background_dark"
+        app:tabMode="fixed"
+        app:tabTextColor="@color/text_secondary"
+        app:tabSelectedTextColor="@color/primary"
+        app:tabIndicatorColor="@color/primary">
 
-        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="الأحدث" />
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="الأقدم" />
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="الأكثر تفاعل" />
+    </com.google.android.material.tabs.TabLayout>
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipeRefresh"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/commentsRecyclerView"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:clipToPadding="false"
-            android:paddingVertical="8dp" />
+            android:layout_height="match_parent">
 
-        <ProgressBar
-            android:id="@+id/loadingIndicator"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_gravity="center"
-            android:visibility="gone"
-            android:indeterminateTint="@color/primary" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/commentsRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipToPadding="false"
+                android:padding="12dp" />
 
-        <TextView
-            android:id="@+id/emptyText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:padding="32dp"
-            android:gravity="center"
-            android:text="لا توجد تعليقات بعد. كن أول من يعلق!"
-            android:textColor="@color/text_secondary"
-            android:textSize="14sp"
-            android:lineSpacingExtra="3dp"
-            android:visibility="gone"
-            tools:ignore="HardcodedText" />
-    </FrameLayout>
+            <ProgressBar
+                android:id="@+id/loadingIndicator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:indeterminateTint="@color/primary"
+                android:visibility="gone" />
 
-    <!-- ============ Reply banner (shown when replying) ============ -->
-    <LinearLayout
-        android:id="@+id/replyBanner"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:paddingHorizontal="14dp"
-        android:paddingVertical="6dp"
-        android:background="@color/surface_light"
-        android:visibility="gone">
+            <TextView
+                android:id="@+id/emptyText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="لا توجد تعليقات بعد"
+                android:textColor="@color/text_secondary"
+                android:textSize="14sp"
+                android:visibility="gone"
+                android:padding="32dp" />
+        </FrameLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-        <TextView
-            android:id="@+id/replyLabel"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textColor="@color/text_secondary"
-            android:textSize="12sp"
-            tools:ignore="HardcodedText" />
-
-        <ImageButton
-            android:id="@+id/btnCancelReply"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:src="@drawable/ic_close"
-            android:contentDescription="إلغاء"
-            android:tint="@color/text_secondary"
-            tools:ignore="HardcodedText,UseAppTint" />
-    </LinearLayout>
-
-    <!-- ============ Input bar ============ -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:background="@color/surface"
-        android:paddingHorizontal="10dp"
-        android:paddingVertical="8dp">
+        android:padding="12dp"
+        android:background="@color/background_dark"
+        android:elevation="8dp">
 
         <EditText
             android:id="@+id/commentInput"
             android:layout_width="0dp"
-            android:layout_height="44dp"
+            android:layout_height="48dp"
             android:layout_weight="1"
-            android:background="@drawable/bg_search_input"
             android:hint="اكتب تعليقك..."
-            android:textColorHint="@color/text_muted"
-            android:textColor="@color/text_primary"
-            android:paddingHorizontal="14dp"
-            android:singleLine="false"
-            android:inputType="textMultiLine|textCapSentences"
-            android:maxLength="300"
-            android:maxLines="3"
-            tools:ignore="HardcodedText" />
+            android:textColorHint="@color/text_secondary"
+            android:textColor="@color/white"
+            android:background="@drawable/bg_search_input"
+            android:paddingHorizontal="16dp"
+            android:textSize="14sp"
+            android:inputType="textMultiLine"
+            android:maxLines="3" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnSendComment"
-            android:layout_width="48dp"
-            android:layout_height="44dp"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:text="إرسال"
+            android:textSize="14sp"
             android:layout_marginStart="8dp"
-            android:background="@drawable/bg_primary_button"
-            app:backgroundTint="@null"
-            app:icon="@drawable/ic_share"
-            app:iconTint="@color/white"
-            app:iconGravity="textStart"
-            app:iconPadding="0dp"
-            android:contentDescription="إرسال"
-            tools:ignore="HardcodedText" />
+            app:cornerRadius="12dp" />
     </LinearLayout>
-
 </LinearLayout>
