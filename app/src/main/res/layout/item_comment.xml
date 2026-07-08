@@ -1,270 +1,120 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginHorizontal="12dp"
-    android:layout_marginVertical="5dp"
-    app:cardBackgroundColor="@color/surface"
-    app:cardCornerRadius="14dp"
-    app:cardElevation="1dp"
-    app:strokeWidth="0dp">
+    android:orientation="horizontal"
+    android:padding="12dp"
+    android:layout_marginHorizontal="8dp"
+    android:layout_marginVertical="4dp"
+    android:background="@drawable/bg_card"
+    android:gravity="top">
+
+    <TextView
+        android:id="@+id/commentAvatar"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:background="@drawable/bg_avatar"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        android:textStyle="bold" />
 
     <LinearLayout
-        android:id="@+id/commentRoot"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_weight="1"
         android:orientation="vertical"
-        android:padding="14dp">
+        android:layout_marginStart="10dp">
 
-        <!-- Header: avatar + name + admin badge + time -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center_vertical">
 
-            <FrameLayout
-                android:layout_width="40dp"
-                android:layout_height="40dp">
-
-                <TextView
-                    android:id="@+id/avatarLetter"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/bg_avatar_gradient"
-                    android:gravity="center"
-                    android:text="U"
-                    android:textColor="@color/white"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:foreground="?attr/selectableItemBackground"
-                    tools:ignore="HardcodedText" />
-
-                <ImageView
-                    android:id="@+id/avatarImage"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:scaleType="centerCrop"
-                    android:visibility="gone"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:contentDescription="الصورة الرمزية" />
-            </FrameLayout>
-
             <TextView
-                android:id="@+id/authorName"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginStart="10dp"
-                android:text="Username"
-                android:textColor="@color/text_primary"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                android:clickable="true"
-                android:focusable="true"
-                android:foreground="?attr/selectableItemBackground"
-                tools:ignore="HardcodedText" />
-
-            <TextView
-                android:id="@+id/adminBadge"
+                android:id="@+id/commentAdminBadge"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="6dp"
-                android:paddingHorizontal="8dp"
-                android:paddingVertical="2dp"
-                android:background="@drawable/bg_chapter_num"
-                android:text="مشرف"
-                android:textColor="@color/white"
+                android:text="👑"
                 android:textSize="10sp"
-                android:textStyle="bold"
-                android:visibility="gone"
-                tools:ignore="HardcodedText" />
+                android:layout_marginEnd="4dp"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/commentAuthor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textSize="13sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/commentTime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:text=""
-                android:textColor="@color/text_muted"
-                android:textSize="11sp" />
+                android:textColor="@color/text_secondary"
+                android:textSize="10sp"
+                android:layout_marginStart="8dp" />
         </LinearLayout>
 
-        <!-- Comment text -->
         <TextView
             android:id="@+id/commentText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:textColor="@color/text_primary"
-            android:textSize="14sp"
-            android:lineSpacingExtra="3dp" />
+            android:textSize="13sp"
+            android:lineSpacingExtra="3dp"
+            android:layout_marginTop="4dp" />
 
-        <TextView
-            android:id="@+id/editedLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:text="(معدّل)"
-            android:textColor="@color/text_muted"
-            android:textSize="11sp"
-            android:visibility="gone"
-            tools:ignore="HardcodedText" />
-
-        <!-- Actions row -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="8dp">
 
-            <LinearLayout
+            <TextView
                 android:id="@+id/btnLike"
                 android:layout_width="wrap_content"
-                android:layout_height="32dp"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:paddingHorizontal="8dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:clickable="true"
-                android:focusable="true">
+                android:layout_height="wrap_content"
+                android:text="👍 0"
+                android:textColor="@color/text_secondary"
+                android:textSize="11sp"
+                android:padding="4dp"
+                android:background="?attr/selectableItemBackgroundBorderless" />
 
-                <ImageView
-                    android:layout_width="16dp"
-                    android:layout_height="16dp"
-                    android:src="@drawable/ic_like"
-                    android:tint="@color/text_secondary"
-                    tools:ignore="UseAppTint" />
-
-                <TextView
-                    android:id="@+id/likeCount"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
-                    android:text="0"
-                    android:textColor="@color/text_secondary"
-                    android:textSize="12sp"
-                    tools:ignore="HardcodedText" />
-            </LinearLayout>
-
-            <LinearLayout
+            <TextView
                 android:id="@+id/btnDislike"
                 android:layout_width="wrap_content"
-                android:layout_height="32dp"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:paddingHorizontal="8dp"
-                android:layout_marginStart="6dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:clickable="true"
-                android:focusable="true">
+                android:layout_height="wrap_content"
+                android:text="👎 0"
+                android:textColor="@color/text_secondary"
+                android:textSize="11sp"
+                android:padding="4dp"
+                android:layout_marginStart="12dp"
+                android:background="?attr/selectableItemBackgroundBorderless" />
 
-                <ImageView
-                    android:layout_width="16dp"
-                    android:layout_height="16dp"
-                    android:src="@drawable/ic_dislike"
-                    android:tint="@color/text_secondary"
-                    tools:ignore="UseAppTint" />
-
-                <TextView
-                    android:id="@+id/dislikeCount"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
-                    android:text="0"
-                    android:textColor="@color/text_secondary"
-                    android:textSize="12sp"
-                    tools:ignore="HardcodedText" />
-            </LinearLayout>
-
-            <LinearLayout
+            <TextView
                 android:id="@+id/btnReply"
                 android:layout_width="wrap_content"
-                android:layout_height="32dp"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:paddingHorizontal="8dp"
-                android:layout_marginStart="6dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:clickable="true"
-                android:focusable="true">
+                android:layout_height="wrap_content"
+                android:text="💬 رد"
+                android:textColor="@color/text_secondary"
+                android:textSize="11sp"
+                android:padding="4dp"
+                android:layout_marginStart="12dp"
+                android:background="?attr/selectableItemBackgroundBorderless" />
 
-                <ImageView
-                    android:layout_width="16dp"
-                    android:layout_height="16dp"
-                    android:src="@drawable/ic_reply"
-                    android:tint="@color/text_secondary"
-                    tools:ignore="UseAppTint" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
-                    android:text="رد"
-                    android:textColor="@color/text_secondary"
-                    android:textSize="12sp"
-                    tools:ignore="HardcodedText" />
-            </LinearLayout>
-
-            <View
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_weight="1" />
-
-            <ImageButton
-                android:id="@+id/btnEdit"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:src="@drawable/ic_edit"
-                android:contentDescription="تعديل"
-                android:tint="@color/text_secondary"
-                android:visibility="gone"
-                tools:ignore="HardcodedText,UseAppTint" />
-
-            <ImageButton
+            <TextView
                 android:id="@+id/btnDelete"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:layout_marginStart="4dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="🗑️"
+                android:textSize="13sp"
+                android:padding="4dp"
+                android:layout_marginStart="8dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
-                android:src="@drawable/ic_delete"
-                android:contentDescription="حذف"
-                android:tint="@color/danger"
-                android:visibility="gone"
-                tools:ignore="HardcodedText,UseAppTint" />
-
-            <ImageButton
-                android:id="@+id/btnBan"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:layout_marginStart="4dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:src="@drawable/ic_ban"
-                android:contentDescription="حظر"
-                android:tint="@color/warning"
-                android:visibility="gone"
-                tools:ignore="HardcodedText,UseAppTint" />
+                android:visibility="gone" />
         </LinearLayout>
-
-        <!-- Replies container (indented with right border) -->
-        <LinearLayout
-            android:id="@+id/repliesContainer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="50dp"
-            android:layout_marginTop="10dp"
-            android:orientation="vertical"
-            android:visibility="gone"
-            android:paddingEnd="8dp"
-            android:background="@color/background_dark" />
-
     </LinearLayout>
-</com.google.android.material.card.MaterialCardView>
+</LinearLayout>
