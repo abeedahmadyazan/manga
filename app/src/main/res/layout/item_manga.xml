@@ -79,12 +79,13 @@
                         tools:ignore="HardcodedText" />
                 </LinearLayout>
 
-                <!-- Bottom-left status badge -->
+                <!-- Top-left status badge (moved from bottom-left so it
+                     doesn't cover the title overlay) -->
                 <TextView
                     android:id="@+id/tvStatus"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="bottom|start"
+                    android:layout_gravity="top|start"
                     android:layout_margin="8dp"
                     android:background="@drawable/bg_card_chip"
                     android:paddingHorizontal="8dp"
@@ -105,7 +106,7 @@
                     android:orientation="vertical"
                     android:paddingHorizontal="10dp"
                     android:paddingBottom="9dp"
-                    android:paddingTop="20dp">
+                    android:paddingTop="30dp">
 
                     <TextView
                         android:id="@+id/mangaTitle"
