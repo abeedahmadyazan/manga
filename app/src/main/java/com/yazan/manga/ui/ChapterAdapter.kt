@@ -113,7 +113,10 @@ class ChapterAdapter(
             btnDownload.setImageResource(android.R.drawable.ic_popup_sync)
             btnDownload.isEnabled = false
 
-            downloadJob = (ctx as? androidx.appcompat.app.AppCompatActivity)?.lifecycleScope?.launch {
+            // Use a GlobalScope job tied to the adapter — the download continues
+            // even if the user scrolls away or leaves the activity, because we
+            // want downloads to complete in the background.
+            downloadJob = kotlinx.coroutines.GlobalScope.launch(Dispatchers.Main) {
                 val repo = MangaRepository()
                 val result = withContext(Dispatchers.IO) {
                     // First: fetch the page URLs from the network
