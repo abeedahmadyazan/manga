@@ -29,7 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:text="مانجا"
+            android:text="YZ MANGA"
             android:textColor="@color/text_primary"
             android:textSize="13sp"
             android:textStyle="bold" />

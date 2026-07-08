@@ -84,7 +84,7 @@ class PieChartView @JvmOverloads constructor(
             centerTextPaint.textSize = 36f
             canvas.drawText("0", cx, cy + 12f, centerTextPaint)
             centerSubTextPaint.textSize = 18f
-            canvas.drawText("مانجا", cx, cy + 38f, centerSubTextPaint)
+            canvas.drawText("YZ", cx, cy + 38f, centerSubTextPaint)
             return
         }
 
@@ -113,6 +113,6 @@ class PieChartView @JvmOverloads constructor(
         centerTextPaint.textSize = 48f
         canvas.drawText(total.toString(), cx, cy + 16f, centerTextPaint)
         centerSubTextPaint.textSize = 20f
-        canvas.drawText("مانجا", cx, cy + 44f, centerSubTextPaint)
+        canvas.drawText("YZ", cx, cy + 44f, centerSubTextPaint)
     }
 }
