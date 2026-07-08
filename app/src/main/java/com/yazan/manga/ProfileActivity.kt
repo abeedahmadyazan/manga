@@ -253,9 +253,9 @@ class ProfileActivity : AppCompatActivity() {
             val first = user.name.firstOrNull()?.uppercaseChar()?.toString() ?: "U"
             avatarLetter.text = first
             avatarLetter.visibility = View.VISIBLE
-            if (user.avatarImage.isNotEmpty()) {
+            if (user.avatar.isNotEmpty()) {
                 avatarImage.visibility = View.VISIBLE
-                Glide.with(this).load(user.avatarImage).circleCrop().into(avatarImage)
+                Glide.with(this).load(user.avatar).circleCrop().into(avatarImage)
             } else {
                 avatarImage.visibility = View.GONE
             }
