@@ -27,6 +27,7 @@ class ProfileActivity : AppCompatActivity() {
 
     companion object {
         private const val RC_SIGN_IN = 9001
+        private const val RC_IMAGE_PICK = 9003
         private const val RC_ACCOUNT_PICKER = 9002
     }
 
@@ -85,6 +86,16 @@ class ProfileActivity : AppCompatActivity() {
             Toast.makeText(this, "تم تسجيل الخروج", Toast.LENGTH_SHORT).show()
         }
         btnChangeUsername.setOnClickListener { showChangeUsernameDialog() }
+        btnChangeUsername.setOnClickListener {
+            showChangeUsernameDialog()
+        }
+
+        // Profile picture
+        avatar.setOnClickListener {
+            val intent = Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+            startActivityForResult(intent, RC_IMAGE_PICK)
+        }
+
         btnAdminPanel.setOnClickListener { startActivity(Intent(this, AdminPanelActivity::class.java)) }
     }
 
@@ -109,10 +120,26 @@ class ProfileActivity : AppCompatActivity() {
         }
     }
 
+    private fun saveProfileImage(uri: android.net.Uri) {
+        try {
+            val prefs = getSharedPreferences("manga_prefs", MODE_PRIVATE)
+            prefs.edit().putString("profile_image", uri.toString()).apply()
+            com.bumptech.glide.Glide.with(this).load(uri).circleCrop().into(avatar)
+            Toast.makeText(this, "تم تحديث الصورة", Toast.LENGTH_SHORT).show()
+        } catch (e: Exception) {
+            Toast.makeText(this, "فشل تحميل الصورة", Toast.LENGTH_SHORT).show()
+        }
+    }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
         when (requestCode) {
+            RC_IMAGE_PICK -> {
+                if (resultCode == Activity.RESULT_OK && data?.data != null) {
+                    saveProfileImage(data.data!!)
+                }
+            }
             RC_SIGN_IN -> {
                 if (resultCode != Activity.RESULT_OK) {
                     showAccountPicker()
@@ -216,6 +243,12 @@ class ProfileActivity : AppCompatActivity() {
         val user = AuthManager.getCurrentUser(this)
 
         if (user != null) {
+            // Load profile image
+            val prefs = getSharedPreferences("manga_prefs", MODE_PRIVATE)
+            val imageUri = prefs.getString("profile_image", null)
+            if (imageUri != null) {
+                com.bumptech.glide.Glide.with(this).load(android.net.Uri.parse(imageUri)).circleCrop().into(avatar)
+            }
             // Avatar
             val first = user.name.firstOrNull()?.uppercaseChar()?.toString() ?: "U"
             avatarLetter.text = first
