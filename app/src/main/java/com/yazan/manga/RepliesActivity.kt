@@ -1,33 +1,41 @@
 package com.yazan.manga
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
+import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.google.android.material.button.MaterialButton
+import com.google.firebase.firestore.ListenerRegistration
 import com.yazan.manga.data.AuthManager
-import com.yazan.manga.data.CommentsManager
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import com.yazan.manga.data.CloudCommentsManager
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class RepliesActivity : AppCompatActivity() {
 
     private lateinit var swipeRefresh: SwipeRefreshLayout
     private lateinit var recyclerView: RecyclerView
     private lateinit var emptyText: TextView
-    private lateinit var replyInput: android.widget.EditText
+    private lateinit var replyInput: EditText
     private lateinit var sendBtn: MaterialButton
+    private lateinit var progressBar: ProgressBar
+
     private var parentId: String = ""
     private var contextId: String = ""
     private var contextType: String = ""
+    private var allReplies: List<CloudCommentsManager.Comment> = emptyList()
+    private var listener: ListenerRegistration? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,10 +53,11 @@ class RepliesActivity : AppCompatActivity() {
         emptyText = findViewById(R.id.emptyText)
         replyInput = findViewById(R.id.replyInput)
         sendBtn = findViewById(R.id.btnSendReply)
+        progressBar = findViewById(R.id.repliesProgressBar)
 
         findViewById<ImageButton>(R.id.btnBack).setOnClickListener { finish() }
 
-        swipeRefresh.setOnRefreshListener { loadReplies(); swipeRefresh.isRefreshing = false }
+        swipeRefresh.setOnRefreshListener { swipeRefresh.isRefreshing = false }
         swipeRefresh.setColorSchemeResources(R.color.primary)
 
         sendBtn.setOnClickListener {
@@ -56,61 +65,101 @@ class RepliesActivity : AppCompatActivity() {
             if (text.isNotEmpty()) sendReply(text)
         }
 
-        loadReplies()
+        startListening()
+    }
+
+    private fun startListening() {
+        progressBar.visibility = View.VISIBLE
+        listener = CloudCommentsManager.listenToComments(contextId) { comments ->
+            progressBar.visibility = View.GONE
+            allReplies = comments.filter { it.parentId == parentId }
+            renderReplies()
+        }
     }
 
     private fun sendReply(text: String) {
         val user = AuthManager.getCurrentUser(this)
-        if (user == null) {
-            Toast.makeText(this, "يجب تسجيل الدخول", Toast.LENGTH_SHORT).show()
-            return
-        }
+        if (user == null) { Toast.makeText(this, "يجب تسجيل الدخول", Toast.LENGTH_SHORT).show(); return }
 
-        val cd = CommentsManager.checkCooldown(this)
-        if (!cd.allowed) {
-            Toast.makeText(this, "انتظر ${cd.secondsLeft} ثانية", Toast.LENGTH_SHORT).show()
-            return
-        }
-
-        val error = CommentsManager.addComment(this, contextId, contextType, text, parentId)
-        if (error != null) {
-            Toast.makeText(this, error, Toast.LENGTH_LONG).show()
-        } else {
-            replyInput.text.clear()
-            loadReplies()
-        }
-    }
-
-    private fun loadReplies() {
-        lifecycleScope.launch {
-            val replies = withContext(Dispatchers.IO) {
-                CommentsManager.getReplies(this@RepliesActivity, parentId)
-            }
-            if (replies.isEmpty()) {
-                emptyText.visibility = View.VISIBLE
-                recyclerView.visibility = View.GONE
+        sendBtn.isEnabled = false
+        CloudCommentsManager.addComment(this, contextId, contextType, text, parentId) { success, error ->
+            sendBtn.isEnabled = true
+            if (success) {
+                replyInput.text.clear()
+                Toast.makeText(this, "تم إرسال الرد", Toast.LENGTH_SHORT).show()
             } else {
-                emptyText.visibility = View.GONE
-                recyclerView.visibility = View.VISIBLE
-                recyclerView.layoutManager = LinearLayoutManager(this@RepliesActivity)
-                val user = AuthManager.getCurrentUser(this@RepliesActivity)
-                recyclerView.adapter = object : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-                    override fun onCreateViewHolder(parent: android.view.ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-                        val tv = TextView(parent.context).apply {
-                            setPadding(32, 24, 32, 24)
-                            setTextColor(getColor(R.color.white))
-                            textSize = 13f
-                        }
-                        return object : RecyclerView.ViewHolder(tv) {}
-                    }
-                    override fun getItemCount() = replies.size
-                    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-                        val r = replies[position]
-                        val sdf = java.text.SimpleDateFormat("yyyy-MM-dd HH:mm", java.util.Locale.getDefault())
-                        (holder.itemView as TextView).text = "${if (r.isAdmin) "👑 " else ""}${r.authorName}\n${r.text}\n👍 ${r.likes.size} | 👎 ${r.dislikes.size} | ${sdf.format(java.util.Date(r.createdAt))}"
-                    }
-                }
+                Toast.makeText(this, error ?: "فشل", Toast.LENGTH_LONG).show()
             }
         }
     }
+
+    private fun renderReplies() {
+        if (allReplies.isEmpty()) {
+            emptyText.visibility = View.VISIBLE
+            recyclerView.visibility = View.GONE
+            return
+        }
+
+        emptyText.visibility = View.GONE
+        recyclerView.visibility = View.VISIBLE
+        recyclerView.layoutManager = LinearLayoutManager(this)
+
+        val user = AuthManager.getCurrentUser(this)
+        val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault())
+
+        recyclerView.adapter = object : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+            override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+                val v = LayoutInflater.from(parent.context).inflate(R.layout.item_comment, parent, false)
+                return object : RecyclerView.ViewHolder(v) {}
+            }
+
+            override fun getItemCount() = allReplies.size
+
+            override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+                val r = allReplies[position]
+                val avatar = holder.itemView.findViewById<TextView>(R.id.commentAvatar)
+                val adminBadge = holder.itemView.findViewById<TextView>(R.id.commentAdminBadge)
+                val author = holder.itemView.findViewById<TextView>(R.id.commentAuthor)
+                val time = holder.itemView.findViewById<TextView>(R.id.commentTime)
+                val text = holder.itemView.findViewById<TextView>(R.id.commentText)
+                val btnLike = holder.itemView.findViewById<TextView>(R.id.btnLike)
+                val btnDislike = holder.itemView.findViewById<TextView>(R.id.btnDislike)
+                val btnReply = holder.itemView.findViewById<TextView>(R.id.btnReply)
+                val btnDelete = holder.itemView.findViewById<TextView>(R.id.btnDelete)
+
+                avatar.text = r.authorName.firstOrNull()?.uppercaseChar()?.toString() ?: "?"
+                adminBadge.visibility = if (r.isAdmin) View.VISIBLE else View.GONE
+                author.text = r.authorName
+                time.text = sdf.format(Date(r.createdAt))
+                text.text = r.text
+                btnLike.text = "👍 ${r.likes.size}"
+                btnDislike.text = "👎 ${r.dislikes.size}"
+                btnReply.visibility = View.GONE
+
+                val isOwner = user?.email == r.authorEmail
+                val canDelete = isOwner || (user?.isAdmin == true)
+                btnDelete.visibility = if (canDelete) View.VISIBLE else View.GONE
+
+                btnLike.setOnClickListener { user?.let { CloudCommentsManager.toggleLike(r.id, it.email, true) {} } }
+                btnDislike.setOnClickListener { user?.let { CloudCommentsManager.toggleLike(r.id, it.email, false) {} } }
+                btnDelete.setOnClickListener {
+                    AlertDialog.Builder(this@RepliesActivity)
+                        .setTitle("حذف الرد").setMessage("هل تريد الحذف؟")
+                        .setPositiveButton("حذف") { _, _ -> CloudCommentsManager.deleteComment(r.id) {} }
+                        .setNegativeButton("إلغاء", null).show()
+                }
+
+                author.setOnClickListener { openUserProfile(r.authorEmail) }
+                avatar.setOnClickListener { openUserProfile(r.authorEmail) }
+            }
+        }
+    }
+
+    private fun openUserProfile(email: String) {
+        val intent = android.content.Intent(this, UserProfileActivity::class.java)
+        intent.putExtra("user_email", email)
+        startActivity(intent)
+    }
+
+    override fun onDestroy() { super.onDestroy(); listener?.remove() }
 }
