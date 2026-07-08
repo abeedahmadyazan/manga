@@ -59,6 +59,10 @@ class MangaApp : Application() {
                 firebaseAuth.signInAnonymously()
                     .addOnSuccessListener {
                         android.util.Log.d("MangaApp", "Anonymous auth success: UID=${it.user?.uid}")
+                        // After anonymous auth, try to restore user from cloud.
+                        // This handles the reinstall case where local data is gone
+                        // but the user's email is in Firebase Auth.
+                        com.yazan.manga.data.AuthManager.restoreUserFromCloud(this)
                     }
                     .addOnFailureListener { e ->
                         android.util.Log.w("MangaApp", "Anonymous auth failed (this is OK): ${e.message}")
@@ -66,6 +70,12 @@ class MangaApp : Application() {
             } catch (e: Exception) {
                 android.util.Log.w("MangaApp", "Anonymous auth exception: ${e.message}")
             }
+        } else {
+            android.util.Log.d("MangaApp", "Already signed in: UID=${firebaseAuth.currentUser?.uid}")
+            // User already signed in — try to restore their profile from cloud.
+            // This is the key fix: even if local data is gone (reinstall),
+            // we restore name/avatar/username from Firestore.
+            com.yazan.manga.data.AuthManager.restoreUserFromCloud(this)
         }
     }
 }

@@ -889,35 +889,64 @@ object AuthManager {
      * Runs async — updates the local user + store when the cloud data arrives.
      */
     fun restoreUserFromCloud(context: Context, onRestored: ((Boolean) -> Unit)? = null) {
-        val current = getCurrentUser(context) ?: run {
+        // Try to get the email from the local user first (fast path)
+        var email = getCurrentUser(context)?.email ?: ""
+
+        // If no local user, try to get the email from Firebase Auth.
+        // This handles the case where the app was reinstalled — the local
+        // SharedPreferences are gone, but Firebase Auth session might still
+        // be active (or anonymous auth created a new UID we can use).
+        if (email.isEmpty()) {
+            val firebaseUser = FirebaseAuth.getInstance().currentUser
+            email = firebaseUser?.email ?: ""
+        }
+
+        if (email.isEmpty()) {
             onRestored?.invoke(false)
             return
         }
+
         try {
-            cloudDb.collection(USERS_COLLECTION).document(current.email).get()
+            cloudDb.collection(USERS_COLLECTION).document(email).get()
                 .addOnSuccessListener { doc ->
                     if (!doc.exists()) {
                         onRestored?.invoke(false)
                         return@addOnSuccessListener
                     }
 
-                    val cloudName = doc.getString("name")
-                    val cloudUsername = doc.getString("username")
+                    val cloudName = doc.getString("name") ?: ""
+                    val cloudUsername = doc.getString("username") ?: ""
                     val cloudAvatarBase64 = doc.getString("avatarBase64") ?: ""
                     val cloudBirthDate = doc.getString("birthDate") ?: ""
                     val cloudCountry = doc.getString("country") ?: ""
+                    val cloudIsAdmin = doc.getBoolean("isAdmin") ?: false
+                    val cloudCreatedAt = doc.getLong("createdAt") ?: 0L
+
+                    // If we have no local user at all (reinstall case),
+                    // create one from the cloud data.
+                    val current = getCurrentUser(context) ?: User(
+                        email = email,
+                        name = cloudName.ifEmpty { email.substringBefore("@") },
+                        username = cloudUsername.ifEmpty { "@${email.substringBefore("@")}" },
+                        isAdmin = cloudIsAdmin,
+                        deviceId = getDeviceId(context),
+                        createdAt = cloudCreatedAt,
+                        lastUsernameChange = 0L,
+                        avatar = "",
+                        bio = ""
+                    )
 
                     var updated = current
                     var changed = false
 
                     // Always restore the name from the cloud (cloud is source of truth)
-                    if (!cloudName.isNullOrEmpty() && cloudName != current.name) {
+                    if (cloudName.isNotEmpty() && cloudName != current.name) {
                         updated = updated.copy(name = cloudName)
                         changed = true
                     }
 
                     // Always restore the username from the cloud
-                    if (!cloudUsername.isNullOrEmpty() && cloudUsername != current.username) {
+                    if (cloudUsername.isNotEmpty() && cloudUsername != current.username) {
                         updated = updated.copy(username = cloudUsername)
                         changed = true
                     }
@@ -931,6 +960,12 @@ object AuthManager {
                     // Restore country if the cloud has it
                     if (cloudCountry != current.country) {
                         updated = updated.copy(country = cloudCountry)
+                        changed = true
+                    }
+
+                    // Restore admin status from cloud
+                    if (cloudIsAdmin != current.isAdmin) {
+                        updated = updated.copy(isAdmin = cloudIsAdmin)
                         changed = true
                     }
 
