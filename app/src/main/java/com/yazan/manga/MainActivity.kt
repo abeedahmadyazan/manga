@@ -190,6 +190,23 @@ class MainActivity : AppCompatActivity() {
                 }
                 R.id.menuDownloads -> Toast.makeText(this, "قريباً", Toast.LENGTH_SHORT).show()
                 R.id.menuAbout -> Toast.makeText(this, "تطبيق مانجا v1.0", Toast.LENGTH_SHORT).show()
+                R.id.menuShare -> {
+                    val shareIntent = Intent(Intent.ACTION_SEND).apply {
+                        type = "text/plain"
+                        putExtra(Intent.EXTRA_TEXT, "تطبيق مانجا - اقرأ المانجا بالعربية!\nhttps://github.com/abeedahmadyazan/mangaapp")
+                    }
+                    startActivity(Intent.createChooser(shareIntent, "مشاركة عبر"))
+                }
+                R.id.menuRate -> {
+                    try {
+                        val intent = Intent(Intent.ACTION_VIEW, android.net.Uri.parse("market://details?id=com.yazan.manga"))
+                        startActivity(intent)
+                    } catch (e: Exception) {
+                        // Play Store not installed — open web URL instead
+                        val intent = Intent(Intent.ACTION_VIEW, android.net.Uri.parse("https://play.google.com/store/apps/details?id=com.yazan.manga"))
+                        startActivity(intent)
+                    }
+                }
             }
             true
         }
@@ -204,12 +221,13 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        // Position the drawer content below the top bar (status bar + 56dp toolbar)
-        // so the first menu item aligns roughly with the 'مانجا' title.
+        // Position the drawer content below the status bar only (raised position).
+        // Previously this included the 56dp toolbar offset, which pushed the drawer
+        // too far down. Now the drawer starts right under the status bar — its
+        // header + menu fill more of the screen and don't feel "half-empty".
         val resourceId = resources.getIdentifier("status_bar_height", "dimen", "android")
         val statusBarHeight = if (resourceId > 0) resources.getDimensionPixelSize(resourceId) else 0
-        val toolbarHeight = (56 * resources.displayMetrics.density).toInt()
-        navigationView.setPadding(0, statusBarHeight + toolbarHeight, 0, 0)
+        navigationView.setPadding(0, statusBarHeight, 0, 0)
         updateMenuHeader()
     }
 

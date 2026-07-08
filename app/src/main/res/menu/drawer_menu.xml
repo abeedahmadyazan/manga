@@ -25,6 +25,17 @@
             android:id="@+id/menuSettings"
             android:icon="@drawable/ic_settings"
             android:title="الإعدادات" />
+    </group>
+
+    <group android:checkableBehavior="none">
+        <item
+            android:id="@+id/menuShare"
+            android:icon="@drawable/ic_share"
+            android:title="مشاركة التطبيق" />
+        <item
+            android:id="@+id/menuRate"
+            android:icon="@drawable/ic_like"
+            android:title="تقييم التطبيق" />
         <item
             android:id="@+id/menuAbout"
             android:icon="@drawable/ic_info"
