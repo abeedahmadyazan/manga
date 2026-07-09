@@ -512,18 +512,10 @@ class ProfileActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
+        // Just update UI from local storage (which has the latest changes).
+        // DON'T call restoreUserFromCloud here — it overwrites local name/username
+        // changes with stale cloud data. Cloud sync happens on app start (MangaApp).
         updateUI()
-        // If the user is logged in, try to pull the latest profile from the cloud.
-        // This ensures the profile screen always shows the current name/username/avatar
-        // even if they were changed from another device.
-        val user = AuthManager.getCurrentUser(this)
-        if (user != null) {
-            AuthManager.restoreUserFromCloud(this) { changed ->
-                if (changed) {
-                    runOnUiThread { updateUI() }
-                }
-            }
-        }
     }
 
     override fun onDestroy() {
