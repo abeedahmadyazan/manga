@@ -390,8 +390,9 @@ class CommentsAdapter(
             }
             time.text = com.yazan.manga.data.relativeTime(c.createdAt)
             text.text = c.text
-            val liked = currentUser != null && c.likes.contains(currentUser.email)
-            val disliked = currentUser != null && c.dislikes.contains(currentUser.email)
+            val currentUserCopy2 = currentUser
+            val liked = currentUserCopy2 != null && c.likes.contains(currentUserCopy2.email)
+            val disliked = currentUserCopy2 != null && c.dislikes.contains(currentUserCopy2.email)
             tvLikeCount.text = c.likes.size.toString()
             tvDislikeCount.text = c.dislikes.size.toString()
             // Like: blue when liked, gray when not (transparent bg)
