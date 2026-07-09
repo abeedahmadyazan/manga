@@ -22,6 +22,8 @@ class MangaRepository(private val appContext: Context? = null) {
     private val ASQ_API = "https://3asq-api.netlify.app/.netlify/functions"
     private val CORS_PROXY = "https://proxy.cors.sh/"
     private val ASQ_BASE = "https://3asq.pro"
+    private val CDN_CACHE_BASE = "https://cdn.jsdelivr.net/gh/abeedahmadyazan/mangaapp@gh-pages/cache"
+    private val CDN_CACHE_TTL_MS = 2 * 60 * 60 * 1000L  // 2 hours (matches GitHub Actions schedule)
 
     // Cache: maps chapter number -> MangaDex chapter ID (for Arabic chapters)
     private val mdChapterCache = mutableMapOf<Pair<String, String>, String>()
@@ -31,11 +33,59 @@ class MangaRepository(private val appContext: Context? = null) {
     // Cache: maps manga id -> (chapter number -> MangaPill chapter URL path)
     private val mpChapterUrlCache = mutableMapOf<String, MutableMap<String, String>>()
 
+    /**
+     * Fetch cached manga list from jsDelivr CDN (gh-pages branch).
+     * Updated every 2h by GitHub Actions (scripts/fetch_latest.py).
+     * Returns empty list on any failure — caller falls back to live API.
+     */
+    private fun fetchCdnCache(type: String): List<MangaListItem> {
+        return try {
+            val url = "$CDN_CACHE_BASE/$type.json"
+            val req = Request.Builder().url(url)
+                .header("User-Agent", UA)
+                .header("Accept", "application/json")
+                .build()
+            client.newCall(req).execute().use { resp ->
+                if (!resp.isSuccessful) return emptyList()
+                val body = resp.body?.string() ?: return emptyList()
+                val root = JsonParser.parseString(body).asJsonObject
+                val items = root.getAsJsonArray("items") ?: return emptyList()
+                val result = mutableListOf<MangaListItem>()
+                for (i in 0 until items.size()) {
+                    try {
+                        val it = items[i].asJsonObject
+                        result.add(MangaListItem(
+                            id = it.get("id").asString,
+                            title = it.get("title").asString,
+                            cover = it.get("cover")?.asString ?: "",
+                            source = it.get("source")?.asString ?: "mangadex",
+                            status = it.get("status")?.asString
+                        ))
+                    } catch (e: Exception) {}
+                }
+                Log.d(TAG, "CDN cache '$type': ${result.size} items")
+                result
+            }
+        } catch (e: Exception) {
+            Log.w(TAG, "CDN cache '$type' failed: ${e.message}")
+            emptyList()
+        }
+    }
+
     suspend fun getLatestManga(page: Int = 1): Result<List<MangaListItem>> {
         // Try cache first (1h TTL)
         appContext?.let { ctx ->
             CacheManager.getCachedMangaList(ctx, "latest", page)?.let { cached ->
                 return Result.success(cached)
+            }
+        }
+        // Try CDN cache (gh-pages, updated every 2h by GitHub Actions) — page 1 only
+        if (page == 1) {
+            val cdnItems = fetchCdnCache("latest")
+            if (cdnItems.isNotEmpty()) {
+                appContext?.let { CacheManager.cacheMangaList(it, "latest", page, cdnItems) }
+                DDoSProtection.reportSuccess()
+                return Result.success(cdnItems)
             }
         }
         if (!DDoSProtection.tryAcquire(DDoSProtection.Action.MANGA_LIST)) {
@@ -58,6 +108,15 @@ class MangaRepository(private val appContext: Context? = null) {
         appContext?.let { ctx ->
             CacheManager.getCachedMangaList(ctx, "popular", page)?.let { cached ->
                 return Result.success(cached)
+            }
+        }
+        // Try CDN cache (gh-pages, updated every 2h by GitHub Actions) — page 1 only
+        if (page == 1) {
+            val cdnItems = fetchCdnCache("popular")
+            if (cdnItems.isNotEmpty()) {
+                appContext?.let { CacheManager.cacheMangaList(it, "popular", page, cdnItems) }
+                DDoSProtection.reportSuccess()
+                return Result.success(cdnItems)
             }
         }
         if (!DDoSProtection.tryAcquire(DDoSProtection.Action.MANGA_LIST)) {

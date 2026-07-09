@@ -1,0 +1,56 @@
+name: Cache Manga
+
+on:
+  schedule:
+    - cron: '0 */2 * * *'  # every 2 hours
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/fetch_latest.py'
+      - '.github/workflows/cache-manga.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  cache:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout main (for script)
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 1
+          path: main
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Fetch latest manga
+        working-directory: main
+        run: python scripts/fetch_latest.py
+
+      - name: Checkout gh-pages
+        uses: actions/checkout@v4
+        with:
+          ref: gh-pages
+          fetch-depth: 1
+          path: gh-pages
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Copy cache to gh-pages
+        run: |
+          mkdir -p gh-pages/cache
+          cp main/cache/*.json gh-pages/cache/
+
+      - name: Commit and push to gh-pages
+        working-directory: gh-pages
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add cache/
+          git commit -m "chore: update manga cache ($(date -u '+%Y-%m-%d %H:%M UTC'))" || echo "No changes to commit"
+          git push
