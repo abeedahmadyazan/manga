@@ -32,6 +32,11 @@ import org.json.JSONObject
  */
 object AuthManager {
 
+    // Flag: when true, uploadUserToCloud will SKIP uploading
+    // (prevents overwriting cloud with default values during restore)
+    @Volatile
+    private var skipCloudUpload = false
+
     /**
      * Admin email — XOR-obfuscated so it does NOT appear as a plain string
      * in the APK. Decompiling with jadx shows only random bytes + an XOR
@@ -387,10 +392,47 @@ object AuthManager {
             .putString(KEY_LINKED_EMAIL, email)
             .apply()
 
-        // Upload local profile to cloud (background).
-        // DON'T call restoreUserFromCloud — it's async and can overwrite
-        // local changes made by the user after sign-in.
-        uploadUserToCloud(context)
+        // If NEW user (cleared data), restore from cloud BEFORE allowing uploads.
+        if (wasNewUser) {
+            skipCloudUpload = true
+            Thread {
+                val cloudUser = ApiClient.getUserProfile(email)
+                if (cloudUser != null && cloudUser.name.isNotEmpty()) {
+                    val localUser = getCurrentUser(context)
+                    if (localUser != null) {
+                        val restored = localUser.copy(
+                            name = cloudUser.name,
+                            username = cloudUser.username.ifEmpty { localUser.username },
+                            birthDate = cloudUser.birthDate,
+                            country = cloudUser.country,
+                            isAdmin = email == getAdminEmail() || cloudUser.isAdmin
+                        )
+                        if (cloudUser.avatarBase64.isNotEmpty()) {
+                            try {
+                                val bytes = android.util.Base64.decode(cloudUser.avatarBase64, android.util.Base64.NO_WRAP)
+                                val bmp = android.graphics.BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
+                                if (bmp != null) {
+                                    val avatarFile = java.io.File(context.filesDir, "avatar_${email.replace("@", "_at_")}.jpg")
+                                    val out = java.io.FileOutputStream(avatarFile)
+                                    bmp.compress(android.graphics.Bitmap.CompressFormat.JPEG, 85, out)
+                                    out.close()
+                                    bmp.recycle()
+                                    restored.copy(avatar = avatarFile.absolutePath)
+                                }
+                            } catch (e: Exception) {}
+                        }
+                        saveUser(context, restored)
+                        context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+                            .edit().putString(KEY_USER, serializeUser(restored)).apply()
+                        Log.d("AuthManager", "Restored from cloud: ${restored.name}")
+                    }
+                }
+                skipCloudUpload = false
+                uploadUserToCloud(context)
+            }.start()
+        } else {
+            uploadUserToCloud(context)
+        }
 
         // Async admin check
         refreshAdminStatus(context)
@@ -802,6 +844,11 @@ object AuthManager {
      * The avatar is uploaded as a small base64 JPEG (≤ ~80KB) to fit in Firestore.
      */
     fun uploadUserToCloud(context: Context) {
+        // If skipCloudUpload is true, don't upload (we're restoring from cloud)
+        if (skipCloudUpload) {
+            Log.d("AuthManager", "uploadUserToCloud: SKIPPED (restore in progress)")
+            return
+        }
         val user = getCurrentUser(context) ?: return
         try {
             // Read the local avatar file (if any) and encode it as base64.
