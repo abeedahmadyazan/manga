@@ -35,6 +35,7 @@ object ReadingHistoryManager {
     /** Record that the user opened a chapter. Called from ReaderActivity. */
     fun recordChapterRead(context: Context, entry: HistoryEntry) {
         val user = AuthManager.getCurrentUser(context) ?: return
+        if (user.email.isEmpty()) return
         try {
             db.collection(COLLECTION).document(user.email).get()
                 .addOnSuccessListener { doc ->

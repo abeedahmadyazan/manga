@@ -102,6 +102,7 @@ object AuthManager {
      * regular user until the next successful check).
      */
     fun checkAdminFromCloud(uid: String, callback: (Boolean) -> Unit) {
+        if (uid.isEmpty()) { callback(false); return }
         try {
             val db = com.google.firebase.firestore.FirebaseFirestore.getInstance()
             db.collection("admins").document(uid).get()
@@ -152,6 +153,7 @@ object AuthManager {
         val user = getCurrentUser(context) ?: return
         val firebaseUser = com.google.firebase.auth.FirebaseAuth.getInstance().currentUser
         val uid = firebaseUser?.uid ?: return
+        if (uid.isEmpty()) return
 
         // SECURITY CHECK: Only promote if the email matches the admin email.
         // This is the critical fix — without it, every user becomes admin!
@@ -882,6 +884,7 @@ object AuthManager {
 
     // Original Firestore-based fetchCloudUser (kept as fallback, renamed)
     fun fetchCloudUserLegacy(email: String, onResult: (CloudUser?) -> Unit) {
+        if (email.isEmpty()) { onResult(null); return }
         try {
             cloudDb.collection(USERS_COLLECTION).document(email).get()
                 .addOnSuccessListener { doc ->
@@ -951,6 +954,7 @@ object AuthManager {
     }
 
     private fun restoreProfileByEmail(context: Context, email: String, onRestored: ((Boolean) -> Unit)?) {
+        if (email.isEmpty()) { onRestored?.invoke(false); return }
         try {
             cloudDb.collection(USERS_COLLECTION).document(email).get()
                 .addOnSuccessListener { doc ->
