@@ -509,12 +509,21 @@ object AuthManager {
                 return@isUsernameAvailableInCloud
             }
 
-            // All checks passed — save
+            // All checks passed — save locally
             val updated = current.copy(username = clean, lastUsernameChange = now)
             saveUser(context, updated)
             prefs.edit().putString(KEY_USER, serializeUser(updated)).apply()
-            uploadUserToCloud(context)
-            onResult(null)
+
+            // === SYNCHRONOUS cloud upload ===
+            val success = uploadUserToCloudSync(context)
+            if (success) {
+                onResult(null)
+            } else {
+                // Revert local change if cloud save failed
+                saveUser(context, current)
+                prefs.edit().putString(KEY_USER, serializeUser(current)).apply()
+                onResult("تعذّر حفظ اسم المستخدم. تحقق من اتصالك")
+            }
         }
     }
 
@@ -530,14 +539,20 @@ object AuthManager {
         if (clean.length < 3) return "الاسم يجب أن يكون 3 أحرف على الأقل"
         if (clean.length > 30) return "الاسم طويل جداً (حد أقصى 30 حرف)"
 
-        // Admin badge is shown separately (the green pill), so we don't
-        // add '(مشرف)' to the name itself.
         val finalName = clean
 
+        // Save locally
         val updated = current.copy(name = finalName)
         saveUser(context, updated)
         prefs.edit().putString(KEY_USER, serializeUser(updated)).apply()
-        uploadUserToCloud(context)
+
+        // === SYNCHRONOUS cloud upload (blocks until saved) ===
+        // This ensures the cloud ALWAYS has the latest name
+        // before the user leaves the screen.
+        val success = uploadUserToCloudSync(context)
+        if (!success) {
+            return "تعذّر حفظ الاسم. تحقق من اتصالك بالإنترنت"
+        }
         return null
     }
 
@@ -864,6 +879,56 @@ object AuthManager {
     }
 
     /**
+     * Synchronous version of uploadUserToCloud.
+     * Blocks the calling thread until the cloud save completes.
+     * Returns true on success, false on failure.
+     * 
+     * USE THIS for name/username changes so the cloud is ALWAYS
+     * up-to-date before the user leaves the screen.
+     */
+    fun uploadUserToCloudSync(context: Context): Boolean {
+        val user = getCurrentUser(context) ?: return false
+        try {
+            // Read avatar
+            val avatarBase64: String? = if (user.avatar.isNotEmpty() && !user.avatar.startsWith("http")) {
+                try {
+                    val file = File(user.avatar)
+                    if (file.exists()) {
+                        val bitmap = BitmapFactory.decodeFile(file.absolutePath)
+                        if (bitmap != null) {
+                            val maxDim = 256
+                            val scaled = if (bitmap.width > maxDim || bitmap.height > maxDim) {
+                                val scale = minOf(maxDim.toFloat() / bitmap.width, maxDim.toFloat() / bitmap.height)
+                                Bitmap.createScaledBitmap(bitmap,
+                                    (bitmap.width * scale).toInt().coerceAtLeast(1),
+                                    (bitmap.height * scale).toInt().coerceAtLeast(1), true)
+                            } else bitmap
+                            val stream = ByteArrayOutputStream()
+                            scaled.compress(Bitmap.CompressFormat.JPEG, 70, stream)
+                            if (scaled !== bitmap) scaled.recycle()
+                            bitmap.recycle()
+                            Base64.encodeToString(stream.toByteArray(), Base64.NO_WRAP)
+                        } else null
+                    } else null
+                } catch (e: Exception) { null }
+            } else null
+
+            // Call API synchronously (blocks until done)
+            val success = ApiClient.updateProfile(
+                name = user.name,
+                username = user.username,
+                avatarBase64 = avatarBase64,
+                birthDate = user.birthDate,
+                country = user.country
+            )
+            return success
+        } catch (e: Exception) {
+            Log.w("AuthManager", "uploadUserToCloudSync exception", e)
+            return false
+        }
+    }
+
+    /**
      * Fetch a user's cloud profile by email (used by CommentsAdapter to load the
      * latest avatar for a comment author).
      */
@@ -989,16 +1054,18 @@ object AuthManager {
                     var updated = current
                     var changed = false
 
-                    // === CRITICAL FIX: NEVER overwrite local name/username with cloud data ===
-                    // The cloud might have stale data. Name/username changes are
-                    // always saved locally first, then uploaded. So local is
-                    // always the most recent.
-                    //
-                    // Only restore avatar/birthDate/country/isAdmin from cloud
-                    // (these are less frequently changed and cloud is source of truth for them).
-                    //
-                    // Name/username: only use cloud if creating a NEW user (current == null above)
-                    // which is already handled. For existing users, keep local.
+                    // === CLOUD IS SOURCE OF TRUTH ===
+                    // Since we now use synchronous uploads (uploadUserToCloudSync),
+                    // the cloud ALWAYS has the latest data.
+                    // Safe to restore name/username from cloud.
+                    if (cloudName.isNotEmpty() && cloudName != current.name) {
+                        updated = updated.copy(name = cloudName)
+                        changed = true
+                    }
+                    if (cloudUsername.isNotEmpty() && cloudUsername != current.username) {
+                        updated = updated.copy(username = cloudUsername)
+                        changed = true
+                    }
 
                     // Restore birthDate if the cloud has it
                     if (cloudBirthDate != current.birthDate) {
