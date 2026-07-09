@@ -263,7 +263,7 @@ class ReaderActivity : AppCompatActivity() {
             private val pageNumber: TextView = v.findViewById(R.id.pageNumber)
 
             fun bind(url: String, position: Int) {
-                pageNumber.text = "${position + 1} / ${pages.size}"
+                // Page counter is in the top bar
                 pageProgress.visibility = View.VISIBLE
 
                 Glide.with(itemView.context)

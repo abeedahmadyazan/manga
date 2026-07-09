@@ -363,6 +363,7 @@ object ApiClient {
             authorEmail = obj.get("authorEmail")?.asString ?: "",
             authorName = obj.get("authorName")?.asString ?: "",
             authorAvatar = obj.get("authorAvatar")?.asString ?: "",
+            authorAvatar = obj.get("authorAvatar")?.asString ?: "",
             isAdmin = obj.get("isAdmin")?.asBoolean ?: false,
             parentId = obj.get("parentId")?.takeIf { !it.isJsonNull }?.asString,
             createdAt = obj.get("createdAt")?.asLong ?: 0L,
