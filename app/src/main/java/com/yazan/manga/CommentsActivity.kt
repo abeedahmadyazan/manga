@@ -199,26 +199,9 @@ class CommentsActivity : AppCompatActivity() {
             return
         }
 
-        if (!user.isAdmin) {
-            // Check the 60-second cooldown (same as posting)
-            com.google.firebase.firestore.FirebaseFirestore.getInstance()
-                .collection("comment_cooldowns").document(user.email).get()
-                .addOnSuccessListener { doc ->
-                    val lastAt = doc.getLong("lastCommentAt") ?: 0L
-                    val diff = System.currentTimeMillis() - lastAt
-                    if (diff < 60_000L) {
-                        val left = ((60_000L - diff) / 1000).toInt()
-                        runOnUiThread {
-                            Toast.makeText(this, "انتظر $left ثانية قبل التعديل", Toast.LENGTH_SHORT).show()
-                        }
-                    } else {
-                        runOnUiThread { showEditDialogInternal(comment, user) }
-                    }
-                }
-                .addOnFailureListener { runOnUiThread { showEditDialogInternal(comment, user) } }
-        } else {
-            showEditDialogInternal(comment, user)
-        }
+        // Cooldown is now enforced server-side by the Vercel API.
+        // No need to check Firestore directly here.
+        showEditDialogInternal(comment, user)
     }
 
     private fun showEditDialogInternal(comment: CloudCommentsManager.Comment, user: AuthManager.User) {
@@ -252,11 +235,7 @@ class CommentsActivity : AppCompatActivity() {
                     runOnUiThread {
                         if (success) {
                             Toast.makeText(this, "تم التعديل", Toast.LENGTH_SHORT).show()
-                            // Update the cooldown timer so the next edit/comment
-                            // also has to wait 60 seconds.
-                            com.google.firebase.firestore.FirebaseFirestore.getInstance()
-                                .collection("comment_cooldowns").document(user.email)
-                                .set(mapOf("lastCommentAt" to System.currentTimeMillis()))
+                            // Cooldown is handled server-side by the API.
                         } else {
                             Toast.makeText(this, "فشل التعديل", Toast.LENGTH_SHORT).show()
                         }
