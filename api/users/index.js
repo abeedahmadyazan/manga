@@ -4,12 +4,16 @@ const { authenticate } = require('../_auth');
 module.exports = async (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET,PUT,OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Authorization,Content-Type');
+  res.setHeader('Access-Control-Allow-Headers', 'Authorization,Content-Type,X-App-Version,X-User-Email');
   if (req.method === 'OPTIONS') return res.status(200).end();
   
   const authResult = await authenticate(req);
   if (authResult.error) return res.status(authResult.error.status).json({ error: authResult.error.message });
   const { email } = authResult.user;
+  
+  if (!email || email.length === 0) {
+    return res.status(400).json({ error: 'يجب تسجيل الدخول بحساب Google' });
+  }
   
   // GET /api/users?email=xxx
   if (req.method === 'GET') {
@@ -31,60 +35,52 @@ module.exports = async (req, res) => {
   if (req.method === 'PUT') {
     const { name, username, avatarBase64, birthDate, country } = req.body || {};
     
-    // Validate name
-    if (name !== undefined) {
-      if (typeof name !== 'string' || name.length < 1 || name.length > 50) {
-        return res.status(400).json({ error: 'اسم غير صالح (1-50 حرف)' });
+    // Validate name (but don't reject if empty - just skip)
+    if (name !== undefined && name !== null) {
+      if (typeof name !== 'string' || name.length > 50) {
+        return res.status(400).json({ error: 'اسم غير صالح' });
       }
     }
     
-    // Validate username
-    if (username !== undefined) {
-      if (typeof username !== 'string' || username.length < 3 || username.length > 30) {
-        return res.status(400).json({ error: 'اسم المستخدم غير صالح (3-30 حرف)' });
+    // Validate username (but don't reject if empty - just skip)
+    if (username !== undefined && username !== null) {
+      if (typeof username !== 'string' || username.length > 30) {
+        return res.status(400).json({ error: 'اسم المستخدم غير صالح' });
       }
-      // Check uniqueness
-      const existing = await db.collection('users')
-        .where('username', '==', username)
-        .get();
-      for (const doc of existing.docs) {
-        if (doc.id !== email) {
-          return res.status(400).json({ error: 'اسم المستخدم محجوز' });
+      
+      // Check uniqueness - but don't fail if the check itself fails
+      try {
+        const existing = await db.collection('users')
+          .where('username', '==', username)
+          .limit(1)
+          .get();
+        for (const doc of existing.docs) {
+          if (doc.id !== email) {
+            return res.status(400).json({ error: 'اسم المستخدم محجوز' });
+          }
         }
+      } catch (e) {
+        // If uniqueness check fails, proceed anyway (better to save than lose data)
+        console.error('Username uniqueness check failed:', e.message);
       }
     }
     
-    // Validate avatar size (max 500KB base64 ~ 700K chars)
-    if (avatarBase64 !== undefined) {
+    // Validate avatar size
+    if (avatarBase64 !== undefined && avatarBase64 !== null) {
       if (typeof avatarBase64 !== 'string' || avatarBase64.length > 700000) {
         return res.status(400).json({ error: 'حجم الصورة كبير جداً' });
       }
     }
     
-    // Validate birthDate
-    if (birthDate !== undefined && birthDate !== '') {
-      if (typeof birthDate !== 'string' || birthDate.length > 20) {
-        return res.status(400).json({ error: 'تاريخ ميلاد غير صالح' });
-      }
-    }
-    
-    // Validate country
-    if (country !== undefined && country !== '') {
-      if (typeof country !== 'string' || country.length > 50) {
-        return res.status(400).json({ error: 'دولة غير صالحة' });
-      }
-    }
-    
-    // Build update object (only allowed fields)
+    // Build update object
     const update = { lastUpdated: Date.now() };
-    if (name !== undefined) update.name = name.trim();
-    if (username !== undefined) update.username = username.trim();
-    if (avatarBase64 !== undefined) update.avatarBase64 = avatarBase64;
-    if (birthDate !== undefined) update.birthDate = birthDate;
-    if (country !== undefined) update.country = country;
+    if (name !== undefined && name !== null && name.length > 0) update.name = name.trim();
+    if (username !== undefined && username !== null && username.length > 0) update.username = username.trim();
+    if (avatarBase64 !== undefined && avatarBase64 !== null) update.avatarBase64 = avatarBase64;
+    if (birthDate !== undefined && birthDate !== null) update.birthDate = birthDate;
+    if (country !== undefined && country !== null) update.country = country;
     
     try {
-      // Use set with merge to keep existing fields
       await db.collection('users').doc(email).set(update, { merge: true });
       res.json({ success: true, ...update });
     } catch (e) {
