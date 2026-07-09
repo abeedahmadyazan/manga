@@ -18,7 +18,8 @@ service cloud.firestore {
 
     match /admins/{uid} {
       allow read, list: if isSignedIn();
-      allow create: if isSignedIn() && request.auth.uid == uid
+      allow create: if isSignedIn()
+                    && request.auth.uid == uid
                     && request.resource.data.role == "admin";
       allow update, delete: if isAdmin();
     }
@@ -28,6 +29,7 @@ service cloud.firestore {
       allow write: if isSignedIn() && request.auth.uid == uid;
     }
 
+    // === FIXED: allow any signed-in user (anonymous included) ===
     match /users/{email} {
       allow read: if isSignedIn();
       allow create: if isSignedIn();
@@ -41,7 +43,11 @@ service cloud.firestore {
                     && request.resource.data.text is string
                     && request.resource.data.text.size() >= 1
                     && request.resource.data.text.size() <= 500
-                    && request.resource.data.authorEmail == userEmail();
+                    && request.resource.data.authorEmail == userEmail()
+                    && request.resource.data.contextId is string
+                    && request.resource.data.contextId.size() <= 200
+                    && request.resource.data.createdAt is number
+                    && request.resource.data.createdAt <= request.time.toMillis() + 5000;
       allow update: if isSignedIn()
                     && resource.data.authorEmail == userEmail()
                     && request.resource.data.text is string
@@ -57,9 +63,14 @@ service cloud.firestore {
                     && request.resource.data.text is string
                     && request.resource.data.text.size() >= 1
                     && request.resource.data.text.size() <= 500
-                    && request.resource.data.authorEmail == userEmail();
+                    && request.resource.data.authorEmail == userEmail()
+                    && request.resource.data.parentId is string
+                    && request.resource.data.createdAt is number
+                    && request.resource.data.createdAt <= request.time.toMillis() + 5000;
       allow update: if isSignedIn()
-                    && resource.data.authorEmail == userEmail();
+                    && resource.data.authorEmail == userEmail()
+                    && request.resource.data.text is string
+                    && request.resource.data.text.size() <= 500;
       allow delete: if isSignedIn()
                     && (resource.data.authorEmail == userEmail() || isAdmin());
     }
@@ -82,8 +93,6 @@ service cloud.firestore {
       allow read, write: if isSignedIn();
     }
 
-    // === FIXED: allow any signed-in user to read/write their own lists ===
-    // Uses request.auth.token.email OR allows if the doc doesn't exist yet
     match /user_lists/{email} {
       allow read: if isSignedIn();
       allow create, update: if isSignedIn();
@@ -100,7 +109,8 @@ service cloud.firestore {
       allow read: if isAdmin();
       allow create: if isSignedIn()
                     && request.resource.data.reason is string
-                    && request.resource.data.reason.size() <= 200;
+                    && request.resource.data.reason.size() <= 200
+                    && request.resource.data.reportedBy == userEmail();
       allow update, delete: if isAdmin();
     }
 
