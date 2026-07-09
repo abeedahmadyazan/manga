@@ -247,7 +247,7 @@ class ReaderActivity : AppCompatActivity() {
 
             override fun onLoadFailed(
                 e: com.bumptech.glide.load.engine.GlideException?,
-                model: Any,
+                model: Any?,
                 target: com.bumptech.glide.request.target.Target<android.graphics.drawable.Drawable>,
                 isFirstResource: Boolean
             ): Boolean {
