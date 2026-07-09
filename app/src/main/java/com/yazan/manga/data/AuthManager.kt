@@ -989,14 +989,19 @@ object AuthManager {
                     var updated = current
                     var changed = false
 
-                    // Always restore the name from the cloud (cloud is source of truth)
-                    if (cloudName.isNotEmpty() && cloudName != current.name) {
+                    // === FIX: Only restore from cloud if local is empty ===
+                    // Don't overwrite local changes with cloud data.
+                    // The cloud might have stale data if uploadUserToCloud
+                    // hasn't completed yet.
+                    
+                    // Only restore name if local name is empty
+                    if (cloudName.isNotEmpty() && current.name.isEmpty()) {
                         updated = updated.copy(name = cloudName)
                         changed = true
                     }
 
-                    // Always restore the username from the cloud
-                    if (cloudUsername.isNotEmpty() && cloudUsername != current.username) {
+                    // Only restore username if local username is empty
+                    if (cloudUsername.isNotEmpty() && current.username.isEmpty()) {
                         updated = updated.copy(username = cloudUsername)
                         changed = true
                     }
