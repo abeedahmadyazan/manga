@@ -223,7 +223,7 @@ object ApiClient {
     }
 
     fun resolveReport(reportId: String): Boolean {
-        val (code, _) = request("PUT", "/api/admin/reports/resolve", query = mapOf("id" to reportId))
+        val (code, _) = request("PUT", "/api/admin/reports", query = mapOf("id" to reportId))
         return code == 200
     }
 
