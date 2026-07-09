@@ -260,10 +260,8 @@ class ReaderActivity : AppCompatActivity() {
         inner class PageVH(v: View) : RecyclerView.ViewHolder(v) {
             private val pageImage: ZoomableImageView = v.findViewById(R.id.pageImage)
             private val pageProgress: ProgressBar = v.findViewById(R.id.pageProgress)
-            private val pageNumber: TextView = v.findViewById(R.id.pageNumber)
 
             fun bind(url: String, position: Int) {
-                // Page counter is in the top bar
                 pageProgress.visibility = View.VISIBLE
 
                 Glide.with(itemView.context)
