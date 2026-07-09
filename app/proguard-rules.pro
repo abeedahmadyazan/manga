@@ -95,3 +95,28 @@
 # ---------- Unboxing enums ----------
 # Convert enum fields to int constants. Harder to read in decompiler.
 -optimizations !code/simplification/arithmetic,!code/simplification/cast,!field/*,!class/merging/*
+
+# =============================================================
+#  API Client + In-App Update (Vercel API integration)
+# =============================================================
+
+# Keep ApiClient entirely — it uses reflection and callbacks
+-keep class com.yazan.manga.data.ApiClient { *; }
+
+# Keep InAppUpdateManager
+-keep class com.yazan.manga.data.InAppUpdateManager { *; }
+
+# Keep CloudCommentsManager (rewritten to use ApiClient)
+-keep class com.yazan.manga.data.CloudCommentsManager { *; }
+-keep class com.yazan.manga.data.CloudCommentsManager$Comment { *; }
+-keep class com.yazan.manga.data.CloudCommentsManager$Report { *; }
+
+# Keep AuthManager CloudUser (used by ApiClient)
+-keep class com.yazan.manga.data.AuthManager$CloudUser { *; }
+-keep class com.yazan.manga.data.AuthManager$User { *; }
+
+# Keep ReadingHistoryManager HistoryEntry (used by ApiClient)
+-keep class com.yazan.manga.data.ReadingHistoryManager$HistoryEntry { *; }
+
+# Keep all data classes used by the API
+-keep class com.yazan.manga.data.** { <fields>; }
