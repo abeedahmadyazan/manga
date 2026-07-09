@@ -35,6 +35,7 @@ class RepliesActivity : AppCompatActivity() {
     private var contextType: String = ""
     private var allReplies: List<CloudCommentsManager.Comment> = emptyList()
     private lateinit var titleView: TextView
+    private var parentAuthor: String = "تعليق"
     private var listener: ListenerRegistration? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,7 +46,7 @@ class RepliesActivity : AppCompatActivity() {
         contextId = intent.getStringExtra("context_id") ?: ""
         contextType = intent.getStringExtra("context_type") ?: "manga"
 
-        val parentAuthor = intent.getStringExtra("parent_author") ?: "تعليق"
+        parentAuthor = intent.getStringExtra("parent_author") ?: "تعليق"
         titleView = findViewById(R.id.repliesTitle)
         titleView.text = "💬 ردود على: $parentAuthor"
 

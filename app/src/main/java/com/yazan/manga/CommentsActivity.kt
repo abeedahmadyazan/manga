@@ -406,8 +406,9 @@ class CommentsAdapter(
             tvDislikeCount.setTextColor(if (disliked) red else gray)
             imgDislike.isSelected = disliked
 
-            val isOwner = currentUser?.email == c.authorEmail
-            val canDelete = isOwner || (currentUser?.isAdmin == true)
+            val currentUserCopy = currentUser
+            val isOwner = currentUserCopy?.email == c.authorEmail
+            val canDelete = isOwner || (currentUserCopy?.isAdmin == true)
             btnDelete.visibility = if (canDelete) View.VISIBLE else View.GONE
             // Show edit button only for the comment owner
             btnEdit.visibility = if (isOwner) View.VISIBLE else View.GONE
@@ -415,7 +416,7 @@ class CommentsAdapter(
             tvEdited.visibility = if (c.editedAt != null) View.VISIBLE else View.GONE
             // Show the report button for any logged-in user who isn't the comment owner
             // AND isn't an admin (you can't report admins)
-            btnReport.visibility = if (currentUser != null && !isOwner && !c.isAdmin) View.VISIBLE else View.GONE
+            btnReport.visibility = if (currentUserCopy != null && !isOwner && !c.isAdmin) View.VISIBLE else View.GONE
 
             btnLike.setOnClickListener { onLike(c) }
             btnDislike.setOnClickListener { onDislike(c) }
