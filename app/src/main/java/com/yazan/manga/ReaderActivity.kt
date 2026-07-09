@@ -277,13 +277,15 @@ class ReaderActivity : AppCompatActivity() {
                             dataSource: com.bumptech.glide.load.DataSource,
                             isFirstResource: Boolean
                         ): Boolean {
+                            // unused params
+                            @Suppress("UNUSED_PARAMETER") fun unused(a: Any?, b: Any?, c: Any?, d: Any?, e: Any?) {}
                             pageProgress.visibility = View.GONE
                             return false
                         }
 
                         override fun onLoadFailed(
                             e: com.bumptech.glide.load.engine.GlideException?,
-                            model: Any,
+                            model: Any?,
                             target: com.bumptech.glide.request.target.Target<android.graphics.drawable.Drawable>,
                             isFirstResource: Boolean
                         ): Boolean {
