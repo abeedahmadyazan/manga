@@ -1,6 +1,24 @@
 const { auth, db } = require('./_lib');
 
+// Minimum app version required (versionCode)
+// Any app with lower version will be rejected
+const MIN_APP_VERSION = 13;
+
 async function authenticate(req) {
+  // === Version check ===
+  // The app sends X-App-Version header. If missing or too old, reject.
+  const clientVersion = parseInt(req.headers['x-app-version'] || '0', 10);
+  if (clientVersion < MIN_APP_VERSION) {
+    return { 
+      error: { 
+        status: 426, 
+        message: 'يرجى تحديث التطبيق إلى أحدث إصدار',
+        updateUrl: 'https://yzmanga.netlify.app'
+      } 
+    };
+  }
+
+  // === Auth check ===
   const authHeader = req.headers.authorization;
   if (!authHeader || !authHeader.startsWith('Bearer ')) {
     return { error: { status: 401, message: 'مطلوب تسجيل الدخول' } };
@@ -52,4 +70,4 @@ function validateText(text) {
   return null;
 }
 
-module.exports = { authenticate, isAdmin, isBanned, validateText };
+module.exports = { authenticate, isAdmin, isBanned, validateText, MIN_APP_VERSION };

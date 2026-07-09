@@ -1,6 +1,7 @@
 package com.yazan.manga
 
 import android.app.Application
+import android.content.Context
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreSettings
@@ -21,8 +22,14 @@ import com.yazan.manga.data.AntiTampering
  * which breaks comments, lists, history — everything.
  */
 class MangaApp : Application() {
+    companion object {
+        lateinit var appContext: Context
+            private set
+    }
+
     override fun onCreate() {
         super.onCreate()
+        appContext = this
 
         // Initialize AntiDebug with the app context (it needs it for
         // package manager queries and process name lookups).

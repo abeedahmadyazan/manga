@@ -41,6 +41,25 @@ object ApiClient {
         .build()
 
     /**
+     * Get the app's versionCode (for the X-App-Version header).
+     * The server uses this to reject requests from old app versions.
+     */
+    private fun getAppVersionCode(): Int {
+        return try {
+            val context = com.yazan.manga.MangaApp.appContext
+            val pInfo = context.packageManager.getPackageInfo(context.packageName, 0)
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.P) {
+                pInfo.longVersionCode.toInt()
+            } else {
+                @Suppress("DEPRECATION")
+                pInfo.versionCode
+            }
+        } catch (e: Exception) {
+            1
+        }
+    }
+
+    /**
      * Get the current user's Firebase ID token (blocking).
      * Returns null if not signed in or token fetch fails.
      */
@@ -81,6 +100,7 @@ object ApiClient {
             .url(urlBuilder.toString())
             .header("Authorization", "Bearer $token")
             .header("Content-Type", "application/json")
+            .header("X-App-Version", getAppVersionCode().toString())
 
         when (method) {
             "GET" -> reqBuilder.get()
