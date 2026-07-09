@@ -21,7 +21,33 @@ async function authenticate(req) {
   const idToken = authHeader.split('Bearer ')[1];
   try {
     const decoded = await auth.verifyIdToken(idToken);
-    return { user: { uid: decoded.uid, email: decoded.email || '' } };
+    const uid = decoded.uid;
+    let email = decoded.email || '';
+    
+    // If no email in token (anonymous user), try to get it from Admin SDK
+    if (!email && uid) {
+      try {
+        const userRecord = await auth.getUser(uid);
+        email = userRecord.email || '';
+      } catch (e) {
+        // Can't get user record
+      }
+    }
+    
+    // If still no email, check if this is an anonymous user
+    if (!email) {
+      // Check if this UID is linked to a Google account via user_uids
+      try {
+        const indexDoc = await db.collection('user_uids').doc(uid).get();
+        if (indexDoc.exists) {
+          email = indexDoc.data().email || '';
+        }
+      } catch (e) {
+        // Can't check index
+      }
+    }
+    
+    return { user: { uid, email } };
   } catch (e) {
     return { error: { status: 401, message: 'رمز غير صالح' } };
   }
@@ -29,18 +55,26 @@ async function authenticate(req) {
 
 async function isAdmin(uid) {
   if (!uid || uid.length === 0) return false;
-  const doc = await db.collection('admins').doc(uid).get();
-  return doc.exists;
+  try {
+    const doc = await db.collection('admins').doc(uid).get();
+    return doc.exists;
+  } catch (e) {
+    return false;
+  }
 }
 
 async function isBanned(email) {
   if (!email || email.length === 0) return false;
-  const doc = await db.collection('banned_users').doc(email).get();
-  if (!doc.exists) return false;
-  const data = doc.data();
-  if (data.permanent) return true;
-  if (data.until && data.until > Date.now()) return true;
-  return false;
+  try {
+    const doc = await db.collection('banned_users').doc(email).get();
+    if (!doc.exists) return false;
+    const data = doc.data();
+    if (data.permanent) return true;
+    if (data.until && data.until > Date.now()) return true;
+    return false;
+  } catch (e) {
+    return false;
+  }
 }
 
 const BANNED_WORDS = [
