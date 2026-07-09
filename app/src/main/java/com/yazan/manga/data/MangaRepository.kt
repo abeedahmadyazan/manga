@@ -23,7 +23,7 @@ class MangaRepository(private val appContext: Context? = null) {
     private val CORS_PROXY = "https://proxy.cors.sh/"
     private val ASQ_BASE = "https://3asq.pro"
     private val CDN_CACHE_BASE = "https://cdn.jsdelivr.net/gh/abeedahmadyazan/mangaapp@gh-pages/cache"
-    private val CDN_CACHE_TTL_MS = 2 * 60 * 60 * 1000L  // 2 hours (matches GitHub Actions schedule)
+    private val CDN_CACHE_TTL_MS = 2 * 60 * 60 * 1000L  // 2 hours
 
     // Cache: maps chapter number -> MangaDex chapter ID (for Arabic chapters)
     private val mdChapterCache = mutableMapOf<Pair<String, String>, String>()
@@ -35,8 +35,7 @@ class MangaRepository(private val appContext: Context? = null) {
 
     /**
      * Fetch cached manga list from jsDelivr CDN (gh-pages branch).
-     * Updated every 2h by GitHub Actions (scripts/fetch_latest.py).
-     * Returns empty list on any failure — caller falls back to live API.
+     * Updated every 2h by GitHub Actions. Returns empty list on failure.
      */
     private fun fetchCdnCache(type: String): List<MangaListItem> {
         return try {
@@ -79,7 +78,7 @@ class MangaRepository(private val appContext: Context? = null) {
                 return Result.success(cached)
             }
         }
-        // Try CDN cache (gh-pages, updated every 2h by GitHub Actions) — page 1 only
+        // Try CDN cache (gh-pages, updated every 2h) — page 1 only
         if (page == 1) {
             val cdnItems = fetchCdnCache("latest")
             if (cdnItems.isNotEmpty()) {
@@ -108,15 +107,6 @@ class MangaRepository(private val appContext: Context? = null) {
         appContext?.let { ctx ->
             CacheManager.getCachedMangaList(ctx, "popular", page)?.let { cached ->
                 return Result.success(cached)
-            }
-        }
-        // Try CDN cache (gh-pages, updated every 2h by GitHub Actions) — page 1 only
-        if (page == 1) {
-            val cdnItems = fetchCdnCache("popular")
-            if (cdnItems.isNotEmpty()) {
-                appContext?.let { CacheManager.cacheMangaList(it, "popular", page, cdnItems) }
-                DDoSProtection.reportSuccess()
-                return Result.success(cdnItems)
             }
         }
         if (!DDoSProtection.tryAcquire(DDoSProtection.Action.MANGA_LIST)) {
@@ -228,49 +218,6 @@ class MangaRepository(private val appContext: Context? = null) {
         return result
     }
 
-    /**
-     * Fetch cached chapter pages from jsDelivr CDN (gh-pages branch).
-     *
-     * The One Piece latest 10 chapters are pre-cached by GitHub Actions
-     * (scripts/cache_onepiece_chapters.py) as WebP images on gh-pages.
-     * This avoids hitting 3asq at runtime — if 3asq goes down, the user
-     * can still read the latest chapters.
-     *
-     * Returns null if the chapter is not cached (caller falls back to live source).
-     */
-    private fun fetchCdnChapterPages(slug: String, chapter: String): List<ChapterPage>? {
-        // Only One Piece is cached on CDN for now
-        if (slug != "one-piece") return null
-        val chapterNum = chapter.toFloatOrNull()?.toInt() ?: return null
-        return try {
-            val manifestUrl = "$CDN_CACHE_BASE/chapters/manifest.json"
-            val req = Request.Builder().url(manifestUrl)
-                .header("User-Agent", UA)
-                .header("Accept", "application/json")
-                .build()
-            client.newCall(req).execute().use { resp ->
-                if (!resp.isSuccessful) return null
-                val body = resp.body?.string() ?: return null
-                val root = JsonParser.parseString(body).asJsonObject
-                val chapters = root.getAsJsonObject("chapters") ?: return null
-                val chObj = chapters.getAsJsonObject(chapterNum.toString()) ?: return null
-                val pages = chObj.getAsJsonArray("pages") ?: return null
-                val result = mutableListOf<ChapterPage>()
-                for (i in 0 until pages.size()) {
-                    val path = pages[i].asString
-                    // Convert relative path to jsDelivr URL
-                    val fullUrl = "https://cdn.jsdelivr.net/gh/abeedahmadyazan/mangaapp@gh-pages/$path"
-                    result.add(ChapterPage(index = i, url = fullUrl))
-                }
-                Log.d(TAG, "CDN chapter cache: $slug/$chapter -> ${result.size} pages")
-                result
-            }
-        } catch (e: Exception) {
-            Log.w(TAG, "CDN chapter cache failed: ${e.message}")
-            null
-        }
-    }
-
     private fun getMangaDetailsFromNetwork(id: String): Result<MangaDetails> {
         return try {
             // 1. Get manga details from MangaDex
@@ -332,9 +279,20 @@ class MangaRepository(private val appContext: Context? = null) {
                 mdChapterCache[Pair(id, ch.number)] = ch.id
             }
 
-            // 3asq chapter fetching removed — was causing issues with chapter loading.
-            // MangaDex is now the primary source for Arabic chapters (more reliable).
-            val asqChapters: List<MangaChapter>? = null
+            // 3. Try 3asq for more chapters (One Piece 1187)
+            val slug = guessSlug(enTitle, title)
+            val asqChapters = try {
+                if (slug.isBlank()) {
+                    // Slug couldn't be guessed (e.g. purely Arabic title) — try
+                    // searching 3asq by the manga title instead.
+                    search3asqChapters(enTitle.ifBlank { title })
+                } else {
+                    fetch3asqChapters(slug)
+                }
+            } catch (e: Exception) {
+                Log.w(TAG, "3asq fetch failed: ${e.message}")
+                null
+            }
 
             // 3b. MangaPill fallback — fetch chapter list so we can show it
             // as a source AND use it as a fallback for chapter pages.
@@ -668,11 +626,42 @@ class MangaRepository(private val appContext: Context? = null) {
     suspend fun getChapterPages(chapter: MangaChapter): Result<List<ChapterPage>> {
         return try {
             if (chapter.source == "3asq") {
-                // 3asq source is deprecated — chapter pages fetch was unreliable.
-                // Fall through to MangaPill if available.
+                // Extract slug and chapter number from the chapter id
+                // Format: "3asq-{slug}-{num}"
+                val parts = chapter.id.split("-")
+                val num = parts.lastOrNull() ?: ""
+                val slug = if (parts.size >= 3) parts.dropLast(1).joinToString("-").removePrefix("3asq-") else ""
+                if (slug.isNotBlank() && num.isNotBlank()) {
+                    val req = Request.Builder().url("$ASQ_API/pages?slug=$slug&chapter=$num").header("Accept", "application/json").build()
+                    client.newCall(req).execute().use { resp ->
+                        if (resp.isSuccessful) {
+                            val body = resp.body?.string() ?: ""
+                            val root = JsonParser.parseString(body)
+                            if (root.isJsonObject) {
+                                val arr = root.asJsonObject.getAsJsonArray("pages")
+                                if (arr != null && arr.size() > 0) {
+                                    val pages = mutableListOf<ChapterPage>()
+                                    for (i in 0 until arr.size()) {
+                                        val p = arr[i].asJsonObject
+                                        val u = p.get("url")?.asString ?: continue
+                                        pages.add(ChapterPage(index = i, url = if (u.startsWith("//")) "https:$u" else u))
+                                    }
+                                    if (pages.isNotEmpty()) return Result.success(pages)
+                                }
+                            }
+                        }
+                    }
+                }
+                // 3asq proxy failed — try scraping 3asq.pro directly via CORS proxy
+                val directPages = scrape3asqPagesDirect(slug, num)
+                if (directPages.isNotEmpty()) {
+                    Log.d(TAG, "Got ${directPages.size} pages from 3asq direct (CORS proxy)")
+                    return Result.success(directPages)
+                }
+                // 3asq direct also failed — try MangaPill fallback (English)
                 val mpPages = fetchMangaPillPagesForChapter(chapter)
                 if (mpPages.isNotEmpty()) {
-                    Log.d(TAG, "3asq chapter falling back to MangaPill: ${chapter.number}")
+                    Log.d(TAG, "Falling back to MangaPill for chapter ${chapter.number}")
                     return Result.success(mpPages)
                 }
                 Result.failure(Exception("هذا الفصل غير متاح حالياً"))
