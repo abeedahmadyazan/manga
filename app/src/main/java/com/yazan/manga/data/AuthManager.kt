@@ -388,9 +388,15 @@ object AuthManager {
             .apply()
 
         // If this is a NEW user (cleared data/reinstall), restore from cloud first.
+        // DON'T upload until restore completes — otherwise we overwrite cloud
+        // with default values before the real data is fetched.
         if (wasNewUser) {
-            restoreUserFromCloud(context) {
-                uploadUserToCloud(context)
+            restoreUserFromCloud(context) { restored ->
+                if (restored) {
+                    uploadUserToCloud(context)
+                } else {
+                    uploadUserToCloud(context)
+                }
             }
         } else {
             uploadUserToCloud(context)
