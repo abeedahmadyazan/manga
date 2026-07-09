@@ -163,7 +163,7 @@ class CommentsActivity : AppCompatActivity() {
         CloudCommentsManager.addComment(this, contextId, contextType, text, null) { success, error ->
             sendBtn.isEnabled = true
             if (success) commentInput.text.clear()
-            else Toast.makeText(this, "حدث خطأ", Toast.LENGTH_LONG).show()
+            else Toast.makeText(this, error ?: "حدث خطأ", Toast.LENGTH_LONG).show()
         }
     }
 
