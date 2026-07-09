@@ -514,27 +514,9 @@ object AuthManager {
             saveUser(context, updated)
             prefs.edit().putString(KEY_USER, serializeUser(updated)).apply()
 
-            // === Run cloud upload on background thread, but WAIT for result ===
-            var uploadSuccess = false
-            val latch = java.util.concurrent.CountDownLatch(1)
-            Thread {
-                uploadSuccess = uploadUserToCloudSync(context)
-                latch.countDown()
-            }.start()
-            try {
-                latch.await(15, java.util.concurrent.TimeUnit.SECONDS)
-            } catch (e: Exception) {
-                uploadSuccess = false
-            }
-            
-            if (uploadSuccess) {
-                onResult(null)
-            } else {
-                // Revert local change if cloud save failed
-                saveUser(context, current)
-                prefs.edit().putString(KEY_USER, serializeUser(current)).apply()
-                onResult("تعذّر حفظ اسم المستخدم. تحقق من اتصالك")
-            }
+            // Upload to cloud (background — same as setAvatar which works)
+            uploadUserToCloud(context)
+            onResult(null)
         }
     }
 
@@ -552,28 +534,12 @@ object AuthManager {
 
         val finalName = clean
 
-        // Save locally
+        // Save locally (same pattern as setAvatar)
         val updated = current.copy(name = finalName)
         saveUser(context, updated)
         prefs.edit().putString(KEY_USER, serializeUser(updated)).apply()
-
-        // === Run cloud upload on background thread, but WAIT for result ===
-        // Using CountDownLatch to block without freezing the UI
-        var success = false
-        val latch = java.util.concurrent.CountDownLatch(1)
-        Thread {
-            success = uploadUserToCloudSync(context)
-            latch.countDown()
-        }.start()
-        try {
-            latch.await(15, java.util.concurrent.TimeUnit.SECONDS)  // wait max 15s
-        } catch (e: Exception) {
-            return "تعذّر حفظ الاسم. حاول مرة أخرى"
-        }
-        
-        if (!success) {
-            return "تعذّر حفظ الاسم. تحقق من اتصالك بالإنترنت"
-        }
+        // Upload to cloud (background — same as setAvatar which works)
+        uploadUserToCloud(context)
         return null
     }
 
