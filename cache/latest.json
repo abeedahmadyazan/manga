@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-07-09T15:15:04.510546+00:00",
+  "updated_at": "2026-07-09T19:49:38.294011+00:00",
   "count": 50,
   "items": [
     {
@@ -10,9 +10,16 @@
       "status": "completed"
     },
     {
-      "id": "19a5c7e3-b743-4cb6-8dd8-41459bfc685d",
-      "title": "تدليل فارسة لا تعرف اي شيء سوى القتال",
-      "cover": "https://uploads.mangadex.org/covers/19a5c7e3-b743-4cb6-8dd8-41459bfc685d/883318ff-c44b-4ea9-a456-2b5b18a34631.jpg.256.jpg",
+      "id": "da36a727-7686-4e92-8fac-94bc292b8e91",
+      "title": "ساحر المكتبة العظيم",
+      "cover": "https://uploads.mangadex.org/covers/da36a727-7686-4e92-8fac-94bc292b8e91/f40f8db2-b1d2-46de-b029-a3a10c333dc2.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "96ae166c-d8e1-4e9e-88cb-805b65154d7e",
+      "title": "Red Blue",
+      "cover": "https://uploads.mangadex.org/covers/96ae166c-d8e1-4e9e-88cb-805b65154d7e/d010f9c1-fdaa-4925-93df-dc3c06417574.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
@@ -24,9 +31,30 @@
       "status": "ongoing"
     },
     {
-      "id": "96ae166c-d8e1-4e9e-88cb-805b65154d7e",
-      "title": "Red Blue",
-      "cover": "https://uploads.mangadex.org/covers/96ae166c-d8e1-4e9e-88cb-805b65154d7e/d010f9c1-fdaa-4925-93df-dc3c06417574.jpg.256.jpg",
+      "id": "569963c5-6b0b-4f92-b561-e1304b78b0dc",
+      "title": "Bungou Stray Dogs: Wan!",
+      "cover": "https://uploads.mangadex.org/covers/569963c5-6b0b-4f92-b561-e1304b78b0dc/53839189-747f-451f-9803-150b428ea77b.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "a6a46436-9ed4-4c20-8b11-6f4a0f74b23a",
+      "title": "Kabuto Mushi",
+      "cover": "https://uploads.mangadex.org/covers/a6a46436-9ed4-4c20-8b11-6f4a0f74b23a/5a16e9bf-0859-4719-bd13-7e5e43e338d7.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "d7037b2a-874a-4360-8a7b-07f2899152fd",
+      "title": "إيروما-كن في مدرسة الشياطين",
+      "cover": "https://uploads.mangadex.org/covers/d7037b2a-874a-4360-8a7b-07f2899152fd/52d67301-401c-44c4-9d7b-529e2796f7d5.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "19a5c7e3-b743-4cb6-8dd8-41459bfc685d",
+      "title": "تدليل فارسة لا تعرف اي شيء سوى القتال",
+      "cover": "https://uploads.mangadex.org/covers/19a5c7e3-b743-4cb6-8dd8-41459bfc685d/883318ff-c44b-4ea9-a456-2b5b18a34631.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
@@ -64,13 +92,6 @@
       "cover": "https://uploads.mangadex.org/covers/37f5cce0-8070-4ada-96e5-fa24b1bd4ff9/e21ca520-5054-4041-a07e-de8b7c683522.jpg.256.jpg",
       "source": "mangadex",
       "status": "completed"
-    },
-    {
-      "id": "d7037b2a-874a-4360-8a7b-07f2899152fd",
-      "title": "إيروما-كن في مدرسة الشياطين",
-      "cover": "https://uploads.mangadex.org/covers/d7037b2a-874a-4360-8a7b-07f2899152fd/52d67301-401c-44c4-9d7b-529e2796f7d5.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
     },
     {
       "id": "418791c0-35cf-4f87-936b-acd9cddf0989",
@@ -328,27 +349,6 @@
       "id": "9d3d3403-1a87-4737-9803-bc3d99db1424",
       "title": "The Guy She Was Interested in Wasn't a Guy at All",
       "cover": "https://uploads.mangadex.org/covers/9d3d3403-1a87-4737-9803-bc3d99db1424/fac191d0-96c1-4ebb-bf79-b7616d7162ac.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "98017a70-5580-40fb-9d69-69e377325484",
-      "title": "I Picked Up This World's Strategy Guide",
-      "cover": "https://uploads.mangadex.org/covers/98017a70-5580-40fb-9d69-69e377325484/d21ac77f-8982-43a7-bf62-7946d225e642.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "a1c7c817-4e59-43b7-9365-09675a149a6f",
-      "title": "ون بيس",
-      "cover": "https://uploads.mangadex.org/covers/a1c7c817-4e59-43b7-9365-09675a149a6f/2f4aca53-64c7-46ac-ae85-3bc9b3169890.png.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "b16f2554-9525-4f2a-bbe4-5b75b6605176",
-      "title": "Clevatess: The King of Dark Beasts, the Baby, and the Undead Hero",
-      "cover": "https://uploads.mangadex.org/covers/b16f2554-9525-4f2a-bbe4-5b75b6605176/0814dad9-5036-412c-b99e-61a31bab0e32.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     }
