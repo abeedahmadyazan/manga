@@ -837,52 +837,27 @@ object AuthManager {
                 }
             } else null
 
-            // === CRITICAL FIX: Fetch existing cloud data FIRST, then merge ===
-            // This prevents overwriting cloud data with empty local values
-            // (which happened when restoreUserFromCloud failed due to rules)
-            cloudDb.collection(USERS_COLLECTION).document(user.email).get()
-                .addOnSuccessListener { doc ->
-                    val existingAvatar = if (doc.exists()) doc.getString("avatarBase64") ?: "" else ""
-                    val existingName = if (doc.exists()) doc.getString("name") ?: "" else ""
-                    val existingUsername = if (doc.exists()) doc.getString("username") ?: "" else ""
-                    val existingBirthDate = if (doc.exists()) doc.getString("birthDate") ?: "" else ""
-                    val existingCountry = if (doc.exists()) doc.getString("country") ?: "" else ""
-                    val existingCreatedAt = if (doc.exists()) doc.getLong("createdAt") ?: user.createdAt else user.createdAt
-                    
-                    // Merge: use local value if non-empty, else keep cloud value
-                    val finalName = if (user.name.isNotEmpty() && user.name != "يزان") user.name
-                                    else if (existingName.isNotEmpty()) existingName else user.name
-                    val finalUsername = if (user.username.isNotEmpty()) user.username else existingUsername
-                    val finalAvatar = avatarBase64 ?: existingAvatar  // prefer new avatar, keep old if no new
-                    val finalBirthDate = if (user.birthDate.isNotEmpty()) user.birthDate else existingBirthDate
-                    val finalCountry = if (user.country.isNotEmpty()) user.country else existingCountry
-                    
-                    val data = hashMapOf(
-                        "email" to user.email,
-                        "name" to finalName,
-                        "username" to finalUsername,
-                        "isAdmin" to user.isAdmin,
-                        "avatarBase64" to finalAvatar,
-                        "birthDate" to finalBirthDate,
-                        "country" to finalCountry,
-                        "createdAt" to existingCreatedAt,
-                        "lastUpdated" to System.currentTimeMillis()
+            // === Use Vercel API (server-side protection) ===
+            // The API merges with existing cloud data and validates inputs.
+            // It also enforces owner-only writes (email must match token).
+            Thread {
+                try {
+                    val success = ApiClient.updateProfile(
+                        name = user.name.ifEmpty { null },
+                        username = user.username.ifEmpty { null },
+                        avatarBase64 = avatarBase64,
+                        birthDate = user.birthDate.ifEmpty { null },
+                        country = user.country.ifEmpty { null }
                     )
-                    cloudDb.collection(USERS_COLLECTION).document(user.email).set(data)
-                        .addOnFailureListener { Log.w("AuthManager", "uploadUserToCloud failed", it) }
-                    
-                    // Save UID index
-                    val firebaseUser = FirebaseAuth.getInstance().currentUser
-                    if (firebaseUser != null) {
-                        cloudDb.collection(UID_INDEX_COLLECTION).document(firebaseUser.uid)
-                            .set(mapOf("email" to user.email))
-                            .addOnFailureListener { Log.w("AuthManager", "UID index save failed", it) }
+                    if (success) {
+                        Log.d("AuthManager", "uploadUserToCloud: OK via API")
+                    } else {
+                        Log.w("AuthManager", "uploadUserToCloud: API returned false")
                     }
+                } catch (e: Exception) {
+                    Log.w("AuthManager", "uploadUserToCloud: API exception: ${e.message}")
                 }
-                .addOnFailureListener { e ->
-                    Log.w("AuthManager", "uploadUserToCloud: fetch existing failed, skipping upload to avoid overwriting", e)
-                    // DON'T upload if we can't fetch existing — better to skip than overwrite with empty
-                }
+            }.start()
         } catch (e: Exception) {
             Log.w("AuthManager", "uploadUserToCloud exception", e)
         }
@@ -893,6 +868,20 @@ object AuthManager {
      * latest avatar for a comment author).
      */
     fun fetchCloudUser(email: String, onResult: (CloudUser?) -> Unit) {
+        // Use Vercel API (server-side protection)
+        Thread {
+            try {
+                val user = ApiClient.getUserProfile(email)
+                onResult(user)
+            } catch (e: Exception) {
+                Log.w("AuthManager", "fetchCloudUser: ${e.message}")
+                onResult(null)
+            }
+        }.start()
+    }
+
+    // Original Firestore-based fetchCloudUser (kept as fallback, renamed)
+    fun fetchCloudUserLegacy(email: String, onResult: (CloudUser?) -> Unit) {
         try {
             cloudDb.collection(USERS_COLLECTION).document(email).get()
                 .addOnSuccessListener { doc ->
