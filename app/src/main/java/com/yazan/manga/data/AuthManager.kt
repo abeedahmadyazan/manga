@@ -1008,118 +1008,91 @@ object AuthManager {
     }
 
     private fun restoreProfileByEmail(context: Context, email: String, onRestored: ((Boolean) -> Unit)?) {
-        try {
-            cloudDb.collection(USERS_COLLECTION).document(email).get()
-                .addOnSuccessListener { doc ->
-                    if (!doc.exists()) {
-                        onRestored?.invoke(false)
-                        return@addOnSuccessListener
-                    }
-
-                    val cloudName = doc.getString("name") ?: ""
-                    val cloudUsername = doc.getString("username") ?: ""
-                    val cloudAvatarBase64 = doc.getString("avatarBase64") ?: ""
-                    val cloudBirthDate = doc.getString("birthDate") ?: ""
-                    val cloudCountry = doc.getString("country") ?: ""
-                    val cloudIsAdmin = doc.getBoolean("isAdmin") ?: false
-                    // Always re-check admin status from the XOR-encoded email.
-                    // This is the source of truth — even if the cloud doc has
-                    // isAdmin=false (e.g. from an older version), the email
-                    // check will correctly identify the admin.
-                    val actualIsAdmin = email == getAdminEmail() || cloudIsAdmin
-                    val cloudCreatedAt = doc.getLong("createdAt") ?: 0L
-
-                    // If we have no local user at all (reinstall case),
-                    // create one from the cloud data.
-                    val current = getCurrentUser(context) ?: User(
-                        email = email,
-                        name = cloudName.ifEmpty { email.substringBefore("@") },
-                        username = cloudUsername.ifEmpty { "@${email.substringBefore("@")}" },
-                        isAdmin = actualIsAdmin,
-                        deviceId = getDeviceId(context),
-                        createdAt = cloudCreatedAt,
-                        lastUsernameChange = 0L,
-                        avatar = "",
-                        bio = ""
-                    )
-
-                    var updated = current
-                    var changed = false
-
-                    // === CLOUD IS SOURCE OF TRUTH ===
-                    // Since we now use synchronous uploads (uploadUserToCloudSync),
-                    // the cloud ALWAYS has the latest data.
-                    // Safe to restore name/username from cloud.
-                    if (cloudName.isNotEmpty() && cloudName != current.name) {
-                        updated = updated.copy(name = cloudName)
-                        changed = true
-                    }
-                    if (cloudUsername.isNotEmpty() && cloudUsername != current.username) {
-                        updated = updated.copy(username = cloudUsername)
-                        changed = true
-                    }
-
-                    // Restore birthDate if the cloud has it
-                    if (cloudBirthDate != current.birthDate) {
-                        updated = updated.copy(birthDate = cloudBirthDate)
-                        changed = true
-                    }
-
-                    // Restore country if the cloud has it
-                    if (cloudCountry != current.country) {
-                        updated = updated.copy(country = cloudCountry)
-                        changed = true
-                    }
-
-                    // Restore admin status — always use actualIsAdmin (email-based)
-                    if (actualIsAdmin != current.isAdmin) {
-                        updated = updated.copy(isAdmin = actualIsAdmin)
-                        changed = true
-                    }
-
-                    // Restore avatar: decode base64 → save to internal storage → set path.
-                    // We overwrite the local avatar if the cloud has one AND either:
-                    //  - the local avatar path is empty, OR
-                    //  - the local avatar file doesn't exist anymore (e.g. after reinstall)
-                    if (cloudAvatarBase64.isNotEmpty()) {
-                        val localAvatarFile = updated.avatar.takeIf { it.isNotEmpty() }?.let { File(it) }
-                        val localAvatarMissing = localAvatarFile == null || !localAvatarFile.exists()
-                        if (localAvatarMissing) {
-                            try {
-                                val bytes = Base64.decode(cloudAvatarBase64, Base64.NO_WRAP)
-                                val bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
-                                if (bitmap != null) {
-                                    val avatarFile = File(context.filesDir, "avatar_${current.email.replace("@", "_at_")}.jpg")
-                                    val out = FileOutputStream(avatarFile)
-                                    bitmap.compress(Bitmap.CompressFormat.JPEG, 85, out)
-                                    out.close()
-                                    bitmap.recycle()
-                                    updated = updated.copy(avatar = avatarFile.absolutePath)
-                                    changed = true
-                                }
-                            } catch (e: Exception) {
-                                Log.w("AuthManager", "restoreUserFromCloud: avatar decode failed", e)
-                            }
-                        }
-                    }
-
-                    // If anything changed, save locally + update the current-user cache
-                    if (changed) {
-                        saveUser(context, updated)
-                        context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
-                            .edit().putString(KEY_USER, serializeUser(updated)).apply()
-                        Log.d("AuthManager", "restoreUserFromCloud: restored name/username/avatar")
-                    }
-                    onRestored?.invoke(changed)
-                }
-                .addOnFailureListener {
-                    Log.w("AuthManager", "restoreUserFromCloud failed", it)
+        // === USE VERCEL API (not Firestore SDK) to avoid cache issues ===
+        // Firestore SDK has offline persistence which returns stale cached data.
+        // The Vercel API always reads from the server (no cache).
+        Thread {
+            try {
+                val cloudUser = ApiClient.getUserProfile(email)
+                if (cloudUser == null) {
                     onRestored?.invoke(false)
+                    return@Thread
                 }
-        } catch (e: Exception) {
-            Log.w("AuthManager", "restoreUserFromCloud exception", e)
-            onRestored?.invoke(false)
-        }
+
+                val cloudName = cloudUser.name
+                val cloudUsername = cloudUser.username
+                val cloudAvatarBase64 = cloudUser.avatarBase64
+                val cloudBirthDate = cloudUser.birthDate
+                val cloudCountry = cloudUser.country
+                val actualIsAdmin = email == getAdminEmail() || cloudUser.isAdmin
+                val cloudCreatedAt = cloudUser.createdAt
+
+                val current = getCurrentUser(context) ?: User(
+                    email = email,
+                    name = cloudName.ifEmpty { email.substringBefore("@") },
+                    username = cloudUsername.ifEmpty { "@${email.substringBefore("@")}" },
+                    isAdmin = actualIsAdmin,
+                    deviceId = getDeviceId(context),
+                    createdAt = cloudCreatedAt,
+                    lastUsernameChange = 0L,
+                    avatar = "",
+                    bio = ""
+                )
+
+                var updated = current
+                var changed = false
+
+                if (cloudName.isNotEmpty() && cloudName != current.name) {
+                    updated = updated.copy(name = cloudName)
+                    changed = true
+                }
+                if (cloudUsername.isNotEmpty() && cloudUsername != current.username) {
+                    updated = updated.copy(username = cloudUsername)
+                    changed = true
+                }
+                if (cloudBirthDate != current.birthDate) {
+                    updated = updated.copy(birthDate = cloudBirthDate)
+                    changed = true
+                }
+                if (cloudCountry != current.country) {
+                    updated = updated.copy(country = cloudCountry)
+                    changed = true
+                }
+                if (actualIsAdmin != current.isAdmin) {
+                    updated = updated.copy(isAdmin = actualIsAdmin)
+                    changed = true
+                }
+
+                if (cloudAvatarBase64.isNotEmpty()) {
+                    val localAvatarFile = updated.avatar.takeIf { it.isNotEmpty() }?.let { File(it) }
+                    val localAvatarMissing = localAvatarFile == null || !localAvatarFile.exists()
+                    if (localAvatarMissing) {
+                        try {
+                            val bytes = Base64.decode(cloudAvatarBase64, Base64.NO_WRAP)
+                            val bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
+                            if (bitmap != null) {
+                                val avatarFile = File(context.filesDir, "avatar_${current.email.replace("@", "_at_")}.jpg")
+                                val out = FileOutputStream(avatarFile)
+                                bitmap.compress(Bitmap.CompressFormat.JPEG, 85, out)
+                                out.close()
+                                bitmap.recycle()
+                                updated = updated.copy(avatar = avatarFile.absolutePath)
+                                changed = true
+                            }
+                        } catch (e: Exception) {}
+                    }
+                }
+
+                if (changed) {
+                    saveUser(context, updated)
+                    context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+                        .edit().putString(KEY_USER, serializeUser(updated)).apply()
+                }
+                onRestored?.invoke(changed)
+            } catch (e: Exception) {
+                onRestored?.invoke(false)
+            }
+        }.start()
     }
 
     /** Lightweight cloud-only user profile (for avatars on comments). */
