@@ -116,7 +116,7 @@ class AdminPanelActivity : AppCompatActivity() {
                             .setMessage("حذف التعليق وحل البلاغ؟")
                             .setPositiveButton("حذف") { _, _ ->
                                 val admin = AuthManager.getCurrentUser(this@AdminPanelActivity)
-                                CloudCommentsManager.resolveReport(r.id, admin?.email ?: "", true, r.commentId) {}
+                                CloudCommentsManager.resolveReport(r.id, true, r.commentId) {}
                             }
                             .setNegativeButton("إلغاء", null).show()
                     }
