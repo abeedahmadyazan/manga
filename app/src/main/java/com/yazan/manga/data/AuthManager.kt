@@ -808,15 +808,12 @@ object AuthManager {
         val user = getCurrentUser(context) ?: return
         try {
             // Read the local avatar file (if any) and encode it as base64.
-            // Only local file paths are supported — HTTP URLs (e.g. from Google
-            // Sign-In) can't be read directly and are skipped.
             val avatarBase64: String? = if (user.avatar.isNotEmpty() && !user.avatar.startsWith("http")) {
                 try {
                     val file = File(user.avatar)
                     if (file.exists()) {
                         val bitmap = BitmapFactory.decodeFile(file.absolutePath)
                         if (bitmap != null) {
-                            // Downscale to max 256px to keep the base64 small
                             val maxDim = 256
                             val scaled = if (bitmap.width > maxDim || bitmap.height > maxDim) {
                                 val scale = minOf(maxDim.toFloat() / bitmap.width, maxDim.toFloat() / bitmap.height)
@@ -840,29 +837,52 @@ object AuthManager {
                 }
             } else null
 
-            val data = hashMapOf(
-                "email" to user.email,
-                "name" to user.name,
-                "username" to user.username,
-                "isAdmin" to user.isAdmin,
-                "avatarBase64" to (avatarBase64 ?: ""),
-                "birthDate" to user.birthDate,
-                "country" to user.country,
-                "createdAt" to user.createdAt,
-                "lastUpdated" to System.currentTimeMillis()
-            )
-            cloudDb.collection(USERS_COLLECTION).document(user.email).set(data)
-                .addOnFailureListener { Log.w("AuthManager", "uploadUserToCloud failed", it) }
-
-            // Also save the UID → email mapping so we can restore the profile
-            // by UID (which is always available via Firebase Auth) even when the
-            // local SharedPreferences are gone (e.g. after reinstall).
-            val firebaseUser = FirebaseAuth.getInstance().currentUser
-            if (firebaseUser != null) {
-                cloudDb.collection(UID_INDEX_COLLECTION).document(firebaseUser.uid)
-                    .set(mapOf("email" to user.email))
-                    .addOnFailureListener { Log.w("AuthManager", "UID index save failed", it) }
-            }
+            // === CRITICAL FIX: Fetch existing cloud data FIRST, then merge ===
+            // This prevents overwriting cloud data with empty local values
+            // (which happened when restoreUserFromCloud failed due to rules)
+            cloudDb.collection(USERS_COLLECTION).document(user.email).get()
+                .addOnSuccessListener { doc ->
+                    val existingAvatar = if (doc.exists()) doc.getString("avatarBase64") ?: "" else ""
+                    val existingName = if (doc.exists()) doc.getString("name") ?: "" else ""
+                    val existingUsername = if (doc.exists()) doc.getString("username") ?: "" else ""
+                    val existingBirthDate = if (doc.exists()) doc.getString("birthDate") ?: "" else ""
+                    val existingCountry = if (doc.exists()) doc.getString("country") ?: "" else ""
+                    val existingCreatedAt = if (doc.exists()) doc.getLong("createdAt") ?: user.createdAt else user.createdAt
+                    
+                    // Merge: use local value if non-empty, else keep cloud value
+                    val finalName = if (user.name.isNotEmpty() && user.name != "يزان") user.name
+                                    else if (existingName.isNotEmpty()) existingName else user.name
+                    val finalUsername = if (user.username.isNotEmpty()) user.username else existingUsername
+                    val finalAvatar = avatarBase64 ?: existingAvatar  // prefer new avatar, keep old if no new
+                    val finalBirthDate = if (user.birthDate.isNotEmpty()) user.birthDate else existingBirthDate
+                    val finalCountry = if (user.country.isNotEmpty()) user.country else existingCountry
+                    
+                    val data = hashMapOf(
+                        "email" to user.email,
+                        "name" to finalName,
+                        "username" to finalUsername,
+                        "isAdmin" to user.isAdmin,
+                        "avatarBase64" to finalAvatar,
+                        "birthDate" to finalBirthDate,
+                        "country" to finalCountry,
+                        "createdAt" to existingCreatedAt,
+                        "lastUpdated" to System.currentTimeMillis()
+                    )
+                    cloudDb.collection(USERS_COLLECTION).document(user.email).set(data)
+                        .addOnFailureListener { Log.w("AuthManager", "uploadUserToCloud failed", it) }
+                    
+                    // Save UID index
+                    val firebaseUser = FirebaseAuth.getInstance().currentUser
+                    if (firebaseUser != null) {
+                        cloudDb.collection(UID_INDEX_COLLECTION).document(firebaseUser.uid)
+                            .set(mapOf("email" to user.email))
+                            .addOnFailureListener { Log.w("AuthManager", "UID index save failed", it) }
+                    }
+                }
+                .addOnFailureListener { e ->
+                    Log.w("AuthManager", "uploadUserToCloud: fetch existing failed, skipping upload to avoid overwriting", e)
+                    // DON'T upload if we can't fetch existing — better to skip than overwrite with empty
+                }
         } catch (e: Exception) {
             Log.w("AuthManager", "uploadUserToCloud exception", e)
         }
