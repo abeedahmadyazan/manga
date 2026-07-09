@@ -1,12 +1,8 @@
 const { auth, db } = require('./_lib');
 
-// Minimum app version required (versionCode)
-// Any app with lower version will be rejected
 const MIN_APP_VERSION = 13;
 
 async function authenticate(req) {
-  // === Version check ===
-  // The app sends X-App-Version header. If missing or too old, reject.
   const clientVersion = parseInt(req.headers['x-app-version'] || '0', 10);
   if (clientVersion < MIN_APP_VERSION) {
     return { 
@@ -18,7 +14,6 @@ async function authenticate(req) {
     };
   }
 
-  // === Auth check ===
   const authHeader = req.headers.authorization;
   if (!authHeader || !authHeader.startsWith('Bearer ')) {
     return { error: { status: 401, message: 'مطلوب تسجيل الدخول' } };
@@ -26,18 +21,20 @@ async function authenticate(req) {
   const idToken = authHeader.split('Bearer ')[1];
   try {
     const decoded = await auth.verifyIdToken(idToken);
-    return { user: { uid: decoded.uid, email: decoded.email } };
+    return { user: { uid: decoded.uid, email: decoded.email || '' } };
   } catch (e) {
     return { error: { status: 401, message: 'رمز غير صالح' } };
   }
 }
 
 async function isAdmin(uid) {
+  if (!uid || uid.length === 0) return false;
   const doc = await db.collection('admins').doc(uid).get();
   return doc.exists;
 }
 
 async function isBanned(email) {
+  if (!email || email.length === 0) return false;
   const doc = await db.collection('banned_users').doc(email).get();
   if (!doc.exists) return false;
   const data = doc.data();

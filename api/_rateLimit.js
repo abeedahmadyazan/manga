@@ -1,10 +1,7 @@
 const { db } = require('./_lib');
 
-/**
- * Check if user is on cooldown (60s between comments)
- * Uses Firestore as the rate limit store (works across all Vercel instances)
- */
 async function checkCooldown(email) {
+  if (!email || email.length === 0) return { allowed: true };
   const doc = await db.collection('comment_cooldowns').doc(email).get();
   if (!doc.exists) return { allowed: true };
   const lastComment = doc.data().lastCommentAt || 0;
@@ -16,6 +13,7 @@ async function checkCooldown(email) {
 }
 
 async function updateCooldown(email) {
+  if (!email || email.length === 0) return;
   await db.collection('comment_cooldowns').doc(email).set({
     lastCommentAt: Date.now(),
   });

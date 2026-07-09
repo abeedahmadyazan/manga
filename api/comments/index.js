@@ -33,7 +33,7 @@ async function GET(req, res) {
     res.json({ comments });
   } catch (e) {
     console.error('GET comments error:', e.message);
-    res.status(500).json({ error: 'تعذّر تحميل التعليقات: ' + e.message });
+    res.status(500).json({ error: 'تعذّر تحميل التعليقات' });
   }
 }
 
@@ -41,6 +41,11 @@ async function POST(req, res) {
   const authResult = await authenticate(req);
   if (authResult.error) return res.status(authResult.error.status).json({ error: authResult.error.message });
   const { email, uid } = authResult.user;
+  
+  // === GUARD: email must not be empty ===
+  if (!email || email.isEmpty || email.length === 0) {
+    return res.status(400).json({ error: 'يجب تسجيل الدخول بحساب Google' });
+  }
   
   const { contextId, contextType, text, parentId } = req.body || {};
   
@@ -50,11 +55,11 @@ async function POST(req, res) {
   if (!contextId || contextId.length > 200) return res.status(400).json({ error: 'سياق غير صالح' });
   
   try {
-    // Run checks in parallel to save time (avoid Vercel 10s timeout)
+    // Run checks in parallel - but guard each one against empty email
     const [banned, cd, isAdminUser, userDoc] = await Promise.all([
-      isBanned(email),
-      checkCooldown(email),
-      isAdmin(uid),
+      isBanned(email).catch(() => false),
+      checkCooldown(email).catch(() => ({ allowed: true })),
+      isAdmin(uid).catch(() => false),
       db.collection('users').doc(email).get().catch(() => null),
     ]);
     
@@ -96,7 +101,8 @@ async function POST(req, res) {
     res.status(201).json({ id: docRef.id, ...comment });
   } catch (e) {
     console.error('POST comment error:', e.message);
-    res.status(500).json({ error: 'تعذّر إضافة التعليق: ' + e.message });
+    // Don't expose internal error to client
+    res.status(500).json({ error: 'تعذّر إضافة التعليق. حاول مرة أخرى.' });
   }
 }
 
@@ -104,6 +110,8 @@ async function PUT(req, res) {
   const authResult = await authenticate(req);
   if (authResult.error) return res.status(authResult.error.status).json({ error: authResult.error.message });
   const { email } = authResult.user;
+  
+  if (!email || email.length === 0) return res.status(400).json({ error: 'يجب تسجيل الدخول' });
   
   const { id } = req.query;
   const { text } = req.body || {};
@@ -118,7 +126,7 @@ async function PUT(req, res) {
     await docRef.update({ text: text.trim(), editedAt: Date.now() });
     res.json({ id, text: text.trim(), editedAt: Date.now() });
   } catch (e) {
-    res.status(500).json({ error: 'تعذّر التعديل: ' + e.message });
+    res.status(500).json({ error: 'تعذّر التعديل' });
   }
 }
 
@@ -127,13 +135,15 @@ async function DELETE(req, res) {
   if (authResult.error) return res.status(authResult.error.status).json({ error: authResult.error.message });
   const { email, uid } = authResult.user;
   
+  if (!email || email.length === 0) return res.status(400).json({ error: 'يجب تسجيل الدخول' });
+  
   const { id } = req.query;
   try {
     const docRef = db.collection('comments').doc(id);
     const doc = await docRef.get();
     if (!doc.exists) return res.status(404).json({ error: 'التعليق غير موجود' });
     const data = doc.data();
-    const isAdminUser = await isAdmin(uid);
+    const isAdminUser = await isAdmin(uid).catch(() => false);
     if (data.authorEmail !== email && !isAdminUser) return res.status(403).json({ error: 'لا يمكنك حذف تعليق شخص آخر' });
     await docRef.delete();
     // Delete replies in background (don't wait)
@@ -142,6 +152,6 @@ async function DELETE(req, res) {
       .catch(() => {});
     res.json({ success: true });
   } catch (e) {
-    res.status(500).json({ error: 'تعذّر الحذف: ' + e.message });
+    res.status(500).json({ error: 'تعذّر الحذف' });
   }
 }
