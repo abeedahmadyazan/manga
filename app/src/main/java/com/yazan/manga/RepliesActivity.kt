@@ -34,6 +34,7 @@ class RepliesActivity : AppCompatActivity() {
     private var contextId: String = ""
     private var contextType: String = ""
     private var allReplies: List<CloudCommentsManager.Comment> = emptyList()
+    private lateinit var titleView: TextView
     private var listener: ListenerRegistration? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,7 +46,8 @@ class RepliesActivity : AppCompatActivity() {
         contextType = intent.getStringExtra("context_type") ?: "manga"
 
         val parentAuthor = intent.getStringExtra("parent_author") ?: "تعليق"
-        findViewById<TextView>(R.id.repliesTitle).text = "💬 ردود على: $parentAuthor"
+        titleView = findViewById(R.id.repliesTitle)
+        titleView.text = "💬 ردود على: $parentAuthor"
 
         swipeRefresh = findViewById(R.id.swipeRefresh)
         recyclerView = findViewById(R.id.repliesRecyclerView)
@@ -73,6 +75,9 @@ class RepliesActivity : AppCompatActivity() {
             onUpdate = { comments ->
                 swipeRefresh.isRefreshing = false
                 allReplies = comments.filter { it.parentId == parentId }
+                // Update title with reply count
+                val count = allReplies.size
+                titleView.text = if (count > 0) "💬 $count رد" else "💬 ردود على: $parentAuthor"
                 renderReplies()
             },
             onError = { e ->

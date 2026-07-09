@@ -116,6 +116,8 @@ class CommentsActivity : AppCompatActivity() {
 
     private fun startListening() {
         loadingIndicator.visibility = View.VISIBLE
+        // Refresh admin status so the adapter has the correct isAdmin flag
+        com.yazan.manga.data.AuthManager.refreshAdminStatus(this)
         listener = CloudCommentsManager.listenToComments(
             contextId = contextId,
             onUpdate = { comments ->
@@ -133,6 +135,9 @@ class CommentsActivity : AppCompatActivity() {
     }
 
     private fun updateList() {
+        // Refresh currentUser so admin status changes are reflected
+        adapter.updateCurrentUser(AuthManager.getCurrentUser(this))
+        
         val topLevel = allComments.filter { it.parentId == null }
         val sorted = when (currentSort) {
             "oldest" -> topLevel.sortedBy { it.createdAt }
@@ -305,7 +310,7 @@ class CommentsActivity : AppCompatActivity() {
 }
 
 class CommentsAdapter(
-    private val currentUser: AuthManager.User?,
+    private var currentUser: AuthManager.User?,
     private val onLike: (CloudCommentsManager.Comment) -> Unit,
     private val onDislike: (CloudCommentsManager.Comment) -> Unit,
     private val onReply: (CloudCommentsManager.Comment) -> Unit,
@@ -325,6 +330,11 @@ class CommentsAdapter(
     fun updateList(top: List<CloudCommentsManager.Comment>, replies: Map<String, List<CloudCommentsManager.Comment>>) {
         items.clear(); items.addAll(top)
         repliesMap.clear(); repliesMap.putAll(replies)
+        notifyDataSetChanged()
+    }
+    
+    fun updateCurrentUser(user: AuthManager.User?) {
+        currentUser = user
         notifyDataSetChanged()
     }
 
@@ -410,6 +420,16 @@ class CommentsAdapter(
             btnLike.setOnClickListener { onLike(c) }
             btnDislike.setOnClickListener { onDislike(c) }
             btnReply.setOnClickListener { onReply(c) }
+            // Show reply count next to the reply icon
+            val replyCount = repliesMap[c.id]?.size ?: 0
+            val replyTv = (btnReply as? android.widget.LinearLayout)?.findViewById<android.widget.TextView>(android.R.id.text1)
+                ?: (btnReply as? android.widget.LinearLayout)?.let { layout ->
+                    // Find the second child (TextView after ImageView)
+                    if (layout.childCount >= 2 && layout.getChildAt(1) is android.widget.TextView) {
+                        layout.getChildAt(1) as android.widget.TextView
+                    } else null
+                }
+            replyTv?.text = if (replyCount > 0) "$replyCount رد" else "رد"
             btnEdit.setOnClickListener { onEdit(c) }
             btnDelete.setOnClickListener { onDelete(c) }
             btnReport.setOnClickListener { onReport(c) }
