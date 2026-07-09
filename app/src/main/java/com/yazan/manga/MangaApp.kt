@@ -74,10 +74,6 @@ class MangaApp : Application() {
                 firebaseAuth.signInAnonymously()
                     .addOnSuccessListener {
                         android.util.Log.d("MangaApp", "Anonymous auth success: UID=${it.user?.uid}")
-                        // After anonymous auth, try to restore user from cloud.
-                        // This handles the reinstall case where local data is gone
-                        // but the user's email is in Firebase Auth.
-                        com.yazan.manga.data.AuthManager.restoreUserFromCloud(this)
                     }
                     .addOnFailureListener { e ->
                         android.util.Log.w("MangaApp", "Anonymous auth failed (this is OK): ${e.message}")

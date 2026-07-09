@@ -387,17 +387,11 @@ object AuthManager {
             .putString(KEY_LINKED_EMAIL, email)
             .apply()
 
-        // Restore from cloud FIRST (async), then upload the (now-correct) local
-        // profile. restoreUserFromCloud calls uploadUserToCloud itself once the
-        // cloud data is applied, so we never overwrite the cloud with stale data.
-        restoreUserFromCloud(context) {
-            uploadUserToCloud(context)
-        }
+        // Upload local profile to cloud (background, non-blocking).
+        // DON'T call restoreUserFromCloud — it overwrites local changes.
+        uploadUserToCloud(context)
 
-        // Async admin check: if the user's UID exists in the 'admins' Firestore
-        // collection, mark them as admin. This runs after the synchronous flow
-        // so the user can sign in immediately, and the admin flag updates once
-        // the cloud check completes.
+        // Async admin check
         refreshAdminStatus(context)
         // Bootstrap: if no admin exists yet, promote this user automatically.
         bootstrapFirstAdmin(context)
