@@ -24,27 +24,28 @@ async function authenticate(req) {
     const uid = decoded.uid;
     let email = decoded.email || '';
     
-    // If no email in token (anonymous user), try to get it from Admin SDK
+    // If no email in token (anonymous user), use the X-User-Email header
+    // The app sends this from SharedPreferences (the user's actual email)
+    if (!email) {
+      email = req.headers['x-user-email'] || '';
+    }
+    
+    // If still no email, try Admin SDK
     if (!email && uid) {
       try {
         const userRecord = await auth.getUser(uid);
         email = userRecord.email || '';
-      } catch (e) {
-        // Can't get user record
-      }
+      } catch (e) {}
     }
     
-    // If still no email, check if this is an anonymous user
-    if (!email) {
-      // Check if this UID is linked to a Google account via user_uids
+    // If still no email, check user_uids index
+    if (!email && uid) {
       try {
         const indexDoc = await db.collection('user_uids').doc(uid).get();
         if (indexDoc.exists) {
           email = indexDoc.data().email || '';
         }
-      } catch (e) {
-        // Can't check index
-      }
+      } catch (e) {}
     }
     
     return { user: { uid, email } };
@@ -58,9 +59,7 @@ async function isAdmin(uid) {
   try {
     const doc = await db.collection('admins').doc(uid).get();
     return doc.exists;
-  } catch (e) {
-    return false;
-  }
+  } catch (e) { return false; }
 }
 
 async function isBanned(email) {
@@ -72,9 +71,7 @@ async function isBanned(email) {
     if (data.permanent) return true;
     if (data.until && data.until > Date.now()) return true;
     return false;
-  } catch (e) {
-    return false;
-  }
+  } catch (e) { return false; }
 }
 
 const BANNED_WORDS = [

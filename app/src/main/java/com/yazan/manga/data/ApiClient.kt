@@ -41,6 +41,23 @@ object ApiClient {
         .build()
 
     /**
+     * Get the current user's email (from SharedPreferences).
+     * Sent as X-User-Email header because the Firebase token might
+     * be from an anonymous session (no email).
+     */
+    private fun getUserEmail(): String {
+        return try {
+            val context = com.yazan.manga.MangaApp.appContext
+            val prefs = context.getSharedPreferences("manga_auth", android.content.Context.MODE_PRIVATE)
+            val userJson = prefs.getString("current_user", "") ?: ""
+            if (userJson.isNotEmpty()) {
+                val json = com.google.gson.JsonParser.parseString(userJson).asJsonObject
+                json.get("email")?.asString ?: ""
+            } else ""
+        } catch (e: Exception) { "" }
+    }
+
+    /**
      * Get the app's versionCode (for the X-App-Version header).
      * The server uses this to reject requests from old app versions.
      */
@@ -101,6 +118,7 @@ object ApiClient {
             .header("Authorization", "Bearer $token")
             .header("Content-Type", "application/json")
             .header("X-App-Version", getAppVersionCode().toString())
+            .header("X-User-Email", getUserEmail())
 
         when (method) {
             "GET" -> reqBuilder.get()
