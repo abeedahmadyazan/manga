@@ -19,7 +19,6 @@
         android:textSize="14sp"
         android:textStyle="bold" />
 
-    <!-- Avatar image (shown when the commenter has a cloud-uploaded photo) -->
     <ImageView
         android:id="@+id/commentAvatarImage"
         android:layout_width="36dp"
@@ -42,8 +41,6 @@
             android:orientation="horizontal"
             android:gravity="center_vertical">
 
-            <!-- Admin name shown in a green pill so nobody can impersonate
-                 an admin by just writing '(مشرف)' in their name. -->
             <TextView
                 android:id="@+id/commentAdminBadge"
                 android:layout_width="wrap_content"
@@ -57,7 +54,6 @@
                 android:textStyle="bold"
                 android:visibility="gone" />
 
-            <!-- For non-admins, the author name is a plain TextView. -->
             <TextView
                 android:id="@+id/commentAuthor"
                 android:layout_width="wrap_content"
@@ -88,54 +84,126 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:gravity="center_vertical"
             android:layout_marginTop="8dp">
 
-            <TextView
+            <!-- Like button: transparent, turns blue when selected -->
+            <LinearLayout
                 android:id="@+id/btnLike"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="👍 0"
-                android:textColor="@color/text_secondary"
-                android:textSize="11sp"
-                android:padding="4dp"
-                android:background="?attr/selectableItemBackgroundBorderless" />
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:padding="6dp"
+                android:background="@drawable/bg_btn_transparent"
+                android:clickable="true"
+                android:focusable="true">
 
-            <TextView
+                <ImageView
+                    android:id="@+id/imgLike"
+                    android:layout_width="14dp"
+                    android:layout_height="14dp"
+                    android:src="@drawable/ic_like_new"
+                    android:contentDescription="إعجاب" />
+
+                <TextView
+                    android:id="@+id/tvLikeCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textColor="@color/color_like"
+                    android:textSize="11sp"
+                    android:layout_marginStart="4dp" />
+            </LinearLayout>
+
+            <!-- Dislike button: transparent, turns red when selected -->
+            <LinearLayout
                 android:id="@+id/btnDislike"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="👎 0"
-                android:textColor="@color/text_secondary"
-                android:textSize="11sp"
-                android:padding="4dp"
-                android:layout_marginStart="12dp"
-                android:background="?attr/selectableItemBackgroundBorderless" />
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:padding="6dp"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/bg_btn_transparent"
+                android:clickable="true"
+                android:focusable="true">
 
-            <TextView
+                <ImageView
+                    android:id="@+id/imgDislike"
+                    android:layout_width="14dp"
+                    android:layout_height="14dp"
+                    android:src="@drawable/ic_dislike_new"
+                    android:contentDescription="عدم إعجاب" />
+
+                <TextView
+                    android:id="@+id/tvDislikeCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textColor="@color/color_dislike"
+                    android:textSize="11sp"
+                    android:layout_marginStart="4dp" />
+            </LinearLayout>
+
+            <!-- Reply button -->
+            <LinearLayout
                 android:id="@+id/btnReply"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="💬 رد"
-                android:textColor="@color/text_secondary"
-                android:textSize="11sp"
-                android:padding="4dp"
-                android:layout_marginStart="12dp"
-                android:background="?attr/selectableItemBackgroundBorderless" />
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:padding="6dp"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/bg_btn_transparent"
+                android:clickable="true"
+                android:focusable="true">
 
-            <!-- Edit button (only shown for the comment owner) -->
-            <TextView
+                <ImageView
+                    android:layout_width="14dp"
+                    android:layout_height="14dp"
+                    android:src="@drawable/ic_reply_new"
+                    android:contentDescription="رد" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="رد"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="11sp"
+                    android:layout_marginStart="4dp" />
+            </LinearLayout>
+
+            <!-- Edit button (owner only) -->
+            <LinearLayout
                 android:id="@+id/btnEdit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="✏️ تعديل"
-                android:textColor="@color/text_secondary"
-                android:textSize="11sp"
-                android:padding="4dp"
-                android:layout_marginStart="12dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:visibility="gone" />
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:padding="6dp"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/bg_btn_transparent"
+                android:clickable="true"
+                android:focusable="true"
+                android:visibility="gone">
 
-            <!-- "Edited" indicator (shown if editedAt != null) -->
+                <ImageView
+                    android:layout_width="14dp"
+                    android:layout_height="14dp"
+                    android:src="@drawable/ic_edit_new"
+                    android:contentDescription="تعديل" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="تعديل"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="11sp"
+                    android:layout_marginStart="4dp" />
+            </LinearLayout>
+
+            <!-- Edited indicator -->
             <TextView
                 android:id="@+id/tvEdited"
                 android:layout_width="wrap_content"
@@ -147,26 +215,32 @@
                 android:layout_marginStart="4dp"
                 android:visibility="gone" />
 
-            <TextView
+            <!-- Delete button — cleaner trash icon -->
+            <ImageView
                 android:id="@+id/btnDelete"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="🗑️"
-                android:textSize="13sp"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/ic_delete_new"
                 android:padding="4dp"
                 android:layout_marginStart="8dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
+                android:background="@drawable/bg_btn_transparent"
+                android:clickable="true"
+                android:focusable="true"
+                android:contentDescription="حذف"
                 android:visibility="gone" />
 
-            <TextView
+            <!-- Report button -->
+            <ImageView
                 android:id="@+id/btnReport"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="🚩"
-                android:textSize="13sp"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/ic_report_new"
                 android:padding="4dp"
                 android:layout_marginStart="8dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
+                android:background="@drawable/bg_btn_transparent"
+                android:clickable="true"
+                android:focusable="true"
+                android:contentDescription="إبلاغ"
                 android:visibility="gone" />
         </LinearLayout>
     </LinearLayout>

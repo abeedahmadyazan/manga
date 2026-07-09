@@ -344,13 +344,17 @@ class CommentsAdapter(
         private val author = v.findViewById<TextView>(R.id.commentAuthor)
         private val time = v.findViewById<TextView>(R.id.commentTime)
         private val text = v.findViewById<TextView>(R.id.commentText)
-        private val btnLike = v.findViewById<TextView>(R.id.btnLike)
-        private val btnDislike = v.findViewById<TextView>(R.id.btnDislike)
-        private val btnReply = v.findViewById<TextView>(R.id.btnReply)
-        private val btnEdit = v.findViewById<TextView>(R.id.btnEdit)
+        private val btnLike = v.findViewById<View>(R.id.btnLike)
+        private val btnDislike = v.findViewById<View>(R.id.btnDislike)
+        private val btnReply = v.findViewById<View>(R.id.btnReply)
+        private val btnEdit = v.findViewById<View>(R.id.btnEdit)
         private val tvEdited = v.findViewById<TextView>(R.id.tvEdited)
-        private val btnDelete = v.findViewById<TextView>(R.id.btnDelete)
-        private val btnReport = v.findViewById<TextView>(R.id.btnReport)
+        private val btnDelete = v.findViewById<View>(R.id.btnDelete)
+        private val btnReport = v.findViewById<View>(R.id.btnReport)
+        private val imgLike = v.findViewById<android.widget.ImageView>(R.id.imgLike)
+        private val tvLikeCount = v.findViewById<TextView>(R.id.tvLikeCount)
+        private val imgDislike = v.findViewById<android.widget.ImageView>(R.id.imgDislike)
+        private val tvDislikeCount = v.findViewById<TextView>(R.id.tvDislikeCount)
 
         fun bind(c: CloudCommentsManager.Comment) {
             // FIX: Don't show the OLD cached name/avatar at all.
@@ -376,13 +380,21 @@ class CommentsAdapter(
             }
             time.text = com.yazan.manga.data.relativeTime(c.createdAt)
             text.text = c.text
-            btnLike.text = "👍 ${c.likes.size}"
-            btnDislike.text = "👎 ${c.dislikes.size}"
-
             val liked = currentUser != null && c.likes.contains(currentUser.email)
             val disliked = currentUser != null && c.dislikes.contains(currentUser.email)
-            btnLike.alpha = if (liked) 1f else 0.5f
-            btnDislike.alpha = if (disliked) 1f else 0.5f
+            tvLikeCount.text = c.likes.size.toString()
+            tvDislikeCount.text = c.dislikes.size.toString()
+            // Like: blue when liked, gray when not (transparent bg)
+            val blue = android.graphics.Color.parseColor("#3b82f6")
+            val red = android.graphics.Color.parseColor("#ef4444")
+            val gray = android.graphics.Color.parseColor("#9ca3af")
+            imgLike.imageTintList = android.content.res.ColorStateList.valueOf(if (liked) blue else gray)
+            tvLikeCount.setTextColor(if (liked) blue else gray)
+            imgLike.isSelected = liked
+            // Dislike: red when disliked, gray when not
+            imgDislike.imageTintList = android.content.res.ColorStateList.valueOf(if (disliked) red else gray)
+            tvDislikeCount.setTextColor(if (disliked) red else gray)
+            imgDislike.isSelected = disliked
 
             val isOwner = currentUser?.email == c.authorEmail
             val canDelete = isOwner || (currentUser?.isAdmin == true)

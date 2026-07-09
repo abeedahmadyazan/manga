@@ -201,19 +201,9 @@ class MainActivity : AppCompatActivity() {
                 R.id.menuShare -> {
                     val shareIntent = Intent(Intent.ACTION_SEND).apply {
                         type = "text/plain"
-                        putExtra(Intent.EXTRA_TEXT, "تطبيق مانجا - اقرأ المانجا بالعربية!\nhttps://github.com/abeedahmadyazan/mangaapp")
+                        putExtra(Intent.EXTRA_TEXT, "تطبيق مانجا - اقرأ المانجا بالعربية!\nhttps://yzmanga.netlify.app")
                     }
                     startActivity(Intent.createChooser(shareIntent, "مشاركة عبر"))
-                }
-                R.id.menuRate -> {
-                    try {
-                        val intent = Intent(Intent.ACTION_VIEW, android.net.Uri.parse("market://details?id=com.yazan.manga"))
-                        startActivity(intent)
-                    } catch (e: Exception) {
-                        // Play Store not installed — open web URL instead
-                        val intent = Intent(Intent.ACTION_VIEW, android.net.Uri.parse("https://play.google.com/store/apps/details?id=com.yazan.manga"))
-                        startActivity(intent)
-                    }
                 }
             }
             true

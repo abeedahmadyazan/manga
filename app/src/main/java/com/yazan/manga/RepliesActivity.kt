@@ -128,11 +128,15 @@ class RepliesActivity : AppCompatActivity() {
                 val author = holder.itemView.findViewById<TextView>(R.id.commentAuthor)
                 val time = holder.itemView.findViewById<TextView>(R.id.commentTime)
                 val text = holder.itemView.findViewById<TextView>(R.id.commentText)
-                val btnLike = holder.itemView.findViewById<TextView>(R.id.btnLike)
-                val btnDislike = holder.itemView.findViewById<TextView>(R.id.btnDislike)
-                val btnReply = holder.itemView.findViewById<TextView>(R.id.btnReply)
-                val btnDelete = holder.itemView.findViewById<TextView>(R.id.btnDelete)
-                val btnReport = holder.itemView.findViewById<TextView>(R.id.btnReport)
+                val btnLike = holder.itemView.findViewById<View>(R.id.btnLike)
+                val btnDislike = holder.itemView.findViewById<View>(R.id.btnDislike)
+                val btnReply = holder.itemView.findViewById<View>(R.id.btnReply)
+                val btnDelete = holder.itemView.findViewById<View>(R.id.btnDelete)
+                val btnReport = holder.itemView.findViewById<View>(R.id.btnReport)
+                val imgLike = holder.itemView.findViewById<android.widget.ImageView>(R.id.imgLike)
+                val tvLikeCount = holder.itemView.findViewById<TextView>(R.id.tvLikeCount)
+                val imgDislike = holder.itemView.findViewById<android.widget.ImageView>(R.id.imgDislike)
+                val tvDislikeCount = holder.itemView.findViewById<TextView>(R.id.tvDislikeCount)
 
                 avatar.text = r.authorName.firstOrNull()?.uppercaseChar()?.toString() ?: "?"
                 avatar.visibility = View.VISIBLE
@@ -149,9 +153,20 @@ class RepliesActivity : AppCompatActivity() {
                 }
                 time.text = com.yazan.manga.data.relativeTime(r.createdAt)
                 text.text = r.text
-                btnLike.text = "👍 ${r.likes.size}"
-                btnDislike.text = "👎 ${r.dislikes.size}"
                 btnReply.visibility = View.GONE
+                tvLikeCount.text = r.likes.size.toString()
+                tvDislikeCount.text = r.dislikes.size.toString()
+                val blue = android.graphics.Color.parseColor("#3b82f6")
+                val red = android.graphics.Color.parseColor("#ef4444")
+                val gray = android.graphics.Color.parseColor("#9ca3af")
+                val liked = user != null && r.likes.contains(user.email)
+                val disliked = user != null && r.dislikes.contains(user.email)
+                imgLike.imageTintList = android.content.res.ColorStateList.valueOf(if (liked) blue else gray)
+                tvLikeCount.setTextColor(if (liked) blue else gray)
+                imgLike.isSelected = liked
+                imgDislike.imageTintList = android.content.res.ColorStateList.valueOf(if (disliked) red else gray)
+                tvDislikeCount.setTextColor(if (disliked) red else gray)
+                imgDislike.isSelected = disliked
 
                 // Fetch the latest name + avatar from the cloud
                 AuthManager.fetchCloudUser(r.authorEmail) { cu ->

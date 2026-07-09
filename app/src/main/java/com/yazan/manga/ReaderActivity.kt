@@ -228,7 +228,57 @@ class ReaderActivity : AppCompatActivity() {
         pageImage.scaleY = 1.0f
         pageImage.resetZoom()
 
-        Glide.with(this).load(pages[index]).into(pageImage)
+        // Show spinner while loading this page
+        loadingIndicator.visibility = View.VISIBLE
+
+        // Load current page with listener to hide spinner
+        Glide.with(this)
+            .load(pages[index])
+            .listener(object : com.bumptech.glide.request.RequestListener<android.graphics.drawable.Drawable> {
+                override fun onResourceReady(
+                    resource: android.graphics.drawable.Drawable,
+                    model: Any,
+                    target: com.bumptech.glide.request.target.Target<android.graphics.drawable.Drawable>?,
+                    dataSource: com.bumptech.glide.load.DataSource,
+                    isFirstResource: Boolean
+                ): Boolean {
+                    loadingIndicator.visibility = View.GONE
+                    return false
+                }
+
+                override fun onLoadFailed(
+                    e: com.bumptech.glide.load.engine.GlideException?,
+                    model: Any,
+                    target: com.bumptech.glide.request.target.Target<android.graphics.drawable.Drawable>?,
+                    isFirstResource: Boolean
+                ): Boolean {
+                    loadingIndicator.visibility = View.GONE
+                    return false
+                }
+            })
+            .into(pageImage)
+
+        // Preload next 2 pages so the user finds them already loaded
+        preloadNextPages(index)
+    }
+
+    /**
+     * Preload up to 2 pages ahead of the current page so when the user
+     * navigates forward, the image is already in Glide's disk cache.
+     */
+    private fun preloadNextPages(currentIndex: Int) {
+        val preloadIndices = listOf(currentIndex + 1, currentIndex + 2)
+            .filter { it in pages.indices }
+        for (i in preloadIndices) {
+            try {
+                Glide.with(this)
+                    .load(pages[i])
+                    .diskCacheStrategy(com.bumptech.glide.load.engine.DiskCacheStrategy.ALL)
+                    .preload()
+            } catch (e: Exception) {
+                // Ignore preload errors — it's a best-effort optimization
+            }
+        }
     }
 
     private fun goToPage(index: Int) {

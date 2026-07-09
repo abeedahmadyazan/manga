@@ -33,10 +33,6 @@
             android:icon="@drawable/ic_share"
             android:title="مشاركة التطبيق" />
         <item
-            android:id="@+id/menuRate"
-            android:icon="@drawable/ic_like"
-            android:title="تقييم التطبيق" />
-        <item
             android:id="@+id/menuAbout"
             android:icon="@drawable/ic_info"
             android:title="عن التطبيق" />
