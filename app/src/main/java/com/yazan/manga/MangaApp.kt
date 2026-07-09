@@ -38,6 +38,14 @@ class MangaApp : Application() {
         // Log for debugging (will be stripped in release by ProGuard)
         android.util.Log.d("MangaApp", "Security: compromised=$compromised rooted=$rooted emulator=$emulator")
 
+        // === App Check: verify app integrity before any Firebase call ===
+        // This prevents scripts/bots from using Firestore directly with our
+        // API keys. Tokens are auto-refreshed (TTL 1h).
+        val firebaseAppCheck = com.google.firebase.appcheck.FirebaseAppCheck.getInstance()
+        firebaseAppCheck.installAppCheckProviderFactory(
+            com.google.firebase.appcheck.playintegrity.PlayIntegrityAppCheckProviderFactory.getInstance()
+        )
+
         // Set up Firestore with offline persistence
         val db = FirebaseFirestore.getInstance()
         val settings = FirebaseFirestoreSettings.Builder()
