@@ -685,6 +685,20 @@ class MangaRepository(private val appContext: Context? = null) {
                 val num = parts.lastOrNull() ?: ""
                 val slug = if (parts.size >= 3) parts.dropLast(1).joinToString("-").removePrefix("3asq-") else ""
                 if (slug.isNotBlank() && num.isNotBlank()) {
+                    // === CDN cache first (One Piece latest 10 chapters) ===
+                    fetchCdnChapterPages(slug, num)?.let { cached ->
+                        if (cached.isNotEmpty()) {
+                            Log.d(TAG, "Chapter $slug/$num served from CDN cache (${cached.size} pages)")
+                            return Result.success(cached)
+                        }
+                    }
+                    // === Live fallback: try 3asq directly via CORS proxy ===
+                    val directPages = scrape3asqPagesDirect(slug, num)
+                    if (directPages.isNotEmpty()) {
+                        Log.d(TAG, "Chapter $slug/$num served from 3asq direct (${directPages.size} pages)")
+                        return Result.success(directPages)
+                    }
+                    // === Final fallback: dead ASQ_API proxy ===
                     val req = Request.Builder().url("$ASQ_API/pages?slug=$slug&chapter=$num").header("Accept", "application/json").build()
                     client.newCall(req).execute().use { resp ->
                         if (resp.isSuccessful) {
