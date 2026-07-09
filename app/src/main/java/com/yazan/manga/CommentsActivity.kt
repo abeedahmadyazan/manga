@@ -428,8 +428,31 @@ class CommentsAdapter(
             }
         }
 
-        /** Fetch the commenter's cloud profile (name + avatar) and update the view. */
+        /**
+         * Show the commenter's avatar + name.
+         * Uses authorAvatar from the comment (returned by API) for instant display.
+         * Falls back to cloud fetch only if avatar is missing.
+         */
         private fun loadCloudProfile(c: CloudCommentsManager.Comment) {
+            // === FAST PATH: use authorAvatar from the API response (instant) ===
+            if (c.authorAvatar.isNotEmpty()) {
+                try {
+                    val bytes = android.util.Base64.decode(c.authorAvatar, android.util.Base64.NO_WRAP)
+                    val bmp = android.graphics.BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
+                    if (bmp != null) {
+                        avatar.visibility = View.GONE
+                        avatarImg.visibility = View.VISIBLE
+                        com.bumptech.glide.Glide.with(itemView.context)
+                            .load(bmp)
+                            .circleCrop()
+                            .into(avatarImg)
+                        // Skip the cloud fetch — we already have the avatar
+                        return
+                    }
+                } catch (e: Exception) {}
+            }
+            
+            // === SLOW PATH: fetch from cloud (only if avatar is missing) ===
             // If we already have it cached, apply it immediately
             cloudProfiles[c.authorEmail]?.let { applyProfile(c, it); return }
             // Mark as "fetching" with null so we don't refetch

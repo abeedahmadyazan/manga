@@ -55,6 +55,8 @@ class MainActivity : AppCompatActivity() {
 
         // Check for app updates on startup (non-blocking)
         com.yazan.manga.data.InAppUpdateManager.checkForUpdate(this)
+        // Check for admin announcements + force updates
+        com.yazan.manga.data.AnnouncementManager.checkAnnouncement(this)
 
         initViews()
         loadManga()
