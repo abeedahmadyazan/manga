@@ -32,6 +32,7 @@ object CloudCommentsManager {
         val contextType: String = "",
         val authorName: String = "",
         val authorEmail: String = "",
+        val authorAvatar: String = "",
         val isAdmin: Boolean = false,
         val text: String = "",
         val parentId: String? = null,

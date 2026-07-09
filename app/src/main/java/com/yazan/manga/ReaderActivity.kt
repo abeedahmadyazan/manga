@@ -283,8 +283,8 @@ class ReaderActivity : AppCompatActivity() {
 
                         override fun onLoadFailed(
                             e: com.bumptech.glide.load.engine.GlideException?,
-                            model: Any?,
-                            target: com.bumptech.glide.request.target.Target<android.graphics.drawable.Drawable>?,
+                            model: Any,
+                            target: com.bumptech.glide.request.target.Target<android.graphics.drawable.Drawable>,
                             isFirstResource: Boolean
                         ): Boolean {
                             pageProgress.visibility = View.GONE
