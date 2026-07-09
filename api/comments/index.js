@@ -5,7 +5,7 @@ const { checkCooldown, updateCooldown } = require('../_rateLimit');
 module.exports = async (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Authorization,Content-Type,X-App-Version');
+  res.setHeader('Access-Control-Allow-Headers', 'Authorization,Content-Type,X-App-Version,X-User-Email');
   if (req.method === 'OPTIONS') return res.status(200).end();
   
   if (req.method === 'GET') return GET(req, res);
@@ -23,13 +23,18 @@ async function GET(req, res) {
   if (!contextId || contextId.length > 200) return res.status(400).json({ error: 'سياق غير صالح' });
   
   try {
+    // Simple query WITHOUT orderBy (avoids needing composite index)
     const snapshot = await db.collection('comments')
       .where('contextId', '==', contextId)
-      .orderBy('createdAt', 'desc')
       .limit(500)
       .get();
+    
     const comments = [];
     snapshot.forEach(doc => comments.push({ id: doc.id, ...doc.data() }));
+    
+    // Sort in JavaScript (descending by createdAt)
+    comments.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+    
     res.json({ comments });
   } catch (e) {
     console.error('GET comments error:', e.message);
@@ -42,20 +47,17 @@ async function POST(req, res) {
   if (authResult.error) return res.status(authResult.error.status).json({ error: authResult.error.message });
   const { email, uid } = authResult.user;
   
-  // === GUARD: email must not be empty ===
-  if (!email || email.isEmpty || email.length === 0) {
+  if (!email || email.length === 0) {
     return res.status(400).json({ error: 'يجب تسجيل الدخول بحساب Google' });
   }
   
   const { contextId, contextType, text, parentId } = req.body || {};
   
-  // Validate text
   const textError = validateText(text);
   if (textError) return res.status(400).json({ error: textError });
   if (!contextId || contextId.length > 200) return res.status(400).json({ error: 'سياق غير صالح' });
   
   try {
-    // Run checks in parallel - but guard each one against empty email
     const [banned, cd, isAdminUser, userDoc] = await Promise.all([
       isBanned(email).catch(() => false),
       checkCooldown(email).catch(() => ({ allowed: true })),
@@ -66,7 +68,6 @@ async function POST(req, res) {
     if (banned) return res.status(403).json({ error: 'تم حظر حسابك' });
     if (!cd.allowed) return res.status(429).json({ error: `انتظر ${cd.wait} ثانية` });
     
-    // Check max comments per chapter (only for top-level, not replies)
     const isReply = parentId && parentId.length > 0;
     if (!isReply) {
       const userComments = await db.collection('comments')
@@ -101,7 +102,6 @@ async function POST(req, res) {
     res.status(201).json({ id: docRef.id, ...comment });
   } catch (e) {
     console.error('POST comment error:', e.message);
-    // Don't expose internal error to client
     res.status(500).json({ error: 'تعذّر إضافة التعليق. حاول مرة أخرى.' });
   }
 }
@@ -146,7 +146,6 @@ async function DELETE(req, res) {
     const isAdminUser = await isAdmin(uid).catch(() => false);
     if (data.authorEmail !== email && !isAdminUser) return res.status(403).json({ error: 'لا يمكنك حذف تعليق شخص آخر' });
     await docRef.delete();
-    // Delete replies in background (don't wait)
     db.collection('comments').where('parentId', '==', id).get()
       .then(snap => { const b = db.batch(); snap.forEach(d => b.delete(d.ref)); b.commit(); })
       .catch(() => {});
