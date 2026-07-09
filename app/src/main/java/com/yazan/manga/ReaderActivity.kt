@@ -231,31 +231,33 @@ class ReaderActivity : AppCompatActivity() {
         // Show spinner while loading this page
         loadingIndicator.visibility = View.VISIBLE
 
-        // Load current page with listener to hide spinner
+        // Load current page; hide spinner once loaded (or on error).
+        // Use Glide's RequestListener with platform-typed params (matching Java API exactly).
+        val listener = object : com.bumptech.glide.request.RequestListener<android.graphics.drawable.Drawable> {
+            override fun onResourceReady(
+                resource: android.graphics.drawable.Drawable?,
+                model: Any?,
+                target: com.bumptech.glide.request.target.Target<android.graphics.drawable.Drawable>?,
+                dataSource: com.bumptech.glide.load.DataSource?,
+                isFirstResource: Boolean
+            ): Boolean {
+                loadingIndicator.visibility = View.GONE
+                return false
+            }
+
+            override fun onLoadFailed(
+                e: com.bumptech.glide.load.engine.GlideException?,
+                model: Any?,
+                target: com.bumptech.glide.request.target.Target<android.graphics.drawable.Drawable>?,
+                isFirstResource: Boolean
+            ): Boolean {
+                loadingIndicator.visibility = View.GONE
+                return false
+            }
+        }
         Glide.with(this)
             .load(pages[index])
-            .listener(object : com.bumptech.glide.request.RequestListener<android.graphics.drawable.Drawable> {
-                override fun onResourceReady(
-                    resource: android.graphics.drawable.Drawable,
-                    model: Any,
-                    target: com.bumptech.glide.request.target.Target<android.graphics.drawable.Drawable>,
-                    dataSource: com.bumptech.glide.load.DataSource,
-                    isFirstResource: Boolean
-                ): Boolean {
-                    loadingIndicator.visibility = View.GONE
-                    return false
-                }
-
-                override fun onLoadFailed(
-                    e: com.bumptech.glide.load.engine.GlideException?,
-                    model: Any,
-                    target: com.bumptech.glide.request.target.Target<android.graphics.drawable.Drawable>,
-                    isFirstResource: Boolean
-                ): Boolean {
-                    loadingIndicator.visibility = View.GONE
-                    return false
-                }
-            })
+            .listener(listener)
             .into(pageImage)
 
         // Preload next 2 pages so the user finds them already loaded
