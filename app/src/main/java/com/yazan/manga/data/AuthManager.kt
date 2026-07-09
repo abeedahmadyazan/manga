@@ -387,20 +387,10 @@ object AuthManager {
             .putString(KEY_LINKED_EMAIL, email)
             .apply()
 
-        // If this is a NEW user (cleared data/reinstall), restore from cloud first.
-        // DON'T upload until restore completes — otherwise we overwrite cloud
-        // with default values before the real data is fetched.
-        if (wasNewUser) {
-            restoreUserFromCloud(context) { restored ->
-                if (restored) {
-                    uploadUserToCloud(context)
-                } else {
-                    uploadUserToCloud(context)
-                }
-            }
-        } else {
-            uploadUserToCloud(context)
-        }
+        // Upload local profile to cloud (background).
+        // DON'T call restoreUserFromCloud — it's async and can overwrite
+        // local changes made by the user after sign-in.
+        uploadUserToCloud(context)
 
         // Async admin check
         refreshAdminStatus(context)
