@@ -1,6 +1,5 @@
 {
   "version": 2,
-  "public": false,
   "functions": {
     "api/**/*.js": {
       "maxDuration": 10,
