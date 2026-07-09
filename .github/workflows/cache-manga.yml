@@ -2,22 +2,23 @@ name: Cache Manga
 
 on:
   schedule:
-    - cron: '0 */2 * * *'  # every 2 hours
+    - cron: '0 */6 * * *'  # every 6 hours (was 2h, reduced to save Actions minutes)
   workflow_dispatch:
   push:
     branches: [main]
     paths:
       - 'scripts/fetch_latest.py'
+      - 'scripts/cache_onepiece_chapters.py'
       - '.github/workflows/cache-manga.yml'
 
 permissions:
   contents: write
 
 jobs:
-  cache:
+  cache-lists:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout main (for script)
+      - name: Checkout main
         uses: actions/checkout@v4
         with:
           ref: main
@@ -29,9 +30,16 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Fetch latest manga
+      - name: Install Pillow (for image conversion)
+        run: pip install Pillow
+
+      - name: Fetch latest manga lists
         working-directory: main
         run: python scripts/fetch_latest.py
+
+      - name: Cache One Piece latest chapters
+        working-directory: main
+        run: python scripts/cache_onepiece_chapters.py
 
       - name: Checkout gh-pages
         uses: actions/checkout@v4
@@ -41,10 +49,12 @@ jobs:
           path: gh-pages
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Copy cache to gh-pages
+      - name: Copy caches to gh-pages
         run: |
-          mkdir -p gh-pages/cache
-          cp main/cache/*.json gh-pages/cache/
+          mkdir -p gh-pages/cache/chapters
+          cp main/cache/latest.json gh-pages/cache/
+          cp main/cache/popular.json gh-pages/cache/
+          cp -r main/cache/chapters/* gh-pages/cache/chapters/ 2>/dev/null || true
 
       - name: Commit and push to gh-pages
         working-directory: gh-pages

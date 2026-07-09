@@ -228,6 +228,49 @@ class MangaRepository(private val appContext: Context? = null) {
         return result
     }
 
+    /**
+     * Fetch cached chapter pages from jsDelivr CDN (gh-pages branch).
+     *
+     * The One Piece latest 10 chapters are pre-cached by GitHub Actions
+     * (scripts/cache_onepiece_chapters.py) as WebP images on gh-pages.
+     * This avoids hitting 3asq at runtime — if 3asq goes down, the user
+     * can still read the latest chapters.
+     *
+     * Returns null if the chapter is not cached (caller falls back to live source).
+     */
+    private fun fetchCdnChapterPages(slug: String, chapter: String): List<ChapterPage>? {
+        // Only One Piece is cached on CDN for now
+        if (slug != "one-piece") return null
+        val chapterNum = chapter.toFloatOrNull()?.toInt() ?: return null
+        return try {
+            val manifestUrl = "$CDN_CACHE_BASE/chapters/manifest.json"
+            val req = Request.Builder().url(manifestUrl)
+                .header("User-Agent", UA)
+                .header("Accept", "application/json")
+                .build()
+            client.newCall(req).execute().use { resp ->
+                if (!resp.isSuccessful) return null
+                val body = resp.body?.string() ?: return null
+                val root = JsonParser.parseString(body).asJsonObject
+                val chapters = root.getAsJsonObject("chapters") ?: return null
+                val chObj = chapters.getAsJsonObject(chapterNum.toString()) ?: return null
+                val pages = chObj.getAsJsonArray("pages") ?: return null
+                val result = mutableListOf<ChapterPage>()
+                for (i in 0 until pages.size()) {
+                    val path = pages[i].asString
+                    // Convert relative path to jsDelivr URL
+                    val fullUrl = "https://cdn.jsdelivr.net/gh/abeedahmadyazan/mangaapp@gh-pages/$path"
+                    result.add(ChapterPage(index = i, url = fullUrl))
+                }
+                Log.d(TAG, "CDN chapter cache: $slug/$chapter -> ${result.size} pages")
+                result
+            }
+        } catch (e: Exception) {
+            Log.w(TAG, "CDN chapter cache failed: ${e.message}")
+            null
+        }
+    }
+
     private fun getMangaDetailsFromNetwork(id: String): Result<MangaDetails> {
         return try {
             // 1. Get manga details from MangaDex
