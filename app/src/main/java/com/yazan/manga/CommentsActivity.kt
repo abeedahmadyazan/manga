@@ -428,14 +428,25 @@ class CommentsAdapter(
             }
         }
 
-        /**
-         * Show the commenter's avatar + name.
-         * Uses authorAvatar from the comment (returned by API) for instant display.
-         * Falls back to cloud fetch only if avatar is missing.
-         */
+        /** Fetch the commenter's cloud profile (name + avatar) and update the view. */
         private fun loadCloudProfile(c: CloudCommentsManager.Comment) {
-            // === FAST PATH: use authorAvatar from the API response (instant) ===
+            // === FAST PATH: check in-memory AvatarCache first (0ms) ===
+            val cachedBmp = com.yazan.manga.data.AvatarCache.get(c.authorEmail)
+            if (cachedBmp != null) {
+                avatar.visibility = View.GONE
+                avatarImg.visibility = View.VISIBLE
+                com.bumptech.glide.Glide.with(itemView.context)
+                    .load(cachedBmp)
+                    .circleCrop()
+                    .into(avatarImg)
+                // Still update the name from cache
+                cloudProfiles[c.authorEmail]?.let { applyProfile(c, it) }
+                return
+            }
+            
+            // === MEDIUM PATH: use authorAvatar from API response ===
             if (c.authorAvatar.isNotEmpty()) {
+                com.yazan.manga.data.AvatarCache.put(c.authorEmail, c.authorAvatar)
                 try {
                     val bytes = android.util.Base64.decode(c.authorAvatar, android.util.Base64.NO_WRAP)
                     val bmp = android.graphics.BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
@@ -446,20 +457,23 @@ class CommentsAdapter(
                             .load(bmp)
                             .circleCrop()
                             .into(avatarImg)
-                        // Skip the cloud fetch — we already have the avatar
                         return
                     }
                 } catch (e: Exception) {}
             }
             
-            // === SLOW PATH: fetch from cloud (only if avatar is missing) ===
-            // If we already have it cached, apply it immediately
-            cloudProfiles[c.authorEmail]?.let { applyProfile(c, it); return }
-            // Mark as "fetching" with null so we don't refetch
+            // === SLOW PATH: fetch from cloud (only if not cached) ===
+            if (cloudProfiles.containsKey(c.authorEmail)) {
+                cloudProfiles[c.authorEmail]?.let { applyProfile(c, it) }
+                return
+            }
             cloudProfiles[c.authorEmail] = null
             AuthManager.fetchCloudUser(c.authorEmail) { cu ->
                 cloudProfiles[c.authorEmail] = cu
-                // Only rebind if this VH is still showing the same comment
+                // Cache the avatar in memory
+                if (cu?.avatarBase64?.isNotEmpty() == true) {
+                    com.yazan.manga.data.AvatarCache.put(c.authorEmail, cu.avatarBase64)
+                }
                 if (bindingAdapterPosition != RecyclerView.NO_POSITION &&
                     items.getOrNull(bindingAdapterPosition)?.id == c.id) {
                     applyProfile(c, cu)

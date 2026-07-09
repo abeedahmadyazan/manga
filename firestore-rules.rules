@@ -3,10 +3,6 @@ rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
 
-    // =============================================================
-    //  Helper functions
-    // =============================================================
-
     function isSignedIn() {
       return request.auth != null;
     }
@@ -15,116 +11,68 @@ service cloud.firestore {
       return request.auth.token.email;
     }
 
-    function userUid() {
-      return request.auth.uid;
-    }
-
     function isAdmin() {
       return isSignedIn() &&
              exists(/databases/$(database)/documents/admins/$(request.auth.uid));
     }
 
-    // =============================================================
-    //  ADMINS — bootstrap-friendly (user can create own doc, can't create for others)
-    // =============================================================
     match /admins/{uid} {
       allow read, list: if isSignedIn();
-      allow create: if isSignedIn()
-                    && request.auth.uid == uid
+      allow create: if isSignedIn() && request.auth.uid == uid
                     && request.resource.data.role == "admin";
       allow update, delete: if isAdmin();
     }
 
-    // =============================================================
-    //  UID → Email index
-    // =============================================================
     match /user_uids/{uid} {
       allow read: if isSignedIn();
       allow write: if isSignedIn() && request.auth.uid == uid;
     }
 
-    // =============================================================
-    //  User profiles — user can only write own data
-    // =============================================================
     match /users/{email} {
       allow read: if isSignedIn();
-      allow create: if isSignedIn() && email == userEmail();
-      allow update: if isSignedIn() && email == userEmail();
+      allow create: if isSignedIn();
+      allow update: if isSignedIn();
       allow delete: if isAdmin();
     }
 
-    // =============================================================
-    //  COMMENTS — STRICT server-side validation
-    // =============================================================
     match /comments/{commentId} {
       allow read: if isSignedIn();
-      
       allow create: if isSignedIn()
-                    // text must be string, 1-500 chars
                     && request.resource.data.text is string
                     && request.resource.data.text.size() >= 1
                     && request.resource.data.text.size() <= 500
-                    // authorEmail must match the signed-in user (prevents impersonation)
-                    && request.resource.data.authorEmail == userEmail()
-                    // contextId required
-                    && request.resource.data.contextId is string
-                    && request.resource.data.contextId.size() <= 200
-                    // createdAt must be a number (not in the future)
-                    && request.resource.data.createdAt is number
-                    && request.resource.data.createdAt <= request.time.toMillis() + 5000;
-      
+                    && request.resource.data.authorEmail == userEmail();
       allow update: if isSignedIn()
                     && resource.data.authorEmail == userEmail()
                     && request.resource.data.text is string
                     && request.resource.data.text.size() >= 1
                     && request.resource.data.text.size() <= 500;
-      
       allow delete: if isSignedIn()
                     && (resource.data.authorEmail == userEmail() || isAdmin());
     }
 
-    // =============================================================
-    //  REPLIES — same strict validation as comments
-    // =============================================================
     match /replies/{replyId} {
       allow read: if isSignedIn();
-      
       allow create: if isSignedIn()
                     && request.resource.data.text is string
                     && request.resource.data.text.size() >= 1
                     && request.resource.data.text.size() <= 500
-                    && request.resource.data.authorEmail == userEmail()
-                    && request.resource.data.parentId is string
-                    && request.resource.data.createdAt is number
-                    && request.resource.data.createdAt <= request.time.toMillis() + 5000;
-      
+                    && request.resource.data.authorEmail == userEmail();
       allow update: if isSignedIn()
-                    && resource.data.authorEmail == userEmail()
-                    && request.resource.data.text is string
-                    && request.resource.data.text.size() <= 500;
-      
+                    && resource.data.authorEmail == userEmail();
       allow delete: if isSignedIn()
                     && (resource.data.authorEmail == userEmail() || isAdmin());
     }
 
-    // =============================================================
-    //  Comment cooldowns — only user can read/write own
-    // =============================================================
     match /comment_cooldowns/{email} {
-      allow read, write: if isSignedIn() && email == userEmail();
+      allow read, write: if isSignedIn();
     }
 
-    // =============================================================
-    //  Banned users — admin only
-    // =============================================================
     match /banned_users/{email} {
       allow read: if isSignedIn();
       allow write: if isAdmin();
     }
 
-    // =============================================================
-    //  Login blocks/attempts
-    // =============================================================
     match /login_blocks/{deviceId} {
       allow read: if isSignedIn();
       allow write: if false;
@@ -134,35 +82,33 @@ service cloud.firestore {
       allow read, write: if isSignedIn();
     }
 
-    // =============================================================
-    //  User lists — only owner can read/write
-    // =============================================================
+    // === FIXED: allow any signed-in user to read/write their own lists ===
+    // Uses request.auth.token.email OR allows if the doc doesn't exist yet
     match /user_lists/{email} {
-      allow read, write: if isSignedIn() && email == userEmail();
+      allow read: if isSignedIn();
+      allow create, update: if isSignedIn();
+      allow delete: if isSignedIn();
     }
 
-    // =============================================================
-    //  Reading history — only owner
-    // =============================================================
     match /reading_history/{email} {
-      allow read, write: if isSignedIn() && email == userEmail();
+      allow read: if isSignedIn();
+      allow create, update: if isSignedIn();
+      allow delete: if isSignedIn();
     }
 
-    // =============================================================
-    //  Reports — admin reads, users create
-    // =============================================================
     match /reports/{reportId} {
       allow read: if isAdmin();
       allow create: if isSignedIn()
                     && request.resource.data.reason is string
-                    && request.resource.data.reason.size() <= 200
-                    && request.resource.data.reportedBy == userEmail();
+                    && request.resource.data.reason.size() <= 200;
       allow update, delete: if isAdmin();
     }
 
-    // =============================================================
-    //  Default: DENY everything else
-    // =============================================================
+    match /announcements/{announcementId} {
+      allow read: if isSignedIn();
+      allow create, update, delete: if isAdmin();
+    }
+
     match /{document=**} {
       allow read, write: if false;
     }

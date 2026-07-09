@@ -1,26 +1,20 @@
 package com.yazan.manga.ui
 
 import android.content.Context
-import android.graphics.Matrix
 import android.util.AttributeSet
 import android.view.GestureDetector
 import android.view.MotionEvent
-import android.view.ScaleGestureDetector
+import android.widget.OverScroller
 import androidx.appcompat.widget.AppCompatImageView
 
 /**
- * Professional pinch-to-zoom ImageView.
+ * ImageView with double-tap zoom + pan support.
  * 
- * Features:
- * - Pinch to zoom (2 fingers) — smooth, like gallery apps
- * - Pan/drag with 1 finger when zoomed in (>1x)
- * - Double-tap to zoom in (2x) or reset to 1x
- * - Clamped edges (can't drag image off-screen)
- * - Smooth scaling with min=1x, max=5x
- * 
- * When inside a RecyclerView/ScrollView:
- * - At 1x scale: allows parent to scroll (vertical swipe)
- * - At >1x scale: captures touch events (prevents parent scroll)
+ * - Double-tap: zoom to 2.5x at tap position, or reset to 1x
+ * - Pan with 1 finger when zoomed in (>1x)
+ * - Clamped edges
+ * - At 1x: allows parent scroll (RecyclerView)
+ * - At >1x: captures touch events
  */
 class ZoomableImageView @JvmOverloads constructor(
     context: Context,
@@ -40,23 +34,6 @@ class ZoomableImageView @JvmOverloads constructor(
     private var lastTouchX = 0f
     private var lastTouchY = 0f
 
-    private val scaleDetector = ScaleGestureDetector(context, object : ScaleGestureDetector.SimpleOnScaleGestureListener() {
-        override fun onScale(detector: ScaleGestureDetector): Boolean {
-            val newScale = scaleFactor * detector.scaleFactor
-            scaleFactor = newScale.coerceIn(MIN_SCALE, MAX_SCALE)
-            
-            // Adjust position to zoom around the focal point
-            val focusX = detector.focusX
-            val focusY = detector.focusY
-            val scaleChange = scaleFactor / (scaleFactor / detector.scaleFactor)
-            posX = (posX - (focusX - width / 2f)) * detector.scaleFactor + (focusX - width / 2f)
-            posY = (posY - (focusY - height / 2f)) * detector.scaleFactor + (focusY - height / 2f)
-            
-            applyTransform()
-            return true
-        }
-    })
-
     private val gestureDetector = GestureDetector(context, object : GestureDetector.SimpleOnGestureListener() {
         override fun onDoubleTap(e: MotionEvent): Boolean {
             if (scaleFactor > MIN_SCALE) {
@@ -64,13 +41,24 @@ class ZoomableImageView @JvmOverloads constructor(
                 scaleFactor = MIN_SCALE
                 posX = 0f
                 posY = 0f
+                scaleX = 1.0f
+                scaleY = 1.0f
+                translationX = 0f
+                translationY = 0f
             } else {
-                // Zoom to 2.5x at the double-tap position
+                // Zoom to 2.5x
                 scaleFactor = DOUBLE_TAP_SCALE
-                posX = (width / 2f - e.x) * (scaleFactor - 1f)
-                posY = (height / 2f - e.y) * (scaleFactor - 1f)
+                scaleX = DOUBLE_TAP_SCALE
+                scaleY = DOUBLE_TAP_SCALE
+                // Adjust position to zoom around the tap point
+                val cx = width / 2f
+                val cy = height / 2f
+                posX = (cx - e.x) * (scaleFactor - 1f)
+                posY = (cy - e.y) * (scaleFactor - 1f)
+                clampTranslation()
+                translationX = posX
+                translationY = posY
             }
-            applyTransform()
             return true
         }
 
@@ -80,69 +68,16 @@ class ZoomableImageView @JvmOverloads constructor(
     })
 
     init {
-        scaleType = ScaleType.MATRIX
-    }
-
-    private fun applyTransform() {
-        val matrix = Matrix()
-        // Center the image
-        val drawable = drawable
-        if (drawable != null) {
-            val drawableWidth = drawable.intrinsicWidth
-            val drawableHeight = drawable.intrinsicHeight
-            val viewWidth = width
-            val viewHeight = height
-            
-            if (viewWidth > 0 && viewHeight > 0 && drawableWidth > 0 && drawableHeight > 0) {
-                val scale = minOf(viewWidth.toFloat() / drawableWidth, viewHeight.toFloat() / drawableHeight)
-                val totalScale = scale * scaleFactor
-                
-                // Center
-                val dx = (viewWidth - drawableWidth * totalScale) / 2f
-                val dy = (viewHeight - drawableHeight * totalScale) / 2f
-                
-                matrix.setScale(totalScale, totalScale)
-                matrix.postTranslate(dx + posX, dy + posY)
-                
-                // Clamp position
-                clampPosition()
-                matrix.reset()
-                matrix.setScale(totalScale, totalScale)
-                matrix.postTranslate(dx + posX, dy + posY)
-            }
-        }
-        imageMatrix = matrix
-    }
-
-    private fun clampPosition() {
-        if (width <= 0 || height <= 0) return
-        val drawable = drawable ?: return
-        val drawableWidth = drawable.intrinsicWidth
-        val drawableHeight = drawable.intrinsicHeight
-        val viewWidth = width
-        val viewHeight = height
-        
-        val scale = minOf(viewWidth.toFloat() / drawableWidth, viewHeight.toFloat() / drawableHeight) * scaleFactor
-        val scaledWidth = drawableWidth * scale
-        val scaledHeight = drawableHeight * scale
-        
-        // Max pan = how much the image exceeds the view
-        val maxX = ((scaledWidth - viewWidth) / 2f).coerceAtLeast(0f)
-        val maxY = ((scaledHeight - viewHeight) / 2f).coerceAtLeast(0f)
-        
-        posX = posX.coerceIn(-maxX, maxX)
-        posY = posY.coerceIn(-maxY, maxY)
+        scaleType = ScaleType.FIT_CENTER
     }
 
     override fun onTouchEvent(event: MotionEvent): Boolean {
-        scaleDetector.onTouchEvent(event)
         gestureDetector.onTouchEvent(event)
 
         when (event.actionMasked) {
             MotionEvent.ACTION_DOWN -> {
                 lastTouchX = event.x
                 lastTouchY = event.y
-                // If zoomed in, tell parent not to scroll
                 if (scaleFactor > MIN_SCALE) {
                     parent?.requestDisallowInterceptTouchEvent(true)
                 }
@@ -150,36 +85,59 @@ class ZoomableImageView @JvmOverloads constructor(
             MotionEvent.ACTION_MOVE -> {
                 if (scaleFactor > MIN_SCALE && event.pointerCount == 1) {
                     parent?.requestDisallowInterceptTouchEvent(true)
-                    val dx = event.x - lastTouchX
-                    val dy = event.y - lastTouchY
+                    val dx = (event.x - lastTouchX) * panSpeedMultiplier()
+                    val dy = (event.y - lastTouchY) * panSpeedMultiplier()
                     posX += dx
                     posY += dy
                     lastTouchX = event.x
                     lastTouchY = event.y
-                    clampPosition()
-                    applyTransform()
+                    clampTranslation()
+                    translationX = posX
+                    translationY = posY
                 }
             }
             MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
                 if (scaleFactor <= MIN_SCALE) {
                     posX = 0f
                     posY = 0f
-                    applyTransform()
+                    translationX = 0f
+                    translationY = 0f
+                } else {
+                    clampTranslation()
+                    translationX = posX
+                    translationY = posY
                 }
             }
         }
         return true
     }
 
+    private fun panSpeedMultiplier(): Float {
+        return (1.0f + (scaleX - 1.0f) * 0.5f).coerceIn(1.0f, 3.5f)
+    }
+
+    private fun clampTranslation() {
+        if (width <= 0 || height <= 0) return
+        val scale = scaleX
+        if (scale <= 1.0f) {
+            posX = 0f
+            posY = 0f
+            return
+        }
+        val maxX = (scale - 1f) * (width / 2f)
+        val maxY = (scale - 1f) * (height / 2f)
+        posX = posX.coerceIn(-maxX, maxX)
+        posY = posY.coerceIn(-maxY, maxY)
+    }
+
     fun resetZoom() {
         scaleFactor = MIN_SCALE
         posX = 0f
         posY = 0f
-        applyTransform()
-    }
-
-    override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
-        super.onSizeChanged(w, h, oldw, oldh)
-        applyTransform()
+        scaleX = 1.0f
+        scaleY = 1.0f
+        translationX = 0f
+        translationY = 0f
+        scaleType = ScaleType.FIT_CENTER
     }
 }

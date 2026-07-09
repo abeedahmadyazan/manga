@@ -32,7 +32,6 @@ object CloudCommentsManager {
         val contextType: String = "",
         val authorName: String = "",
         val authorEmail: String = "",
-        val authorAvatar: String = "",
         val isAdmin: Boolean = false,
         val text: String = "",
         val parentId: String? = null,
@@ -103,7 +102,7 @@ object CloudCommentsManager {
                     val comments = ApiClient.getComments(contextId)
                     kotlinx.coroutines.withContext(Dispatchers.Main) { onUpdate(comments) }
                 }
-                handler.postDelayed(this, 5000)
+                handler.postDelayed(this, 10000)
             }
         }
         handler.postDelayed(runnable, 5000)
@@ -138,7 +137,7 @@ object CloudCommentsManager {
                     // NOTE: This is handled in RepliesActivity via listenToComments
                     kotlinx.coroutines.withContext(Dispatchers.Main) { onUpdate(emptyList()) }
                 }
-                handler.postDelayed(this, 5000)
+                handler.postDelayed(this, 10000)
             }
         }
         handler.postDelayed(runnable, 5000)
