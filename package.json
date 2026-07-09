@@ -1,0 +1,8 @@
+{
+  "name": "yz-manga-api",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "firebase-admin": "^12.4.0"
+  }
+}
