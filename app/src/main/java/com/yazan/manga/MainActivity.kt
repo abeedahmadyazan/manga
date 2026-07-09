@@ -53,6 +53,9 @@ class MainActivity : AppCompatActivity() {
         )
         setContentView(R.layout.activity_main)
 
+        // Check for app updates on startup (non-blocking)
+        com.yazan.manga.data.InAppUpdateManager.checkForUpdate(this)
+
         initViews()
         loadManga()
     }
