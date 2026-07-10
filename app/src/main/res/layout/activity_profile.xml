@@ -396,22 +396,38 @@ android:id="@+id/cardCompleted"
                 </LinearLayout>
             </LinearLayout>
 
-            <!-- ============ Login button (Google styled) ============ -->
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnLogin"
+            <!-- ============ Login button (Black Google styled) ============ -->
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="52dp"
-                android:layout_marginTop="22dp"
-                android:text="تسجيل الدخول عبر Google"
-                android:textColor="@color/white"
-                android:textSize="15sp"
-                android:textStyle="bold"
-                android:background="@drawable/bg_google_button"
-                app:backgroundTint="@null"
-                app:icon="@drawable/ic_google"
-                app:iconGravity="textStart"
-                app:iconTint="@null"
-                tools:ignore="HardcodedText" />
+                android:layout_height="wrap_content"
+                android:layout_marginTop="22dp">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnLogin"
+                    android:layout_width="match_parent"
+                    android:layout_height="52dp"
+                    android:text="تسجيل الدخول عبر Google"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    android:background="@drawable/bg_google_button"
+                    app:backgroundTint="@null"
+                    app:icon="@drawable/ic_google"
+                    app:iconGravity="textStart"
+                    app:iconTint="@null"
+                    tools:ignore="HardcodedText" />
+
+                <!-- Spinning loader shown on top of the button while Google
+                     Sign-In is in progress. Tinted white so it's visible on
+                     the black button. -->
+                <ProgressBar
+                    android:id="@+id/loginProgress"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:layout_gravity="center"
+                    android:indeterminateTint="@color/white"
+                    android:visibility="gone" />
+            </FrameLayout>
 
             <!-- ============ Logout ============ -->
             <com.google.android.material.button.MaterialButton

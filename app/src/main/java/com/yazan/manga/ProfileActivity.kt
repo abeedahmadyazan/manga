@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.EditText
 import android.widget.ImageButton
+import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -52,6 +53,7 @@ class ProfileActivity : AppCompatActivity() {
     private lateinit var tvStatWantToWatch: TextView
     private lateinit var tvStatCompleted: TextView
     private lateinit var btnLogin: MaterialButton
+    private lateinit var loginProgress: ProgressBar
     private lateinit var btnLogout: MaterialButton
     private lateinit var btnChangeName: MaterialButton
     private lateinit var btnChangeUsername: MaterialButton
@@ -89,6 +91,7 @@ class ProfileActivity : AppCompatActivity() {
         tvStatWantToWatch = findViewById(R.id.tvStatWantToWatch)
         tvStatCompleted = findViewById(R.id.tvStatCompleted)
         btnLogin = findViewById(R.id.btnLogin)
+        loginProgress = findViewById(R.id.loginProgress)
         btnLogout = findViewById(R.id.btnLogout)
         btnChangeName = findViewById(R.id.btnChangeName)
         btnChangeUsername = findViewById(R.id.btnChangeUsername)
@@ -144,13 +147,31 @@ class ProfileActivity : AppCompatActivity() {
                     Toast.makeText(this, block.reason, Toast.LENGTH_LONG).show()
                 } else {
                     try {
+                        // Show spinner while Google Sign-In flow is in progress
+                        setLoginLoading(true)
                         val signInIntent = googleSignInClient.signInIntent
                         startActivityForResult(signInIntent, RC_SIGN_IN)
                     } catch (e: Exception) {
+                        setLoginLoading(false)
                         Toast.makeText(this, "تعذّر تسجيل الدخول. تأكد من وجود خدمات Google Play", Toast.LENGTH_LONG).show()
                     }
                 }
             }
+        }
+    }
+
+    /** Show/hide the spinning loader on the login button + enable/disable the button. */
+    private fun setLoginLoading(loading: Boolean) {
+        if (loading) {
+            loginProgress.visibility = View.VISIBLE
+            btnLogin.text = ""
+            btnLogin.icon = null
+            btnLogin.isEnabled = false
+        } else {
+            loginProgress.visibility = View.GONE
+            btnLogin.text = "تسجيل الدخول عبر Google"
+            btnLogin.setIconResource(R.drawable.ic_google)
+            btnLogin.isEnabled = true
         }
     }
 
@@ -189,6 +210,7 @@ class ProfileActivity : AppCompatActivity() {
             }
             RC_SIGN_IN -> {
                 if (resultCode != Activity.RESULT_OK) {
+                    setLoginLoading(false)
                     Toast.makeText(this, "تم إلغاء تسجيل الدخول", Toast.LENGTH_SHORT).show()
                     return
                 }
@@ -198,9 +220,11 @@ class ProfileActivity : AppCompatActivity() {
                     if (account != null && account.idToken != null) {
                         firebaseAuthWithGoogle(account.idToken!!)
                     } else {
+                        setLoginLoading(false)
                         Toast.makeText(this, "تعذّر الحصول على بيانات الحساب", Toast.LENGTH_LONG).show()
                     }
                 } catch (e: ApiException) {
+                    setLoginLoading(false)
                     Toast.makeText(this, "فشل تسجيل الدخول: ${e.statusCode}", Toast.LENGTH_LONG).show()
                 }
             }
@@ -227,6 +251,7 @@ class ProfileActivity : AppCompatActivity() {
                     val error = AuthManager.processFirebaseAuth(this, account)
                     handleAuthResult(error)
                 } else {
+                    setLoginLoading(false)
                     // DON'T fallback to Account Picker — force Google Sign-In
                     Toast.makeText(this, "فشل المصادقة مع Google. حاول مرة أخرى", Toast.LENGTH_LONG).show()
                 }
@@ -239,6 +264,8 @@ class ProfileActivity : AppCompatActivity() {
     }
 
     private fun handleAuthResult(error: String?) {
+        // Always hide the login spinner once auth completes
+        setLoginLoading(false)
         if (error == null) {
             val user = AuthManager.getCurrentUser(this)
             if (user?.isAdmin == true) {

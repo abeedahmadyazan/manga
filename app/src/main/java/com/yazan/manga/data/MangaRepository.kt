@@ -34,6 +34,22 @@ class MangaRepository(private val appContext: Context? = null) {
     private val mpChapterUrlCache = mutableMapOf<String, MutableMap<String, String>>()
 
     /**
+     * Fix MangaDex cover URLs that were cached with the old size-suffix format
+     * (.256.jpg / .512.jpg) which now return 404. The correct format is the
+     * plain filename without a size suffix.
+     */
+    private fun fixCoverUrl(url: String): String {
+        if (url.isEmpty()) return url
+        // Only fix MangaDex cover URLs
+        if (!url.contains("uploads.mangadex.org/covers/")) return url
+        // Strip .256.jpg or .512.jpg suffixes → .jpg
+        return url
+            .replace(".256.jpg", ".jpg")
+            .replace(".512.jpg", ".jpg")
+            .replace(".128.jpg", ".jpg")
+    }
+
+    /**
      * Fetch cached manga list from jsDelivr CDN (gh-pages branch).
      * Updated every 2h by GitHub Actions. Returns empty list on failure.
      */
@@ -56,7 +72,7 @@ class MangaRepository(private val appContext: Context? = null) {
                         result.add(MangaListItem(
                             id = it.get("id").asString,
                             title = it.get("title").asString,
-                            cover = it.get("cover")?.asString ?: "",
+                            cover = fixCoverUrl(it.get("cover")?.asString ?: ""),
                             source = it.get("source")?.asString ?: "mangadex",
                             status = it.get("status")?.asString
                         ))
@@ -75,17 +91,25 @@ class MangaRepository(private val appContext: Context? = null) {
         // Try cache first (1h TTL)
         appContext?.let { ctx ->
             CacheManager.getCachedMangaList(ctx, "latest", page)?.let { cached ->
-                return Result.success(cached)
+                // Sanitize any stale .256.jpg / .512.jpg URLs in the local cache
+                val fixed = cached.map { it.copy(cover = fixCoverUrl(it.cover)) }
+                return Result.success(fixed)
             }
         }
-        // Try CDN cache (gh-pages, updated every 2h) — page 1 only
-        if (page == 1) {
+        // Try CDN cache (gh-pages, updated every 2h) — page 1 only, manga only
+        // (manhwa + novels have their own fetch paths below)
+        if (page == 1 && contentType == "manga") {
             val cdnItems = fetchCdnCache("latest")
             if (cdnItems.isNotEmpty()) {
                 appContext?.let { CacheManager.cacheMangaList(it, "latest", page, cdnItems) }
                 DDoSProtection.reportSuccess()
                 return Result.success(cdnItems)
             }
+        }
+        // Novels: serve from the curated Arabic light-novel collection (no CDN cache)
+        if (contentType == "novel") {
+            val items = getCuratedNovels(page)
+            return Result.success(items)
         }
         if (!DDoSProtection.tryAcquire(DDoSProtection.Action.MANGA_LIST)) {
             return Result.failure(Exception("تم تجاوز الحد المسموح. حاول لاحقاً."))
@@ -94,7 +118,6 @@ class MangaRepository(private val appContext: Context? = null) {
             val offset = (page - 1) * 20
             val langFilter = when (contentType) {
                 "manhwa" -> "&originalLanguage[]=ko"
-                "novel" -> "&originalLanguage[]=ja"
                 else -> "&originalLanguage[]=ja"
             }
             val url = "https://api.mangadex.org/manga?limit=20&offset=$offset&availableTranslatedLanguage[]=ar&order[latestUploadedChapter]=desc&includes[]=cover_art&contentRating[]=safe&contentRating[]=suggestive$langFilter"
@@ -109,9 +132,15 @@ class MangaRepository(private val appContext: Context? = null) {
     }
 
     suspend fun getPopularManga(page: Int = 1, contentType: String = "manga"): Result<List<MangaListItem>> {
+        // Novels: serve from the curated Arabic light-novel collection
+        if (contentType == "novel") {
+            val items = getCuratedNovels(page)
+            return Result.success(items)
+        }
         appContext?.let { ctx ->
             CacheManager.getCachedMangaList(ctx, "popular", page)?.let { cached ->
-                return Result.success(cached)
+                val fixed = cached.map { it.copy(cover = fixCoverUrl(it.cover)) }
+                return Result.success(fixed)
             }
         }
         if (!DDoSProtection.tryAcquire(DDoSProtection.Action.MANGA_LIST)) {
@@ -121,7 +150,6 @@ class MangaRepository(private val appContext: Context? = null) {
             val offset = (page - 1) * 20
             val langFilter = when (contentType) {
                 "manhwa" -> "&originalLanguage[]=ko"
-                "novel" -> "&originalLanguage[]=ja"
                 else -> "&originalLanguage[]=ja"
             }
             val url = "https://api.mangadex.org/manga?limit=20&offset=$offset&availableTranslatedLanguage[]=ar&order[followedCount]=desc&includes[]=cover_art&contentRating[]=safe&contentRating[]=suggestive$langFilter"
@@ -138,7 +166,8 @@ class MangaRepository(private val appContext: Context? = null) {
     suspend fun searchManga(query: String, page: Int = 1, contentType: String = "manga"): Result<List<MangaListItem>> {
         appContext?.let { ctx ->
             CacheManager.getCachedSearchResults(ctx, query)?.let { cached ->
-                return Result.success(cached)
+                val fixed = cached.map { it.copy(cover = fixCoverUrl(it.cover)) }
+                return Result.success(fixed)
             }
         }
         if (!DDoSProtection.tryAcquire(DDoSProtection.Action.MANGA_SEARCH)) {
@@ -149,7 +178,6 @@ class MangaRepository(private val appContext: Context? = null) {
             val encoded = java.net.URLEncoder.encode(query, "UTF-8")
             val langFilter = when (contentType) {
                 "manhwa" -> "&originalLanguage[]=ko"
-                "novel" -> "&originalLanguage[]=ja"
                 else -> "&originalLanguage[]=ja"
             }
             val url = "https://api.mangadex.org/manga?title=$encoded&limit=20&offset=$offset&availableTranslatedLanguage[]=ar&order[relevance]=desc&includes[]=cover_art&contentRating[]=safe&contentRating[]=suggestive$langFilter"
@@ -161,6 +189,104 @@ class MangaRepository(private val appContext: Context? = null) {
             DDoSProtection.reportFailure()
             Result.failure(e)
         }
+    }
+
+    /**
+     * Curated collection of popular Arabic-translated Japanese & Korean light
+     * novels. MangaDex doesn't host light novels, so we serve a hand-picked
+     * list of widely fan-translated titles. Each novel has a stable fake ID
+     * (novel-*) so the details screen can detect it. Covers use Unsplash
+     * (open license). Returns 20 items per "page" (page 1 = items 0..19).
+     */
+    private fun getCuratedNovels(page: Int): List<MangaListItem> {
+        val all = listOf(
+            NovelsData.SOLO_LEVELING, NovelsData.ORV, NovelsData.MUSHOKU_TENSEI,
+            NovelsData.TATE_NO_YUUSHA, NovelsData.KONOSUBA, NovelsData.REZERO,
+            NovelsData.OVERLORD, NovelsData.ARIFURETA, NovelsData.TSUKIMICHI,
+            NovelsData.DANMACHI, NovelsData.TENSURA, NovelsData.SAO,
+            NovelsData.HAMEFURA, NovelsData.GRAVEMARK, NovelsData.WORTENIA,
+            NovelsData.KURO_NO_SENKI, NovelsData.EIGHTH, NovelsData.MOBSEKA,
+            NovelsData.SLOW_PRINCESS, NovelsData.DEATH_MAGE, NovelsData.ISEKAI_NONBIRI,
+            NovelsData.MYDEATH, NovelsData.REDICE, NovelsData.NOBLESSE,
+            NovelsData.TOWER_OF_GOD, NovelsData.OMNISCIENT, NovelsData.SLIME,
+            NovelsData.MUSHOKU_TENSEI, NovelsData.RISING_SHIELD, NovelsData.KNIGHT_BLOOD
+        ).distinctBy { it.id }
+
+        val pageSize = 20
+        val start = (page - 1) * pageSize
+        if (start >= all.size) return emptyList()
+        return all.drop(start).take(pageSize).map { n ->
+            MangaListItem(
+                id = n.id,
+                title = n.title,
+                cover = n.cover,
+                source = "novel",
+                status = n.status
+            )
+        }
+    }
+
+    private object NovelsData {
+        data class Novel(val id: String, val title: String, val cover: String, val status: String)
+
+        val SOLO_LEVELING = Novel("novel-solo-leveling", "سولو ليفيلنغ — الرواية",
+            "https://images.unsplash.com/photo-1543002588-bfa74002ed7e?w=400&h=560&fit=crop&auto=format", "completed")
+        val ORV = Novel("novel-orv", "وجهة نظر القارئ العراف",
+            "https://images.unsplash.com/photo-1532012197267-da84d127e765?w=400&h=560&fit=crop&auto=format", "ongoing")
+        val MUSHOKU_TENSEI = Novel("novel-mushoku", "إعادة التجسد عاطل البطالة",
+            "https://images.unsplash.com/photo-1518373714866-3f1478910cc0?w=400&h=560&fit=crop&auto=format", "completed")
+        val TATE_NO_YUUSHA = Novel("novel-tate", "صعود بطل الدرع",
+            "https://images.unsplash.com/photo-1519682337058-a94d519337bc?w=400&h=560&fit=crop&auto=format", "completed")
+        val KONOSUBA = Novel("novel-konosuba", "حظاً سعيداً في هذا العالم الرائع!",
+            "https://images.unsplash.com/photo-1551029506-0807df4e2031?w=400&h=560&fit=crop&auto=format", "ongoing")
+        val REZERO = Novel("novel-rezero", "إعادة الحياة من الصفر في عالم آخر",
+            "https://images.unsplash.com/photo-1535905557558-afc4877a26fc?w=400&h=560&fit=crop&auto=format", "ongoing")
+        val OVERLORD = Novel("novel-overlord", "أوفيرلورد",
+            "https://images.unsplash.com/photo-1571906484236-52cd0f769691?w=400&h=560&fit=crop&auto=format", "ongoing")
+        val ARIFURETA = Novel("novel-arifureta", "أريفورتا — من الأعلى إلى الأدنى",
+            "https://images.unsplash.com/photo-1606112219348-204d7d8b94ee?w=400&h=560&fit=crop&auto=format", "ongoing")
+        val TSUKIMICHI = Novel("novel-tsukimichi", "رحلة القمر في عالم آخر",
+            "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=400&h=560&fit=crop&auto=format", "ongoing")
+        val DANMACHI = Novel("novel-danmachi", "هل من الخطأ محاولة التقاط فتيات في زنزانة؟",
+            "https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=400&h=560&fit=crop&auto=format", "ongoing")
+        val TENSURA = Novel("novel-tensura", "حياتي كصبار — تنسورا",
+            "https://images.unsplash.com/photo-1614850523060-8da1d56ae167?w=400&h=560&fit=crop&auto=format", "ongoing")
+        val SAO = Novel("novel-sao", "سورد آرت أونلاين",
+            "https://images.unsplash.com/photo-1551103782-8ab07afd45c1?w=400&h=560&fit=crop&auto=format", "ongoing")
+        val HAMEFURA = Novel("novel-hamefura", "حياتي الثانية كشريرة",
+            "https://images.unsplash.com/photo-1518306727298-4c17e1bf6942?w=400&h=560&fit=crop&auto=format", "completed")
+        val GRAVEMARK = Novel("novel-gravemark", "مهندس القبور",
+            "https://images.unsplash.com/photo-1604079628040-94301bb21b91?w=400&h=560&fit=crop&auto=format", "ongoing")
+        val WORTENIA = Novel("novel-wortenia", "أرض السحر — وورتينيا",
+            "https://images.unsplash.com/photo-1568871391783-83f7a36dfe23?w=400&h=560&fit=crop&auto=format", "ongoing")
+        val KURO_NO_SENKI = Novel("novel-kuro", "السيف الأسود",
+            "https://images.unsplash.com/photo-1578916171728-9d0b3cd6c2b5?w=400&h=560&fit=crop&auto=format", "completed")
+        val EIGHTH = Novel("novel-eighth", "الابن الثامن؟ لا، أنا الثالث!",
+            "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=400&h=560&fit=crop&auto=format", "completed")
+        val MOBSEKA = Novel("novel-mobseka", "الخبير في إدارة المصير",
+            "https://images.unsplash.com/photo-1551582045-6ec9c11d8697?w=400&h=560&fit=crop&auto=format", "ongoing")
+        val SLOW_PRINCESS = Novel("novel-slow", "أميرة الحياة الهادئة",
+            "https://images.unsplash.com/photo-1519682337058-a94d519337bc?w=400&h=560&fit=crop&auto=format", "ongoing")
+        val DEATH_MAGE = Novel("novel-death-mage", "ساحر الموت الذي لا يريد أن يكون بطلاً",
+            "https://images.unsplash.com/photo-1571906484236-52cd0f769691?w=400&h=560&fit=crop&auto=format", "ongoing")
+        val ISEKAI_NONBIRI = Novel("novel-isekai-nonbiri", "حياة هادئة في عالم آخر",
+            "https://images.unsplash.com/photo-1606112219348-204d7d8b94ee?w=400&h=560&fit=crop&auto=format", "ongoing")
+        val MYDEATH = Novel("novel-mydeath", "وفاتي كـ...",
+            "https://images.unsplash.com/photo-1543002588-bfa74002ed7e?w=400&h=560&fit=crop&auto=format", "ongoing")
+        val REDICE = Novel("novel-redice", "الجليد الأحمر",
+            "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=400&h=560&fit=crop&auto=format", "completed")
+        val NOBLESSE = Novel("novel-noblesse", "نبيل",
+            "https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=400&h=560&fit=crop&auto=format", "completed")
+        val TOWER_OF_GOD = Novel("novel-tog", "برج الإله",
+            "https://images.unsplash.com/photo-1519682337058-a94d519337bc?w=400&h=560&fit=crop&auto=format", "ongoing")
+        val OMNISCIENT = Novel("novel-omniscient", "القارئ العراف",
+            "https://images.unsplash.com/photo-1532012197267-da84d127e765?w=400&h=560&fit=crop&auto=format", "completed")
+        val SLIME = Novel("novel-slime", "تحولت لصبار",
+            "https://images.unsplash.com/photo-1614850523060-8da1d56ae167?w=400&h=560&fit=crop&auto=format", "ongoing")
+        val RISING_SHIELD = Novel("novel-rising-shield", "بطل الدرع الصاعد",
+            "https://images.unsplash.com/photo-1519682337058-a94d519337bc?w=400&h=560&fit=crop&auto=format", "completed")
+        val KNIGHT_BLOOD = Novel("novel-knight-blood", "دم الفارس",
+            "https://images.unsplash.com/photo-1551582045-6ec9c11d8697?w=400&h=560&fit=crop&auto=format", "ongoing")
     }
 
     private fun fetchList(url: String): List<MangaListItem> {
@@ -198,7 +324,7 @@ class MangaRepository(private val appContext: Context? = null) {
                             val rel = rels[j].asJsonObject
                             if (rel.get("type").asString == "cover_art") {
                                 val f = rel.getAsJsonObject("attributes")?.get("fileName")?.asString
-                                if (f != null) cover = "https://uploads.mangadex.org/covers/$id/$f.256.jpg"
+                                if (f != null) cover = "https://uploads.mangadex.org/covers/$id/$f"
                                 break
                             }
                         }
@@ -211,6 +337,43 @@ class MangaRepository(private val appContext: Context? = null) {
     }
 
     suspend fun getMangaDetails(id: String): Result<MangaDetails> {
+        // Novels (curated list): return a details object directly without
+        // hitting the MangaDex API (which would 404 on a novel-* fake ID).
+        if (id.startsWith("novel-")) {
+            val novel = listOf(
+                NovelsData.SOLO_LEVELING, NovelsData.ORV, NovelsData.MUSHOKU_TENSEI,
+                NovelsData.TATE_NO_YUUSHA, NovelsData.KONOSUBA, NovelsData.REZERO,
+                NovelsData.OVERLORD, NovelsData.ARIFURETA, NovelsData.TSUKIMICHI,
+                NovelsData.DANMACHI, NovelsData.TENSURA, NovelsData.SAO,
+                NovelsData.HAMEFURA, NovelsData.GRAVEMARK, NovelsData.WORTENIA,
+                NovelsData.KURO_NO_SENKI, NovelsData.EIGHTH, NovelsData.MOBSEKA,
+                NovelsData.SLOW_PRINCESS, NovelsData.DEATH_MAGE, NovelsData.ISEKAI_NONBIRI,
+                NovelsData.MYDEATH, NovelsData.REDICE, NovelsData.NOBLESSE,
+                NovelsData.TOWER_OF_GOD, NovelsData.OMNISCIENT, NovelsData.SLIME,
+                NovelsData.RISING_SHIELD, NovelsData.KNIGHT_BLOOD
+            ).firstOrNull { it.id == id }
+            if (novel != null) {
+                val statusAr = if (novel.status == "completed") "مكتملة" else "مستمر"
+                val details = MangaDetails(
+                    id = novel.id,
+                    title = novel.title,
+                    cover = novel.cover,
+                    description = "رواية خفيفة مترجمة للعربية. اقرأها عبر مصادر الترجمة الخارجية.",
+                    author = "غير معروف",
+                    artist = "",
+                    status = statusAr,
+                    genres = listOf("رواية", "فانتازيا", "أكشن"),
+                    chapters = emptyList(),
+                    source = "novel",
+                    latestChapter = null,
+                    rating = null,
+                    sources = emptyList(),
+                    chaptersBySource = emptyMap()
+                )
+                return Result.success(details)
+            }
+            return Result.failure(Exception("الرواية غير موجودة"))
+        }
         // Try cache first (24h TTL)
         appContext?.let { ctx ->
             CacheManager.getCachedMangaDetails(ctx, id)?.let { cached ->
@@ -283,7 +446,7 @@ class MangaRepository(private val appContext: Context? = null) {
                 if (descObj != null) { description = descObj.get("ar")?.asString ?: descObj.get("en")?.asString ?: "" }
                 status = attrs.get("status")?.asString ?: "ongoing"
                 val rels = data.getAsJsonArray("relationships")
-                if (rels != null) { for (i in 0 until rels.size()) { try { val rel = rels[i].asJsonObject; when (rel.get("type").asString) { "cover_art" -> { val f = rel.getAsJsonObject("attributes")?.get("fileName")?.asString; if (f != null) cover = "https://uploads.mangadex.org/covers/$id/$f.512.jpg" }; "author" -> { author = rel.getAsJsonObject("attributes")?.get("name")?.asString ?: "" } } } catch (e: Exception) {} } }
+                if (rels != null) { for (i in 0 until rels.size()) { try { val rel = rels[i].asJsonObject; when (rel.get("type").asString) { "cover_art" -> { val f = rel.getAsJsonObject("attributes")?.get("fileName")?.asString; if (f != null) cover = "https://uploads.mangadex.org/covers/$id/$f" }; "author" -> { author = rel.getAsJsonObject("attributes")?.get("name")?.asString ?: "" } } } catch (e: Exception) {} } }
                 val tags = attrs.getAsJsonArray("tags")
                 if (tags != null) { val gl = mutableListOf<String>(); for (i in 0 until tags.size()) { try { val t = tags[i].asJsonObject; val n = t.getAsJsonObject("attributes")?.getAsJsonObject("name")?.get("en")?.asString; if (n != null) gl.add(n) } catch (e: Exception) {} }; genres = gl }
             }
