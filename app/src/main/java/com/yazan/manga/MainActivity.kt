@@ -249,7 +249,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.menuShare -> {
                     val shareIntent = Intent(Intent.ACTION_SEND).apply {
                         type = "text/plain"
-                        putExtra(Intent.EXTRA_TEXT, "تطبيق مانجا - اقرأ المانجا بالعربية!\nhttps://yzmanga.netlify.app")
+                        putExtra(Intent.EXTRA_TEXT, "https://github.com/abeedahmadyazan/mangaapp/releases/latest/download/app-release.apk")
                     }
                     startActivity(Intent.createChooser(shareIntent, "مشاركة عبر"))
                 }
