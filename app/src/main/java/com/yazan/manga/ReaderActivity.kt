@@ -100,10 +100,7 @@ class ReaderActivity : AppCompatActivity() {
         btnPrevPage.setOnClickListener { scrollToPage(currentPageIndex - 1) }
         btnNextPage.setOnClickListener { scrollToPage(currentPageIndex + 1) }
 
-        // Zoom buttons — operate on the currently visible page only.
-        findViewById<ImageButton>(R.id.btnZoomIn).setOnClickListener {
-            findVisiblePageView()?.zoomIn()
-        }
+        // Zoom OUT — operates on the currently visible page only.
         findViewById<ImageButton>(R.id.btnZoomOut).setOnClickListener {
             findVisiblePageView()?.zoomOut()
         }

@@ -18,16 +18,39 @@ class MangaAdapter(
     private val onRemoveClick: ((MangaListItem) -> Unit)? = null
 ) : RecyclerView.Adapter<MangaAdapter.MangaVH>() {
 
+    init {
+        // Stable IDs let RecyclerView animate item changes/moves instead of
+        // rebinding everything — this is the single biggest smoothness win.
+        setHasStableIds(true)
+    }
+
     fun submitList(newItems: List<MangaListItem>) {
+        // Use DiffUtil so only changed items are rebound — avoids the
+        // full rebind (and image reload) that notifyDataSetChanged causes.
+        val old = items.toList()
+        val diff = androidx.recyclerview.widget.DiffUtil.calculateDiff(
+            object : androidx.recyclerview.widget.DiffUtil.Callback() {
+                override fun getOldListSize() = old.size
+                override fun getNewListSize() = newItems.size
+                override fun areItemsTheSame(o: Int, n: Int) = old[o].id == newItems[n].id
+                override fun areContentsTheSame(o: Int, n: Int) = old[o] == newItems[n]
+            }
+        )
         items.clear()
         items.addAll(newItems)
-        notifyDataSetChanged()
+        diff.dispatchUpdatesTo(this)
     }
 
     fun appendList(newItems: List<MangaListItem>) {
         val start = items.size
         items.addAll(newItems)
         notifyItemRangeInserted(start, newItems.size)
+    }
+
+    override fun getItemId(position: Int): Long {
+        // Generate a stable 64-bit ID from the manga id's hashCode.
+        // Required when setHasStableIds(true).
+        return items[position].id.hashCode().toLong()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MangaVH {
@@ -42,11 +65,20 @@ class MangaAdapter(
 
     override fun getItemCount(): Int = items.size
 
+    override fun onViewRecycled(holder: MangaVH) {
+        // Clear the Glide load when the view is recycled — prevents
+        // the old image from flashing briefly when the holder is reused.
+        Glide.with(holder.itemView.context).clear(holder.coverRef)
+        super.onViewRecycled(holder)
+    }
+
     inner class MangaVH(view: View) : RecyclerView.ViewHolder(view) {
         private val cover: ImageView = view.findViewById(R.id.mangaCover)
         private val title: TextView = view.findViewById(R.id.mangaTitle)
         private val btnRemove: ImageButton = view.findViewById(R.id.btnRemoveFromList)
         private val ratingChip: LinearLayout = view.findViewById(R.id.ratingChip)
+        // Exposed for onViewRecycled to clear Glide
+        val coverRef: ImageView get() = cover
         private val tvRating: TextView = view.findViewById(R.id.tvRating)
         private val tvStatus: TextView = view.findViewById(R.id.tvStatus)
 
@@ -74,6 +106,10 @@ class MangaAdapter(
             Glide.with(cover.context)
                 .load(item.cover)
                 .centerCrop()
+                // Downscale the decoded bitmap to the cover thumbnail size.
+                // Without this, Glide decodes the full 256x360 image even
+                // for a 110x150 ImageView, wasting memory and causing jank.
+                .override(com.bumptech.glide.request.target.Target.SIZE_ORIGINAL)
                 .diskCacheStrategy(com.bumptech.glide.load.engine.DiskCacheStrategy.ALL)
                 .thumbnail(0.1f)
                 .placeholder(R.color.surface_light)

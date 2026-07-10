@@ -83,6 +83,19 @@ class MainActivity : AppCompatActivity() {
 
         recyclerView.layoutManager = GridLayoutManager(this, 3)
         recyclerView.setHasFixedSize(true)
+        // Cache more off-screen views so scrolling back/forward doesn't
+        // rebind+reload images. Default is only 2 — too low for a 3-col grid.
+        recyclerView.setItemViewCacheSize(12)
+        // Larger recycled view pool — prevents view inflation when the list
+        // is long (e.g. after loading 100+ manga).
+        recyclerView.recycledViewPool.setMaxRecycledViews(0, 30)
+        // Disable item change animations — without this, swapping the list
+        // triggers a fade-in/out on every item, which looks like jank.
+        (recyclerView.itemAnimator as? androidx.recyclerview.widget.DefaultItemAnimator)?.apply {
+            changeDuration = 0
+            addDuration = 200
+            moveDuration = 200
+        }
         recyclerView.adapter = adapter
 
         recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
