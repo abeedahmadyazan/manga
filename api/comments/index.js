@@ -70,17 +70,20 @@ async function POST(req, res) {
     
     const isReply = parentId && parentId.length > 0;
     if (!isReply) {
-      // Count ONLY top-level comments (parentId == null) — replies don't
-      // count toward the per-chapter limit. Previously the query counted
-      // replies too, so a user with 1 comment + 1 reply was blocked.
+      // Rule: max 2 top-level comments per chapter per user.
+      // Replies (parentId != null) are unlimited.
+      // If the user already has 2 top-level comments in this chapter,
+      // they must delete one before posting a new one (swap policy).
       const userComments = await db.collection('comments')
         .where('contextId', '==', contextId)
         .where('authorEmail', '==', email)
         .where('parentId', '==', null)
-        .limit(11)
+        .limit(3)
         .get();
-      if (userComments.size >= 10) {
-        return res.status(400).json({ error: 'وصلت للحد الأقصى (10 تعليقات لكل فصل)' });
+      if (userComments.size >= 2) {
+        return res.status(400).json({
+          error: 'وصلت للحد الأقصى (تعليقان لكل فصل). احذف أحد تعليقاتك في هذا الفصل لتكتب تعليقاً جديداً.'
+        });
       }
     }
     

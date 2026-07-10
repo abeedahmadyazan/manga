@@ -11,6 +11,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -18,6 +19,9 @@ import com.google.android.material.button.MaterialButton
 import com.google.firebase.firestore.ListenerRegistration
 import com.yazan.manga.data.AuthManager
 import com.yazan.manga.data.CloudCommentsManager
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -58,7 +62,10 @@ class RepliesActivity : AppCompatActivity() {
         
         findViewById<ImageButton>(R.id.btnBack).setOnClickListener { finish() }
 
-        swipeRefresh.setOnRefreshListener { swipeRefresh.isRefreshing = false }
+        swipeRefresh.setOnRefreshListener {
+            // Pull-to-refresh: re-fetch replies immediately.
+            refreshReplies()
+        }
         swipeRefresh.setColorSchemeResources(R.color.primary)
 
         sendBtn.setOnClickListener {
@@ -98,9 +105,30 @@ class RepliesActivity : AppCompatActivity() {
             if (success) {
                 replyInput.text.clear()
                 Toast.makeText(this, "تم إرسال الرد", Toast.LENGTH_SHORT).show()
+                // Refresh immediately so the new reply appears instantly.
+                refreshReplies()
             } else {
-                Toast.makeText(this, "حدث خطأ", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, error ?: "حدث خطأ", Toast.LENGTH_LONG).show()
             }
+        }
+    }
+
+    /**
+     * Re-fetch replies from the server immediately. Used by pull-to-refresh
+     * and after posting a reply so the UI updates without waiting for the
+     * next 5s poll cycle.
+     */
+    private fun refreshReplies() {
+        swipeRefresh.isRefreshing = true
+        lifecycleScope.launch {
+            val comments = withContext(Dispatchers.IO) {
+                com.yazan.manga.data.ApiClient.getComments(contextId)
+            }
+            swipeRefresh.isRefreshing = false
+            allReplies = comments.filter { it.parentId == parentId }
+            val count = allReplies.size
+            titleView.text = if (count > 0) "💬 $count رد" else "💬 ردود على: $parentAuthor"
+            renderReplies()
         }
     }
 

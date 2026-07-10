@@ -12,6 +12,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -20,6 +21,9 @@ import com.google.android.material.tabs.TabLayout
 import com.google.firebase.firestore.ListenerRegistration
 import com.yazan.manga.data.AuthManager
 import com.yazan.manga.data.CloudCommentsManager
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -65,7 +69,10 @@ class CommentsActivity : AppCompatActivity() {
         sortTabs = findViewById(R.id.sortTabs)
 
         findViewById<ImageButton>(R.id.btnBack).setOnClickListener { finish() }
-        swipeRefresh.setOnRefreshListener { swipeRefresh.isRefreshing = false }
+        swipeRefresh.setOnRefreshListener {
+            // Manual pull-to-refresh: re-fetch comments immediately.
+            refreshComments()
+        }
         swipeRefresh.setColorSchemeResources(R.color.primary)
 
         adapter = CommentsAdapter(
@@ -162,8 +169,30 @@ class CommentsActivity : AppCompatActivity() {
         sendBtn.isEnabled = false
         CloudCommentsManager.addComment(this, contextId, contextType, text, null) { success, error ->
             sendBtn.isEnabled = true
-            if (success) commentInput.text.clear()
-            else Toast.makeText(this, error ?: "حدث خطأ", Toast.LENGTH_LONG).show()
+            if (success) {
+                commentInput.text.clear()
+                // Refresh immediately so the new comment appears without
+                // waiting for the next 5s poll cycle.
+                refreshComments()
+            } else {
+                Toast.makeText(this, error ?: "حدث خطأ", Toast.LENGTH_LONG).show()
+            }
+        }
+    }
+
+    /**
+     * Re-fetch comments from the server immediately. Used by pull-to-refresh
+     * and after posting/editing/deleting a comment so the UI updates instantly.
+     */
+    private fun refreshComments() {
+        swipeRefresh.isRefreshing = true
+        lifecycleScope.launch {
+            val comments = withContext(kotlinx.coroutines.Dispatchers.IO) {
+                com.yazan.manga.data.ApiClient.getComments(contextId)
+            }
+            swipeRefresh.isRefreshing = false
+            allComments = comments
+            updateList()
         }
     }
 
@@ -174,10 +203,9 @@ class CommentsActivity : AppCompatActivity() {
                     runOnUiThread {
                         if (success) {
                             Toast.makeText(this, "تم الحذف", Toast.LENGTH_SHORT).show()
-                            // The real-time listener will refresh the list automatically.
-                            // As a fallback, also remove it locally in case the listener is slow.
-                            allComments = allComments.filterNot { it.id == commentId || it.parentId == commentId }
-                            updateList()
+                            // Refresh immediately from the server so the
+                            // deleted comment disappears without waiting.
+                            refreshComments()
                         } else {
                             Toast.makeText(this, "فشل الحذف", Toast.LENGTH_SHORT).show()
                         }
@@ -235,7 +263,9 @@ class CommentsActivity : AppCompatActivity() {
                     runOnUiThread {
                         if (success) {
                             Toast.makeText(this, "تم التعديل", Toast.LENGTH_SHORT).show()
-                            // Cooldown is handled server-side by the API.
+                            // Refresh immediately so the edited text shows up
+                            // without waiting for the next poll.
+                            refreshComments()
                         } else {
                             Toast.makeText(this, "فشل التعديل", Toast.LENGTH_SHORT).show()
                         }
