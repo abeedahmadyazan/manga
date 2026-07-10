@@ -40,6 +40,7 @@ class MainActivity : AppCompatActivity() {
 
     private val repository = MangaRepository(this)
     private var currentTab = "latest"
+    private var currentContentType = "manga"  // manga | manhwa | novel
     private var currentPage = 1
     private var isLoading = false
 
@@ -168,6 +169,34 @@ class MainActivity : AppCompatActivity() {
         }
 
         setActiveTab(currentTab)
+
+        // Content type chips (مانجا | مانهوا | روايات)
+        val chipManga = findViewById<MaterialButton>(R.id.chipManga)
+        val chipManhwa = findViewById<MaterialButton>(R.id.chipManhwa)
+        val chipNovel = findViewById<MaterialButton>(R.id.chipNovel)
+        
+        fun setActiveContent(type: String) {
+            currentContentType = type
+            chipManga.isSelected = type == "manga"
+            chipManhwa.isSelected = type == "manhwa"
+            chipNovel.isSelected = type == "novel"
+            // Update text colors
+            chipManga.setTextColor(if (type == "manga") getColor(R.color.black) else getColor(R.color.text_secondary))
+            chipManhwa.setTextColor(if (type == "manhwa") getColor(R.color.black) else getColor(R.color.text_secondary))
+            chipNovel.setTextColor(if (type == "novel") getColor(R.color.black) else getColor(R.color.text_secondary))
+            // Reload with new content type
+            currentPage = 1
+            adapter.submitList(emptyList())
+            loadManga()
+        }
+        
+        chipManga.setOnClickListener { if (currentContentType != "manga") setActiveContent("manga") }
+        chipManhwa.setOnClickListener { if (currentContentType != "manhwa") setActiveContent("manhwa") }
+        chipNovel.setOnClickListener { if (currentContentType != "novel") setActiveContent("novel") }
+        
+        // Set default selection
+        chipManga.isSelected = true
+        chipManga.setTextColor(getColor(R.color.black))
 
         tabLatest.setOnClickListener {
             if (currentTab == "latest") return@setOnClickListener
@@ -341,8 +370,8 @@ class MainActivity : AppCompatActivity() {
         lifecycleScope.launch {
             val result = withContext(Dispatchers.IO) {
                 when (currentTab) {
-                    "popular" -> repository.getPopularManga(currentPage)
-                    else -> repository.getLatestManga(currentPage)
+                    "popular" -> repository.getPopularManga(currentPage, currentContentType)
+                    else -> repository.getLatestManga(currentPage, currentContentType)
                 }
             }
 
@@ -434,8 +463,8 @@ class MainActivity : AppCompatActivity() {
         lifecycleScope.launch {
             val result = withContext(Dispatchers.IO) {
                 when (currentTab) {
-                    "popular" -> repository.getPopularManga(currentPage)
-                    else -> repository.getLatestManga(currentPage)
+                    "popular" -> repository.getPopularManga(currentPage, currentContentType)
+                    else -> repository.getLatestManga(currentPage, currentContentType)
                 }
             }
 

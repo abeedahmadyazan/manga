@@ -71,7 +71,7 @@ class MangaRepository(private val appContext: Context? = null) {
         }
     }
 
-    suspend fun getLatestManga(page: Int = 1): Result<List<MangaListItem>> {
+    suspend fun getLatestManga(page: Int = 1, contentType: String = "manga"): Result<List<MangaListItem>> {
         // Try cache first (1h TTL)
         appContext?.let { ctx ->
             CacheManager.getCachedMangaList(ctx, "latest", page)?.let { cached ->
@@ -92,7 +92,12 @@ class MangaRepository(private val appContext: Context? = null) {
         }
         return try {
             val offset = (page - 1) * 20
-            val url = "https://api.mangadex.org/manga?limit=20&offset=$offset&availableTranslatedLanguage[]=ar&order[latestUploadedChapter]=desc&includes[]=cover_art&contentRating[]=safe&contentRating[]=suggestive"
+            val langFilter = when (contentType) {
+                "manhwa" -> "&originalLanguage[]=ko"
+                "novel" -> "&originalLanguage[]=ja"
+                else -> "&originalLanguage[]=ja"
+            }
+            val url = "https://api.mangadex.org/manga?limit=20&offset=$offset&availableTranslatedLanguage[]=ar&order[latestUploadedChapter]=desc&includes[]=cover_art&contentRating[]=safe&contentRating[]=suggestive$langFilter"
             val items = fetchList(url)
             DDoSProtection.reportSuccess()
             appContext?.let { CacheManager.cacheMangaList(it, "latest", page, items) }
@@ -103,7 +108,7 @@ class MangaRepository(private val appContext: Context? = null) {
         }
     }
 
-    suspend fun getPopularManga(page: Int = 1): Result<List<MangaListItem>> {
+    suspend fun getPopularManga(page: Int = 1, contentType: String = "manga"): Result<List<MangaListItem>> {
         appContext?.let { ctx ->
             CacheManager.getCachedMangaList(ctx, "popular", page)?.let { cached ->
                 return Result.success(cached)
@@ -114,7 +119,12 @@ class MangaRepository(private val appContext: Context? = null) {
         }
         return try {
             val offset = (page - 1) * 20
-            val url = "https://api.mangadex.org/manga?limit=20&offset=$offset&availableTranslatedLanguage[]=ar&order[followedCount]=desc&includes[]=cover_art&contentRating[]=safe&contentRating[]=suggestive"
+            val langFilter = when (contentType) {
+                "manhwa" -> "&originalLanguage[]=ko"
+                "novel" -> "&originalLanguage[]=ja"
+                else -> "&originalLanguage[]=ja"
+            }
+            val url = "https://api.mangadex.org/manga?limit=20&offset=$offset&availableTranslatedLanguage[]=ar&order[followedCount]=desc&includes[]=cover_art&contentRating[]=safe&contentRating[]=suggestive$langFilter"
             val items = fetchList(url)
             DDoSProtection.reportSuccess()
             appContext?.let { CacheManager.cacheMangaList(it, "popular", page, items) }
@@ -125,7 +135,7 @@ class MangaRepository(private val appContext: Context? = null) {
         }
     }
 
-    suspend fun searchManga(query: String, page: Int = 1): Result<List<MangaListItem>> {
+    suspend fun searchManga(query: String, page: Int = 1, contentType: String = "manga"): Result<List<MangaListItem>> {
         appContext?.let { ctx ->
             CacheManager.getCachedSearchResults(ctx, query)?.let { cached ->
                 return Result.success(cached)
@@ -137,7 +147,12 @@ class MangaRepository(private val appContext: Context? = null) {
         return try {
             val offset = (page - 1) * 20
             val encoded = java.net.URLEncoder.encode(query, "UTF-8")
-            val url = "https://api.mangadex.org/manga?title=$encoded&limit=20&offset=$offset&availableTranslatedLanguage[]=ar&order[relevance]=desc&includes[]=cover_art&contentRating[]=safe&contentRating[]=suggestive"
+            val langFilter = when (contentType) {
+                "manhwa" -> "&originalLanguage[]=ko"
+                "novel" -> "&originalLanguage[]=ja"
+                else -> "&originalLanguage[]=ja"
+            }
+            val url = "https://api.mangadex.org/manga?title=$encoded&limit=20&offset=$offset&availableTranslatedLanguage[]=ar&order[relevance]=desc&includes[]=cover_art&contentRating[]=safe&contentRating[]=suggestive$langFilter"
             val items = fetchList(url)
             DDoSProtection.reportSuccess()
             appContext?.let { CacheManager.cacheSearchResults(it, query, items) }
