@@ -53,6 +53,20 @@
             android:textSize="11sp"
             android:textStyle="bold"
             android:visibility="gone" />
+
+        <!-- Remove button (for custom lists) -->
+        <ImageButton
+            android:id="@+id/btnRemoveFromList"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_gravity="top|left"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/bg_circle_button"
+            android:src="@drawable/ic_delete"
+            android:tint="@color/danger"
+            android:contentDescription="إزالة"
+            android:visibility="gone" />
     </FrameLayout>
 
     <!-- Card body -->
@@ -87,17 +101,24 @@
                 android:textColor="@color/text_secondary"
                 android:textSize="11sp" />
 
-            <TextView
-                android:id="@+id/mangaGenre"
+            <!-- Rating chip (for list view) -->
+            <LinearLayout
+                android:id="@+id/ratingChip"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_genre_chip"
                 android:paddingHorizontal="8dp"
                 android:paddingVertical="3dp"
-                android:textColor="@color/primary"
-                android:textSize="10sp"
-                android:textStyle="bold"
-                android:visibility="gone" />
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/mangaGenre"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/primary"
+                    android:textSize="10sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>
