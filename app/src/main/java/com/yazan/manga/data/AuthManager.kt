@@ -292,32 +292,39 @@ object AuthManager {
         val isAdmin = cleanEmail == getAdminEmail()
 
         var user = getUserByEmail(context, cleanEmail)
-        val wasNewUser = (user == null)
+        var wasNewUser = false
+
         if (user == null) {
-            val uniqueUsername = generateUniqueUsername(context, displayName)
-            user = User(
-                email = cleanEmail,
-                name = if (isAdmin) "يزان" else displayName,
-                username = uniqueUsername,
-                isAdmin = isAdmin,
-                deviceId = deviceId,
-                createdAt = System.currentTimeMillis(),
-                lastUsernameChange = 0L,
-                avatar = "",
-                bio = ""
-            )
-            saveUser(context, user)
+            val cloudUser = ApiClient.getUserProfile(cleanEmail)
+            if (cloudUser != null && cloudUser.name.isNotEmpty()) {
+                user = User(email = cleanEmail, name = cloudUser.name,
+                    username = cloudUser.username.ifEmpty { "@${cleanEmail.substringBefore("@")}" },
+                    isAdmin = isAdmin, deviceId = deviceId, createdAt = cloudUser.createdAt,
+                    lastUsernameChange = 0L, avatar = "", bio = "")
+                if (cloudUser.avatarBase64.isNotEmpty()) {
+                    try {
+                        val bytes = android.util.Base64.decode(cloudUser.avatarBase64, android.util.Base64.NO_WRAP)
+                        val bmp = android.graphics.BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
+                        if (bmp != null) {
+                            val f = java.io.File(context.filesDir, "avatar_${cleanEmail.replace("@", "_at_")}.jpg")
+                            val o = java.io.FileOutputStream(f); bmp.compress(android.graphics.Bitmap.CompressFormat.JPEG, 85, o); o.close(); bmp.recycle()
+                            user = user.copy(avatar = f.absolutePath)
+                        }
+                    } catch (e: Exception) {}
+                }
+                user = user.copy(birthDate = cloudUser.birthDate, country = cloudUser.country)
+                saveUser(context, user)
+            } else {
+                wasNewUser = true
+                user = User(email = cleanEmail, name = if (isAdmin) "يزان" else displayName,
+                    username = generateUniqueUsername(context, displayName), isAdmin = isAdmin,
+                    deviceId = deviceId, createdAt = System.currentTimeMillis(), lastUsernameChange = 0L, avatar = "", bio = "")
+                saveUser(context, user)
+            }
         }
 
-        prefs.edit()
-            .putString(KEY_USER, serializeUser(user))
-            .putString(KEY_LINKED_EMAIL, cleanEmail)
-            .apply()
-
-        // SIMPLE: just upload local to cloud. No restore, no smart sync.
-        // Local data is the ONLY source of truth for display.
-        // Cloud is write-only backup.
-        uploadUserToCloud(context)
+        prefs.edit().putString(KEY_USER, serializeUser(user)).putString(KEY_LINKED_EMAIL, cleanEmail).apply()
+        if (wasNewUser) { uploadUserToCloud(context) }
 
         // Async admin check: if the user's UID exists in the 'admins' Firestore
         // collection, mark them as admin. This runs after the synchronous flow
@@ -360,31 +367,40 @@ object AuthManager {
         val isAdmin = email == getAdminEmail()
 
         var user = getUserByEmail(context, email)
-        val wasNewUser = (user == null)
+        var wasNewUser = false
+
         if (user == null) {
-            val baseName = displayName
-            val uniqueUsername = generateUniqueUsername(context, baseName)
-            user = User(
-                email = email,
-                name = if (isAdmin) "يزان" else baseName,
-                username = uniqueUsername,
-                isAdmin = isAdmin,
-                deviceId = deviceId,
-                createdAt = System.currentTimeMillis(),
-                lastUsernameChange = 0L,
-                avatar = account.photoUrl?.toString() ?: "",
-                bio = ""
-            )
-            saveUser(context, user)
+            val cloudUser = ApiClient.getUserProfile(email)
+            if (cloudUser != null && cloudUser.name.isNotEmpty()) {
+                user = User(email = email, name = cloudUser.name,
+                    username = cloudUser.username.ifEmpty { "@${email.substringBefore("@")}" },
+                    isAdmin = isAdmin, deviceId = deviceId, createdAt = cloudUser.createdAt,
+                    lastUsernameChange = 0L, avatar = "", bio = "")
+                if (cloudUser.avatarBase64.isNotEmpty()) {
+                    try {
+                        val bytes = android.util.Base64.decode(cloudUser.avatarBase64, android.util.Base64.NO_WRAP)
+                        val bmp = android.graphics.BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
+                        if (bmp != null) {
+                            val f = java.io.File(context.filesDir, "avatar_${email.replace("@", "_at_")}.jpg")
+                            val o = java.io.FileOutputStream(f); bmp.compress(android.graphics.Bitmap.CompressFormat.JPEG, 85, o); o.close(); bmp.recycle()
+                            user = user.copy(avatar = f.absolutePath)
+                        }
+                    } catch (e: Exception) {}
+                }
+                user = user.copy(birthDate = cloudUser.birthDate, country = cloudUser.country)
+                saveUser(context, user)
+            } else {
+                wasNewUser = true
+                user = User(email = email, name = if (isAdmin) "يزان" else displayName,
+                    username = generateUniqueUsername(context, displayName), isAdmin = isAdmin,
+                    deviceId = deviceId, createdAt = System.currentTimeMillis(), lastUsernameChange = 0L,
+                    avatar = account.photoUrl?.toString() ?: "", bio = "")
+                saveUser(context, user)
+            }
         }
 
-        prefs.edit()
-            .putString(KEY_USER, serializeUser(user))
-            .putString(KEY_LINKED_EMAIL, email)
-            .apply()
-
-        // SIMPLE: just upload local to cloud.
-        uploadUserToCloud(context)
+        prefs.edit().putString(KEY_USER, serializeUser(user)).putString(KEY_LINKED_EMAIL, email).apply()
+        if (wasNewUser) { uploadUserToCloud(context) }
 
         // Async admin check
         refreshAdminStatus(context)
