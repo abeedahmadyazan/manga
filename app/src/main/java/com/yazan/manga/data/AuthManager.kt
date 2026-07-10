@@ -303,14 +303,15 @@ object AuthManager {
             }.start()
             try { latch2.await(10, java.util.concurrent.TimeUnit.SECONDS) } catch (e: Exception) {}
             
-            if (cloudUser != null && cloudUser!!.name.isNotEmpty()) {
-                user = User(email = cleanEmail, name = cloudUser!!.name,
-                    username = cloudUser!!.username.ifEmpty { "@${cleanEmail.substringBefore("@")}" },
-                    isAdmin = isAdmin, deviceId = deviceId, createdAt = cloudUser!!.createdAt,
+            val cu = cloudUser
+            if (cu != null && cu.name.isNotEmpty()) {
+                user = User(email = cleanEmail, name = cu.name,
+                    username = cu.username.ifEmpty { "@${cleanEmail.substringBefore("@")}" },
+                    isAdmin = isAdmin, deviceId = deviceId, createdAt = cu.createdAt,
                     lastUsernameChange = 0L, avatar = "", bio = "")
-                if (cloudUser!!.avatarBase64.isNotEmpty()) {
+                if (cu.avatarBase64.isNotEmpty()) {
                     try {
-                        val bytes = android.util.Base64.decode(cloudUser!!.avatarBase64, android.util.Base64.NO_WRAP)
+                        val bytes = android.util.Base64.decode(cu.avatarBase64, android.util.Base64.NO_WRAP)
                         val bmp = android.graphics.BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
                         if (bmp != null) {
                             val f = java.io.File(context.filesDir, "avatar_${cleanEmail.replace("@", "_at_")}.jpg")
@@ -386,14 +387,15 @@ object AuthManager {
             }.start()
             try { latch.await(10, java.util.concurrent.TimeUnit.SECONDS) } catch (e: Exception) {}
             
-            if (cloudUser != null && cloudUser!!.name.isNotEmpty()) {
-                user = User(email = email, name = cloudUser!!.name,
-                    username = cloudUser!!.username.ifEmpty { "@${email.substringBefore("@")}" },
-                    isAdmin = isAdmin, deviceId = deviceId, createdAt = cloudUser!!.createdAt,
+            val cu = cloudUser
+            if (cu != null && cu.name.isNotEmpty()) {
+                user = User(email = email, name = cu.name,
+                    username = cu.username.ifEmpty { "@${email.substringBefore("@")}" },
+                    isAdmin = isAdmin, deviceId = deviceId, createdAt = cu.createdAt,
                     lastUsernameChange = 0L, avatar = "", bio = "")
-                if (cloudUser!!.avatarBase64.isNotEmpty()) {
+                if (cu.avatarBase64.isNotEmpty()) {
                     try {
-                        val bytes = android.util.Base64.decode(cloudUser!!.avatarBase64, android.util.Base64.NO_WRAP)
+                        val bytes = android.util.Base64.decode(cu.avatarBase64, android.util.Base64.NO_WRAP)
                         val bmp = android.graphics.BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
                         if (bmp != null) {
                             val f = java.io.File(context.filesDir, "avatar_${email.replace("@", "_at_")}.jpg")
