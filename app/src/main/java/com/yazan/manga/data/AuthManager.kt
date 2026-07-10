@@ -32,10 +32,13 @@ import org.json.JSONObject
  */
 object AuthManager {
 
-    // Flag: when true, uploadUserToCloud will SKIP uploading
-    // (prevents overwriting cloud with default values during restore)
     @Volatile
     private var skipCloudUpload = false
+    
+    // Flag: when true, next uploadUserToCloud will force upload
+    // (set by changeName/changeUsername to override the "cloud is newer" check)
+    @Volatile
+    private var forceNextUpload = false
 
     /**
      * Admin email — XOR-obfuscated so it does NOT appear as a plain string
@@ -853,13 +856,78 @@ object AuthManager {
      * The avatar is uploaded as a small base64 JPEG (≤ ~80KB) to fit in Firestore.
      */
     fun uploadUserToCloud(context: Context) {
-        // If skipCloudUpload is true, don't upload (we're restoring from cloud)
         if (skipCloudUpload) {
             Log.d("AuthManager", "uploadUserToCloud: SKIPPED (restore in progress)")
             return
         }
         val user = getCurrentUser(context) ?: return
-        try {
+        
+        // === SMART UPLOAD: check cloud first, don't overwrite newer data ===
+        Thread {
+            try {
+                // Read avatar
+                val avatarBase64: String? = if (user.avatar.isNotEmpty() && !user.avatar.startsWith("http")) {
+                    try {
+                        val file = File(user.avatar)
+                        if (file.exists()) {
+                            val bitmap = BitmapFactory.decodeFile(file.absolutePath)
+                            if (bitmap != null) {
+                                val maxDim = 256
+                                val scaled = if (bitmap.width > maxDim || bitmap.height > maxDim) {
+                                    val scale = minOf(maxDim.toFloat() / bitmap.width, maxDim.toFloat() / bitmap.height)
+                                    Bitmap.createScaledBitmap(bitmap,
+                                        (bitmap.width * scale).toInt().coerceAtLeast(1),
+                                        (bitmap.height * scale).toInt().coerceAtLeast(1), true)
+                                } else bitmap
+                                val stream = ByteArrayOutputStream()
+                                scaled.compress(Bitmap.CompressFormat.JPEG, 70, stream)
+                                if (scaled !== bitmap) scaled.recycle()
+                                bitmap.recycle()
+                                Base64.encodeToString(stream.toByteArray(), Base64.NO_WRAP)
+                            } else null
+                        } else null
+                    } catch (e: Exception) { null }
+                } else null
+
+                // Read cloud lastUpdated FIRST
+                val cloudUser = ApiClient.getUserProfile(user.email)
+                val cloudLastUpdated = cloudUser?.createdAt ?: 0L
+                val localLastUpdated = user.createdAt
+                val now = System.currentTimeMillis()
+                
+                // Determine if we should upload:
+                // 1. Cloud is empty (first time) → YES
+                // 2. Cloud is older than local → YES
+                // 3. Cloud is newer than local → NO (cloud has latest)
+                //    BUT if user just changed their name, we must upload!
+                //    So we use a "force upload" flag set by changeName/changeUsername
+                
+                val shouldUpload = cloudUser == null || cloudLastUpdated <= localLastUpdated || forceNextUpload
+                
+                if (!shouldUpload) {
+                    Log.d("AuthManager", "uploadUserToCloud: SKIPPED (cloud is newer)")
+                    return@Thread
+                }
+                
+                forceNextUpload = false  // Reset flag
+                
+                val success = ApiClient.updateProfile(
+                    name = user.name,
+                    username = user.username,
+                    avatarBase64 = avatarBase64,
+                    birthDate = user.birthDate,
+                    country = user.country
+                )
+                if (success) {
+                    Log.d("AuthManager", "uploadUserToCloud: OK via API")
+                } else {
+                    Log.w("AuthManager", "uploadUserToCloud: API returned false")
+                }
+            } catch (e: Exception) {
+                Log.w("AuthManager", "uploadUserToCloud exception", e)
+            }
+        }.start()
+    }
             // Read the local avatar file (if any) and encode it as base64.
             val avatarBase64: String? = if (user.avatar.isNotEmpty() && !user.avatar.startsWith("http")) {
                 try {
@@ -890,31 +958,7 @@ object AuthManager {
                 }
             } else null
 
-            // === Use Vercel API (server-side protection) ===
-            // The API merges with existing cloud data and validates inputs.
-            // It also enforces owner-only writes (email must match token).
-            Thread {
-                try {
-                    val success = ApiClient.updateProfile(
-                        name = user.name,
-                        username = user.username,
-                        avatarBase64 = avatarBase64,
-                        birthDate = user.birthDate,
-                        country = user.country
-                    )
-                    if (success) {
-                        Log.d("AuthManager", "uploadUserToCloud: OK via API")
-                    } else {
-                        Log.w("AuthManager", "uploadUserToCloud: API returned false")
-                    }
-                } catch (e: Exception) {
-                    Log.w("AuthManager", "uploadUserToCloud: API exception: ${e.message}")
-                }
-            }.start()
-        } catch (e: Exception) {
-            Log.w("AuthManager", "uploadUserToCloud exception", e)
-        }
-    }
+
 
     /**
      * Synchronous version of uploadUserToCloud.
