@@ -207,17 +207,22 @@ class ReaderActivity : AppCompatActivity() {
         preloadPages(0)
     }
 
+    /**
+     * Preload the NEXT page only (1 ahead). Preloading 3+ pages at once caused
+     * all chapter images to download simultaneously, severely slowing down the
+     * first visible page. With 1-page-ahead preload, the current page gets full
+     * bandwidth and the next page starts quietly in the background.
+     */
     private fun preloadPages(startIndex: Int) {
-        val indices = listOf(startIndex + 1, startIndex + 2, startIndex + 3)
-            .filter { it in pages.indices }
-        for (i in indices) {
-            try {
-                Glide.with(this)
-                    .load(pages[i])
-                    .diskCacheStrategy(com.bumptech.glide.load.engine.DiskCacheStrategy.ALL)
-                    .preload()
-            } catch (e: Exception) {}
-        }
+        val nextIndex = startIndex + 1
+        if (nextIndex !in pages.indices) return
+        try {
+            Glide.with(this)
+                .load(pages[nextIndex])
+                .diskCacheStrategy(com.bumptech.glide.load.engine.DiskCacheStrategy.ALL)
+                .priority(com.bumptech.glide.Priority.LOW)
+                .preload()
+        } catch (e: Exception) {}
     }
 
     private fun scrollToPage(index: Int) {
@@ -267,6 +272,7 @@ class ReaderActivity : AppCompatActivity() {
                 Glide.with(itemView.context)
                     .load(url)
                     .diskCacheStrategy(com.bumptech.glide.load.engine.DiskCacheStrategy.ALL)
+                    .priority(com.bumptech.glide.Priority.HIGH)
                     .listener(object : com.bumptech.glide.request.RequestListener<android.graphics.drawable.Drawable> {
                         override fun onResourceReady(
                             resource: android.graphics.drawable.Drawable,

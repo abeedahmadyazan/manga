@@ -34,19 +34,26 @@ class MangaRepository(private val appContext: Context? = null) {
     private val mpChapterUrlCache = mutableMapOf<String, MutableMap<String, String>>()
 
     /**
-     * Fix MangaDex cover URLs that were cached with the old size-suffix format
-     * (.256.jpg / .512.jpg) which now return 404. The correct format is the
-     * plain filename without a size suffix.
+     * Normalize MangaDex cover URLs to use the small .256.jpg thumbnail
+     * (≈42KB) instead of the full-resolution original (≈430KB). Full-res
+     * covers were causing severe loading slowdowns in the grid view.
+     *
+     * The filename from the API already ends in .jpg, so the thumbnail URL
+     * format is: {filename}.256.jpg  →  e.g.  abc.jpg.256.jpg
      */
     private fun fixCoverUrl(url: String): String {
         if (url.isEmpty()) return url
-        // Only fix MangaDex cover URLs
+        // Only normalize MangaDex cover URLs
         if (!url.contains("uploads.mangadex.org/covers/")) return url
-        // Strip .256.jpg or .512.jpg suffixes → .jpg
+        // Already has a size suffix? Keep .256, downgrade larger ones.
+        if (url.endsWith(".256.jpg")) return url
+        if (url.endsWith(".512.jpg")) return url.replace(".512.jpg", ".256.jpg")
+        if (url.endsWith(".128.jpg")) return url  // 128 is even smaller, keep it
+        // Full-res (ends in .jpg without size suffix) → add .256.jpg
+        if (url.endsWith(".jpg") && !url.endsWith(".256.jpg")) {
+            return "$url.256.jpg"
+        }
         return url
-            .replace(".256.jpg", ".jpg")
-            .replace(".512.jpg", ".jpg")
-            .replace(".128.jpg", ".jpg")
     }
 
     /**
@@ -324,7 +331,7 @@ class MangaRepository(private val appContext: Context? = null) {
                             val rel = rels[j].asJsonObject
                             if (rel.get("type").asString == "cover_art") {
                                 val f = rel.getAsJsonObject("attributes")?.get("fileName")?.asString
-                                if (f != null) cover = "https://uploads.mangadex.org/covers/$id/$f"
+                                if (f != null) cover = "https://uploads.mangadex.org/covers/$id/$f.256.jpg"
                                 break
                             }
                         }
@@ -446,7 +453,7 @@ class MangaRepository(private val appContext: Context? = null) {
                 if (descObj != null) { description = descObj.get("ar")?.asString ?: descObj.get("en")?.asString ?: "" }
                 status = attrs.get("status")?.asString ?: "ongoing"
                 val rels = data.getAsJsonArray("relationships")
-                if (rels != null) { for (i in 0 until rels.size()) { try { val rel = rels[i].asJsonObject; when (rel.get("type").asString) { "cover_art" -> { val f = rel.getAsJsonObject("attributes")?.get("fileName")?.asString; if (f != null) cover = "https://uploads.mangadex.org/covers/$id/$f" }; "author" -> { author = rel.getAsJsonObject("attributes")?.get("name")?.asString ?: "" } } } catch (e: Exception) {} } }
+                if (rels != null) { for (i in 0 until rels.size()) { try { val rel = rels[i].asJsonObject; when (rel.get("type").asString) { "cover_art" -> { val f = rel.getAsJsonObject("attributes")?.get("fileName")?.asString; if (f != null) cover = "https://uploads.mangadex.org/covers/$id/$f.256.jpg" }; "author" -> { author = rel.getAsJsonObject("attributes")?.get("name")?.asString ?: "" } } } catch (e: Exception) {} } }
                 val tags = attrs.getAsJsonArray("tags")
                 if (tags != null) { val gl = mutableListOf<String>(); for (i in 0 until tags.size()) { try { val t = tags[i].asJsonObject; val n = t.getAsJsonObject("attributes")?.getAsJsonObject("name")?.get("en")?.asString; if (n != null) gl.add(n) } catch (e: Exception) {} }; genres = gl }
             }

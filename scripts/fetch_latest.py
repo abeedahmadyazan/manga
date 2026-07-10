@@ -59,7 +59,7 @@ def get_cover(m):
         if rel.get('type') == 'cover_art':
             fn = (rel.get('attributes') or {}).get('fileName')
             if fn:
-                return 'https://uploads.mangadex.org/covers/%s/%s' % (mid, fn)
+                return 'https://uploads.mangadex.org/covers/%s/%s.256.jpg' % (mid, fn)
     return ''
 
 

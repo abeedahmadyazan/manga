@@ -74,6 +74,8 @@ class MangaAdapter(
             Glide.with(cover.context)
                 .load(item.cover)
                 .centerCrop()
+                .diskCacheStrategy(com.bumptech.glide.load.engine.DiskCacheStrategy.ALL)
+                .thumbnail(0.1f)
                 .placeholder(R.color.surface_light)
                 .into(cover)
 

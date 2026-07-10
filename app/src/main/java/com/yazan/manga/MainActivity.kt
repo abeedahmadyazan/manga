@@ -82,6 +82,7 @@ class MainActivity : AppCompatActivity() {
         )
 
         recyclerView.layoutManager = GridLayoutManager(this, 3)
+        recyclerView.setHasFixedSize(true)
         recyclerView.adapter = adapter
 
         recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
