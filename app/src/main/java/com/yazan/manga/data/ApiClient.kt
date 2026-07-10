@@ -289,7 +289,7 @@ object ApiClient {
     // =============================================================
 
     fun getUserProfile(email: String): AuthManager.CloudUser? {
-        val (code, json) = requestNoAuth("GET", "/api/profile", query = mapOf("email" to email))
+        val (code, json) = request("GET", "/api/profile", query = mapOf("email" to email))
         if (code != 200 || json == null) return null
         val userObj = json.getAsJsonObject("user") ?: return null
         return AuthManager.CloudUser(
@@ -318,7 +318,7 @@ object ApiClient {
             if (birthDate != null) addProperty("birthDate", birthDate)
             if (country != null) addProperty("country", country)
         }
-        val (code, json) = requestNoAuth("PUT", "/api/profile", body)
+        val (code, json) = request("PUT", "/api/profile", body)
         if (code == 200 && json != null) {
             val msg = json.get("message")?.asString ?: "تم التحديث بنجاح"
             return Pair(true, msg)

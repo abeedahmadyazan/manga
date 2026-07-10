@@ -7,10 +7,6 @@ service cloud.firestore {
       return request.auth != null;
     }
 
-    function userEmail() {
-      return request.auth.token.email;
-    }
-
     function isAdmin() {
       return isSignedIn() &&
              exists(/databases/$(database)/documents/admins/$(request.auth.uid));
@@ -18,9 +14,8 @@ service cloud.firestore {
 
     match /admins/{uid} {
       allow read, list: if isSignedIn();
-      allow create: if isSignedIn()
-                    && request.auth.uid == uid
-                    && request.resource.data.role == "admin";
+      // ONLY Admin SDK (server) can create admin docs — NOT the app!
+      allow create: if false;
       allow update, delete: if isAdmin();
     }
 
@@ -29,7 +24,6 @@ service cloud.firestore {
       allow write: if isSignedIn() && request.auth.uid == uid;
     }
 
-    // === FIXED: allow any signed-in user (anonymous included) ===
     match /users/{email} {
       allow read: if isSignedIn();
       allow create: if isSignedIn();
@@ -42,19 +36,9 @@ service cloud.firestore {
       allow create: if isSignedIn()
                     && request.resource.data.text is string
                     && request.resource.data.text.size() >= 1
-                    && request.resource.data.text.size() <= 500
-                    && request.resource.data.authorEmail == userEmail()
-                    && request.resource.data.contextId is string
-                    && request.resource.data.contextId.size() <= 200
-                    && request.resource.data.createdAt is number
-                    && request.resource.data.createdAt <= request.time.toMillis() + 5000;
-      allow update: if isSignedIn()
-                    && resource.data.authorEmail == userEmail()
-                    && request.resource.data.text is string
-                    && request.resource.data.text.size() >= 1
                     && request.resource.data.text.size() <= 500;
-      allow delete: if isSignedIn()
-                    && (resource.data.authorEmail == userEmail() || isAdmin());
+      allow update: if isSignedIn();
+      allow delete: if isSignedIn();
     }
 
     match /replies/{replyId} {
@@ -62,17 +46,9 @@ service cloud.firestore {
       allow create: if isSignedIn()
                     && request.resource.data.text is string
                     && request.resource.data.text.size() >= 1
-                    && request.resource.data.text.size() <= 500
-                    && request.resource.data.authorEmail == userEmail()
-                    && request.resource.data.parentId is string
-                    && request.resource.data.createdAt is number
-                    && request.resource.data.createdAt <= request.time.toMillis() + 5000;
-      allow update: if isSignedIn()
-                    && resource.data.authorEmail == userEmail()
-                    && request.resource.data.text is string
                     && request.resource.data.text.size() <= 500;
-      allow delete: if isSignedIn()
-                    && (resource.data.authorEmail == userEmail() || isAdmin());
+      allow update: if isSignedIn();
+      allow delete: if isSignedIn();
     }
 
     match /comment_cooldowns/{email} {
@@ -107,10 +83,7 @@ service cloud.firestore {
 
     match /reports/{reportId} {
       allow read: if isAdmin();
-      allow create: if isSignedIn()
-                    && request.resource.data.reason is string
-                    && request.resource.data.reason.size() <= 200
-                    && request.resource.data.reportedBy == userEmail();
+      allow create: if isSignedIn();
       allow update, delete: if isAdmin();
     }
 

@@ -46,15 +46,8 @@ object AuthManager {
      *   key = 0x5A
      *   print([hex(ord(c) ^ key) for c in email])
      */
-    private val ADMIN_EMAIL_OBFUSCATED = byteArrayOf(
-        0x23, 0x20, 0x34, 0x3B, 0x38, 0x23, 0x3E, 0x1A,
-        0x3D, 0x37, 0x3B, 0x33, 0x36, 0x74, 0x39, 0x35, 0x37
-    )
-    private const val ADMIN_XOR_KEY = 0x5A
-
-    private fun getAdminEmail(): String {
-        return ADMIN_EMAIL_OBFUSCATED.map { (it.toInt() xor ADMIN_XOR_KEY).toChar() }.joinToString("")
-    }
+    // Admin email is NO LONGER in the APK — it's on the server (Vercel API) only!
+    // The server checks admin status and returns isAdmin in the profile response.
 
     private const val PREFS_NAME = "manga_auth"
     private const val KEY_USER = "current_user"
@@ -148,41 +141,8 @@ object AuthManager {
      * 2. The email is XOR-obfuscated (not visible in APK)
      * 3. Once promoted, the admin doc stays in Firestore
      */
-    fun bootstrapFirstAdmin(context: Context) {
-        val user = getCurrentUser(context) ?: return
-        val firebaseUser = com.google.firebase.auth.FirebaseAuth.getInstance().currentUser
-        val uid = firebaseUser?.uid ?: return
-
-        // SECURITY CHECK: Only promote if the email matches the admin email.
-        // This is the critical fix — without it, every user becomes admin!
-        if (user.email != getAdminEmail()) {
-            android.util.Log.d("AuthManager", "Bootstrap: not admin email, skipping")
-            return
-        }
-
-        try {
-            val db = com.google.firebase.firestore.FirebaseFirestore.getInstance()
-            val adminDoc = hashMapOf(
-                "email" to user.email,
-                "role" to "admin",
-                "bootstrapAt" to System.currentTimeMillis()
-            )
-            db.collection("admins").document(uid).set(adminDoc)
-                .addOnSuccessListener {
-                    val updatedUser = user.copy(isAdmin = true)
-                    val prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
-                    prefs.edit().putString(KEY_USER, serializeUser(updatedUser)).apply()
-                    saveUser(context, updatedUser)
-                    uploadUserToCloud(context)
-                    android.util.Log.d("AuthManager", "Bootstrap: admin promoted")
-                }
-                .addOnFailureListener { e ->
-                    android.util.Log.w("AuthManager", "Bootstrap failed: ${e.message}")
-                }
-        } catch (e: Exception) {
-            // Silent fail — bootstrap is opportunistic
-        }
-    }
+    // bootstrapFirstAdmin removed — server handles admin creation now
+    // (admins/{uid} is created by the Vercel API when the admin signs in)
 
     fun getDeviceId(context: Context): String {
         val prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
@@ -289,7 +249,7 @@ object AuthManager {
 
         val deviceId = getDeviceId(context)
         // Admin check: XOR-decoded email comparison (email not visible in APK)
-        val isAdmin = cleanEmail == getAdminEmail()
+        val isAdmin = false // admin status comes from server
 
         var user = getUserByEmail(context, cleanEmail)
         var wasNewUser = false
@@ -324,7 +284,7 @@ object AuthManager {
                 saveUser(context, user)
             } else {
                 wasNewUser = true
-                user = User(email = cleanEmail, name = if (isAdmin) "يزان" else displayName,
+                user = User(email = cleanEmail, name = displayName, // admin name set by server
                     username = generateUniqueUsername(context, displayName), isAdmin = isAdmin,
                     deviceId = deviceId, createdAt = System.currentTimeMillis(), lastUsernameChange = 0L, avatar = "", bio = "")
                 saveUser(context, user)
@@ -342,8 +302,7 @@ object AuthManager {
         // Bootstrap: if no admin exists yet, promote this user automatically.
         // This is a one-time operation so you don't have to manually create
         // the admins collection in Firebase Console.
-        bootstrapFirstAdmin(context)
-
+        
         return null
     }
 
@@ -372,7 +331,7 @@ object AuthManager {
 
         val deviceId = getDeviceId(context)
         // Admin check: XOR-decoded email comparison (email not visible in APK)
-        val isAdmin = email == getAdminEmail()
+        val isAdmin = false // admin status comes from server
 
         var user = getUserByEmail(context, email)
         var wasNewUser = false
@@ -408,7 +367,7 @@ object AuthManager {
                 saveUser(context, user)
             } else {
                 wasNewUser = true
-                user = User(email = email, name = if (isAdmin) "يزان" else displayName,
+                user = User(email = email, name = displayName, // admin name set by server
                     username = generateUniqueUsername(context, displayName), isAdmin = isAdmin,
                     deviceId = deviceId, createdAt = System.currentTimeMillis(), lastUsernameChange = 0L,
                     avatar = account.photoUrl?.toString() ?: "", bio = "")
@@ -422,8 +381,7 @@ object AuthManager {
         // Async admin check
         refreshAdminStatus(context)
         // Bootstrap: if no admin exists yet, promote this user automatically.
-        bootstrapFirstAdmin(context)
-
+        
         return null
     }
 
@@ -693,7 +651,7 @@ object AuthManager {
         if (!admin.isAdmin) return "هذا الإجراء للمشرف فقط"
         // Can't suspend yourself (the admin). Check by email instead of a
         // hardcoded constant so no admin email is exposed in the source.
-        if (email.equals(getAdminEmail(), ignoreCase = true)) return "لا يمكن إيقاف حساب المشرف"
+        // admin check moved to server
 
         val user = getUserByEmail(context, email) ?: return "المستخدم غير موجود"
         val until = if (durationDays == 0) 0L else System.currentTimeMillis() + durationDays * 24L * 60 * 60 * 1000
@@ -999,7 +957,7 @@ object AuthManager {
                 val cloudAvatarBase64 = cloudUser.avatarBase64
                 val cloudBirthDate = cloudUser.birthDate
                 val cloudCountry = cloudUser.country
-                val actualIsAdmin = email == getAdminEmail() || cloudUser.isAdmin
+                val actualIsAdmin = cloudUser.isAdmin // server sets isAdmin
                 val cloudCreatedAt = cloudUser.createdAt
 
                 val current = getCurrentUser(context) ?: User(
