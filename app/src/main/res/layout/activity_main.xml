@@ -127,6 +127,62 @@
             android:paddingBottom="8dp"
             android:background="@color/background_dark">
 
+            <!-- Content type chips -->
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="none"
+                android:layout_marginBottom="8dp">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:padding="2dp">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/chipManga"
+                        style="@style/Widget.MaterialComponents.Button.TextButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="36dp"
+                        android:text="مانجا"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        android:minWidth="76dp"
+                        android:background="@drawable/bg_tab_active"
+                        android:textColor="@color/text_secondary"
+                        android:layout_marginEnd="6dp"
+                        app:cornerRadius="22dp" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/chipManhwa"
+                        style="@style/Widget.MaterialComponents.Button.TextButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="36dp"
+                        android:text="مانهوا"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        android:minWidth="76dp"
+                        android:background="@drawable/bg_tab_inactive"
+                        android:textColor="@color/text_secondary"
+                        android:layout_marginEnd="6dp"
+                        app:cornerRadius="22dp" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/chipNovel"
+                        style="@style/Widget.MaterialComponents.Button.TextButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="36dp"
+                        android:text="روايات"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        android:minWidth="76dp"
+                        android:background="@drawable/bg_tab_inactive"
+                        android:textColor="@color/text_secondary"
+                        app:cornerRadius="22dp" />
+                </LinearLayout>
+            </HorizontalScrollView>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
