@@ -6,20 +6,20 @@ import java.util.concurrent.TimeUnit
 import java.util.regex.Pattern
 
 /**
- * AsqClient — Direct scraper for 3asq.pro (Arabic manga source).
+ * AsqClient — Direct scraper for 3asq.online (Arabic manga source).
  *
- * All network requests hit https://3asq.pro directly from the phone using a
+ * All network requests hit https://3asq.online directly from the phone using a
  * desktop browser User-Agent. HTML is parsed using regex (no Jsoup dependency).
  *
  * URL patterns:
- *  - Manga page:  https://3asq.pro/manga/{slug}/
- *  - Chapter:     https://3asq.pro/manga/{slug}/{chapter}/
- *  - Search:      https://3asq.pro/?s={query}&post_type=wp-manga
- *  - Listing:     https://3asq.pro/page/{page}/
+ *  - Manga page:  https://3asq.online/manga/{slug}/
+ *  - Chapter:     https://3asq.online/manga/{slug}/{chapter}/
+ *  - Search:      https://3asq.online/?s={query}&post_type=wp-manga
+ *  - Listing:     https://3asq.online/page/{page}/
  */
 object AsqClient {
 
-    const val BASE_URL = "https://3asq.pro"
+    const val BASE_URL = "https://3asq.online"
     private const val USER_AGENT =
         "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
 
@@ -193,7 +193,7 @@ object AsqClient {
     private fun parseSliderItems(html: String): List<MangaListItem> {
         val items = mutableListOf<MangaListItem>()
 
-        // slider items: <a href="https://3asq.pro/manga/{slug}/"> ... <img src="...">
+        // slider items: <a href="https://3asq.online/manga/{slug}/"> ... <img src="...">
         val sliderPattern = Pattern.compile(
             "<div\\s+class=\"slider__thumb_item[\\s\\S]*?<a\\s+href=\"(https?://3asq\\.pro/manga/([\\w-]+)/?)[^>]*>[\\s\\S]*?<img[^>]+src=\"([^\"]+)\"[\\s\\S]*?<div\\s+class=\"post-title[\\s\\S]*?<a[^>]*>([^<]+)</a>",
             Pattern.CASE_INSENSITIVE
@@ -351,8 +351,8 @@ object AsqClient {
     private fun parseChaptersFromHtml(html: String, slug: String): List<MangaChapter> {
         val list = mutableListOf<MangaChapter>()
         // Look for chapter links in various formats:
-        //  1. https://3asq.pro/manga/{slug}/{num}/
-        //  2. https://3asq.pro/manga/{slug}/{chapter-slug}/
+        //  1. https://3asq.online/manga/{slug}/{num}/
+        //  2. https://3asq.online/manga/{slug}/{chapter-slug}/
         //  3. <li class="wp-manga-chapter"> ... <a href="...">Chapter X</a>
         // We extract whatever comes after /manga/{slug}/ as the chapter identifier.
         val pattern = Pattern.compile(
@@ -527,7 +527,7 @@ object AsqClient {
 
     /** Extract latest chapter number from the "btn-read-first" link. */
     private fun extractLatestChapter(html: String): Int {
-        // <a href="https://3asq.pro/manga/{slug}/{num}/" id="btn-read-first" ...>
+        // <a href="https://3asq.online/manga/{slug}/{num}/" id="btn-read-first" ...>
         // Note: href appears before id in the actual HTML
         val p = Pattern.compile(
             "href=\"[^\"]*?/(\\d+(?:\\.\\d+)?)/?\"[^>]*id=\"btn-read-first\"",

@@ -21,7 +21,7 @@ class MangaRepository(private val appContext: Context? = null) {
     private val UA = "MangaApp/1.0 (Android)"
     private val ASQ_API = "https://3asq-api.netlify.app/.netlify/functions"
     private val CORS_PROXY = "https://proxy.cors.sh/"
-    private val ASQ_BASE = "https://3asq.pro"
+    private val ASQ_BASE = "https://3asq.online"
     private val CDN_CACHE_BASE = "https://cdn.jsdelivr.net/gh/abeedahmadyazan/mangaapp@gh-pages/cache"
     private val CDN_CACHE_TTL_MS = 2 * 60 * 60 * 1000L  // 2 hours
 
@@ -118,6 +118,22 @@ class MangaRepository(private val appContext: Context? = null) {
             val items = getCuratedNovels(page)
             return Result.success(items)
         }
+        // 3asq: fetch ALL manga (manhwa + manhua + manga) from 3asq.online
+        // This gives us Arabic-translated manhwa (Solo Leveling, Tower of God,
+        // Omniscient Reader) that MangaDex doesn't have Arabic chapters for.
+        if (contentType == "3asq") {
+            return try {
+                if (!DDoSProtection.tryAcquire(DDoSProtection.Action.MANGA_LIST)) {
+                    return Result.failure(Exception("تم تجاوز الحد المسموح. حاول لاحقاً."))
+                }
+                val items = fetch3asqListing(page)
+                DDoSProtection.reportSuccess()
+                Result.success(items)
+            } catch (e: Exception) {
+                DDoSProtection.reportFailure()
+                Result.failure(e)
+            }
+        }
         if (!DDoSProtection.tryAcquire(DDoSProtection.Action.MANGA_LIST)) {
             return Result.failure(Exception("تم تجاوز الحد المسموح. حاول لاحقاً."))
         }
@@ -143,6 +159,20 @@ class MangaRepository(private val appContext: Context? = null) {
     }
 
     suspend fun getPopularManga(page: Int = 1, contentType: String = "manga"): Result<List<MangaListItem>> {
+        // 3asq: same listing as latest (3asq doesn't have a "popular" endpoint)
+        if (contentType == "3asq") {
+            return try {
+                if (!DDoSProtection.tryAcquire(DDoSProtection.Action.MANGA_LIST)) {
+                    return Result.failure(Exception("تم تجاوز الحد المسموح. حاول لاحقاً."))
+                }
+                val items = fetch3asqListing(page)
+                DDoSProtection.reportSuccess()
+                Result.success(items)
+            } catch (e: Exception) {
+                DDoSProtection.reportFailure()
+                Result.failure(e)
+            }
+        }
         // Novels: serve from the curated Arabic light-novel collection
         if (contentType == "novel") {
             val items = getCuratedNovels(page)
@@ -300,6 +330,164 @@ class MangaRepository(private val appContext: Context? = null) {
             "https://images.unsplash.com/photo-1551582045-6ec9c11d8697?w=400&h=560&fit=crop&auto=format", "ongoing")
     }
 
+    /**
+     * Fetch manga listing from 3asq.online. Returns ~22 items per page.
+     * 3asq hosts Arabic-translated manga, manhwa, AND manhua — all in one
+     * listing. Each manga's type (مانجا/مانهوا/مانهوا) is on its detail page,
+     * not the listing, so we return them all as "3asq" source.
+     *
+     * URL: https://3asq.online/manga/page/{page}/
+     */
+    private fun fetch3asqListing(page: Int): List<MangaListItem> {
+        return try {
+            val url = if (page <= 1) "$ASQ_BASE/manga/" else "$ASQ_BASE/manga/page/$page/"
+            val req = Request.Builder().url(url)
+                .header("User-Agent", UA)
+                .header("Accept", "text/html")
+                .header("Accept-Language", "ar,en;q=0.9")
+                .build()
+            client.newCall(req).execute().use { resp ->
+                if (!resp.isSuccessful) return emptyList()
+                val html = resp.body?.string() ?: return emptyList()
+                // Extract manga slug + title + cover from the listing HTML.
+                // 3asq uses WordPress Madara theme — each manga is in an
+                // <div class="row c-tabs-item"> or similar, with:
+                //   <a href="https://3asq.online/manga/{slug}/" ...>
+                //   <img src="...cover..." ...>
+                //   <h3 class="h4">...<a>{title}</a></h3>
+                val items = mutableListOf<MangaListItem>()
+                // Pattern 1: Madara theme listing (most common)
+                val pattern = Regex(
+                    "href=\"https?://3asq\\.[a-z]+/manga/([\\w-]+)/?\"[^>]*>[\\s\\S]{0,500}?<img[^>]+src=\"([^\"]+)\"[\\s\\S]{0,800}?<a[^>]*>([^<]+)</a>",
+                    RegexOption.IGNORE_CASE
+                )
+                val seen = mutableSetOf<String>()
+                for (m in pattern.findAll(html)) {
+                    val slug = m.groupValues[1]
+                    if (slug == "feed" || slug.isEmpty()) continue
+                    if (seen.contains(slug)) continue
+                    seen.add(slug)
+                    val cover = m.groupValues[2].let { if (it.startsWith("//")) "https:$it" else it }
+                    var title = m.groupValues[3].trim()
+                    // Decode HTML entities
+                    title = title.replace("&#8211;", "—").replace("&#8217;", "'")
+                        .replace("&#8220;", "\"").replace("&#8221;", "\"")
+                        .replace("&amp;", "&").replace("&#038;", "&")
+                    if (title.isNotEmpty()) {
+                        items.add(MangaListItem(
+                            id = "3asq-$slug",
+                            title = title,
+                            cover = cover,
+                            source = "3asq",
+                            status = "ongoing"
+                        ))
+                    }
+                    if (items.size >= 22) break
+                }
+                Log.d(TAG, "3asq listing page $page: ${items.size} items")
+                items
+            }
+        } catch (e: Exception) {
+            Log.w(TAG, "3asq listing failed: ${e.message}")
+            emptyList()
+        }
+    }
+
+    /**
+     * Fetch a manga's details + chapter list from 3asq.online via the
+     * Netlify proxy. Returns title, cover, type (مانجا/مانهوا/مانهوا),
+     * description, and the full Arabic chapter list.
+     */
+    private fun fetch3asqMangaDetails(slug: String): MangaDetails? {
+        return try {
+            // 1. Fetch chapter list from the Netlify proxy (fast, cached)
+            val chaptersReq = Request.Builder()
+                .url("$ASQ_API/chapters?slug=$slug")
+                .header("Accept", "application/json")
+                .build()
+            var title = ""
+            var cover = ""
+            var description = ""
+            var status = "ongoing"
+            var genres = listOf<String>()
+            val chapters = mutableListOf<MangaChapter>()
+            client.newCall(chaptersReq).execute().use { resp ->
+                if (!resp.isSuccessful) return null
+                val body = resp.body?.string() ?: return null
+                val root = JsonParser.parseString(body).asJsonObject
+                val chArr = root.getAsJsonArray("chapters") ?: return null
+                for (i in 0 until chArr.size()) {
+                    try {
+                        val ch = chArr[i].asJsonObject
+                        val num = ch.get("number")?.asString ?: continue
+                        chapters.add(MangaChapter(
+                            id = "3asq-$slug-$num",
+                            number = num,
+                            title = "الفصل $num",
+                            date = "",
+                            source = "3asq"
+                        ))
+                    } catch (e: Exception) {}
+                }
+            }
+            // 2. Fetch the manga detail page to get title, cover, type, description
+            val detailReq = Request.Builder()
+                .url("$ASQ_BASE/manga/$slug/")
+                .header("User-Agent", UA)
+                .header("Accept", "text/html")
+                .header("Accept-Language", "ar,en;q=0.9")
+                .build()
+            client.newCall(detailReq).execute().use { resp ->
+                if (!resp.isSuccessful) return@use
+                val html = resp.body?.string() ?: return@use
+                // Title: <h1 class="h4">...</h1> or <title>...</title>
+                val titleMatch = Regex("<h1[^>]*class=\"[^\"]*h4[^\"]*\"[^>]*>\\s*<a[^>]*>([^<]+)</a>").find(html)
+                    ?: Regex("<title>([^<]+)</title>").find(html)
+                title = titleMatch?.groupValues?.get(1)?.trim()?.replace("&#8211;","—")?.replace("&#8217;","'")?.replace("&amp;","&") ?: slug
+                // Cover: <div class="summary_image">...<img src="...">
+                val coverMatch = Regex("class=\"[^\"]*summary_image[^\"]*\"[\\s\\S]*?<img[^>]+src=\"([^\"]+)\"").find(html)
+                cover = coverMatch?.groupValues?.get(1)?.let { if (it.startsWith("//")) "https:$it" else it } ?: ""
+                // Type: <h5>النوع</h5>...<div class="summary-content">مانهوا</div>
+                val typeMatch = Regex("النوع[\\s\\S]{0,200}?summary-content[^>]*>\\s*(\\S+)").find(html)
+                val type = typeMatch?.groupValues?.get(1)?.trim()?.replace("،","") ?: ""
+                // Status: <h5>الحالة</h5>...<div class="summary-content">...</div>
+                val statusMatch = Regex("الحالة[\\s\\S]{0,200}?summary-content[^>]*>\\s*([^<]+)").find(html)
+                status = statusMatch?.groupValues?.get(1)?.trim() ?: "ongoing"
+                // Description: <div class="description-summary">...<p>...</p>
+                val descMatch = Regex("class=\"[^\"]*description-summary[^\"]*\"[\\s\\S]*?<p[^>]*>([\\s\\S]*?)</p>").find(html)
+                description = descMatch?.groupValues?.get(1)?.replace("<[^>]+>".toRegex(), "")?.trim() ?: ""
+                // Genres: <div class="genres-content">...<a>...</a>...</div>
+                val genresMatch = Regex("genres-content[\\s\\S]*?</div>").find(html)
+                if (genresMatch != null) {
+                    val genreText = genresMatch.groupValues[0]
+                    val genreList = Regex("<a[^>]*>([^<]+)</a>").findAll(genreText).map { it.groupValues[1].trim() }.toList()
+                    genres = genreList
+                }
+                // Add the type as a genre if found
+                if (type.isNotEmpty() && type !in genres) genres = listOf(type) + genres
+            }
+            MangaDetails(
+                id = "3asq-$slug",
+                title = title,
+                cover = cover,
+                description = description,
+                author = "العاشق",
+                artist = "",
+                status = status,
+                genres = genres,
+                chapters = chapters,
+                source = "3asq",
+                latestChapter = chapters.firstOrNull()?.number,
+                rating = null,
+                sources = emptyList(),
+                chaptersBySource = emptyMap()
+            )
+        } catch (e: Exception) {
+            Log.w(TAG, "fetch3asqMangaDetails($slug) failed: ${e.message}")
+            null
+        }
+    }
+
     private fun fetchList(url: String): List<MangaListItem> {
         val req = Request.Builder().url(url).header("User-Agent", UA).header("Accept", "application/json").build()
         client.newCall(req).execute().use { resp ->
@@ -384,6 +572,29 @@ class MangaRepository(private val appContext: Context? = null) {
                 return Result.success(details)
             }
             return Result.failure(Exception("الرواية غير موجودة"))
+        }
+        // 3asq manga: fetch details + chapters from 3asq.online via the
+        // Netlify proxy (3asq-api.netlify.app). 3asq hosts Arabic manhwa,
+        // manhua, and manga — all with full Arabic chapter translations.
+        if (id.startsWith("3asq-")) {
+            val slug = id.removePrefix("3asq-")
+            return try {
+                if (!DDoSProtection.tryAcquire(DDoSProtection.Action.MANGA_DETAILS)) {
+                    return Result.failure(Exception("تم تجاوز الحد المسموح. حاول لاحقاً."))
+                }
+                val details = fetch3asqMangaDetails(slug)
+                if (details != null) {
+                    DDoSProtection.reportSuccess()
+                    appContext?.let { CacheManager.cacheMangaDetails(it, id, details) }
+                    Result.success(details)
+                } else {
+                    DDoSProtection.reportFailure()
+                    Result.failure(Exception("تعذّر تحميل تفاصيل المانجا من العاشق"))
+                }
+            } catch (e: Exception) {
+                DDoSProtection.reportFailure()
+                Result.failure(e)
+            }
         }
         // Try cache first (24h TTL)
         appContext?.let { ctx ->
@@ -701,13 +912,13 @@ class MangaRepository(private val appContext: Context? = null) {
 
         if (proxyResult != null) return proxyResult
 
-        // Fallback: scrape 3asq.pro directly via CORS proxy
+        // Fallback: scrape 3asq.online directly via CORS proxy
         // This bypasses Cloudflare by going through proxy.cors.sh
         return scrape3asqChaptersDirect(slug)
     }
 
     /**
-     * Scrape 3asq.pro chapter list directly via a CORS proxy.
+     * Scrape 3asq.online chapter list directly via a CORS proxy.
      * This is the NEW method that bypasses Cloudflare.
      */
     private fun scrape3asqChaptersDirect(slug: String): List<MangaChapter>? {
@@ -841,7 +1052,7 @@ class MangaRepository(private val appContext: Context? = null) {
                         }
                     }
                 }
-                // 3asq proxy failed — try scraping 3asq.pro directly via CORS proxy
+                // 3asq proxy failed — try scraping 3asq.online directly via CORS proxy
                 val directPages = scrape3asqPagesDirect(slug, num)
                 if (directPages.isNotEmpty()) {
                     Log.d(TAG, "Got ${directPages.size} pages from 3asq direct (CORS proxy)")
@@ -898,7 +1109,7 @@ class MangaRepository(private val appContext: Context? = null) {
      * list if no MangaPill data is available for this manga.
      */
     /**
-     * Scrape 3asq.pro chapter pages directly via CORS proxy.
+     * Scrape 3asq.online chapter pages directly via CORS proxy.
      * Bypasses Cloudflare by going through proxy.cors.sh.
      * Returns Arabic manga pages — this is the primary method now.
      */
@@ -915,7 +1126,7 @@ class MangaRepository(private val appContext: Context? = null) {
                 if (!resp.isSuccessful) return emptyList()
                 val html = resp.body?.string() ?: return emptyList()
                 // Find all image URLs inside reading-content div
-                // Pattern: src="https://3asq.pro/wp-content/uploads/WP-manga/data/..."
+                // Pattern: src="https://3asq.online/wp-content/uploads/WP-manga/data/..."
                 val pattern = java.util.regex.Pattern.compile(
                     "(?:src|data-src)=\"(https://3asq\\.pro/wp-content/uploads/WP-manga/data/[^\"]+\\.(?:jpg|jpeg|png|webp))\""
                 )

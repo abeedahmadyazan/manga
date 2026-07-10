@@ -11,7 +11,7 @@ import java.util.regex.Pattern
  * both fail to provide chapter pages.
  *
  * Why MangaPill:
- *  - No Cloudflare protection (3asq.pro returns "Just a moment..." for old chapters)
+ *  - No Cloudflare protection (3asq.online returns "Just a moment..." for old chapters)
  *  - Direct <img src="..."> URLs in chapter HTML (no lazy-load tricks)
  *  - Clean URL scheme:
  *      Manga page:   https://mangapill.com/manga/{id}/{slug}

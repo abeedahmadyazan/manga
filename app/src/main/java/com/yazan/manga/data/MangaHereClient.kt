@@ -10,7 +10,7 @@ import java.util.regex.Pattern
  * MangaHere — English manga source.
  *
  * Why MangaHere:
- *  - No Cloudflare (unlike 3asq.pro for old chapters)
+ *  - No Cloudflare (unlike 3asq.online for old chapters)
  *  - Chapter listing works cleanly (279 chapters for JJK)
  *  - URL scheme:
  *      Manga page:   https://www.mangahere.cc/manga/{slug}/

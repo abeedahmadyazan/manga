@@ -184,29 +184,33 @@ class MainActivity : AppCompatActivity() {
 
         setActiveTab(currentTab)
 
-        // Content type chips (مانجا | مانهوا | روايات)
+        // Content type chips (مانجا | مانهوا | روايات | العاشق)
         val chipManga = findViewById<MaterialButton>(R.id.chipManga)
         val chipManhwa = findViewById<MaterialButton>(R.id.chipManhwa)
         val chipNovel = findViewById<MaterialButton>(R.id.chipNovel)
-        
+        val chip3asq = findViewById<MaterialButton>(R.id.chip3asq)
+
         fun setActiveContent(type: String) {
             currentContentType = type
             chipManga.isSelected = type == "manga"
             chipManhwa.isSelected = type == "manhwa"
             chipNovel.isSelected = type == "novel"
+            chip3asq.isSelected = type == "3asq"
             // Update text colors
             chipManga.setTextColor(if (type == "manga") getColor(R.color.black) else getColor(R.color.text_secondary))
             chipManhwa.setTextColor(if (type == "manhwa") getColor(R.color.black) else getColor(R.color.text_secondary))
             chipNovel.setTextColor(if (type == "novel") getColor(R.color.black) else getColor(R.color.text_secondary))
+            chip3asq.setTextColor(if (type == "3asq") getColor(R.color.black) else getColor(R.color.text_secondary))
             // Reload with new content type
             currentPage = 1
             adapter.submitList(emptyList())
             loadManga()
         }
-        
+
         chipManga.setOnClickListener { if (currentContentType != "manga") setActiveContent("manga") }
         chipManhwa.setOnClickListener { if (currentContentType != "manhwa") setActiveContent("manhwa") }
         chipNovel.setOnClickListener { if (currentContentType != "novel") setActiveContent("novel") }
+        chip3asq.setOnClickListener { if (currentContentType != "3asq") setActiveContent("3asq") }
         
         // Set default selection
         chipManga.isSelected = true
