@@ -57,10 +57,6 @@ android {
             } else {
                 signingConfigs.getByName("debug")
             }
-            // Enable v1 signing (needed for Google Sign-In SHA-1)
-            enableV1Signing = true
-            enableV2Signing = true
-            enableV3Signing = true
         }
         debug {
             // Enable all signing schemes on debug builds too
