@@ -12,7 +12,7 @@ android {
         applicationId = "com.yazan.manga"
         minSdk = 24
         targetSdk = 35
-        versionCode = 45
+        versionCode = 46
         versionName = "1.0.2"
     }
 
@@ -33,9 +33,10 @@ android {
             }
         }
         getByName("debug") {
-            // Use the default debug keystore — this makes the APK consistently
-            // signed, which slightly reduces (but doesn't eliminate) Play Protect
-            // warnings. For full trust, you'd need to publish via Play Store.
+            storeFile = file("${System.getProperty("user.home")}/.android/debug.keystore")
+            storePassword = "android"
+            keyAlias = "androiddebugkey"
+            keyPassword = "android"
         }
     }
 
@@ -56,6 +57,10 @@ android {
             } else {
                 signingConfigs.getByName("debug")
             }
+            // Enable v1 signing (needed for Google Sign-In SHA-1)
+            enableV1Signing = true
+            enableV2Signing = true
+            enableV3Signing = true
         }
         debug {
             // Enable all signing schemes on debug builds too
