@@ -320,7 +320,7 @@ object AuthManager {
                         }
                     } catch (e: Exception) {}
                 }
-                user = user!!.copy(birthDate = cloudUser.birthDate, country = cloudUser.country)
+                user = user!!.copy(birthDate = cu.birthDate, country = cu.country)
                 saveUser(context, user)
             } else {
                 wasNewUser = true
@@ -404,7 +404,7 @@ object AuthManager {
                         }
                     } catch (e: Exception) {}
                 }
-                user = user!!.copy(birthDate = cloudUser.birthDate, country = cloudUser.country)
+                user = user!!.copy(birthDate = cu.birthDate, country = cu.country)
                 saveUser(context, user)
             } else {
                 wasNewUser = true
@@ -997,8 +997,8 @@ object AuthManager {
                 val cloudName = cloudUser.name
                 val cloudUsername = cloudUser.username
                 val cloudAvatarBase64 = cloudUser.avatarBase64
-                val cloudBirthDate = cloudUser.birthDate
-                val cloudCountry = cloudUser.country
+                val cloudBirthDate = cu.birthDate
+                val cloudCountry = cu.country
                 val actualIsAdmin = email == getAdminEmail() || cloudUser.isAdmin
                 val cloudCreatedAt = cloudUser.createdAt
 
