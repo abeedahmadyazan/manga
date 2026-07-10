@@ -94,6 +94,45 @@ object ApiClient {
         }
     }
 
+    private fun requestNoAuth(
+        method: String,
+        path: String,
+        body: JsonObject? = null,
+        query: Map<String, String> = emptyMap()
+    ): Pair<Int, JsonObject?> {
+        val urlBuilder = StringBuilder("$BASE_URL$path")
+        if (query.isNotEmpty()) {
+            urlBuilder.append("?")
+            query.entries.joinTo(urlBuilder, "&") {
+                "${it.key}=${java.net.URLEncoder.encode(it.value, "UTF-8")}"
+            }
+        }
+        val reqBuilder = Request.Builder()
+            .url(urlBuilder.toString())
+            .header("Content-Type", "application/json")
+            .header("X-App-Version", getAppVersionCode().toString())
+            .header("X-User-Email", getUserEmail())
+        when (method) {
+            "GET" -> reqBuilder.get()
+            "POST", "PUT", "DELETE" -> {
+                val bodyStr = body?.toString() ?: "{}"
+                reqBuilder.method(method, bodyStr.toRequestBody(JSON))
+            }
+        }
+        return try {
+            client.newCall(reqBuilder.build()).execute().use { response ->
+                val responseBody = response.body?.string()
+                val json = if (responseBody != null && responseBody.isNotEmpty()) {
+                    try { JsonParser.parseString(responseBody).asJsonObject } catch (e: Exception) { null }
+                } else null
+                Pair(response.code, json)
+            }
+        } catch (e: Exception) {
+            Log.e(TAG, "Request failed: ${e.message}")
+            Pair(0, null)
+        }
+    }
+
     /**
      * Make an authenticated HTTP request to the API (blocking).
      */
@@ -250,7 +289,7 @@ object ApiClient {
     // =============================================================
 
     fun getUserProfile(email: String): AuthManager.CloudUser? {
-        val (code, json) = request("GET", "/api/users", query = mapOf("email" to email))
+        val (code, json) = requestNoAuth("GET", "/api/profile-read", query = mapOf("email" to email))
         if (code != 200 || json == null) return null
         val userObj = json.getAsJsonObject("user") ?: return null
         return AuthManager.CloudUser(
@@ -279,7 +318,7 @@ object ApiClient {
             if (birthDate != null) addProperty("birthDate", birthDate)
             if (country != null) addProperty("country", country)
         }
-        val (code, json) = request("PUT", "/api/users", body)
+        val (code, json) = requestNoAuth("PUT", "/api/profile-update", body)
         if (code == 200 && json != null) {
             val msg = json.get("message")?.asString ?: "تم التحديث بنجاح"
             return Pair(true, msg)
