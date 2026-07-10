@@ -12,7 +12,7 @@ android {
         applicationId = "com.yazan.manga"
         minSdk = 24
         targetSdk = 35
-        versionCode = 48
+        versionCode = 49
         versionName = "1.0.2"
     }
 
@@ -32,8 +32,8 @@ android {
                 keyPassword = System.getenv("KEY_PASSWORD") ?: ""
             }
         }
-        getByName("debug") {
-            storeFile = rootProject.file("app/yz-manga-debug.keystore")
+        create("debug") {
+            storeFile = file("../app/yz-manga-debug.keystore")
             storePassword = "android"
             keyAlias = "androiddebugkey"
             keyPassword = "android"
@@ -52,11 +52,7 @@ android {
             )
             // Sign with the release keystore if available (CI env), otherwise
             // fall back to debug (local dev builds or CI without secrets).
-            signingConfig = if (System.getenv("KEYSTORE_FILE") != null) {
-                signingConfigs.getByName("release")
-            } else {
-                signingConfigs.getByName("debug")
-            }
+            signingConfig = signingConfigs.getByName("debug")
         }
         debug {
             // Enable all signing schemes on debug builds too
