@@ -305,12 +305,14 @@ class ProfileActivity : AppCompatActivity() {
                     Toast.makeText(this, "الاسم لا يمكن أن يكون فارغاً", Toast.LENGTH_SHORT).show()
                     return@setPositiveButton
                 }
-                val err = AuthManager.changeName(this, newName)
-                if (err == null) {
-                    Toast.makeText(this, "تم تحديث الاسم", Toast.LENGTH_SHORT).show()
+                val result = AuthManager.changeName(this, newName)
+                if (result != null && result.startsWith("تم")) {
+                    // Success message from server
+                    Toast.makeText(this, result, Toast.LENGTH_SHORT).show()
                     updateUI()
                 } else {
-                    Toast.makeText(this, err, Toast.LENGTH_LONG).show()
+                    // Error message
+                    Toast.makeText(this, result ?: "حدث خطأ", Toast.LENGTH_LONG).show()
                 }
             }
             .setNegativeButton("إلغاء", null)

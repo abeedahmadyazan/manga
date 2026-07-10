@@ -538,21 +538,25 @@ object AuthManager {
         if (clean.length > 30) return "الاسم طويل جداً (حد أقصى 30 حرف)"
 
         // CLOUD FIRST: call API, wait for result
-        var success = false
+        var apiResult: Pair<Boolean, String?> = Pair(false, "فشل الاتصال")
         val latch = java.util.concurrent.CountDownLatch(1)
         Thread {
-            try { success = ApiClient.updateProfile(name = clean) } catch (e: Exception) {}
+            try { apiResult = ApiClient.updateProfile(name = clean) } catch (e: Exception) {}
             latch.countDown()
         }.start()
         try { latch.await(15, java.util.concurrent.TimeUnit.SECONDS) } catch (e: Exception) {}
 
-        if (!success) return "تعذّر حفظ الاسم على السحابة"
+        if (!apiResult.first) {
+            return apiResult.second ?: "تعذّر حفظ الاسم على السحابة"
+        }
 
         // Cloud succeeded → save locally
         val updated = current.copy(name = clean)
         saveUser(context, updated)
         prefs.edit().putString(KEY_USER, serializeUser(updated)).apply()
-        return null
+        
+        // Return the SUCCESS MESSAGE from the server (starts with "تم")
+        return apiResult.second
     }
 
     /** Update the user's optional birth date (format: yyyy-MM-dd, or empty to clear). */

@@ -271,7 +271,7 @@ object ApiClient {
         avatarBase64: String? = null,
         birthDate: String? = null,
         country: String? = null
-    ): Boolean {
+    ): Pair<Boolean, String?> {
         val body = JsonObject().apply {
             if (name != null) addProperty("name", name)
             if (username != null) addProperty("username", username)
@@ -279,8 +279,13 @@ object ApiClient {
             if (birthDate != null) addProperty("birthDate", birthDate)
             if (country != null) addProperty("country", country)
         }
-        val (code, _) = request("PUT", "/api/users", body)
-        return code == 200
+        val (code, json) = request("PUT", "/api/users", body)
+        if (code == 200 && json != null) {
+            val msg = json.get("message")?.asString ?: "تم التحديث بنجاح"
+            return Pair(true, msg)
+        }
+        val errorMsg = json?.get("error")?.asString ?: "فشل الاتصال بالسيرفر"
+        return Pair(false, errorMsg)
     }
 
     // =============================================================
