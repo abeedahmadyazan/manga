@@ -608,11 +608,29 @@ object AuthManager {
             bitmap.recycle()
 
             val savedPath = avatarFile.absolutePath
+            
+            // === CLOUD FIRST: upload avatar to cloud ===
+            val stream2 = ByteArrayOutputStream()
+            scaled.compress(Bitmap.CompressFormat.JPEG, 70, stream2)
+            val avatarBase64 = Base64.encodeToString(stream2.toByteArray(), Base64.NO_WRAP)
+            
+            var apiSuccess = false
+            val latch = java.util.concurrent.CountDownLatch(1)
+            Thread {
+                try { apiSuccess = ApiClient.updateProfile(avatarBase64 = avatarBase64) } catch (e: Exception) {}
+                latch.countDown()
+            }.start()
+            try { latch.await(15, java.util.concurrent.TimeUnit.SECONDS) } catch (e: Exception) {}
+            
+            if (!apiSuccess) {
+                // Cloud failed → still save locally (avatar is a file, less critical)
+                Log.w("AuthManager", "setAvatar: cloud upload failed, saved locally only")
+            }
+            
             val updated = current.copy(avatar = savedPath)
             saveUser(context, updated)
             context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
                 .edit().putString(KEY_USER, serializeUser(updated)).apply()
-            uploadUserToCloud(context)
             savedPath
         } catch (e: Exception) {
             null
