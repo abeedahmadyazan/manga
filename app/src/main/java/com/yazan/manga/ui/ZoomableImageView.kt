@@ -140,4 +140,41 @@ class ZoomableImageView @JvmOverloads constructor(
         translationY = 0f
         scaleType = ScaleType.FIT_CENTER
     }
+
+    /**
+     * Programmatically zoom IN by a fixed step (e.g. when the user taps a
+     * zoom-in button in the reader toolbar). Animates the scale change for
+     * a smooth feel.
+     */
+    fun zoomIn() {
+        val target = (scaleFactor * 1.4f).coerceAtMost(MAX_SCALE)
+        animateToZoom(target)
+    }
+
+    /**
+     * Programmatically zoom OUT by a fixed step (opposite of zoomIn).
+     * At 1x it's a no-op so the user can't shrink below fit-to-screen.
+     */
+    fun zoomOut() {
+        val target = (scaleFactor / 1.4f).coerceAtLeast(MIN_SCALE)
+        animateToZoom(target)
+    }
+
+    private fun animateToZoom(target: Float) {
+        if (target == scaleFactor) return
+        val from = scaleFactor
+        scaleFactor = target
+        if (target <= MIN_SCALE) {
+            // Reset to fit
+            posX = 0f
+            posY = 0f
+        }
+        animate()
+            .scaleX(target)
+            .scaleY(target)
+            .translationX(posX)
+            .translationY(posY)
+            .setDuration(180)
+            .start()
+    }
 }

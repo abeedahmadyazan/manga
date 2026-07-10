@@ -127,7 +127,11 @@ class MangaRepository(private val appContext: Context? = null) {
                 "manhwa" -> "&originalLanguage[]=ko"
                 else -> "&originalLanguage[]=ja"
             }
-            val url = "https://api.mangadex.org/manga?limit=20&offset=$offset&availableTranslatedLanguage[]=ar&order[latestUploadedChapter]=desc&includes[]=cover_art&contentRating[]=safe&contentRating[]=suggestive$langFilter"
+            // hasAvailableChapters=true filters out manga whose Arabic
+            // translations were removed/never uploaded — without this, the
+            // list shows manhwa like Solo Leveling that have 0 Arabic
+            // chapters, and the reader fails with 'حدث خطأ أثناء تحميل الفصل'.
+            val url = "https://api.mangadex.org/manga?limit=20&offset=$offset&availableTranslatedLanguage[]=ar&hasAvailableChapters=true&order[latestUploadedChapter]=desc&includes[]=cover_art&contentRating[]=safe&contentRating[]=suggestive$langFilter"
             val items = fetchList(url)
             DDoSProtection.reportSuccess()
             appContext?.let { CacheManager.cacheMangaList(it, "latest", page, items) }
@@ -159,7 +163,7 @@ class MangaRepository(private val appContext: Context? = null) {
                 "manhwa" -> "&originalLanguage[]=ko"
                 else -> "&originalLanguage[]=ja"
             }
-            val url = "https://api.mangadex.org/manga?limit=20&offset=$offset&availableTranslatedLanguage[]=ar&order[followedCount]=desc&includes[]=cover_art&contentRating[]=safe&contentRating[]=suggestive$langFilter"
+            val url = "https://api.mangadex.org/manga?limit=20&offset=$offset&availableTranslatedLanguage[]=ar&hasAvailableChapters=true&order[followedCount]=desc&includes[]=cover_art&contentRating[]=safe&contentRating[]=suggestive$langFilter"
             val items = fetchList(url)
             DDoSProtection.reportSuccess()
             appContext?.let { CacheManager.cacheMangaList(it, "popular", page, items) }
@@ -187,7 +191,7 @@ class MangaRepository(private val appContext: Context? = null) {
                 "manhwa" -> "&originalLanguage[]=ko"
                 else -> "&originalLanguage[]=ja"
             }
-            val url = "https://api.mangadex.org/manga?title=$encoded&limit=20&offset=$offset&availableTranslatedLanguage[]=ar&order[relevance]=desc&includes[]=cover_art&contentRating[]=safe&contentRating[]=suggestive$langFilter"
+            val url = "https://api.mangadex.org/manga?title=$encoded&limit=20&offset=$offset&availableTranslatedLanguage[]=ar&hasAvailableChapters=true&order[relevance]=desc&includes[]=cover_art&contentRating[]=safe&contentRating[]=suggestive$langFilter"
             val items = fetchList(url)
             DDoSProtection.reportSuccess()
             appContext?.let { CacheManager.cacheSearchResults(it, query, items) }

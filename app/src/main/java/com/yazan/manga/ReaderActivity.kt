@@ -100,6 +100,14 @@ class ReaderActivity : AppCompatActivity() {
         btnPrevPage.setOnClickListener { scrollToPage(currentPageIndex - 1) }
         btnNextPage.setOnClickListener { scrollToPage(currentPageIndex + 1) }
 
+        // Zoom buttons — operate on the currently visible page only.
+        findViewById<ImageButton>(R.id.btnZoomIn).setOnClickListener {
+            findVisiblePageView()?.zoomIn()
+        }
+        findViewById<ImageButton>(R.id.btnZoomOut).setOnClickListener {
+            findVisiblePageView()?.zoomOut()
+        }
+
         pageSeekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
                 if (fromUser && pages.isNotEmpty()) {
@@ -166,8 +174,17 @@ class ReaderActivity : AppCompatActivity() {
                         )
                     )
                 }
-            }.onFailure {
-                errorText.text = "حدث خطأ أثناء تحميل الفصل. حاول مرة أخرى لاحقاً."
+            }.onFailure { e ->
+                // Show a more helpful message: distinguish between "no Arabic
+                // pages available for this chapter" vs a generic network error.
+                val msg = e.message.orEmpty()
+                errorText.text = when {
+                    msg.contains("غير متاح", true) || msg.contains("تعذّر", true) ->
+                        "لا تتوفر صفحات عربية لهذا الفصل بعد.\nجرّب فصلاً آخر أو مصدراً مختلفاً."
+                    msg.contains("HTTP 4", true) || msg.contains("HTTP 5", true) ->
+                        "تعذّر تحميل الفصل من المصدر. حاول لاحقاً."
+                    else -> "حدث خطأ أثناء تحميل الفصل.\n${msg.take(80)}"
+                }
                 errorText.visibility = View.VISIBLE
             }
         }
@@ -228,6 +245,19 @@ class ReaderActivity : AppCompatActivity() {
     private fun scrollToPage(index: Int) {
         if (index < 0 || index >= pages.size) return
         pagesRecyclerView.smoothScrollToPosition(index)
+    }
+
+    /**
+     * Find the ZoomableImageView of the page currently visible on screen.
+     * Used by the zoom-in / zoom-out toolbar buttons so they affect the
+     * page the user is actually looking at, not a random one.
+     */
+    private fun findVisiblePageView(): com.yazan.manga.ui.ZoomableImageView? {
+        val lm = pagesRecyclerView.layoutManager as? LinearLayoutManager ?: return null
+        val pos = lm.findFirstVisibleItemPosition()
+        if (pos == RecyclerView.NO_POSITION) return null
+        val holder = pagesRecyclerView.findViewHolderForAdapterPosition(pos) ?: return null
+        return holder.itemView.findViewById(R.id.pageImage)
     }
 
     private fun toggleBars() {

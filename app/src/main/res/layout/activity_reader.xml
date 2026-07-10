@@ -122,8 +122,8 @@
 
         <ImageButton
             android:id="@+id/btnPrevPage"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
             android:background="@drawable/bg_circle_button"
             android:src="@drawable/ic_back"
             android:contentDescription="الصفحة السابقة"
@@ -135,12 +135,37 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_marginHorizontal="12dp" />
+            android:layout_marginHorizontal="8dp" />
+
+        <!-- Zoom OUT (shrink) — opposite of zoom-in -->
+        <ImageButton
+            android:id="@+id/btnZoomOut"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:layout_marginStart="2dp"
+            android:background="@drawable/bg_circle_button"
+            android:src="@drawable/ic_zoom_out"
+            android:contentDescription="تصغير"
+            android:tint="@color/white"
+            tools:ignore="HardcodedText,UseAppTint" />
+
+        <!-- Zoom IN (enlarge) -->
+        <ImageButton
+            android:id="@+id/btnZoomIn"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:layout_marginStart="4dp"
+            android:background="@drawable/bg_circle_button"
+            android:src="@drawable/ic_zoom_in"
+            android:contentDescription="تكبير"
+            android:tint="@color/white"
+            tools:ignore="HardcodedText,UseAppTint" />
 
         <ImageButton
             android:id="@+id/btnNextPage"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:layout_marginStart="4dp"
             android:background="@drawable/bg_circle_button"
             android:src="@drawable/ic_back"
             android:rotation="180"
