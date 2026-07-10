@@ -147,7 +147,7 @@ class ProfileActivity : AppCompatActivity() {
                         val signInIntent = googleSignInClient.signInIntent
                         startActivityForResult(signInIntent, RC_SIGN_IN)
                     } catch (e: Exception) {
-                        showAccountPicker()
+                        Toast.makeText(this, "تعذّر تسجيل الدخول. تأكد من وجود خدمات Google Play", Toast.LENGTH_LONG).show()
                     }
                 }
             }
@@ -189,7 +189,7 @@ class ProfileActivity : AppCompatActivity() {
             }
             RC_SIGN_IN -> {
                 if (resultCode != Activity.RESULT_OK) {
-                    showAccountPicker()
+                    Toast.makeText(this, "تم إلغاء تسجيل الدخول", Toast.LENGTH_SHORT).show()
                     return
                 }
                 try {
@@ -197,13 +197,11 @@ class ProfileActivity : AppCompatActivity() {
                         .getResult(ApiException::class.java)
                     if (account != null && account.idToken != null) {
                         firebaseAuthWithGoogle(account.idToken!!)
-                    } else if (account != null && account.email != null) {
-                        loginWithEmail(account.email!!, account.displayName ?: account.email!!.split("@")[0])
                     } else {
-                        showAccountPicker()
+                        Toast.makeText(this, "تعذّر الحصول على بيانات الحساب", Toast.LENGTH_LONG).show()
                     }
                 } catch (e: ApiException) {
-                    showAccountPicker()
+                    Toast.makeText(this, "فشل تسجيل الدخول: ${e.statusCode}", Toast.LENGTH_LONG).show()
                 }
             }
             RC_ACCOUNT_PICKER -> {
@@ -229,12 +227,8 @@ class ProfileActivity : AppCompatActivity() {
                     val error = AuthManager.processFirebaseAuth(this, account)
                     handleAuthResult(error)
                 } else {
-                    val account = GoogleSignIn.getLastSignedInAccount(this)
-                    if (account?.email != null) {
-                        loginWithEmail(account.email!!, account.displayName ?: account.email!!.split("@")[0])
-                    } else {
-                        Toast.makeText(this, "فشل المصادقة", Toast.LENGTH_SHORT).show()
-                    }
+                    // DON'T fallback to Account Picker — force Google Sign-In
+                    Toast.makeText(this, "فشل المصادقة مع Google. حاول مرة أخرى", Toast.LENGTH_LONG).show()
                 }
             }
     }
