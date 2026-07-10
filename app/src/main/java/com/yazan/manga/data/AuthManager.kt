@@ -537,14 +537,21 @@ object AuthManager {
         if (clean.length < 3) return "الاسم يجب أن يكون 3 أحرف على الأقل"
         if (clean.length > 30) return "الاسم طويل جداً (حد أقصى 30 حرف)"
 
-        val finalName = clean
+        // CLOUD FIRST: call API, wait for result
+        var success = false
+        val latch = java.util.concurrent.CountDownLatch(1)
+        Thread {
+            try { success = ApiClient.updateProfile(name = clean) } catch (e: Exception) {}
+            latch.countDown()
+        }.start()
+        try { latch.await(15, java.util.concurrent.TimeUnit.SECONDS) } catch (e: Exception) {}
 
-        // Save locally (same pattern as setAvatar)
-        val updated = current.copy(name = finalName)
+        if (!success) return "تعذّر حفظ الاسم على السحابة"
+
+        // Cloud succeeded → save locally
+        val updated = current.copy(name = clean)
         saveUser(context, updated)
         prefs.edit().putString(KEY_USER, serializeUser(updated)).apply()
-        // Upload to cloud (background — same as setAvatar which works)
-        uploadUserToCloud(context)
         return null
     }
 
