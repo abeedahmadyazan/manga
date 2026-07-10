@@ -14,6 +14,22 @@
       },
       "oauth_client": [
         {
+          "client_id": "561976290856-2m54qvjlunip2ifih5j7ra2odssmt8vi.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.yazan.manga",
+            "certificate_hash": "4f1b68512c435c0a07d4cf29319140320b263197"
+          }
+        },
+        {
+          "client_id": "561976290856-37gev90q9pmbg5meibgi8lgitoq5d1fm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.yazan.manga",
+            "certificate_hash": "a5e4db96426323c16f87735563eb5ac0a7bf43ac"
+          }
+        },
+        {
           "client_id": "561976290856-mkfmpgn8avr4d891oliu3sboq9anln30.apps.googleusercontent.com",
           "client_type": 3
         }
