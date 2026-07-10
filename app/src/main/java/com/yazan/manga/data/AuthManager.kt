@@ -628,7 +628,7 @@ object AuthManager {
             var apiSuccess = false
             val latch = java.util.concurrent.CountDownLatch(1)
             Thread {
-                try { apiSuccess = ApiClient.updateProfile(avatarBase64 = avatarBase64) } catch (e: Exception) {}
+                try { apiSuccess = ApiClient.updateProfile(avatarBase64 = avatarBase64).first } catch (e: Exception) {}
                 latch.countDown()
             }.start()
             try { latch.await(15, java.util.concurrent.TimeUnit.SECONDS) } catch (e: Exception) {}
@@ -873,7 +873,7 @@ object AuthManager {
                     avatarBase64 = avatarBase64,
                     birthDate = user.birthDate,
                     country = user.country
-                )
+                ).first  // We only need the success boolean here
             } catch (e: Exception) {}
         }.start()
     }
