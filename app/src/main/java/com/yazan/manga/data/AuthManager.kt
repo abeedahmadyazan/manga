@@ -32,14 +32,6 @@ import org.json.JSONObject
  */
 object AuthManager {
 
-    @Volatile
-    private var skipCloudUpload = false
-    
-    // Flag: when true, next uploadUserToCloud will force upload
-    // (set by changeName/changeUsername to override the "cloud is newer" check)
-    @Volatile
-    private var forceNextUpload = false
-
     /**
      * Admin email — XOR-obfuscated so it does NOT appear as a plain string
      * in the APK. Decompiling with jadx shows only random bytes + an XOR
@@ -395,56 +387,8 @@ object AuthManager {
             .putString(KEY_LINKED_EMAIL, email)
             .apply()
 
-        // Smart cloud sync: only restore fields that are EMPTY locally.
-        if (wasNewUser) {
-            skipCloudUpload = true
-            Thread {
-                try {
-                    val cloudUser = ApiClient.getUserProfile(email)
-                    if (cloudUser != null) {
-                        val localUser = getCurrentUser(context)
-                        if (localUser != null) {
-                            val restored = localUser.copy(
-                                name = if (localUser.name.isEmpty() || localUser.name == email.substringBefore("@")) 
-                                       cloudUser.name.ifEmpty { localUser.name } else localUser.name,
-                                username = if (localUser.username.isEmpty()) 
-                                          cloudUser.username.ifEmpty { localUser.username } else localUser.username,
-                                birthDate = if (localUser.birthDate.isEmpty()) 
-                                           cloudUser.birthDate else localUser.birthDate,
-                                country = if (localUser.country.isEmpty()) 
-                                         cloudUser.country else localUser.country,
-                                isAdmin = email == getAdminEmail() || cloudUser.isAdmin
-                            )
-                            if (cloudUser.avatarBase64.isNotEmpty() && 
-                                (localUser.avatar.isEmpty() || !java.io.File(localUser.avatar).exists())) {
-                                try {
-                                    val bytes = android.util.Base64.decode(cloudUser.avatarBase64, android.util.Base64.NO_WRAP)
-                                    val bmp = android.graphics.BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
-                                    if (bmp != null) {
-                                        val avatarFile = java.io.File(context.filesDir, "avatar_${email.replace("@", "_at_")}.jpg")
-                                        val out = java.io.FileOutputStream(avatarFile)
-                                        bmp.compress(android.graphics.Bitmap.CompressFormat.JPEG, 85, out)
-                                        out.close()
-                                        bmp.recycle()
-                                        restored.copy(avatar = avatarFile.absolutePath)
-                                    }
-                                } catch (e: Exception) {}
-                            }
-                            saveUser(context, restored)
-                            context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
-                                .edit().putString(KEY_USER, serializeUser(restored)).apply()
-                            Log.d("AuthManager", "Smart restore: kept local, filled empty fields from cloud")
-                        }
-                    }
-                } catch (e: Exception) {
-                    Log.w("AuthManager", "Smart restore failed: ${e.message}")
-                }
-                skipCloudUpload = false
-                uploadUserToCloud(context)
-            }.start()
-        } else {
-            uploadUserToCloud(context)
-        }
+        // SIMPLE: just upload local to cloud.
+        uploadUserToCloud(context)
 
         // Async admin check
         refreshAdminStatus(context)
@@ -856,16 +800,9 @@ object AuthManager {
      * The avatar is uploaded as a small base64 JPEG (≤ ~80KB) to fit in Firestore.
      */
     fun uploadUserToCloud(context: Context) {
-        if (skipCloudUpload) {
-            Log.d("AuthManager", "uploadUserToCloud: SKIPPED (restore in progress)")
-            return
-        }
         val user = getCurrentUser(context) ?: return
-        
-        // === SMART UPLOAD: check cloud first, don't overwrite newer data ===
         Thread {
             try {
-                // Read avatar
                 val avatarBase64: String? = if (user.avatar.isNotEmpty() && !user.avatar.startsWith("http")) {
                     try {
                         val file = File(user.avatar)
@@ -889,43 +826,14 @@ object AuthManager {
                     } catch (e: Exception) { null }
                 } else null
 
-                // Read cloud lastUpdated FIRST
-                val cloudUser = ApiClient.getUserProfile(user.email)
-                val cloudLastUpdated = cloudUser?.createdAt ?: 0L
-                val localLastUpdated = user.createdAt
-                val now = System.currentTimeMillis()
-                
-                // Determine if we should upload:
-                // 1. Cloud is empty (first time) → YES
-                // 2. Cloud is older than local → YES
-                // 3. Cloud is newer than local → NO (cloud has latest)
-                //    BUT if user just changed their name, we must upload!
-                //    So we use a "force upload" flag set by changeName/changeUsername
-                
-                val shouldUpload = cloudUser == null || cloudLastUpdated <= localLastUpdated || forceNextUpload
-                
-                if (!shouldUpload) {
-                    Log.d("AuthManager", "uploadUserToCloud: SKIPPED (cloud is newer)")
-                    return@Thread
-                }
-                
-                forceNextUpload = false  // Reset flag
-                
-                val success = ApiClient.updateProfile(
+                ApiClient.updateProfile(
                     name = user.name,
                     username = user.username,
                     avatarBase64 = avatarBase64,
                     birthDate = user.birthDate,
                     country = user.country
                 )
-                if (success) {
-                    Log.d("AuthManager", "uploadUserToCloud: OK via API")
-                } else {
-                    Log.w("AuthManager", "uploadUserToCloud: API returned false")
-                }
-            } catch (e: Exception) {
-                Log.w("AuthManager", "uploadUserToCloud exception", e)
-            }
+            } catch (e: Exception) {}
         }.start()
     }
 
