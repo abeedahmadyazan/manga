@@ -1,144 +1,103 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="0dp"
     android:layout_height="wrap_content"
-    android:layout_margin="5dp"
-    app:cardBackgroundColor="@color/surface"
-    app:cardCornerRadius="14dp"
-    app:cardElevation="2dp"
-    app:strokeWidth="0dp"
-    android:foreground="?attr/selectableItemBackground"
-    android:clickable="true"
-    android:focusable="true">
+    android:layout_weight="1"
+    android:orientation="vertical"
+    android:background="@drawable/bg_card"
+    android:layout_margin="4dp"
+    android:elevation="2dp">
 
+    <!-- Cover image with badges -->
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="0dp"
+        android:layout_weight="3">
+
+        <ImageView
+            android:id="@+id/mangaCover"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:contentDescription="غلاف المانجا"
+            android:background="@color/surface" />
+
+        <!-- Status badge (top-right) -->
+        <TextView
+            android:id="@+id/mangaStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top|right"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/bg_status_badge"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="4dp"
+            android:textColor="@color/black"
+            android:textSize="10sp"
+            android:textStyle="bold"
+            android:visibility="gone" />
+
+        <!-- Rating badge (bottom-left) -->
+        <TextView
+            android:id="@+id/mangaRating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|left"
+            android:layout_marginBottom="8dp"
+            android:layout_marginStart="8dp"
+            android:background="#99000000"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="4dp"
+            android:textColor="@color/star"
+            android:textSize="11sp"
+            android:textStyle="bold"
+            android:visibility="gone" />
+    </FrameLayout>
+
+    <!-- Card body -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="12dp">
+
+        <TextView
+            android:id="@+id/mangaTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_primary"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:layout_marginBottom="6dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
 
-            <!-- Cover image with overlay info (Netflix-style) -->
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="220dp">
+            <TextView
+                android:id="@+id/mangaChapter"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@color/text_secondary"
+                android:textSize="11sp" />
 
-                <ImageView
-                    android:id="@+id/mangaCover"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:scaleType="centerCrop"
-                    android:adjustViewBounds="true"
-                    android:background="@color/surface_light"
-                    android:contentDescription="غلاف المانجا"
-                    tools:ignore="HardcodedText" />
-
-                <!-- Bottom gradient overlay -->
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="120dp"
-                    android:layout_gravity="bottom"
-                    android:background="@drawable/bg_card_overlay" />
-
-                <!-- Top-right rating chip -->
-                <LinearLayout
-                    android:id="@+id/ratingChip"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="top|end"
-                    android:layout_margin="8dp"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    android:background="@drawable/bg_card_chip"
-                    android:paddingHorizontal="7dp"
-                    android:paddingVertical="3dp"
-                    android:visibility="gone"
-                    tools:visibility="visible">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="★"
-                        android:textColor="@color/star"
-                        android:textSize="10sp" />
-
-                    <TextView
-                        android:id="@+id/tvRating"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="3dp"
-                        android:text="0.0"
-                        android:textColor="@color/white"
-                        android:textSize="11sp"
-                        android:textStyle="bold"
-                        tools:ignore="HardcodedText" />
-                </LinearLayout>
-
-                <!-- Top-left status badge (moved from bottom-left so it
-                     doesn't cover the title overlay) -->
-                <TextView
-                    android:id="@+id/tvStatus"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="top|start"
-                    android:layout_margin="8dp"
-                    android:background="@drawable/bg_card_chip"
-                    android:paddingHorizontal="8dp"
-                    android:paddingVertical="3dp"
-                    android:text="مستمرة"
-                    android:textColor="@color/white"
-                    android:textSize="10sp"
-                    android:textStyle="bold"
-                    android:visibility="gone"
-                    tools:visibility="visible"
-                    tools:ignore="HardcodedText" />
-
-                <!-- Title overlay (bottom) -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="bottom"
-                    android:orientation="vertical"
-                    android:paddingHorizontal="10dp"
-                    android:paddingBottom="9dp"
-                    android:paddingTop="30dp">
-
-                    <TextView
-                        android:id="@+id/mangaTitle"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Manga Title"
-                        android:textColor="@color/white"
-                        android:textSize="12sp"
-                        android:textStyle="bold"
-                        android:maxLines="2"
-                        android:ellipsize="end"
-                        android:lineSpacingExtra="1dp"
-                        tools:ignore="HardcodedText" />
-                </LinearLayout>
-            </FrameLayout>
+            <TextView
+                android:id="@+id/mangaGenre"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_genre_chip"
+                android:paddingHorizontal="8dp"
+                android:paddingVertical="3dp"
+                android:textColor="@color/primary"
+                android:textSize="10sp"
+                android:textStyle="bold"
+                android:visibility="gone" />
         </LinearLayout>
-
-        <!-- Remove button (top-end corner) — only shown in custom-list screens -->
-        <ImageButton
-            android:id="@+id/btnRemoveFromList"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_gravity="top|start"
-            android:layout_margin="6dp"
-            android:background="@drawable/bg_circle_button"
-            android:src="@android:drawable/ic_menu_close_clear_cancel"
-            android:scaleType="center"
-            android:padding="6dp"
-            android:tint="@color/white"
-            android:contentDescription="إزالة من القائمة"
-            android:visibility="gone"
-            tools:ignore="UseAppTint,HardcodedText" />
-    </FrameLayout>
-
-</com.google.android.material.card.MaterialCardView>
+    </LinearLayout>
+</LinearLayout>

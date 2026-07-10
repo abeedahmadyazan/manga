@@ -1,28 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Backgrounds -->
-    <color name="background_dark">#0a0a0f</color>
-    <color name="surface">#1a1a24</color>
-    <color name="surface_light">#242432</color>
-    <color name="surface_elevated">#2a2a36</color>
+    <!-- Material 3 Backgrounds -->
+    <color name="background_dark">#0f0f14</color>
+    <color name="surface">#1b1b24</color>
+    <color name="surface_light">#24242f</color>
+    <color name="surface_elevated">#2e2e3a</color>
 
     <!-- Brand -->
-    <color name="primary">#10b981</color>          <!-- emerald green -->
+    <color name="primary">#10b981</color>
     <color name="primary_dark">#059669</color>
     <color name="primary_light">#34d399</color>
-    <color name="accent">#8b5cf6</color>           <!-- purple -->
+    <color name="primary_container">#286052</color>
+    <color name="accent">#8b5cf6</color>
     <color name="accent_dark">#7c3aed</color>
 
     <!-- Text -->
-    <color name="text_primary">#ffffff</color>
-    <color name="text_secondary">#9ca3af</color>
-    <color name="text_muted">#6b7280</color>
+    <color name="text_primary">#f3f3f8</color>
+    <color name="text_secondary">#b8b8c4</color>
+    <color name="text_muted">#82828f</color>
 
-    <!-- Status colors (for manga status badges) -->
-    <color name="status_ongoing">#10b981</color>    <!-- green - مستمرة -->
-    <color name="status_completed">#3b82f6</color>  <!-- blue - منتهية -->
-    <color name="status_hiatus">#f59e0b</color>     <!-- amber - متوقفة -->
-    <color name="status_cancelled">#ef4444</color>  <!-- red - ملغاة -->
+    <!-- Status colors -->
+    <color name="status_ongoing">#10b981</color>
+    <color name="status_completed">#3b82f6</color>
+    <color name="status_hiatus">#f59e0b</color>
+    <color name="status_cancelled">#ef4444</color>
 
     <!-- States -->
     <color name="danger">#ef4444</color>
@@ -52,6 +53,6 @@
     <color name="skeleton_highlight">#2d2d3d</color>
 
     <!-- Legacy aliases kept for older refs -->
-    <color name="surface_lighter">#242432</color>
+    <color name="surface_lighter">#24242f</color>
     <color name="green">#10b981</color>
 </resources>
