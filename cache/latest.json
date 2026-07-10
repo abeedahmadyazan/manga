@@ -1,7 +1,35 @@
 {
-  "updated_at": "2026-07-09T19:49:38.294011+00:00",
+  "updated_at": "2026-07-10T03:32:25.550611+00:00",
   "count": 50,
   "items": [
+    {
+      "id": "50ba23c9-1eea-4b9c-93a2-9531f66b9b78",
+      "title": "ZIG",
+      "cover": "https://uploads.mangadex.org/covers/50ba23c9-1eea-4b9c-93a2-9531f66b9b78/8b6da79e-b2fb-4b1e-b217-adadbf234573.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "484f94e7-35c3-4cb5-a068-53d684c1439a",
+      "title": "Baki Part 6",
+      "cover": "https://uploads.mangadex.org/covers/484f94e7-35c3-4cb5-a068-53d684c1439a/863ae891-3627-4070-8918-4a626dc9d1ff.png.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "1693697a-783c-4d3c-a2d3-dc069e137a23",
+      "title": "I Have No Home",
+      "cover": "https://uploads.mangadex.org/covers/1693697a-783c-4d3c-a2d3-dc069e137a23/bc55de2a-47dd-41cb-9338-75b3f0650a69.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "e5357466-c8a2-4259-9b02-2580185bd2bb",
+      "title": "Billy Bat",
+      "cover": "https://uploads.mangadex.org/covers/e5357466-c8a2-4259-9b02-2580185bd2bb/11cde992-1cd2-4e84-af10-31f9ff71e69b.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
     {
       "id": "6a468761-5bd6-4de0-a0cb-47cb456ac2e0",
       "title": "A Returner's Magic Should Be Special",
@@ -150,20 +178,6 @@
       "status": "ongoing"
     },
     {
-      "id": "1693697a-783c-4d3c-a2d3-dc069e137a23",
-      "title": "I Have No Home",
-      "cover": "https://uploads.mangadex.org/covers/1693697a-783c-4d3c-a2d3-dc069e137a23/bc55de2a-47dd-41cb-9338-75b3f0650a69.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
-      "id": "484f94e7-35c3-4cb5-a068-53d684c1439a",
-      "title": "Baki Part 6",
-      "cover": "https://uploads.mangadex.org/covers/484f94e7-35c3-4cb5-a068-53d684c1439a/863ae891-3627-4070-8918-4a626dc9d1ff.png.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
       "id": "a07320a4-afcd-413a-a451-d69a448d0c28",
       "title": "Usogui",
       "cover": "https://uploads.mangadex.org/covers/a07320a4-afcd-413a-a451-d69a448d0c28/b74c8cce-42cd-4889-b75d-7944e63f9a14.jpg.256.jpg",
@@ -239,13 +253,6 @@
       "cover": "https://uploads.mangadex.org/covers/a08cd14f-68d4-4942-9305-2fe9d7d0339e/aaf6d4a4-2aba-48af-94a0-7920a60c6d01.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
-    },
-    {
-      "id": "e5357466-c8a2-4259-9b02-2580185bd2bb",
-      "title": "Billy Bat",
-      "cover": "https://uploads.mangadex.org/covers/e5357466-c8a2-4259-9b02-2580185bd2bb/11cde992-1cd2-4e84-af10-31f9ff71e69b.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
     },
     {
       "id": "356de811-ae92-48f1-b93b-cfdf0f8d02e4",
@@ -344,13 +351,6 @@
       "cover": "https://uploads.mangadex.org/covers/7b88e8d3-d2a9-4fe8-be55-44ccfbd8f700/f8d7f9a4-4dd9-4529-a71a-dfbf9285f69d.jpg.256.jpg",
       "source": "mangadex",
       "status": "completed"
-    },
-    {
-      "id": "9d3d3403-1a87-4737-9803-bc3d99db1424",
-      "title": "The Guy She Was Interested in Wasn't a Guy at All",
-      "cover": "https://uploads.mangadex.org/covers/9d3d3403-1a87-4737-9803-bc3d99db1424/fac191d0-96c1-4ebb-bf79-b7616d7162ac.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
     }
   ]
 }
