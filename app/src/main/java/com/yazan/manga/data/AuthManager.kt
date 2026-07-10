@@ -392,40 +392,49 @@ object AuthManager {
             .putString(KEY_LINKED_EMAIL, email)
             .apply()
 
-        // If NEW user (cleared data), restore from cloud BEFORE allowing uploads.
+        // Smart cloud sync: only restore fields that are EMPTY locally.
         if (wasNewUser) {
             skipCloudUpload = true
             Thread {
-                val cloudUser = ApiClient.getUserProfile(email)
-                if (cloudUser != null && cloudUser.name.isNotEmpty()) {
-                    val localUser = getCurrentUser(context)
-                    if (localUser != null) {
-                        val restored = localUser.copy(
-                            name = cloudUser.name,
-                            username = cloudUser.username.ifEmpty { localUser.username },
-                            birthDate = cloudUser.birthDate,
-                            country = cloudUser.country,
-                            isAdmin = email == getAdminEmail() || cloudUser.isAdmin
-                        )
-                        if (cloudUser.avatarBase64.isNotEmpty()) {
-                            try {
-                                val bytes = android.util.Base64.decode(cloudUser.avatarBase64, android.util.Base64.NO_WRAP)
-                                val bmp = android.graphics.BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
-                                if (bmp != null) {
-                                    val avatarFile = java.io.File(context.filesDir, "avatar_${email.replace("@", "_at_")}.jpg")
-                                    val out = java.io.FileOutputStream(avatarFile)
-                                    bmp.compress(android.graphics.Bitmap.CompressFormat.JPEG, 85, out)
-                                    out.close()
-                                    bmp.recycle()
-                                    restored.copy(avatar = avatarFile.absolutePath)
-                                }
-                            } catch (e: Exception) {}
+                try {
+                    val cloudUser = ApiClient.getUserProfile(email)
+                    if (cloudUser != null) {
+                        val localUser = getCurrentUser(context)
+                        if (localUser != null) {
+                            val restored = localUser.copy(
+                                name = if (localUser.name.isEmpty() || localUser.name == email.substringBefore("@")) 
+                                       cloudUser.name.ifEmpty { localUser.name } else localUser.name,
+                                username = if (localUser.username.isEmpty()) 
+                                          cloudUser.username.ifEmpty { localUser.username } else localUser.username,
+                                birthDate = if (localUser.birthDate.isEmpty()) 
+                                           cloudUser.birthDate else localUser.birthDate,
+                                country = if (localUser.country.isEmpty()) 
+                                         cloudUser.country else localUser.country,
+                                isAdmin = email == getAdminEmail() || cloudUser.isAdmin
+                            )
+                            if (cloudUser.avatarBase64.isNotEmpty() && 
+                                (localUser.avatar.isEmpty() || !java.io.File(localUser.avatar).exists())) {
+                                try {
+                                    val bytes = android.util.Base64.decode(cloudUser.avatarBase64, android.util.Base64.NO_WRAP)
+                                    val bmp = android.graphics.BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
+                                    if (bmp != null) {
+                                        val avatarFile = java.io.File(context.filesDir, "avatar_${email.replace("@", "_at_")}.jpg")
+                                        val out = java.io.FileOutputStream(avatarFile)
+                                        bmp.compress(android.graphics.Bitmap.CompressFormat.JPEG, 85, out)
+                                        out.close()
+                                        bmp.recycle()
+                                        restored.copy(avatar = avatarFile.absolutePath)
+                                    }
+                                } catch (e: Exception) {}
+                            }
+                            saveUser(context, restored)
+                            context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+                                .edit().putString(KEY_USER, serializeUser(restored)).apply()
+                            Log.d("AuthManager", "Smart restore: kept local, filled empty fields from cloud")
                         }
-                        saveUser(context, restored)
-                        context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
-                            .edit().putString(KEY_USER, serializeUser(restored)).apply()
-                        Log.d("AuthManager", "Restored from cloud: ${restored.name}")
                     }
+                } catch (e: Exception) {
+                    Log.w("AuthManager", "Smart restore failed: ${e.message}")
                 }
                 skipCloudUpload = false
                 uploadUserToCloud(context)
