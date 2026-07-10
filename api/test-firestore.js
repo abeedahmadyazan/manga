@@ -37,5 +37,17 @@ module.exports = async (req, res) => {
     result.writeTest = { success: false, error: e.message };
   }
   
+  
+  // Fix yznabyd profile
+  try {
+    await db.collection('users').doc('yznabyd@gmail.com').set({
+      name: 'YZ',
+      lastUpdated: Date.now()
+    }, { merge: true });
+    result.profileFix = 'done';
+  } catch (e) {
+    result.profileFix = 'failed: ' + e.message;
+  }
+  
   res.json(result);
 };
