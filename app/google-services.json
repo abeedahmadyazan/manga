@@ -30,6 +30,14 @@
           }
         },
         {
+          "client_id": "561976290856-sdasm00rtlaav106bt12jlmec3jtd2c2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.yazan.manga",
+            "certificate_hash": "26345dbec6b4f219f6303514faf6a8e4ec7696eb"
+          }
+        },
+        {
           "client_id": "561976290856-mkfmpgn8avr4d891oliu3sboq9anln30.apps.googleusercontent.com",
           "client_type": 3
         }
