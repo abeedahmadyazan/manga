@@ -7,14 +7,29 @@ service cloud.firestore {
       return request.auth != null;
     }
 
+    function userEmail() {
+      return request.auth.token.email;
+    }
+
     function isAdmin() {
       return isSignedIn() &&
              exists(/databases/$(database)/documents/admins/$(request.auth.uid));
     }
 
+    // Helper: the request is for the currently signed-in user's own document
+    function isOwnUserDoc(email) {
+      return isSignedIn() && userEmail() == email;
+    }
+
+    // Helper: the requester owns the resource (by authorEmail field)
+    function isAuthor() {
+      return isSignedIn() &&
+             resource.data.authorEmail == userEmail();
+    }
+
     match /admins/{uid} {
       allow read, list: if isSignedIn();
-      // ONLY Admin SDK (server) can create admin docs — NOT the app!
+      // ONLY Admin SDK (server) can create admin docs — never the app.
       allow create: if false;
       allow update, delete: if isAdmin();
     }
@@ -26,8 +41,11 @@ service cloud.firestore {
 
     match /users/{email} {
       allow read: if isSignedIn();
-      allow create: if isSignedIn();
-      allow update: if isSignedIn();
+      // User can only create their OWN user doc (matching their auth email).
+      allow create: if isOwnUserDoc(email);
+      // FIX: user can update ONLY their own doc — not anyone else's.
+      allow update: if isOwnUserDoc(email);
+      // Only admin can delete user accounts.
       allow delete: if isAdmin();
     }
 
@@ -36,9 +54,21 @@ service cloud.firestore {
       allow create: if isSignedIn()
                     && request.resource.data.text is string
                     && request.resource.data.text.size() >= 1
-                    && request.resource.data.text.size() <= 500;
-      allow update: if isSignedIn();
-      allow delete: if isSignedIn();
+                    && request.resource.data.text.size() <= 500
+                    && request.resource.data.authorEmail == userEmail()
+                    && request.resource.data.contextId is string
+                    && request.resource.data.contextId.size() <= 200
+                    && request.resource.data.createdAt is number
+                    && request.resource.data.createdAt <= request.time.toMillis() + 5000;
+      // FIX: only the author can edit their own comment.
+      allow update: if isAuthor()
+                    && request.resource.data.text is string
+                    && request.resource.data.text.size() >= 1
+                    && request.resource.data.text.size() <= 500
+                    // authorEmail cannot be changed during update (prevents hijacking)
+                    && request.resource.data.authorEmail == resource.data.authorEmail;
+      // Author or admin can delete.
+      allow delete: if isAuthor() || isAdmin();
     }
 
     match /replies/{replyId} {
@@ -46,13 +76,24 @@ service cloud.firestore {
       allow create: if isSignedIn()
                     && request.resource.data.text is string
                     && request.resource.data.text.size() >= 1
-                    && request.resource.data.text.size() <= 500;
-      allow update: if isSignedIn();
-      allow delete: if isSignedIn();
+                    && request.resource.data.text.size() <= 500
+                    && request.resource.data.authorEmail == userEmail()
+                    && request.resource.data.parentId is string
+                    && request.resource.data.createdAt is number
+                    && request.resource.data.createdAt <= request.time.toMillis() + 5000;
+      allow update: if isAuthor()
+                    && request.resource.data.text is string
+                    && request.resource.data.text.size() <= 500
+                    && request.resource.data.authorEmail == resource.data.authorEmail;
+      allow delete: if isAuthor() || isAdmin();
     }
 
+    // FIX: cooldowns can only be READ by the user, never written from the
+    // app. Only the server (Admin SDK) sets cooldowns — prevents users from
+    // clearing their own cooldown to spam comments.
     match /comment_cooldowns/{email} {
-      allow read, write: if isSignedIn();
+      allow read: if isSignedIn() && userEmail() == email;
+      allow write: if false;
     }
 
     match /banned_users/{email} {
@@ -65,25 +106,37 @@ service cloud.firestore {
       allow write: if false;
     }
 
+    // FIX: login_attempts can only be READ by the user, never written.
+    // Only the server records failed attempts — prevents attackers from
+    // wiping their own attempt history to bypass brute-force protection.
     match /login_attempts/{deviceId} {
-      allow read, write: if isSignedIn();
+      allow read: if isSignedIn();
+      allow write: if false;
     }
 
+    // FIX: user lists are private to the owner. Only the user themselves
+    // (matching their auth email) can read or modify their lists.
     match /user_lists/{email} {
-      allow read: if isSignedIn();
-      allow create, update: if isSignedIn();
-      allow delete: if isSignedIn();
+      allow read: if isOwnUserDoc(email);
+      allow create: if isOwnUserDoc(email);
+      allow update: if isOwnUserDoc(email);
+      allow delete: if isOwnUserDoc(email) || isAdmin();
     }
 
+    // FIX: reading history is private to the owner.
     match /reading_history/{email} {
-      allow read: if isSignedIn();
-      allow create, update: if isSignedIn();
-      allow delete: if isSignedIn();
+      allow read: if isOwnUserDoc(email);
+      allow create: if isOwnUserDoc(email);
+      allow update: if isOwnUserDoc(email);
+      allow delete: if isOwnUserDoc(email) || isAdmin();
     }
 
     match /reports/{reportId} {
       allow read: if isAdmin();
-      allow create: if isSignedIn();
+      allow create: if isSignedIn()
+                    && request.resource.data.reason is string
+                    && request.resource.data.reason.size() <= 200
+                    && request.resource.data.reportedBy == userEmail();
       allow update, delete: if isAdmin();
     }
 
@@ -92,6 +145,7 @@ service cloud.firestore {
       allow create, update, delete: if isAdmin();
     }
 
+    // Catch-all: deny everything else by default.
     match /{document=**} {
       allow read, write: if false;
     }
