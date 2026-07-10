@@ -314,14 +314,10 @@ object AuthManager {
             .putString(KEY_LINKED_EMAIL, cleanEmail)
             .apply()
 
-        // Restore from cloud FIRST (async), then upload the (now-correct) local
-        // profile. We can't just call them in sequence because both are async —
-        // instead, restoreUserFromCloud calls uploadUserToCloud itself once the
-        // cloud data is applied, so we never overwrite the cloud with stale data.
-        restoreUserFromCloud(context) {
-            // After restore, upload the merged local profile back to the cloud
-            uploadUserToCloud(context)
-        }
+        // SIMPLE: just upload local to cloud. No restore, no smart sync.
+        // Local data is the ONLY source of truth for display.
+        // Cloud is write-only backup.
+        uploadUserToCloud(context)
 
         // Async admin check: if the user's UID exists in the 'admins' Firestore
         // collection, mark them as admin. This runs after the synchronous flow
