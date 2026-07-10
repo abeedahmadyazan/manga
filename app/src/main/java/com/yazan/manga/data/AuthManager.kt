@@ -312,7 +312,7 @@ object AuthManager {
                         }
                     } catch (e: Exception) {}
                 }
-                user = user.copy(birthDate = cloudUser.birthDate, country = cloudUser.country)
+                user = user!!.copy(birthDate = cloudUser.birthDate, country = cloudUser.country)
                 saveUser(context, user)
             } else {
                 wasNewUser = true
@@ -387,7 +387,7 @@ object AuthManager {
                         }
                     } catch (e: Exception) {}
                 }
-                user = user.copy(birthDate = cloudUser.birthDate, country = cloudUser.country)
+                user = user!!.copy(birthDate = cloudUser.birthDate, country = cloudUser.country)
                 saveUser(context, user)
             } else {
                 wasNewUser = true
