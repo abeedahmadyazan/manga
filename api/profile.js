@@ -86,6 +86,13 @@ module.exports = async (req, res) => {
     if (isAdmin) update.isAdmin = true;
     
     try {
+      // Check if the user doc already exists. If not, this is a NEW user —
+      // set createdAt so the profile shows the correct join date instead of
+      // 1970 (which happens when createdAt is missing → defaults to 0L).
+      const existingDoc = await db.collection('users').doc(email).get();
+      if (!existingDoc.exists) {
+        update.createdAt = Date.now();
+      }
       await db.collection('users').doc(email).set(update, { merge: true });
       
       // If admin, also create admins/{uid} doc (server-side only)

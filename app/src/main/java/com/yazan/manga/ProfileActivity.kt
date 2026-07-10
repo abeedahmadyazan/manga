@@ -466,9 +466,16 @@ class ProfileActivity : AppCompatActivity() {
             tvAdminBadge.visibility = if (user.isAdmin) View.VISIBLE else View.GONE
 
             // Account creation date
-            val sdf = java.text.SimpleDateFormat("yyyy-MM-dd", java.util.Locale.getDefault())
-            tvCreatedAt.text = "عضو منذ ${sdf.format(java.util.Date(user.createdAt))}"
-            tvCreatedAt.visibility = View.VISIBLE
+            if (user.createdAt > 0) {
+                val sdf = java.text.SimpleDateFormat("yyyy-MM-dd", java.util.Locale.getDefault())
+                tvCreatedAt.text = "عضو منذ ${sdf.format(java.util.Date(user.createdAt))}"
+                tvCreatedAt.visibility = View.VISIBLE
+            } else {
+                // createdAt is 0 or missing — don't show 1970, just hide it.
+                // The server sets createdAt on first profile PUT, so this
+                // should only happen for users created before the fix.
+                tvCreatedAt.visibility = View.GONE
+            }
 
             // Optional birth date (only shown if set)
             if (user.birthDate.isNotEmpty()) {
