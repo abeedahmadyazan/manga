@@ -997,8 +997,8 @@ object AuthManager {
                 val cloudName = cloudUser.name
                 val cloudUsername = cloudUser.username
                 val cloudAvatarBase64 = cloudUser.avatarBase64
-                val cloudBirthDate = cu.birthDate
-                val cloudCountry = cu.country
+                val cloudBirthDate = cloudUser.birthDate
+                val cloudCountry = cloudUser.country
                 val actualIsAdmin = email == getAdminEmail() || cloudUser.isAdmin
                 val cloudCreatedAt = cloudUser.createdAt
 
