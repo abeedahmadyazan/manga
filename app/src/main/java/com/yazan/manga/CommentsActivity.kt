@@ -306,10 +306,37 @@ class CommentsAdapter(
     // Cache of cloud profiles: email -> (name, avatarBase64). Avoids refetching on every scroll.
     private val cloudProfiles = mutableMapOf<String, AuthManager.CloudUser?>()
 
+    init {
+        // Stable IDs so RecyclerView doesn't rebind unchanged comments
+        // when the list updates (prevents avatar flicker).
+        setHasStableIds(true)
+    }
+
+    override fun getItemId(position: Int): Long {
+        return items[position].id.hashCode().toLong()
+    }
+
     fun updateList(top: List<CloudCommentsManager.Comment>, replies: Map<String, List<CloudCommentsManager.Comment>>) {
+        // Use DiffUtil so only NEW/CHANGED comments are rebound. This
+        // prevents existing comments from having their avatars cleared +
+        // reloaded every time a new comment is added or a like changes.
+        val old = items.toList()
+        val diff = androidx.recyclerview.widget.DiffUtil.calculateDiff(
+            object : androidx.recyclerview.widget.DiffUtil.Callback() {
+                override fun getOldListSize() = old.size
+                override fun getNewListSize() = top.size
+                override fun areItemsTheSame(o: Int, n: Int) = old[o].id == top[n].id
+                override fun areContentsTheSame(o: Int, n: Int) =
+                    old[o].text == top[n].text &&
+                    old[o].likes == top[n].likes &&
+                    old[o].dislikes == top[n].dislikes &&
+                    old[o].editedAt == top[n].editedAt &&
+                    old[o].authorName == top[n].authorName
+            }
+        )
         items.clear(); items.addAll(top)
         repliesMap.clear(); repliesMap.putAll(replies)
-        notifyDataSetChanged()
+        diff.dispatchUpdatesTo(this)
     }
     
     fun updateCurrentUser(user: AuthManager.User?) {
@@ -346,14 +373,46 @@ class CommentsAdapter(
         private val tvDislikeCount = v.findViewById<TextView>(R.id.tvDislikeCount)
 
         fun bind(c: CloudCommentsManager.Comment) {
-            // FIX: Don't show the OLD cached name/avatar at all.
-            // Instead, show a neutral placeholder while we fetch the cloud
-            // profile. This prevents the "flash of old data" the user was
-            // seeing on screen.
-            avatar.text = "?"
-            avatar.visibility = View.VISIBLE
-            avatarImg.visibility = View.GONE
-            avatarImg.setImageDrawable(null) // CRITICAL: clear old image
+            // === AVATAR: show cached bitmap immediately if available ===
+            // Previously this always cleared the avatar to "?" then reloaded,
+            // causing a flash on every list update. Now we show the cached
+            // avatar instantly and only fall back to "?" if truly unknown.
+            val cachedBmp = com.yazan.manga.data.AvatarCache.get(c.authorEmail)
+            if (cachedBmp != null) {
+                avatar.visibility = View.GONE
+                avatarImg.visibility = View.VISIBLE
+                com.bumptech.glide.Glide.with(itemView.context)
+                    .load(cachedBmp)
+                    .circleCrop()
+                    .diskCacheStrategy(com.bumptech.glide.load.engine.DiskCacheStrategy.ALL)
+                    .into(avatarImg)
+            } else if (c.authorAvatar.isNotEmpty()) {
+                // Decode the base64 avatar from the comment data itself
+                com.yazan.manga.data.AvatarCache.put(c.authorEmail, c.authorAvatar)
+                avatar.visibility = View.GONE
+                avatarImg.visibility = View.VISIBLE
+                try {
+                    val bytes = android.util.Base64.decode(c.authorAvatar, android.util.Base64.NO_WRAP)
+                    val bmp = android.graphics.BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
+                    if (bmp != null) {
+                        com.bumptech.glide.Glide.with(itemView.context)
+                            .load(bmp)
+                            .circleCrop()
+                            .diskCacheStrategy(com.bumptech.glide.load.engine.DiskCacheStrategy.ALL)
+                            .into(avatarImg)
+                    }
+                } catch (e: Exception) {
+                    avatar.text = c.authorName.firstOrNull()?.toString() ?: "?"
+                    avatar.visibility = View.VISIBLE
+                    avatarImg.visibility = View.GONE
+                }
+            } else {
+                // No avatar image — show first letter
+                avatar.text = c.authorName.firstOrNull()?.toString() ?: "?"
+                avatar.visibility = View.VISIBLE
+                avatarImg.visibility = View.GONE
+                avatarImg.setImageDrawable(null)
+            }
 
             // For admins: show the name inside the green pill badge, and hide
             // the plain author TextView so nobody can impersonate an admin by

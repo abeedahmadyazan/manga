@@ -70,13 +70,17 @@ async function POST(req, res) {
     
     const isReply = parentId && parentId.length > 0;
     if (!isReply) {
+      // Count ONLY top-level comments (parentId == null) — replies don't
+      // count toward the per-chapter limit. Previously the query counted
+      // replies too, so a user with 1 comment + 1 reply was blocked.
       const userComments = await db.collection('comments')
         .where('contextId', '==', contextId)
         .where('authorEmail', '==', email)
-        .limit(3)
+        .where('parentId', '==', null)
+        .limit(11)
         .get();
-      if (userComments.size >= 2) {
-        return res.status(400).json({ error: 'وصلت للحد الأقصى (2 لكل فصل)' });
+      if (userComments.size >= 10) {
+        return res.status(400).json({ error: 'وصلت للحد الأقصى (10 تعليقات لكل فصل)' });
       }
     }
     
