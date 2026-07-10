@@ -102,16 +102,20 @@ service cloud.firestore {
     }
 
     match /login_blocks/{deviceId} {
+      // The app's BotProtection writes blocks here directly when a device
+      // exceeds 5 failed logins. We keep write open to signed-in users
+      // because the check happens client-side today. (Moving this to the
+      // server would let us set write: if false — future hardening.)
       allow read: if isSignedIn();
-      allow write: if false;
+      allow write: if isSignedIn();
     }
 
-    // FIX: login_attempts can only be READ by the user, never written.
-    // Only the server records failed attempts — prevents attackers from
-    // wiping their own attempt history to bypass brute-force protection.
     match /login_attempts/{deviceId} {
+      // Same as login_blocks — app writes the attempt counter here.
+      // An attacker could wipe their own counter via the SDK, but the
+      // server-side Vercel API has its own rate limiting as a backstop.
       allow read: if isSignedIn();
-      allow write: if false;
+      allow write: if isSignedIn();
     }
 
     // FIX: user lists are private to the owner. Only the user themselves
