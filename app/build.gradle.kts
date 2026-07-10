@@ -12,7 +12,7 @@ android {
         applicationId = "com.yazan.manga"
         minSdk = 24
         targetSdk = 35
-        versionCode = 49
+        versionCode = 50
         versionName = "1.0.2"
     }
 
@@ -32,8 +32,8 @@ android {
                 keyPassword = System.getenv("KEY_PASSWORD") ?: ""
             }
         }
-        create("debug") {
-            storeFile = file("../app/yz-manga-debug.keystore")
+        getByName("debug") {
+            storeFile = file("yz-manga-debug.keystore")
             storePassword = "android"
             keyAlias = "androiddebugkey"
             keyPassword = "android"
