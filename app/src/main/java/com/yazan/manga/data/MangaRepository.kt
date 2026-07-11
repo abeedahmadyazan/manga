@@ -115,30 +115,16 @@ class MangaRepository(private val appContext: Context? = null) {
         return getLatestManga(page, contentType)
     }
 
-    suspend fun searchManga(query: String, page: Int = 1, contentType: String = "manga"): Result<List<MangaListItem>> {
-        appContext?.let { ctx ->
-            CacheManager.getCachedSearchResults(ctx, query)?.let { cached ->
-                val fixed = cached.map { it.copy(cover = fixCoverUrl(it.cover)) }
-                return Result.success(fixed)
-            }
-        }
-        if (!DDoSProtection.tryAcquire(DDoSProtection.Action.MANGA_SEARCH)) {
-            return Result.failure(Exception("تم تجاوز حد البحث. حاول لاحقاً."))
-        }
+    suspend fun searchManga(query: String, page: Int = 1, contentType: String = "3asq"): Result<List<MangaListItem>> {
+        // Search 3asq listing by filtering titles (3asq doesn't have a search API).
+        // We fetch page 1 of the listing and filter client-side.
         return try {
-            val offset = (page - 1) * 20
-            val encoded = java.net.URLEncoder.encode(query, "UTF-8")
-            val langFilter = when (contentType) {
-                "manhwa" -> "&originalLanguage[]=ko"
-                else -> "&originalLanguage[]=ja"
+            val items = fetch3asqListing(1)
+            val filtered = items.filter { 
+                it.title.contains(query, ignoreCase = true) 
             }
-            val url = "https://api.mangadex.org/manga?title=$encoded&limit=20&offset=$offset&availableTranslatedLanguage[]=ar&hasAvailableChapters=true&order[relevance]=desc&includes[]=cover_art&contentRating[]=safe&contentRating[]=suggestive$langFilter"
-            val items = fetchList(url)
-            DDoSProtection.reportSuccess()
-            appContext?.let { CacheManager.cacheSearchResults(it, query, items) }
-            Result.success(items)
+            Result.success(filtered)
         } catch (e: Exception) {
-            DDoSProtection.reportFailure()
             Result.failure(e)
         }
     }
@@ -455,26 +441,9 @@ class MangaRepository(private val appContext: Context? = null) {
                 Result.failure(e)
             }
         }
-        // Try cache first (24h TTL)
-        appContext?.let { ctx ->
-            CacheManager.getCachedMangaDetails(ctx, id)?.let { cached ->
-                Log.d(TAG, "Details $id: cache hit")
-                return Result.success(cached)
-            }
-        }
-        if (!DDoSProtection.tryAcquire(DDoSProtection.Action.MANGA_DETAILS)) {
-            return Result.failure(Exception("تم تجاوز الحد المسموح. حاول لاحقاً."))
-        }
-        val result = getMangaDetailsFromNetwork(id)
-        if (result.isSuccess) {
-            DDoSProtection.reportSuccess()
-            result.getOrNull()?.let { details ->
-                appContext?.let { CacheManager.cacheMangaDetails(it, id, details) }
-            }
-        } else {
-            DDoSProtection.reportFailure()
-        }
-        return result
+        // Only 3asq and novel IDs are supported. Any other ID (e.g. old
+        // MangaDex UUIDs from cached data) returns a safe error — no crash.
+        return Result.failure(Exception("هذا المحتوى غير متاح"))
     }
 
     private fun getMangaDetailsFromNetwork(id: String): Result<MangaDetails> {
@@ -911,53 +880,10 @@ class MangaRepository(private val appContext: Context? = null) {
                         }
                     }
                 }
-                // 3asq proxy failed — try scraping 3asq.online directly via CORS proxy
-                val directPages = scrape3asqPagesDirect(slug, num)
-                if (directPages.isNotEmpty()) {
-                    Log.d(TAG, "Got ${directPages.size} pages from 3asq direct (CORS proxy)")
-                    return Result.success(directPages)
-                }
-                // 3asq direct also failed — try MangaPill fallback (English)
-                val mpPages = fetchMangaPillPagesForChapter(chapter)
-                if (mpPages.isNotEmpty()) {
-                    Log.d(TAG, "Falling back to MangaPill for chapter ${chapter.number}")
-                    return Result.success(mpPages)
-                }
-                Result.failure(Exception("هذا الفصل غير متاح حالياً"))
-            } else if (chapter.source == "mangapill") {
-                // Direct MangaPill fetch — chapter.id holds the URL path
-                val pages = MangaPillClient.fetchChapterPages(chapter.id)
-                if (pages.isEmpty()) {
-                    Result.failure(Exception("تعذّر تحميل صفحات الفصل"))
-                } else {
-                    Result.success(pages.mapIndexed { i, url -> ChapterPage(index = i, url = url) })
-                }
-            } else if (chapter.source == "mangahere") {
-                // MangaHere listing — fetch pages from MangaPill (same chapter
-                // number). MangaHere's HTML loads images via JS, so we can't
-                // scrape them directly.
-                val mpPages = fetchMangaPillPagesForChapter(chapter)
-                if (mpPages.isNotEmpty()) {
-                    Result.success(mpPages)
-                } else {
-                    Result.failure(Exception("تعذّر تحميل صفحات الفصل"))
-                }
+                Result.failure(Exception("تعذّر تحميل صفحات هذا الفصل"))
             } else {
-                // MangaDex
-                val req = Request.Builder().url("https://api.mangadex.org/at-home/server/${chapter.id}").header("User-Agent", UA).header("Accept", "application/json").build()
-                client.newCall(req).execute().use { resp ->
-                    if (!resp.isSuccessful) return Result.failure(Exception("HTTP ${resp.code}"))
-                    val body = resp.body?.string() ?: return Result.failure(Exception("Empty"))
-                    val root = JsonParser.parseString(body)
-                    if (!root.isJsonObject) return Result.failure(Exception("Invalid JSON"))
-                    val baseUrl = root.asJsonObject.get("baseUrl")?.asString ?: return Result.failure(Exception("No baseUrl"))
-                    val chObj = root.asJsonObject.getAsJsonObject("chapter") ?: return Result.failure(Exception("No chapter"))
-                    val hash = chObj.get("hash")?.asString ?: return Result.failure(Exception("No hash"))
-                    val ds = chObj.getAsJsonArray("dataSaver") ?: return Result.failure(Exception("No pages"))
-                    val pages = mutableListOf<ChapterPage>()
-                    for (i in 0 until ds.size()) { pages.add(ChapterPage(index = i, url = "$baseUrl/data-saver/$hash/${ds[i].asString}")) }
-                    Result.success(pages)
-                }
+                // Only 3asq source is supported. Any other source returns a safe error.
+                Result.failure(Exception("هذا المصدر غير مدعوم"))
             }
         } catch (e: Exception) { Result.failure(e) }
     }
