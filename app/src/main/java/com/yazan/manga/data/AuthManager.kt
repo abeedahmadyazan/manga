@@ -298,6 +298,7 @@ object AuthManager {
             }
         }
 
+        val prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
         prefs.edit().putString(KEY_USER, serializeUser(user)).apply()
         if (wasNewUser) { uploadUserToCloud(context) }
 
@@ -389,6 +390,7 @@ object AuthManager {
             }
         }
 
+        val prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
         prefs.edit().putString(KEY_USER, serializeUser(user)).apply()
         if (wasNewUser) { uploadUserToCloud(context) }
 
