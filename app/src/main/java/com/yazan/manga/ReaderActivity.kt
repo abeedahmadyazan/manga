@@ -11,7 +11,9 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
-import androidx.viewpager2.widget.ViewPager2
+import androidx.recyclerview.widget.PagerSnapHelper
+import androidx.recyclerview.widget.LinearLayoutManager
+
 import com.bumptech.glide.Glide
 import com.yazan.manga.data.MangaChapter
 import com.yazan.manga.data.MangaRepository
@@ -22,7 +24,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 class ReaderActivity : AppCompatActivity() {
     private lateinit var repository: MangaRepository
-    private lateinit var pagesRecyclerView: ViewPager2
+    private lateinit var pagesRecyclerView: RecyclerView
     private lateinit var loadingIndicator: ProgressBar
     private lateinit var errorText: TextView
     private lateinit var chapterTitleText: TextView
@@ -64,7 +66,9 @@ class ReaderActivity : AppCompatActivity() {
     }
     private fun initViews() {
         pagesRecyclerView = findViewById(R.id.pagesRecyclerView)
-        pagesRecyclerView.orientation = ViewPager2.ORIENTATION_VERTICAL
+        pagesRecyclerView.layoutManager = LinearLayoutManager(this)
+        // PagerSnapHelper makes RecyclerView behave like ViewPager — one page per screen
+        PagerSnapHelper().attachToRecyclerView(pagesRecyclerView)
         loadingIndicator = findViewById(R.id.loadingIndicator)
         errorText = findViewById(R.id.errorText)
         chapterTitleText = findViewById(R.id.chapterTitle)
@@ -171,16 +175,23 @@ class ReaderActivity : AppCompatActivity() {
         val adapter = PagesAdapter(pages) { pageIndex ->
             toggleBars()
         }
-        // ViewPager2: one page per screen, swipe vertically to navigate
+        // RecyclerView + PagerSnapHelper: one page per screen
         pagesRecyclerView.adapter = adapter
-        pagesRecyclerView.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
-            override fun onPageSelected(position: Int) {
-                currentPageIndex = position
-                pageCounter.text = "${position + 1} / ${pages.size}"
-                pageSeekBar.progress = position
-                preloadPages(position)
+        pagesRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                    val lm = recyclerView.layoutManager as LinearLayoutManager
+                    val pos = lm.findFirstCompletelyVisibleItemPosition()
+                    if (pos != RecyclerView.NO_POSITION && pos != currentPageIndex) {
+                        currentPageIndex = pos
+                        pageCounter.text = "${pos + 1} / ${pages.size}"
+                        pageSeekBar.progress = pos
+                        preloadPages(pos)
+                    }
+                }
             }
         })
+        preloadPages(0)
     }
     private fun preloadPages(startIndex: Int) {
         val nextIndex = startIndex + 1
@@ -195,10 +206,12 @@ class ReaderActivity : AppCompatActivity() {
     }
     private fun scrollToPage(index: Int) {
         if (index < 0 || index >= pages.size) return
-        pagesRecyclerView.setCurrentItem(index, true)
+        pagesRecyclerView.smoothScrollToPosition(index)
     }
     private fun findVisiblePageView(): com.yazan.manga.ui.ZoomableImageView? {
-        val pos = pagesRecyclerView.currentItem
+        val lm = pagesRecyclerView.layoutManager as? LinearLayoutManager ?: return null
+        val pos = lm.findFirstCompletelyVisibleItemPosition()
+        if (pos == RecyclerView.NO_POSITION) return null
         val holder = pagesRecyclerView.findViewHolderForAdapterPosition(pos) ?: return null
         return holder.itemView.findViewById(R.id.pageImage)
     }

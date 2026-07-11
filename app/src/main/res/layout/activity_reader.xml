@@ -7,8 +7,8 @@
     android:background="@color/background_dark"
     android:layoutDirection="rtl">
 
-    <!-- ViewPager2 — one page per screen, swipe to navigate -->
-    <androidx.viewpager2.widget.ViewPager2
+    <!-- RecyclerView with PagerSnapHelper — one page per screen, swipe to navigate -->
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/pagesRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
