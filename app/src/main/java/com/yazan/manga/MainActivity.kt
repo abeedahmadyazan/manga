@@ -190,11 +190,26 @@ class MainActivity : AppCompatActivity() {
 
         fun setActiveContent(type: String) {
             currentContentType = type
-            chipManga.isSelected = type == "manga"
-            chip3asq.isSelected = type == "3asq"
-            // Update text colors
-            chipManga.setTextColor(if (type == "manga") getColor(R.color.black) else getColor(R.color.text_secondary))
-            chip3asq.setTextColor(if (type == "3asq") getColor(R.color.black) else getColor(R.color.text_secondary))
+            // Update backgrounds: active = green pill, inactive = dark surface
+            val activeDrawable = android.graphics.drawable.GradientDrawable().apply {
+                cornerRadius = 22f * resources.displayMetrics.density
+                setColor(getColor(R.color.primary))
+            }
+            val inactiveDrawable = android.graphics.drawable.GradientDrawable().apply {
+                cornerRadius = 22f * resources.displayMetrics.density
+                setColor(getColor(R.color.surface))
+            }
+            if (type == "manga") {
+                chipManga.background = activeDrawable
+                chipManga.setTextColor(getColor(R.color.black))
+                chip3asq.background = inactiveDrawable
+                chip3asq.setTextColor(getColor(R.color.text_secondary))
+            } else {
+                chip3asq.background = activeDrawable
+                chip3asq.setTextColor(getColor(R.color.black))
+                chipManga.background = inactiveDrawable
+                chipManga.setTextColor(getColor(R.color.text_secondary))
+            }
             // Reload with new content type
             currentPage = 1
             adapter.submitList(emptyList())
@@ -203,10 +218,9 @@ class MainActivity : AppCompatActivity() {
 
         chipManga.setOnClickListener { if (currentContentType != "manga") setActiveContent("manga") }
         chip3asq.setOnClickListener { if (currentContentType != "3asq") setActiveContent("3asq") }
-        
+
         // Set default selection
-        chipManga.isSelected = true
-        chipManga.setTextColor(getColor(R.color.black))
+        setActiveContent("manga")
 
         tabLatest.setOnClickListener {
             if (currentTab == "latest") return@setOnClickListener
