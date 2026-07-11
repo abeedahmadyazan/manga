@@ -177,17 +177,23 @@ class MainActivity : AppCompatActivity() {
                 cornerRadius = 18f * resources.displayMetrics.density
                 setColor(getColor(R.color.primary))
             }
+            val inactiveDrawable = android.graphics.drawable.GradientDrawable().apply {
+                cornerRadius = 18f * resources.displayMetrics.density
+                setColor(getColor(android.R.color.transparent))
+            }
             tabs.forEach { (key, btn) ->
-                if (key == active) {
-                    // Active: filled green pill, white bold text
-                    btn.background = activeDrawable
-                    btn.setTextColor(getColor(R.color.white))
-                    btn.typeface = android.graphics.Typeface.DEFAULT_BOLD
-                } else {
-                    // Inactive: transparent, secondary text
-                    btn.background = null
-                    btn.setTextColor(getColor(R.color.text_secondary))
-                    btn.typeface = android.graphics.Typeface.DEFAULT
+                try {
+                    if (key == active) {
+                        btn.background = activeDrawable
+                        btn.setTextColor(getColor(R.color.white))
+                        btn.typeface = android.graphics.Typeface.DEFAULT_BOLD
+                    } else {
+                        btn.background = inactiveDrawable
+                        btn.setTextColor(getColor(R.color.text_secondary))
+                        btn.typeface = android.graphics.Typeface.DEFAULT
+                    }
+                } catch (e: Exception) {
+                    android.util.Log.w("MainActivity", "setActiveTab error: ${e.message}")
                 }
             }
         }
