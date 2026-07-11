@@ -67,8 +67,8 @@ class ReaderActivity : AppCompatActivity() {
     private fun initViews() {
         pagesRecyclerView = findViewById(R.id.pagesRecyclerView)
         pagesRecyclerView.layoutManager = LinearLayoutManager(this)
-        // PagerSnapHelper makes RecyclerView behave like ViewPager — one page per screen
-        PagerSnapHelper().attachToRecyclerView(pagesRecyclerView)
+        // Vertical scroll — each image shows at FULL resolution
+        // (manhwa like Lookism has long strip images that need full height)
         loadingIndicator = findViewById(R.id.loadingIndicator)
         errorText = findViewById(R.id.errorText)
         chapterTitleText = findViewById(R.id.chapterTitle)
@@ -89,7 +89,10 @@ class ReaderActivity : AppCompatActivity() {
         }
         btnPrevPage.setOnClickListener { scrollToPage(currentPageIndex - 1) }
         btnNextPage.setOnClickListener { scrollToPage(currentPageIndex + 1) }
-        // Zoom OUT — operates on the currently visible page only.
+        // Zoom IN + Zoom OUT — operate on the currently visible page
+        findViewById<ImageButton>(R.id.btnZoomIn).setOnClickListener {
+            findVisiblePageView()?.zoomIn()
+        }
         findViewById<ImageButton>(R.id.btnZoomOut).setOnClickListener {
             findVisiblePageView()?.zoomOut()
         }
@@ -175,19 +178,16 @@ class ReaderActivity : AppCompatActivity() {
         val adapter = PagesAdapter(pages) { pageIndex ->
             toggleBars()
         }
-        // RecyclerView + PagerSnapHelper: one page per screen
+        // Vertical scroll — each page shows at full resolution
         pagesRecyclerView.adapter = adapter
         pagesRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
-                    val lm = recyclerView.layoutManager as LinearLayoutManager
-                    val pos = lm.findFirstCompletelyVisibleItemPosition()
-                    if (pos != RecyclerView.NO_POSITION && pos != currentPageIndex) {
-                        currentPageIndex = pos
-                        pageCounter.text = "${pos + 1} / ${pages.size}"
-                        pageSeekBar.progress = pos
-                        preloadPages(pos)
-                    }
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                val lm = recyclerView.layoutManager as LinearLayoutManager
+                val pos = lm.findFirstVisibleItemPosition()
+                if (pos != RecyclerView.NO_POSITION && pos != currentPageIndex) {
+                    currentPageIndex = pos
+                    pageCounter.text = "${pos + 1} / ${pages.size}"
+                    pageSeekBar.progress = pos
                 }
             }
         })
@@ -210,7 +210,7 @@ class ReaderActivity : AppCompatActivity() {
     }
     private fun findVisiblePageView(): com.yazan.manga.ui.ZoomableImageView? {
         val lm = pagesRecyclerView.layoutManager as? LinearLayoutManager ?: return null
-        val pos = lm.findFirstCompletelyVisibleItemPosition()
+        val pos = lm.findFirstVisibleItemPosition()
         if (pos == RecyclerView.NO_POSITION) return null
         val holder = pagesRecyclerView.findViewHolderForAdapterPosition(pos) ?: return null
         return holder.itemView.findViewById(R.id.pageImage)
