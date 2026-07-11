@@ -95,7 +95,23 @@ class MangaRepository(private val appContext: Context? = null) {
     }
 
     suspend fun getLatestManga(page: Int = 1, contentType: String = "manga"): Result<List<MangaListItem>> {
-        // Try cache first (1h TTL)
+        // 3asq: fetch ALL manga (manhwa + manhua + manga) from 3asq.online
+        // This MUST be checked FIRST — before any cache — so the 3asq source
+        // never returns stale MangaDex data from the local cache.
+        if (contentType == "3asq") {
+            return try {
+                if (!DDoSProtection.tryAcquire(DDoSProtection.Action.MANGA_LIST)) {
+                    return Result.failure(Exception("تم تجاوز الحد المسموح. حاول لاحقاً."))
+                }
+                val items = fetch3asqListing(page)
+                DDoSProtection.reportSuccess()
+                Result.success(items)
+            } catch (e: Exception) {
+                DDoSProtection.reportFailure()
+                Result.failure(e)
+            }
+        }
+        // Try cache first (1h TTL) — only for manga (not 3asq, not novels)
         appContext?.let { ctx ->
             CacheManager.getCachedMangaList(ctx, "latest", page)?.let { cached ->
                 // Sanitize any stale .256.jpg / .512.jpg URLs in the local cache
@@ -117,22 +133,6 @@ class MangaRepository(private val appContext: Context? = null) {
         if (contentType == "novel") {
             val items = getCuratedNovels(page)
             return Result.success(items)
-        }
-        // 3asq: fetch ALL manga (manhwa + manhua + manga) from 3asq.online
-        // This gives us Arabic-translated manhwa (Solo Leveling, Tower of God,
-        // Omniscient Reader) that MangaDex doesn't have Arabic chapters for.
-        if (contentType == "3asq") {
-            return try {
-                if (!DDoSProtection.tryAcquire(DDoSProtection.Action.MANGA_LIST)) {
-                    return Result.failure(Exception("تم تجاوز الحد المسموح. حاول لاحقاً."))
-                }
-                val items = fetch3asqListing(page)
-                DDoSProtection.reportSuccess()
-                Result.success(items)
-            } catch (e: Exception) {
-                DDoSProtection.reportFailure()
-                Result.failure(e)
-            }
         }
         if (!DDoSProtection.tryAcquire(DDoSProtection.Action.MANGA_LIST)) {
             return Result.failure(Exception("تم تجاوز الحد المسموح. حاول لاحقاً."))
