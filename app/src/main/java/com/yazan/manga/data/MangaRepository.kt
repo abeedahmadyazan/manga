@@ -25,7 +25,7 @@ class MangaRepository(private val appContext: Context? = null) {
 
     private val TAG = "MangaRepo"
     private val UA = "MangaApp/1.0 (Android)"
-    private val ASQ_API = "https://3asq-api.netlify.app/.netlify/functions"
+    private val ASQ_API = "https://asq-proxy.yznabyd.workers.dev"
     private val CORS_PROXY = "https://proxy.cors.sh/"
     private val ASQ_BASE = "https://3asq.online"
     private val MHH_API = "https://manhwahentai.net/api"

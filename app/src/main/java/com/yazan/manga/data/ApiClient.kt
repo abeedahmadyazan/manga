@@ -31,7 +31,7 @@ import java.util.concurrent.TimeUnit
  */
 object ApiClient {
     private const val TAG = "ApiClient"
-    private const val BASE_URL = "https://yz-manga-api.vercel.app"
+    private const val BASE_URL = "https://yz-manga-api.yznabyd.workers.dev"
     private val JSON = "application/json".toMediaType()
     private val gson = Gson()
 
