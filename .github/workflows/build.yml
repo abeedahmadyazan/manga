@@ -58,7 +58,7 @@ jobs:
       env:
         KEYSTORE_FILE: app/release.keystore
         KEYSTORE_PASSWORD: ${{ secrets.RELEASE_KEYSTORE_PASSWORD || 'android' }}
-        KEY_ALIAS: manga
+        KEY_ALIAS: androiddebugkey
         KEY_PASSWORD: ${{ secrets.RELEASE_KEY_PASSWORD || 'android' }}
 
     - name: Upload Debug APK
