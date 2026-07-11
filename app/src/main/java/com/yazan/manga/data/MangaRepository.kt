@@ -395,16 +395,14 @@ class MangaRepository(private val appContext: Context? = null) {
      */
     private fun fetch3asqMangaDetails(slug: String): MangaDetails? {
         return try {
-            // 1. Fetch chapter list from the Netlify proxy (fast, cached)
+            // Fetch chapter list from the Netlify proxy (works — no Cloudflare)
+            // We NO LONGER fetch the detail page directly from 3asq.online
+            // because Cloudflare blocks the app's requests. Instead, we use
+            // the proxy for chapters and derive basic info from the slug.
             val chaptersReq = Request.Builder()
                 .url("$ASQ_API/chapters?slug=$slug")
                 .header("Accept", "application/json")
                 .build()
-            var title = ""
-            var cover = ""
-            var description = ""
-            var status = "ongoing"
-            var genres = listOf<String>()
             val chapters = mutableListOf<MangaChapter>()
             client.newCall(chaptersReq).execute().use { resp ->
                 if (!resp.isSuccessful) return null
@@ -425,51 +423,19 @@ class MangaRepository(private val appContext: Context? = null) {
                     } catch (e: Exception) {}
                 }
             }
-            // 2. Fetch the manga detail page to get title, cover, type, description
-            val detailReq = Request.Builder()
-                .url("$ASQ_BASE/manga/$slug/")
-                .header("User-Agent", UA)
-                .header("Accept", "text/html")
-                .header("Accept-Language", "ar,en;q=0.9")
-                .build()
-            client.newCall(detailReq).execute().use { resp ->
-                if (!resp.isSuccessful) return@use
-                val html = resp.body?.string() ?: return@use
-                // Title: <h1 class="h4">...</h1> or <title>...</title>
-                val titleMatch = Regex("<h1[^>]*class=\"[^\"]*h4[^\"]*\"[^>]*>\\s*<a[^>]*>([^<]+)</a>").find(html)
-                    ?: Regex("<title>([^<]+)</title>").find(html)
-                title = titleMatch?.groupValues?.get(1)?.trim()?.replace("&#8211;","—")?.replace("&#8217;","'")?.replace("&amp;","&") ?: slug
-                // Cover: <div class="summary_image">...<img src="...">
-                val coverMatch = Regex("class=\"[^\"]*summary_image[^\"]*\"[\\s\\S]*?<img[^>]+src=\"([^\"]+)\"").find(html)
-                cover = coverMatch?.groupValues?.get(1)?.let { if (it.startsWith("//")) "https:$it" else it } ?: ""
-                // Type: <h5>النوع</h5>...<div class="summary-content">مانهوا</div>
-                val typeMatch = Regex("النوع[\\s\\S]{0,200}?summary-content[^>]*>\\s*(\\S+)").find(html)
-                val type = typeMatch?.groupValues?.get(1)?.trim()?.replace("،","") ?: ""
-                // Status: <h5>الحالة</h5>...<div class="summary-content">...</div>
-                val statusMatch = Regex("الحالة[\\s\\S]{0,200}?summary-content[^>]*>\\s*([^<]+)").find(html)
-                status = statusMatch?.groupValues?.get(1)?.trim() ?: "ongoing"
-                // Description: <div class="description-summary">...<p>...</p>
-                val descMatch = Regex("class=\"[^\"]*description-summary[^\"]*\"[\\s\\S]*?<p[^>]*>([\\s\\S]*?)</p>").find(html)
-                description = descMatch?.groupValues?.get(1)?.replace("<[^>]+>".toRegex(), "")?.trim() ?: ""
-                // Genres: <div class="genres-content">...<a>...</a>...</div>
-                val genresMatch = Regex("genres-content[\\s\\S]*?</div>").find(html)
-                if (genresMatch != null) {
-                    val genreText = genresMatch.groupValues[0]
-                    val genreList = Regex("<a[^>]*>([^<]+)</a>").findAll(genreText).map { it.groupValues[1].trim() }.toList()
-                    genres = genreList
-                }
-                // Add the type as a genre if found
-                if (type.isNotEmpty() && type !in genres) genres = listOf(type) + genres
+            // Derive a readable title from the slug (e.g. "solo-leveling" → "Solo Leveling")
+            val title = slug.split("-").joinToString(" ") { word ->
+                word.replaceFirstChar { it.uppercase() }
             }
             MangaDetails(
                 id = "3asq-$slug",
                 title = title,
-                cover = cover,
-                description = description,
+                cover = "",  // cover will be loaded from the listing cache
+                description = "مانجا من مصدر العاشق — مترجمة بالعربية",
                 author = "العاشق",
                 artist = "",
-                status = status,
-                genres = genres,
+                status = "ongoing",
+                genres = listOf("مانجا"),
                 chapters = chapters,
                 source = "3asq",
                 latestChapter = chapters.firstOrNull()?.number,
