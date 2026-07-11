@@ -127,75 +127,42 @@
             android:paddingBottom="8dp"
             android:background="@color/background_dark">
 
-            <!-- Content type chips -->
-            <HorizontalScrollView
+            <!-- Source selector — 2 buttons only -->
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:scrollbars="none"
-                android:layout_marginBottom="8dp">
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    android:padding="2dp">
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginBottom="10dp"
+                android:weightSum="2">
 
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/chipManga"
-                        style="@style/Widget.MaterialComponents.Button.TextButton"
-                        android:layout_width="wrap_content"
-                        android:layout_height="36dp"
-                        android:text="مانجا"
-                        android:textSize="13sp"
-                        android:textStyle="bold"
-                        android:minWidth="76dp"
-                        android:background="@drawable/bg_tab_active"
-                        android:textColor="@color/text_secondary"
-                        android:layout_marginEnd="6dp"
-                        app:cornerRadius="22dp" />
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/chipManga"
+                    style="@style/Widget.MaterialComponents.Button.TextButton"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:text="مصدر 1"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:background="@drawable/bg_tab_active"
+                    android:textColor="@color/black"
+                    android:layout_marginEnd="6dp"
+                    app:cornerRadius="22dp" />
 
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/chipManhwa"
-                        style="@style/Widget.MaterialComponents.Button.TextButton"
-                        android:layout_width="wrap_content"
-                        android:layout_height="36dp"
-                        android:text="مانهوا"
-                        android:textSize="13sp"
-                        android:textStyle="bold"
-                        android:minWidth="76dp"
-                        android:background="@drawable/bg_tab_inactive"
-                        android:textColor="@color/text_secondary"
-                        android:layout_marginEnd="6dp"
-                        app:cornerRadius="22dp" />
-
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/chipNovel"
-                        style="@style/Widget.MaterialComponents.Button.TextButton"
-                        android:layout_width="wrap_content"
-                        android:layout_height="36dp"
-                        android:text="روايات"
-                        android:textSize="13sp"
-                        android:textStyle="bold"
-                        android:minWidth="76dp"
-                        android:background="@drawable/bg_tab_inactive"
-                        android:textColor="@color/text_secondary"
-                        android:layout_marginEnd="6dp"
-                        app:cornerRadius="22dp" />
-
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/chip3asq"
-                        style="@style/Widget.MaterialComponents.Button.TextButton"
-                        android:layout_width="wrap_content"
-                        android:layout_height="36dp"
-                        android:text="العاشق"
-                        android:textSize="13sp"
-                        android:textStyle="bold"
-                        android:minWidth="76dp"
-                        android:background="@drawable/bg_tab_inactive"
-                        android:textColor="@color/text_secondary"
-                        app:cornerRadius="22dp" />
-                </LinearLayout>
-            </HorizontalScrollView>
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/chip3asq"
+                    style="@style/Widget.MaterialComponents.Button.TextButton"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:text="مصدر 2"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:background="@drawable/bg_tab_inactive"
+                    android:textColor="@color/text_secondary"
+                    app:cornerRadius="22dp" />
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"

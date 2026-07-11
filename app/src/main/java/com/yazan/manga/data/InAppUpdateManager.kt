@@ -41,10 +41,17 @@ object InAppUpdateManager {
         Thread {
             try {
                 val currentVersionCode = getCurrentVersionCode(activity)
+                val currentVersionName = getCurrentVersionName(activity)
                 val (latestVersionCode, releaseName) = fetchLatestRelease() ?: return@Thread
 
-                Log.d(TAG, "Current: $currentVersionCode, Latest: $latestVersionCode")
+                Log.d(TAG, "Current code: $currentVersionCode, Latest code: $latestVersionCode")
+                Log.d(TAG, "Current name: $currentVersionName, Release: $releaseName")
 
+                // Only show update dialog if the LATEST versionCode on GitHub
+                // is STRICTLY GREATER than the app's installed versionCode.
+                // The app's versionCode is the source of truth (66, 67, 68...),
+                // NOT the release build number (316, 317...) which is a separate
+                // counter maintained by GitHub Actions.
                 if (latestVersionCode > currentVersionCode) {
                     activity.runOnUiThread {
                         showUpdateDialog(activity, releaseName)
@@ -70,6 +77,26 @@ object InAppUpdateManager {
         }
     }
 
+    private fun getCurrentVersionName(context: Context): String {
+        return try {
+            val pInfo = context.packageManager.getPackageInfo(context.packageName, 0)
+            pInfo.versionName ?: "unknown"
+        } catch (e: Exception) {
+            "unknown"
+        }
+    }
+
+    /**
+     * Fetch the latest release from GitHub. Returns (versionCode, releaseName).
+     *
+     * The versionCode is extracted from the release BODY (the commit message),
+     * which contains a line like "Version: 66 → 67, 1.0.10 → 1.0.11." — we
+     * parse the SECOND number (the new versionCode).
+     *
+     * This is necessary because the GitHub release tag (v1.0.316) uses the
+     * BUILD number (316), not the app's internal versionCode (67). Comparing
+     * them directly caused a permanent "update available" loop.
+     */
     private fun fetchLatestRelease(): Pair<Int, String>? {
         return try {
             val req = Request.Builder()
@@ -84,32 +111,31 @@ object InAppUpdateManager {
                 val root = JsonParser.parseString(body).asJsonObject
                 val tagName = root.get("tag_name")?.asString ?: return null
                 val name = root.get("name")?.asString ?: tagName
+                val releaseBody = root.get("body")?.asString ?: ""
 
-                // Extract version code from tag_name (format: "v1.0.213" → 213)
-                // Or from name (format: "Manga App Build 213")
-                val versionCode = extractVersionCode(tagName, name) ?: return null
+                // Extract the new versionCode from the commit body.
+                // The commit message always ends with:
+                //   "Version: 65 → 66, 1.0.9 → 1.0.10."
+                // We want the SECOND number (66) — the NEW versionCode.
+                val versionMatch = Regex("""Version:\s*\d+\s*→\s*(\d+)""", RegexOption.IGNORE_CASE).find(releaseBody)
+                val versionCode = if (versionMatch != null) {
+                    versionMatch.groupValues[1].toIntOrNull()
+                } else {
+                    // Fallback: extract from the LAST line of the body
+                    val lastLine = releaseBody.trim().lines().lastOrNull() ?: ""
+                    val numMatch = Regex("""(\d+)""").findAll(lastLine).map { it.groupValues[1].toIntOrNull() }.lastOrNull()
+                    numMatch
+                }
+                if (versionCode == null) {
+                    Log.w(TAG, "Could not extract versionCode from release body")
+                    return null
+                }
                 Pair(versionCode, name)
             }
         } catch (e: Exception) {
             Log.w(TAG, "fetchLatestRelease failed: ${e.message}")
             null
         }
-    }
-
-    private fun extractVersionCode(tagName: String, name: String): Int? {
-        // Try tag_name first: "v1.0.213" → 213
-        val tagMatch = Regex("""v?(\d+)\.(\d+)\.(\d+)""").find(tagName)
-        if (tagMatch != null) {
-            return tagMatch.groupValues[3].toIntOrNull()
-        }
-        // Try name: "Manga App Build 213" → 213
-        val nameMatch = Regex("""Build\s+(\d+)""", RegexOption.IGNORE_CASE).find(name)
-        if (nameMatch != null) {
-            return nameMatch.groupValues[1].toIntOrNull()
-        }
-        // Fallback: any number in tag_name
-        val numMatch = Regex("""(\d+)""").find(tagName)
-        return numMatch?.groupValues?.get(1)?.toIntOrNull()
     }
 
     private fun showUpdateDialog(activity: Activity, releaseName: String) {
