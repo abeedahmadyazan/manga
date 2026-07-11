@@ -230,6 +230,11 @@ object AuthManager {
     /**
      * Process email-based auth (fallback when Google Sign-In fails due to missing SHA-1).
      * Uses Account Picker to get the user's Google email.
+     *
+     * SECURITY: Multi-account prevention is now SERVER-SIDE only.
+     * We call /api/auth/link-device which checks device_links/{deviceId}.
+     * If the device is already linked to a different email, the server
+     * returns 403 and we abort the login.
      */
     fun processEmailAuth(context: Context, email: String, displayName: String): String? {
         val cleanEmail = email.lowercase().trim()
@@ -241,10 +246,12 @@ object AuthManager {
         val (suspended, reason) = isUserSuspended(context, cleanEmail)
         if (suspended) return reason
 
-        val prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
-        val linkedEmail = prefs.getString(KEY_LINKED_EMAIL, null)
-        if (linkedEmail != null && linkedEmail != cleanEmail) {
-            return "⚠️ هذا الجهاز مرتبط بحساب آخر ($linkedEmail)"
+        // SERVER-SIDE multi-account prevention.
+        // The old client-side KEY_LINKED_EMAIL check is REMOVED — it was
+        // bypassable by clearing app data. The server check is authoritative.
+        val (linkOk, linkError) = ApiClient.linkDevice()
+        if (!linkOk) {
+            return linkError ?: "هذا الجهاز مرتبط بحساب آخر"
         }
 
         val deviceId = getDeviceId(context)
@@ -262,7 +269,7 @@ object AuthManager {
                 latch2.countDown()
             }.start()
             try { latch2.await(10, java.util.concurrent.TimeUnit.SECONDS) } catch (e: Exception) {}
-            
+
             val cu = cloudUser
             if (cu != null && cu.name.isNotEmpty()) {
                 user = User(email = cleanEmail, name = cu.name,
@@ -291,7 +298,7 @@ object AuthManager {
             }
         }
 
-        prefs.edit().putString(KEY_USER, serializeUser(user)).putString(KEY_LINKED_EMAIL, cleanEmail).apply()
+        prefs.edit().putString(KEY_USER, serializeUser(user)).apply()
         if (wasNewUser) { uploadUserToCloud(context) }
 
         // Async admin check: if the user's UID exists in the 'admins' Firestore
@@ -309,6 +316,11 @@ object AuthManager {
     /**
      * Process Firebase Auth result after Google Sign-In.
      * Returns error message if failed, null if success.
+     *
+     * SECURITY: Multi-account prevention is now SERVER-SIDE only.
+     * We call /api/auth/link-device which checks device_links/{deviceId}.
+     * If the device is already linked to a different email, the server
+     * returns 403 and we abort the login.
      */
     fun processFirebaseAuth(context: Context, account: GoogleSignInAccount?): String? {
         if (account == null) return "تم إلغاء تسجيل الدخول"
@@ -323,10 +335,12 @@ object AuthManager {
         val (suspended, reason) = isUserSuspended(context, email)
         if (suspended) return reason
 
-        val prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
-        val linkedEmail = prefs.getString(KEY_LINKED_EMAIL, null)
-        if (linkedEmail != null && linkedEmail != email) {
-            return "⚠️ هذا الجهاز مرتبط بحساب آخر ($linkedEmail). لا يمكن إنشاء حساب جديد."
+        // SERVER-SIDE multi-account prevention.
+        // The old client-side KEY_LINKED_EMAIL check is REMOVED — it was
+        // bypassable by clearing app data. The server check is authoritative.
+        val (linkOk, linkError) = ApiClient.linkDevice()
+        if (!linkOk) {
+            return linkError ?: "⚠️ هذا الجهاز مرتبط بحساب آخر. لا يمكن إنشاء حساب جديد."
         }
 
         val deviceId = getDeviceId(context)
@@ -345,7 +359,7 @@ object AuthManager {
                 latch.countDown()
             }.start()
             try { latch.await(10, java.util.concurrent.TimeUnit.SECONDS) } catch (e: Exception) {}
-            
+
             val cu = cloudUser
             if (cu != null && cu.name.isNotEmpty()) {
                 user = User(email = email, name = cu.name,
@@ -375,7 +389,7 @@ object AuthManager {
             }
         }
 
-        prefs.edit().putString(KEY_USER, serializeUser(user)).putString(KEY_LINKED_EMAIL, email).apply()
+        prefs.edit().putString(KEY_USER, serializeUser(user)).apply()
         if (wasNewUser) { uploadUserToCloud(context) }
 
         // Async admin check

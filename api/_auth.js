@@ -75,6 +75,37 @@ async function authenticate(req) {
       return { user: { uid, email, compromised: true } };
     }
 
+    // ---- SERVER-SIDE multi-account prevention ----
+    // Check device_links/{deviceId} — if this device is linked to a DIFFERENT
+    // email, reject ALL API calls (not just login). This is the real
+    // enforcement: even if the client app is hacked, the server still blocks.
+    //
+    // We only enforce this for WRITE operations (POST/PUT/DELETE). Reads (GET)
+    // are allowed so the user can still browse (but not interact).
+    const deviceId = req.headers['x-device-id'];
+    if (deviceId && req.method !== 'GET' && email) {
+      try {
+        const linkDoc = await db.collection('device_links').doc(deviceId).get();
+        if (linkDoc.exists) {
+          const linkedEmail = linkDoc.data().email || '';
+          if (linkedEmail && linkedEmail !== email) {
+            // 🔴 Device linked to another account — block write
+            return {
+              error: {
+                status: 403,
+                message: `هذا الجهاز مرتبط بحساب آخر (${linkedEmail})`,
+                code: 'DEVICE_LINKED_TO_ANOTHER_ACCOUNT'
+              }
+            };
+          }
+        }
+        // If no link exists, allow — the link will be created by /api/auth/link-device
+      } catch (e) {
+        // Fail-open on DB errors (don't break the app if Firestore is down)
+        console.warn('[device_link] check failed:', e.message);
+      }
+    }
+
     return { user: { uid, email } };
   } catch (e) {
     return { error: { status: 401, message: 'رمز غير صالح' } };

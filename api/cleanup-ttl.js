@@ -22,7 +22,7 @@ module.exports = async (req, res) => {
   }
 
   const now = Date.now();
-  const collections = ['login_attempts', 'login_blocks', 'comment_cooldowns'];
+  const collections = ['login_attempts', 'login_blocks', 'comment_cooldowns', 'device_links'];
   const results = {};
 
   for (const col of collections) {

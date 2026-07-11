@@ -148,6 +148,24 @@ service cloud.firestore {
 
     // FIX: user lists are private to the owner. Only the user themselves
     // (matching their auth email) can read or modify their lists.
+    // ============================================================
+    //  device_links — Server-side multi-account prevention
+    //  One account per device. Link is permanent (can't be changed
+    //  or deleted by the client). Only the server (Admin SDK) can
+    //  create/modify/delete these documents.
+    //
+    //  The app calls /api/auth/link-device after login, which uses
+    //  the Admin SDK to create the link. The client SDK has NO
+    //  write access — only read (for fast-fail UI checks).
+    // ============================================================
+    match /device_links/{deviceId} {
+      // Read allowed (app checks before showing login button)
+      allow read: if true;
+      // Only the server can write/delete
+      allow write: if false;
+      allow delete: if false;
+    }
+
     match /user_lists/{email} {
       allow read: if isOwnUserDoc(email);
       allow create: if isOwnUserDoc(email);

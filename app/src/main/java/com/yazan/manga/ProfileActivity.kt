@@ -10,6 +10,8 @@ import android.widget.ImageButton
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.result.PickVisualMediaRequest
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
@@ -30,8 +32,21 @@ class ProfileActivity : AppCompatActivity() {
 
     companion object {
         private const val RC_SIGN_IN = 9001
-        private const val RC_IMAGE_PICK = 9003
         private const val RC_ACCOUNT_PICKER = 9002
+        // RC_IMAGE_PICK removed — replaced by Photo Picker (no permission needed)
+    }
+
+    /**
+     * Android Photo Picker (official, no permissions required on any Android version).
+     * Replaces the old ACTION_PICK + MediaStore approach which could fail on
+     * Android 7-9 without READ_EXTERNAL_STORAGE permission.
+     */
+    private val pickImage = registerForActivityResult(
+        ActivityResultContracts.PickVisualMedia()
+    ) { uri ->
+        if (uri != null) {
+            saveProfileImage(uri)
+        }
     }
 
     private lateinit var googleSignInClient: GoogleSignInClient
@@ -123,8 +138,8 @@ class ProfileActivity : AppCompatActivity() {
                 Toast.makeText(this, "سجّل الدخول أولاً", Toast.LENGTH_SHORT).show()
                 return@OnClickListener
             }
-            val intent = Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-            startActivityForResult(intent, RC_IMAGE_PICK)
+            // Android Photo Picker (no permissions required, works on all versions)
+            pickImage.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
         }
         avatarImage.setOnClickListener(openPicker)
         btnChangeAvatar.setOnClickListener(openPicker)
@@ -203,11 +218,7 @@ class ProfileActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
 
         when (requestCode) {
-            RC_IMAGE_PICK -> {
-                if (resultCode == Activity.RESULT_OK && data?.data != null) {
-                    saveProfileImage(data.data!!)
-                }
-            }
+            // RC_IMAGE_PICK removed — Photo Picker uses callback (pickImage)
             RC_SIGN_IN -> {
                 if (resultCode != Activity.RESULT_OK) {
                     setLoginLoading(false)

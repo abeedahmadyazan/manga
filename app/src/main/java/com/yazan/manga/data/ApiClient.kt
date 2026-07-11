@@ -108,6 +108,20 @@ object ApiClient {
     }
 
     /**
+     * Get the device ID (SHA-256 hash of ANDROID_ID + Build info).
+     * Sent as X-Device-Id header so the server can enforce one-account-per-device.
+     * The server checks device_links/{deviceId} on every write operation.
+     */
+    private fun getDeviceId(): String {
+        return try {
+            val context = com.yazan.manga.MangaApp.appContext
+            com.yazan.manga.data.AuthManager.getDeviceId(context)
+        } catch (e: Exception) {
+            ""
+        }
+    }
+
+    /**
      * Get the Firebase App Check token (blocking).
      * The server verifies this to ensure the request comes from the real APK,
      * not a decompiled/forged client. This is the SERVER-SIDE anti-debug:
@@ -166,6 +180,7 @@ object ApiClient {
             .header("User-Agent", getUserAgent())
             .header("X-App-Version", getAppVersionCode().toString())
             .header("X-Device-Status", getDeviceStatus())
+            .header("X-Device-Id", getDeviceId())
         // App Check token — server-side anti-debug verification
         getAppCheckToken()?.let { reqBuilder.header("X-Firebase-AppCheck", it) }
         when (method) {
@@ -215,6 +230,7 @@ object ApiClient {
             .header("User-Agent", getUserAgent())
             .header("X-App-Version", getAppVersionCode().toString())
             .header("X-Device-Status", getDeviceStatus())
+            .header("X-Device-Id", getDeviceId())
         // App Check token — server-side anti-debug verification
         getAppCheckToken()?.let { reqBuilder.header("X-Firebase-AppCheck", it) }
 
@@ -237,6 +253,40 @@ object ApiClient {
         } catch (e: Exception) {
             Log.e(TAG, "Request failed: ${e.message}")
             Pair(0, null)
+        }
+    }
+
+    // =============================================================
+    //  Device Linking (server-side multi-account prevention)
+    // =============================================================
+
+    /**
+     * Link this device to the current user's account (server-side).
+     *
+     * MUST be called after successful Google Sign-In. The server checks
+     * device_links/{deviceId} and either:
+     * - Creates the link (first login on this device)
+     * - Allows (same user re-login)
+     * - Rejects with 403 (device linked to another account)
+     *
+     * Returns:
+     * - Pair(true, null) → link successful (or already linked to same account)
+     * - Pair(false, errorMessage) → rejected (linked to another account)
+     */
+    fun linkDevice(): Pair<Boolean, String?> {
+        val (code, json) = request("POST", "/api/auth/link-device")
+        return when (code) {
+            200 -> Pair(true, null)
+            403 -> {
+                val error = json?.get("error")?.asString ?: "هذا الجهاز مرتبط بحساب آخر"
+                Pair(false, error)
+            }
+            else -> {
+                // On network errors, allow login (fail-open) — the device link
+                // will be checked on every subsequent API call anyway.
+                Log.w(TAG, "linkDevice failed with $code, allowing (fail-open)")
+                Pair(true, null)
+            }
         }
     }
 
