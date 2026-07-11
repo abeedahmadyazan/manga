@@ -10,7 +10,7 @@
 *.apk
 *.aab
 *.keystore
-!debug.keystore
 app/build/
 build-output.log
 google-services.json.bak
+.vercel

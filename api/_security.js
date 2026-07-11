@@ -51,9 +51,17 @@ function securityCheck(req, res) {
 
   // ---- 4) Shadow ban compromised devices ----
   // Return a fake success so the attacker thinks it worked.
+  // NOTE: Do NOT include any flag that reveals the shadow ban (no "shadow: true").
+  // The response should look identical to a real success.
   const deviceStatus = headers['x-device-status'];
   if (deviceStatus === 'compromised' || deviceStatus === 'debug' || deviceStatus === 'rooted') {
-    res.status(200).json({ success: true, shadow: true });
+    // For write endpoints: return a fake success
+    // For read endpoints: return empty data
+    if (req.method === 'GET') {
+      res.status(200).json({ comments: [], lists: {}, history: [] });
+    } else {
+      res.status(200).json({ success: true });
+    }
     return true;
   }
 

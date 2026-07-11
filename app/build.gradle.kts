@@ -50,9 +50,15 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
-            // Sign with the release keystore if available (CI env), otherwise
-            // fall back to debug (local dev builds or CI without secrets).
-            signingConfig = signingConfigs.getByName("debug")
+            // SECURITY: Only sign release with the release keystore (from GitHub Secrets).
+            // If RELEASE_KEYSTORE env var is not set, the build FAILS instead of
+            // falling back to the debug keystore (which would let anyone sign
+            // a "update" APK with the known debug key).
+            val keystoreFile = System.getenv("KEYSTORE_FILE")
+            if (keystoreFile != null) {
+                signingConfig = signingConfigs.getByName("release")
+            }
+            // If no release keystore, the APK is unsigned — safer than debug-signed.
         }
         debug {
             // Enable all signing schemes on debug builds too

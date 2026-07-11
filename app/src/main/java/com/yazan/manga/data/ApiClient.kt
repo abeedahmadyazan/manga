@@ -108,6 +108,28 @@ object ApiClient {
     }
 
     /**
+     * Get the Firebase App Check token (blocking).
+     * The server verifies this to ensure the request comes from the real APK,
+     * not a decompiled/forged client. This is the SERVER-SIDE anti-debug:
+     * even if an attacker removes AntiDebug from the APK, they cannot forge
+     * a valid App Check token — it's issued by Google Play Integrity.
+     *
+     * Returns null if App Check is not yet ready (first launch) — the server
+     * treats missing tokens as "potentially compromised" and shadow-bans them.
+     */
+    private fun getAppCheckToken(): String? {
+        return try {
+            val appCheck = com.google.firebase.appcheck.FirebaseAppCheck.getInstance()
+            val tokenTask = appCheck.getAppCheckToken(false)
+            val result = com.google.android.gms.tasks.Tasks.await(tokenTask, 5, java.util.concurrent.TimeUnit.SECONDS)
+            result?.token
+        } catch (e: Exception) {
+            Log.w(TAG, "App Check token not available: ${e.message}")
+            null
+        }
+    }
+
+    /**
      * Get the current user's Firebase ID token (blocking).
      * Returns null if not signed in or token fetch fails.
      */
@@ -143,8 +165,9 @@ object ApiClient {
             .header("Content-Type", "application/json")
             .header("User-Agent", getUserAgent())
             .header("X-App-Version", getAppVersionCode().toString())
-            .header("X-User-Email", getUserEmail())
             .header("X-Device-Status", getDeviceStatus())
+        // App Check token — server-side anti-debug verification
+        getAppCheckToken()?.let { reqBuilder.header("X-Firebase-AppCheck", it) }
         when (method) {
             "GET" -> reqBuilder.get()
             "POST", "PUT", "DELETE" -> {
@@ -191,8 +214,9 @@ object ApiClient {
             .header("Content-Type", "application/json")
             .header("User-Agent", getUserAgent())
             .header("X-App-Version", getAppVersionCode().toString())
-            .header("X-User-Email", getUserEmail())
             .header("X-Device-Status", getDeviceStatus())
+        // App Check token — server-side anti-debug verification
+        getAppCheckToken()?.let { reqBuilder.header("X-Firebase-AppCheck", it) }
 
         when (method) {
             "GET" -> reqBuilder.get()

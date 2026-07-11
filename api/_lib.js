@@ -21,5 +21,32 @@ if (!admin.apps.length) {
 
 const db = admin.firestore();
 const auth = admin.auth();
+const appCheck = admin.appCheck();
 
-module.exports = { admin, db, auth };
+/**
+ * Verify the Firebase App Check token sent by the app.
+ *
+ * This is the SERVER-SIDE enforcement of App Check. Even if an attacker
+ * decompiles the APK and removes the client-side AntiDebug checks, they
+ * CANNOT forge a valid App Check token — it's issued by Google Play
+ * Integrity after verifying the app's signature and device integrity.
+ *
+ * @param {object} req - Request object (reads X-Firebase-AppCheck header)
+ * @returns {Promise<{valid: boolean, compromised: boolean}>}
+ */
+async function verifyAppCheck(req) {
+  const appCheckToken = req.headers['x-firebase-appcheck'];
+  if (!appCheckToken) {
+    // No App Check token — treat as potentially compromised.
+    // In "Log" mode: allow but flag. In "Enforce" mode: reject.
+    return { valid: false, compromised: true, reason: 'no_app_check_token' };
+  }
+  try {
+    await appCheck.verifyToken(appCheckToken);
+    return { valid: true, compromised: false };
+  } catch (e) {
+    return { valid: false, compromised: true, reason: 'invalid_token' };
+  }
+}
+
+module.exports = { admin, db, auth, appCheck, verifyAppCheck };

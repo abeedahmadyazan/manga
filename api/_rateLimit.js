@@ -14,8 +14,12 @@ async function checkCooldown(email) {
 
 async function updateCooldown(email) {
   if (!email || email.length === 0) return;
+  // TTL: auto-delete cooldown doc 24h after last comment.
+  // This prevents the collection from growing forever.
+  const COOLDOWN_TTL_MS = 24 * 60 * 60 * 1000; // 24 hours
   await db.collection('comment_cooldowns').doc(email).set({
     lastCommentAt: Date.now(),
+    expiresAt: Date.now() + COOLDOWN_TTL_MS,
   });
 }
 

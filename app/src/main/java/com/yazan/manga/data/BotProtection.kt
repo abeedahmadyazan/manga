@@ -36,6 +36,8 @@ object BotProtection {
     private const val LOGIN_MAX_ATTEMPTS = 5
     private const val LOGIN_WINDOW_MS = 30 * 60 * 1000L  // 30 minutes
     private const val LOGIN_BLOCK_MS = 60 * 60 * 1000L    // 1 hour block
+    // TTL: login_attempts documents auto-delete after 7 days of inactivity
+    private const val LOGIN_ATTEMPTS_TTL_MS = 7 * 24 * 60 * 60 * 1000L  // 7 days
 
     // Like/Dislike spam thresholds (per device, local)
     private const val LIKE_MAX_TAPS = 10
@@ -105,7 +107,11 @@ object BotProtection {
                 val data = mapOf(
                     "count" to newCount,
                     "lastAttempt" to now,
-                    "deviceId" to deviceId
+                    "deviceId" to deviceId,
+                    // TTL field: Firestore auto-deletes this doc 7 days after
+                    // the last update. Updated on every write, so it only
+                    // expires if the device stops attacking for 7 days.
+                    "expiresAt" to (now + LOGIN_ATTEMPTS_TTL_MS)
                 )
                 // set() = create or overwrite. Firestore rules will:
                 //  - allow create if count == 1
@@ -122,7 +128,9 @@ object BotProtection {
                         "deviceId" to deviceId,
                         "until" to blockUntil,
                         "blockedAt" to now,
-                        "reason" to "5 failed login attempts within 30 minutes"
+                        "reason" to "5 failed login attempts within 30 minutes",
+                        // TTL: auto-delete block 24h after it expires
+                        "expiresAt" to (blockUntil + 24 * 60 * 60 * 1000L)
                     )
                     db.collection("login_blocks").document(deviceId).set(blockData)
                         .addOnFailureListener { e ->

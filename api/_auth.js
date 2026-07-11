@@ -1,4 +1,4 @@
-const { auth, db } = require('./_lib');
+const { auth, db, verifyAppCheck } = require('./_lib');
 const { securityCheck } = require('./_security');
 
 const MIN_APP_VERSION = 13;
@@ -35,7 +35,7 @@ async function authenticate(req) {
     const decoded = await auth.verifyIdToken(idToken);
     const uid = decoded.uid;
     let email = decoded.email || '';
-    
+
     // SECURITY FIX: NEVER trust X-User-Email header — it can be spoofed.
     // Email must come from the verified Firebase ID token only.
     // If the token doesn't have an email, try Admin SDK (server-side lookup).
@@ -45,7 +45,7 @@ async function authenticate(req) {
         email = userRecord.email || '';
       } catch (e) {}
     }
-    
+
     // If still no email, check user_uids index (server-side Firestore lookup)
     if (!email && uid) {
       try {
@@ -55,14 +55,26 @@ async function authenticate(req) {
         }
       } catch (e) {}
     }
-    
-    // SECURITY: check if device is compromised (Frida/debugger/emulator)
+
+    // ---- App Check verification (server-side anti-debug) ----
+    // This is the REAL anti-debug: even if an attacker decompiles the APK
+    // and removes AntiDebug.kt, they CANNOT forge a valid App Check token.
+    // Play Integrity verifies the app's signature + device integrity.
+    //
+    // We don't reject on missing/invalid token (yet) — that would break
+    // older app versions. Instead, we shadow-ban: allow reads, block writes.
+    // Once App Check is in "Enforce" mode on Firebase, we can reject entirely.
+    const appCheckResult = await verifyAppCheck(req);
+
+    // SECURITY: check if device is compromised (client-side flag OR App Check failure)
     const deviceStatus = req.headers['x-device-status'] || '';
-    if (deviceStatus === 'compromised') {
+    const compromised = deviceStatus === 'compromised' || appCheckResult.compromised;
+
+    if (compromised) {
       // Shadow ban: allow read but block write operations
       return { user: { uid, email, compromised: true } };
     }
-    
+
     return { user: { uid, email } };
   } catch (e) {
     return { error: { status: 401, message: 'رمز غير صالح' } };
