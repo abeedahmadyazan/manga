@@ -26,14 +26,6 @@ jobs:
       with:
         gradle-version: '8.9'
 
-    - name: Decode Debug Keystore
-      run: |
-        echo "${{ secrets.RELEASE_KEYSTORE }}" | base64 -d > app/yz-manga-debug.keystore 2>/dev/null || true
-        # Fallback: if secret is invalid, use the debug keystore from repo (still tracked for now)
-        if [ ! -s app/yz-manga-debug.keystore ]; then
-          echo "Warning: RELEASE_KEYSTORE secret not valid, using debug keystore"
-        fi
-
     - name: Build Debug APK
       run: gradle assembleDebug --stacktrace
 
