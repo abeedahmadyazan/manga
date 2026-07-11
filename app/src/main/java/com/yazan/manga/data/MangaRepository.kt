@@ -28,6 +28,7 @@ class MangaRepository(private val appContext: Context? = null) {
     private val ASQ_API = "https://3asq-api.netlify.app/.netlify/functions"
     private val CORS_PROXY = "https://proxy.cors.sh/"
     private val ASQ_BASE = "https://3asq.online"
+    private val MHH_API = "https://manhwahentai.net/api"
     private val CDN_CACHE_BASE = "https://cdn.jsdelivr.net/gh/abeedahmadyazan/mangaapp@gh-pages/cache"
     private val CDN_CACHE_TTL_MS = 2 * 60 * 60 * 1000L  // 2 hours
 
@@ -106,6 +107,8 @@ class MangaRepository(private val appContext: Context? = null) {
                 val items = fetch3asqListing(page)
                 if (items.isNotEmpty()) Result.success(items)
                 else Result.failure(Exception("تعذّر تحميل المانجا. حاول لاحقاً."))
+            } else if (contentType == "mhh") {
+                fetchMHHList(page, "latest")
             } else {
                 // مصدر 1: MangaDex
                 fetchMangaDexList(page, "latest")
@@ -122,6 +125,8 @@ class MangaRepository(private val appContext: Context? = null) {
                 items.shuffle()
                 if (items.isNotEmpty()) Result.success(items)
                 else Result.failure(Exception("تعذّر تحميل المانجا. حاول لاحقاً."))
+            } else if (contentType == "mhh") {
+                fetchMHHList(page, "popular")
             } else {
                 // مصدر 1: MangaDex popular
                 fetchMangaDexList(page, "popular")
@@ -169,6 +174,9 @@ class MangaRepository(private val appContext: Context? = null) {
                     }
                     Result.success(items)
                 }
+            } else if (contentType == "mhh") {
+                // Search manhwahentai.net (مصدر 3 - أجنبي)
+                fetchMHHSearch(query, page)
             } else {
                 // Search MangaDex (مصدر 1)
                 val encoded = java.net.URLEncoder.encode(query, "UTF-8")
@@ -386,6 +394,123 @@ class MangaRepository(private val appContext: Context? = null) {
         }
     }
 
+    // === manhwahentai.net (مصدر 3 - أجنبي) ===
+    
+    private fun fetchMHHList(page: Int, sort: String): Result<List<MangaListItem>> {
+        return try {
+            val sortParam = if (sort == "popular") "&sort=bookmark_count&order=desc" else "&sort=created_at&order=desc"
+            val url = "$MHH_API/manga?page=$page&per_page=20$sortParam"
+            val req = Request.Builder().url(url).header("Accept", "application/json").build()
+            proxyClient.newCall(req).execute().use { resp ->
+                if (!resp.isSuccessful) return Result.failure(Exception("HTTP ${resp.code}"))
+                val body = resp.body?.string() ?: return Result.failure(Exception("Empty"))
+                val root = JsonParser.parseString(body).asJsonObject
+                val arr = root.getAsJsonArray("data") ?: return Result.failure(Exception("No data"))
+                val items = mutableListOf<MangaListItem>()
+                for (i in 0 until arr.size()) {
+                    try {
+                        val m = arr[i].asJsonObject
+                        val slug = m.get("slug")?.asString ?: continue
+                        val title = m.get("title")?.asString ?: continue
+                        val cover = m.get("cover_url")?.asString ?: ""
+                        val status = m.get("status")?.asString ?: "ongoing"
+                        items.add(MangaListItem(id = "mhh-$slug", title = title, cover = cover, source = "mhh", status = status))
+                    } catch (e: Exception) {}
+                }
+                if (items.isNotEmpty()) Result.success(items)
+                else Result.failure(Exception("تعذّر تحميل المانجا"))
+            }
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
+
+    private fun fetchMHHSearch(query: String, page: Int): Result<List<MangaListItem>> {
+        return try {
+            val encoded = java.net.URLEncoder.encode(query, "UTF-8")
+            val url = "$MHH_API/manga?page=$page&per_page=20&search=$encoded"
+            val req = Request.Builder().url(url).header("Accept", "application/json").build()
+            proxyClient.newCall(req).execute().use { resp ->
+                if (!resp.isSuccessful) return Result.success(emptyList())
+                val body = resp.body?.string() ?: return Result.success(emptyList())
+                val root = JsonParser.parseString(body).asJsonObject
+                val arr = root.getAsJsonArray("data") ?: return Result.success(emptyList())
+                val items = mutableListOf<MangaListItem>()
+                for (i in 0 until arr.size()) {
+                    try {
+                        val m = arr[i].asJsonObject
+                        val slug = m.get("slug")?.asString ?: continue
+                        val title = m.get("title")?.asString ?: continue
+                        val cover = m.get("cover_url")?.asString ?: ""
+                        items.add(MangaListItem(id = "mhh-$slug", title = title, cover = cover, source = "mhh", status = "ongoing"))
+                    } catch (e: Exception) {}
+                }
+                Result.success(items)
+            }
+        } catch (e: Exception) {
+            Result.success(emptyList())
+        }
+    }
+
+    private fun fetchMHHDetails(slug: String): MangaDetails? {
+        return try {
+            // 1. Fetch manga details
+            val detailReq = Request.Builder().url("$MHH_API/manga/$slug").header("Accept", "application/json").build()
+            var title = slug
+            var cover = ""
+            var description = ""
+            var status = "ongoing"
+            proxyClient.newCall(detailReq).execute().use { resp ->
+                if (!resp.isSuccessful) return null
+                val body = resp.body?.string() ?: return null
+                val root = JsonParser.parseString(body).asJsonObject
+                val data = root.getAsJsonObject("data") ?: return null
+                title = data.get("title")?.asString ?: slug
+                cover = data.get("cover_url")?.asString ?: ""
+                description = data.get("description")?.asString ?: ""
+                status = data.get("status")?.asString ?: "ongoing"
+            }
+            // 2. Fetch chapters
+            val chapters = mutableListOf<MangaChapter>()
+            val chapReq = Request.Builder().url("$MHH_API/manga/$slug/chapters").header("Accept", "application/json").build()
+            proxyClient.newCall(chapReq).execute().use { resp ->
+                if (!resp.isSuccessful) return@use
+                val body = resp.body?.string() ?: return@use
+                val root = JsonParser.parseString(body)
+                val arr = root.asJsonObject.getAsJsonArray("data") ?: return@use
+                for (i in 0 until arr.size()) {
+                    try {
+                        val ch = arr[i].asJsonObject
+                        val chSlug = ch.get("slug")?.asString ?: continue
+                        val num = ch.get("number")?.asString?.removeSuffix(".0") ?: (i + 1).toString()
+                        val chTitle = ch.get("title")?.asString ?: "Capitulo $num"
+                        // ID format: "mangaSlug||chapterSlug" (split in getChapterPages)
+                        chapters.add(MangaChapter(id = "$slug||$chSlug", number = num, title = chTitle, date = "", source = "mhh"))
+                    } catch (e: Exception) {}
+                }
+            }
+            MangaDetails(
+                id = "mhh-$slug",
+                title = title,
+                cover = cover,
+                description = description,
+                author = "",
+                artist = "",
+                status = status,
+                genres = listOf("Manhwa", "Adulto"),
+                chapters = chapters,
+                source = "mhh",
+                latestChapter = chapters.firstOrNull()?.number,
+                rating = null,
+                sources = emptyList(),
+                chaptersBySource = emptyMap()
+            )
+        } catch (e: Exception) {
+            Log.w(TAG, "fetchMHHDetails($slug) failed: ${e.message}")
+            null
+        }
+    }
+
     private fun fetchList(url: String): List<MangaListItem> {
         val req = Request.Builder().url(url).header("User-Agent", UA).header("Accept", "application/json").build()
         proxyClient.newCall(req).execute().use { resp ->
@@ -474,6 +599,16 @@ class MangaRepository(private val appContext: Context? = null) {
         // 3asq manga: fetch details + chapters from 3asq.online via the
         // Netlify proxy (3asq-api.netlify.app). 3asq hosts Arabic manhwa,
         // manhua, and manga — all with full Arabic chapter translations.
+        if (id.startsWith("mhh-")) {
+            val slug = id.removePrefix("mhh-")
+            return try {
+                val details = fetchMHHDetails(slug)
+                if (details != null) Result.success(details)
+                else Result.failure(Exception("تعذّر تحميل التفاصيل"))
+            } catch (e: Exception) {
+                Result.failure(e)
+            }
+        }
         if (id.startsWith("3asq-")) {
             val slug = id.removePrefix("3asq-")
             return try {
@@ -902,7 +1037,30 @@ class MangaRepository(private val appContext: Context? = null) {
 
     suspend fun getChapterPages(chapter: MangaChapter): Result<List<ChapterPage>> {
         return try {
-            if (chapter.source == "3asq") {
+            if (chapter.source == "mhh") {
+                // manhwahentai.net chapter pages
+                val parts = chapter.id.split("||")
+                val mangaSlug = parts.getOrNull(0) ?: ""
+                val chapterSlug = parts.getOrNull(1) ?: ""
+                if (mangaSlug.isNotBlank() && chapterSlug.isNotBlank()) {
+                    val req = Request.Builder().url("$MHH_API/manga/$mangaSlug/chapters/$chapterSlug").header("Accept", "application/json").build()
+                    proxyClient.newCall(req).execute().use { resp ->
+                        if (!resp.isSuccessful) return Result.failure(Exception("HTTP ${resp.code}"))
+                        val body = resp.body?.string() ?: return Result.failure(Exception("Empty"))
+                        val root = JsonParser.parseString(body).asJsonObject
+                        val data = root.getAsJsonObject("data") ?: return Result.failure(Exception("No data"))
+                        val pagesArr = data.getAsJsonArray("pages") ?: return Result.failure(Exception("No pages"))
+                        val pages = mutableListOf<ChapterPage>()
+                        for (i in 0 until pagesArr.size()) {
+                            val p = pagesArr[i].asJsonObject
+                            val url = p.get("image_url")?.asString ?: continue
+                            pages.add(ChapterPage(index = i, url = url))
+                        }
+                        if (pages.isNotEmpty()) return Result.success(pages)
+                    }
+                }
+                Result.failure(Exception("تعذّر تحميل صفحات هذا الفصل"))
+            } else if (chapter.source == "3asq") {
                 // Extract slug and chapter number from the chapter id
                 val parts = chapter.id.split("-")
                 val num = parts.lastOrNull() ?: ""

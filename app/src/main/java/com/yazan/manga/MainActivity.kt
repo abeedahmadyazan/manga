@@ -200,13 +200,13 @@ class MainActivity : AppCompatActivity() {
 
         setActiveTab(currentTab)
 
-        // === Source selector — 2 buttons ===
+        // === Source selector — 3 buttons ===
         val chipSource1 = findViewById<MaterialButton>(R.id.chipSource1)
         val chipSource2 = findViewById<MaterialButton>(R.id.chipSource2)
+        val chipSource3 = findViewById<MaterialButton>(R.id.chipSource3)
 
         fun setActiveSource(source: String) {
             currentContentType = source
-            // Update button backgrounds programmatically (avoids MaterialButton crash)
             val activeBg = android.graphics.drawable.GradientDrawable().apply {
                 cornerRadius = 22f * resources.displayMetrics.density
                 setColor(getColor(R.color.primary))
@@ -215,18 +215,17 @@ class MainActivity : AppCompatActivity() {
                 cornerRadius = 22f * resources.displayMetrics.density
                 setColor(getColor(R.color.surface))
             }
-            if (source == "manga") {
-                chipSource1.background = activeBg
-                chipSource1.setTextColor(getColor(R.color.black))
-                chipSource2.background = inactiveBg
-                chipSource2.setTextColor(getColor(R.color.text_secondary))
-            } else {
-                chipSource2.background = activeBg
-                chipSource2.setTextColor(getColor(R.color.black))
-                chipSource1.background = inactiveBg
-                chipSource1.setTextColor(getColor(R.color.text_secondary))
+            val buttons = listOf(chipSource1, chipSource2, chipSource3)
+            val types = listOf("manga", "3asq", "mhh")
+            buttons.forEachIndexed { i, btn ->
+                if (types[i] == source) {
+                    btn.background = activeBg
+                    btn.setTextColor(getColor(R.color.black))
+                } else {
+                    btn.background = inactiveBg
+                    btn.setTextColor(getColor(R.color.text_secondary))
+                }
             }
-            // Reload with new source
             currentPage = 1
             adapter.submitList(emptyList())
             loadManga()
@@ -234,8 +233,8 @@ class MainActivity : AppCompatActivity() {
 
         chipSource1.setOnClickListener { if (currentContentType != "manga") setActiveSource("manga") }
         chipSource2.setOnClickListener { if (currentContentType != "3asq") setActiveSource("3asq") }
+        chipSource3.setOnClickListener { if (currentContentType != "mhh") setActiveSource("mhh") }
 
-        // Set default source
         setActiveSource("3asq")
 
         tabLatest.setOnClickListener {
