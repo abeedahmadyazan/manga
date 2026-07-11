@@ -63,10 +63,11 @@ class MainActivity : AppCompatActivity() {
             }
         }.start()
 
-        // Check for app updates on startup (non-blocking)
+        // Check for app updates on startup (non-blocking, runs on background thread)
         com.yazan.manga.data.InAppUpdateManager.checkForUpdate(this)
-        // Check for admin announcements + force updates
-        com.yazan.manga.data.AnnouncementManager.checkAnnouncement(this)
+        // NOTE: AnnouncementManager disabled on startup — it was calling the
+        // Vercel API which returns 426 (blocks for 3+ seconds). Can re-enable
+        // later once the Vercel API is redeployed.
 
         initViews()
         loadManga()
