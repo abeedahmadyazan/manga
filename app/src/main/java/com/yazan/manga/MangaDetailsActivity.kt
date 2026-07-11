@@ -164,6 +164,7 @@ class MangaDetailsActivity : AppCompatActivity() {
     }
 
     private fun displayDetails(data: MangaDetails) {
+        try {
         titleText.text = data.title
         if (data.cover.isNotEmpty()) {
             Glide.with(this).load(data.cover)
@@ -253,6 +254,11 @@ class MangaDetailsActivity : AppCompatActivity() {
             chaptersCountText.text = data.chapters.size.toString()
             displayChapters(data.chapters)
             btnRead.visibility = View.VISIBLE
+        }
+        } catch (e: Exception) {
+            android.util.Log.e("MangaDetails", "displayDetails crash: ${e.message}", e)
+            errorText.text = "تعذّر عرض التفاصيل"
+            errorText.visibility = View.VISIBLE
         }
     }
 

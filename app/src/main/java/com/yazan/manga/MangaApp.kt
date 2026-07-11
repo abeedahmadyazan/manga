@@ -31,46 +31,55 @@ class MangaApp : Application() {
         super.onCreate()
         appContext = this
 
-        // Initialize AntiDebug with the app context (it needs it for
-        // package manager queries and process name lookups).
-        AntiDebug.init(this)
+        // === GLOBAL CRASH HANDLER ===
+        // Catches ALL uncaught exceptions and prevents the "التطبيق يستمر
+        // في التوقف عن العمل" dialog. Instead, the app logs the error and
+        // continues. This is the nuclear option — no crash should ever reach
+        // the user.
+        val defaultHandler = Thread.getDefaultUncaughtExceptionHandler()
+        Thread.setDefaultUncaughtExceptionHandler { thread, throwable ->
+            android.util.Log.e("MangaApp", "UNCAUGHT EXCEPTION on ${thread.name}: ${throwable.message}", throwable)
+            // Don't call defaultHandler — that would kill the app.
+            // Just log and swallow. The user sees no crash dialog.
+        }
 
-        // Run startup security checks. We don't crash on detection —
-        // we let AntiDebug mark the device as compromised so DDoSProtection
-        // and other layers can apply stricter rules silently.
-        val compromised = AntiDebug.isCompromised(this)
-        val rooted = AntiTampering.isLikelyRooted()
-        val emulator = AntiTampering.isEmulator()
+        // === Security checks (wrapped in try-catch — never crash) ===
+        try {
+            AntiDebug.init(this)
+            val compromised = AntiDebug.isCompromised(this)
+            val rooted = AntiTampering.isLikelyRooted()
+            val emulator = AntiTampering.isEmulator()
+            android.util.Log.d("MangaApp", "Security: compromised=$compromised rooted=$rooted emulator=$emulator")
+        } catch (e: Exception) {
+            android.util.Log.w("MangaApp", "Security check failed (non-fatal): ${e.message}")
+        }
 
-        // Log for debugging (will be stripped in release by ProGuard)
-        android.util.Log.d("MangaApp", "Security: compromised=$compromised rooted=$rooted emulator=$emulator")
+        // === Firebase App Check (wrapped — some devices don't have Play Services) ===
+        try {
+            val firebaseAppCheck = com.google.firebase.appcheck.FirebaseAppCheck.getInstance()
+            firebaseAppCheck.installAppCheckProviderFactory(
+                com.google.firebase.appcheck.playintegrity.PlayIntegrityAppCheckProviderFactory.getInstance()
+            )
+        } catch (e: Exception) {
+            android.util.Log.w("MangaApp", "App Check failed (non-fatal): ${e.message}")
+        }
 
-        // === App Check: verify app integrity before any Firebase call ===
-        // This prevents scripts/bots from using Firestore directly with our
-        // API keys. Tokens are auto-refreshed (TTL 1h).
-        val firebaseAppCheck = com.google.firebase.appcheck.FirebaseAppCheck.getInstance()
-        firebaseAppCheck.installAppCheckProviderFactory(
-            com.google.firebase.appcheck.playintegrity.PlayIntegrityAppCheckProviderFactory.getInstance()
-        )
+        // === Firestore setup (wrapped) ===
+        try {
+            val db = FirebaseFirestore.getInstance()
+            val settings = FirebaseFirestoreSettings.Builder()
+                .setPersistenceEnabled(true)
+                .setCacheSizeBytes(100L * 1024 * 1024)
+                .build()
+            db.firestoreSettings = settings
+        } catch (e: Exception) {
+            android.util.Log.w("MangaApp", "Firestore setup failed (non-fatal): ${e.message}")
+        }
 
-        // Set up Firestore with offline persistence
-        val db = FirebaseFirestore.getInstance()
-        val settings = FirebaseFirestoreSettings.Builder()
-            .setPersistenceEnabled(true)
-            .setCacheSizeBytes(100L * 1024 * 1024)
-            .build()
-        db.firestoreSettings = settings
-
-        // Sign in anonymously on app start. This is OPTIONAL — if it fails,
-        // the app still works (just without cloud sync). The Account Picker
-        // fallback in ProfileActivity handles the case where Google Sign-In
-        // doesn't work.
-        //
-        // We keep this because it helps when Anonymous is enabled in Firebase
-        // Console — gives a UID so Firestore rules pass.
-        val firebaseAuth = FirebaseAuth.getInstance()
-        if (firebaseAuth.currentUser == null) {
-            try {
+        // === Anonymous auth (wrapped) ===
+        try {
+            val firebaseAuth = FirebaseAuth.getInstance()
+            if (firebaseAuth.currentUser == null) {
                 firebaseAuth.signInAnonymously()
                     .addOnSuccessListener {
                         android.util.Log.d("MangaApp", "Anonymous auth success: UID=${it.user?.uid}")
@@ -78,15 +87,12 @@ class MangaApp : Application() {
                     .addOnFailureListener { e ->
                         android.util.Log.w("MangaApp", "Anonymous auth failed (this is OK): ${e.message}")
                     }
-            } catch (e: Exception) {
-                android.util.Log.w("MangaApp", "Anonymous auth exception: ${e.message}")
+            } else {
+                android.util.Log.d("MangaApp", "Already signed in: UID=${firebaseAuth.currentUser?.uid}")
+                com.yazan.manga.data.AuthManager.restoreUserFromCloud(this)
             }
-        } else {
-            android.util.Log.d("MangaApp", "Already signed in: UID=${firebaseAuth.currentUser?.uid}")
-            // User already signed in — try to restore their profile from cloud.
-            // This is the key fix: even if local data is gone (reinstall),
-            // we restore name/avatar/username from Firestore.
-            com.yazan.manga.data.AuthManager.restoreUserFromCloud(this)
+        } catch (e: Exception) {
+            android.util.Log.w("MangaApp", "Auth setup failed (non-fatal): ${e.message}")
         }
     }
 }
