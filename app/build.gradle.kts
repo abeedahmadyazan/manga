@@ -24,7 +24,9 @@ android {
         create("release") {
             val keystoreFile = System.getenv("KEYSTORE_FILE")
             if (keystoreFile != null) {
-                storeFile = file(keystoreFile)
+                // Use File() instead of file() to resolve from project root,
+                // not from the app/ module directory.
+                storeFile = rootProject.file(keystoreFile)
                 storePassword = System.getenv("KEYSTORE_PASSWORD") ?: ""
                 keyAlias = System.getenv("KEY_ALIAS") ?: "manga"
                 keyPassword = System.getenv("KEY_PASSWORD") ?: ""
