@@ -941,9 +941,14 @@ class MangaRepository(private val appContext: Context? = null) {
                     val baseUrl = root.asJsonObject.get("baseUrl")?.asString ?: return Result.failure(Exception("No baseUrl"))
                     val chObj = root.asJsonObject.getAsJsonObject("chapter") ?: return Result.failure(Exception("No chapter"))
                     val hash = chObj.get("hash")?.asString ?: return Result.failure(Exception("No hash"))
-                    val ds = chObj.getAsJsonArray("dataSaver") ?: return Result.failure(Exception("No pages"))
+                    // Use "data" (full quality) instead of "dataSaver" (compressed/blurry)
+                    val ds = chObj.getAsJsonArray("data") ?: chObj.getAsJsonArray("dataSaver") ?: return Result.failure(Exception("No pages"))
                     val pages = mutableListOf<ChapterPage>()
-                    for (i in 0 until ds.size()) { pages.add(ChapterPage(index = i, url = "$baseUrl/data-saver/$hash/${ds[i].asString}")) }
+                    for (i in 0 until ds.size()) {
+                        val isDataSaver = (chObj.getAsJsonArray("data") == null)
+                        val path = if (isDataSaver) "data-saver" else "data"
+                        pages.add(ChapterPage(index = i, url = "$baseUrl/$path/$hash/${ds[i].asString}"))
+                    }
                     Result.success(pages)
                 }
             }
