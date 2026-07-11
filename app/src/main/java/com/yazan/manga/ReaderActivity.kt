@@ -67,8 +67,9 @@ class ReaderActivity : AppCompatActivity() {
     private fun initViews() {
         pagesRecyclerView = findViewById(R.id.pagesRecyclerView)
         pagesRecyclerView.layoutManager = LinearLayoutManager(this)
-        // Vertical scroll — each image shows at FULL resolution
-        // (manhwa like Lookism has long strip images that need full height)
+        // PagerSnapHelper: one page per screen. Each image fills the screen.
+        // Long images (manhwa) can be zoomed/panned via ZoomableImageView.
+        PagerSnapHelper().attachToRecyclerView(pagesRecyclerView)
         loadingIndicator = findViewById(R.id.loadingIndicator)
         errorText = findViewById(R.id.errorText)
         chapterTitleText = findViewById(R.id.chapterTitle)
@@ -178,16 +179,19 @@ class ReaderActivity : AppCompatActivity() {
         val adapter = PagesAdapter(pages) { pageIndex ->
             toggleBars()
         }
-        // Vertical scroll — each page shows at full resolution
+        // PagerSnapHelper: one page per screen, swipe to navigate
         pagesRecyclerView.adapter = adapter
         pagesRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                val lm = recyclerView.layoutManager as LinearLayoutManager
-                val pos = lm.findFirstVisibleItemPosition()
-                if (pos != RecyclerView.NO_POSITION && pos != currentPageIndex) {
-                    currentPageIndex = pos
-                    pageCounter.text = "${pos + 1} / ${pages.size}"
-                    pageSeekBar.progress = pos
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                    val lm = recyclerView.layoutManager as LinearLayoutManager
+                    val pos = lm.findFirstCompletelyVisibleItemPosition()
+                    if (pos != RecyclerView.NO_POSITION && pos != currentPageIndex) {
+                        currentPageIndex = pos
+                        pageCounter.text = "${pos + 1} / ${pages.size}"
+                        pageSeekBar.progress = pos
+                        preloadPages(pos)
+                    }
                 }
             }
         })
