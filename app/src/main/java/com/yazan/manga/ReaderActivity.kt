@@ -190,7 +190,7 @@ class ReaderActivity : AppCompatActivity() {
     private fun setupPages(pageUrls: List<String>) {
         pages = pageUrls
         pageCounter.text = "1 / ${pages.size}"
-        pageSeekBar.max = pages.size - 1
+        pageSeekBar.max = if (pages.size > 1) pages.size - 1 else 0
 
         val adapter = PagesAdapter(pages) { pageIndex ->
             // Tap on a page toggles the UI bars

@@ -106,12 +106,8 @@ class MangaAdapter(
             Glide.with(cover.context)
                 .load(item.cover)
                 .centerCrop()
-                // Downscale the decoded bitmap to the cover thumbnail size.
-                // Without this, Glide decodes the full 256x360 image even
-                // for a 110x150 ImageView, wasting memory and causing jank.
-                .override(com.bumptech.glide.request.target.Target.SIZE_ORIGINAL)
+                .override(150, 200)  // Small thumbnail — prevents OOM
                 .diskCacheStrategy(com.bumptech.glide.load.engine.DiskCacheStrategy.ALL)
-                .thumbnail(0.1f)
                 .placeholder(R.color.surface_light)
                 .into(cover)
 

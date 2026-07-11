@@ -476,6 +476,10 @@ class MainActivity : AppCompatActivity() {
 
             isLoading = false
             result.onSuccess { items -> adapter.appendList(items) }
+                .onFailure { 
+                    currentPage--  // Revert page increment on failure
+                    Toast.makeText(this@MainActivity, "تعذّر تحميل المزيد", Toast.LENGTH_SHORT).show()
+                }
         }
     }
 }
