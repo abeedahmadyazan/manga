@@ -1,7 +1,70 @@
 {
-  "updated_at": "2026-07-11T13:23:59.046747+00:00",
+  "updated_at": "2026-07-11T19:07:11.008723+00:00",
   "count": 50,
   "items": [
+    {
+      "id": "774f0f04-5023-4e2e-9c0b-f0ed382f078b",
+      "title": "إينيغماتيكا",
+      "cover": "https://uploads.mangadex.org/covers/774f0f04-5023-4e2e-9c0b-f0ed382f078b/a7ef08f7-5abf-4eb6-bca1-ee0279bbbde7.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "c4ca02fb-8378-433b-8049-fbbea5d25cba",
+      "title": "هايميا-سينباي حسناء مهيبة!",
+      "cover": "https://uploads.mangadex.org/covers/c4ca02fb-8378-433b-8049-fbbea5d25cba/3d1dc074-3987-47ab-ad91-39202bc146e6.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "30f3ac69-21b6-45ad-a110-d011b7aaadaa",
+      "title": "Fly Me to The Moon",
+      "cover": "https://uploads.mangadex.org/covers/30f3ac69-21b6-45ad-a110-d011b7aaadaa/fb735d33-b723-4446-9258-eefbffae222f.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "b16f2554-9525-4f2a-bbe4-5b75b6605176",
+      "title": "Clevatess: The King of Dark Beasts, the Baby, and the Undead Hero",
+      "cover": "https://uploads.mangadex.org/covers/b16f2554-9525-4f2a-bbe4-5b75b6605176/0814dad9-5036-412c-b99e-61a31bab0e32.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "7d32ba73-def9-4ef5-a062-00de9f5dec7d",
+      "title": "Franken Fran",
+      "cover": "https://uploads.mangadex.org/covers/7d32ba73-def9-4ef5-a062-00de9f5dec7d/3b494c55-e148-4798-a98f-e67e25f42cb5.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "db692d58-4b13-4174-ae8c-30c515c0689c",
+      "title": "Hunter x Hunter",
+      "cover": "https://uploads.mangadex.org/covers/db692d58-4b13-4174-ae8c-30c515c0689c/aa112927-f1e5-4fe4-a4db-7fd4a1536e3c.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "dd406d53-05b6-4df1-b50a-670cc216d2ac",
+      "title": "The Forsaken Saintess and Her Foodie Roadtrip in Another World",
+      "cover": "https://uploads.mangadex.org/covers/dd406d53-05b6-4df1-b50a-670cc216d2ac/1d3d46b3-1916-4772-9005-608d672c7ab9.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "05c2917a-e0a4-4c55-abac-8be0f8b213e4",
+      "title": "ميتم المروض",
+      "cover": "https://uploads.mangadex.org/covers/05c2917a-e0a4-4c55-abac-8be0f8b213e4/3b0d8439-2e7a-473f-af4f-77997c6ced09.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "52842727-59ff-46a6-9a23-5eba61487586",
+      "title": "To Love Ru (Official Colored)",
+      "cover": "https://uploads.mangadex.org/covers/52842727-59ff-46a6-9a23-5eba61487586/1b7bba8a-d22a-4f1a-8723-601a611b135a.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
     {
       "id": "da36a727-7686-4e92-8fac-94bc292b8e91",
       "title": "ساحر المكتبة العظيم",
@@ -171,13 +234,6 @@
       "status": "ongoing"
     },
     {
-      "id": "7d32ba73-def9-4ef5-a062-00de9f5dec7d",
-      "title": "Franken Fran",
-      "cover": "https://uploads.mangadex.org/covers/7d32ba73-def9-4ef5-a062-00de9f5dec7d/3b494c55-e148-4798-a98f-e67e25f42cb5.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
       "id": "4e0ab019-afcb-4fd9-98eb-fcb28cf7fc81",
       "title": "مانجا الملكة النحلة شوكهو ميساكي - مينتل-آوت",
       "cover": "https://uploads.mangadex.org/covers/4e0ab019-afcb-4fd9-98eb-fcb28cf7fc81/71450b93-c970-42e6-bb65-93f45b8e9ac3.jpg.256.jpg",
@@ -295,62 +351,6 @@
       "cover": "https://uploads.mangadex.org/covers/569963c5-6b0b-4f92-b561-e1304b78b0dc/53839189-747f-451f-9803-150b428ea77b.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
-    },
-    {
-      "id": "a6a46436-9ed4-4c20-8b11-6f4a0f74b23a",
-      "title": "Kabuto Mushi",
-      "cover": "https://uploads.mangadex.org/covers/a6a46436-9ed4-4c20-8b11-6f4a0f74b23a/5a16e9bf-0859-4719-bd13-7e5e43e338d7.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "d7037b2a-874a-4360-8a7b-07f2899152fd",
-      "title": "إيروما-كن في مدرسة الشياطين",
-      "cover": "https://uploads.mangadex.org/covers/d7037b2a-874a-4360-8a7b-07f2899152fd/52d67301-401c-44c4-9d7b-529e2796f7d5.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "19a5c7e3-b743-4cb6-8dd8-41459bfc685d",
-      "title": "تدليل فارسة لا تعرف اي شيء سوى القتال",
-      "cover": "https://uploads.mangadex.org/covers/19a5c7e3-b743-4cb6-8dd8-41459bfc685d/883318ff-c44b-4ea9-a456-2b5b18a34631.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "77296cee-0b74-415f-914d-6f29036d3906",
-      "title": "مسرحية الجبل",
-      "cover": "https://uploads.mangadex.org/covers/77296cee-0b74-415f-914d-6f29036d3906/13fc5a86-4c49-43b6-a928-bee46f296724.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "29ab6984-7c1d-4d45-b925-25aa082b492e",
-      "title": "Shangri-La Frontier: From Trash-Game Hunter to God-Tier Game Master!",
-      "cover": "https://uploads.mangadex.org/covers/29ab6984-7c1d-4d45-b925-25aa082b492e/c691a3e7-7ec0-4c2f-a86a-cf04489b33aa.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "ea47525d-99df-45b5-9103-dd853f49f8c3",
-      "title": "Welcome to Demon School! Iruma-kun: IruMafia Edition",
-      "cover": "https://uploads.mangadex.org/covers/ea47525d-99df-45b5-9103-dd853f49f8c3/7ba89c43-1234-4d11-9aa6-c3a7576cd1ce.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "61889f95-60b7-4406-a5db-b256d2a742ae",
-      "title": "Bungou Stray Dogs: The Day I Picked Up Dazai",
-      "cover": "https://uploads.mangadex.org/covers/61889f95-60b7-4406-a5db-b256d2a742ae/ad5d7cc6-4cc7-495c-9920-55b5f12b8c49.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "37f5cce0-8070-4ada-96e5-fa24b1bd4ff9",
-      "title": "Kaguya-sama: Love Is War",
-      "cover": "https://uploads.mangadex.org/covers/37f5cce0-8070-4ada-96e5-fa24b1bd4ff9/e21ca520-5054-4041-a07e-de8b7c683522.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
     }
   ]
 }
