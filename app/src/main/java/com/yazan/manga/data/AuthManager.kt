@@ -246,13 +246,10 @@ object AuthManager {
         val (suspended, reason) = isUserSuspended(context, cleanEmail)
         if (suspended) return reason
 
-        // SERVER-SIDE multi-account prevention.
-        // The old client-side KEY_LINKED_EMAIL check is REMOVED — it was
-        // bypassable by clearing app data. The server check is authoritative.
-        val (linkOk, linkError) = ApiClient.linkDevice()
-        if (!linkOk) {
-            return linkError ?: "هذا الجهاز مرتبط بحساب آخر"
-        }
+        // NOTE: processEmailAuth is called WITHOUT Firebase sign-in (Account Picker fallback).
+        // We can't call linkDevice here because there's no Firebase ID token.
+        // The device link check happens server-side on every API call anyway
+        // (authenticate() checks device_links/{deviceId} for write operations).
 
         val deviceId = getDeviceId(context)
         // Admin check: XOR-decoded email comparison (email not visible in APK)
