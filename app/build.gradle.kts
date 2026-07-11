@@ -18,11 +18,9 @@ android {
 
     signingConfigs {
         // Production release signing: uses the keystore stored in GitHub
-        // Secrets (RELEASE_KEYSTORE, RELEASE_KEYSTORE_PASSWORD,
-        // RELEASE_KEY_PASSWORD). The keystore is base64-encoded in the
-        // secret and decoded by the GitHub Actions workflow before build.
-        // If KEYSTORE_FILE env var is not set, the release build falls back
-        // to the debug keystore (handled in buildTypes below).
+        // Secrets (KEYSTORE_FILE, KEYSTORE_PASSWORD, KEY_ALIAS, KEY_PASSWORD).
+        // The keystore is base64-encoded in the secret and decoded by the
+        // GitHub Actions workflow before build.
         create("release") {
             val keystoreFile = System.getenv("KEYSTORE_FILE")
             if (keystoreFile != null) {
@@ -32,12 +30,10 @@ android {
                 keyPassword = System.getenv("KEY_PASSWORD") ?: ""
             }
         }
-        getByName("debug") {
-            storeFile = file("yz-manga-debug.keystore")
-            storePassword = "android"
-            keyAlias = "androiddebugkey"
-            keyPassword = "android"
-        }
+        // Debug builds use Android's DEFAULT debug keystore (auto-generated
+        // at ~/.android/debug.keystore). We no longer ship a custom debug
+        // keystore in the repo — it was a security risk (anyone could sign
+        // a "update" APK with the known debug key).
     }
 
     buildTypes {
@@ -51,18 +47,16 @@ android {
                 "proguard-rules.pro"
             )
             // SECURITY: Only sign release with the release keystore (from GitHub Secrets).
-            // If RELEASE_KEYSTORE env var is not set, the build FAILS instead of
-            // falling back to the debug keystore (which would let anyone sign
-            // a "update" APK with the known debug key).
+            // If KEYSTORE_FILE env var is not set, the build produces an unsigned APK
+            // (safer than falling back to the debug keystore).
             val keystoreFile = System.getenv("KEYSTORE_FILE")
             if (keystoreFile != null) {
                 signingConfig = signingConfigs.getByName("release")
             }
-            // If no release keystore, the APK is unsigned — safer than debug-signed.
         }
         debug {
-            // Enable all signing schemes on debug builds too
-            signingConfig = signingConfigs.getByName("debug")
+            // Use Android's default debug signing (auto-generated keystore).
+            // No custom signingConfig needed — Gradle uses the default debug key.
         }
     }
     compileOptions {
