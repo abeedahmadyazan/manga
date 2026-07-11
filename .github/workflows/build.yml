@@ -27,22 +27,24 @@ jobs:
         gradle-version: '8.9'
 
     - name: Decode Release Keystore
-      env:
-        RELEASE_KEYSTORE: ${{ secrets.RELEASE_KEYSTORE }}
-        RELEASE_KEYSTORE_PASSWORD: ${{ secrets.RELEASE_KEYSTORE_PASSWORD }}
-        RELEASE_KEY_PASSWORD: ${{ secrets.RELEASE_KEY_PASSWORD }}
       run: |
-        echo "$RELEASE_KEYSTORE" | base64 -d > app/release.keystore
-        echo "KEYSTORE_FILE=app/release.keystore" >> $GITHUB_ENV
-        echo "KEYSTORE_PASSWORD=$RELEASE_KEYSTORE_PASSWORD" >> $GITHUB_ENV
-        echo "KEY_ALIAS=manga" >> $GITHUB_ENV
-        echo "KEY_PASSWORD=$RELEASE_KEY_PASSWORD" >> $GITHUB_ENV
+        echo "${{ secrets.RELEASE_KEYSTORE }}" | base64 -d > app/release.keystore
 
     - name: Build Debug APK
       run: gradle assembleDebug --stacktrace
+      env:
+        KEYSTORE_FILE: app/release.keystore
+        KEYSTORE_PASSWORD: ${{ secrets.RELEASE_KEYSTORE_PASSWORD }}
+        KEY_ALIAS: manga
+        KEY_PASSWORD: ${{ secrets.RELEASE_KEY_PASSWORD }}
 
     - name: Build Release APK
       run: gradle assembleRelease --stacktrace
+      env:
+        KEYSTORE_FILE: app/release.keystore
+        KEYSTORE_PASSWORD: ${{ secrets.RELEASE_KEYSTORE_PASSWORD }}
+        KEY_ALIAS: manga
+        KEY_PASSWORD: ${{ secrets.RELEASE_KEY_PASSWORD }}
 
     - name: Upload Debug APK
       uses: actions/upload-artifact@v4
@@ -64,7 +66,6 @@ jobs:
         files: |
           app/build/outputs/apk/debug/app-debug.apk
           app/build/outputs/apk/release/app-release.apk
-          app/build/outputs/apk/release/app-release-unsigned.apk
         draft: false
         prerelease: false
       env:
