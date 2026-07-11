@@ -115,7 +115,21 @@ class MangaRepository(private val appContext: Context? = null) {
     }
 
     suspend fun getPopularManga(page: Int = 1, contentType: String = "3asq"): Result<List<MangaListItem>> {
-        return getLatestManga(page, contentType)
+        // 3asq doesn't have a "popular" endpoint, so we fetch the listing
+        // and shuffle it to give a different order than "الأحدث".
+        // This makes the "الأكثر شهرة" tab feel different each time.
+        return try {
+            val items = fetch3asqListing(page).toMutableList()
+            // Shuffle so the order is different from "الأحدث"
+            items.shuffle()
+            if (items.isNotEmpty()) {
+                Result.success(items)
+            } else {
+                Result.failure(Exception("تعذّر تحميل المانجا. حاول لاحقاً."))
+            }
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
     }
 
     suspend fun searchManga(query: String, page: Int = 1, contentType: String = "3asq"): Result<List<MangaListItem>> {
