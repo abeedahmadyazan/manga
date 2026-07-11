@@ -77,6 +77,21 @@ object ApiClient {
     }
 
     /**
+     * Check if the device is compromised (Frida, debugger, emulator, root).
+     * Sends the result as X-Device-Status header so the server can
+     * shadow-ban compromised devices (block writes, allow reads).
+     */
+    private fun getDeviceStatus(): String {
+        return try {
+            val context = com.yazan.manga.MangaApp.appContext
+            val compromised = com.yazan.manga.data.AntiDebug.isCompromised(context)
+            if (compromised) "compromised" else "ok"
+        } catch (e: Exception) {
+            "ok"
+        }
+    }
+
+    /**
      * Get the current user's Firebase ID token (blocking).
      * Returns null if not signed in or token fetch fails.
      */
@@ -112,6 +127,7 @@ object ApiClient {
             .header("Content-Type", "application/json")
             .header("X-App-Version", getAppVersionCode().toString())
             .header("X-User-Email", getUserEmail())
+            .header("X-Device-Status", getDeviceStatus())
         when (method) {
             "GET" -> reqBuilder.get()
             "POST", "PUT", "DELETE" -> {
@@ -158,6 +174,7 @@ object ApiClient {
             .header("Content-Type", "application/json")
             .header("X-App-Version", getAppVersionCode().toString())
             .header("X-User-Email", getUserEmail())
+            .header("X-Device-Status", getDeviceStatus())
 
         when (method) {
             "GET" -> reqBuilder.get()

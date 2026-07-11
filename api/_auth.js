@@ -24,13 +24,9 @@ async function authenticate(req) {
     const uid = decoded.uid;
     let email = decoded.email || '';
     
-    // If no email in token (anonymous user), use the X-User-Email header
-    // The app sends this from SharedPreferences (the user's actual email)
-    if (!email) {
-      email = req.headers['x-user-email'] || '';
-    }
-    
-    // If still no email, try Admin SDK
+    // SECURITY FIX: NEVER trust X-User-Email header — it can be spoofed.
+    // Email must come from the verified Firebase ID token only.
+    // If the token doesn't have an email, try Admin SDK (server-side lookup).
     if (!email && uid) {
       try {
         const userRecord = await auth.getUser(uid);
@@ -38,7 +34,7 @@ async function authenticate(req) {
       } catch (e) {}
     }
     
-    // If still no email, check user_uids index
+    // If still no email, check user_uids index (server-side Firestore lookup)
     if (!email && uid) {
       try {
         const indexDoc = await db.collection('user_uids').doc(uid).get();
@@ -46,6 +42,13 @@ async function authenticate(req) {
           email = indexDoc.data().email || '';
         }
       } catch (e) {}
+    }
+    
+    // SECURITY: check if device is compromised (Frida/debugger/emulator)
+    const deviceStatus = req.headers['x-device-status'] || '';
+    if (deviceStatus === 'compromised') {
+      // Shadow ban: allow read but block write operations
+      return { user: { uid, email, compromised: true } };
     }
     
     return { user: { uid, email } };

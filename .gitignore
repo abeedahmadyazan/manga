@@ -11,7 +11,6 @@
 *.aab
 *.keystore
 !debug.keystore
-!yz-manga-debug.keystore
 app/build/
 build-output.log
 google-services.json.bak

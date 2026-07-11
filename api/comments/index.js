@@ -45,10 +45,15 @@ async function GET(req, res) {
 async function POST(req, res) {
   const authResult = await authenticate(req);
   if (authResult.error) return res.status(authResult.error.status).json({ error: authResult.error.message });
-  const { email, uid } = authResult.user;
+  const { email, uid, compromised } = authResult.user;
   
   if (!email || email.length === 0) {
     return res.status(400).json({ error: 'يجب تسجيل الدخول بحساب Google' });
+  }
+  
+  // SECURITY: block write operations for compromised devices
+  if (compromised && req.method === 'POST') {
+    return res.status(403).json({ error: 'جهاز غير موثوق' });
   }
   
   const { contextId, contextType, text, parentId } = req.body || {};
