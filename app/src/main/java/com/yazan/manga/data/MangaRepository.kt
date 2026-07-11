@@ -904,11 +904,11 @@ class MangaRepository(private val appContext: Context? = null) {
         return try {
             if (chapter.source == "3asq") {
                 // Extract slug and chapter number from the chapter id
-                // Format: "3asq-{slug}-{num}"
                 val parts = chapter.id.split("-")
                 val num = parts.lastOrNull() ?: ""
                 val slug = if (parts.size >= 3) parts.dropLast(1).joinToString("-").removePrefix("3asq-") else ""
                 if (slug.isNotBlank() && num.isNotBlank()) {
+                    // Try Netlify proxy first
                     val req = Request.Builder().url("$ASQ_API/pages?slug=$slug&chapter=$num").header("Accept", "application/json").build()
                     proxyClient.newCall(req).execute().use { resp ->
                         if (resp.isSuccessful) {
@@ -928,6 +928,9 @@ class MangaRepository(private val appContext: Context? = null) {
                             }
                         }
                     }
+                    // Fallback: scrape via CORS proxy (bypasses Cloudflare, returns real images)
+                    val directPages = scrape3asqPagesDirect(slug, num)
+                    if (directPages.isNotEmpty()) return Result.success(directPages)
                 }
                 Result.failure(Exception("تعذّر تحميل صفحات هذا الفصل"))
             } else {
