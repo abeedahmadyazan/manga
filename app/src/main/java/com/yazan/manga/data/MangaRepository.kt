@@ -487,9 +487,12 @@ class MangaRepository(private val appContext: Context? = null) {
                 Result.failure(e)
             }
         }
-        // Only 3asq and novel IDs are supported. Any other ID (e.g. old
-        // MangaDex UUIDs from cached data) returns a safe error — no crash.
-        return Result.failure(Exception("هذا المحتوى غير متاح"))
+        // MangaDex (مصدر 1): fetch details from MangaDex API
+        return try {
+            getMangaDetailsFromNetwork(id)
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
     }
 
     private fun getMangaDetailsFromNetwork(id: String): Result<MangaDetails> {
@@ -928,8 +931,21 @@ class MangaRepository(private val appContext: Context? = null) {
                 }
                 Result.failure(Exception("تعذّر تحميل صفحات هذا الفصل"))
             } else {
-                // Only 3asq source is supported. Any other source returns a safe error.
-                Result.failure(Exception("هذا المصدر غير مدعوم"))
+                // MangaDex (مصدر 1): fetch pages from MangaDex at-home server
+                val req = Request.Builder().url("https://api.mangadex.org/at-home/server/${chapter.id}").header("User-Agent", UA).header("Accept", "application/json").build()
+                proxyClient.newCall(req).execute().use { resp ->
+                    if (!resp.isSuccessful) return Result.failure(Exception("HTTP ${resp.code}"))
+                    val body = resp.body?.string() ?: return Result.failure(Exception("Empty"))
+                    val root = JsonParser.parseString(body)
+                    if (!root.isJsonObject) return Result.failure(Exception("Invalid JSON"))
+                    val baseUrl = root.asJsonObject.get("baseUrl")?.asString ?: return Result.failure(Exception("No baseUrl"))
+                    val chObj = root.asJsonObject.getAsJsonObject("chapter") ?: return Result.failure(Exception("No chapter"))
+                    val hash = chObj.get("hash")?.asString ?: return Result.failure(Exception("No hash"))
+                    val ds = chObj.getAsJsonArray("dataSaver") ?: return Result.failure(Exception("No pages"))
+                    val pages = mutableListOf<ChapterPage>()
+                    for (i in 0 until ds.size()) { pages.add(ChapterPage(index = i, url = "$baseUrl/data-saver/$hash/${ds[i].asString}")) }
+                    Result.success(pages)
+                }
             }
         } catch (e: Exception) { Result.failure(e) }
     }
