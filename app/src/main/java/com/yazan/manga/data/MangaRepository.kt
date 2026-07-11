@@ -95,57 +95,15 @@ class MangaRepository(private val appContext: Context? = null) {
     }
 
     suspend fun getLatestManga(page: Int = 1, contentType: String = "3asq"): Result<List<MangaListItem>> {
-        // 3asq is now the PRIMARY source. Try it first.
-        if (contentType == "3asq") {
-            try {
-                val items = fetch3asqListing(page)
-                if (items.isNotEmpty()) {
-                    DDoSProtection.reportSuccess()
-                    return Result.success(items)
-                }
-            } catch (e: Exception) {
-                Log.w(TAG, "3asq latest failed, falling back to MangaDex: ${e.message}")
-            }
-            // FALLBACK: if 3asq returned empty or threw an exception,
-            // automatically switch to MangaDex so the user always sees content.
-            return fetchMangaDexLatest(page)
-        }
-        // Try cache first (1h TTL) — only for manga (not 3asq, not novels)
-        appContext?.let { ctx ->
-            CacheManager.getCachedMangaList(ctx, "latest", page)?.let { cached ->
-                val fixed = cached.map { it.copy(cover = fixCoverUrl(it.cover)) }
-                return Result.success(fixed)
-            }
-        }
-        // Try CDN cache (gh-pages, updated every 2h) — page 1 only, manga only
-        if (page == 1 && contentType == "manga") {
-            val cdnItems = fetchCdnCache("latest")
-            if (cdnItems.isNotEmpty()) {
-                appContext?.let { CacheManager.cacheMangaList(it, "latest", page, cdnItems) }
-                DDoSProtection.reportSuccess()
-                return Result.success(cdnItems)
-            }
-        }
-        // Novels: serve from the curated Arabic light-novel collection (no CDN cache)
-        if (contentType == "novel") {
-            val items = getCuratedNovels(page)
-            return Result.success(items)
-        }
-        return fetchMangaDexLatest(page)
-    }
-
-    /** Fallback: fetch latest manga from MangaDex (Arabic). */
-    private fun fetchMangaDexLatest(page: Int): Result<List<MangaListItem>> {
-        if (!DDoSProtection.tryAcquire(DDoSProtection.Action.MANGA_LIST)) {
-            return Result.failure(Exception("تم تجاوز الحد المسموح. حاول لاحقاً."))
-        }
+        // 3asq is the ONLY source now. No MangaDex fallback.
         return try {
-            val offset = (page - 1) * 20
-            val url = "https://api.mangadex.org/manga?limit=20&offset=$offset&availableTranslatedLanguage[]=ar&hasAvailableChapters=true&order[latestUploadedChapter]=desc&includes[]=cover_art&contentRating[]=safe&contentRating[]=suggestive&originalLanguage[]=ja"
-            val items = fetchList(url)
-            DDoSProtection.reportSuccess()
-            appContext?.let { CacheManager.cacheMangaList(it, "latest", page, items) }
-            Result.success(items)
+            val items = fetch3asqListing(page)
+            if (items.isNotEmpty()) {
+                DDoSProtection.reportSuccess()
+                Result.success(items)
+            } else {
+                Result.failure(Exception("تعذّر تحميل المانجا. حاول لاحقاً."))
+            }
         } catch (e: Exception) {
             DDoSProtection.reportFailure()
             Result.failure(e)
@@ -153,50 +111,8 @@ class MangaRepository(private val appContext: Context? = null) {
     }
 
     suspend fun getPopularManga(page: Int = 1, contentType: String = "3asq"): Result<List<MangaListItem>> {
-        // 3asq is the primary source. Try it first.
-        if (contentType == "3asq") {
-            try {
-                val items = fetch3asqListing(page)
-                if (items.isNotEmpty()) {
-                    DDoSProtection.reportSuccess()
-                    return Result.success(items)
-                }
-            } catch (e: Exception) {
-                Log.w(TAG, "3asq popular failed, falling back to MangaDex: ${e.message}")
-            }
-            // FALLBACK to MangaDex popular
-            return fetchMangaDexPopular(page)
-        }
-        // Novels: serve from the curated Arabic light-novel collection
-        if (contentType == "novel") {
-            val items = getCuratedNovels(page)
-            return Result.success(items)
-        }
-        appContext?.let { ctx ->
-            CacheManager.getCachedMangaList(ctx, "popular", page)?.let { cached ->
-                val fixed = cached.map { it.copy(cover = fixCoverUrl(it.cover)) }
-                return Result.success(fixed)
-            }
-        }
-        return fetchMangaDexPopular(page)
-    }
-
-    /** Fallback: fetch popular manga from MangaDex (Arabic). */
-    private fun fetchMangaDexPopular(page: Int): Result<List<MangaListItem>> {
-        if (!DDoSProtection.tryAcquire(DDoSProtection.Action.MANGA_LIST)) {
-            return Result.failure(Exception("تم تجاوز الحد المسموح. حاول لاحقاً."))
-        }
-        return try {
-            val offset = (page - 1) * 20
-            val url = "https://api.mangadex.org/manga?limit=20&offset=$offset&availableTranslatedLanguage[]=ar&hasAvailableChapters=true&order[followedCount]=desc&includes[]=cover_art&contentRating[]=safe&contentRating[]=suggestive&originalLanguage[]=ja"
-            val items = fetchList(url)
-            DDoSProtection.reportSuccess()
-            appContext?.let { CacheManager.cacheMangaList(it, "popular", page, items) }
-            Result.success(items)
-        } catch (e: Exception) {
-            DDoSProtection.reportFailure()
-            Result.failure(e)
-        }
+        // 3asq is the ONLY source. Popular = same as latest (3asq has no popular endpoint).
+        return getLatestManga(page, contentType)
     }
 
     suspend fun searchManga(query: String, page: Int = 1, contentType: String = "manga"): Result<List<MangaListItem>> {
@@ -335,51 +251,33 @@ class MangaRepository(private val appContext: Context? = null) {
      */
     private fun fetch3asqListing(page: Int): List<MangaListItem> {
         return try {
-            val url = if (page <= 1) "$ASQ_BASE/manga/" else "$ASQ_BASE/manga/page/$page/"
+            // Use the Netlify proxy (bypasses Cloudflare)
+            val url = "$ASQ_API/listing?page=$page"
             val req = Request.Builder().url(url)
-                .header("User-Agent", UA)
-                .header("Accept", "text/html")
-                .header("Accept-Language", "ar,en;q=0.9")
+                .header("Accept", "application/json")
                 .build()
             client.newCall(req).execute().use { resp ->
                 if (!resp.isSuccessful) return emptyList()
-                val html = resp.body?.string() ?: return emptyList()
-                // Extract manga slug + title + cover from the listing HTML.
-                // 3asq uses WordPress Madara theme — each manga is in an
-                // <div class="row c-tabs-item"> or similar, with:
-                //   <a href="https://3asq.online/manga/{slug}/" ...>
-                //   <img src="...cover..." ...>
-                //   <h3 class="h4">...<a>{title}</a></h3>
+                val body = resp.body?.string() ?: return emptyList()
+                val root = JsonParser.parseString(body).asJsonObject
+                val arr = root.getAsJsonArray("items") ?: return emptyList()
                 val items = mutableListOf<MangaListItem>()
-                // Pattern 1: Madara theme listing (most common)
-                val pattern = Regex(
-                    "href=\"https?://3asq\\.[a-z]+/manga/([\\w-]+)/?\"[^>]*>[\\s\\S]{0,500}?<img[^>]+src=\"([^\"]+)\"[\\s\\S]{0,800}?<a[^>]*>([^<]+)</a>",
-                    RegexOption.IGNORE_CASE
-                )
-                val seen = mutableSetOf<String>()
-                for (m in pattern.findAll(html)) {
-                    val slug = m.groupValues[1]
-                    if (slug == "feed" || slug.isEmpty()) continue
-                    if (seen.contains(slug)) continue
-                    seen.add(slug)
-                    val cover = m.groupValues[2].let { if (it.startsWith("//")) "https:$it" else it }
-                    var title = m.groupValues[3].trim()
-                    // Decode HTML entities
-                    title = title.replace("&#8211;", "—").replace("&#8217;", "'")
-                        .replace("&#8220;", "\"").replace("&#8221;", "\"")
-                        .replace("&amp;", "&").replace("&#038;", "&")
-                    if (title.isNotEmpty()) {
+                for (i in 0 until arr.size()) {
+                    try {
+                        val item = arr[i].asJsonObject
+                        val id = item.get("id")?.asString ?: continue
+                        val title = item.get("title")?.asString ?: continue
+                        val cover = item.get("cover")?.asString ?: ""
                         items.add(MangaListItem(
-                            id = "3asq-$slug",
+                            id = id,
                             title = title,
                             cover = cover,
                             source = "3asq",
-                            status = "ongoing"
+                            status = item.get("status")?.asString ?: "ongoing"
                         ))
-                    }
-                    if (items.size >= 22) break
+                    } catch (e: Exception) {}
                 }
-                Log.d(TAG, "3asq listing page $page: ${items.size} items")
+                Log.d(TAG, "3asq listing page $page: ${items.size} items (via proxy)")
                 items
             }
         } catch (e: Exception) {
