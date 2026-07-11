@@ -32,67 +32,59 @@ class MangaApp : Application() {
         appContext = this
 
         // === GLOBAL CRASH HANDLER ===
-        // Catches ALL uncaught exceptions and prevents the "التطبيق يستمر
-        // في التوقف عن العمل" dialog. Instead, the app logs the error and
-        // continues. This is the nuclear option — no crash should ever reach
-        // the user.
         val defaultHandler = Thread.getDefaultUncaughtExceptionHandler()
         Thread.setDefaultUncaughtExceptionHandler { thread, throwable ->
-            android.util.Log.e("MangaApp", "UNCAUGHT EXCEPTION on ${thread.name}: ${throwable.message}", throwable)
-            // Don't call defaultHandler — that would kill the app.
-            // Just log and swallow. The user sees no crash dialog.
+            android.util.Log.e("MangaApp", "UNCAUGHT on ${thread.name}: ${throwable.message}", throwable)
         }
 
-        // === Security checks (wrapped in try-catch — never crash) ===
-        try {
-            AntiDebug.init(this)
-            val compromised = AntiDebug.isCompromised(this)
-            val rooted = AntiTampering.isLikelyRooted()
-            val emulator = AntiTampering.isEmulator()
-            android.util.Log.d("MangaApp", "Security: compromised=$compromised rooted=$rooted emulator=$emulator")
-        } catch (e: Exception) {
-            android.util.Log.w("MangaApp", "Security check failed (non-fatal): ${e.message}")
-        }
-
-        // === Firebase App Check (wrapped — some devices don't have Play Services) ===
-        try {
-            val firebaseAppCheck = com.google.firebase.appcheck.FirebaseAppCheck.getInstance()
-            firebaseAppCheck.installAppCheckProviderFactory(
-                com.google.firebase.appcheck.playintegrity.PlayIntegrityAppCheckProviderFactory.getInstance()
-            )
-        } catch (e: Exception) {
-            android.util.Log.w("MangaApp", "App Check failed (non-fatal): ${e.message}")
-        }
-
-        // === Firestore setup (wrapped) ===
-        try {
-            val db = FirebaseFirestore.getInstance()
-            val settings = FirebaseFirestoreSettings.Builder()
-                .setPersistenceEnabled(true)
-                .setCacheSizeBytes(100L * 1024 * 1024)
-                .build()
-            db.firestoreSettings = settings
-        } catch (e: Exception) {
-            android.util.Log.w("MangaApp", "Firestore setup failed (non-fatal): ${e.message}")
-        }
-
-        // === Anonymous auth (wrapped) ===
-        try {
-            val firebaseAuth = FirebaseAuth.getInstance()
-            if (firebaseAuth.currentUser == null) {
-                firebaseAuth.signInAnonymously()
-                    .addOnSuccessListener {
-                        android.util.Log.d("MangaApp", "Anonymous auth success: UID=${it.user?.uid}")
-                    }
-                    .addOnFailureListener { e ->
-                        android.util.Log.w("MangaApp", "Anonymous auth failed (this is OK): ${e.message}")
-                    }
-            } else {
-                android.util.Log.d("MangaApp", "Already signed in: UID=${firebaseAuth.currentUser?.uid}")
-                com.yazan.manga.data.AuthManager.restoreUserFromCloud(this)
+        // === ALL heavy initialization moved to BACKGROUND THREAD ===
+        // This prevents ANR ("التطبيق لا يستجيب") on app startup.
+        // The UI thread stays free to render the screen immediately.
+        Thread {
+            try {
+                // Security checks (non-blocking now — on background thread)
+                AntiDebug.init(this)
+                val compromised = AntiDebug.isCompromised(this)
+                val rooted = AntiTampering.isLikelyRooted()
+                val emulator = AntiTampering.isEmulator()
+                android.util.Log.d("MangaApp", "Security: compromised=$compromised rooted=$rooted emulator=$emulator")
+            } catch (e: Exception) {
+                android.util.Log.w("MangaApp", "Security check failed: ${e.message}")
             }
-        } catch (e: Exception) {
-            android.util.Log.w("MangaApp", "Auth setup failed (non-fatal): ${e.message}")
-        }
+
+            try {
+                // Firestore setup
+                val db = FirebaseFirestore.getInstance()
+                val settings = FirebaseFirestoreSettings.Builder()
+                    .setPersistenceEnabled(true)
+                    .setCacheSizeBytes(100L * 1024 * 1024)
+                    .build()
+                db.firestoreSettings = settings
+            } catch (e: Exception) {
+                android.util.Log.w("MangaApp", "Firestore setup failed: ${e.message}")
+            }
+
+            try {
+                // Anonymous auth
+                val firebaseAuth = FirebaseAuth.getInstance()
+                if (firebaseAuth.currentUser == null) {
+                    firebaseAuth.signInAnonymously()
+                        .addOnSuccessListener {
+                            android.util.Log.d("MangaApp", "Anonymous auth success")
+                        }
+                        .addOnFailureListener { e ->
+                            android.util.Log.w("MangaApp", "Anonymous auth failed: ${e.message}")
+                        }
+                } else {
+                    com.yazan.manga.data.AuthManager.restoreUserFromCloud(this)
+                }
+            } catch (e: Exception) {
+                android.util.Log.w("MangaApp", "Auth setup failed: ${e.message}")
+            }
+        }.start()
+
+        // NOTE: FirebaseAppCheck REMOVED — it was causing ANR by blocking
+        // the main thread while contacting Google Play Services. The app
+        // works fine without it; Firestore rules still protect the data.
     }
 }

@@ -12,8 +12,8 @@ android {
         applicationId = "com.yazan.manga"
         minSdk = 24
         targetSdk = 35
-        versionCode = 78
-        versionName = "1.0.22"
+        versionCode = 79
+        versionName = "1.0.23"
     }
 
     signingConfigs {
