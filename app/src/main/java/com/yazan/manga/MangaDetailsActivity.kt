@@ -172,7 +172,13 @@ class MangaDetailsActivity : AppCompatActivity() {
                 .placeholder(R.color.surface_light)
                 .into(coverImg)
         }
-        authorText.text = "المؤلف: ${data.author.ifEmpty { "غير معروف" }}"
+        // Hide author if empty — don't show "المؤلف: غير معروف"
+        if (data.author.isNotEmpty()) {
+            authorText.text = "المؤلف: ${data.author}"
+            authorText.visibility = View.VISIBLE
+        } else {
+            authorText.visibility = View.GONE
+        }
         // Status: keep label short + color-code it
         val rawStatus = data.status.ifEmpty { "مستمرة" }
         statusText.text = normalizeStatus(rawStatus)

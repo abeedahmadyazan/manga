@@ -106,7 +106,7 @@ class MangaAdapter(
             Glide.with(cover.context)
                 .load(item.cover)
                 .centerCrop()
-                .override(150, 200)  // Small thumbnail — prevents OOM
+                .override(300, 400)  // Higher quality — still safe for memory
                 .diskCacheStrategy(com.bumptech.glide.load.engine.DiskCacheStrategy.ALL)
                 .placeholder(R.color.surface_light)
                 .into(cover)
