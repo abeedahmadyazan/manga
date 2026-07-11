@@ -27,8 +27,7 @@ jobs:
         gradle-version: '8.9'
 
     - name: Decode Release Keystore
-      run: |
-        echo "${{ secrets.RELEASE_KEYSTORE }}" | base64 -d > app/release.keystore
+      run: echo "${{ secrets.RELEASE_KEYSTORE }}" | base64 -d > app/release.keystore
 
     - name: Build Debug APK
       run: gradle assembleDebug --stacktrace
