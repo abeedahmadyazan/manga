@@ -7,14 +7,12 @@
     android:background="@color/background_dark"
     android:layoutDirection="rtl">
 
-    <!-- Vertical scroll reader — all pages in a RecyclerView -->
-    <androidx.recyclerview.widget.RecyclerView
+    <!-- ViewPager2 — one page per screen, swipe to navigate -->
+    <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/pagesRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/background_dark"
-        android:overScrollMode="never"
-        android:scrollbars="vertical" />
+        android:background="@color/background_dark" />
 
     <ProgressBar
         android:id="@+id/loadingIndicator"

@@ -991,10 +991,9 @@ class MangaRepository(private val appContext: Context? = null) {
                 while (matcher.find()) {
                     var imgUrl = matcher.group(1) ?: continue
                     imgUrl = imgUrl.trim()
-                    // Route image through CORS proxy so Cloudflare doesn't block it
-                    val proxiedUrl = "${CORS_PROXY}${imgUrl}"
-                    if (seen.add(proxiedUrl)) {
-                        pages.add(ChapterPage(index = index, url = proxiedUrl))
+                    // Return DIRECT image URL — Glide will load it
+                    if (seen.add(imgUrl)) {
+                        pages.add(ChapterPage(index = index, url = imgUrl))
                         index++
                     }
                 }
