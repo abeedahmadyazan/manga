@@ -101,13 +101,14 @@ class MangaRepository(private val appContext: Context? = null) {
     }
 
     suspend fun getLatestManga(page: Int = 1, contentType: String = "3asq"): Result<List<MangaListItem>> {
-        // 3asq is the ONLY source. No DDoSProtection (proxy handles rate limiting).
         return try {
-            val items = fetch3asqListing(page)
-            if (items.isNotEmpty()) {
-                Result.success(items)
+            if (contentType == "3asq") {
+                val items = fetch3asqListing(page)
+                if (items.isNotEmpty()) Result.success(items)
+                else Result.failure(Exception("تعذّر تحميل المانجا. حاول لاحقاً."))
             } else {
-                Result.failure(Exception("تعذّر تحميل المانجا. حاول لاحقاً."))
+                // مصدر 1: MangaDex
+                fetchMangaDexList(page, "latest")
             }
         } catch (e: Exception) {
             Result.failure(e)
@@ -115,52 +116,65 @@ class MangaRepository(private val appContext: Context? = null) {
     }
 
     suspend fun getPopularManga(page: Int = 1, contentType: String = "3asq"): Result<List<MangaListItem>> {
-        // 3asq doesn't have a "popular" endpoint, so we fetch the listing
-        // and shuffle it to give a different order than "الأحدث".
-        // This makes the "الأكثر شهرة" tab feel different each time.
         return try {
-            val items = fetch3asqListing(page).toMutableList()
-            // Shuffle so the order is different from "الأحدث"
-            items.shuffle()
-            if (items.isNotEmpty()) {
-                Result.success(items)
+            if (contentType == "3asq") {
+                val items = fetch3asqListing(page).toMutableList()
+                items.shuffle()
+                if (items.isNotEmpty()) Result.success(items)
+                else Result.failure(Exception("تعذّر تحميل المانجا. حاول لاحقاً."))
             } else {
-                Result.failure(Exception("تعذّر تحميل المانجا. حاول لاحقاً."))
+                // مصدر 1: MangaDex popular
+                fetchMangaDexList(page, "popular")
             }
         } catch (e: Exception) {
             Result.failure(e)
         }
     }
 
-    suspend fun searchManga(query: String, page: Int = 1, contentType: String = "3asq"): Result<List<MangaListItem>> {
-        // Search 3asq via the Netlify proxy search endpoint.
+    /** Fetch manga list from MangaDex (مصدر 1) */
+    private fun fetchMangaDexList(page: Int, sort: String): Result<List<MangaListItem>> {
         return try {
-            val encoded = java.net.URLEncoder.encode(query, "UTF-8")
-            val url = "$ASQ_API/search?q=$encoded"
-            val req = Request.Builder().url(url)
-                .header("Accept", "application/json")
-                .build()
-            proxyClient.newCall(req).execute().use { resp ->
-                if (!resp.isSuccessful) return Result.success(emptyList())
-                val body = resp.body?.string() ?: return Result.success(emptyList())
-                val root = JsonParser.parseString(body).asJsonObject
-                val arr = root.getAsJsonArray("items") ?: return Result.success(emptyList())
-                val items = mutableListOf<MangaListItem>()
-                for (i in 0 until arr.size()) {
-                    try {
-                        val item = arr[i].asJsonObject
-                        val id = item.get("id")?.asString ?: continue
-                        val title = item.get("title")?.asString ?: continue
-                        val cover = item.get("cover")?.asString ?: ""
-                        items.add(MangaListItem(
-                            id = id,
-                            title = title,
-                            cover = cover,
-                            source = "3asq",
-                            status = item.get("status")?.asString ?: "ongoing"
-                        ))
-                    } catch (e: Exception) {}
+            val offset = (page - 1) * 20
+            val orderParam = if (sort == "popular") "order[followedCount]=desc" else "order[latestUploadedChapter]=desc"
+            val url = "https://api.mangadex.org/manga?limit=20&offset=$offset&availableTranslatedLanguage[]=ar&hasAvailableChapters=true&$orderParam&includes[]=cover_art&contentRating[]=safe&contentRating[]=suggestive&originalLanguage[]=ja"
+            val items = fetchList(url)
+            if (items.isNotEmpty()) Result.success(items)
+            else Result.failure(Exception("تعذّر تحميل المانجا. حاول لاحقاً."))
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
+
+    suspend fun searchManga(query: String, page: Int = 1, contentType: String = "3asq"): Result<List<MangaListItem>> {
+        return try {
+            if (contentType == "3asq") {
+                // Search 3asq via proxy
+                val encoded = java.net.URLEncoder.encode(query, "UTF-8")
+                val url = "$ASQ_API/search?q=$encoded"
+                val req = Request.Builder().url(url).header("Accept", "application/json").build()
+                proxyClient.newCall(req).execute().use { resp ->
+                    if (!resp.isSuccessful) return Result.success(emptyList())
+                    val body = resp.body?.string() ?: return Result.success(emptyList())
+                    val root = JsonParser.parseString(body).asJsonObject
+                    val arr = root.getAsJsonArray("items") ?: return Result.success(emptyList())
+                    val items = mutableListOf<MangaListItem>()
+                    for (i in 0 until arr.size()) {
+                        try {
+                            val item = arr[i].asJsonObject
+                            val id = item.get("id")?.asString ?: continue
+                            val title = item.get("title")?.asString ?: continue
+                            val cover = item.get("cover")?.asString ?: ""
+                            items.add(MangaListItem(id = id, title = title, cover = cover, source = "3asq", status = "ongoing"))
+                        } catch (e: Exception) {}
+                    }
+                    Result.success(items)
                 }
+            } else {
+                // Search MangaDex (مصدر 1)
+                val encoded = java.net.URLEncoder.encode(query, "UTF-8")
+                val offset = (page - 1) * 20
+                val url = "https://api.mangadex.org/manga?title=$encoded&limit=20&offset=$offset&availableTranslatedLanguage[]=ar&hasAvailableChapters=true&order[relevance]=desc&includes[]=cover_art&contentRating[]=safe&contentRating[]=suggestive&originalLanguage[]=ja"
+                val items = fetchList(url)
                 Result.success(items)
             }
         } catch (e: Exception) {

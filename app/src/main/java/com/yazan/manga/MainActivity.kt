@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity() {
 
     private val repository = MangaRepository(this)
     private var currentTab = "latest"
-    private var currentContentType = "3asq"  // 3asq is the primary source now
+    private var currentContentType = "3asq"  // 3asq = مصدر 2, manga = مصدر 1
     private var currentPage = 1
     private var isLoading = false
 
@@ -200,9 +200,43 @@ class MainActivity : AppCompatActivity() {
 
         setActiveTab(currentTab)
 
-        // Source buttons removed — 3asq is now the default source with
-        // automatic fallback to MangaDex if 3asq is down.
-        // currentContentType stays "3asq" and the repository handles fallback.
+        // === Source selector — 2 buttons ===
+        val chipSource1 = findViewById<MaterialButton>(R.id.chipSource1)
+        val chipSource2 = findViewById<MaterialButton>(R.id.chipSource2)
+
+        fun setActiveSource(source: String) {
+            currentContentType = source
+            // Update button backgrounds programmatically (avoids MaterialButton crash)
+            val activeBg = android.graphics.drawable.GradientDrawable().apply {
+                cornerRadius = 22f * resources.displayMetrics.density
+                setColor(getColor(R.color.primary))
+            }
+            val inactiveBg = android.graphics.drawable.GradientDrawable().apply {
+                cornerRadius = 22f * resources.displayMetrics.density
+                setColor(getColor(R.color.surface))
+            }
+            if (source == "manga") {
+                chipSource1.background = activeBg
+                chipSource1.setTextColor(getColor(R.color.black))
+                chipSource2.background = inactiveBg
+                chipSource2.setTextColor(getColor(R.color.text_secondary))
+            } else {
+                chipSource2.background = activeBg
+                chipSource2.setTextColor(getColor(R.color.black))
+                chipSource1.background = inactiveBg
+                chipSource1.setTextColor(getColor(R.color.text_secondary))
+            }
+            // Reload with new source
+            currentPage = 1
+            adapter.submitList(emptyList())
+            loadManga()
+        }
+
+        chipSource1.setOnClickListener { if (currentContentType != "manga") setActiveSource("manga") }
+        chipSource2.setOnClickListener { if (currentContentType != "3asq") setActiveSource("3asq") }
+
+        // Set default source
+        setActiveSource("3asq")
 
         tabLatest.setOnClickListener {
             if (currentTab == "latest") return@setOnClickListener
@@ -440,7 +474,7 @@ class MainActivity : AppCompatActivity() {
 
         lifecycleScope.launch {
             val result = withContext(Dispatchers.IO) {
-                repository.searchManga(query)
+                repository.searchManga(query, 1, currentContentType)
             }
 
             hideSkeleton()
