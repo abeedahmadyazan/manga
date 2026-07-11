@@ -13,8 +13,14 @@ import java.util.concurrent.TimeUnit
 class MangaRepository(private val appContext: Context? = null) {
 
     private val client = OkHttpClient.Builder()
-        .connectTimeout(15, TimeUnit.SECONDS)
-        .readTimeout(30, TimeUnit.SECONDS)
+        .connectTimeout(10, TimeUnit.SECONDS)
+        .readTimeout(15, TimeUnit.SECONDS)
+        .build()
+
+    // Separate client for 3asq proxy calls — short timeouts to prevent ANR
+    private val proxyClient = OkHttpClient.Builder()
+        .connectTimeout(8, TimeUnit.SECONDS)
+        .readTimeout(12, TimeUnit.SECONDS)
         .build()
 
     private val TAG = "MangaRepo"
@@ -67,7 +73,7 @@ class MangaRepository(private val appContext: Context? = null) {
                 .header("User-Agent", UA)
                 .header("Accept", "application/json")
                 .build()
-            client.newCall(req).execute().use { resp ->
+            proxyClient.newCall(req).execute().use { resp ->
                 if (!resp.isSuccessful) return emptyList()
                 val body = resp.body?.string() ?: return emptyList()
                 val root = JsonParser.parseString(body).asJsonObject
@@ -95,23 +101,20 @@ class MangaRepository(private val appContext: Context? = null) {
     }
 
     suspend fun getLatestManga(page: Int = 1, contentType: String = "3asq"): Result<List<MangaListItem>> {
-        // 3asq is the ONLY source now. No MangaDex fallback.
+        // 3asq is the ONLY source. No DDoSProtection (proxy handles rate limiting).
         return try {
             val items = fetch3asqListing(page)
             if (items.isNotEmpty()) {
-                DDoSProtection.reportSuccess()
                 Result.success(items)
             } else {
                 Result.failure(Exception("تعذّر تحميل المانجا. حاول لاحقاً."))
             }
         } catch (e: Exception) {
-            DDoSProtection.reportFailure()
             Result.failure(e)
         }
     }
 
     suspend fun getPopularManga(page: Int = 1, contentType: String = "3asq"): Result<List<MangaListItem>> {
-        // 3asq is the ONLY source. Popular = same as latest (3asq has no popular endpoint).
         return getLatestManga(page, contentType)
     }
 
@@ -123,7 +126,7 @@ class MangaRepository(private val appContext: Context? = null) {
             val req = Request.Builder().url(url)
                 .header("Accept", "application/json")
                 .build()
-            client.newCall(req).execute().use { resp ->
+            proxyClient.newCall(req).execute().use { resp ->
                 if (!resp.isSuccessful) return Result.success(emptyList())
                 val body = resp.body?.string() ?: return Result.success(emptyList())
                 val root = JsonParser.parseString(body).asJsonObject
@@ -259,12 +262,12 @@ class MangaRepository(private val appContext: Context? = null) {
      */
     private fun fetch3asqListing(page: Int): List<MangaListItem> {
         return try {
-            // Use the Netlify proxy (bypasses Cloudflare)
+            // Use the Netlify proxy with SHORT timeout (proxyClient)
             val url = "$ASQ_API/listing?page=$page"
             val req = Request.Builder().url(url)
                 .header("Accept", "application/json")
                 .build()
-            client.newCall(req).execute().use { resp ->
+            proxyClient.newCall(req).execute().use { resp ->
                 if (!resp.isSuccessful) return emptyList()
                 val body = resp.body?.string() ?: return emptyList()
                 val root = JsonParser.parseString(body).asJsonObject
@@ -310,7 +313,7 @@ class MangaRepository(private val appContext: Context? = null) {
                 .header("Accept", "application/json")
                 .build()
             val chapters = mutableListOf<MangaChapter>()
-            client.newCall(chaptersReq).execute().use { resp ->
+            proxyClient.newCall(chaptersReq).execute().use { resp ->
                 if (!resp.isSuccessful) return null
                 val body = resp.body?.string() ?: return null
                 val root = JsonParser.parseString(body).asJsonObject
@@ -357,7 +360,7 @@ class MangaRepository(private val appContext: Context? = null) {
 
     private fun fetchList(url: String): List<MangaListItem> {
         val req = Request.Builder().url(url).header("User-Agent", UA).header("Accept", "application/json").build()
-        client.newCall(req).execute().use { resp ->
+        proxyClient.newCall(req).execute().use { resp ->
             if (!resp.isSuccessful) return emptyList()
             val body = resp.body?.string() ?: return emptyList()
             val root = JsonParser.parseString(body)
@@ -446,20 +449,13 @@ class MangaRepository(private val appContext: Context? = null) {
         if (id.startsWith("3asq-")) {
             val slug = id.removePrefix("3asq-")
             return try {
-                if (!DDoSProtection.tryAcquire(DDoSProtection.Action.MANGA_DETAILS)) {
-                    return Result.failure(Exception("تم تجاوز الحد المسموح. حاول لاحقاً."))
-                }
                 val details = fetch3asqMangaDetails(slug)
                 if (details != null) {
-                    DDoSProtection.reportSuccess()
-                    appContext?.let { CacheManager.cacheMangaDetails(it, id, details) }
                     Result.success(details)
                 } else {
-                    DDoSProtection.reportFailure()
-                    Result.failure(Exception("تعذّر تحميل تفاصيل المانجا من العاشق"))
+                    Result.failure(Exception("تعذّر تحميل تفاصيل المانجا"))
                 }
             } catch (e: Exception) {
-                DDoSProtection.reportFailure()
                 Result.failure(e)
             }
         }
@@ -473,7 +469,7 @@ class MangaRepository(private val appContext: Context? = null) {
             // 1. Get manga details from MangaDex
             val req = Request.Builder().url("https://api.mangadex.org/manga/$id?includes[]=cover_art&includes[]=author").header("User-Agent", UA).header("Accept", "application/json").build()
             var title = "بدون عنوان"; var enTitle = ""; var cover = ""; var author = ""; var description = ""; var status = "ongoing"; var genres = listOf<String>()
-            client.newCall(req).execute().use { resp ->
+            proxyClient.newCall(req).execute().use { resp ->
                 if (!resp.isSuccessful) return@use
                 val body = resp.body?.string() ?: return@use
                 val root = JsonParser.parseString(body)
@@ -743,7 +739,7 @@ class MangaRepository(private val appContext: Context? = null) {
         // Try the Netlify proxy first (fast, JSON)
         val proxyResult = try {
             val req = Request.Builder().url("$ASQ_API/chapters?slug=$slug").header("Accept", "application/json").build()
-            client.newCall(req).execute().use { resp ->
+            proxyClient.newCall(req).execute().use { resp ->
                 if (!resp.isSuccessful) return@use null
                 val body = resp.body?.string() ?: return@use null
                 val root = JsonParser.parseString(body)
@@ -780,7 +776,7 @@ class MangaRepository(private val appContext: Context? = null) {
                 .header("Origin", ASQ_BASE)
                 .header("Accept", "text/html")
                 .build()
-            client.newCall(req).execute().use { resp ->
+            proxyClient.newCall(req).execute().use { resp ->
                 if (!resp.isSuccessful) return null
                 val html = resp.body?.string() ?: return null
                 // Find all chapter links: /manga/{slug}/{number}/
@@ -821,7 +817,7 @@ class MangaRepository(private val appContext: Context? = null) {
         return try {
             val encoded = java.net.URLEncoder.encode(query, "UTF-8")
             val req = Request.Builder().url("$ASQ_API/search?q=$encoded&limit=1").header("Accept", "application/json").build()
-            val slug = client.newCall(req).execute().use { resp ->
+            val slug = proxyClient.newCall(req).execute().use { resp ->
                 if (!resp.isSuccessful) return null
                 val body = resp.body?.string() ?: return null
                 val root = JsonParser.parseString(body)
@@ -883,7 +879,7 @@ class MangaRepository(private val appContext: Context? = null) {
                 val slug = if (parts.size >= 3) parts.dropLast(1).joinToString("-").removePrefix("3asq-") else ""
                 if (slug.isNotBlank() && num.isNotBlank()) {
                     val req = Request.Builder().url("$ASQ_API/pages?slug=$slug&chapter=$num").header("Accept", "application/json").build()
-                    client.newCall(req).execute().use { resp ->
+                    proxyClient.newCall(req).execute().use { resp ->
                         if (resp.isSuccessful) {
                             val body = resp.body?.string() ?: ""
                             val root = JsonParser.parseString(body)
@@ -929,7 +925,7 @@ class MangaRepository(private val appContext: Context? = null) {
                 .header("Origin", ASQ_BASE)
                 .header("Accept", "text/html")
                 .build()
-            client.newCall(req).execute().use { resp ->
+            proxyClient.newCall(req).execute().use { resp ->
                 if (!resp.isSuccessful) return emptyList()
                 val html = resp.body?.string() ?: return emptyList()
                 // Find all image URLs inside reading-content div
