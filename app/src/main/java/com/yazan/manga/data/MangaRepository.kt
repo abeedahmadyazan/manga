@@ -980,22 +980,25 @@ class MangaRepository(private val appContext: Context? = null) {
             proxyClient.newCall(req).execute().use { resp ->
                 if (!resp.isSuccessful) return emptyList()
                 val html = resp.body?.string() ?: return emptyList()
-                // Find all image URLs inside reading-content div
-                // Pattern: src="https://3asq.online/wp-content/uploads/WP-manga/data/..."
+                // Match 3asq.online (not .pro) image URLs
                 val pattern = java.util.regex.Pattern.compile(
-                    "(?:src|data-src)=\"(https://3asq\\.pro/wp-content/uploads/WP-manga/data/[^\"]+\\.(?:jpg|jpeg|png|webp))\""
+                    "(?:src|data-src)=\"\\s*(https?://3asq\\.[a-z]+/wp-content/uploads/WP-manga/data/[^\"]+\\.(?:jpg|jpeg|png|webp))\""
                 )
                 val matcher = pattern.matcher(html)
                 val pages = mutableListOf<ChapterPage>()
                 val seen = mutableSetOf<String>()
                 var index = 0
                 while (matcher.find()) {
-                    val imgUrl = matcher.group(1) ?: continue
-                    if (seen.add(imgUrl)) {
-                        pages.add(ChapterPage(index = index, url = imgUrl))
+                    var imgUrl = matcher.group(1) ?: continue
+                    imgUrl = imgUrl.trim()
+                    // Route image through CORS proxy so Cloudflare doesn't block it
+                    val proxiedUrl = "${CORS_PROXY}${imgUrl}"
+                    if (seen.add(proxiedUrl)) {
+                        pages.add(ChapterPage(index = index, url = proxiedUrl))
                         index++
                     }
                 }
+                Log.d(TAG, "scrape3asqPagesDirect: found ${pages.size} pages")
                 pages
             }
         } catch (e: Exception) {
