@@ -1,5 +1,4 @@
 package com.yazan.manga
-
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,7 +10,6 @@ import android.widget.SeekBar
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
-
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
@@ -22,9 +20,7 @@ import com.yazan.manga.ui.ZoomableImageView
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-
 class ReaderActivity : AppCompatActivity() {
-
     private lateinit var repository: MangaRepository
     private lateinit var pagesRecyclerView: ViewPager2
     private lateinit var loadingIndicator: ProgressBar
@@ -36,23 +32,18 @@ class ReaderActivity : AppCompatActivity() {
     private lateinit var pageSeekBar: SeekBar
     private lateinit var topBarOverlay: View
     private lateinit var bottomBar: View
-
     private var currentChapter: MangaChapter? = null
     private var currentChapterId: String = ""
     private var currentChapterNumber: String = ""
     private var chapterUrl: String = ""
     private var mangaSlug: String = ""
-
     private var pages: List<String> = emptyList()
     private var currentPageIndex: Int = 0
     private var barsVisible = false
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_reader)
-
         repository = MangaRepository(this)
-
         currentChapterId = intent.getStringExtra("chapter_id") ?: ""
         currentChapterNumber = intent.getStringExtra("chapter_number") ?: ""
         val chapterTitle = intent.getStringExtra("chapter_title") ?: ""
@@ -60,7 +51,6 @@ class ReaderActivity : AppCompatActivity() {
         val chapterSource = intent.getStringExtra("chapter_source") ?: "3asq"
         chapterUrl = intent.getStringExtra("chapter_url") ?: ""
         mangaSlug = intent.getStringExtra("manga_slug") ?: ""
-
         currentChapter = MangaChapter(
             id = currentChapterId,
             number = currentChapterNumber,
@@ -69,11 +59,9 @@ class ReaderActivity : AppCompatActivity() {
             source = chapterSource,
             externalUrl = chapterUrl.ifEmpty { null }
         )
-
         initViews()
         loadPages()
     }
-
     private fun initViews() {
         pagesRecyclerView = findViewById(R.id.pagesRecyclerView)
         pagesRecyclerView.orientation = ViewPager2.ORIENTATION_VERTICAL
@@ -86,11 +74,8 @@ class ReaderActivity : AppCompatActivity() {
         pageSeekBar = findViewById(R.id.pageSeekBar)
         topBarOverlay = findViewById(R.id.topBarOverlay)
         bottomBar = findViewById(R.id.bottomBar)
-
         chapterTitleText.text = "الفصل $currentChapterNumber"
-
         findViewById<ImageButton>(R.id.btnBack).setOnClickListener { finish() }
-
         findViewById<ImageButton>(R.id.btnChapterComments).setOnClickListener {
             val intent = Intent(this, CommentsActivity::class.java)
             intent.putExtra("context_id", currentChapterId)
@@ -98,15 +83,12 @@ class ReaderActivity : AppCompatActivity() {
             intent.putExtra("context_title", "الفصل $currentChapterNumber")
             startActivity(intent)
         }
-
         btnPrevPage.setOnClickListener { scrollToPage(currentPageIndex - 1) }
         btnNextPage.setOnClickListener { scrollToPage(currentPageIndex + 1) }
-
         // Zoom OUT — operates on the currently visible page only.
         findViewById<ImageButton>(R.id.btnZoomOut).setOnClickListener {
             findVisiblePageView()?.zoomOut()
         }
-
         pageSeekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
                 if (fromUser && pages.isNotEmpty()) {
@@ -117,12 +99,10 @@ class ReaderActivity : AppCompatActivity() {
             override fun onStopTrackingTouch(seekBar: SeekBar?) {}
         })
     }
-
     private fun loadPages() {
         val chapter = currentChapter ?: return
         loadingIndicator.visibility = View.VISIBLE
         errorText.visibility = View.GONE
-
         val localPages = intent.getStringArrayExtra("local_pages")
         if (chapter.source == "local" || localPages != null) {
             loadingIndicator.visibility = View.GONE
@@ -136,7 +116,6 @@ class ReaderActivity : AppCompatActivity() {
             }
             return
         }
-
         if (mangaSlug.isNotBlank() && currentChapterNumber.isNotBlank() &&
             com.yazan.manga.data.DownloadManager.isChapterDownloaded(this, mangaSlug, currentChapterNumber)) {
             val cached = com.yazan.manga.data.DownloadManager.getDownloadedPages(this, mangaSlug, currentChapterNumber)
@@ -146,14 +125,11 @@ class ReaderActivity : AppCompatActivity() {
                 return
             }
         }
-
         lifecycleScope.launch {
             val result = withContext(Dispatchers.IO) {
                 repository.getChapterPages(chapter)
             }
-
             loadingIndicator.visibility = View.GONE
-
             result.onSuccess { pageList ->
                 if (pageList.isEmpty()) {
                     errorText.text = "لا توجد صفحات لهذا الفصل"
@@ -188,16 +164,13 @@ class ReaderActivity : AppCompatActivity() {
             }
         }
     }
-
     private fun setupPages(pageUrls: List<String>) {
         pages = pageUrls
         pageCounter.text = "1 / ${pages.size}"
         pageSeekBar.max = if (pages.size > 1) pages.size - 1 else 0
-
         val adapter = PagesAdapter(pages) { pageIndex ->
             toggleBars()
         }
-
         // ViewPager2: one page per screen, swipe vertically to navigate
         pagesRecyclerView.adapter = adapter
         pagesRecyclerView.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
@@ -209,7 +182,6 @@ class ReaderActivity : AppCompatActivity() {
             }
         })
     }
-
     private fun preloadPages(startIndex: Int) {
         val nextIndex = startIndex + 1
         if (nextIndex !in pages.indices) return
@@ -221,18 +193,15 @@ class ReaderActivity : AppCompatActivity() {
                 .preload()
         } catch (e: Exception) {}
     }
-
     private fun scrollToPage(index: Int) {
         if (index < 0 || index >= pages.size) return
         pagesRecyclerView.setCurrentItem(index, true)
     }
-
     private fun findVisiblePageView(): com.yazan.manga.ui.ZoomableImageView? {
         val pos = pagesRecyclerView.currentItem
         val holder = pagesRecyclerView.findViewHolderForAdapterPosition(pos) ?: return null
         return holder.itemView.findViewById(R.id.pageImage)
     }
-
     private fun toggleBars() {
         barsVisible = !barsVisible
         val targetAlpha = if (barsVisible) 1f else 0f
@@ -245,7 +214,6 @@ class ReaderActivity : AppCompatActivity() {
             bottomBar.postDelayed({ if (!barsVisible) bottomBar.visibility = View.GONE }, 200)
         }
     }
-
     // =============================================================
     //  RecyclerView Adapter for pages
     // =============================================================
@@ -253,25 +221,19 @@ class ReaderActivity : AppCompatActivity() {
         private val pages: List<String>,
         private val onTap: (Int) -> Unit
     ) : RecyclerView.Adapter<PagesAdapter.PageVH>() {
-
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PageVH {
             val view = LayoutInflater.from(parent.context).inflate(R.layout.item_reader_page, parent, false)
             return PageVH(view)
         }
-
         override fun onBindViewHolder(holder: PageVH, position: Int) {
             holder.bind(pages[position], position)
         }
-
         override fun getItemCount() = pages.size
-
         inner class PageVH(v: View) : RecyclerView.ViewHolder(v) {
             private val pageImage: ZoomableImageView = v.findViewById(R.id.pageImage)
             private val pageProgress: ProgressBar = v.findViewById(R.id.pageProgress)
-
             fun bind(url: String, position: Int) {
                 pageProgress.visibility = View.VISIBLE
-
                 Glide.with(itemView.context)
                     .load(url)
                     .diskCacheStrategy(com.bumptech.glide.load.engine.DiskCacheStrategy.ALL)
@@ -289,7 +251,6 @@ class ReaderActivity : AppCompatActivity() {
                             pageProgress.visibility = View.GONE
                             return false
                         }
-
                         override fun onLoadFailed(
                             e: com.bumptech.glide.load.engine.GlideException?,
                             model: Any?,
@@ -301,9 +262,7 @@ class ReaderActivity : AppCompatActivity() {
                         }
                     })
                     .into(pageImage)
-
                 pageImage.setOnClickListener { onTap(position) }
-
                 // Preload next pages when this page becomes visible
                 preloadPages(position)
             }
