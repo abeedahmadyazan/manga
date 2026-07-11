@@ -1,7 +1,35 @@
 {
-  "updated_at": "2026-07-11T02:48:00.044662+00:00",
+  "updated_at": "2026-07-11T07:59:51.473974+00:00",
   "count": 50,
   "items": [
+    {
+      "id": "3ad8d2f2-1afe-43da-a88b-0a790c64939e",
+      "title": "دَينُونَة ماريا",
+      "cover": "https://uploads.mangadex.org/covers/3ad8d2f2-1afe-43da-a88b-0a790c64939e/eeae8e36-f437-4ed9-8b87-d86b210ad6ee.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "0cfcda3b-0dcb-459b-9931-aa823e7bf403",
+      "title": "تسع قمم",
+      "cover": "https://uploads.mangadex.org/covers/0cfcda3b-0dcb-459b-9931-aa823e7bf403/ee1043d6-d349-4a61-9e64-689d43633e55.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "25e1d17b-6a4d-4698-a4f6-bf53460c10af",
+      "title": "Bus For Two",
+      "cover": "https://uploads.mangadex.org/covers/25e1d17b-6a4d-4698-a4f6-bf53460c10af/0fc34ab4-a172-4db0-9cbc-893380685a58.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "334019e1-18bb-4ac0-b35c-0e8efb1e481c",
+      "title": "JoJo’s Bizarre Adventure, Part 9: The JoJoLands - Digital Colored Comics",
+      "cover": "https://uploads.mangadex.org/covers/334019e1-18bb-4ac0-b35c-0e8efb1e481c/530583f4-80ad-4f37-92d9-441b225c9785.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
     {
       "id": "263deeff-c010-4ac7-bc01-6341f3e698ac",
       "title": "Dragon Quest: The Great Adventure of Dai - Avan the Brave and the Demon King of Hellfire",
@@ -323,34 +351,6 @@
       "cover": "https://uploads.mangadex.org/covers/077a3fed-1634-424f-be7a-9a96b7f07b78/7c1a85fe-1ce7-4b27-bde8-c668d7e766c8.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
-    },
-    {
-      "id": "b6fed5d7-9021-4ff5-be9d-74c4925152e7",
-      "title": "-Hitogatana-",
-      "cover": "https://uploads.mangadex.org/covers/b6fed5d7-9021-4ff5-be9d-74c4925152e7/ceed297b-e02d-4811-9308-4b29cd676130.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
-      "id": "a25e46ec-30f7-4db6-89df-cacbc1d9a900",
-      "title": "هوريميا",
-      "cover": "https://uploads.mangadex.org/covers/a25e46ec-30f7-4db6-89df-cacbc1d9a900/04feed00-d919-4c72-b355-15b37555eb1e.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
-      "id": "87ffa375-bd2c-49ba-ba0c-6d78ea07c342",
-      "title": "Medaka Kuroiwa is Impervious to My Charms",
-      "cover": "https://uploads.mangadex.org/covers/87ffa375-bd2c-49ba-ba0c-6d78ea07c342/393e9445-7032-4392-96fe-4c549903e663.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "a07320a4-afcd-413a-a451-d69a448d0c28",
-      "title": "Usogui",
-      "cover": "https://uploads.mangadex.org/covers/a07320a4-afcd-413a-a451-d69a448d0c28/b74c8cce-42cd-4889-b75d-7944e63f9a14.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
     }
   ]
 }
