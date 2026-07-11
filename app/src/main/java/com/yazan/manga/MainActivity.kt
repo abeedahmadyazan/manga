@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity() {
 
     private val repository = MangaRepository(this)
     private var currentTab = "latest"
-    private var currentContentType = "manga"  // manga | manhwa | novel
+    private var currentContentType = "3asq"  // 3asq is the primary source now
     private var currentPage = 1
     private var isLoading = false
 
@@ -184,43 +184,9 @@ class MainActivity : AppCompatActivity() {
 
         setActiveTab(currentTab)
 
-        // Source selector — 2 buttons: مصدر 1 (MangaDex) + مصدر 2 (3asq)
-        val chipManga = findViewById<MaterialButton>(R.id.chipManga)
-        val chip3asq = findViewById<MaterialButton>(R.id.chip3asq)
-
-        fun setActiveContent(type: String) {
-            currentContentType = type
-            // Update backgrounds: active = green pill, inactive = dark surface
-            val activeDrawable = android.graphics.drawable.GradientDrawable().apply {
-                cornerRadius = 22f * resources.displayMetrics.density
-                setColor(getColor(R.color.primary))
-            }
-            val inactiveDrawable = android.graphics.drawable.GradientDrawable().apply {
-                cornerRadius = 22f * resources.displayMetrics.density
-                setColor(getColor(R.color.surface))
-            }
-            if (type == "manga") {
-                chipManga.background = activeDrawable
-                chipManga.setTextColor(getColor(R.color.black))
-                chip3asq.background = inactiveDrawable
-                chip3asq.setTextColor(getColor(R.color.text_secondary))
-            } else {
-                chip3asq.background = activeDrawable
-                chip3asq.setTextColor(getColor(R.color.black))
-                chipManga.background = inactiveDrawable
-                chipManga.setTextColor(getColor(R.color.text_secondary))
-            }
-            // Reload with new content type
-            currentPage = 1
-            adapter.submitList(emptyList())
-            loadManga()
-        }
-
-        chipManga.setOnClickListener { if (currentContentType != "manga") setActiveContent("manga") }
-        chip3asq.setOnClickListener { if (currentContentType != "3asq") setActiveContent("3asq") }
-
-        // Set default selection
-        setActiveContent("manga")
+        // Source buttons removed — 3asq is now the default source with
+        // automatic fallback to MangaDex if 3asq is down.
+        // currentContentType stays "3asq" and the repository handles fallback.
 
         tabLatest.setOnClickListener {
             if (currentTab == "latest") return@setOnClickListener

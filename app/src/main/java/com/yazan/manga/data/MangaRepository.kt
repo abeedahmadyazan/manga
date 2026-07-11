@@ -94,33 +94,30 @@ class MangaRepository(private val appContext: Context? = null) {
         }
     }
 
-    suspend fun getLatestManga(page: Int = 1, contentType: String = "manga"): Result<List<MangaListItem>> {
-        // 3asq: fetch ALL manga (manhwa + manhua + manga) from 3asq.online
-        // This MUST be checked FIRST — before any cache — so the 3asq source
-        // never returns stale MangaDex data from the local cache.
+    suspend fun getLatestManga(page: Int = 1, contentType: String = "3asq"): Result<List<MangaListItem>> {
+        // 3asq is now the PRIMARY source. Try it first.
         if (contentType == "3asq") {
-            return try {
-                if (!DDoSProtection.tryAcquire(DDoSProtection.Action.MANGA_LIST)) {
-                    return Result.failure(Exception("تم تجاوز الحد المسموح. حاول لاحقاً."))
-                }
+            try {
                 val items = fetch3asqListing(page)
-                DDoSProtection.reportSuccess()
-                Result.success(items)
+                if (items.isNotEmpty()) {
+                    DDoSProtection.reportSuccess()
+                    return Result.success(items)
+                }
             } catch (e: Exception) {
-                DDoSProtection.reportFailure()
-                Result.failure(e)
+                Log.w(TAG, "3asq latest failed, falling back to MangaDex: ${e.message}")
             }
+            // FALLBACK: if 3asq returned empty or threw an exception,
+            // automatically switch to MangaDex so the user always sees content.
+            return fetchMangaDexLatest(page)
         }
         // Try cache first (1h TTL) — only for manga (not 3asq, not novels)
         appContext?.let { ctx ->
             CacheManager.getCachedMangaList(ctx, "latest", page)?.let { cached ->
-                // Sanitize any stale .256.jpg / .512.jpg URLs in the local cache
                 val fixed = cached.map { it.copy(cover = fixCoverUrl(it.cover)) }
                 return Result.success(fixed)
             }
         }
         // Try CDN cache (gh-pages, updated every 2h) — page 1 only, manga only
-        // (manhwa + novels have their own fetch paths below)
         if (page == 1 && contentType == "manga") {
             val cdnItems = fetchCdnCache("latest")
             if (cdnItems.isNotEmpty()) {
@@ -134,20 +131,17 @@ class MangaRepository(private val appContext: Context? = null) {
             val items = getCuratedNovels(page)
             return Result.success(items)
         }
+        return fetchMangaDexLatest(page)
+    }
+
+    /** Fallback: fetch latest manga from MangaDex (Arabic). */
+    private fun fetchMangaDexLatest(page: Int): Result<List<MangaListItem>> {
         if (!DDoSProtection.tryAcquire(DDoSProtection.Action.MANGA_LIST)) {
             return Result.failure(Exception("تم تجاوز الحد المسموح. حاول لاحقاً."))
         }
         return try {
             val offset = (page - 1) * 20
-            val langFilter = when (contentType) {
-                "manhwa" -> "&originalLanguage[]=ko"
-                else -> "&originalLanguage[]=ja"
-            }
-            // hasAvailableChapters=true filters out manga whose Arabic
-            // translations were removed/never uploaded — without this, the
-            // list shows manhwa like Solo Leveling that have 0 Arabic
-            // chapters, and the reader fails with 'حدث خطأ أثناء تحميل الفصل'.
-            val url = "https://api.mangadex.org/manga?limit=20&offset=$offset&availableTranslatedLanguage[]=ar&hasAvailableChapters=true&order[latestUploadedChapter]=desc&includes[]=cover_art&contentRating[]=safe&contentRating[]=suggestive$langFilter"
+            val url = "https://api.mangadex.org/manga?limit=20&offset=$offset&availableTranslatedLanguage[]=ar&hasAvailableChapters=true&order[latestUploadedChapter]=desc&includes[]=cover_art&contentRating[]=safe&contentRating[]=suggestive&originalLanguage[]=ja"
             val items = fetchList(url)
             DDoSProtection.reportSuccess()
             appContext?.let { CacheManager.cacheMangaList(it, "latest", page, items) }
@@ -158,20 +152,20 @@ class MangaRepository(private val appContext: Context? = null) {
         }
     }
 
-    suspend fun getPopularManga(page: Int = 1, contentType: String = "manga"): Result<List<MangaListItem>> {
-        // 3asq: same listing as latest (3asq doesn't have a "popular" endpoint)
+    suspend fun getPopularManga(page: Int = 1, contentType: String = "3asq"): Result<List<MangaListItem>> {
+        // 3asq is the primary source. Try it first.
         if (contentType == "3asq") {
-            return try {
-                if (!DDoSProtection.tryAcquire(DDoSProtection.Action.MANGA_LIST)) {
-                    return Result.failure(Exception("تم تجاوز الحد المسموح. حاول لاحقاً."))
-                }
+            try {
                 val items = fetch3asqListing(page)
-                DDoSProtection.reportSuccess()
-                Result.success(items)
+                if (items.isNotEmpty()) {
+                    DDoSProtection.reportSuccess()
+                    return Result.success(items)
+                }
             } catch (e: Exception) {
-                DDoSProtection.reportFailure()
-                Result.failure(e)
+                Log.w(TAG, "3asq popular failed, falling back to MangaDex: ${e.message}")
             }
+            // FALLBACK to MangaDex popular
+            return fetchMangaDexPopular(page)
         }
         // Novels: serve from the curated Arabic light-novel collection
         if (contentType == "novel") {
@@ -184,16 +178,17 @@ class MangaRepository(private val appContext: Context? = null) {
                 return Result.success(fixed)
             }
         }
+        return fetchMangaDexPopular(page)
+    }
+
+    /** Fallback: fetch popular manga from MangaDex (Arabic). */
+    private fun fetchMangaDexPopular(page: Int): Result<List<MangaListItem>> {
         if (!DDoSProtection.tryAcquire(DDoSProtection.Action.MANGA_LIST)) {
             return Result.failure(Exception("تم تجاوز الحد المسموح. حاول لاحقاً."))
         }
         return try {
             val offset = (page - 1) * 20
-            val langFilter = when (contentType) {
-                "manhwa" -> "&originalLanguage[]=ko"
-                else -> "&originalLanguage[]=ja"
-            }
-            val url = "https://api.mangadex.org/manga?limit=20&offset=$offset&availableTranslatedLanguage[]=ar&hasAvailableChapters=true&order[followedCount]=desc&includes[]=cover_art&contentRating[]=safe&contentRating[]=suggestive$langFilter"
+            val url = "https://api.mangadex.org/manga?limit=20&offset=$offset&availableTranslatedLanguage[]=ar&hasAvailableChapters=true&order[followedCount]=desc&includes[]=cover_art&contentRating[]=safe&contentRating[]=suggestive&originalLanguage[]=ja"
             val items = fetchList(url)
             DDoSProtection.reportSuccess()
             appContext?.let { CacheManager.cacheMangaList(it, "popular", page, items) }
