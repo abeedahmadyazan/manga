@@ -29,7 +29,7 @@ class MangaRepository(private val appContext: Context? = null) {
     private val CORS_PROXY = "https://proxy.cors.sh/"
     private val ASQ_BASE = "https://3asq.online"
     private val MHH_API = "https://manhwahentai.net/api"
-    private val CDN_CACHE_BASE = "https://cdn.jsdelivr.net/gh/abeedahmadyazan/mangaapp@gh-pages/cache"
+    private val CDN_CACHE_BASE = "https://raw.githubusercontent.com/abeedahmadyazan/manga/gh-pages/cache"
     private val CDN_CACHE_TTL_MS = 2 * 60 * 60 * 1000L  // 2 hours
 
     // Cache: maps chapter number -> MangaDex chapter ID (for Arabic chapters)
