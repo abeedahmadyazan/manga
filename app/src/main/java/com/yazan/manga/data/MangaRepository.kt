@@ -136,7 +136,7 @@ class MangaRepository(private val appContext: Context? = null) {
         return try {
             val offset = (page - 1) * 20
             val orderParam = if (sort == "popular") "order[followedCount]=desc" else "order[latestUploadedChapter]=desc"
-            val url = "https://api.mangadex.org/manga?limit=20&offset=$offset&availableTranslatedLanguage[]=ar&hasAvailableChapters=true&$orderParam&includes[]=cover_art&contentRating[]=safe&contentRating[]=suggestive&originalLanguage[]=ja"
+            val url = "https://api.mangadex.org/manga?limit=20&offset=$offset&availableTranslatedLanguage[]=ar&hasAvailableChapters=true&$orderParam&includes[]=cover_art&contentRating[]=safe&contentRating[]=suggestive&contentRating[]=erotica&originalLanguage[]=ja"
             val items = fetchList(url)
             if (items.isNotEmpty()) Result.success(items)
             else Result.failure(Exception("تعذّر تحميل المانجا. حاول لاحقاً."))
@@ -173,7 +173,7 @@ class MangaRepository(private val appContext: Context? = null) {
                 // Search MangaDex (مصدر 1)
                 val encoded = java.net.URLEncoder.encode(query, "UTF-8")
                 val offset = (page - 1) * 20
-                val url = "https://api.mangadex.org/manga?title=$encoded&limit=20&offset=$offset&availableTranslatedLanguage[]=ar&hasAvailableChapters=true&order[relevance]=desc&includes[]=cover_art&contentRating[]=safe&contentRating[]=suggestive&originalLanguage[]=ja"
+                val url = "https://api.mangadex.org/manga?title=$encoded&limit=20&offset=$offset&availableTranslatedLanguage[]=ar&hasAvailableChapters=true&order[relevance]=desc&includes[]=cover_art&contentRating[]=safe&contentRating[]=suggestive&contentRating[]=erotica&originalLanguage[]=ja"
                 val items = fetchList(url)
                 Result.success(items)
             }
@@ -870,7 +870,7 @@ class MangaRepository(private val appContext: Context? = null) {
         var offset = 0; val limit = 100; var total = Int.MAX_VALUE
         while (offset < total && offset < 5000) {
             try {
-                val url = "https://api.mangadex.org/manga/$id/feed?limit=$limit&offset=$offset&translatedLanguage[]=ar&order[chapter]=desc&contentRating[]=safe&contentRating[]=suggestive"
+                val url = "https://api.mangadex.org/manga/$id/feed?limit=$limit&offset=$offset&translatedLanguage[]=ar&order[chapter]=desc&contentRating[]=safe&contentRating[]=suggestive&contentRating[]=erotica"
                 val req = Request.Builder().url(url).header("User-Agent", UA).header("Accept", "application/json").build()
                 val resp = client.newCall(req).execute()
                 if (!resp.isSuccessful) { resp.close(); break }
