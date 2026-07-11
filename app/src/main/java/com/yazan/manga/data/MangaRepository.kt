@@ -116,14 +116,36 @@ class MangaRepository(private val appContext: Context? = null) {
     }
 
     suspend fun searchManga(query: String, page: Int = 1, contentType: String = "3asq"): Result<List<MangaListItem>> {
-        // Search 3asq listing by filtering titles (3asq doesn't have a search API).
-        // We fetch page 1 of the listing and filter client-side.
+        // Search 3asq via the Netlify proxy search endpoint.
         return try {
-            val items = fetch3asqListing(1)
-            val filtered = items.filter { 
-                it.title.contains(query, ignoreCase = true) 
+            val encoded = java.net.URLEncoder.encode(query, "UTF-8")
+            val url = "$ASQ_API/search?q=$encoded"
+            val req = Request.Builder().url(url)
+                .header("Accept", "application/json")
+                .build()
+            client.newCall(req).execute().use { resp ->
+                if (!resp.isSuccessful) return Result.success(emptyList())
+                val body = resp.body?.string() ?: return Result.success(emptyList())
+                val root = JsonParser.parseString(body).asJsonObject
+                val arr = root.getAsJsonArray("items") ?: return Result.success(emptyList())
+                val items = mutableListOf<MangaListItem>()
+                for (i in 0 until arr.size()) {
+                    try {
+                        val item = arr[i].asJsonObject
+                        val id = item.get("id")?.asString ?: continue
+                        val title = item.get("title")?.asString ?: continue
+                        val cover = item.get("cover")?.asString ?: ""
+                        items.add(MangaListItem(
+                            id = id,
+                            title = title,
+                            cover = cover,
+                            source = "3asq",
+                            status = item.get("status")?.asString ?: "ongoing"
+                        ))
+                    } catch (e: Exception) {}
+                }
+                Result.success(items)
             }
-            Result.success(filtered)
         } catch (e: Exception) {
             Result.failure(e)
         }

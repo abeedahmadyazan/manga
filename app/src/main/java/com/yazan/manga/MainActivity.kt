@@ -54,6 +54,11 @@ class MainActivity : AppCompatActivity() {
         )
         setContentView(R.layout.activity_main)
 
+        // CRITICAL: clear old cached data from previous versions that used
+        // MangaDex. Old cache has MangaDex UUID IDs which crash when tapped
+        // (getMangaDetails can't handle them). This runs once per app launch.
+        com.yazan.manga.data.CacheManager.clearAllCache(this)
+
         // Check for app updates on startup (non-blocking)
         com.yazan.manga.data.InAppUpdateManager.checkForUpdate(this)
         // Check for admin announcements + force updates

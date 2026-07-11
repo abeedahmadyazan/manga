@@ -45,6 +45,21 @@ object CacheManager {
     private fun file(context: Context, key: String): File =
         File(cacheDir(context), "$key.json")
 
+    /**
+     * Clear ALL cached data. Called on app startup to wipe old MangaDex
+     * cached items that would cause crashes when tapped (their IDs are
+     * MangaDex UUIDs, not 3asq-* IDs).
+     */
+    fun clearAllCache(context: Context) {
+        try {
+            cacheDir(context).deleteRecursively()
+            cacheDir(context).mkdirs()
+            Log.d(TAG, "All cache cleared")
+        } catch (e: Exception) {
+            Log.w(TAG, "Failed to clear cache: ${e.message}")
+        }
+    }
+
     // =============================================================
     //  Generic get/set with TTL
     // =============================================================
