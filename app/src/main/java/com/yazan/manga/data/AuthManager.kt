@@ -252,8 +252,6 @@ object AuthManager {
         // (authenticate() checks device_links/{deviceId} for write operations).
 
         val deviceId = getDeviceId(context)
-        // Admin check: XOR-decoded email comparison (email not visible in APK)
-        val isAdmin = false // admin status comes from server
 
         var user = getUserByEmail(context, cleanEmail)
         var wasNewUser = false
@@ -271,7 +269,7 @@ object AuthManager {
             if (cu != null && cu.name.isNotEmpty()) {
                 user = User(email = cleanEmail, name = cu.name,
                     username = cu.username.ifEmpty { "@${cleanEmail.substringBefore("@")}" },
-                    isAdmin = isAdmin, deviceId = deviceId, createdAt = cu.createdAt,
+                    isAdmin = cu.isAdmin, deviceId = deviceId, createdAt = cu.createdAt,
                     lastUsernameChange = 0L, avatar = "", bio = "")
                 if (cu.avatarBase64.isNotEmpty()) {
                     try {
@@ -342,8 +340,6 @@ object AuthManager {
         }
 
         val deviceId = getDeviceId(context)
-        // Admin check: XOR-decoded email comparison (email not visible in APK)
-        val isAdmin = false // admin status comes from server
 
         var user = getUserByEmail(context, email)
         var wasNewUser = false
@@ -362,7 +358,7 @@ object AuthManager {
             if (cu != null && cu.name.isNotEmpty()) {
                 user = User(email = email, name = cu.name,
                     username = cu.username.ifEmpty { "@${email.substringBefore("@")}" },
-                    isAdmin = isAdmin, deviceId = deviceId, createdAt = cu.createdAt,
+                    isAdmin = cu.isAdmin, deviceId = deviceId, createdAt = cu.createdAt,
                     lastUsernameChange = 0L, avatar = "", bio = "")
                 if (cu.avatarBase64.isNotEmpty()) {
                     try {
