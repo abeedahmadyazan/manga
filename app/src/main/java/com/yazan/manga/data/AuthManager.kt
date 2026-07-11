@@ -287,7 +287,7 @@ object AuthManager {
             } else {
                 wasNewUser = true
                 user = User(email = cleanEmail, name = displayName, // admin name set by server
-                    username = generateUniqueUsername(context, displayName), isAdmin = isAdmin,
+                    username = generateUniqueUsername(context, displayName), isAdmin = false,
                     deviceId = deviceId, createdAt = System.currentTimeMillis(), lastUsernameChange = 0L, avatar = "", bio = "")
                 saveUser(context, user)
             }
@@ -376,7 +376,7 @@ object AuthManager {
             } else {
                 wasNewUser = true
                 user = User(email = email, name = displayName, // admin name set by server
-                    username = generateUniqueUsername(context, displayName), isAdmin = isAdmin,
+                    username = generateUniqueUsername(context, displayName), isAdmin = false,
                     deviceId = deviceId, createdAt = System.currentTimeMillis(), lastUsernameChange = 0L,
                     avatar = account.photoUrl?.toString() ?: "", bio = "")
                 saveUser(context, user)
