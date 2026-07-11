@@ -1,5 +1,5 @@
 module.exports = (req, res) => {
-  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Origin', 'null');
   res.setHeader('Access-Control-Allow-Headers', 'Authorization,Content-Type,X-App-Version');
   
   // Log what we received (for debugging)

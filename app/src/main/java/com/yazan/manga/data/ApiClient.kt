@@ -41,6 +41,22 @@ object ApiClient {
         .build()
 
     /**
+     * Build the app's User-Agent string.
+     *
+     * The server uses this to distinguish real app traffic from browser / curl
+     * traffic. Format: "YZ-Manga/{versionCode} (Android {release})".
+     */
+    private fun getUserAgent(): String {
+        return try {
+            val version = getAppVersionCode()
+            val android = android.os.Build.VERSION.RELEASE ?: "unknown"
+            "YZ-Manga/$version (Android $android)"
+        } catch (e: Exception) {
+            "YZ-Manga/unknown"
+        }
+    }
+
+    /**
      * Get the current user's email (from SharedPreferences).
      * Sent as X-User-Email header because the Firebase token might
      * be from an anonymous session (no email).
@@ -125,6 +141,7 @@ object ApiClient {
         val reqBuilder = Request.Builder()
             .url(urlBuilder.toString())
             .header("Content-Type", "application/json")
+            .header("User-Agent", getUserAgent())
             .header("X-App-Version", getAppVersionCode().toString())
             .header("X-User-Email", getUserEmail())
             .header("X-Device-Status", getDeviceStatus())
@@ -172,6 +189,7 @@ object ApiClient {
             .url(urlBuilder.toString())
             .header("Authorization", "Bearer $token")
             .header("Content-Type", "application/json")
+            .header("User-Agent", getUserAgent())
             .header("X-App-Version", getAppVersionCode().toString())
             .header("X-User-Email", getUserEmail())
             .header("X-Device-Status", getDeviceStatus())

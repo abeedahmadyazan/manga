@@ -1,14 +1,20 @@
 const { db, auth } = require('./_lib');
+const { securityCheck } = require('./_security');
 
 // Profile endpoint — REQUIRES Firebase token (no more X-User-Email)
-const ADMIN_EMAIL = 'yznabyd@gmail.com'; // Server-side only, NOT in APK!
+// SECURITY: Admin email comes from environment variable, NOT hardcoded.
+// Set ADMIN_EMAIL in Vercel Project Settings → Environment Variables.
+const ADMIN_EMAIL = process.env.ADMIN_EMAIL || '';
 
 module.exports = async (req, res) => {
-  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Origin', 'null');
   res.setHeader('Access-Control-Allow-Methods', 'GET,PUT,OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type,X-App-Version,Authorization');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type,X-App-Version,X-Device-Status,Authorization');
   if (req.method === 'OPTIONS') return res.status(200).end();
-  
+
+  // Security gate: reject browser/curl traffic, shadow-ban compromised devices
+  if (securityCheck(req, res)) return;
+
   const clientVersion = parseInt(req.headers['x-app-version'] || '0', 10);
   if (clientVersion < 13) return res.status(426).json({ error: 'يرجى تحديث التطبيق' });
   

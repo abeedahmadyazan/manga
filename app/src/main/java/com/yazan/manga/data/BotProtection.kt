@@ -20,6 +20,12 @@ import com.google.firebase.firestore.FirebaseFirestore
  *    bots from rapidly inflating/deleting likes.
  *
  * Both are stored in Firestore so they're enforced across all devices.
+ *
+ * SECURITY: Firestore rules enforce that:
+ * - login_attempts.count can only INCREASE (or reset to 1 after 30 min)
+ * - login_blocks.until can only be EXTENDED
+ * - Neither collection can be deleted by the client
+ * This means an attacker cannot reset their own counter or lift their block.
  */
 object BotProtection {
 
@@ -46,6 +52,10 @@ object BotProtection {
      * Check if the current device is blocked from attempting login.
      * Blocks are keyed by device fingerprint (so a banned user can't just
      * retry with a different account on the same phone).
+     *
+     * NOTE: We do NOT delete expired blocks. Firestore rules forbid deletion
+     * (to prevent an attacker from lifting their own block). We simply rely
+     * on the `until > now` check — expired blocks become inert naturally.
      */
     fun checkLoginBlock(deviceId: String, onResult: (LoginBlock) -> Unit) {
         db.collection("login_blocks").document(deviceId).get()
@@ -61,8 +71,8 @@ object BotProtection {
                     val minutes = remaining / (60 * 1000)
                     onResult(LoginBlock(true, remaining, "تم حظرك من تسجيل الدخول لمدة $minutes دقيقة"))
                 } else {
-                    // Block expired — clean it up
-                    db.collection("login_blocks").document(deviceId).delete()
+                    // Block expired — do NOT delete (Firestore rules forbid it).
+                    // The block is inert now; the user can retry login.
                     onResult(LoginBlock(false))
                 }
             }
@@ -72,27 +82,41 @@ object BotProtection {
     /**
      * Record a failed login attempt. If the threshold is reached, block
      * the device for 1 hour.
+     *
+     * SECURITY: The count only increases (never resets to 0). If the 30-min
+     * window has passed, we reset to 1 — Firestore rules allow this only
+     * when (now - lastAttempt > 30 min). After blocking, we do NOT reset
+     * the counter; the block in login_blocks handles the cooldown.
+     *
+     * Write failures are logged but non-fatal — the block check still works
+     * for already-blocked devices.
      */
     fun recordFailedLogin(deviceId: String) {
         db.collection("login_attempts").document(deviceId).get()
             .addOnSuccessListener { doc ->
                 val now = System.currentTimeMillis()
-                val attempts = if (doc.exists()) {
+                val newCount: Int = if (doc.exists()) {
                     val lastAttempt = doc.getLong("lastAttempt") ?: 0L
-                    val count = (doc.getLong("count") ?: 0L).toInt()
-                    // Reset if the window passed
-                    if (now - lastAttempt > LOGIN_WINDOW_MS) 1 else count + 1
+                    val oldCount = (doc.getLong("count") ?: 0L).toInt()
+                    // Reset to 1 if the 30-min window passed; else increment
+                    if (now - lastAttempt > LOGIN_WINDOW_MS) 1 else oldCount + 1
                 } else 1
 
                 val data = mapOf(
-                    "count" to attempts,
+                    "count" to newCount,
                     "lastAttempt" to now,
                     "deviceId" to deviceId
                 )
+                // set() = create or overwrite. Firestore rules will:
+                //  - allow create if count == 1
+                //  - allow update if count > old, OR (window passed AND count == 1)
                 db.collection("login_attempts").document(deviceId).set(data)
+                    .addOnFailureListener { e ->
+                        Log.w(TAG, "Failed to record login attempt: ${e.message}")
+                    }
 
-                if (attempts >= LOGIN_MAX_ATTEMPTS) {
-                    // Block the device
+                if (newCount >= LOGIN_MAX_ATTEMPTS) {
+                    // Block the device — Firestore rules require until > old until
                     val blockUntil = now + LOGIN_BLOCK_MS
                     val blockData = mapOf(
                         "deviceId" to deviceId,
@@ -101,17 +125,33 @@ object BotProtection {
                         "reason" to "5 failed login attempts within 30 minutes"
                     )
                     db.collection("login_blocks").document(deviceId).set(blockData)
-                    // Reset the attempt counter
-                    db.collection("login_attempts").document(deviceId)
-                        .set(mapOf("count" to 0, "lastAttempt" to now, "deviceId" to deviceId))
+                        .addOnFailureListener { e ->
+                            Log.w(TAG, "Failed to write login block: ${e.message}")
+                        }
+                    // Do NOT reset the counter. The block in login_blocks handles
+                    // the cooldown. After the block expires, the next failed attempt
+                    // will reset to 1 (because now - lastAttempt > 30 min).
                     Log.w(TAG, "Device $deviceId blocked for 1 hour due to login abuse")
                 }
             }
+            .addOnFailureListener { e ->
+                Log.w(TAG, "Failed to read login attempts: ${e.message}")
+            }
     }
 
-    /** Clear the attempt counter on successful login. */
+    /**
+     * Clear the attempt counter on successful login.
+     *
+     * SECURITY: We CANNOT delete the document (Firestore rules forbid it).
+     * This is now a no-op — the counter persists but is harmless because:
+     * 1. The next failed attempt after 30 min will reset to 1.
+     * 2. The block in login_blocks is what actually enforces the cooldown.
+     *
+     * Keeping this function as a no-op avoids breaking callers.
+     */
     fun clearLoginAttempts(deviceId: String) {
-        db.collection("login_attempts").document(deviceId).delete()
+        // Intentionally a no-op. See class doc for security rationale.
+        Log.d(TAG, "clearLoginAttempts called (no-op per security rules) for $deviceId")
     }
 
     // ============================================================

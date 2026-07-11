@@ -3,7 +3,7 @@ const { authenticate, isAdmin, isBanned, validateText } = require('../_auth');
 const { checkCooldown, updateCooldown } = require('../_rateLimit');
 
 module.exports = async (req, res) => {
-  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Origin', 'null');
   res.setHeader('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Authorization,Content-Type,X-App-Version,X-User-Email');
   if (req.method === 'OPTIONS') return res.status(200).end();

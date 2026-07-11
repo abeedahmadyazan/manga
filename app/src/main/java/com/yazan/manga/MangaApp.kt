@@ -2,6 +2,9 @@ package com.yazan.manga
 
 import android.app.Application
 import android.content.Context
+import android.util.Log
+import com.google.firebase.appcheck.FirebaseAppCheck
+import com.google.firebase.appcheck.playintegrity.PlayIntegrityAppCheckProviderFactory
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreSettings
@@ -23,6 +26,7 @@ import com.yazan.manga.data.AntiTampering
  */
 class MangaApp : Application() {
     companion object {
+        private const val TAG = "MangaApp"
         lateinit var appContext: Context
             private set
     }
@@ -43,7 +47,7 @@ class MangaApp : Application() {
                 AntiTampering.isLikelyRooted()
                 AntiTampering.isEmulator()
             } catch (e: Exception) {
-                android.util.Log.w("MangaApp", "Security: ${e.message}")
+                Log.w(TAG, "Security: ${e.message}")
             }
 
             try {
@@ -54,22 +58,62 @@ class MangaApp : Application() {
                     .build()
                 db.firestoreSettings = settings
             } catch (e: Exception) {
-                android.util.Log.w("MangaApp", "Firestore: ${e.message}")
+                Log.w(TAG, "Firestore: ${e.message}")
             }
+
+            // App Check — async, non-blocking, never crashes the app.
+            // We use PlayIntegrity for release builds. The token is fetched
+            // lazily on the first API call, so we just install the factory
+            // and pre-warm the token.
+            //
+            // IMPORTANT: Run this in the background thread because Play
+            // Integrity makes a network call to Google Play Services that
+            // would cause ANR if run on the main thread.
+            initAppCheckAsync()
 
             try {
                 val firebaseAuth = FirebaseAuth.getInstance()
                 if (firebaseAuth.currentUser == null) {
                     firebaseAuth.signInAnonymously()
                         .addOnFailureListener { e ->
-                            android.util.Log.w("MangaApp", "Auth: ${e.message}")
+                            Log.w(TAG, "Auth: ${e.message}")
                         }
                 } else {
                     com.yazan.manga.data.AuthManager.restoreUserFromCloud(this)
                 }
             } catch (e: Exception) {
-                android.util.Log.w("MangaApp", "Auth: ${e.message}")
+                Log.w(TAG, "Auth: ${e.message}")
             }
         }.start()
+    }
+
+    /**
+     * Initialize Firebase App Check asynchronously.
+     *
+     * App Check verifies app authenticity via Play Integrity. It must run
+     * in the background because:
+     * 1. Play Integrity makes a network call to Google Play Services.
+     * 2. Running it on the main thread causes ANR.
+     *
+     * Failure is non-fatal — the app still works; App Check just won't
+     * enforce (Firebase will be in "log only" mode until you switch to
+     * "enforce" in the console).
+     */
+    private fun initAppCheckAsync() {
+        try {
+            val firebaseAppCheck = FirebaseAppCheck.getInstance()
+            firebaseAppCheck.installAppCheckProviderFactory(
+                PlayIntegrityAppCheckProviderFactory.getInstance()
+            )
+            // Pre-warm the token so the first API call doesn't fail.
+            // This is async — it won't block the thread.
+            firebaseAppCheck.getAppCheckToken(false)
+                .addOnSuccessListener { Log.d(TAG, "App Check token ready") }
+                .addOnFailureListener { e ->
+                    Log.w(TAG, "App Check token deferred (non-fatal): ${e.message}")
+                }
+        } catch (e: Exception) {
+            Log.w(TAG, "App Check init failed (non-fatal): ${e.message}")
+        }
     }
 }

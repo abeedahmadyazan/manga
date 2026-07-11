@@ -1,16 +1,28 @@
 const { auth, db } = require('./_lib');
+const { securityCheck } = require('./_security');
 
 const MIN_APP_VERSION = 13;
 
 async function authenticate(req) {
+  // ---- Security gate: reject browser/curl traffic ----
+  // The Android app never sends Origin/Referer, and uses a custom User-Agent.
+  const headers = req.headers || {};
+  if (headers.origin || headers.referer) {
+    return { error: { status: 403, message: 'Forbidden' } };
+  }
+  const userAgent = headers['user-agent'] || '';
+  if (!userAgent.startsWith('YZ-Manga/')) {
+    return { error: { status: 403, message: 'Unauthorized client' } };
+  }
+
   const clientVersion = parseInt(req.headers['x-app-version'] || '0', 10);
   if (clientVersion < MIN_APP_VERSION) {
-    return { 
-      error: { 
-        status: 426, 
+    return {
+      error: {
+        status: 426,
         message: 'يرجى تحديث التطبيق إلى أحدث إصدار',
         updateUrl: 'https://yzmanga.netlify.app'
-      } 
+      }
     };
   }
 
@@ -101,4 +113,4 @@ function validateText(text) {
   return null;
 }
 
-module.exports = { authenticate, isAdmin, isBanned, validateText, MIN_APP_VERSION };
+module.exports = { authenticate, isAdmin, isBanned, validateText, MIN_APP_VERSION, securityCheck };

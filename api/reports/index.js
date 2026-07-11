@@ -2,7 +2,7 @@ const { db } = require('../_lib');
 const { authenticate } = require('../_auth');
 
 module.exports = async (req, res) => {
-  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Origin', 'null');
   res.setHeader('Access-Control-Allow-Methods', 'POST,OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Authorization,Content-Type');
   if (req.method === 'OPTIONS') return res.status(200).end();

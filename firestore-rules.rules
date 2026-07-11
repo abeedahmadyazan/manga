@@ -101,21 +101,49 @@ service cloud.firestore {
       allow write: if isAdmin();
     }
 
+    // ============================================================
+    //  login_blocks — Brute Force protection
+    //  Field name: `until` (timestamp ms when block expires)
+    //  Principle: block can be created and EXTENDED, never deleted or shortened.
+    //  This prevents an attacker from lifting their own block.
+    //  Read is open (the app checks the block before login, when auth may be null).
+    // ============================================================
     match /login_blocks/{deviceId} {
-      // The app's BotProtection writes blocks here directly when a device
-      // exceeds 5 failed logins. We keep write open to signed-in users
-      // because the check happens client-side today. (Moving this to the
-      // server would let us set write: if false — future hardening.)
-      allow read: if isSignedIn();
-      allow write: if isSignedIn();
+      allow read: if true;
+      allow create: if request.resource.data.until is int
+                    && request.resource.data.until > 0;
+      allow update: if request.resource.data.until is int
+                    && request.resource.data.until > resource.data.until;
+      allow delete: if false;
     }
 
+    // ============================================================
+    //  login_attempts — Failed login counter
+    //  Field names: `count` (int), `lastAttempt` (timestamp ms)
+    //  Principle: counter can only INCREASE, or reset to 1 after the 30-min
+    //  window has passed (measured by lastAttempt). An attacker cannot
+    //  zero their own counter, and cannot reset it before the window expires.
+    // ============================================================
     match /login_attempts/{deviceId} {
-      // Same as login_blocks — app writes the attempt counter here.
-      // An attacker could wipe their own counter via the SDK, but the
-      // server-side Vercel API has its own rate limiting as a backstop.
-      allow read: if isSignedIn();
-      allow write: if isSignedIn();
+      allow read: if true;
+      allow create: if request.resource.data.count is int
+                    && request.resource.data.count == 1
+                    && request.resource.data.lastAttempt is int
+                    && request.resource.data.lastAttempt <= request.time.toMillis() + 5000;
+      allow update: if request.resource.data.count is int
+                    && request.resource.data.lastAttempt is int
+                    && request.resource.data.lastAttempt <= request.time.toMillis() + 5000
+                    && request.resource.data.lastAttempt >= resource.data.lastAttempt
+                    && (
+                      // Case A: normal increment — count must strictly increase
+                      request.resource.data.count > resource.data.count
+                      ||
+                      // Case B: window expired (30 min) — allow reset to 1
+                      // (request.time - lastAttempt > 30 minutes in ms)
+                      (request.time.toMillis() - resource.data.lastAttempt > 1800000
+                       && request.resource.data.count == 1)
+                    );
+      allow delete: if false;
     }
 
     // FIX: user lists are private to the owner. Only the user themselves
