@@ -82,8 +82,7 @@
             android:background="?attr/selectableItemBackgroundBorderless"
             android:src="@drawable/ic_comments"
             android:tint="@color/text_primary"
-            android:contentDescription="الإشعارات"
-            tools:ignore="UseAppTint,HardcodedText" />
+            android:contentDescription="الإشعارات" />
         </LinearLayout>
 
         <!-- Divider line under top bar -->
