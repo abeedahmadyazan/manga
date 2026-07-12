@@ -73,4 +73,5 @@
     <color name="danger_button_bg">#1a1a2e</color>
     <color name="skeleton_base">#1a1a2e</color>
     <color name="skeleton_highlight">#2a2a3e</color>
+    <color name="warning">#f59e0b</color>
 </resources>
