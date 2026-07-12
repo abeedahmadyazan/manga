@@ -108,13 +108,14 @@ class MainActivity : AppCompatActivity() {
 
     private fun showBroadcastPopup(
         broadcast: com.yazan.manga.data.ApiClient.Broadcast,
-        prefs: android.content.SharedPreferences
+        prefs: android.content.SharedPreferences,
+        seenKey: String
     ) {
         val builder = AlertDialog.Builder(this)
             .setTitle(broadcast.title)
             .setMessage(broadcast.message)
             .setPositiveButton("تم") { dialog, _ ->
-                prefs.edit().putBoolean(broadcast.id, true).apply()
+                prefs.edit().putBoolean(seenKey, true).apply()
                 dialog.dismiss()
             }
             .setCancelable(true)
@@ -124,7 +125,7 @@ class MainActivity : AppCompatActivity() {
                 val clipboard = getSystemService(android.content.Context.CLIPBOARD_SERVICE) as android.content.ClipboardManager
                 clipboard.setPrimaryClip(android.content.ClipData.newPlainText("link", broadcast.linkUrl))
                 Toast.makeText(this, "تم نسخ الرابط", Toast.LENGTH_SHORT).show()
-                prefs.edit().putBoolean(broadcast.id, true).apply()
+                prefs.edit().putBoolean(seenKey, true).apply()
                 dialog.dismiss()
             }
         }
@@ -134,7 +135,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun showForceBlockPopup(
         broadcast: com.yazan.manga.data.ApiClient.Broadcast,
-        prefs: android.content.SharedPreferences
+        prefs: android.content.SharedPreferences,
+        seenKey: String
     ) {
         val builder = AlertDialog.Builder(this)
             .setTitle("⚠️ ${broadcast.title}")
@@ -148,7 +150,7 @@ class MainActivity : AppCompatActivity() {
                 val clipboard = getSystemService(android.content.Context.CLIPBOARD_SERVICE) as android.content.ClipboardManager
                 clipboard.setPrimaryClip(android.content.ClipData.newPlainText("link", broadcast.linkUrl))
                 Toast.makeText(this, "تم نسخ الرابط — يرجى التحديث", Toast.LENGTH_LONG).show()
-                prefs.edit().putBoolean("fb_${broadcast.id}", true).apply()
+                prefs.edit().putBoolean(seenKey, true).apply()
                 dialog.dismiss()
                 // Close the app — user must update
                 finishAffinity()
