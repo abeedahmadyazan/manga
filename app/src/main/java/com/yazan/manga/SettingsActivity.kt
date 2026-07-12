@@ -24,7 +24,7 @@ class SettingsActivity : AppCompatActivity() {
 
         findViewById<ImageButton>(R.id.btnBack).setOnClickListener {
             finish()
-            overridePendingTransition(R.anim.fade_in, R.anim.slide_out_left)
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
         }
 
         // ===== المظهر =====
