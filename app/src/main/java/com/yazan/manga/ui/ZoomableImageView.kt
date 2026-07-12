@@ -35,7 +35,7 @@ class ZoomableImageView @JvmOverloads constructor(
         zoomEnabled = enabled
         if (!enabled) {
             // Reset zoom to 1x
-            zoomTo(MIN_SCALE)
+            resetZoom()
         }
     }
 
