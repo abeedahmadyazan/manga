@@ -391,7 +391,7 @@ class ReaderActivity : AppCompatActivity() {
                 // This gives best quality without OOM.
                 // Use ARGB_8888 for 32-bit color depth (no banding).
                 if (readingMode == "webtoon") {
-                    request.format(android.graphics.Bitmap.Config.ARGB_8888)
+                    request.format(com.bumptech.glide.load.DecodeFormat.PREFER_ARGB_8888)
                 }
 
                 request.listener(object : com.bumptech.glide.request.RequestListener<android.graphics.drawable.Drawable> {
