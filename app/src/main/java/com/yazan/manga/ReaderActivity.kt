@@ -85,15 +85,15 @@ class ReaderActivity : BaseSwipeBackActivity() {
         )
 
         // Auto-detect reading mode based on source:
-        // manhwa (3asq, mhh) → webtoon mode (vertical scroll)
+        // manhwa (3asq) → webtoon mode (vertical scroll)
         // manga (mangadex) → manga mode (one page per screen)
         val prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
         val savedMode = prefs.getString(KEY_READING_MODE, null)
         if (savedMode != null) {
             readingMode = savedMode
         } else {
-            // Auto-detect: manhwa sources use webtoon mode
-            readingMode = if (chapterSource == "3asq" || chapterSource == "mhh") "webtoon" else "manga"
+            // Auto-detect: 3asq hosts manhwa/manhua → webtoon mode
+            readingMode = if (chapterSource == "3asq") "webtoon" else "manga"
         }
 
         initViews()

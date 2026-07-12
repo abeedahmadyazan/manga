@@ -42,12 +42,20 @@
         <item name="android:statusBarColor">@color/background_dark</item>
     </style>
 
-    <!-- Activity transition: subtle fade + slight slide-up -->
+    <!-- RTL activity transitions (Arabic reading direction: forward = leftward).
+         OPEN (entering a new screen):
+           - new screen slides IN from the LEFT  (left-to-right movement)
+           - old screen slides OUT to the RIGHT
+         CLOSE (going back):
+           - current screen slides OUT to the LEFT  (right-to-left movement)
+           - previous screen slides IN from the RIGHT
+         This matches the swipe-back gesture (right edge → drag left) so the back
+         button and the swipe gesture feel like the same motion. -->
     <style name="Animation.MangaApp.Activity" parent="@android:style/Animation.Activity">
-        <item name="android:activityOpenEnterAnimation">@anim/activity_enter</item>
-        <item name="android:activityOpenExitAnimation">@anim/activity_exit</item>
-        <item name="android:activityCloseEnterAnimation">@anim/activity_enter</item>
-        <item name="android:activityCloseExitAnimation">@anim/activity_exit</item>
+        <item name="android:activityOpenEnterAnimation">@anim/slide_in_left</item>
+        <item name="android:activityOpenExitAnimation">@anim/slide_out_right</item>
+        <item name="android:activityCloseEnterAnimation">@anim/slide_in_right</item>
+        <item name="android:activityCloseExitAnimation">@anim/slide_out_left</item>
     </style>
 
 </resources>

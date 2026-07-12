@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- RTL open: new screen slides IN from the LEFT (left-to-right movement). -->
 <set xmlns:android="http://schemas.android.com/apk/res/android"
     android:shareInterpolator="false">
     <translate
-        android:fromXDelta="-100%"
+        android:fromXDelta="-30%"
         android:toXDelta="0%"
-        android:duration="350"
+        android:duration="280"
         android:interpolator="@android:anim/decelerate_interpolator" />
     <alpha
-        android:fromAlpha="0.3"
+        android:fromAlpha="0.0"
         android:toAlpha="1.0"
-        android:duration="350"
+        android:duration="280"
         android:interpolator="@android:anim/decelerate_interpolator" />
 </set>

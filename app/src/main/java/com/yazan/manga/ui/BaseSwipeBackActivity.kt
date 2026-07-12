@@ -9,12 +9,19 @@ import android.view.ViewConfiguration
 import androidx.appcompat.app.AppCompatActivity
 
 /**
- * Edge-swipe-to-go-back.
+ * RTL edge-swipe-to-go-back.
  *
- * Swiping from the left edge of the screen toward the right slides the current
- * activity out and finishes it — exactly like the system gesture in modern apps.
- * This masks the (sometimes laggy) back-button transition because the content
- * follows the finger instantly.
+ * The app is Arabic (RTL). In RTL, "forward" navigation is leftward (the reading
+ * direction), so "back" is rightward → the back gesture starts from the RIGHT
+ * edge and the finger drags LEFT (right-to-left). The current screen slides LEFT,
+ * revealing the previous activity underneath.
+ *
+ *     ┌──────────────────┐
+ *     │                  │ ← previous activity (revealed underneath)
+ *     │   current screen │
+ *     │     slides ←     │
+ *     └──────────────────┘
+ *      ▲ finger starts here (right edge), drags ←
  *
  * The activity window MUST be translucent (see Theme.MangaApp.SwipeBack) so the
  * previous activity is revealed underneath as the current one slides away.
@@ -47,16 +54,17 @@ open class BaseSwipeBackActivity : AppCompatActivity() {
                 gestureSwipeEnabled = canSwipeBack()
                 downX = ev.rawX
                 downY = ev.rawY
-                edgeDown = gestureSwipeEnabled && ev.rawX <= edgeSize
+                // RTL: the back gesture starts from the RIGHT edge.
+                edgeDown = gestureSwipeEnabled && ev.rawX >= (screenWidth - edgeSize)
                 swiping = false
                 childCancelled = false
             }
             MotionEvent.ACTION_MOVE -> {
                 if (edgeDown && !swiping) {
-                    val dx = ev.rawX - downX
+                    val dx = ev.rawX - downX   // negative when dragging left
                     val dy = ev.rawY - downY
-                    // Only steal clearly-horizontal, rightward drags from the edge.
-                    if (dx > touchSlop && dx > Math.abs(dy) * 1.5f) {
+                    // Only steal clearly-horizontal, LEFTWARD drags from the right edge.
+                    if (dx < -touchSlop && -dx > Math.abs(dy) * 1.5f) {
                         swiping = true
                         // Cancel any gesture the children already started so they
                         // don't keep scrolling/selecting while we take over.
@@ -70,7 +78,8 @@ open class BaseSwipeBackActivity : AppCompatActivity() {
                     }
                 }
                 if (swiping) {
-                    val dx = (ev.rawX - downX).coerceAtLeast(0f)
+                    // translationX is negative → the screen moves LEFT.
+                    val dx = (ev.rawX - downX).coerceAtMost(0f)
                     window.decorView.translationX = dx
                     return true
                 }
@@ -78,7 +87,8 @@ open class BaseSwipeBackActivity : AppCompatActivity() {
             MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
                 if (swiping) {
                     val dx = window.decorView.translationX
-                    if (dx > screenWidth * 0.30f) {
+                    // Finished if the screen has been dragged at least 30% to the left.
+                    if (dx < -screenWidth * 0.30f) {
                         animateOutAndFinish()
                     } else {
                         animateBack()
@@ -113,7 +123,8 @@ open class BaseSwipeBackActivity : AppCompatActivity() {
 
     private fun animateOutAndFinish() {
         val start = window.decorView.translationX
-        ValueAnimator.ofFloat(start, screenWidth.toFloat()).apply {
+        // Animate the screen the rest of the way off to the LEFT (negative X).
+        ValueAnimator.ofFloat(start, -screenWidth.toFloat()).apply {
             duration = 220
             addUpdateListener { window.decorView.translationX = it.animatedValue as Float }
             addListener(object : AnimatorListenerAdapter() {
