@@ -346,20 +346,36 @@ class ReaderActivity : AppCompatActivity() {
                 pageProgress.visibility = View.VISIBLE
 
                 // Adjust layout based on reading mode
-                val params = pageImage.layoutParams
+                val imageParams = pageImage.layoutParams
+                val parentParams = itemView.layoutParams
+
                 if (readingMode == "webtoon") {
-                    // Webtoon mode: wrap_content height — image keeps its natural aspect ratio
-                    // This allows long manhwa pages to display at full quality
-                    params.height = ViewGroup.LayoutParams.WRAP_CONTENT
+                    // Webtoon mode: 
+                    // - width = match_parent (fill screen width)
+                    // - height = wrap_content (image keeps natural aspect ratio)
+                    // - adjustViewBounds = true (scale up to fill width)
+                    // This makes images FULL WIDTH and properly tall (not tiny thumbnails)
+                    imageParams.height = ViewGroup.LayoutParams.WRAP_CONTENT
+                    imageParams.width = ViewGroup.LayoutParams.MATCH_PARENT
+                    pageImage.adjustViewBounds = true
                     pageImage.scaleType = android.widget.ImageView.ScaleType.FIT_CENTER
-                    pageImage.setZoomEnabled(false) // disable zoom in webtoon mode
+                    pageImage.setZoomEnabled(false)
+                    
+                    // Parent (FrameLayout) also needs wrap_content height
+                    parentParams.height = ViewGroup.LayoutParams.WRAP_CONTENT
                 } else {
-                    // Manga mode: match_parent height — one page fills the screen
-                    params.height = ViewGroup.LayoutParams.MATCH_PARENT
+                    // Manga mode: one page fills the entire screen
+                    imageParams.height = ViewGroup.LayoutParams.MATCH_PARENT
+                    imageParams.width = ViewGroup.LayoutParams.MATCH_PARENT
+                    pageImage.adjustViewBounds = false
                     pageImage.scaleType = android.widget.ImageView.ScaleType.FIT_CENTER
-                    pageImage.setZoomEnabled(true) // enable zoom in manga mode
+                    pageImage.setZoomEnabled(true)
+                    
+                    // Parent fills screen too
+                    parentParams.height = ViewGroup.LayoutParams.MATCH_PARENT
                 }
-                pageImage.layoutParams = params
+                pageImage.layoutParams = imageParams
+                itemView.layoutParams = parentParams
 
                 val request = Glide.with(itemView.context)
                     .load(url)
