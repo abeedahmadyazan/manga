@@ -43,8 +43,6 @@
     <color name="surface">#15151f</color>
 
     <!-- Legacy colors (referenced by existing layouts/drawables) -->
-    <color name="white">#ffffff</color>
-    <color name="black">#000000</color>
     <color name="text_muted">#6b7280</color>
     <color name="surface">#15151f</color>
     <color name="surface_light">#1a1a2e</color>
