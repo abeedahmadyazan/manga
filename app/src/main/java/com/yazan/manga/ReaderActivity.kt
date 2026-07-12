@@ -288,7 +288,10 @@ class ReaderActivity : AppCompatActivity() {
                 }
             }
         })
-        preloadPages(0)
+        // Only preload first page in manga mode (webtoon mode loads on demand)
+        if (readingMode == "manga") {
+            preloadPages(0)
+        }
     }
     private fun preloadPages(startIndex: Int) {
         val nextIndex = startIndex + 1
@@ -382,9 +385,14 @@ class ReaderActivity : AppCompatActivity() {
                     .diskCacheStrategy(com.bumptech.glide.load.engine.DiskCacheStrategy.ALL)
                     .priority(com.bumptech.glide.Priority.HIGH)
 
-                // Note: We don't use SIZE_ORIGINAL because manhwa images
-                // can be very tall (3000x10000px+) and cause OutOfMemoryError.
-                // Glide auto-resizes to fit the ImageView with fitCenter.
+                // In webtoon mode, load at FULL ORIGINAL resolution
+                // so zooming doesn't blur. OOM is prevented by NOT preloading
+                // (only 1-2 images in memory at a time).
+                if (readingMode == "webtoon") {
+                    request.override(com.bumptech.glide.request.target.Target.SIZE_ORIGINAL)
+                    // Use highest quality decode format
+                    request.encodeFormat(android.graphics.Bitmap.CompressFormat.PNG)
+                }
 
                 request.listener(object : com.bumptech.glide.request.RequestListener<android.graphics.drawable.Drawable> {
                         override fun onResourceReady(
@@ -409,8 +417,11 @@ class ReaderActivity : AppCompatActivity() {
                     })
                     .into(pageImage)
                 pageImage.setOnClickListener { onTap(position) }
-                // Preload next pages when this page becomes visible
-                preloadPages(position)
+                // Only preload in manga mode (small images).
+                // In webtoon mode, preloading large images causes OOM.
+                if (readingMode == "manga") {
+                    preloadPages(position)
+                }
             }
         }
     }
