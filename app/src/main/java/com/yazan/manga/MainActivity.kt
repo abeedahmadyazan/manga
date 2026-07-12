@@ -490,8 +490,7 @@ class MainActivity : AppCompatActivity() {
                 if (items.isEmpty() && currentPage == 1) {
                     // Only show "no manga" if it's page 1 AND we have no cached items
                     if (adapter.itemCount == 0) {
-                        errorText.text = "لا توجد مانجا حالياً 📭
-اسحب للأسفل للتحديث"
+                        errorText.text = "لا توجد مانجا حالياً 📭\nاسحب للأسفل للتحديث"
                         errorText.visibility = View.VISIBLE
                     }
                     // If we have cached items, keep them — don't clear the list
@@ -551,8 +550,7 @@ class MainActivity : AppCompatActivity() {
 
             result.onSuccess { items ->
                 if (items.isEmpty()) {
-                    errorText.text = "لا توجد نتائج بحث 🔍
-جرّب كلمة أخرى"
+                    errorText.text = "لا توجد نتائج بحث 🔍\nجرّب كلمة أخرى"
                     errorText.visibility = View.VISIBLE
                 }
                 adapter.submitList(items)
