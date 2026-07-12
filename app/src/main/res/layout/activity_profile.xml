@@ -485,13 +485,31 @@ android:id="@+id/cardCompleted"
                 android:visibility="gone"
                 tools:ignore="HardcodedText" />
 
-            <!-- ============ Edit profile info (birth date + country) ============ -->
+            <!-- ============ Birth date ============ -->
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnEditProfileInfo"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:layout_marginTop="8dp"
-                android:text="تعديل المعلومات الشخصية"
+                android:text="🎂 تاريخ الميلاد"
+                android:textColor="@color/text_primary"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:background="@drawable/bg_secondary_button"
+                app:backgroundTint="@null"
+                app:icon="@drawable/ic_edit"
+                app:iconGravity="textStart"
+                app:iconTint="@color/text_primary"
+                android:visibility="gone"
+                tools:ignore="HardcodedText" />
+
+            <!-- ============ Country ============ -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnEditCountry"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginTop="8dp"
+                android:text="🌍 الدولة"
                 android:textColor="@color/text_primary"
                 android:textSize="14sp"
                 android:textStyle="bold"

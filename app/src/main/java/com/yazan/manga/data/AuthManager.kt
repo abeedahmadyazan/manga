@@ -547,10 +547,14 @@ object AuthManager {
      * Update the user's optional birth date (format: yyyy-MM-dd, or empty to clear).
      * Goes through the Cloudflare API which validates the date and enforces a
      * once-per-month cooldown. Returns null on success, or an error message.
+     *
+     * Safety net: converts Arabic-Indic digits (٠-٩ / ۰-۹) to Latin (0-9) before
+     * sending — some Android devices with Arabic locale produce localized digits
+     * from String.format/NumberPicker, which the server's strict regex would reject.
      */
     fun updateBirthDate(context: Context, birthDate: String): String? {
         val current = getCurrentUser(context) ?: return "يجب تسجيل الدخول"
-        val clean = birthDate.trim()
+        val clean = toLatinDigits(birthDate.trim())
         // CLOUD FIRST: let the server validate + enforce cooldown
         var apiResult: Pair<Boolean, String?> = Pair(false, "فشل الاتصال")
         val latch = java.util.concurrent.CountDownLatch(1)
@@ -568,6 +572,19 @@ object AuthManager {
         context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
             .edit().putString(KEY_USER, serializeUser(updated)).apply()
         return null
+    }
+
+    /** Convert Arabic-Indic (and Extended/Persian) digits to Latin 0-9. */
+    private fun toLatinDigits(s: String): String {
+        val sb = StringBuilder(s.length)
+        for (c in s) {
+            sb.append(when {
+                c in '\u0660'..'\u0669' -> ('0' + (c - '\u0660'))   // ٠-٩ (Arabic-Indic)
+                c in '\u06F0'..'\u06F9' -> ('0' + (c - '\u06F0'))   // ۰-۹ (Extended/Persian)
+                else -> c
+            })
+        }
+        return sb.toString()
     }
 
     /** Update the user's optional country. Returns null on success, or an error message. */

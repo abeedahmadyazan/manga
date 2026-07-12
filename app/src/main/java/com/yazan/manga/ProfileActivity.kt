@@ -74,6 +74,7 @@ class ProfileActivity : BaseSwipeBackActivity() {
     private lateinit var btnChangeName: MaterialButton
     private lateinit var btnChangeUsername: MaterialButton
     private lateinit var btnEditProfileInfo: MaterialButton
+    private lateinit var btnEditCountry: MaterialButton
     private lateinit var btnAdminPanel: MaterialButton
     private lateinit var statsContainer: View
     private var listsListener: ListenerRegistration? = null
@@ -113,6 +114,7 @@ class ProfileActivity : BaseSwipeBackActivity() {
         btnChangeName = findViewById(R.id.btnChangeName)
         btnChangeUsername = findViewById(R.id.btnChangeUsername)
         btnEditProfileInfo = findViewById(R.id.btnEditProfileInfo)
+        btnEditCountry = findViewById(R.id.btnEditCountry)
         btnAdminPanel = findViewById(R.id.btnAdminPanel)
         statsContainer = findViewById(R.id.statsContainer)
 
@@ -131,7 +133,10 @@ class ProfileActivity : BaseSwipeBackActivity() {
             showChangeUsernameDialog()
         }
         btnEditProfileInfo.setOnClickListener {
-            showEditProfileInfoDialog()
+            showBirthDateDialog()
+        }
+        btnEditCountry.setOnClickListener {
+            showCountryDialog()
         }
 
         // Profile picture — both the avatar image and the dedicated camera button open the picker
@@ -403,21 +408,27 @@ class ProfileActivity : BaseSwipeBackActivity() {
         else "⏳ تبقّى $hours ساعة قبل أن تتمكن من التغيير."
     }
 
-    private fun showEditProfileInfoDialog() {
+    /**
+     * Birth date editor — a separate dialog with Day → Month → Year pickers.
+     * No free-text editing: the date is built ONLY from NumberPicker selections,
+     * so the format is always valid (YYYY-MM-DD with Latin digits).
+     */
+    private fun showBirthDateDialog() {
         val user = AuthManager.getCurrentUser(this) ?: return
 
-        // ---------- Birth date: Day → Month → Year pickers (logical bounds) ----------
         val currentYear = java.util.Calendar.getInstance().get(java.util.Calendar.YEAR)
         val minYear = 1940
         val maxYear = currentYear - 10  // لا يقل عمره عن 10 سنوات
 
-        // Parse existing birth date (if any)
+        // Parse existing birth date (if any) — normalize Arabic digits first
+        // (some old dates were saved as "٢٠٠٩-٠٩-٢٤" before the Latin-digit fix).
+        val normalized = toLatinDigitsLocal(user.birthDate)
         var initYear = maxYear - 20
         var initMonth = 1
         var initDay = 1
-        if (user.birthDate.isNotEmpty()) {
+        if (normalized.isNotEmpty()) {
             try {
-                val p = user.birthDate.split("-")
+                val p = normalized.split("-")
                 initYear = p[0].toInt().coerceIn(minYear, maxYear)
                 initMonth = p[1].toInt().coerceIn(1, 12)
                 initDay = p[2].toInt().coerceIn(1, 31)
@@ -455,14 +466,9 @@ class ProfileActivity : BaseSwipeBackActivity() {
             wrapSelectorWheel = false
         }
 
-        // Track whether the user actually changed the date, so that opening the
-        // dialog and pressing Save without touching anything does NOT set a
-        // default date (and so "clear" is handled correctly).
         var interacted = false
         var cleared = false
 
-        // When month or year changes → recompute the day picker's max and clamp,
-        // so it's impossible to select an invalid day (e.g. 31 Feb, 30 Feb in non-leap years).
         val recomputeDays = {
             val newMax = daysInMonth(yearPicker.value, monthPicker.value)
             if (dayPicker.maxValue != newMax) dayPicker.maxValue = newMax
@@ -480,7 +486,6 @@ class ProfileActivity : BaseSwipeBackActivity() {
             orientation = android.widget.LinearLayout.HORIZONTAL
             setPadding(8, 8, 8, 8)
             gravity = android.view.Gravity.CENTER
-            // RTL order: day (right) → month → year (left)
             val dayCol = android.widget.LinearLayout(this@ProfileActivity).apply {
                 orientation = android.widget.LinearLayout.VERTICAL; gravity = android.view.Gravity.CENTER
                 addView(dayLabel); addView(dayPicker)
@@ -500,7 +505,6 @@ class ProfileActivity : BaseSwipeBackActivity() {
             addView(yearCol)
         }
 
-        // "Clear" button to unset the birth date (sends empty string on save)
         val clearBtn = android.widget.TextView(this).apply {
             text = "🗑️ مسح تاريخ الميلاد"
             setTextColor(getColor(R.color.danger))
@@ -519,12 +523,71 @@ class ProfileActivity : BaseSwipeBackActivity() {
             setTextColor(android.graphics.Color.parseColor("#FFB74D"))
         }
 
-        // ---------- Country ----------
-        val countryLabel = TextView(this).apply {
-            text = "الدولة (اختياري)"
-            setPadding(40, 16, 40, 4); textSize = 12f
-            setTextColor(getColor(R.color.text_secondary))
+        val container = android.widget.LinearLayout(this).apply {
+            orientation = android.widget.LinearLayout.VERTICAL
+            setPadding(20, 16, 20, 0)
+            addView(TextView(this@ProfileActivity).apply {
+                text = "🎂 تاريخ الميلاد"; setPadding(40, 0, 40, 0); textSize = 13f
+                setTextColor(getColor(R.color.text_primary))
+            })
+            addView(pickersRow)
+            addView(clearBtn)
+            addView(birthCooldown)
         }
+
+        AuthManager.fetchCloudUser(user.email) { cu ->
+            runOnUiThread {
+                val bm = cooldownMessage(cu?.lastBirthDateChange ?: 0L, 30)
+                birthCooldown.text = bm
+                birthCooldown.setTextColor(android.graphics.Color.parseColor(if (bm.startsWith("✅")) "#4CAF50" else "#FFB74D"))
+            }
+        }
+
+        val dialog = AlertDialog.Builder(this)
+            .setTitle("تاريخ الميلاد")
+            .setView(container)
+            .setPositiveButton("حفظ", null)
+            .setNegativeButton("إلغاء", null)
+            .create()
+
+        dialog.setOnShowListener {
+            dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener {
+                val y = yearPicker.value
+                val m = monthPicker.value
+                val d = dayPicker.value
+                val newBirthDate = when {
+                    cleared -> ""
+                    interacted -> String.format(java.util.Locale.US, "%04d-%02d-%02d", y, m, d)
+                    else -> user.birthDate
+                }
+
+                if (newBirthDate == user.birthDate) { dialog.dismiss(); return@setOnClickListener }
+
+                Thread {
+                    val err = AuthManager.updateBirthDate(this, newBirthDate)
+                    runOnUiThread {
+                        if (err == null) {
+                            Toast.makeText(this, if (newBirthDate.isEmpty()) "تم حذف تاريخ الميلاد" else "تم تحديث تاريخ الميلاد", Toast.LENGTH_SHORT).show()
+                            updateUI()
+                            dialog.dismiss()
+                        } else {
+                            Toast.makeText(this, err, Toast.LENGTH_LONG).show()
+                        }
+                    }
+                }.start()
+            }
+        }
+        dialog.show()
+    }
+
+    /**
+     * Country editor — a separate dialog with a free-text input for the country.
+     * (Country is the only profile field that stays free-text; the birth date is
+     *  fully picker-driven to prevent invalid formats.)
+     */
+    private fun showCountryDialog() {
+        val user = AuthManager.getCurrentUser(this) ?: return
+
         val countryInput = EditText(this).apply {
             setText(user.country)
             hint = "مثال: سوريا، مصر، السعودية..."
@@ -536,36 +599,27 @@ class ProfileActivity : BaseSwipeBackActivity() {
             setPadding(40, 4, 40, 4); textSize = 12f
             setTextColor(android.graphics.Color.parseColor("#FFB74D"))
         }
-
         val container = android.widget.LinearLayout(this).apply {
             orientation = android.widget.LinearLayout.VERTICAL
             setPadding(20, 16, 20, 0)
             addView(TextView(this@ProfileActivity).apply {
-                text = "🎂 تاريخ الميلاد"; setPadding(40, 0, 40, 0); textSize = 13f
+                text = "🌍 الدولة (اختياري)"; setPadding(40, 0, 40, 0); textSize = 13f
                 setTextColor(getColor(R.color.text_primary))
             })
-            addView(pickersRow)
-            addView(clearBtn)
-            addView(birthCooldown)
-            addView(countryLabel)
             addView(countryInput)
             addView(countryCooldown)
         }
 
-        // Async fetch cooldowns from the cloud
         AuthManager.fetchCloudUser(user.email) { cu ->
             runOnUiThread {
-                val bm = cooldownMessage(cu?.lastBirthDateChange ?: 0L, 30)
-                birthCooldown.text = "تاريخ الميلاد: $bm"
-                birthCooldown.setTextColor(android.graphics.Color.parseColor(if (bm.startsWith("✅")) "#4CAF50" else "#FFB74D"))
                 val cm = cooldownMessage(cu?.lastCountryChange ?: 0L, 7)
-                countryCooldown.text = "الدولة: $cm"
+                countryCooldown.text = cm
                 countryCooldown.setTextColor(android.graphics.Color.parseColor(if (cm.startsWith("✅")) "#4CAF50" else "#FFB74D"))
             }
         }
 
         val dialog = AlertDialog.Builder(this)
-            .setTitle("تعديل المعلومات الشخصية")
+            .setTitle("الدولة")
             .setView(container)
             .setPositiveButton("حفظ", null)
             .setNegativeButton("إلغاء", null)
@@ -573,43 +627,37 @@ class ProfileActivity : BaseSwipeBackActivity() {
 
         dialog.setOnShowListener {
             dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener {
-                val y = yearPicker.value
-                val m = monthPicker.value
-                val d = dayPicker.value
-                // Only treat as a date change if the user actually interacted with
-                // the pickers (or pressed clear). Otherwise keep the existing value.
-                val newBirthDate = when {
-                    cleared -> ""
-                    interacted -> String.format("%04d-%02d-%02d", y, m, d)
-                    else -> user.birthDate
-                }
                 val country = countryInput.text.toString().trim()
+                if (country == user.country) { dialog.dismiss(); return@setOnClickListener }
 
-                val bdChanged = newBirthDate != user.birthDate
-                val cChanged = country != user.country
-
-                if (!bdChanged && !cChanged) { dialog.dismiss(); return@setOnClickListener }
-
-                // Save in background so we don't block the UI thread (the API calls use latches)
                 Thread {
-                    var bdErr: String? = null
-                    var cErr: String? = null
-                    if (bdChanged) bdErr = AuthManager.updateBirthDate(this, newBirthDate)
-                    if (cChanged) cErr = AuthManager.updateCountry(this, country)
+                    val err = AuthManager.updateCountry(this, country)
                     runOnUiThread {
-                        val errs = listOfNotNull(bdErr, cErr)
-                        if (errs.isEmpty()) {
-                            Toast.makeText(this, "تم تحديث المعلومات بنجاح", Toast.LENGTH_SHORT).show()
+                        if (err == null) {
+                            Toast.makeText(this, "تم تحديث الدولة", Toast.LENGTH_SHORT).show()
                             updateUI()
                             dialog.dismiss()
                         } else {
-                            Toast.makeText(this, errs.joinToString("\n"), Toast.LENGTH_LONG).show()
+                            Toast.makeText(this, err, Toast.LENGTH_LONG).show()
                         }
                     }
                 }.start()
             }
         }
         dialog.show()
+    }
+
+    /** Convert Arabic-Indic (and Persian) digits to Latin 0-9. */
+    private fun toLatinDigitsLocal(s: String): String {
+        val sb = StringBuilder(s.length)
+        for (c in s) {
+            sb.append(when {
+                c in '\u0660'..'\u0669' -> ('0' + (c - '\u0660'))
+                c in '\u06F0'..'\u06F9' -> ('0' + (c - '\u06F0'))
+                else -> c
+            })
+        }
+        return sb.toString()
     }
 
     private fun showChangeUsernameDialog() {
@@ -735,6 +783,7 @@ class ProfileActivity : BaseSwipeBackActivity() {
             btnChangeName.visibility = View.VISIBLE
             btnChangeUsername.visibility = View.VISIBLE
             btnEditProfileInfo.visibility = View.VISIBLE
+            btnEditCountry.visibility = View.VISIBLE
             btnChangeAvatar.visibility = View.VISIBLE
             btnAdminPanel.visibility = if (user.isAdmin) View.VISIBLE else View.GONE
         } else {
@@ -752,6 +801,7 @@ class ProfileActivity : BaseSwipeBackActivity() {
             btnChangeName.visibility = View.GONE
             btnChangeUsername.visibility = View.GONE
             btnEditProfileInfo.visibility = View.GONE
+            btnEditCountry.visibility = View.GONE
             btnAdminPanel.visibility = View.GONE
         }
     }
