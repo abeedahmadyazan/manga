@@ -600,8 +600,8 @@ class CommentsAdapter(
             }
         }
     }
-    override fun onBackPressed() {
-        super.onBackPressed()
+    override fun finish() {
+        super.finish()
         overridePendingTransition(R.anim.fade_in, R.anim.slide_out_left)
     }
 }

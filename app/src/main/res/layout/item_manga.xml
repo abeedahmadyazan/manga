@@ -33,6 +33,18 @@
                 android:layout_gravity="bottom"
                 android:background="@drawable/bg_gradient_overlay" />
 
+            <ImageButton
+                android:id="@+id/btnRemoveFromList"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_gravity="top|start"
+                android:layout_margin="6dp"
+                android:src="@drawable/ic_delete"
+                android:background="@drawable/bg_circle_button"
+                android:tint="@color/white"
+                android:visibility="gone"
+                android:contentDescription="إزالة" />
+
         </FrameLayout>
 
         <LinearLayout
@@ -53,17 +65,49 @@
                 android:ellipsize="end"
                 android:minLines="2" />
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginTop="4dp">
+
+                <TextView
+                    android:id="@+id/mangaStatus"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="مستمرة"
+                    android:textColor="@color/primary"
+                    android:textSize="11sp"
+                    android:background="@drawable/bg_status_badge"
+                    android:paddingHorizontal="8dp"
+                    android:paddingVertical="2dp" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/ratingChip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="4.5"
+                    android:textSize="10sp"
+                    app:chipBackgroundColor="@color/star"
+                    android:textColor="@color/black"
+                    android:visibility="gone"
+                    app:chipMinHeight="20dp"
+                    app:chipCornerRadius="8dp" />
+            </LinearLayout>
+
             <TextView
-                android:id="@+id/mangaStatus"
+                android:id="@+id/tvRating"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:text="مستمرة"
-                android:textColor="@color/primary"
-                android:textSize="11sp"
-                android:background="@drawable/bg_status_badge"
-                android:paddingHorizontal="8dp"
-                android:paddingVertical="2dp" />
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/tvStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone" />
 
         </LinearLayout>
 
