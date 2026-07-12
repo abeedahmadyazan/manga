@@ -56,6 +56,7 @@ class ProfileActivity : BaseSwipeBackActivity() {
     private lateinit var avatarImage: android.widget.ImageView
     private lateinit var avatarLetter: TextView
     private lateinit var btnChangeAvatar: ImageButton
+    private lateinit var avatarProgress: ProgressBar
     private lateinit var tvName: TextView
     private lateinit var tvUsername: TextView
     private lateinit var tvEmail: TextView
@@ -96,6 +97,7 @@ class ProfileActivity : BaseSwipeBackActivity() {
         avatarImage = findViewById(R.id.avatarImage)
         avatarLetter = findViewById(R.id.avatarLetter)
         btnChangeAvatar = findViewById(R.id.btnChangeAvatar)
+        avatarProgress = findViewById(R.id.avatarProgress)
         tvName = findViewById(R.id.tvName)
         tvUsername = findViewById(R.id.tvUsername)
         tvEmail = findViewById(R.id.tvEmail)
@@ -210,14 +212,52 @@ class ProfileActivity : BaseSwipeBackActivity() {
     }
 
     private fun saveProfileImage(uri: android.net.Uri) {
-        // Copy the image into internal storage so it survives app restarts
-        // and permission revocation (the old URI-based approach broke after restart).
-        val savedPath = AuthManager.setAvatar(this, uri)
-        if (savedPath != null) {
-            Toast.makeText(this, "تم تحديث الصورة", Toast.LENGTH_SHORT).show()
+        // Show a circular progress overlay and disable the change button while
+        // saving. setAvatar does disk I/O + a 15s-countdown API call, so running
+        // it on the main thread was blocking the UI (looked like the app froze).
+        avatarProgress.visibility = View.VISIBLE
+        btnChangeAvatar.isEnabled = false
+        avatarImage.isEnabled = false
+
+        Thread {
+            // Copy the image into internal storage + upload base64 to the cloud.
+            val savedPath = AuthManager.setAvatar(this, uri)
+            runOnUiThread {
+                avatarProgress.visibility = View.GONE
+                btnChangeAvatar.isEnabled = true
+                avatarImage.isEnabled = true
+                if (savedPath != null) {
+                    Toast.makeText(this, "تم تحديث الصورة", Toast.LENGTH_SHORT).show()
+                    // Reload the avatar, bypassing Glide's cache: the file path is
+                    // the same as before (avatar_<email>.jpg) but the CONTENT has
+                    // changed. Without skipMemoryCache + diskCacheStrategy NONE,
+                    // Glide would show the OLD image from its cache forever.
+                    reloadAvatarNoCache(savedPath)
+                } else {
+                    Toast.makeText(this, "فشل حفظ الصورة", Toast.LENGTH_LONG).show()
+                }
+            }
+        }.start()
+    }
+
+    /** Force-reload the avatar from the given path, bypassing Glide's caches. */
+    private fun reloadAvatarNoCache(path: String) {
+        try {
+            avatarImage.visibility = View.VISIBLE
+            avatarLetter.visibility = View.GONE
+            // Add a cache-busting signature so Glide treats this as a new request.
+            val sig = com.bumptech.glide.signature.ObjectKey("avatar_${System.currentTimeMillis()}")
+            Glide.with(this)
+                .load(java.io.File(path))
+                .circleCrop()
+                .signature(sig)
+                .skipMemoryCache(true)
+                .diskCacheStrategy(com.bumptech.glide.load.engine.DiskCacheStrategy.NONE)
+                .placeholder(R.drawable.bg_avatar_gradient)
+                .into(avatarImage)
+        } catch (e: Exception) {
+            // Fallback to the normal updateUI path
             updateUI()
-        } else {
-            Toast.makeText(this, "فشل حفظ الصورة", Toast.LENGTH_LONG).show()
         }
     }
 
@@ -707,7 +747,15 @@ class ProfileActivity : BaseSwipeBackActivity() {
             if (user.avatar.isNotEmpty()) {
                 avatarImage.visibility = View.VISIBLE
                 avatarLetter.visibility = View.GONE
-                Glide.with(this).load(user.avatar).circleCrop()
+                // Cache-busting signature: when the avatar file is rewritten, its
+                // lastModified timestamp changes → Glide treats it as a new image
+                // instead of showing the stale cached one.
+                val avatarFile = java.io.File(user.avatar)
+                val sig = com.bumptech.glide.signature.ObjectKey(
+                    "avatar_${avatarFile.lastModified()}_${avatarFile.length()}"
+                )
+                Glide.with(this).load(avatarFile).circleCrop()
+                    .signature(sig)
                     .placeholder(R.drawable.bg_avatar_gradient)
                     .into(avatarImage)
             } else {

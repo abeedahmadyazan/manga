@@ -96,6 +96,16 @@
                     android:contentDescription="تغيير الصورة"
                     android:visibility="gone"
                     tools:ignore="HardcodedText,UseAppTint" />
+
+                <!-- Circular progress overlay — shown while the avatar is being saved -->
+                <ProgressBar
+                    android:id="@+id/avatarProgress"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_gravity="center"
+                    android:indeterminateTint="@color/white"
+                    android:visibility="gone"
+                    tools:ignore="UnusedAttribute" />
             </FrameLayout>
 
             <!-- Name + admin badge -->
