@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/background_dark"
     android:fitsSystemWindows="true"
     android:layoutDirection="rtl">
@@ -11,52 +10,328 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:paddingTop="36dp"
-        android:paddingHorizontal="12dp"
-        android:paddingBottom="10dp"
-        android:background="@color/background_dark"
-        android:elevation="4dp">
+        android:orientation="vertical">
 
-        <ImageButton
-            android:id="@+id/btnBack"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:src="@drawable/ic_back"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:tint="@color/text_primary"
-            android:contentDescription="رجوع"
-            tools:ignore="UseAppTint" />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="الإعدادات"
-            android:textColor="@color/text_primary"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:layout_marginStart="10dp"
-            tools:ignore="HardcodedText" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="20dp">
-
-        <TextView
-            android:id="@+id/tvAbout"
+        <!-- Header -->
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="16dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingTop="36dp"
+            android:paddingHorizontal="12dp"
+            android:paddingBottom="10dp"
+            android:background="@drawable/bg_header_gradient"
+            android:elevation="4dp">
+
+            <ImageButton
+                android:id="@+id/btnBack"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/ic_back"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:tint="@color/text_primary"
+                android:contentDescription="رجوع"
+                tools:ignore="UseAppTint,HardcodedText" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="الإعدادات"
+                android:textColor="@color/text_primary"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginStart="10dp"
+                tools:ignore="HardcodedText" />
+        </LinearLayout>
+
+        <!-- ===== المظهر ===== -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="20dp"
+            android:text="🎨 المظهر"
+            android:textColor="@color/primary"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="8dp"
             android:background="@drawable/bg_card"
-            android:text="تطبيق مانجا v1.0.0\n© 2026"
-            android:textColor="@color/text_secondary"
-            android:textSize="13sp"
-            android:lineSpacingExtra="3dp"
-            tools:ignore="HardcodedText" />
+            android:padding="4dp">
+
+            <!-- الوضع الليلي -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:padding="14dp"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:id="@+id/rowDarkMode">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="الوضع الليلي"
+                    android:textColor="@color/text_primary"
+                    android:textSize="15sp" />
+
+                <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/switchDarkMode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/divider"
+                android:layout_marginHorizontal="14dp" />
+
+            <!-- وضع القراءة -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:padding="14dp"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:id="@+id/rowReadingMode">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="وضع القراءة الافتراضي"
+                    android:textColor="@color/text_primary"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/tvReadingMode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="مانهوا (تمرير)"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="13sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- ===== القارئ ===== -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="20dp"
+            android:text="📖 القارئ"
+            android:textColor="@color/primary"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/bg_card"
+            android:padding="4dp">
+
+            <!-- إبقاء الشاشة مضاءة -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:padding="14dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="إبقاء الشاشة مضاءة أثناء القراءة"
+                    android:textColor="@color/text_primary"
+                    android:textSize="15sp" />
+
+                <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/switchKeepScreenOn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/divider"
+                android:layout_marginHorizontal="14dp" />
+
+            <!-- جودة الصور -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:padding="14dp"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:id="@+id/rowImageQuality">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="جودة الصور"
+                    android:textColor="@color/text_primary"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/tvImageQuality"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="عالية"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="13sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- ===== البيانات ===== -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="20dp"
+            android:text="💾 البيانات"
+            android:textColor="@color/primary"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/bg_card"
+            android:padding="4dp">
+
+            <!-- مسح الكاش -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:padding="14dp"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:id="@+id/rowClearCache">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="مسح ذاكرة التخزين المؤقت"
+                    android:textColor="@color/text_primary"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/tvCacheSize"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="—"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/divider"
+                android:layout_marginHorizontal="14dp" />
+
+            <!-- مسح التاريخ -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:padding="14dp"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:id="@+id/rowClearHistory">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="مسح سجل القراءة"
+                    android:textColor="@color/danger"
+                    android:textSize="15sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- ===== حول التطبيق ===== -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="20dp"
+            android:text="ℹ️ حول التطبيق"
+            android:textColor="@color/primary"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/bg_card"
+            android:padding="16dp"
+            android:layout_marginBottom="30dp">
+
+            <TextView
+                android:id="@+id/tvAbout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="YZ MANGA v1.0.66\n© 2026 يزن عبدالله"
+                android:textColor="@color/text_secondary"
+                android:textSize="14sp"
+                android:lineSpacingExtra="4dp"
+                tools:ignore="HardcodedText" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/divider"
+                android:layout_marginVertical="12dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="المصادر: MangaDex • 3asq • manhwahentai"
+                android:textColor="@color/text_hint"
+                android:textSize="12sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="API: Cloudflare Workers"
+                android:textColor="@color/text_hint"
+                android:textSize="12sp" />
+        </LinearLayout>
+
     </LinearLayout>
-</LinearLayout>
+</ScrollView>

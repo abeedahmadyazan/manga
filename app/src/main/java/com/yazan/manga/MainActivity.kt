@@ -634,4 +634,8 @@ class MainActivity : AppCompatActivity() {
                 }
         }
     }
+    override fun onBackPressed() {
+        super.onBackPressed()
+        overridePendingTransition(R.anim.fade_in, R.anim.slide_out_left)
+    }
 }

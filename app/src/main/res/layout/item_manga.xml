@@ -1,144 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="5dp"
-    app:cardBackgroundColor="@color/surface"
-    app:cardCornerRadius="14dp"
-    app:cardElevation="2dp"
-    app:strokeWidth="0dp"
+    android:layout_margin="4dp"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="4dp"
+    app:cardBackgroundColor="@color/card_dark"
     android:foreground="?attr/selectableItemBackground"
     android:clickable="true"
     android:focusable="true">
 
-    <FrameLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="160dp">
+
+            <ImageView
+                android:id="@+id/mangaCover"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:contentDescription="غلاف" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_gravity="bottom"
+                android:background="@drawable/bg_gradient_overlay" />
+
+        </FrameLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="10dp">
 
-            <!-- Cover image with overlay info (Netflix-style) -->
-            <FrameLayout
+            <TextView
+                android:id="@+id/mangaTitle"
                 android:layout_width="match_parent"
-                android:layout_height="220dp">
+                android:layout_height="wrap_content"
+                android:text="عنوان المانجا"
+                android:textColor="@color/text_primary"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                android:maxLines="2"
+                android:ellipsize="end"
+                android:minLines="2" />
 
-                <ImageView
-                    android:id="@+id/mangaCover"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:scaleType="centerCrop"
-                    android:adjustViewBounds="true"
-                    android:background="@color/surface_light"
-                    android:contentDescription="غلاف المانجا"
-                    tools:ignore="HardcodedText" />
+            <TextView
+                android:id="@+id/mangaStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="مستمرة"
+                android:textColor="@color/primary"
+                android:textSize="11sp"
+                android:background="@drawable/bg_status_badge"
+                android:paddingHorizontal="8dp"
+                android:paddingVertical="2dp" />
 
-                <!-- Bottom gradient overlay -->
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="120dp"
-                    android:layout_gravity="bottom"
-                    android:background="@drawable/bg_card_overlay" />
-
-                <!-- Top-right rating chip -->
-                <LinearLayout
-                    android:id="@+id/ratingChip"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="top|end"
-                    android:layout_margin="8dp"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    android:background="@drawable/bg_card_chip"
-                    android:paddingHorizontal="7dp"
-                    android:paddingVertical="3dp"
-                    android:visibility="gone"
-                    tools:visibility="visible">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="★"
-                        android:textColor="@color/star"
-                        android:textSize="10sp" />
-
-                    <TextView
-                        android:id="@+id/tvRating"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="3dp"
-                        android:text="0.0"
-                        android:textColor="@color/white"
-                        android:textSize="11sp"
-                        android:textStyle="bold"
-                        tools:ignore="HardcodedText" />
-                </LinearLayout>
-
-                <!-- Top-left status badge (moved from bottom-left so it
-                     doesn't cover the title overlay) -->
-                <TextView
-                    android:id="@+id/tvStatus"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="top|start"
-                    android:layout_margin="8dp"
-                    android:background="@drawable/bg_card_chip"
-                    android:paddingHorizontal="8dp"
-                    android:paddingVertical="3dp"
-                    android:text="مستمرة"
-                    android:textColor="@color/white"
-                    android:textSize="10sp"
-                    android:textStyle="bold"
-                    android:visibility="gone"
-                    tools:visibility="visible"
-                    tools:ignore="HardcodedText" />
-
-                <!-- Title overlay (bottom) -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="bottom"
-                    android:orientation="vertical"
-                    android:paddingHorizontal="10dp"
-                    android:paddingBottom="9dp"
-                    android:paddingTop="30dp">
-
-                    <TextView
-                        android:id="@+id/mangaTitle"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Manga Title"
-                        android:textColor="@color/white"
-                        android:textSize="12sp"
-                        android:textStyle="bold"
-                        android:maxLines="2"
-                        android:ellipsize="end"
-                        android:lineSpacingExtra="1dp"
-                        tools:ignore="HardcodedText" />
-                </LinearLayout>
-            </FrameLayout>
         </LinearLayout>
 
-        <!-- Remove button (top-end corner) — only shown in custom-list screens -->
-        <ImageButton
-            android:id="@+id/btnRemoveFromList"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_gravity="top|start"
-            android:layout_margin="6dp"
-            android:background="@drawable/bg_circle_button"
-            android:src="@android:drawable/ic_menu_close_clear_cancel"
-            android:scaleType="center"
-            android:padding="6dp"
-            android:tint="@color/white"
-            android:contentDescription="إزالة من القائمة"
-            android:visibility="gone"
-            tools:ignore="UseAppTint,HardcodedText" />
-    </FrameLayout>
+    </LinearLayout>
 
-</com.google.android.material.card.MaterialCardView>
+</androidx.cardview.widget.CardView>
