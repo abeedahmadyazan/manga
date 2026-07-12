@@ -169,7 +169,7 @@ class MangaRepository(private val appContext: Context? = null) {
                             val id = item.get("id")?.asString ?: continue
                             val title = item.get("title")?.asString ?: continue
                             val cover = item.get("cover")?.asString ?: ""
-                            items.add(MangaListItem(id = id, title = title, cover = cover, source = "3asq", status = "ongoing"))
+                            items.add(MangaListItem(id = "3asq-$id", title = title, cover = cover, source = "3asq", status = "ongoing"))
                         } catch (e: Exception) {}
                     }
                     Result.success(items)
@@ -332,7 +332,7 @@ class MangaRepository(private val appContext: Context? = null) {
                         val title = item.get("title")?.asString ?: continue
                         val cover = item.get("cover")?.asString ?: ""
                         items.add(MangaListItem(
-                            id = id,
+                            id = "3asq-$id",  // MUST prefix with "3asq-" so getMangaDetails recognizes it
                             title = title,
                             cover = cover,
                             source = "3asq",
