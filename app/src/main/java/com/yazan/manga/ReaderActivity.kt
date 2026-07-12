@@ -385,13 +385,12 @@ class ReaderActivity : AppCompatActivity() {
                     .diskCacheStrategy(com.bumptech.glide.load.engine.DiskCacheStrategy.ALL)
                     .priority(com.bumptech.glide.Priority.HIGH)
 
-                // In webtoon mode, load at FULL ORIGINAL resolution
-                // so zooming doesn't blur. OOM is prevented by NOT preloading
-                // (only 1-2 images in memory at a time).
+                // In webtoon mode, load at high resolution (2000px width)
+                // for good zoom quality without OOM.
+                // SIZE_ORIGINAL causes OOM on very tall manhwa images.
+                // 2000px width is enough for zoom clarity on most devices.
                 if (readingMode == "webtoon") {
-                    request.override(com.bumptech.glide.request.target.Target.SIZE_ORIGINAL)
-                    // Use highest quality decode format
-                    request.encodeFormat(android.graphics.Bitmap.CompressFormat.PNG)
+                    request.override(2000, 4000)
                 }
 
                 request.listener(object : com.bumptech.glide.request.RequestListener<android.graphics.drawable.Drawable> {
