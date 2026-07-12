@@ -336,7 +336,7 @@ class MainActivity : AppCompatActivity() {
                 setColor(getColor(R.color.surface))
             }
             val buttons = listOfNotNull(chipSource1, chipSource2, chipSource3, chipSource4)
-            val types = listOf("manga", "3asq", "mhh")
+            val types = listOf("manga", "3asq", "arabtoons", "mhh")
             buttons.forEachIndexed { i, btn ->
                 if (types[i] == source) {
                     btn.background = activeBg
