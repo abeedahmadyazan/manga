@@ -71,4 +71,6 @@
     <color name="overlay_round">#15151f</color>
     <color name="secondary_button_bg">#1a1a2e</color>
     <color name="danger_button_bg">#1a1a2e</color>
+    <color name="skeleton_base">#1a1a2e</color>
+    <color name="skeleton_highlight">#2a2a3e</color>
 </resources>
