@@ -366,10 +366,9 @@ class ReaderActivity : AppCompatActivity() {
                     .diskCacheStrategy(com.bumptech.glide.load.engine.DiskCacheStrategy.ALL)
                     .priority(com.bumptech.glide.Priority.HIGH)
 
-                // In webtoon mode, load original size for best quality
-                if (readingMode == "webtoon") {
-                    request.override(com.bumptech.glide.request.target.Target.SIZE_ORIGINAL)
-                }
+                // Note: We don't use SIZE_ORIGINAL because manhwa images
+                // can be very tall (3000x10000px+) and cause OutOfMemoryError.
+                // Glide auto-resizes to fit the ImageView with fitCenter.
 
                 request.listener(object : com.bumptech.glide.request.RequestListener<android.graphics.drawable.Drawable> {
                         override fun onResourceReady(

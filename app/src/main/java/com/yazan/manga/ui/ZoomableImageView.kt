@@ -83,8 +83,11 @@ class ZoomableImageView @JvmOverloads constructor(
     }
 
     override fun onTouchEvent(event: MotionEvent): Boolean {
-        // In webtoon mode, disable zoom — let parent (RecyclerView) handle scroll
-        if (!zoomEnabled) return false
+        // In webtoon mode, disable zoom but still handle click (for showing/hiding bars)
+        if (!zoomEnabled) {
+            // Still process the touch so onClickListener works
+            return super.onTouchEvent(event)
+        }
         gestureDetector.onTouchEvent(event)
 
         when (event.actionMasked) {
