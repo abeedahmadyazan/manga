@@ -21,6 +21,7 @@
     <color name="text_primary">#ffffff</color>
     <color name="text_secondary">#9ca3af</color>
     <color name="text_hint">#6b7280</color>
+    <color name="text_muted">#6b7280</color>
 
     <!-- Divider -->
     <color name="divider">#1f1f2e</color>
@@ -36,24 +37,29 @@
     <!-- Badge -->
     <color name="badge_red">#ef4444</color>
 
-    <!-- Legacy colors (referenced by existing layouts) -->
+    <!-- Basic -->
     <color name="white">#ffffff</color>
     <color name="black">#000000</color>
-    <color name="text_muted">#6b7280</color>
-    <color name="surface">#15151f</color>
+    <color name="transparent">#00000000</color>
+    <color name="semi_transparent">#80000000</color>
 
-    <!-- Legacy colors (referenced by existing layouts/drawables) -->
-    <color name="text_muted">#6b7280</color>
+    <!-- Surfaces -->
     <color name="surface">#15151f</color>
     <color name="surface_light">#1a1a2e</color>
     <color name="overlay_dark">#99000000</color>
+
+    <!-- Status -->
     <color name="star">#fbbf24</color>
     <color name="status_ongoing">#10b981</color>
     <color name="status_completed">#3b82f6</color>
     <color name="status_hiatus">#f59e0b</color>
     <color name="status_cancelled">#ef4444</color>
+
+    <!-- Chips -->
     <color name="chip_bg">#1a10b981</color>
     <color name="chip_text">#34d399</color>
+
+    <!-- UI elements -->
     <color name="search_bg">#15151f</color>
     <color name="tab_inactive">#6b7280</color>
     <color name="tab_active">#10b981</color>
@@ -65,6 +71,4 @@
     <color name="overlay_round">#15151f</color>
     <color name="secondary_button_bg">#1a1a2e</color>
     <color name="danger_button_bg">#1a1a2e</color>
-    <color name="transparent">#00000000</color>
-    <color name="semi_transparent">#80000000</color>
 </resources>
