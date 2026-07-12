@@ -41,4 +41,32 @@
     <color name="black">#000000</color>
     <color name="text_muted">#6b7280</color>
     <color name="surface">#15151f</color>
+
+    <!-- Legacy colors (referenced by existing layouts/drawables) -->
+    <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
+    <color name="text_muted">#6b7280</color>
+    <color name="surface">#15151f</color>
+    <color name="surface_light">#1a1a2e</color>
+    <color name="overlay_dark">#99000000</color>
+    <color name="star">#fbbf24</color>
+    <color name="status_ongoing">#10b981</color>
+    <color name="status_completed">#3b82f6</color>
+    <color name="status_hiatus">#f59e0b</color>
+    <color name="status_cancelled">#ef4444</color>
+    <color name="chip_bg">#1a10b981</color>
+    <color name="chip_text">#34d399</color>
+    <color name="search_bg">#15151f</color>
+    <color name="tab_inactive">#6b7280</color>
+    <color name="tab_active">#10b981</color>
+    <color name="drawer_bg">#0f0f17</color>
+    <color name="segmented_bg">#15151f</color>
+    <color name="segmented_active">#10b981</color>
+    <color name="avatar_placeholder">#1a1a2e</color>
+    <color name="icon_circle_bg">#15151f</color>
+    <color name="overlay_round">#15151f</color>
+    <color name="secondary_button_bg">#1a1a2e</color>
+    <color name="danger_button_bg">#1a1a2e</color>
+    <color name="transparent">#00000000</color>
+    <color name="semi_transparent">#80000000</color>
 </resources>
