@@ -503,6 +503,119 @@ object ApiClient {
         return code == 200
     }
 
+
+    // =============================================================
+    //  Broadcasts (admin notifications)
+    // =============================================================
+
+    data class Broadcast(
+        val id: String,
+        val title: String,
+        val message: String,
+        val linkText: String?,
+        val linkUrl: String?,
+        val createdAt: Long,
+        val active: Boolean
+    )
+
+    fun getBroadcasts(): List<Broadcast> {
+        val (code, json) = requestNoAuth("GET", "/api/broadcasts")
+        if (code != 200 || json == null) return emptyList()
+        val arr = json.getAsJsonArray("broadcasts") ?: return emptyList()
+        val result = mutableListOf<Broadcast>()
+        for (i in 0 until arr.size()) {
+            try {
+                val b = arr[i].asJsonObject
+                result.add(Broadcast(
+                    id = b.get("id")?.asString ?: "",
+                    title = b.get("title")?.asString ?: "",
+                    message = b.get("message")?.asString ?: "",
+                    linkText = b.get("linkText")?.takeIf { !it.isJsonNull }?.asString,
+                    linkUrl = b.get("linkUrl")?.takeIf { !it.isJsonNull }?.asString,
+                    createdAt = b.get("createdAt")?.asLong ?: 0L,
+                    active = b.get("active")?.asBoolean ?: true
+                ))
+            } catch (e: Exception) {}
+        }
+        return result
+    }
+
+    fun sendBroadcast(title: String, message: String, linkText: String?, linkUrl: String?): Boolean {
+        val body = JsonObject().apply {
+            addProperty("title", title)
+            addProperty("message", message)
+            if (linkText != null) addProperty("linkText", linkText)
+            if (linkUrl != null) addProperty("linkUrl", linkUrl)
+        }
+        val (code, _) = request("POST", "/api/admin/broadcast", body)
+        return code == 201
+    }
+
+    fun getAdminBroadcasts(): List<Broadcast> {
+        val (code, json) = request("GET", "/api/admin/broadcast")
+        if (code != 200 || json == null) return emptyList()
+        val arr = json.getAsJsonArray("broadcasts") ?: return emptyList()
+        val result = mutableListOf<Broadcast>()
+        for (i in 0 until arr.size()) {
+            try {
+                val b = arr[i].asJsonObject
+                result.add(Broadcast(
+                    id = b.get("id")?.asString ?: "",
+                    title = b.get("title")?.asString ?: "",
+                    message = b.get("message")?.asString ?: "",
+                    linkText = b.get("linkText")?.takeIf { !it.isJsonNull }?.asString,
+                    linkUrl = b.get("linkUrl")?.takeIf { !it.isJsonNull }?.asString,
+                    createdAt = b.get("createdAt")?.asLong ?: 0L,
+                    active = b.get("active")?.asBoolean ?: true
+                ))
+            } catch (e: Exception) {}
+        }
+        return result
+    }
+
+    fun deactivateBroadcast(id: String): Boolean {
+        val body = JsonObject().apply { addProperty("active", false) }
+        val (code, _) = request("PUT", "/api/admin/broadcast", body, mapOf("id" to id))
+        return code == 200
+    }
+
+    fun deleteBroadcast(id: String): Boolean {
+        val (code, _) = request("DELETE", "/api/admin/broadcast", query = mapOf("id" to id))
+        return code == 200
+    }
+
+    // =============================================================
+    //  Recommendations
+    // =============================================================
+
+    data class Recommendation(
+        val id: String,
+        val title: String,
+        val cover: String,
+        val source: String,
+        val status: String
+    )
+
+    fun getRecommendations(): List<Recommendation> {
+        val (code, json) = requestNoAuth("GET", "/api/recommendations")
+        if (code != 200 || json == null) return emptyList()
+        val arr = json.getAsJsonArray("recommendations") ?: return emptyList()
+        val result = mutableListOf<Recommendation>()
+        for (i in 0 until arr.size()) {
+            try {
+                val r = arr[i].asJsonObject
+                result.add(Recommendation(
+                    id = r.get("id")?.asString ?: "",
+                    title = r.get("title")?.asString ?: "",
+                    cover = r.get("cover")?.asString ?: "",
+                    source = r.get("source")?.asString ?: "mangadex",
+                    status = r.get("status")?.asString ?: "ongoing"
+                ))
+            } catch (e: Exception) {}
+        }
+        return result
+    }
+
     // =============================================================
     //  Parsers
     // =============================================================
