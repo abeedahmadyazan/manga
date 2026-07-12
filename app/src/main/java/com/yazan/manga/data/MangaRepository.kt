@@ -1080,9 +1080,12 @@ class MangaRepository(private val appContext: Context? = null) {
                 Result.failure(Exception("تعذّر تحميل صفحات هذا الفصل"))
             } else if (chapter.source == "3asq") {
                 // Extract slug and chapter number from the chapter id
-                val parts = chapter.id.split("-")
-                val num = parts.lastOrNull() ?: ""
-                val slug = if (parts.size >= 3) parts.dropLast(1).joinToString("-").removePrefix("3asq-") else ""
+                // chapter.id format: "3asq-{slug}-{num}" where slug may contain dashes
+                // e.g. "3asq-one-piece-1188" → slug="one-piece", num="1188"
+                val idWithoutPrefix = chapter.id.removePrefix("3asq-")
+                val num = idWithoutPrefix.substringAfterLast("-")
+                val slug = idWithoutPrefix.substringBeforeLast("-")
+                Log.d(TAG, "3asq pages: slug=$slug, num=$num (from id=${chapter.id})")
                 if (slug.isNotBlank() && num.isNotBlank()) {
                     // Try Netlify proxy first
                     val req = Request.Builder().url("$ASQ_API/pages?slug=$slug&chapter=$num").header("Accept", "application/json").build()
