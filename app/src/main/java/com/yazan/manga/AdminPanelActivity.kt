@@ -198,16 +198,24 @@ class AdminPanelActivity : AppCompatActivity() {
             setPadding(20, 16, 20, 16)
         }
 
+        // Auto-detect current app version — use as default target
+        val currentVersion = try {
+            val pInfo = packageManager.getPackageInfo(packageName, 0)
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.P) pInfo.longVersionCode.toInt()
+            else @Suppress("DEPRECATION") pInfo.versionCode
+        } catch (e: Exception) { 1 }
+
         val versionInput = android.widget.EditText(this).apply {
-            hint = "رقم الإصدار المستهدف (مثلاً 120)"
+            hint = "رقم الإصدار (افتراضي: $currentVersion)"
             setPadding(40, 24, 40, 24)
             inputType = android.text.InputType.TYPE_CLASS_NUMBER
         }
 
         val versionLabel = android.widget.TextView(this).apply {
-            text = "إذا لم تفعّل (كل النسخ)، أدخل رقم الإصدار:"
+            text = "الإصدار المستهدف (افتراضياً إصدارك الحالي: $currentVersion):"
             setPadding(20, 8, 20, 4)
             textSize = 13f
+            setTextColor(android.graphics.Color.parseColor("#aaaaaa"))
         }
 
         val layout = android.widget.LinearLayout(this).apply {
@@ -233,7 +241,9 @@ class AdminPanelActivity : AppCompatActivity() {
                 val linkUrl = linkUrlInput.text.toString().trim().ifEmpty { null }
                 val forceBlock = forceBlockCheckbox.isChecked
                 val allVersions = allVersionsCheckbox.isChecked
-                val targetVersion = versionInput.text.toString().trim().toIntOrNull() ?: 0
+                // If no version entered and not all versions → use current app version
+                val targetVersion = if (allVersions) -1
+                    else versionInput.text.toString().trim().toIntOrNull() ?: currentVersion
 
                 if (title.isEmpty() || message.isEmpty()) {
                     Toast.makeText(this, "العنوان والنص مطلوبان", Toast.LENGTH_SHORT).show()

@@ -58,6 +58,7 @@ class MangaDetailsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_manga_details)
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
 
         repository = MangaRepository(this)
         mangaSlug = intent.getStringExtra("manga_id") ?: ""

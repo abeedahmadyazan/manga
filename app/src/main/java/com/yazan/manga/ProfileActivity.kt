@@ -80,6 +80,7 @@ class ProfileActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
 
         val gso = AuthManager.getGoogleSignInOptions(this)
         googleSignInClient = GoogleSignIn.getClient(this, gso)

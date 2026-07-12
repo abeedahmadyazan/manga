@@ -57,6 +57,9 @@ class ReaderActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_reader)
+        // Keep screen on while reading
+        window.addFlags(android.view.WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+        overridePendingTransition(R.anim.slide_in_bottom, R.anim.fade_out)
         repository = MangaRepository(this)
         currentChapterId = intent.getStringExtra("chapter_id") ?: ""
         currentChapterNumber = intent.getStringExtra("chapter_number") ?: ""

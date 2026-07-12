@@ -82,6 +82,13 @@ class MainActivity : AppCompatActivity() {
         Thread {
             try {
                 val broadcasts = com.yazan.manga.data.ApiClient.getBroadcasts()
+                
+                // Update bell badge with unread count
+                val prefs = getSharedPreferences("broadcast_seen", android.content.Context.MODE_PRIVATE)
+                val appVersion = getAppVersionCode()
+                val unreadCount = broadcasts.count { !prefs.getBoolean("${it.id}_v$appVersion", false) }
+                runOnUiThread { updateBellBadge(unreadCount) }
+                
                 if (broadcasts.isEmpty()) return@Thread
 
                 val prefs = getSharedPreferences("broadcast_seen", android.content.Context.MODE_PRIVATE)
@@ -189,6 +196,7 @@ class MainActivity : AppCompatActivity() {
         val btnSearch = findViewById<ImageButton>(R.id.btnSearch)
         findViewById<android.widget.ImageButton?>(R.id.btnNotifications)?.setOnClickListener {
             startActivity(Intent(this, NotificationsActivity::class.java))
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
         }
         val btnCloseSearch = findViewById<ImageButton>(R.id.btnCloseSearch)
         val searchBar = findViewById<LinearLayout>(R.id.searchBar)
@@ -482,7 +490,8 @@ class MainActivity : AppCompatActivity() {
                 if (items.isEmpty() && currentPage == 1) {
                     // Only show "no manga" if it's page 1 AND we have no cached items
                     if (adapter.itemCount == 0) {
-                        errorText.text = "لا توجد مانجا"
+                        errorText.text = "لا توجد مانجا حالياً 📭
+اسحب للأسفل للتحديث"
                         errorText.visibility = View.VISIBLE
                     }
                     // If we have cached items, keep them — don't clear the list
@@ -542,7 +551,8 @@ class MainActivity : AppCompatActivity() {
 
             result.onSuccess { items ->
                 if (items.isEmpty()) {
-                    errorText.text = "لا توجد نتائج"
+                    errorText.text = "لا توجد نتائج بحث 🔍
+جرّب كلمة أخرى"
                     errorText.visibility = View.VISIBLE
                 }
                 adapter.submitList(items)
