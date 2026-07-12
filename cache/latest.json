@@ -1,7 +1,56 @@
 {
-  "updated_at": "2026-07-11T19:07:11.008723+00:00",
+  "updated_at": "2026-07-12T02:31:04.648803+00:00",
   "count": 50,
   "items": [
+    {
+      "id": "baa95345-24fb-47a9-83e9-434ff671f968",
+      "title": "خلف المتجر ادخن معك",
+      "cover": "https://uploads.mangadex.org/covers/baa95345-24fb-47a9-83e9-434ff671f968/2d66388f-7821-4723-8daa-f30394d882d1.png.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "936f0ba5-ca65-4de4-99b1-528c02a4454d",
+      "title": "Hunter x Hunter (Official Colored)",
+      "cover": "https://uploads.mangadex.org/covers/936f0ba5-ca65-4de4-99b1-528c02a4454d/c08c2728-5af5-4a6e-83e0-f665280c866c.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "f4045a9e-e5f6-4778-bd33-7a91cefc3f71",
+      "title": "For the Sake of My Future Vengeance",
+      "cover": "https://uploads.mangadex.org/covers/f4045a9e-e5f6-4778-bd33-7a91cefc3f71/53e634e3-aa3b-4dc3-9171-85e2a71d2ec8.png.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "f5c25341-d6ff-4585-8548-3a48fc7654d9",
+      "title": "Akira Failing in Love",
+      "cover": "https://uploads.mangadex.org/covers/f5c25341-d6ff-4585-8548-3a48fc7654d9/c4ba7710-116f-45bd-b9b9-86293ca04350.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "a07320a4-afcd-413a-a451-d69a448d0c28",
+      "title": "Usogui",
+      "cover": "https://uploads.mangadex.org/covers/a07320a4-afcd-413a-a451-d69a448d0c28/b74c8cce-42cd-4889-b75d-7944e63f9a14.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "f6ce20ca-73c3-4fdd-9367-e2901fca780e",
+      "title": "ويلات الزمان",
+      "cover": "https://uploads.mangadex.org/covers/f6ce20ca-73c3-4fdd-9367-e2901fca780e/fed093aa-cbcf-4ca0-b80c-49eb251b1e80.png.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "88949f72-43b8-48af-94a0-dc639e44be07",
+      "title": "On and Off: Work-Life Imbalance",
+      "cover": "https://uploads.mangadex.org/covers/88949f72-43b8-48af-94a0-dc639e44be07/320293c8-1cc7-488f-a453-25b17cba7132.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
     {
       "id": "774f0f04-5023-4e2e-9c0b-f0ed382f078b",
       "title": "إينيغماتيكا",
@@ -90,13 +139,6 @@
       "id": "10027822-b188-4093-a658-abb64c368ac2",
       "title": "Sekai no 4koma",
       "cover": "https://uploads.mangadex.org/covers/10027822-b188-4093-a658-abb64c368ac2/21667a08-f5b9-4270-b33e-53bb0e20c702.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "f4045a9e-e5f6-4778-bd33-7a91cefc3f71",
-      "title": "For the Sake of My Future Vengeance",
-      "cover": "https://uploads.mangadex.org/covers/f4045a9e-e5f6-4778-bd33-7a91cefc3f71/53e634e3-aa3b-4dc3-9171-85e2a71d2ec8.png.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
@@ -197,13 +239,6 @@
       "cover": "https://uploads.mangadex.org/covers/51c1e7cc-23f4-4a08-a961-c1ab75e2bb33/3bdea205-146a-460c-ae6e-7c2b27f762ed.jpg.256.jpg",
       "source": "mangadex",
       "status": "completed"
-    },
-    {
-      "id": "936f0ba5-ca65-4de4-99b1-528c02a4454d",
-      "title": "Hunter x Hunter (Official Colored)",
-      "cover": "https://uploads.mangadex.org/covers/936f0ba5-ca65-4de4-99b1-528c02a4454d/c08c2728-5af5-4a6e-83e0-f665280c866c.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
     },
     {
       "id": "61830b36-1712-4b7b-9421-f671e9ced6d3",
@@ -316,41 +351,6 @@
       "cover": "https://uploads.mangadex.org/covers/50ba23c9-1eea-4b9c-93a2-9531f66b9b78/8b6da79e-b2fb-4b1e-b217-adadbf234573.jpg.256.jpg",
       "source": "mangadex",
       "status": "completed"
-    },
-    {
-      "id": "484f94e7-35c3-4cb5-a068-53d684c1439a",
-      "title": "Baki Part 6",
-      "cover": "https://uploads.mangadex.org/covers/484f94e7-35c3-4cb5-a068-53d684c1439a/863ae891-3627-4070-8918-4a626dc9d1ff.png.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "1693697a-783c-4d3c-a2d3-dc069e137a23",
-      "title": "I Have No Home",
-      "cover": "https://uploads.mangadex.org/covers/1693697a-783c-4d3c-a2d3-dc069e137a23/bc55de2a-47dd-41cb-9338-75b3f0650a69.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
-      "id": "e5357466-c8a2-4259-9b02-2580185bd2bb",
-      "title": "Billy Bat",
-      "cover": "https://uploads.mangadex.org/covers/e5357466-c8a2-4259-9b02-2580185bd2bb/11cde992-1cd2-4e84-af10-31f9ff71e69b.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
-      "id": "6a468761-5bd6-4de0-a0cb-47cb456ac2e0",
-      "title": "A Returner's Magic Should Be Special",
-      "cover": "https://uploads.mangadex.org/covers/6a468761-5bd6-4de0-a0cb-47cb456ac2e0/98162533-1838-4639-8419-2f19f8af651b.png.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
-      "id": "569963c5-6b0b-4f92-b561-e1304b78b0dc",
-      "title": "Bungou Stray Dogs: Wan!",
-      "cover": "https://uploads.mangadex.org/covers/569963c5-6b0b-4f92-b561-e1304b78b0dc/53839189-747f-451f-9803-150b428ea77b.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
     }
   ]
 }
