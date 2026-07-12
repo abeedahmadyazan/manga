@@ -89,18 +89,8 @@ class MainActivity : AppCompatActivity() {
                 // Use device ID as key — survives app updates
                 val deviceId = com.yazan.manga.data.AuthManager.getDeviceId(this)
 
-                // Check for force-block broadcasts (user MUST see these)
-                val forceBlocks = broadcasts.filter { it.forceBlock }
-                for (fb in forceBlocks) {
-                    val seenKey = "fb_${fb.id}_${deviceId}"
-                    if (!prefs.getBoolean(seenKey, false)) {
-                        runOnUiThread { showForceBlockPopup(fb, prefs, seenKey) }
-                        return@Thread
-                    }
-                }
-
-                // Check for normal unseen broadcasts
-                val unseen = broadcasts.filter { !it.forceBlock && !prefs.getBoolean("${it.id}_${deviceId}", false) }
+                // Show first unseen broadcast (if any)
+                val unseen = broadcasts.filter { !prefs.getBoolean("${it.id}_${deviceId}", false) }
                 if (unseen.isNotEmpty()) {
                     val seenKey = "${unseen[0].id}_${deviceId}"
                     runOnUiThread { showBroadcastPopup(unseen[0], prefs, seenKey) }
