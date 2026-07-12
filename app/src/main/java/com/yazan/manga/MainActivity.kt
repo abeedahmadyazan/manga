@@ -86,19 +86,24 @@ class MainActivity : AppCompatActivity() {
 
                 val prefs = getSharedPreferences("broadcast_seen", android.content.Context.MODE_PRIVATE)
 
+                // Use device ID as key — survives app updates
+                val deviceId = com.yazan.manga.data.AuthManager.getDeviceId(this)
+
                 // Check for force-block broadcasts (user MUST see these)
                 val forceBlocks = broadcasts.filter { it.forceBlock }
                 for (fb in forceBlocks) {
-                    if (!prefs.getBoolean("fb_${fb.id}", false)) {
-                        runOnUiThread { showForceBlockPopup(fb, prefs) }
+                    val seenKey = "fb_${fb.id}_${deviceId}"
+                    if (!prefs.getBoolean(seenKey, false)) {
+                        runOnUiThread { showForceBlockPopup(fb, prefs, seenKey) }
                         return@Thread
                     }
                 }
 
                 // Check for normal unseen broadcasts
-                val unseen = broadcasts.filter { !it.forceBlock && !prefs.getBoolean(it.id, false) }
+                val unseen = broadcasts.filter { !it.forceBlock && !prefs.getBoolean("${it.id}_${deviceId}", false) }
                 if (unseen.isNotEmpty()) {
-                    runOnUiThread { showBroadcastPopup(unseen[0], prefs) }
+                    val seenKey = "${unseen[0].id}_${deviceId}"
+                    runOnUiThread { showBroadcastPopup(unseen[0], prefs, seenKey) }
                 }
             } catch (e: Exception) {
                 android.util.Log.w("MainActivity", "Broadcast check failed: ${e.message}")
