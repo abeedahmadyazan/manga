@@ -176,6 +176,17 @@
                     app:cornerRadius="22dp" />
 
                 <com.google.android.material.button.MaterialButton
+            android:id="@+id/chipSource4"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="أجنبي 18+"
+            android:textColor="@color/bottom_nav_color"
+            android:textSize="13sp"
+            android:minWidth="0dp"
+            android:paddingHorizontal="12dp" />
+
+        <com.google.android.material.button.MaterialButton
                     android:id="@+id/chipSource3"
                     style="@style/Widget.MaterialComponents.Button.TextButton"
                     android:layout_width="0dp"
