@@ -27,12 +27,6 @@
                 android:scaleType="centerCrop"
                 android:contentDescription="غلاف" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_gravity="bottom"
-                android:background="@drawable/bg_gradient_overlay" />
-
             <ImageButton
                 android:id="@+id/btnRemoveFromList"
                 android:layout_width="28dp"
@@ -80,6 +74,8 @@
                     android:text="مستمرة"
                     android:textColor="@color/primary"
                     android:textSize="11sp"
+                    android:maxLines="1"
+                    android:ellipsize="end"
                     android:background="@drawable/bg_status_badge"
                     android:paddingHorizontal="8dp"
                     android:paddingVertical="2dp" />
