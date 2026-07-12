@@ -76,7 +76,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     // =============================================================
-    //  Broadcasts (admin messages — popup once + bell icon)
+    //  Broadcasts (admin messages — popup + force block + bell)
     // =============================================================
     private fun checkBroadcasts() {
         Thread {
@@ -84,10 +84,19 @@ class MainActivity : AppCompatActivity() {
                 val broadcasts = com.yazan.manga.data.ApiClient.getBroadcasts()
                 if (broadcasts.isEmpty()) return@Thread
 
-                // Check which broadcasts the user has already seen
                 val prefs = getSharedPreferences("broadcast_seen", android.content.Context.MODE_PRIVATE)
-                val unseen = broadcasts.filter { !prefs.getBoolean(it.id, false) }
 
+                // Check for force-block broadcasts (user MUST see these)
+                val forceBlocks = broadcasts.filter { it.forceBlock }
+                for (fb in forceBlocks) {
+                    if (!prefs.getBoolean("fb_${fb.id}", false)) {
+                        runOnUiThread { showForceBlockPopup(fb, prefs) }
+                        return@Thread
+                    }
+                }
+
+                // Check for normal unseen broadcasts
+                val unseen = broadcasts.filter { !it.forceBlock && !prefs.getBoolean(it.id, false) }
                 if (unseen.isNotEmpty()) {
                     runOnUiThread { showBroadcastPopup(unseen[0], prefs) }
                 }
@@ -108,17 +117,51 @@ class MainActivity : AppCompatActivity() {
                 prefs.edit().putBoolean(broadcast.id, true).apply()
                 dialog.dismiss()
             }
-            .setCancelable(false)
+            .setCancelable(true)
 
-        // Add link button if BOTH linkText and linkUrl are present
         if (broadcast.linkText != null && broadcast.linkUrl != null) {
             builder.setNeutralButton(broadcast.linkText) { dialog, _ ->
-                // Copy link to clipboard
                 val clipboard = getSystemService(android.content.Context.CLIPBOARD_SERVICE) as android.content.ClipboardManager
                 clipboard.setPrimaryClip(android.content.ClipData.newPlainText("link", broadcast.linkUrl))
                 Toast.makeText(this, "تم نسخ الرابط", Toast.LENGTH_SHORT).show()
                 prefs.edit().putBoolean(broadcast.id, true).apply()
                 dialog.dismiss()
+            }
+        }
+
+        builder.show()
+    }
+
+    private fun showForceBlockPopup(
+        broadcast: com.yazan.manga.data.ApiClient.Broadcast,
+        prefs: android.content.SharedPreferences
+    ) {
+        val builder = AlertDialog.Builder(this)
+            .setTitle("⚠️ ${broadcast.title}")
+            .setMessage(broadcast.message)
+            .setCancelable(false)  // CANNOT be dismissed by back button or outside click
+
+        // Force block: only "نسخ الرابط" button (no "تم" button)
+        // User MUST interact with the link or close the app
+        if (broadcast.linkText != null && broadcast.linkUrl != null) {
+            builder.setPositiveButton(broadcast.linkText) { dialog, _ ->
+                val clipboard = getSystemService(android.content.Context.CLIPBOARD_SERVICE) as android.content.ClipboardManager
+                clipboard.setPrimaryClip(android.content.ClipData.newPlainText("link", broadcast.linkUrl))
+                Toast.makeText(this, "تم نسخ الرابط — يرجى التحديث", Toast.LENGTH_LONG).show()
+                prefs.edit().putBoolean("fb_${broadcast.id}", true).apply()
+                dialog.dismiss()
+                // Close the app — user must update
+                finishAffinity()
+            }
+            builder.setNegativeButton("خروج") { dialog, _ ->
+                dialog.dismiss()
+                finishAffinity()  // Close the app
+            }
+        } else {
+            // No link — just "خروج" button
+            builder.setPositiveButton("خروج") { dialog, _ ->
+                dialog.dismiss()
+                finishAffinity()
             }
         }
 
@@ -183,6 +226,9 @@ class MainActivity : AppCompatActivity() {
 
         // Search
         val btnSearch = findViewById<ImageButton>(R.id.btnSearch)
+        findViewById<android.widget.ImageButton?>(R.id.btnNotifications)?.setOnClickListener {
+            startActivity(Intent(this, NotificationsActivity::class.java))
+        }
         val btnCloseSearch = findViewById<ImageButton>(R.id.btnCloseSearch)
         val searchBar = findViewById<LinearLayout>(R.id.searchBar)
         val topBar = findViewById<LinearLayout>(R.id.topBar)

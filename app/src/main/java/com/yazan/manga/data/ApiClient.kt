@@ -514,6 +514,7 @@ object ApiClient {
         val message: String,
         val linkText: String?,
         val linkUrl: String?,
+        val forceBlock: Boolean,
         val createdAt: Long,
         val active: Boolean
     )
@@ -532,6 +533,7 @@ object ApiClient {
                     message = b.get("message")?.asString ?: "",
                     linkText = b.get("linkText")?.takeIf { !it.isJsonNull }?.asString,
                     linkUrl = b.get("linkUrl")?.takeIf { !it.isJsonNull }?.asString,
+                    forceBlock = b.get("forceBlock")?.asBoolean ?: false,
                     createdAt = b.get("createdAt")?.asLong ?: 0L,
                     active = b.get("active")?.asBoolean ?: true
                 ))
@@ -540,12 +542,13 @@ object ApiClient {
         return result
     }
 
-    fun sendBroadcast(title: String, message: String, linkText: String?, linkUrl: String?): Boolean {
+    fun sendBroadcast(title: String, message: String, linkText: String?, linkUrl: String?, forceBlock: Boolean = false): Boolean {
         val body = JsonObject().apply {
             addProperty("title", title)
             addProperty("message", message)
             if (linkText != null) addProperty("linkText", linkText)
             if (linkUrl != null) addProperty("linkUrl", linkUrl)
+            addProperty("forceBlock", forceBlock)
         }
         val (code, _) = request("POST", "/api/admin/broadcast", body)
         return code == 201
@@ -565,6 +568,7 @@ object ApiClient {
                     message = b.get("message")?.asString ?: "",
                     linkText = b.get("linkText")?.takeIf { !it.isJsonNull }?.asString,
                     linkUrl = b.get("linkUrl")?.takeIf { !it.isJsonNull }?.asString,
+                    forceBlock = b.get("forceBlock")?.asBoolean ?: false,
                     createdAt = b.get("createdAt")?.asLong ?: 0L,
                     active = b.get("active")?.asBoolean ?: true
                 ))

@@ -188,6 +188,11 @@ class AdminPanelActivity : AppCompatActivity() {
             setPadding(40, 24, 40, 24)
         }
 
+        val forceBlockCheckbox = android.widget.CheckBox(this).apply {
+            text = "رسالة إلزامية (لا يمكن تخطيها — للمستخدم التحديث)"
+            setPadding(20, 16, 20, 16)
+        }
+
         val layout = android.widget.LinearLayout(this).apply {
             orientation = android.widget.LinearLayout.VERTICAL
             setPadding(20, 10, 20, 10)
@@ -195,6 +200,7 @@ class AdminPanelActivity : AppCompatActivity() {
             addView(input)
             addView(linkTextInput)
             addView(linkUrlInput)
+            addView(forceBlockCheckbox)
         }
 
         AlertDialog.Builder(this)
@@ -205,6 +211,7 @@ class AdminPanelActivity : AppCompatActivity() {
                 val message = input.text.toString().trim()
                 val linkText = linkTextInput.text.toString().trim().ifEmpty { null }
                 val linkUrl = linkUrlInput.text.toString().trim().ifEmpty { null }
+                val forceBlock = forceBlockCheckbox.isChecked
 
                 if (title.isEmpty() || message.isEmpty()) {
                     Toast.makeText(this, "العنوان والنص مطلوبان", Toast.LENGTH_SHORT).show()
@@ -212,7 +219,7 @@ class AdminPanelActivity : AppCompatActivity() {
                 }
 
                 Thread {
-                    val success = com.yazan.manga.data.ApiClient.sendBroadcast(title, message, linkText, linkUrl)
+                    val success = com.yazan.manga.data.ApiClient.sendBroadcast(title, message, linkText, linkUrl, forceBlock)
                     runOnUiThread {
                         if (success) {
                             Toast.makeText(this, "تم إرسال الرسالة بنجاح!", Toast.LENGTH_SHORT).show()
