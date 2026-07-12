@@ -78,6 +78,38 @@ class MainActivity : AppCompatActivity() {
     // =============================================================
     //  Broadcasts (admin messages — popup + force block + bell)
     // =============================================================
+    private fun showForceBlockPopup(
+        broadcast: com.yazan.manga.data.ApiClient.Broadcast,
+        prefs: android.content.SharedPreferences,
+        seenKey: String
+    ) {
+        val builder = AlertDialog.Builder(this)
+            .setTitle("⚠️ " + broadcast.title)
+            .setMessage(broadcast.message)
+            .setCancelable(false)
+
+        if (broadcast.linkText != null && broadcast.linkUrl != null) {
+            builder.setPositiveButton(broadcast.linkText) { dialog, _ ->
+                val clipboard = getSystemService(android.content.Context.CLIPBOARD_SERVICE) as android.content.ClipboardManager
+                clipboard.setPrimaryClip(android.content.ClipData.newPlainText("link", broadcast.linkUrl))
+                Toast.makeText(this, "تم نسخ الرابط", Toast.LENGTH_SHORT).show()
+                prefs.edit().putBoolean(seenKey, true).apply()
+                dialog.dismiss()
+            }
+            builder.setNegativeButton("خروج") { dialog, _ ->
+                prefs.edit().putBoolean(seenKey, true).apply()
+                dialog.dismiss()
+            }
+        } else {
+            builder.setPositiveButton("حسنًا") { dialog, _ ->
+                prefs.edit().putBoolean(seenKey, true).apply()
+                dialog.dismiss()
+            }
+        }
+
+        builder.show()
+    }
+
     private fun checkBroadcasts() {
         Thread {
             try {
