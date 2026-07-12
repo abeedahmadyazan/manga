@@ -35,4 +35,10 @@
 
     <!-- Badge -->
     <color name="badge_red">#ef4444</color>
+
+    <!-- Legacy colors (referenced by existing layouts) -->
+    <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
+    <color name="text_muted">#6b7280</color>
+    <color name="surface">#15151f</color>
 </resources>
