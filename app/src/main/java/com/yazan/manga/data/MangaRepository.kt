@@ -298,16 +298,32 @@ class MangaRepository(private val appContext: Context? = null) {
      */
     private fun fetch3asqListing(page: Int): List<MangaListItem> {
         return try {
-            // Use the Netlify proxy with SHORT timeout (proxyClient)
             val url = "$ASQ_API/listing?page=$page"
+            Log.d(TAG, "3asq: fetching $url")
             val req = Request.Builder().url(url)
                 .header("Accept", "application/json")
+                .header("User-Agent", UA)
                 .build()
             proxyClient.newCall(req).execute().use { resp ->
-                if (!resp.isSuccessful) return emptyList()
-                val body = resp.body?.string() ?: return emptyList()
+                Log.d(TAG, "3asq: response code ${resp.code}")
+                if (!resp.isSuccessful) {
+                    Log.w(TAG, "3asq: HTTP ${resp.code}")
+                    return emptyList()
+                }
+                val body = resp.body?.string()
+                if (body.isNullOrEmpty()) {
+                    Log.w(TAG, "3asq: empty body")
+                    return emptyList()
+                }
+                Log.d(TAG, "3asq: body length ${body.length}")
+                
                 val root = JsonParser.parseString(body).asJsonObject
-                val arr = root.getAsJsonArray("items") ?: return emptyList()
+                val arr = root.getAsJsonArray("items")
+                if (arr == null) {
+                    Log.w(TAG, "3asq: no items array in response")
+                    return emptyList()
+                }
+                
                 val items = mutableListOf<MangaListItem>()
                 for (i in 0 until arr.size()) {
                     try {
@@ -320,15 +336,17 @@ class MangaRepository(private val appContext: Context? = null) {
                             title = title,
                             cover = cover,
                             source = "3asq",
-                            status = item.get("status")?.asString ?: "ongoing"
+                            status = "ongoing"
                         ))
-                    } catch (e: Exception) {}
+                    } catch (e: Exception) {
+                        Log.w(TAG, "3asq: parse error at item $i: ${e.message}")
+                    }
                 }
-                Log.d(TAG, "3asq listing page $page: ${items.size} items (via proxy)")
+                Log.d(TAG, "3asq listing page $page: ${items.size} items")
                 items
             }
         } catch (e: Exception) {
-            Log.w(TAG, "3asq listing failed: ${e.message}")
+            Log.e(TAG, "3asq listing failed: ${e.message}", e)
             emptyList()
         }
     }
