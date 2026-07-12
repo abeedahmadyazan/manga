@@ -28,6 +28,17 @@ class ZoomableImageView @JvmOverloads constructor(
         private const val DOUBLE_TAP_SCALE = 2.5f
     }
 
+    // When false (webtoon mode), zoom is disabled and touch events pass to parent
+    private var zoomEnabled = true
+
+    fun setZoomEnabled(enabled: Boolean) {
+        zoomEnabled = enabled
+        if (!enabled) {
+            // Reset zoom to 1x
+            zoomTo(MIN_SCALE)
+        }
+    }
+
     private var scaleFactor = 1.0f
     private var posX = 0f
     private var posY = 0f
@@ -72,6 +83,8 @@ class ZoomableImageView @JvmOverloads constructor(
     }
 
     override fun onTouchEvent(event: MotionEvent): Boolean {
+        // In webtoon mode, disable zoom — let parent (RecyclerView) handle scroll
+        if (!zoomEnabled) return false
         gestureDetector.onTouchEvent(event)
 
         when (event.actionMasked) {

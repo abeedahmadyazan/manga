@@ -8,6 +8,8 @@ import android.widget.ImageButton
 import android.widget.ProgressBar
 import android.widget.SeekBar
 import android.widget.TextView
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
@@ -34,6 +36,7 @@ class ReaderActivity : AppCompatActivity() {
     private lateinit var pageSeekBar: SeekBar
     private lateinit var topBarOverlay: View
     private lateinit var bottomBar: View
+    private lateinit var btnReadingMode: ImageButton
     private var currentChapter: MangaChapter? = null
     private var currentChapterId: String = ""
     private var currentChapterNumber: String = ""
@@ -42,6 +45,15 @@ class ReaderActivity : AppCompatActivity() {
     private var pages: List<String> = emptyList()
     private var currentPageIndex: Int = 0
     private var barsVisible = false
+
+    // Reading modes
+    // "manga" = one page per screen (PagerSnapHelper + zoom) — best for Japanese manga
+    // "webtoon" = vertical scroll (all pages connected) — best for Korean manhwa (Lookism, etc.)
+    private var readingMode: String = "manga"
+    private var snapHelper: PagerSnapHelper? = null
+    private val PREFS_NAME = "reader_prefs"
+    private val KEY_READING_MODE = "reading_mode"
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_reader)
@@ -61,15 +73,27 @@ class ReaderActivity : AppCompatActivity() {
             source = chapterSource,
             externalUrl = chapterUrl.ifEmpty { null }
         )
+
+        // Auto-detect reading mode based on source:
+        // manhwa (3asq, mhh) → webtoon mode (vertical scroll)
+        // manga (mangadex) → manga mode (one page per screen)
+        val prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
+        val savedMode = prefs.getString(KEY_READING_MODE, null)
+        if (savedMode != null) {
+            readingMode = savedMode
+        } else {
+            // Auto-detect: manhwa sources use webtoon mode
+            readingMode = if (chapterSource == "3asq" || chapterSource == "mhh") "webtoon" else "manga"
+        }
+
         initViews()
         loadPages()
     }
     private fun initViews() {
         pagesRecyclerView = findViewById(R.id.pagesRecyclerView)
         pagesRecyclerView.layoutManager = LinearLayoutManager(this)
-        // PagerSnapHelper: one page per screen. Each image fills the screen.
-        // Long images (manhwa) can be zoomed/panned via ZoomableImageView.
-        PagerSnapHelper().attachToRecyclerView(pagesRecyclerView)
+        applyReadingMode()
+
         loadingIndicator = findViewById(R.id.loadingIndicator)
         errorText = findViewById(R.id.errorText)
         chapterTitleText = findViewById(R.id.chapterTitle)
@@ -79,6 +103,8 @@ class ReaderActivity : AppCompatActivity() {
         pageSeekBar = findViewById(R.id.pageSeekBar)
         topBarOverlay = findViewById(R.id.topBarOverlay)
         bottomBar = findViewById(R.id.bottomBar)
+        btnReadingMode = findViewById(R.id.btnReadingMode) ?: ImageButton(this)
+
         chapterTitleText.text = "الفصل $currentChapterNumber"
         findViewById<ImageButton>(R.id.btnBack).setOnClickListener { finish() }
         findViewById<ImageButton>(R.id.btnChapterComments).setOnClickListener {
@@ -90,6 +116,7 @@ class ReaderActivity : AppCompatActivity() {
         }
         btnPrevPage.setOnClickListener { scrollToPage(currentPageIndex - 1) }
         btnNextPage.setOnClickListener { scrollToPage(currentPageIndex + 1) }
+
         // Zoom IN + Zoom OUT — operate on the currently visible page
         findViewById<ImageButton>(R.id.btnZoomIn).setOnClickListener {
             findVisiblePageView()?.zoomIn()
@@ -97,6 +124,11 @@ class ReaderActivity : AppCompatActivity() {
         findViewById<ImageButton>(R.id.btnZoomOut).setOnClickListener {
             findVisiblePageView()?.zoomOut()
         }
+
+        // Reading mode toggle button
+        btnReadingMode.setOnClickListener { showReadingModeDialog() }
+        updateReadingModeIcon()
+
         pageSeekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
                 if (fromUser && pages.isNotEmpty()) {
@@ -107,6 +139,66 @@ class ReaderActivity : AppCompatActivity() {
             override fun onStopTrackingTouch(seekBar: SeekBar?) {}
         })
     }
+
+    private fun applyReadingMode() {
+        // Remove old snap helper
+        snapHelper?.attachToRecyclerView(null)
+        snapHelper = null
+
+        if (readingMode == "manga") {
+            // Manga mode: one page per screen with snap + zoom
+            snapHelper = PagerSnapHelper()
+            snapHelper?.attachToRecyclerView(pagesRecyclerView)
+        }
+        // Webtoon mode: no snap, free vertical scroll (all pages connected)
+    }
+
+    private fun updateReadingModeIcon() {
+        // Update icon based on mode
+        try {
+            if (readingMode == "webtoon") {
+                btnReadingMode.setImageResource(R.drawable.ic_menu)
+            } else {
+                btnReadingMode.setImageResource(R.drawable.ic_menu)
+            }
+        } catch (e: Exception) {}
+    }
+
+    private fun showReadingModeDialog() {
+        val options = arrayOf(
+            "📖 وضع المانجا — صفحة لكل شاشة\n(مناسب للمانجا اليابانية)",
+            "📜 وضع المانهوا — تمرير عمودي متصل\n(مناسب للمانهوا الكورية مثل Lookism)"
+        )
+        val checkedItem = if (readingMode == "webtoon") 1 else 0
+
+        AlertDialog.Builder(this)
+            .setTitle("وضع القراءة")
+            .setSingleChoiceItems(options, checkedItem) { dialog, which ->
+                val newMode = if (which == 1) "webtoon" else "manga"
+                if (newMode != readingMode) {
+                    readingMode = newMode
+                    // Save preference
+                    getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
+                        .edit()
+                        .putString(KEY_READING_MODE, readingMode)
+                        .apply()
+                    // Apply new mode
+                    applyReadingMode()
+                    updateReadingModeIcon()
+                    // Refresh adapter
+                    pagesRecyclerView.adapter?.notifyDataSetChanged()
+                    Toast.makeText(this,
+                        if (readingMode == "webtoon") "تم التبديل لوضع المانهوا (تمرير عمودي)"
+                        else "تم التبديل لوضع المانجا (صفحة لكل شاشة)",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+                dialog.dismiss()
+            }
+            .setNegativeButton("فهمت") { dialog, _ -> dialog.dismiss() }
+            .show()
+    }
+
     private fun loadPages() {
         val chapter = currentChapter ?: return
         loadingIndicator.visibility = View.VISIBLE
@@ -158,8 +250,6 @@ class ReaderActivity : AppCompatActivity() {
                     )
                 }
             }.onFailure { e ->
-                // Show a more helpful message: distinguish between "no Arabic
-                // pages available for this chapter" vs a generic network error.
                 val msg = e.message.orEmpty()
                 errorText.text = when {
                     msg.contains("غير متاح", true) || msg.contains("تعذّر", true) ->
@@ -179,13 +269,16 @@ class ReaderActivity : AppCompatActivity() {
         val adapter = PagesAdapter(pages) { pageIndex ->
             toggleBars()
         }
-        // PagerSnapHelper: one page per screen, swipe to navigate
         pagesRecyclerView.adapter = adapter
         pagesRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 if (newState == RecyclerView.SCROLL_STATE_IDLE) {
                     val lm = recyclerView.layoutManager as LinearLayoutManager
-                    val pos = lm.findFirstCompletelyVisibleItemPosition()
+                    val pos = if (readingMode == "manga") {
+                        lm.findFirstCompletelyVisibleItemPosition()
+                    } else {
+                        lm.findFirstVisibleItemPosition()
+                    }
                     if (pos != RecyclerView.NO_POSITION && pos != currentPageIndex) {
                         currentPageIndex = pos
                         pageCounter.text = "${pos + 1} / ${pages.size}"
@@ -251,11 +344,34 @@ class ReaderActivity : AppCompatActivity() {
             private val pageProgress: ProgressBar = v.findViewById(R.id.pageProgress)
             fun bind(url: String, position: Int) {
                 pageProgress.visibility = View.VISIBLE
-                Glide.with(itemView.context)
+
+                // Adjust layout based on reading mode
+                val params = pageImage.layoutParams
+                if (readingMode == "webtoon") {
+                    // Webtoon mode: wrap_content height — image keeps its natural aspect ratio
+                    // This allows long manhwa pages to display at full quality
+                    params.height = ViewGroup.LayoutParams.WRAP_CONTENT
+                    pageImage.scaleType = android.widget.ImageView.ScaleType.FIT_CENTER
+                    pageImage.setZoomEnabled(false) // disable zoom in webtoon mode
+                } else {
+                    // Manga mode: match_parent height — one page fills the screen
+                    params.height = ViewGroup.LayoutParams.MATCH_PARENT
+                    pageImage.scaleType = android.widget.ImageView.ScaleType.FIT_CENTER
+                    pageImage.setZoomEnabled(true) // enable zoom in manga mode
+                }
+                pageImage.layoutParams = params
+
+                val request = Glide.with(itemView.context)
                     .load(url)
                     .diskCacheStrategy(com.bumptech.glide.load.engine.DiskCacheStrategy.ALL)
                     .priority(com.bumptech.glide.Priority.HIGH)
-                    .listener(object : com.bumptech.glide.request.RequestListener<android.graphics.drawable.Drawable> {
+
+                // In webtoon mode, load original size for best quality
+                if (readingMode == "webtoon") {
+                    request.override(com.bumptech.glide.request.target.Target.SIZE_ORIGINAL)
+                }
+
+                request.listener(object : com.bumptech.glide.request.RequestListener<android.graphics.drawable.Drawable> {
                         override fun onResourceReady(
                             resource: android.graphics.drawable.Drawable,
                             model: Any,
@@ -263,13 +379,11 @@ class ReaderActivity : AppCompatActivity() {
                             dataSource: com.bumptech.glide.load.DataSource,
                             isFirstResource: Boolean
                         ): Boolean {
-                            // unused params
-                            @Suppress("UNUSED_PARAMETER") fun unused(a: Any?, b: Any?, c: Any?, d: Any?, e: Any?) {}
                             pageProgress.visibility = View.GONE
                             return false
                         }
                         override fun onLoadFailed(
-                            e: com.bumptech.glide.load.engine.GlideException?,
+                            e: com.bumptech.glide.load.GlideException?,
                             model: Any?,
                             target: com.bumptech.glide.request.target.Target<android.graphics.drawable.Drawable>,
                             isFirstResource: Boolean
