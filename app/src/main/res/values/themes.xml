@@ -31,6 +31,18 @@
         <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
 
+    <!-- Swipe-back theme: translucent + transparent background so the previous
+         activity is revealed as the current one slides away during an edge swipe.
+         The content view still fills the window with a solid background, so the
+         activity looks normal when NOT being swiped. -->
+    <style name="Theme.MangaApp.SwipeBack" parent="Theme.MangaApp">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsOpaque">false</item>
+        <item name="android:colorBackgroundCacheHint">@null</item>
+        <item name="android:statusBarColor">@color/background_dark</item>
+    </style>
+
     <!-- Activity transition: subtle fade + slight slide-up -->
     <style name="Animation.MangaApp.Activity" parent="@android:style/Animation.Activity">
         <item name="android:activityOpenEnterAnimation">@anim/activity_enter</item>

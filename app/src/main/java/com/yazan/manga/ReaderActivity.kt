@@ -11,6 +11,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.yazan.manga.ui.BaseSwipeBackActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.PagerSnapHelper
@@ -24,7 +25,13 @@ import com.yazan.manga.ui.ZoomableImageView
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-class ReaderActivity : AppCompatActivity() {
+class ReaderActivity : BaseSwipeBackActivity() {
+
+    /** Disable swipe-back while flipping pages horizontally in manga mode —
+     *  only allow it in webtoon (vertical) mode, or at the first page where
+     *  there's no previous page to flip to. This avoids conflicting with the
+     *  PagerSnapHelper's horizontal paging. */
+    override fun canSwipeBack(): Boolean = readingMode == "webtoon" || currentPageIndex == 0
     private lateinit var repository: MangaRepository
     private lateinit var pagesRecyclerView: RecyclerView
     private lateinit var loadingIndicator: ProgressBar

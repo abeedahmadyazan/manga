@@ -41,10 +41,22 @@ service cloud.firestore {
 
     match /users/{email} {
       allow read: if isSignedIn();
-      // User can only create their OWN user doc (matching their auth email).
-      allow create: if isOwnUserDoc(email);
-      // FIX: user can update ONLY their own doc — not anyone else's.
-      allow update: if isOwnUserDoc(email);
+      // User can only create their OWN user doc (matching their auth email),
+      // and only with a safe subset of fields (no admin/cooldown/device fields).
+      allow create: if isOwnUserDoc(email)
+                    && request.resource.data.keys()
+                        .hasOnly(['email','name','username','avatarBase64','birthDate','country','createdAt']);
+      // ALL profile updates MUST go through the Cloudflare API (Admin SDK),
+      // which enforces per-field cooldowns:
+      //   - name         → once per 30 days (lastNameChange)
+      //   - @username    → once per 30 days (lastUsernameChange)
+      //   - birthDate    → once per 30 days + strict validation (lastBirthDateChange)
+      //   - country      → once per 7 days (lastCountryChange)
+      // Direct client updates are FORBIDDEN — this closes the bypass where a user
+      // could change their name infinitely by writing directly to Firestore, and
+      // prevents self-granting admin / resetting cooldowns.
+      // The Admin SDK (server) bypasses these rules entirely.
+      allow update: if false;
       // Only admin can delete user accounts.
       allow delete: if isAdmin();
     }

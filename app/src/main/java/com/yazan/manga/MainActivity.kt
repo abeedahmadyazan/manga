@@ -71,43 +71,79 @@ class MainActivity : AppCompatActivity() {
         // later once the Vercel API is redeployed.
 
         initViews()
-        loadManga()
+        // Check broadcasts FIRST — a force-block must gate the app before content loads.
         checkBroadcasts()
+        loadManga()
     }
 
     // =============================================================
     //  Broadcasts (admin messages — popup + force block + bell)
     // =============================================================
-    private fun showForceBlockPopup(
-        broadcast: com.yazan.manga.data.ApiClient.Broadcast,
-        prefs: android.content.SharedPreferences,
-        seenKey: String
-    ) {
+    /**
+     * Hard force-block dialog. The user CANNOT use the app on this (or older)
+     * version — they must install a newer version released by the admin.
+     *
+     * Behavior:
+     *  - Non-cancelable (back button doesn't dismiss).
+     *  - NOT marked as "seen" — blocks on every launch.
+     *  - Only exit actions: open the update link (then exit) or just exit.
+     *  - Admins are exempt (they need to manage the app) → dismissible warning.
+     */
+    private fun showForceBlockPopup(broadcast: com.yazan.manga.data.ApiClient.Broadcast) {
+        val isAdmin = try {
+            com.yazan.manga.data.AuthManager.getCurrentUser(this)?.isAdmin == true
+        } catch (e: Exception) { false }
+
         val builder = AlertDialog.Builder(this)
             .setTitle("⚠️ " + broadcast.title)
-            .setMessage(broadcast.message)
-            .setCancelable(false)
+            .setMessage(broadcast.message + "\n\n⚠️ هذا الإصدار لم يعد صالحاً للاستخدام. الرجاء تحديث التطبيق لإصدار أحدث.")
 
-        if (broadcast.linkText != null && broadcast.linkUrl != null) {
-            builder.setPositiveButton(broadcast.linkText) { dialog, _ ->
-                val clipboard = getSystemService(android.content.Context.CLIPBOARD_SERVICE) as android.content.ClipboardManager
-                clipboard.setPrimaryClip(android.content.ClipData.newPlainText("link", broadcast.linkUrl))
-                Toast.makeText(this, "تم نسخ الرابط", Toast.LENGTH_SHORT).show()
-                prefs.edit().putBoolean(seenKey, true).apply()
-                dialog.dismiss()
+        if (isAdmin) {
+            // Admin can dismiss and continue (so they can manage broadcasts / release updates)
+            builder.setCancelable(true)
+                .setPositiveButton("تم (وضع المشرف)") { d, _ -> d.dismiss() }
+            if (broadcast.linkText != null && broadcast.linkUrl != null) {
+                builder.setNeutralButton(broadcast.linkText) { _, _ ->
+                    copyLink(broadcast.linkUrl!!)
+                }
             }
-            builder.setNegativeButton("خروج") { dialog, _ ->
-                prefs.edit().putBoolean(seenKey, true).apply()
-                dialog.dismiss()
-            }
-        } else {
-            builder.setPositiveButton("حسنًا") { dialog, _ ->
-                prefs.edit().putBoolean(seenKey, true).apply()
-                dialog.dismiss()
-            }
+            builder.show()
+            return
         }
 
+        // Non-admin: true hard block
+        builder.setCancelable(false)
+        if (broadcast.linkText != null && broadcast.linkUrl != null) {
+            builder.setPositiveButton(broadcast.linkText) { _, _ ->
+                copyLink(broadcast.linkUrl!!)
+                // Exit the app after giving the link
+                finishAffinity()
+            }
+            builder.setNegativeButton("خروج") { _, _ -> finishAffinity() }
+        } else if (broadcast.linkUrl != null) {
+            builder.setPositiveButton("تحديث") { _, _ ->
+                copyLink(broadcast.linkUrl!!)
+                finishAffinity()
+            }
+            builder.setNegativeButton("خروج") { _, _ -> finishAffinity() }
+        } else {
+            builder.setPositiveButton("خروج") { _, _ -> finishAffinity() }
+        }
         builder.show()
+    }
+
+    private fun copyLink(url: String) {
+        try {
+            // Try opening the URL in a browser first
+            val intent = android.content.Intent(android.content.Intent.ACTION_VIEW, android.net.Uri.parse(url))
+            intent.addFlags(android.content.Intent.FLAG_ACTIVITY_NEW_TASK)
+            startActivity(intent)
+        } catch (e: Exception) {
+            // Fallback: copy to clipboard
+            val clipboard = getSystemService(android.content.Context.CLIPBOARD_SERVICE) as android.content.ClipboardManager
+            clipboard.setPrimaryClip(android.content.ClipData.newPlainText("link", url))
+            Toast.makeText(this, "تم نسخ الرابط", Toast.LENGTH_LONG).show()
+        }
     }
 
     private fun checkBroadcasts() {
@@ -121,8 +157,8 @@ class MainActivity : AppCompatActivity() {
                     else @Suppress("DEPRECATION") pInfo.versionCode
                 } catch (e: Exception) { 1 }
 
-                // Update bell badge
-                val unreadCount = broadcasts.count { !prefs.getBoolean("${it.id}_v$appVersion", false) }
+                // Update bell badge (force-blocks excluded — they're not "notifications")
+                val unreadCount = broadcasts.count { !it.forceBlock && !prefs.getBoolean("${it.id}_v$appVersion", false) }
                 runOnUiThread {
                     try {
                         val bellBtn = findViewById<android.widget.ImageButton?>(R.id.btnNotifications)
@@ -138,17 +174,17 @@ class MainActivity : AppCompatActivity() {
 
                 if (broadcasts.isEmpty()) return@Thread
 
-                // Check for force block
+                // Force-block: applies to this app version (and older). The user CANNOT
+                // use the app until they install a NEWER version. We never mark it as
+                // "seen" — it must block on every launch.
                 val forceBlocks = broadcasts.filter { it.forceBlock }
-                for (fb in forceBlocks) {
-                    val seenKey = "fb_${fb.id}_v$appVersion"
-                    if (!prefs.getBoolean(seenKey, false)) {
-                        runOnUiThread { showForceBlockPopup(fb, prefs, seenKey) }
-                        return@Thread
-                    }
+                if (forceBlocks.isNotEmpty()) {
+                    val fb = forceBlocks[0]
+                    runOnUiThread { showForceBlockPopup(fb) }
+                    return@Thread
                 }
 
-                // Check for normal unseen
+                // Normal unseen announcement
                 val unseen = broadcasts.filter { !it.forceBlock && !prefs.getBoolean("${it.id}_v$appVersion", false) }
                 if (unseen.isNotEmpty()) {
                     val seenKey = "${unseen[0].id}_v$appVersion"

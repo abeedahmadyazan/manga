@@ -9,13 +9,14 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.yazan.manga.ui.BaseSwipeBackActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.firestore.ListenerRegistration
 import com.yazan.manga.data.AuthManager
 import com.yazan.manga.data.CloudCommentsManager
 
-class AdminPanelActivity : AppCompatActivity() {
+class AdminPanelActivity : BaseSwipeBackActivity() {
 
     private lateinit var reportsRecyclerView: RecyclerView
     private lateinit var reportsEmpty: TextView
@@ -189,12 +190,12 @@ class AdminPanelActivity : AppCompatActivity() {
         }
 
         val forceBlockCheckbox = android.widget.CheckBox(this).apply {
-            text = "رسالة إلزامية (تظهر مرة وحدة، تختفي بالتحديث)"
+            text = "🚫 رسالة إلزامية — تمنع فتح التطبيق لهذا الإصدار (وما دونه) حتى يثبّت المستخدم إصداراً أحدث"
             setPadding(20, 16, 20, 16)
         }
 
         val allVersionsCheckbox = android.widget.CheckBox(this).apply {
-            text = "إظهار لكل النسخ (مش مرتبطة بإصدار معين)"
+            text = "تطبيق على كل النسخ (نادر — حتى الإصدارات الأحدث)"
             setPadding(20, 16, 20, 16)
         }
 
@@ -206,15 +207,15 @@ class AdminPanelActivity : AppCompatActivity() {
         } catch (e: Exception) { 1 }
 
         val versionInput = android.widget.EditText(this).apply {
-            hint = "رقم الإصدار (افتراضي: $currentVersion)"
+            hint = "رقم الإصدار المستهدف (افتراضي: $currentVersion)"
             setPadding(40, 24, 40, 24)
             inputType = android.text.InputType.TYPE_CLASS_NUMBER
         }
 
         val versionLabel = android.widget.TextView(this).apply {
-            text = "الإصدار المستهدف (افتراضياً إصدارك الحالي: $currentVersion):"
+            text = "رقم الإصدار (versionCode) المراد منعه. افتراضياً إصدارك الحالي ($currentVersion). كل من على هذا الإصدار أو أقدم سيُمنع من فتح التطبيق حتى يثبّت إصداراً أحدث."
             setPadding(20, 8, 20, 4)
-            textSize = 13f
+            textSize = 12f
             setTextColor(android.graphics.Color.parseColor("#aaaaaa"))
         }
 
@@ -247,6 +248,11 @@ class AdminPanelActivity : AppCompatActivity() {
 
                 if (title.isEmpty() || message.isEmpty()) {
                     Toast.makeText(this, "العنوان والنص مطلوبان", Toast.LENGTH_SHORT).show()
+                    return@setPositiveButton
+                }
+                // A force-block with no update link would trap users with no way out.
+                if (forceBlock && linkUrl == null) {
+                    Toast.makeText(this, "الرسالة الإلزامية تتطلب رابط تحديث (linkUrl) كي يتمكن المستخدم من التحديث", Toast.LENGTH_LONG).show()
                     return@setPositiveButton
                 }
 

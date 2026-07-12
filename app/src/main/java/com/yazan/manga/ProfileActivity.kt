@@ -14,6 +14,7 @@ import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.yazan.manga.ui.BaseSwipeBackActivity
 import com.bumptech.glide.Glide
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -28,7 +29,7 @@ import com.yazan.manga.data.AuthManager
 import com.yazan.manga.data.MangaListsManager
 import com.yazan.manga.ui.PieChartView
 
-class ProfileActivity : AppCompatActivity() {
+class ProfileActivity : BaseSwipeBackActivity() {
 
     companion object {
         private const val RC_SIGN_IN = 9001
@@ -321,7 +322,6 @@ class ProfileActivity : AppCompatActivity() {
 
     private fun showChangeNameDialog() {
         val user = AuthManager.getCurrentUser(this) ?: return
-        // Strip the admin suffix when showing the current name
         val currentName = user.name
         val input = EditText(this).apply {
             setText(currentName)
@@ -329,84 +329,287 @@ class ProfileActivity : AppCompatActivity() {
             hint = "اكتب اسمك الجديد"
             setPadding(40, 24, 40, 24)
         }
-        AlertDialog.Builder(this)
-            .setTitle("تغيير الاسم")
-            .setMessage("الاسم الذي يظهر للآخرين على تعليقاتك وملفك الشخصي.")
-            .setView(input)
-            .setPositiveButton("حفظ") { _, _ ->
-                val newName = input.text.toString().trim()
-                if (newName.isEmpty()) {
-                    Toast.makeText(this, "الاسم لا يمكن أن يكون فارغاً", Toast.LENGTH_SHORT).show()
-                    return@setPositiveButton
-                }
-                val result = AuthManager.changeName(this, newName)
-                if (result != null && result.startsWith("تم")) {
-                    // Success message from server
-                    Toast.makeText(this, result, Toast.LENGTH_SHORT).show()
-                    updateUI()
-                } else {
-                    // Error message
-                    Toast.makeText(this, result ?: "حدث خطأ", Toast.LENGTH_LONG).show()
-                }
-            }
-            .setNegativeButton("إلغاء", null)
-            .show()
-    }
-
-    private fun showEditProfileInfoDialog() {
-        val user = AuthManager.getCurrentUser(this) ?: return
-        val countryInput = EditText(this).apply {
-            setText(user.country)
-            hint = "الدولة — اختياري"
-            setPadding(40, 24, 40, 24)
-            inputType = android.text.InputType.TYPE_CLASS_TEXT
+        // Cooldown status line — updated asynchronously from the cloud
+        val cooldownStatus = TextView(this).apply {
+            text = "⏳ جارٍ التحقق من إمكانية التغيير..."
+            setPadding(40, 8, 40, 8)
+            textSize = 12f
+            setTextColor(android.graphics.Color.parseColor("#FFB74D"))
         }
-        val birthDateBtn = android.widget.Button(this).apply {
-            text = if (user.birthDate.isNotEmpty())
-                "🎂 تاريخ الميلاد: ${user.birthDate}"
-            else
-                "🎂 تحديد تاريخ الميلاد (اختياري)"
-            background = getDrawable(R.drawable.bg_secondary_button)
-            setTextColor(getColor(R.color.text_primary))
-        }
-        var selectedBirthDate = user.birthDate
-        birthDateBtn.setOnClickListener {
-            val cal = java.util.Calendar.getInstance()
-            // Parse existing date if set
-            if (selectedBirthDate.isNotEmpty()) {
-                try {
-                    val parts = selectedBirthDate.split("-")
-                    cal.set(parts[0].toInt(), parts[1].toInt() - 1, parts[2].toInt())
-                } catch (_: Exception) {}
-            }
-            android.app.DatePickerDialog(this,
-                { _, year, month, day ->
-                    selectedBirthDate = String.format("%04d-%02d-%02d", year, month + 1, day)
-                    birthDateBtn.text = "🎂 تاريخ الميلاد: $selectedBirthDate"
-                },
-                cal.get(java.util.Calendar.YEAR),
-                cal.get(java.util.Calendar.MONTH),
-                cal.get(java.util.Calendar.DAY_OF_MONTH)
-            ).show()
+        val policy = TextView(this).apply {
+            text = "ℹ️ يمكن تغيير الاسم مرة واحدة كل شهر."
+            setPadding(40, 0, 40, 16)
+            textSize = 12f
+            setTextColor(android.graphics.Color.parseColor("#aaaaaa"))
         }
         val container = android.widget.LinearLayout(this).apply {
             orientation = android.widget.LinearLayout.VERTICAL
             setPadding(20, 16, 20, 0)
-            addView(birthDateBtn)
-            addView(countryInput)
+            addView(input)
+            addView(cooldownStatus)
+            addView(policy)
         }
-        AlertDialog.Builder(this)
+
+        val dialog = AlertDialog.Builder(this)
+            .setTitle("تغيير الاسم")
+            .setMessage("الاسم الذي يظهر للآخرين على تعليقاتك وملفك الشخصي.")
+            .setView(container)
+            .setPositiveButton("حفظ", null)
+            .setNegativeButton("إلغاء", null)
+            .create()
+
+        // Async fetch the server-side cooldown so we can show remaining days up-front
+        AuthManager.fetchCloudUser(user.email) { cu ->
+            runOnUiThread {
+                val msg = cooldownMessage(cu?.lastNameChange ?: 0L, 30)
+                cooldownStatus.text = msg
+                cooldownStatus.setTextColor(
+                    android.graphics.Color.parseColor(if (msg.startsWith("✅")) "#4CAF50" else "#FFB74D")
+                )
+            }
+        }
+
+        dialog.setOnShowListener {
+            dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener {
+                val newName = input.text.toString().trim()
+                if (newName.isEmpty()) {
+                    Toast.makeText(this, "الاسم لا يمكن أن يكون فارغاً", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
+                if (newName == currentName) { dialog.dismiss(); return@setOnClickListener }
+                val result = AuthManager.changeName(this, newName)
+                if (result != null && result.startsWith("تم")) {
+                    Toast.makeText(this, result, Toast.LENGTH_SHORT).show()
+                    updateUI()
+                    dialog.dismiss()
+                } else {
+                    Toast.makeText(this, result ?: "حدث خطأ", Toast.LENGTH_LONG).show()
+                }
+            }
+        }
+        dialog.show()
+    }
+
+    /** Build a human-readable cooldown message. windowDays = the cooldown length. */
+    private fun cooldownMessage(lastChangeMs: Long, windowDays: Int): String {
+        if (lastChangeMs <= 0L) return "✅ يمكنك التغيير الآن."
+        val windowMs = windowDays * 24L * 60 * 60 * 1000
+        val elapsed = System.currentTimeMillis() - lastChangeMs
+        if (elapsed >= windowMs) return "✅ يمكنك التغيير الآن."
+        val remaining = windowMs - elapsed
+        val days = (remaining / (24L * 60 * 60 * 1000)).toInt()
+        val hours = ((remaining % (24L * 60 * 60 * 1000)) / (60L * 60 * 1000)).toInt()
+        return if (days > 0) "⏳ تبقّى $days يوم قبل أن تتمكن من التغيير."
+        else "⏳ تبقّى $hours ساعة قبل أن تتمكن من التغيير."
+    }
+
+    private fun showEditProfileInfoDialog() {
+        val user = AuthManager.getCurrentUser(this) ?: return
+
+        // ---------- Birth date: Day → Month → Year pickers (logical bounds) ----------
+        val currentYear = java.util.Calendar.getInstance().get(java.util.Calendar.YEAR)
+        val minYear = 1940
+        val maxYear = currentYear - 10  // لا يقل عمره عن 10 سنوات
+
+        // Parse existing birth date (if any)
+        var initYear = maxYear - 20
+        var initMonth = 1
+        var initDay = 1
+        if (user.birthDate.isNotEmpty()) {
+            try {
+                val p = user.birthDate.split("-")
+                initYear = p[0].toInt().coerceIn(minYear, maxYear)
+                initMonth = p[1].toInt().coerceIn(1, 12)
+                initDay = p[2].toInt().coerceIn(1, 31)
+            } catch (_: Exception) {}
+        }
+
+        fun daysInMonth(y: Int, m: Int): Int = java.util.Calendar.getInstance().apply {
+            set(y, m - 1, 1)
+        }.getActualMaximum(java.util.Calendar.DAY_OF_MONTH)
+
+        // Day picker (rightmost in RTL)
+        val dayPicker = android.widget.NumberPicker(this).apply {
+            minValue = 1
+            maxValue = daysInMonth(initYear, initMonth)
+            value = initDay.coerceAtMost(maxValue)
+            wrapSelectorWheel = false
+        }
+        // Month picker (middle)
+        val monthPicker = android.widget.NumberPicker(this).apply {
+            minValue = 1
+            maxValue = 12
+            value = initMonth
+            displayedValues = arrayOf(
+                "1 - يناير", "2 - فبراير", "3 - مارس", "4 - أبريل",
+                "5 - مايو", "6 - يونيو", "7 - يوليو", "8 - أغسطس",
+                "9 - سبتمبر", "10 - أكتوبر", "11 - نوفمبر", "12 - ديسمبر"
+            )
+            wrapSelectorWheel = false
+        }
+        // Year picker (leftmost in RTL)
+        val yearPicker = android.widget.NumberPicker(this).apply {
+            minValue = minYear
+            maxValue = maxYear
+            value = initYear
+            wrapSelectorWheel = false
+        }
+
+        // Track whether the user actually changed the date, so that opening the
+        // dialog and pressing Save without touching anything does NOT set a
+        // default date (and so "clear" is handled correctly).
+        var interacted = false
+        var cleared = false
+
+        // When month or year changes → recompute the day picker's max and clamp,
+        // so it's impossible to select an invalid day (e.g. 31 Feb, 30 Feb in non-leap years).
+        val recomputeDays = {
+            val newMax = daysInMonth(yearPicker.value, monthPicker.value)
+            if (dayPicker.maxValue != newMax) dayPicker.maxValue = newMax
+            if (dayPicker.value > newMax) dayPicker.value = newMax
+        }
+        dayPicker.setOnValueChangedListener { _, _, _ -> interacted = true; cleared = false }
+        monthPicker.setOnValueChangedListener { _, _, _ -> recomputeDays(); interacted = true; cleared = false }
+        yearPicker.setOnValueChangedListener { _, _, _ -> recomputeDays(); interacted = true; cleared = false }
+
+        val dayLabel = TextView(this).apply { text = "اليوم"; gravity = android.view.Gravity.CENTER; textSize = 12f; setTextColor(getColor(R.color.text_secondary)) }
+        val monthLabel = TextView(this).apply { text = "الشهر"; gravity = android.view.Gravity.CENTER; textSize = 12f; setTextColor(getColor(R.color.text_secondary)) }
+        val yearLabel = TextView(this).apply { text = "السنة"; gravity = android.view.Gravity.CENTER; textSize = 12f; setTextColor(getColor(R.color.text_secondary)) }
+
+        val pickersRow = android.widget.LinearLayout(this).apply {
+            orientation = android.widget.LinearLayout.HORIZONTAL
+            setPadding(8, 8, 8, 8)
+            gravity = android.view.Gravity.CENTER
+            // RTL order: day (right) → month → year (left)
+            val dayCol = android.widget.LinearLayout(this@ProfileActivity).apply {
+                orientation = android.widget.LinearLayout.VERTICAL; gravity = android.view.Gravity.CENTER
+                addView(dayLabel); addView(dayPicker)
+            }
+            val monthCol = android.widget.LinearLayout(this@ProfileActivity).apply {
+                orientation = android.widget.LinearLayout.VERTICAL; gravity = android.view.Gravity.CENTER
+                addView(monthLabel); addView(monthPicker)
+            }
+            val yearCol = android.widget.LinearLayout(this@ProfileActivity).apply {
+                orientation = android.widget.LinearLayout.VERTICAL; gravity = android.view.Gravity.CENTER
+                addView(yearLabel); addView(yearPicker)
+            }
+            addView(dayCol)
+            addView(android.view.View(this@ProfileActivity).apply { layoutParams = android.widget.LinearLayout.LayoutParams(24, 0) })
+            addView(monthCol)
+            addView(android.view.View(this@ProfileActivity).apply { layoutParams = android.widget.LinearLayout.LayoutParams(24, 0) })
+            addView(yearCol)
+        }
+
+        // "Clear" button to unset the birth date (sends empty string on save)
+        val clearBtn = android.widget.TextView(this).apply {
+            text = "🗑️ مسح تاريخ الميلاد"
+            setTextColor(getColor(R.color.danger))
+            setPadding(16, 16, 16, 8)
+            gravity = android.view.Gravity.CENTER
+            setOnClickListener {
+                cleared = true
+                interacted = true
+                text = "✓ سيتم حذف تاريخ الميلاد عند الحفظ"
+            }
+        }
+
+        val birthCooldown = TextView(this).apply {
+            text = "⏳ جارٍ التحقق..."
+            setPadding(40, 4, 40, 4); textSize = 12f
+            setTextColor(android.graphics.Color.parseColor("#FFB74D"))
+        }
+
+        // ---------- Country ----------
+        val countryLabel = TextView(this).apply {
+            text = "الدولة (اختياري)"
+            setPadding(40, 16, 40, 4); textSize = 12f
+            setTextColor(getColor(R.color.text_secondary))
+        }
+        val countryInput = EditText(this).apply {
+            setText(user.country)
+            hint = "مثال: سوريا، مصر، السعودية..."
+            setPadding(40, 24, 40, 24)
+            inputType = android.text.InputType.TYPE_CLASS_TEXT
+        }
+        val countryCooldown = TextView(this).apply {
+            text = "⏳ جارٍ التحقق..."
+            setPadding(40, 4, 40, 4); textSize = 12f
+            setTextColor(android.graphics.Color.parseColor("#FFB74D"))
+        }
+
+        val container = android.widget.LinearLayout(this).apply {
+            orientation = android.widget.LinearLayout.VERTICAL
+            setPadding(20, 16, 20, 0)
+            addView(TextView(this@ProfileActivity).apply {
+                text = "🎂 تاريخ الميلاد"; setPadding(40, 0, 40, 0); textSize = 13f
+                setTextColor(getColor(R.color.text_primary))
+            })
+            addView(pickersRow)
+            addView(clearBtn)
+            addView(birthCooldown)
+            addView(countryLabel)
+            addView(countryInput)
+            addView(countryCooldown)
+        }
+
+        // Async fetch cooldowns from the cloud
+        AuthManager.fetchCloudUser(user.email) { cu ->
+            runOnUiThread {
+                val bm = cooldownMessage(cu?.lastBirthDateChange ?: 0L, 30)
+                birthCooldown.text = "تاريخ الميلاد: $bm"
+                birthCooldown.setTextColor(android.graphics.Color.parseColor(if (bm.startsWith("✅")) "#4CAF50" else "#FFB74D"))
+                val cm = cooldownMessage(cu?.lastCountryChange ?: 0L, 7)
+                countryCooldown.text = "الدولة: $cm"
+                countryCooldown.setTextColor(android.graphics.Color.parseColor(if (cm.startsWith("✅")) "#4CAF50" else "#FFB74D"))
+            }
+        }
+
+        val dialog = AlertDialog.Builder(this)
             .setTitle("تعديل المعلومات الشخصية")
             .setView(container)
-            .setPositiveButton("حفظ") { _, _ ->
-                val country = countryInput.text.toString().trim()
-                AuthManager.updateBirthDate(this, selectedBirthDate)
-                AuthManager.updateCountry(this, country)
-                Toast.makeText(this, "تم تحديث المعلومات", Toast.LENGTH_SHORT).show()
-                updateUI()
-            }
+            .setPositiveButton("حفظ", null)
             .setNegativeButton("إلغاء", null)
-            .show()
+            .create()
+
+        dialog.setOnShowListener {
+            dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener {
+                val y = yearPicker.value
+                val m = monthPicker.value
+                val d = dayPicker.value
+                // Only treat as a date change if the user actually interacted with
+                // the pickers (or pressed clear). Otherwise keep the existing value.
+                val newBirthDate = when {
+                    cleared -> ""
+                    interacted -> String.format("%04d-%02d-%02d", y, m, d)
+                    else -> user.birthDate
+                }
+                val country = countryInput.text.toString().trim()
+
+                val bdChanged = newBirthDate != user.birthDate
+                val cChanged = country != user.country
+
+                if (!bdChanged && !cChanged) { dialog.dismiss(); return@setOnClickListener }
+
+                // Save in background so we don't block the UI thread (the API calls use latches)
+                Thread {
+                    var bdErr: String? = null
+                    var cErr: String? = null
+                    if (bdChanged) bdErr = AuthManager.updateBirthDate(this, newBirthDate)
+                    if (cChanged) cErr = AuthManager.updateCountry(this, country)
+                    runOnUiThread {
+                        val errs = listOfNotNull(bdErr, cErr)
+                        if (errs.isEmpty()) {
+                            Toast.makeText(this, "تم تحديث المعلومات بنجاح", Toast.LENGTH_SHORT).show()
+                            updateUI()
+                            dialog.dismiss()
+                        } else {
+                            Toast.makeText(this, errs.joinToString("\n"), Toast.LENGTH_LONG).show()
+                        }
+                    }
+                }.start()
+            }
+        }
+        dialog.show()
     }
 
     private fun showChangeUsernameDialog() {

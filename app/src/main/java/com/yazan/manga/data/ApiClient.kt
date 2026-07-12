@@ -409,7 +409,10 @@ object ApiClient {
             isAdmin = userObj.get("isAdmin")?.asBoolean ?: false,
             birthDate = userObj.get("birthDate")?.asString ?: "",
             country = userObj.get("country")?.asString ?: "",
-            createdAt = userObj.get("createdAt")?.asLong ?: 0L
+            createdAt = userObj.get("createdAt")?.asLong ?: 0L,
+            lastNameChange = userObj.get("lastNameChange")?.asLong ?: userObj.get("lastUsernameChange")?.asLong ?: 0L,
+            lastBirthDateChange = userObj.get("lastBirthDateChange")?.asLong ?: 0L,
+            lastCountryChange = userObj.get("lastCountryChange")?.asLong ?: 0L
         )
     }
 

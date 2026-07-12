@@ -8,10 +8,11 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.yazan.manga.ui.BaseSwipeBackActivity
 import androidx.appcompat.widget.SwitchCompat
 import androidx.appcompat.app.AppCompatDelegate
 
-class SettingsActivity : AppCompatActivity() {
+class SettingsActivity : BaseSwipeBackActivity() {
 
     private val PREFS_NAME = "settings"
 

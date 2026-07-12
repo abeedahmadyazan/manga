@@ -11,6 +11,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.yazan.manga.ui.BaseSwipeBackActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.yazan.manga.data.ApiClient
@@ -19,7 +20,7 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
-class NotificationsActivity : AppCompatActivity() {
+class NotificationsActivity : BaseSwipeBackActivity() {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var loadingIndicator: ProgressBar

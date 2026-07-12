@@ -543,25 +543,51 @@ object AuthManager {
         return apiResult.second
     }
 
-    /** Update the user's optional birth date (format: yyyy-MM-dd, or empty to clear). */
+    /**
+     * Update the user's optional birth date (format: yyyy-MM-dd, or empty to clear).
+     * Goes through the Cloudflare API which validates the date and enforces a
+     * once-per-month cooldown. Returns null on success, or an error message.
+     */
     fun updateBirthDate(context: Context, birthDate: String): String? {
-        val prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
         val current = getCurrentUser(context) ?: return "يجب تسجيل الدخول"
-        val updated = current.copy(birthDate = birthDate.trim())
+        val clean = birthDate.trim()
+        // CLOUD FIRST: let the server validate + enforce cooldown
+        var apiResult: Pair<Boolean, String?> = Pair(false, "فشل الاتصال")
+        val latch = java.util.concurrent.CountDownLatch(1)
+        Thread {
+            try { apiResult = ApiClient.updateProfile(birthDate = clean) } catch (e: Exception) {}
+            latch.countDown()
+        }.start()
+        try { latch.await(15, java.util.concurrent.TimeUnit.SECONDS) } catch (e: Exception) {}
+        if (!apiResult.first) {
+            return apiResult.second ?: "تعذّر حفظ تاريخ الميلاد على السحابة"
+        }
+        // Cloud succeeded → save locally
+        val updated = current.copy(birthDate = clean)
         saveUser(context, updated)
-        prefs.edit().putString(KEY_USER, serializeUser(updated)).apply()
-        uploadUserToCloud(context)
+        context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+            .edit().putString(KEY_USER, serializeUser(updated)).apply()
         return null
     }
 
-    /** Update the user's optional country. */
+    /** Update the user's optional country. Returns null on success, or an error message. */
     fun updateCountry(context: Context, country: String): String? {
-        val prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
         val current = getCurrentUser(context) ?: return "يجب تسجيل الدخول"
-        val updated = current.copy(country = country.trim())
+        val clean = country.trim()
+        var apiResult: Pair<Boolean, String?> = Pair(false, "فشل الاتصال")
+        val latch = java.util.concurrent.CountDownLatch(1)
+        Thread {
+            try { apiResult = ApiClient.updateProfile(country = clean) } catch (e: Exception) {}
+            latch.countDown()
+        }.start()
+        try { latch.await(15, java.util.concurrent.TimeUnit.SECONDS) } catch (e: Exception) {}
+        if (!apiResult.first) {
+            return apiResult.second ?: "تعذّر حفظ الدولة على السحابة"
+        }
+        val updated = current.copy(country = clean)
         saveUser(context, updated)
-        prefs.edit().putString(KEY_USER, serializeUser(updated)).apply()
-        uploadUserToCloud(context)
+        context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+            .edit().putString(KEY_USER, serializeUser(updated)).apply()
         return null
     }
 
@@ -1046,6 +1072,11 @@ object AuthManager {
         val isAdmin: Boolean = false,
         val birthDate: String = "",
         val country: String = "",
-        val createdAt: Long = 0L
+        val createdAt: Long = 0L,
+        // Server-side cooldown timestamps (ms). Used by the UI to show remaining
+        // days before the user can change each field again. Enforced on the server.
+        val lastNameChange: Long = 0L,
+        val lastBirthDateChange: Long = 0L,
+        val lastCountryChange: Long = 0L
     )
 }

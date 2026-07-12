@@ -8,6 +8,7 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.yazan.manga.ui.BaseSwipeBackActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.tabs.TabLayout
@@ -22,7 +23,7 @@ import com.yazan.manga.ui.MangaAdapter
  *
  * All lists are cloud-backed (Firestore user_lists/{email}) and update in real-time.
  */
-class MangaListActivity : AppCompatActivity() {
+class MangaListActivity : BaseSwipeBackActivity() {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var loadingIndicator: ProgressBar

@@ -7,11 +7,12 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.yazan.manga.ui.BaseSwipeBackActivity
 import com.bumptech.glide.Glide
 import com.google.firebase.firestore.FirebaseFirestore
 import com.yazan.manga.data.AuthManager
 
-class UserProfileActivity : AppCompatActivity() {
+class UserProfileActivity : BaseSwipeBackActivity() {
 
     private val db = FirebaseFirestore.getInstance()
 

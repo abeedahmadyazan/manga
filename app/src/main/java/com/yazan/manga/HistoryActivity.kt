@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.yazan.manga.ui.BaseSwipeBackActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.firestore.ListenerRegistration
@@ -16,7 +17,7 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
-class HistoryActivity : AppCompatActivity() {
+class HistoryActivity : BaseSwipeBackActivity() {
 
     private lateinit var recyclerView: RecyclerView
     private var listener: ListenerRegistration? = null

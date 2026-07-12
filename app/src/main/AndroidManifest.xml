@@ -30,63 +30,75 @@
 
         <activity
             android:name=".MangaDetailsActivity"
+            android:theme="@style/Theme.MangaApp.SwipeBack"
             android:parentActivityName=".MainActivity"
             android:configChanges="orientation|screenSize"
             android:windowSoftInputMode="adjustResize" />
 
         <activity
             android:name=".MangaListActivity"
+            android:theme="@style/Theme.MangaApp.SwipeBack"
             android:parentActivityName=".MainActivity"
             android:configChanges="orientation|screenSize" />
 
         <activity
             android:name=".HistoryActivity"
+            android:theme="@style/Theme.MangaApp.SwipeBack"
             android:parentActivityName=".MainActivity"
             android:configChanges="orientation|screenSize" />
 
         <activity
             android:name=".ReaderActivity"
+            android:theme="@style/Theme.MangaApp.SwipeBack"
             android:parentActivityName=".MangaDetailsActivity"
             android:configChanges="orientation|screenSize" />
 
         <activity
             android:name=".ProfileActivity"
+            android:theme="@style/Theme.MangaApp.SwipeBack"
             android:parentActivityName=".MainActivity"
             android:configChanges="orientation|screenSize" />
 
         <activity
             android:name=".UserProfileActivity"
+            android:theme="@style/Theme.MangaApp.SwipeBack"
             android:parentActivityName=".CommentsActivity"
             android:configChanges="orientation|screenSize" />
 
         <activity
             android:name=".RepliesActivity"
+            android:theme="@style/Theme.MangaApp.SwipeBack"
             android:parentActivityName=".CommentsActivity"
             android:configChanges="orientation|screenSize" />
 
         <activity
             android:name=".CommentsActivity"
+            android:theme="@style/Theme.MangaApp.SwipeBack"
             android:parentActivityName=".MangaDetailsActivity"
             android:configChanges="orientation|screenSize"
             android:windowSoftInputMode="adjustResize" />
 
         <activity
             android:name=".AdminPanelActivity"
+            android:theme="@style/Theme.MangaApp.SwipeBack"
             android:parentActivityName=".ProfileActivity"
             android:configChanges="orientation|screenSize" />
 
         <activity
             android:name=".NotificationsActivity"
+            android:theme="@style/Theme.MangaApp.SwipeBack"
             android:parentActivityName=".MainActivity"
             android:configChanges="orientation|screenSize" />
 
         <activity
             android:name=".SettingsActivity"
+            android:theme="@style/Theme.MangaApp.SwipeBack"
             android:parentActivityName=".MainActivity"
             android:configChanges="orientation|screenSize" />
 
         <activity
             android:name=".DownloadsActivity"
+            android:theme="@style/Theme.MangaApp.SwipeBack"
             android:parentActivityName=".MainActivity"
             android:configChanges="orientation|screenSize" />
 
