@@ -80,7 +80,7 @@
             android:layout_height="40dp"
             android:layout_marginStart="4dp"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:src="@drawable/ic_comments"
+            android:src="@drawable/ic_bell"
             android:tint="@color/text_primary"
             android:contentDescription="الإشعارات" />
         </LinearLayout>

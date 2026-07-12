@@ -145,7 +145,6 @@ class ProfileActivity : AppCompatActivity() {
         btnChangeAvatar.setOnClickListener(openPicker)
 
         btnAdminPanel.setOnClickListener { startActivity(Intent(this, AdminPanelActivity::class.java)) }
-        findViewById<android.widget.ImageButton?>(R.id.btnNotifications)?.setOnClickListener { showBroadcastsList() }
 
         // Make the 4 list cards open MangaListActivity for the corresponding list
         findViewById<View>(R.id.cardFavorites).setOnClickListener { openList(0) }
@@ -318,39 +317,6 @@ class ProfileActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-    private fun showBroadcastsList() {
-        Thread {
-            try {
-                val broadcasts = com.yazan.manga.data.ApiClient.getBroadcasts()
-                runOnUiThread {
-                    if (broadcasts.isEmpty()) {
-                        Toast.makeText(this, "لا توجد إشعارات", Toast.LENGTH_SHORT).show()
-                        return@runOnUiThread
-                    }
-
-                    val sb = StringBuilder()
-                    for (b in broadcasts) {
-                        sb.append("📢 ${b.title}\n")
-                        sb.append("${b.message}\n")
-                        if (b.linkText != null && b.linkUrl != null) {
-                            sb.append("🔗 ${b.linkText}: ${b.linkUrl}\n")
-                        }
-                        sb.append("\n---\n\n")
-                    }
-
-                    AlertDialog.Builder(this)
-                        .setTitle("الإشعارات")
-                        .setMessage(sb.toString())
-                        .setPositiveButton("تم", null)
-                        .show()
-                }
-            } catch (e: Exception) {
-                runOnUiThread {
-                    Toast.makeText(this, "تعذّر تحميل الإشعارات", Toast.LENGTH_SHORT).show()
-                }
-            }
-        }.start()
-    }
 
     private fun showChangeNameDialog() {
         val user = AuthManager.getCurrentUser(this) ?: return

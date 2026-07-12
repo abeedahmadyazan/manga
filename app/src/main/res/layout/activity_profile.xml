@@ -81,15 +81,7 @@
                     tools:ignore="HardcodedText" />
 
                 <!-- Camera overlay button (bottom-end corner) — visible only when logged in -->
-                <ImageButton
-            android:id="@+id/btnNotifications"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:src="@drawable/ic_comments"
-            android:tint="@color/text_primary"
-            android:contentDescription="الإشعارات"
-            tools:ignore="UseAppTint,HardcodedText" />
+                
 
         <ImageButton
                     android:id="@+id/btnChangeAvatar"
