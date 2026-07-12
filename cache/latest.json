@@ -1,7 +1,35 @@
 {
-  "updated_at": "2026-07-12T02:31:04.648803+00:00",
+  "updated_at": "2026-07-12T08:13:04.869910+00:00",
   "count": 50,
   "items": [
+    {
+      "id": "9d3d3403-1a87-4737-9803-bc3d99db1424",
+      "title": "The Guy She Was Interested in Wasn't a Guy at All",
+      "cover": "https://uploads.mangadex.org/covers/9d3d3403-1a87-4737-9803-bc3d99db1424/fac191d0-96c1-4ebb-bf79-b7616d7162ac.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "a77742b1-befd-49a4-bff5-1ad4e6b0ef7b",
+      "title": "Chainsaw Man",
+      "cover": "https://uploads.mangadex.org/covers/a77742b1-befd-49a4-bff5-1ad4e6b0ef7b/6e518bd1-5f60-446b-8832-bfe6bf74834b.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "af7cc594-4f6a-4c0a-8f74-16748910dee5",
+      "title": "Akagami no Shirayukihime",
+      "cover": "https://uploads.mangadex.org/covers/af7cc594-4f6a-4c0a-8f74-16748910dee5/8dec8f9f-9762-4f47-9ad6-2ccd3c721043.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "2f4e5f5b-d930-4266-8c8a-c4cf9a81e51f",
+      "title": "The Great Jahy Will Not Be Defeated!",
+      "cover": "https://uploads.mangadex.org/covers/2f4e5f5b-d930-4266-8c8a-c4cf9a81e51f/da817d36-05c3-4810-bdb7-96345a311097.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
     {
       "id": "baa95345-24fb-47a9-83e9-434ff671f968",
       "title": "خلف المتجر ادخن معك",
@@ -283,13 +311,6 @@
       "status": "ongoing"
     },
     {
-      "id": "a77742b1-befd-49a4-bff5-1ad4e6b0ef7b",
-      "title": "Chainsaw Man",
-      "cover": "https://uploads.mangadex.org/covers/a77742b1-befd-49a4-bff5-1ad4e6b0ef7b/6e518bd1-5f60-446b-8832-bfe6bf74834b.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
       "id": "f486a183-6660-492b-b94b-aa80960d8326",
       "title": "Dragon Ball Super (Official Colored)",
       "cover": "https://uploads.mangadex.org/covers/f486a183-6660-492b-b94b-aa80960d8326/64b86e1c-8734-43c0-b6e4-01f394ce15ad.jpg.256.jpg",
@@ -328,27 +349,6 @@
       "id": "f49c28fd-6e19-495e-8faa-af0d2e091c42",
       "title": "Cupid's First Love",
       "cover": "https://uploads.mangadex.org/covers/f49c28fd-6e19-495e-8faa-af0d2e091c42/93335c20-c9d0-4720-83d0-4b999aa4c8ce.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
-      "id": "d553645b-03a3-4fc8-9a9c-57f91cbbab89",
-      "title": "Are You a Landmine, Chihara-san?",
-      "cover": "https://uploads.mangadex.org/covers/d553645b-03a3-4fc8-9a9c-57f91cbbab89/43718c35-9f27-446d-b95d-cd7a2f2de3d2.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "e05dd982-6d09-4f3d-8e8e-6c9ae65b5857",
-      "title": "The Color of the End: Mission in the Apocalypse",
-      "cover": "https://uploads.mangadex.org/covers/e05dd982-6d09-4f3d-8e8e-6c9ae65b5857/120f5f17-4eac-4c0e-9c08-7fef0420c968.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "50ba23c9-1eea-4b9c-93a2-9531f66b9b78",
-      "title": "ZIG",
-      "cover": "https://uploads.mangadex.org/covers/50ba23c9-1eea-4b9c-93a2-9531f66b9b78/8b6da79e-b2fb-4b1e-b217-adadbf234573.jpg.256.jpg",
       "source": "mangadex",
       "status": "completed"
     }
