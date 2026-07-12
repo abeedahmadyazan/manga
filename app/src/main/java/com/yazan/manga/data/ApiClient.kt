@@ -515,6 +515,8 @@ object ApiClient {
         val linkText: String?,
         val linkUrl: String?,
         val forceBlock: Boolean,
+        val allVersions: Boolean,
+        val targetVersion: Int,
         val createdAt: Long,
         val active: Boolean
     )
@@ -534,6 +536,8 @@ object ApiClient {
                     linkText = b.get("linkText")?.takeIf { !it.isJsonNull }?.asString,
                     linkUrl = b.get("linkUrl")?.takeIf { !it.isJsonNull }?.asString,
                     forceBlock = b.get("forceBlock")?.asBoolean ?: false,
+                    allVersions = b.get("allVersions")?.asBoolean ?: false,
+                    targetVersion = b.get("targetVersion")?.asInt ?: 0,
                     createdAt = b.get("createdAt")?.asLong ?: 0L,
                     active = b.get("active")?.asBoolean ?: true
                 ))
@@ -542,13 +546,15 @@ object ApiClient {
         return result
     }
 
-    fun sendBroadcast(title: String, message: String, linkText: String?, linkUrl: String?, forceBlock: Boolean = false): Boolean {
+    fun sendBroadcast(title: String, message: String, linkText: String?, linkUrl: String?, forceBlock: Boolean = false, allVersions: Boolean = false, targetVersion: Int = 0): Boolean {
         val body = JsonObject().apply {
             addProperty("title", title)
             addProperty("message", message)
             if (linkText != null) addProperty("linkText", linkText)
             if (linkUrl != null) addProperty("linkUrl", linkUrl)
             addProperty("forceBlock", forceBlock)
+            addProperty("allVersions", allVersions)
+            addProperty("targetVersion", targetVersion)
         }
         val (code, _) = request("POST", "/api/admin/broadcast", body)
         return code == 201
@@ -569,6 +575,8 @@ object ApiClient {
                     linkText = b.get("linkText")?.takeIf { !it.isJsonNull }?.asString,
                     linkUrl = b.get("linkUrl")?.takeIf { !it.isJsonNull }?.asString,
                     forceBlock = b.get("forceBlock")?.asBoolean ?: false,
+                    allVersions = b.get("allVersions")?.asBoolean ?: false,
+                    targetVersion = b.get("targetVersion")?.asInt ?: 0,
                     createdAt = b.get("createdAt")?.asLong ?: 0L,
                     active = b.get("active")?.asBoolean ?: true
                 ))

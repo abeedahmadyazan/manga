@@ -167,15 +167,15 @@ class AdminPanelActivity : AppCompatActivity() {
     // =============================================================
 
     private fun showBroadcastDialog() {
+        val titleInput = android.widget.EditText(this).apply {
+            hint = "عنوان الرسالة"
+            setPadding(40, 24, 40, 24)
+        }
+
         val input = android.widget.EditText(this).apply {
             hint = "اكتب نص الرسالة..."
             setPadding(40, 24, 40, 24)
             minLines = 3
-        }
-
-        val titleInput = android.widget.EditText(this).apply {
-            hint = "عنوان الرسالة"
-            setPadding(40, 24, 40, 24)
         }
 
         val linkTextInput = android.widget.EditText(this).apply {
@@ -189,8 +189,25 @@ class AdminPanelActivity : AppCompatActivity() {
         }
 
         val forceBlockCheckbox = android.widget.CheckBox(this).apply {
-            text = "رسالة إلزامية (لا يمكن تخطيها — للمستخدم التحديث)"
+            text = "رسالة إلزامية (تظهر مرة وحدة، تختفي بالتحديث)"
             setPadding(20, 16, 20, 16)
+        }
+
+        val allVersionsCheckbox = android.widget.CheckBox(this).apply {
+            text = "إظهار لكل النسخ (مش مرتبطة بإصدار معين)"
+            setPadding(20, 16, 20, 16)
+        }
+
+        val versionInput = android.widget.EditText(this).apply {
+            hint = "رقم الإصدار المستهدف (مثلاً 120)"
+            setPadding(40, 24, 40, 24)
+            inputType = android.text.InputType.TYPE_CLASS_NUMBER
+        }
+
+        val versionLabel = android.widget.TextView(this).apply {
+            text = "إذا لم تفعّل (كل النسخ)، أدخل رقم الإصدار:"
+            setPadding(20, 8, 20, 4)
+            textSize = 13f
         }
 
         val layout = android.widget.LinearLayout(this).apply {
@@ -201,6 +218,9 @@ class AdminPanelActivity : AppCompatActivity() {
             addView(linkTextInput)
             addView(linkUrlInput)
             addView(forceBlockCheckbox)
+            addView(allVersionsCheckbox)
+            addView(versionLabel)
+            addView(versionInput)
         }
 
         AlertDialog.Builder(this)
@@ -212,6 +232,8 @@ class AdminPanelActivity : AppCompatActivity() {
                 val linkText = linkTextInput.text.toString().trim().ifEmpty { null }
                 val linkUrl = linkUrlInput.text.toString().trim().ifEmpty { null }
                 val forceBlock = forceBlockCheckbox.isChecked
+                val allVersions = allVersionsCheckbox.isChecked
+                val targetVersion = versionInput.text.toString().trim().toIntOrNull() ?: 0
 
                 if (title.isEmpty() || message.isEmpty()) {
                     Toast.makeText(this, "العنوان والنص مطلوبان", Toast.LENGTH_SHORT).show()
@@ -219,7 +241,9 @@ class AdminPanelActivity : AppCompatActivity() {
                 }
 
                 Thread {
-                    val success = com.yazan.manga.data.ApiClient.sendBroadcast(title, message, linkText, linkUrl, forceBlock)
+                    val success = com.yazan.manga.data.ApiClient.sendBroadcast(
+                        title, message, linkText, linkUrl, forceBlock, allVersions, targetVersion
+                    )
                     runOnUiThread {
                         if (success) {
                             Toast.makeText(this, "تم إرسال الرسالة بنجاح!", Toast.LENGTH_SHORT).show()
