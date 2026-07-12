@@ -26,6 +26,10 @@ class AdminPanelActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_admin_panel)
 
+        // Add broadcast button
+        val btnBroadcast = findViewById<android.widget.Button?>(R.id.btnBroadcast)
+        btnBroadcast?.setOnClickListener { showBroadcastDialog() }
+
         findViewById<ImageButton>(R.id.btnBack).setOnClickListener { finish() }
 
         val user = AuthManager.getCurrentUser(this)
@@ -156,6 +160,70 @@ class AdminPanelActivity : AppCompatActivity() {
         } else {
             textView.text = suspended.joinToString("\n\n") { "📧 ${it.email}\n👤 ${it.username}" }
         }
+    }
+
+    // =============================================================
+    //  Broadcast management (admin notifications)
+    // =============================================================
+
+    private fun showBroadcastDialog() {
+        val input = android.widget.EditText(this).apply {
+            hint = "اكتب نص الرسالة..."
+            setPadding(40, 24, 40, 24)
+            minLines = 3
+        }
+
+        val titleInput = android.widget.EditText(this).apply {
+            hint = "عنوان الرسالة"
+            setPadding(40, 24, 40, 24)
+        }
+
+        val linkTextInput = android.widget.EditText(this).apply {
+            hint = "نص الرابط (اختياري)"
+            setPadding(40, 24, 40, 24)
+        }
+
+        val linkUrlInput = android.widget.EditText(this).apply {
+            hint = "الرابط (اختياري)"
+            setPadding(40, 24, 40, 24)
+        }
+
+        val layout = android.widget.LinearLayout(this).apply {
+            orientation = android.widget.LinearLayout.VERTICAL
+            setPadding(20, 10, 20, 10)
+            addView(titleInput)
+            addView(input)
+            addView(linkTextInput)
+            addView(linkUrlInput)
+        }
+
+        AlertDialog.Builder(this)
+            .setTitle("إرسال رسالة للمستخدمين")
+            .setView(layout)
+            .setPositiveButton("إرسال") { _, _ ->
+                val title = titleInput.text.toString().trim()
+                val message = input.text.toString().trim()
+                val linkText = linkTextInput.text.toString().trim().ifEmpty { null }
+                val linkUrl = linkUrlInput.text.toString().trim().ifEmpty { null }
+
+                if (title.isEmpty() || message.isEmpty()) {
+                    Toast.makeText(this, "العنوان والنص مطلوبان", Toast.LENGTH_SHORT).show()
+                    return@setPositiveButton
+                }
+
+                Thread {
+                    val success = com.yazan.manga.data.ApiClient.sendBroadcast(title, message, linkText, linkUrl)
+                    runOnUiThread {
+                        if (success) {
+                            Toast.makeText(this, "تم إرسال الرسالة بنجاح!", Toast.LENGTH_SHORT).show()
+                        } else {
+                            Toast.makeText(this, "تعذّر إرسال الرسالة", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }.start()
+            }
+            .setNegativeButton("إلغاء", null)
+            .show()
     }
 
     override fun onDestroy() {

@@ -71,6 +71,57 @@ class MainActivity : AppCompatActivity() {
 
         initViews()
         loadManga()
+        checkBroadcasts()
+    }
+
+    // =============================================================
+    //  Broadcasts (admin messages — popup once + bell icon)
+    // =============================================================
+    private fun checkBroadcasts() {
+        Thread {
+            try {
+                val broadcasts = com.yazan.manga.data.ApiClient.getBroadcasts()
+                if (broadcasts.isEmpty()) return@Thread
+
+                // Check which broadcasts the user has already seen
+                val prefs = getSharedPreferences("broadcast_seen", android.content.Context.MODE_PRIVATE)
+                val unseen = broadcasts.filter { !prefs.getBoolean(it.id, false) }
+
+                if (unseen.isNotEmpty()) {
+                    runOnUiThread { showBroadcastPopup(unseen[0], prefs) }
+                }
+            } catch (e: Exception) {
+                android.util.Log.w("MainActivity", "Broadcast check failed: ${e.message}")
+            }
+        }.start()
+    }
+
+    private fun showBroadcastPopup(
+        broadcast: com.yazan.manga.data.ApiClient.Broadcast,
+        prefs: android.content.SharedPreferences
+    ) {
+        val builder = AlertDialog.Builder(this)
+            .setTitle(broadcast.title)
+            .setMessage(broadcast.message)
+            .setPositiveButton("تم") { dialog, _ ->
+                prefs.edit().putBoolean(broadcast.id, true).apply()
+                dialog.dismiss()
+            }
+            .setCancelable(false)
+
+        // Add link button if BOTH linkText and linkUrl are present
+        if (broadcast.linkText != null && broadcast.linkUrl != null) {
+            builder.setNeutralButton(broadcast.linkText) { dialog, _ ->
+                // Copy link to clipboard
+                val clipboard = getSystemService(android.content.Context.CLIPBOARD_SERVICE) as android.content.ClipboardManager
+                clipboard.setPrimaryClip(android.content.ClipData.newPlainText("link", broadcast.linkUrl))
+                Toast.makeText(this, "تم نسخ الرابط", Toast.LENGTH_SHORT).show()
+                prefs.edit().putBoolean(broadcast.id, true).apply()
+                dialog.dismiss()
+            }
+        }
+
+        builder.show()
     }
 
     private fun initViews() {
