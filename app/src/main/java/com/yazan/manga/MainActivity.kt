@@ -146,29 +146,28 @@ class MainActivity : AppCompatActivity() {
         val builder = AlertDialog.Builder(this)
             .setTitle("⚠️ ${broadcast.title}")
             .setMessage(broadcast.message)
-            .setCancelable(false)  // CANNOT be dismissed by back button or outside click
+            .setCancelable(false)
 
-        // Force block: only "نسخ الرابط" button (no "تم" button)
-        // User MUST interact with the link or close the app
+        // Force block: shows ONCE per device.
+        // BOTH buttons save seenKey so it never blocks again.
+        // Admin can delete the broadcast to remove it completely.
+
         if (broadcast.linkText != null && broadcast.linkUrl != null) {
             builder.setPositiveButton(broadcast.linkText) { dialog, _ ->
                 val clipboard = getSystemService(android.content.Context.CLIPBOARD_SERVICE) as android.content.ClipboardManager
                 clipboard.setPrimaryClip(android.content.ClipData.newPlainText("link", broadcast.linkUrl))
-                Toast.makeText(this, "تم نسخ الرابط — يرجى التحديث", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "تم نسخ الرابط", Toast.LENGTH_SHORT).show()
                 prefs.edit().putBoolean(seenKey, true).apply()
                 dialog.dismiss()
-                // Close the app — user must update
-                finishAffinity()
             }
             builder.setNegativeButton("خروج") { dialog, _ ->
+                prefs.edit().putBoolean(seenKey, true).apply()
                 dialog.dismiss()
-                finishAffinity()  // Close the app
             }
         } else {
-            // No link — just "خروج" button
-            builder.setPositiveButton("خروج") { dialog, _ ->
+            builder.setPositiveButton("حسنًا") { dialog, _ ->
+                prefs.edit().putBoolean(seenKey, true).apply()
                 dialog.dismiss()
-                finishAffinity()
             }
         }
 
