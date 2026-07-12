@@ -566,8 +566,4 @@ class ProfileActivity : AppCompatActivity() {
         listsListener?.remove()
         listsListener = null
     }
-    override fun finish() {
-        super.finish()
-        overridePendingTransition(R.anim.fade_in, R.anim.slide_out_left)
-    }
 }

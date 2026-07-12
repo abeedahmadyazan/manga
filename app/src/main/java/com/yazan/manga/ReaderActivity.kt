@@ -428,8 +428,4 @@ class ReaderActivity : AppCompatActivity() {
             }
         }
     }
-    override fun finish() {
-        super.finish()
-        overridePendingTransition(R.anim.fade_in, R.anim.slide_out_left)
-    }
 }
