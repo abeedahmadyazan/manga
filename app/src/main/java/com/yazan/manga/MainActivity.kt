@@ -323,7 +323,7 @@ class MainActivity : AppCompatActivity() {
         val chipSource1 = findViewById<MaterialButton>(R.id.chipSource1)
         val chipSource2 = findViewById<MaterialButton>(R.id.chipSource2)
         val chipSource3 = findViewById<MaterialButton>(R.id.chipSource3)
-        val chipSource4 = findViewById<MaterialButton?>(R.id.chipSource4)
+        val chipSource4 = findViewById<MaterialButton?>(R.id.chipSource4) ?: null
 
         fun setActiveSource(source: String) {
             currentContentType = source
