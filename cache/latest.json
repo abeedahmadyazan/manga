@@ -1,11 +1,25 @@
 {
-  "updated_at": "2026-07-12T08:13:04.869910+00:00",
+  "updated_at": "2026-07-12T13:14:51.805407+00:00",
   "count": 50,
   "items": [
     {
-      "id": "9d3d3403-1a87-4737-9803-bc3d99db1424",
-      "title": "The Guy She Was Interested in Wasn't a Guy at All",
-      "cover": "https://uploads.mangadex.org/covers/9d3d3403-1a87-4737-9803-bc3d99db1424/fac191d0-96c1-4ebb-bf79-b7616d7162ac.jpg.256.jpg",
+      "id": "c4ca02fb-8378-433b-8049-fbbea5d25cba",
+      "title": "هايميا-سينباي حسناء مهيبة!",
+      "cover": "https://uploads.mangadex.org/covers/c4ca02fb-8378-433b-8049-fbbea5d25cba/3d1dc074-3987-47ab-ad91-39202bc146e6.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "12ac16ec-8894-420b-bc03-eade9340dfd8",
+      "title": "Trinity Seven",
+      "cover": "https://uploads.mangadex.org/covers/12ac16ec-8894-420b-bc03-eade9340dfd8/85c1b863-ef69-4c76-9313-e2b4f06b24db.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "4d6decd4-835d-4905-9534-2571dae07bcd",
+      "title": "Lord El-Melloi II-sei no Jikenbo",
+      "cover": "https://uploads.mangadex.org/covers/4d6decd4-835d-4905-9534-2571dae07bcd/5f347aae-bf45-4dcb-828d-2c507db71d2f.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
@@ -15,6 +29,13 @@
       "cover": "https://uploads.mangadex.org/covers/a77742b1-befd-49a4-bff5-1ad4e6b0ef7b/6e518bd1-5f60-446b-8832-bfe6bf74834b.jpg.256.jpg",
       "source": "mangadex",
       "status": "completed"
+    },
+    {
+      "id": "9d3d3403-1a87-4737-9803-bc3d99db1424",
+      "title": "The Guy She Was Interested in Wasn't a Guy at All",
+      "cover": "https://uploads.mangadex.org/covers/9d3d3403-1a87-4737-9803-bc3d99db1424/fac191d0-96c1-4ebb-bf79-b7616d7162ac.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
     },
     {
       "id": "af7cc594-4f6a-4c0a-8f74-16748910dee5",
@@ -83,13 +104,6 @@
       "id": "774f0f04-5023-4e2e-9c0b-f0ed382f078b",
       "title": "إينيغماتيكا",
       "cover": "https://uploads.mangadex.org/covers/774f0f04-5023-4e2e-9c0b-f0ed382f078b/a7ef08f7-5abf-4eb6-bca1-ee0279bbbde7.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "c4ca02fb-8378-433b-8049-fbbea5d25cba",
-      "title": "هايميا-سينباي حسناء مهيبة!",
-      "cover": "https://uploads.mangadex.org/covers/c4ca02fb-8378-433b-8049-fbbea5d25cba/3d1dc074-3987-47ab-ad91-39202bc146e6.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
@@ -280,7 +294,7 @@
       "title": "Blue Box",
       "cover": "https://uploads.mangadex.org/covers/ed5dddc0-999d-4fd2-a702-9fef1ec2c955/80206db7-7ca3-4038-a8d4-04926e9a4388.jpg.256.jpg",
       "source": "mangadex",
-      "status": "ongoing"
+      "status": "completed"
     },
     {
       "id": "f7888782-0727-49b0-95ec-a3530c70f83b",
@@ -337,20 +351,6 @@
       "cover": "https://uploads.mangadex.org/covers/7f30dfc3-0b80-4dcc-a3b9-0cd746fac005/b65b80fa-217c-4a71-8e8f-5d647990117a.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
-    },
-    {
-      "id": "63dbbf80-0189-4ae4-a549-68a0caa2f834",
-      "title": "ويتشريف",
-      "cover": "https://uploads.mangadex.org/covers/63dbbf80-0189-4ae4-a549-68a0caa2f834/04ae601b-1e85-4b59-bba3-7a140f7339f5.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "f49c28fd-6e19-495e-8faa-af0d2e091c42",
-      "title": "Cupid's First Love",
-      "cover": "https://uploads.mangadex.org/covers/f49c28fd-6e19-495e-8faa-af0d2e091c42/93335c20-c9d0-4720-83d0-4b999aa4c8ce.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
     }
   ]
 }
