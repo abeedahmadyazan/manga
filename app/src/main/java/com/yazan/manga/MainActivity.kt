@@ -82,24 +82,44 @@ class MainActivity : AppCompatActivity() {
         Thread {
             try {
                 val broadcasts = com.yazan.manga.data.ApiClient.getBroadcasts()
-                
-                // Update bell badge with unread count
                 val prefs = getSharedPreferences("broadcast_seen", android.content.Context.MODE_PRIVATE)
-                val appVersion = getAppVersionCode()
+                val appVersion = try {
+                    val pInfo = packageManager.getPackageInfo(packageName, 0)
+                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.P) pInfo.longVersionCode.toInt()
+                    else @Suppress("DEPRECATION") pInfo.versionCode
+                } catch (e: Exception) { 1 }
+
+                // Update bell badge
                 val unreadCount = broadcasts.count { !prefs.getBoolean("${it.id}_v$appVersion", false) }
-                runOnUiThread { updateBellBadge(unreadCount) }
-                
+                runOnUiThread {
+                    try {
+                        val bellBtn = findViewById<android.widget.ImageButton?>(R.id.btnNotifications)
+                        if (bellBtn != null) {
+                            if (unreadCount > 0) {
+                                bellBtn.imageTintList = android.content.res.ColorStateList.valueOf(android.graphics.Color.parseColor("#FF6B6B"))
+                            } else {
+                                bellBtn.imageTintList = android.content.res.ColorStateList.valueOf(android.graphics.Color.parseColor("#FFFFFF"))
+                            }
+                        }
+                    } catch (ex: Exception) {}
+                }
+
                 if (broadcasts.isEmpty()) return@Thread
 
-                val prefs = getSharedPreferences("broadcast_seen", android.content.Context.MODE_PRIVATE)
+                // Check for force block
+                val forceBlocks = broadcasts.filter { it.forceBlock }
+                for (fb in forceBlocks) {
+                    val seenKey = "fb_${fb.id}_v$appVersion"
+                    if (!prefs.getBoolean(seenKey, false)) {
+                        runOnUiThread { showForceBlockPopup(fb, prefs, seenKey) }
+                        return@Thread
+                    }
+                }
 
-                // Use device ID as key — survives app updates
-                val deviceId = com.yazan.manga.data.AuthManager.getDeviceId(this)
-
-                // Show first unseen broadcast (if any)
-                val unseen = broadcasts.filter { !prefs.getBoolean("${it.id}_${deviceId}", false) }
+                // Check for normal unseen
+                val unseen = broadcasts.filter { !it.forceBlock && !prefs.getBoolean("${it.id}_v$appVersion", false) }
                 if (unseen.isNotEmpty()) {
-                    val seenKey = "${unseen[0].id}_${deviceId}"
+                    val seenKey = "${unseen[0].id}_v$appVersion"
                     runOnUiThread { showBroadcastPopup(unseen[0], prefs, seenKey) }
                 }
             } catch (e: Exception) {
