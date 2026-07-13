@@ -32,6 +32,53 @@ class ReaderActivity : BaseSwipeBackActivity() {
      *  there's no previous page to flip to. This avoids conflicting with the
      *  PagerSnapHelper's horizontal paging. */
     override fun canSwipeBack(): Boolean = readingMode == "webtoon" || currentPageIndex == 0
+
+    /**
+     * Save the user's reading position (page index) for a specific chapter.
+     * Stored in SharedPreferences so it persists across app restarts.
+     * Key format: "pos_{chapterId}" → page index (int)
+     */
+    private fun saveReadingPosition(chapterId: String, pageIndex: Int) {
+        try {
+            getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
+                .edit()
+                .putInt("pos_$chapterId", pageIndex)
+                .apply()
+        } catch (e: Exception) {}
+    }
+
+    /**
+     * Restore the user's reading position for a specific chapter.
+     * Returns -1 if no saved position exists.
+     */
+    private fun getSavedReadingPosition(chapterId: String): Int {
+        return try {
+            getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
+                .getInt("pos_$chapterId", -1)
+        } catch (e: Exception) { -1 }
+    }
+
+    /**
+     * Increment the reading stats (chapters read today + total).
+     * Used by ProfileActivity to show reading statistics.
+     */
+    private fun incrementReadingStats() {
+        try {
+            val prefs = getSharedPreferences(KEY_READING_STATS, MODE_PRIVATE)
+            val today = java.text.SimpleDateFormat("yyyy-MM-dd", java.util.Locale.getDefault())
+                .format(java.util.Date())
+            val total = prefs.getInt("total_chapters", 0) + 1
+            val todayCount = prefs.getInt("today_$today", 0) + 1
+            val thisWeek = java.util.Calendar.getInstance().get(java.util.Calendar.WEEK_OF_YEAR)
+            val weekCount = prefs.getInt("week_${thisWeek}", 0) + 1
+            prefs.edit()
+                .putInt("total_chapters", total)
+                .putInt("today_$today", todayCount)
+                .putInt("week_${thisWeek}", weekCount)
+                .putLong("last_read_at", System.currentTimeMillis())
+                .apply()
+        } catch (e: Exception) {}
+    }
     private lateinit var repository: MangaRepository
     private lateinit var pagesRecyclerView: RecyclerView
     private lateinit var loadingIndicator: ProgressBar
@@ -60,6 +107,7 @@ class ReaderActivity : BaseSwipeBackActivity() {
     private var snapHelper: PagerSnapHelper? = null
     private val PREFS_NAME = "reader_prefs"
     private val KEY_READING_MODE = "reading_mode"
+    private val KEY_READING_STATS = "reading_stats"  // chapters read count
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -277,6 +325,17 @@ class ReaderActivity : BaseSwipeBackActivity() {
         pages = pageUrls
         pageCounter.text = "1 / ${pages.size}"
         pageSeekBar.max = if (pages.size > 1) pages.size - 1 else 0
+
+        // Restore reading position if available
+        val savedPos = getSavedReadingPosition(currentChapterId)
+        if (savedPos > 0 && savedPos < pages.size) {
+            pagesRecyclerView.postDelayed({
+                scrollToPage(savedPos)
+            }, 300)
+        }
+
+        // Increment reading stats
+        incrementReadingStats()
         val adapter = PagesAdapter(pages) { pageIndex ->
             toggleBars()
         }
@@ -284,6 +343,8 @@ class ReaderActivity : BaseSwipeBackActivity() {
         pagesRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                    // Save reading position for this chapter
+                    saveReadingPosition(currentChapterId, currentPageIndex)
                     val lm = recyclerView.layoutManager as LinearLayoutManager
                     val pos = if (readingMode == "manga") {
                         lm.findFirstCompletelyVisibleItemPosition()
@@ -435,5 +496,10 @@ class ReaderActivity : BaseSwipeBackActivity() {
                 }
             }
         }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        saveReadingPosition(currentChapterId, currentPageIndex)
     }
 }

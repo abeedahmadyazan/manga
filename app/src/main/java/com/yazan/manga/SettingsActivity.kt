@@ -160,7 +160,7 @@ class SettingsActivity : BaseSwipeBackActivity() {
         try {
             val pInfo = packageManager.getPackageInfo(packageName, 0)
             val versionName = pInfo.versionName ?: "1.0"
-            tvAbout.text = "YZ MANGA v${versionName}\n© 2026 يزن عبدالله"
+            tvAbout.text = "v${versionName}"
         } catch (e: Exception) {}
     }
 

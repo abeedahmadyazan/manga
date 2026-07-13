@@ -371,6 +371,23 @@ class ProfileActivity : BaseSwipeBackActivity() {
     }
 
 
+    /** Load reading statistics from SharedPreferences and display them. */
+    private fun loadReadingStats() {
+        try {
+            val prefs = getSharedPreferences("reading_stats", MODE_PRIVATE)
+            val total = prefs.getInt("total_chapters", 0)
+            val today = java.text.SimpleDateFormat("yyyy-MM-dd", java.util.Locale.getDefault())
+                .format(java.util.Date())
+            val todayCount = prefs.getInt("today_$today", 0)
+            val weekNum = java.util.Calendar.getInstance().get(java.util.Calendar.WEEK_OF_YEAR)
+            val weekCount = prefs.getInt("week_$weekNum", 0)
+
+            findViewById<TextView?>(R.id.tvStatTotalChapters)?.text = total.toString()
+            findViewById<TextView?>(R.id.tvStatThisWeek)?.text = weekCount.toString()
+            findViewById<TextView?>(R.id.tvStatToday)?.text = todayCount.toString()
+        } catch (e: Exception) {}
+    }
+
     private fun showChangeNameDialog() {
         val user = AuthManager.getCurrentUser(this) ?: return
         val currentName = user.name
@@ -836,6 +853,9 @@ class ProfileActivity : BaseSwipeBackActivity() {
                 }
             )
             statsContainer.visibility = View.VISIBLE
+
+            // Reading statistics
+            loadReadingStats()
 
             btnLogin.visibility = View.GONE
             btnLogout.visibility = View.VISIBLE

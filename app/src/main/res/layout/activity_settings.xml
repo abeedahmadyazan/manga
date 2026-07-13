@@ -348,32 +348,10 @@
                 android:id="@+id/tvAbout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="YZ MANGA v1.0.66\n© 2026 يزن عبدالله"
+                android:text="v1.0"
                 android:textColor="@color/text_secondary"
                 android:textSize="14sp"
-                android:lineSpacingExtra="4dp"
                 tools:ignore="HardcodedText" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/divider"
-                android:layout_marginVertical="12dp" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="المصادر: MangaDex • 3asq • manhwahentai"
-                android:textColor="@color/text_hint"
-                android:textSize="12sp" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:text="API: Cloudflare Workers"
-                android:textColor="@color/text_hint"
-                android:textSize="12sp" />
         </LinearLayout>
 
     </LinearLayout>
