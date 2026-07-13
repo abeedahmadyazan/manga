@@ -131,15 +131,22 @@ object WebViewScraper {
                     settings.userAgentString = "Mozilla/5.0 (Linux; Android 12; Pixel 6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Mobile Safari/537.36"
                     settings.cacheMode = WebSettings.LOAD_DEFAULT
                     // Block images (we only need the DOM, not the heavy images).
-                    // blockImageResourceLoads is API 26+, so use loadsImagesAutomatically=false (API 24+).
+                    // loadsImagesAutomatically=false is API 24+ and stops <img> loads.
                     settings.loadsImagesAutomatically = false
-                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-                        settings.blockImageResourceLoads = true
-                    }
                     CookieManager.getInstance().setAcceptCookie(true)
                     CookieManager.getInstance().setAcceptThirdPartyCookies(this, true)
 
                     webViewClient = object : WebViewClient() {
+                        // Cancel image subresource requests at the network level.
+                        override fun shouldInterceptRequest(view: WebView?, request: android.webkit.WebResourceRequest?): android.webkit.WebResourceResponse? {
+                            val u = request?.url?.toString() ?: return null
+                            // Block image MIME types / extensions to save bandwidth.
+                            if (u.endsWith(".jpg") || u.endsWith(".jpeg") || u.endsWith(".png") || u.endsWith(".webp") || u.endsWith(".gif")) {
+                                return android.webkit.WebResourceResponse("text/plain", "utf-8", java.io.ByteArrayInputStream(ByteArray(0)))
+                            }
+                            return null
+                        }
+
                         override fun onPageFinished(view: WebView?, url: String?) {
                             super.onPageFinished(view, url)
                             // CF challenge redirects — wait for the REAL content page.
