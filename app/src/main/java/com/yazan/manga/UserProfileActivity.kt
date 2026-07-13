@@ -89,25 +89,36 @@ class UserProfileActivity : BaseSwipeBackActivity() {
             }
         }
 
-        // === User block button — visible to ALL signed-in users viewing someone else ===
-        // (not just admins). Hides this user's comments from me AND my comments from them.
+        // === User block button — visible to ALL signed-in users viewing someone else,
+        // EXCEPT when the target is an admin (admins cannot be blocked by anyone).
+        // Hides this user's comments from me AND my comments from them.
         val btnBlock = findViewById<com.google.android.material.button.MaterialButton?>(R.id.btnBlockUser)
         if (currentUser != null && email != currentUser.email) {
-            btnBlock?.visibility = View.VISIBLE
-            // Async-check the current block status and update the button label.
+            // Async-check if the target is an admin → hide the block button entirely.
+            // Also check the current block status (to toggle the label).
             Thread {
                 try {
-                    val status = com.yazan.manga.data.ApiClient.checkBlockStatus(email)
+                    val cu = com.yazan.manga.data.ApiClient.getUserProfile(email)
+                    val isTargetAdmin = cu?.isAdmin == true
+                    val status = if (!isTargetAdmin) com.yazan.manga.data.ApiClient.checkBlockStatus(email) else null
                     runOnUiThread {
-                        if (status.iBlockedThem) {
-                            btnBlock?.text = "✓ إلغاء الحظر"
-                            btnBlock?.setTextColor(getColor(R.color.primary))
+                        if (isTargetAdmin) {
+                            // Admins cannot be blocked — hide the button entirely.
+                            btnBlock?.visibility = View.GONE
                         } else {
-                            btnBlock?.text = "🚫 حظر هذا المستخدم"
-                            btnBlock?.setTextColor(getColor(R.color.danger))
+                            btnBlock?.visibility = View.VISIBLE
+                            if (status != null && status.iBlockedThem) {
+                                btnBlock?.text = "✓ إلغاء الحظر"
+                                btnBlock?.setTextColor(getColor(R.color.primary))
+                            } else {
+                                btnBlock?.text = "🚫 حظر هذا المستخدم"
+                                btnBlock?.setTextColor(getColor(R.color.danger))
+                            }
                         }
                     }
-                } catch (e: Exception) {}
+                } catch (e: Exception) {
+                    runOnUiThread { btnBlock?.visibility = View.VISIBLE }
+                }
             }.start()
 
             btnBlock?.setOnClickListener {

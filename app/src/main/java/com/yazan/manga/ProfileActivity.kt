@@ -143,7 +143,7 @@ class ProfileActivity : BaseSwipeBackActivity() {
             showCountryDialog()
         }
         btnBlockedUsers.setOnClickListener {
-            showBlockedUsersDialog()
+            startActivity(Intent(this, BlockedUsersActivity::class.java))
         }
 
         // Profile picture — both the avatar image and the dedicated camera button open the picker
@@ -710,80 +710,6 @@ class ProfileActivity : BaseSwipeBackActivity() {
      * Fetches from /api/blocks (server-side enforced — the user can only see
      * blocks where they are the blocker).
      */
-    private fun showBlockedUsersDialog() {
-        val dialog = AlertDialog.Builder(this)
-            .setTitle("🚫 المحظورون")
-            .setMessage("جارٍ التحميل...")
-            .setPositiveButton("إغلاق", null)
-            .create()
-        dialog.show()
-        Thread {
-            val blocks = com.yazan.manga.data.ApiClient.getBlockedUsers()
-            runOnUiThread {
-                if (blocks.isEmpty()) {
-                    dialog.setMessage("لم تقم بحظر أي مستخدم بعد.\n\nلحظر مستخدم، افتح ملفه الشخصي واضغط «حظر هذا المستخدم».")
-                    return@runOnUiThread
-                }
-                val msg = StringBuilder()
-                msg.append("يمكنك إلغاء الحظر بالضغط على الاسم.\n\n")
-                blocks.forEachIndexed { i, b ->
-                    val name = if (b.name.isNotEmpty()) b.name else b.email.substringBefore("@")
-                    msg.append("${i + 1}. $name")
-                    if (b.email.isNotEmpty()) msg.append("  (${b.email})")
-                    msg.append("\n")
-                }
-                dialog.setMessage(msg.toString())
-                // Replace the message view with a clickable list so the user can unblock
-                // by tapping an item. We use setItems on a fresh dialog for that.
-            }
-        }.start()
-
-        // Build a second, interactive dialog with the list so the user can tap to unblock.
-        Thread {
-            val blocks = com.yazan.manga.data.ApiClient.getBlockedUsers()
-            runOnUiThread {
-                dialog.dismiss()
-                if (blocks.isEmpty()) {
-                    AlertDialog.Builder(this)
-                        .setTitle("🚫 المحظورون")
-                        .setMessage("لم تقم بحظر أي مستخدم بعد.\n\nلحظر مستخدم، افتح ملفه الشخصي واضغط «حظر هذا المستخدم».")
-                        .setPositiveButton("حسناً", null)
-                        .show()
-                    return@runOnUiThread
-                }
-                val labels = blocks.map { b ->
-                    val name = if (b.name.isNotEmpty()) b.name else b.email.substringBefore("@")
-                    "$name  —  اضغط لإلغاء الحظر"
-                }.toTypedArray()
-                AlertDialog.Builder(this)
-                    .setTitle("🚫 المحظورون (${blocks.size})")
-                    .setItems(labels) { _, which ->
-                        val b = blocks[which]
-                        AlertDialog.Builder(this)
-                            .setTitle("إلغاء الحظر")
-                            .setMessage("إلغاء حظر «${if (b.name.isNotEmpty()) b.name else b.email}»؟")
-                            .setPositiveButton("إلغاء الحظر") { _, _ ->
-                                Thread {
-                                    val (ok, err) = com.yazan.manga.data.ApiClient.unblockUser(b.email)
-                                    runOnUiThread {
-                                        if (ok) {
-                                            Toast.makeText(this, "تم إلغاء الحظر", Toast.LENGTH_SHORT).show()
-                                            showBlockedUsersDialog()  // refresh
-                                        } else {
-                                            Toast.makeText(this, err ?: "تعذّر إلغاء الحظر", Toast.LENGTH_LONG).show()
-                                        }
-                                    }
-                                }.start()
-                            }
-                            .setNegativeButton("تراجع", null)
-                            .show()
-                    }
-                    .setNegativeButton("إغلاق", null)
-                    .show()
-            }
-        }.start()
-    }
-
     private fun showChangeUsernameDialog() {
         val user = AuthManager.getCurrentUser(this) ?: return
         val input = EditText(this).apply {

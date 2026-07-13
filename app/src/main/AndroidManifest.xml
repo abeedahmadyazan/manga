@@ -102,6 +102,12 @@
             android:parentActivityName=".MainActivity"
             android:configChanges="orientation|screenSize" />
 
+        <activity
+            android:name=".BlockedUsersActivity"
+            android:theme="@style/Theme.MangaApp.SwipeBack"
+            android:parentActivityName=".ProfileActivity"
+            android:configChanges="orientation|screenSize" />
+
     </application>
 
 </manifest>
