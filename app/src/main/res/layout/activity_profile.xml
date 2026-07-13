@@ -422,8 +422,7 @@ android:id="@+id/cardCompleted"
                         </LinearLayout>
                     </com.google.android.material.card.MaterialCardView>
                 </LinearLayout>
-            </LinearLayout>
-
+            
             
                         <!-- ============ Reading statistics ============ -->
             <LinearLayout
