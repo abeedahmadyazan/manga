@@ -21,7 +21,6 @@ import com.bumptech.glide.Glide
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.navigation.NavigationView
 import com.yazan.manga.data.AuthManager
-import com.yazan.manga.data.ReadingHistoryManager
 import com.yazan.manga.data.MangaListItem
 import com.yazan.manga.data.MangaRepository
 import com.yazan.manga.ui.MangaAdapter
@@ -76,7 +75,6 @@ class MainActivity : AppCompatActivity() {
         // Check broadcasts FIRST — a force-block must gate the app before content loads.
         checkBroadcasts()
         loadManga()
-        loadContinueReading()
     }
 
     /**

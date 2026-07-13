@@ -34,33 +34,6 @@ class ReaderActivity : BaseSwipeBackActivity() {
     override fun canSwipeBack(): Boolean = readingMode == "webtoon" || currentPageIndex == 0
 
     /**
-     * Toggle immersive (distraction-free) reading mode.
-     * Hides the top bar + bottom bar + status bar + navigation bar.
-     * Tapping the screen toggles back.
-     */
-    private fun toggleImmersive() {
-        isImmersive = !isImmersive
-        if (isImmersive) {
-            // Hide UI
-            topBar?.visibility = View.GONE
-            bottomBarView?.visibility = View.GONE
-            window.decorView.systemUiVisibility = (
-                android.view.View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY or
-                android.view.View.SYSTEM_UI_FLAG_FULLSCREEN or
-                android.view.View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or
-                android.view.View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or
-                android.view.View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION or
-                android.view.View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-            )
-        } else {
-            // Show UI
-            topBar?.visibility = View.VISIBLE
-            bottomBarView?.visibility = View.VISIBLE
-            window.decorView.systemUiVisibility = android.view.View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-        }
-    }
-
-    /**
      * Prefetch the next chapter's pages in the background so that
      * when the user finishes the current chapter, the next one loads
      * instantly from cache.
@@ -188,10 +161,7 @@ class ReaderActivity : BaseSwipeBackActivity() {
     // "manga" = one page per screen (PagerSnapHelper + zoom) — best for Japanese manga
     // "webtoon" = vertical scroll (all pages connected) — best for Korean manhwa (Lookism, etc.)
     private var readingMode: String = "manga"
-    private var isImmersive: Boolean = false
     private var nextChapterPages: List<String>? = null
-    private var topBar: View? = null
-    private var bottomBarView: View? = null
     private var snapHelper: PagerSnapHelper? = null
     private val PREFS_NAME = "reader_prefs"
     private val KEY_READING_MODE = "reading_mode"
