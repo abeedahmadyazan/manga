@@ -422,13 +422,16 @@ class MangaRepository(private val appContext: Context? = null) {
     /**
      * HTTP headers that mimic a real Chrome browser — bypasses CF's basic
      * header check on the mangalik.net home/listing pages.
+     * NOTE: do NOT set Accept-Encoding manually — OkHttp adds it automatically
+     * (gzip) and transparently decompresses the response. Setting "br" (Brotli)
+     * here would make OkHttp return garbled bytes because it can't decode Brotli
+     * without a custom interceptor.
      */
     private fun mangalikHeaders(referer: String? = null): Map<String, String> {
         val h = mapOf(
             "User-Agent" to "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
             "Accept" to "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8",
             "Accept-Language" to "ar,en-US;q=0.9,en;q=0.8",
-            "Accept-Encoding" to "gzip, deflate, br",
             "Sec-Ch-Ua" to "\"Not_A Brand\";v=\"8\", \"Chromium\";v=\"120\", \"Google Chrome\";v=\"120\"",
             "Sec-Ch-Ua-Mobile" to "?0",
             "Sec-Ch-Ua-Platform" to "\"Windows\"",
