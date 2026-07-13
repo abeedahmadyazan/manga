@@ -33,7 +33,7 @@ import kotlin.coroutines.resume
 object WebViewScraper {
 
     private const val TAG = "WebViewScraper"
-    private const val DEFAULT_TIMEOUT_MS = 25_000L
+    private const val DEFAULT_TIMEOUT_MS = 45_000L  // CF challenge can take 10-30s on slow networks
 
     /** Fetch the raw HTML of a URL after CF challenge is solved. */
     suspend fun fetchHtml(context: Context, url: String, timeoutMs: Long = DEFAULT_TIMEOUT_MS): String {
@@ -100,6 +100,16 @@ object WebViewScraper {
     /**
      * Load a URL in a headless WebView, wait for CF challenge to clear, then
      * execute the given JS snippet and return its string result.
+     *
+     * Multi-layer CF detection:
+     *  - URL still contains /cdn-cgi/challenge-platform/ → challenge in progress
+     *  - title = "Just a moment..." → challenge in progress
+     *  - body has <div id="cf-challenge-running"> → challenge in progress
+     * When none match → real content loaded → wait 2s for JS rendering → inject JS.
+     *
+     * Images are NOT blocked (CF challenge sometimes requires loading an image
+     * as part of the proof-of-work; blocking images can cause the challenge to
+     * loop forever).
      */
     private suspend fun executeJs(context: Context, url: String, js: String, timeoutMs: Long): String? {
         return withContext(Dispatchers.Main) {
@@ -107,10 +117,13 @@ object WebViewScraper {
                 val handler = Handler(Looper.getMainLooper())
                 var finished = false
                 var webView: WebView? = null
+                var challengeStartMs = System.currentTimeMillis()
+                var pollCount = 0
+
                 val timeoutRunnable = Runnable {
                     if (!finished) {
                         finished = true
-                        Log.w(TAG, "timeout for $url")
+                        Log.w(TAG, "timeout ($timeoutMs ms) for $url — CF challenge may not have cleared")
                         try { webView?.destroy() } catch (_: Exception) {}
                         if (cont.isActive) cont.resume(null)
                     }
@@ -120,7 +133,60 @@ object WebViewScraper {
                     if (!finished) {
                         finished = true
                         handler.removeCallbacks(timeoutRunnable)
+                        handler.removeCallbacksAndMessages(null)
                         try { webView?.destroy() } catch (_: Exception) {}
+                    }
+                }
+
+                // Poll the WebView every 1s to check if the CF challenge has cleared.
+                // onPageFinished alone is unreliable for CF — the challenge page itself
+                // fires onPageFinished, and sometimes the real page's JS-rendered
+                // content needs extra time after onPageFinished.
+                val pollRunnable = object : Runnable {
+                    override fun run() {
+                        if (finished) return
+                        pollCount++
+                        val wv = webView ?: return
+                        // Check the current title + URL to detect CF challenge.
+                        wv.evaluateJavascript("javascript:(function(){ try { return JSON.stringify({title: document.title, url: location.href, hasChallenge: !!document.getElementById('cf-challenge-running') || (document.body && document.body.innerHTML.indexOf('Just a moment') >= 0), bodyLen: document.body ? document.body.innerHTML.length : 0}); } catch(e){ return '{}'; } })();") { result ->
+                            if (finished) return@evaluateJavascript
+                            val r = unescapeJs(result) ?: "{}"
+                            try {
+                                val o = org.json.JSONObject(r)
+                                val title = o.optString("title", "")
+                                val hasChallenge = o.optBoolean("hasChallenge", false) ||
+                                    title.contains("Just a moment", ignoreCase = true) ||
+                                    title.contains("Attention Required", ignoreCase = true)
+                                val bodyLen = o.optInt("bodyLen", 0)
+                                val elapsed = System.currentTimeMillis() - challengeStartMs
+                                if (pollCount <= 3 || pollCount % 5 == 0) {
+                                    Log.d(TAG, "poll #$pollCount (${elapsed}ms): title='$title' bodyLen=$bodyLen challenge=$hasChallenge")
+                                }
+                                if (!hasChallenge && bodyLen > 1000) {
+                                    // Challenge cleared → wait 2s for JS-rendered content, then inject.
+                                    Log.d(TAG, "CF cleared after ${elapsed}ms, extracting data...")
+                                    handler.removeCallbacks(this)
+                                    handler.postDelayed({
+                                        if (!finished) {
+                                            wv.evaluateJavascript(js) { res ->
+                                                if (!finished) {
+                                                    finished = true
+                                                    handler.removeCallbacks(timeoutRunnable)
+                                                    try { webView?.destroy() } catch (_: Exception) {}
+                                                    if (cont.isActive) cont.resume(unescapeJs(res))
+                                                }
+                                            }
+                                        }
+                                    }, 2000)
+                                } else {
+                                    // Still on challenge page — keep polling every 1s.
+                                    handler.postDelayed(this, 1000)
+                                }
+                            } catch (e: Exception) {
+                                Log.w(TAG, "poll parse failed: ${e.message}")
+                                handler.postDelayed(this, 1000)
+                            }
+                        }
                     }
                 }
 
@@ -130,53 +196,30 @@ object WebViewScraper {
                     settings.domStorageEnabled = true
                     settings.userAgentString = "Mozilla/5.0 (Linux; Android 12; Pixel 6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Mobile Safari/537.36"
                     settings.cacheMode = WebSettings.LOAD_DEFAULT
-                    // Block images (we only need the DOM, not the heavy images).
-                    // loadsImagesAutomatically=false is API 24+ and stops <img> loads.
-                    settings.loadsImagesAutomatically = false
+                    // DO NOT block images — CF challenge sometimes requires loading
+                    // an image as part of the proof-of-work. Blocking them causes
+                    // the challenge to loop forever.
+                    settings.loadsImagesAutomatically = true
+                    settings.javaScriptCanOpenWindowsAutomatically = true
+                    settings.mediaPlaybackRequiresUserGesture = false
                     CookieManager.getInstance().setAcceptCookie(true)
                     CookieManager.getInstance().setAcceptThirdPartyCookies(this, true)
 
                     webViewClient = object : WebViewClient() {
-                        // Cancel image subresource requests at the network level.
-                        override fun shouldInterceptRequest(view: WebView?, request: android.webkit.WebResourceRequest?): android.webkit.WebResourceResponse? {
-                            val u = request?.url?.toString() ?: return null
-                            // Block image MIME types / extensions to save bandwidth.
-                            if (u.endsWith(".jpg") || u.endsWith(".jpeg") || u.endsWith(".png") || u.endsWith(".webp") || u.endsWith(".gif")) {
-                                return android.webkit.WebResourceResponse("text/plain", "utf-8", java.io.ByteArrayInputStream(ByteArray(0)))
-                            }
-                            return null
-                        }
-
                         override fun onPageFinished(view: WebView?, url: String?) {
                             super.onPageFinished(view, url)
-                            // CF challenge redirects — wait for the REAL content page.
-                            // If the title is "Just a moment...", we're still on the
-                            // challenge page; the WebView will auto-redirect when CF
-                            // clears, and onPageFinished will fire again.
-                            val title = view?.title ?: ""
-                            if (title.contains("Just a moment", ignoreCase = true) ||
-                                title.contains("Attention Required", ignoreCase = true)) {
-                                Log.d(TAG, "CF challenge in progress, waiting...")
-                                return
+                            Log.d(TAG, "onPageFinished: $url")
+                            // Start polling once the first page load finishes.
+                            // The poll runnable will keep checking until CF clears.
+                            if (!finished) {
+                                handler.removeCallbacks(pollRunnable)
+                                handler.postDelayed(pollRunnable, 500)
                             }
-                            // Real page loaded → wait a bit for any JS-rendered
-                            // content, then extract via our injected JS.
-                            handler.postDelayed({
-                                if (!finished) {
-                                    view?.evaluateJavascript(js) { result ->
-                                        if (!finished) {
-                                            finished = true
-                                            handler.removeCallbacks(timeoutRunnable)
-                                            try { webView?.destroy() } catch (_: Exception) {}
-                                            if (cont.isActive) cont.resume(unescapeJs(result))
-                                        }
-                                    }
-                                }
-                            }, 1500)  // 1.5s for JS-rendered images to populate
                         }
                     }
                 }
                 webView = wv
+                challengeStartMs = System.currentTimeMillis()
                 handler.postDelayed(timeoutRunnable, timeoutMs)
                 wv.loadUrl(url)
             }

@@ -552,62 +552,104 @@ class MangaRepository(private val appContext: Context? = null) {
         return try {
             val ctx = appContext ?: return null
             val url = "$MANGALIK_BASE/manga/$slug/"
-            // Extract: title, cover, description, status, chapters (number + URL)
+            // Extract: title, cover, description, status, chapters (number + URL).
+            // Madara theme has many variants — try a broad set of selectors.
             val js = """
                 javascript:(function(){
                     var title = '';
-                    var th = document.querySelector('.post-title h1, .post-title h3, h1.entry-title, .c-blog__head h1');
-                    if (th) title = th.textContent.trim();
-                    var cover = '';
-                    var ci = document.querySelector('.summary_image img, .tab-summary .c-image-hover img');
-                    if (ci) cover = ci.src || ci.getAttribute('data-src') || '';
-                    var desc = '';
-                    var de = document.querySelector('.description-summary .summary__content, .summary__content, .manga-excerpt, .tab-summary .description');
-                    if (de) desc = de.textContent.trim();
-                    var status = '';
-                    var st = document.querySelector('.post-content .summary-content, .post-status .summary-content');
-                    if (st) status = st.textContent.trim();
-                    // chapters: extract from .listing-chapters_wol li a or .wp-manga-chapter a
-                    var chapters = [];
-                    var chs = document.querySelectorAll('.listing-chapters_wol li a, .main .listing-chapters a, .wp-manga-chapter a, ul.main-version-chap a');
-                    for (var i = 0; i < chs.length; i++) {
-                        var href = chs[i].href;
-                        var m = href.match(/manga\/[^\/]+\/([^\/]+)\//);
-                        if (!m) continue;
-                        var num = m[1].replace('chapter-', '').replace('ch-', '');
-                        if (!num) num = m[1];
-                        chapters.push({num: num, url: href});
+                    var titleSelectors = ['.post-title h1', '.post-title h3', '.c-blog__head h1', 'h1.entry-title', 'h1', '.manga-title'];
+                    for (var i = 0; i < titleSelectors.length; i++) {
+                        var el = document.querySelector(titleSelectors[i]);
+                        if (el && el.textContent.trim()) { title = el.textContent.trim(); break; }
                     }
-                    return JSON.stringify({title: title, cover: cover, desc: desc, status: status, chapters: chapters});
+                    var cover = '';
+                    var coverSelectors = ['.summary_image img', '.tab-summary .c-image-hover img', '.manga-thumbnail img', 'img.wp-post-image', '.profile-manga .summary_image img'];
+                    for (var i = 0; i < coverSelectors.length; i++) {
+                        var el = document.querySelector(coverSelectors[i]);
+                        if (el) { cover = el.src || el.getAttribute('data-src') || el.getAttribute('data-lazy-src') || ''; if (cover) break; }
+                    }
+                    if (cover.indexOf('//') === 0) cover = 'https:' + cover;
+                    var desc = '';
+                    var descSelectors = ['.description-summary .summary__content', '.summary__content', '.manga-excerpt', '.tab-summary .description', '.description-summary'];
+                    for (var i = 0; i < descSelectors.length; i++) {
+                        var el = document.querySelector(descSelectors[i]);
+                        if (el && el.textContent.trim()) { desc = el.textContent.trim().substring(0, 1000); break; }
+                    }
+                    var status = '';
+                    var statusSelectors = ['.post-content .summary-content', '.post-status .summary-content', '.manga-status', 'div:has(>.summary-heading:contains("Status")) .summary-content'];
+                    for (var i = 0; i < statusSelectors.length; i++) {
+                        var el = document.querySelector(statusSelectors[i]);
+                        if (el && el.textContent.trim()) { status = el.textContent.trim(); break; }
+                    }
+                    // chapters: Madara theme uses many variants
+                    var chapters = [];
+                    var chapterSelectors = [
+                        '.listing-chapters_wol li a',
+                        '.main .listing-chapters a',
+                        '.listing-chapters a',
+                        'ul.main-version-chap li a',
+                        'ul.mini-version-chap li a',
+                        '.wp-manga-chapter a',
+                        '.chapter-list a',
+                        '.list-chapters a',
+                        'li.wp-manga-chapter a'
+                    ];
+                    var seen = {};
+                    for (var s = 0; s < chapterSelectors.length; s++) {
+                        var chs = document.querySelectorAll(chapterSelectors[s]);
+                        if (chs.length > 0) {
+                            for (var i = 0; i < chs.length; i++) {
+                                var href = chs[i].href || chs[i].getAttribute('href') || '';
+                                if (!href || href.indexOf('#') === 0) continue;
+                                if (seen[href]) continue;
+                                seen[href] = true;
+                                var m = href.match(/manga\/[^\/]+\/([^\/]+)\//);
+                                if (!m) continue;
+                                var num = m[1].replace('chapter-', '').replace('ch-', '').replace(/-/g, '.');
+                                if (!num || num === 'manga') num = m[1];
+                                // only keep numeric chapter numbers
+                                if (!/^[0-9.]+$/.test(num)) continue;
+                                chapters.push({num: num, url: href});
+                            }
+                            if (chapters.length > 0) break;
+                        }
+                    }
+                    return JSON.stringify({title: title, cover: cover, desc: desc, status: status, chapters: chapters, bodyLen: document.body ? document.body.innerHTML.length : 0});
                 })();
             """.trimIndent()
             val json = WebViewScraper.executeJsForString(ctx, url, js)
-            if (json.isNullOrEmpty()) return null
+            if (json.isNullOrEmpty()) {
+                Log.w(TAG, "mangalik details: empty result for $slug")
+                return null
+            }
+            Log.d(TAG, "mangalik details raw: ${json.take(300)}")
             val o = org.json.JSONObject(json)
             val title = o.optString("title", slug.replace("-", " ").replaceFirstChar { it.uppercase() })
             val cover = o.optString("cover", "")
             val desc = o.optString("desc", "")
             val statusStr = o.optString("status", "ongoing")
-            val chArr = o.optJSONArray("chapters") ?: return null
+            val chArr = o.optJSONArray("chapters")
+            if (chArr == null || chArr.length() == 0) {
+                Log.w(TAG, "mangalik details: no chapters for $slug (bodyLen=${o.optInt("bodyLen")})")
+                return null
+            }
             val chapters = mutableListOf<MangaChapter>()
             for (i in 0 until chArr.length()) {
                 try {
                     val ch = chArr.getJSONObject(i)
                     val num = ch.getString("num")
-                    val chUrl = ch.getString("url")
-                    // Extract chapter number from URL for the id
                     val cleanNum = num.replace(Regex("[^0-9.]"), "")
+                    if (cleanNum.isEmpty()) continue
                     chapters.add(MangaChapter(
                         id = "mangalik-$slug-$cleanNum",
                         number = cleanNum,
                         title = "الفصل $cleanNum",
                         date = "",
-                        source = "mangalex"
+                        source = "mangalik"
                     ))
                 } catch (e: Exception) {}
             }
-            // Fix source — should be "mangalik" not "mangalex"
-            val fixedChapters = chapters.map { it.copy(source = "mangalik") }
+            Log.d(TAG, "mangalik details '$slug': ${chapters.size} chapters")
             MangaDetails(
                 id = "mangalik-$slug",
                 title = title,
@@ -617,9 +659,9 @@ class MangaRepository(private val appContext: Context? = null) {
                 artist = "",
                 status = if (statusStr.contains("مكتمل") || statusStr.contains("completed")) "completed" else "ongoing",
                 genres = listOf("مانجا"),
-                chapters = fixedChapters.sortedByDescending { it.number.toFloatOrNull() ?: 0f },
+                chapters = chapters.sortedByDescending { it.number.toFloatOrNull() ?: 0f },
                 source = "mangalik",
-                latestChapter = fixedChapters.firstOrNull()?.number,
+                latestChapter = chapters.firstOrNull()?.number,
                 rating = null,
                 sources = emptyList(),
                 chaptersBySource = emptyMap()
