@@ -34,6 +34,95 @@ class ReaderActivity : BaseSwipeBackActivity() {
     override fun canSwipeBack(): Boolean = readingMode == "webtoon" || currentPageIndex == 0
 
     /**
+     * Toggle immersive (distraction-free) reading mode.
+     * Hides the top bar + bottom bar + status bar + navigation bar.
+     * Tapping the screen toggles back.
+     */
+    private fun toggleImmersive() {
+        isImmersive = !isImmersive
+        if (isImmersive) {
+            // Hide UI
+            topBar?.visibility = View.GONE
+            bottomBar?.visibility = View.GONE
+            window.decorView.systemUiVisibility = (
+                android.view.View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY or
+                android.view.View.SYSTEM_UI_FLAG_FULLSCREEN or
+                android.view.View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or
+                android.view.View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or
+                android.view.View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION or
+                android.view.View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+            )
+        } else {
+            // Show UI
+            topBar?.visibility = View.VISIBLE
+            bottomBar?.visibility = View.VISIBLE
+            window.decorView.systemUiVisibility = android.view.View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+        }
+    }
+
+    /**
+     * Prefetch the next chapter's pages in the background so that
+     * when the user finishes the current chapter, the next one loads
+     * instantly from cache.
+     */
+    private fun prefetchNextChapter() {
+        try {
+            val chapter = currentChapter ?: return
+            val mangaId = intent.getStringExtra("manga_id") ?: return
+            // Fetch manga details to get the chapter list
+            Thread {
+                try {
+                    val details = com.yazan.manga.data.MangaRepository(this).getMangaDetails(mangaId)
+                    details.onSuccess { d ->
+                        val chapters = d.chapters.sortedByDescending { it.number.toFloatOrNull() ?: 0f }
+                        val currentIdx = chapters.indexOfFirst { it.id == chapter.id }
+                        if (currentIdx > 0) {
+                            // Next chapter = chapters[currentIdx - 1] (sorted desc, so -1 = newer)
+                            val nextCh = chapters[currentIdx - 1]
+                            // Prefetch its pages
+                            val result = com.yazan.manga.data.MangaRepository(this).getChapterPages(nextCh)
+                            result.onSuccess { pages ->
+                                nextChapterPages = pages.map { it.url }
+                                // Show the next chapter button
+                                runOnUiThread {
+                                    findViewById<android.widget.ImageButton?>(R.id.btnNextChapter)?.visibility = View.VISIBLE
+                                    // Store the next chapter info for instant load
+                                    nextChapterInfo = nextCh
+                                }
+                            }
+                        }
+                    }
+                } catch (e: Exception) {}
+            }.start()
+        } catch (e: Exception) {}
+    }
+
+    private var nextChapterInfo: com.yazan.manga.data.MangaChapter? = null
+
+    /**
+     * Load the next chapter (from prefetched pages if available).
+     */
+    private fun loadNextChapter() {
+        val nextCh = nextChapterInfo ?: return
+        val prefetched = nextChapterPages
+        if (prefetched.isNullOrEmpty()) return
+        
+        // Update current chapter info
+        currentChapter = nextCh
+        currentChapterId = nextCh.id
+        currentChapterNumber = nextCh.number
+        
+        // Load from prefetched pages (instant!)
+        setupPages(prefetched)
+        nextChapterPages = null
+        nextChapterInfo = null
+        findViewById<android.widget.ImageButton?>(R.id.btnNextChapter)?.visibility = View.GONE
+        
+        // Prefetch the NEXT next chapter
+        prefetchNextChapter()
+    }
+
+    /**
      * Save the user's reading position (page index) for a specific chapter.
      * Stored in SharedPreferences so it persists across app restarts.
      * Key format: "pos_{chapterId}" → page index (int)
@@ -104,6 +193,10 @@ class ReaderActivity : BaseSwipeBackActivity() {
     // "manga" = one page per screen (PagerSnapHelper + zoom) — best for Japanese manga
     // "webtoon" = vertical scroll (all pages connected) — best for Korean manhwa (Lookism, etc.)
     private var readingMode: String = "manga"
+    private var isImmersive: Boolean = false
+    private var nextChapterPages: List<String>? = null  // prefetched
+    private var topBar: View? = null
+    private var bottomBar: View? = null
     private var snapHelper: PagerSnapHelper? = null
     private val PREFS_NAME = "reader_prefs"
     private val KEY_READING_MODE = "reading_mode"
@@ -159,6 +252,18 @@ class ReaderActivity : BaseSwipeBackActivity() {
         pageCounter = findViewById(R.id.pageCounter)
         btnPrevPage = findViewById(R.id.btnPrevPage)
         btnNextPage = findViewById(R.id.btnNextPage)
+        
+        // Immersive mode toggle
+        topBar = findViewById(R.id.topBarOverlay)
+        bottomBar = findViewById(R.id.bottomBar)
+        findViewById<ImageButton?>(R.id.btnImmersive)?.setOnClickListener {
+            toggleImmersive()
+        }
+
+        // Next chapter button (hidden until pages are prefetched)
+        findViewById<ImageButton?>(R.id.btnNextChapter)?.setOnClickListener {
+            loadNextChapter()
+        }
         pageSeekBar = findViewById(R.id.pageSeekBar)
         topBarOverlay = findViewById(R.id.topBarOverlay)
         bottomBar = findViewById(R.id.bottomBar)
@@ -336,6 +441,9 @@ class ReaderActivity : BaseSwipeBackActivity() {
 
         // Increment reading stats
         incrementReadingStats()
+
+        // Prefetch next chapter in background
+        prefetchNextChapter()
         val adapter = PagesAdapter(pages) { pageIndex ->
             toggleBars()
         }
