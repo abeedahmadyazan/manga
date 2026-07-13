@@ -891,7 +891,9 @@ class MangaRepository(private val appContext: Context? = null) {
             try {
                 val url = "https://api.mangadex.org/manga/$id/feed?limit=$limit&offset=$offset&translatedLanguage[]=ar&order[chapter]=desc&contentRating[]=safe&contentRating[]=suggestive&contentRating[]=erotica"
                 val req = Request.Builder().url(url).header("User-Agent", UA).header("Accept", "application/json").build()
-                val resp = client.newCall(req).execute()
+                // Use proxyClient (shorter timeouts) instead of the direct client —
+                // direct calls to api.mangadex.org often time out on mobile networks.
+                val resp = proxyClient.newCall(req).execute()
                 if (!resp.isSuccessful) { resp.close(); break }
                 val body = resp.body?.string(); resp.close()
                 if (body.isNullOrEmpty()) break
@@ -904,7 +906,7 @@ class MangaRepository(private val appContext: Context? = null) {
                         val ch = data[i].asJsonObject
                         val attrs = ch.getAsJsonObject("attributes") ?: continue
                         val lang = attrs.get("translatedLanguage")?.asString ?: ""
-                        if (lang == "ar") {  // Arabic ONLY
+                        if (lang == "ar") {  // Arabic ONLY (already filtered by the URL, but double-check)
                             val chId = ch.get("id").asString
                             val num = attrs.get("chapter")?.asString ?: continue
                             val pub = attrs.get("publishAt")?.asString ?: ""
@@ -916,7 +918,15 @@ class MangaRepository(private val appContext: Context? = null) {
             } catch (e: Exception) { break }
             offset += limit
         }
-        return chapters.groupBy { it.number }.mapValues { (_, l) -> l.firstOrNull { it.id.contains("ar") } ?: l.first() }.values.sortedByDescending { it.number.toFloatOrNull() ?: 0f }
+        // Dedupe by chapter number (MangaDex can return multiple Arabic uploads
+        // of the same chapter by different groups). Previously this filtered by
+        // `it.id.contains("ar")` — but chapter IDs are random UUIDs with no "ar"
+        // substring, so that filter always returned null and fell back to first().
+        // Since the URL already filters translatedLanguage=ar, every chapter here
+        // is Arabic — just take the first per number.
+        return chapters.groupBy { it.number }
+            .mapValues { (_, l) -> l.first() }
+            .values.sortedByDescending { it.number.toFloatOrNull() ?: 0f }
     }
 
     suspend fun getChapterPages(chapter: MangaChapter): Result<List<ChapterPage>> {
@@ -953,8 +963,15 @@ class MangaRepository(private val appContext: Context? = null) {
                     // Fallback: scrape via CORS proxy (bypasses Cloudflare, returns real images)
                     val directPages = scrape3asqPagesDirect(slug, num)
                     if (directPages.isNotEmpty()) return Result.success(directPages)
+
+                    // Last resort: 3asq has deleted many old chapters (e.g. One Piece
+                    // chapters 1–1000 return an empty reading-content div). When that
+                    // happens, try to find the SAME chapter on MangaDex (source 1) by
+                    // searching the 3asq slug as a title and matching the chapter number.
+                    val mdPages = fetchMangaDexPagesBySlugAndNumber(slug, num)
+                    if (mdPages.isNotEmpty()) return Result.success(mdPages)
                 }
-                Result.failure(Exception("تعذّر تحميل صفحات هذا الفصل"))
+                Result.failure(Exception("هذا الفصل غير متوفر على مصدر 3asq (قد يكون محذوفاً). حاول فتح المانجا من مصدر MangaDex (مصدر 1) للحصول على فصول إضافية."))
             } else {
                 // MangaDex (مصدر 1): fetch pages from MangaDex at-home server
                 val req = Request.Builder().url("https://api.mangadex.org/at-home/server/${chapter.id}").header("User-Agent", UA).header("Accept", "application/json").build()
@@ -978,6 +995,92 @@ class MangaRepository(private val appContext: Context? = null) {
                 }
             }
         } catch (e: Exception) { Result.failure(e) }
+    }
+
+    /**
+     * Cross-source fallback: when 3asq has no pages for a chapter (old chapters
+     * are deleted on 3asq.online), search MangaDex for the same manga by treating
+     * the 3asq slug as a title, then fetch the matching Arabic chapter's pages.
+     *
+     * Flow:
+     *   1. Search MangaDex: GET /manga?title={slug-as-words}&availableTranslatedLanguage[]=ar
+     *   2. Take the first result's id
+     *   3. Fetch its Arabic feed: GET /manga/{id}/feed?translatedLanguage[]=ar
+     *   4. Find a chapter whose number matches `chapterNumber`
+     *   5. Fetch pages: GET /at-home/server/{chapterId}
+     *
+     * Returns empty list on any failure (the caller will then show the error).
+     */
+    private fun fetchMangaDexPagesBySlugAndNumber(slug: String, chapterNumber: String): List<ChapterPage> {
+        return try {
+            // 1. Search MangaDex by title (slug with dashes → spaces, e.g. "one-piece" → "one piece")
+            val titleQuery = java.net.URLEncoder.encode(slug.replace("-", " ").trim(), "UTF-8")
+            val searchUrl = "https://api.mangadex.org/manga?title=$titleQuery&limit=5&availableTranslatedLanguage[]=ar&hasAvailableChapters=true&order[relevance]=desc"
+            val searchReq = Request.Builder().url(searchUrl).header("User-Agent", UA).header("Accept", "application/json").build()
+            var mangaId: String? = null
+            proxyClient.newCall(searchReq).execute().use { resp ->
+                if (!resp.isSuccessful) return emptyList()
+                val body = resp.body?.string() ?: return emptyList()
+                val root = JsonParser.parseString(body).asJsonObject
+                val data = root.getAsJsonArray("data") ?: return emptyList()
+                if (data.size() == 0) return emptyList()
+                mangaId = data[0].asJsonObject.get("id")?.asString ?: return emptyList()
+            }
+            if (mangaId.isNullOrEmpty()) return emptyList()
+            Log.d(TAG, "fallback: found MangaDex manga $mangaId for slug '$slug'")
+
+            // 2. Fetch Arabic chapters feed and find one matching the chapter number
+            var mdChapterId: String? = null
+            val feedUrl = "https://api.mangadex.org/manga/$mangaId/feed?limit=100&translatedLanguage[]=ar&order[chapter]=desc"
+            val feedReq = Request.Builder().url(feedUrl).header("User-Agent", UA).header("Accept", "application/json").build()
+            proxyClient.newCall(feedReq).execute().use { resp ->
+                if (!resp.isSuccessful) return emptyList()
+                val body = resp.body?.string() ?: return emptyList()
+                val root = JsonParser.parseString(body).asJsonObject
+                val data = root.getAsJsonArray("data") ?: return emptyList()
+                // Try exact match first, then "starts with" (e.g. "1188" matches "1188.5" as a fallback)
+                var exact: String? = null
+                var startsWith: String? = null
+                for (i in 0 until data.size()) {
+                    try {
+                        val ch = data[i].asJsonObject
+                        val attrs = ch.getAsJsonObject("attributes") ?: continue
+                        val num = attrs.get("chapter")?.asString ?: continue
+                        val chId = ch.get("id").asString
+                        if (num == chapterNumber) { exact = chId; break }
+                        if (startsWith == null && num.startsWith(chapterNumber)) startsWith = chId
+                    } catch (e: Exception) {}
+                }
+                mdChapterId = exact ?: startsWith
+            }
+            if (mdChapterId.isNullOrEmpty()) {
+                Log.d(TAG, "fallback: no MangaDex Arabic chapter $chapterNumber for '$slug'")
+                return emptyList()
+            }
+
+            // 3. Fetch pages from MangaDex at-home
+            val pagesReq = Request.Builder().url("https://api.mangadex.org/at-home/server/$mdChapterId").header("User-Agent", UA).header("Accept", "application/json").build()
+            val pages = mutableListOf<ChapterPage>()
+            proxyClient.newCall(pagesReq).execute().use { resp ->
+                if (!resp.isSuccessful) return emptyList()
+                val body = resp.body?.string() ?: return emptyList()
+                val root = JsonParser.parseString(body).asJsonObject
+                val baseUrl = root.get("baseUrl")?.asString ?: return emptyList()
+                val chObj = root.getAsJsonObject("chapter") ?: return emptyList()
+                val hash = chObj.get("hash")?.asString ?: return emptyList()
+                val ds = chObj.getAsJsonArray("data") ?: chObj.getAsJsonArray("dataSaver") ?: return emptyList()
+                val isDataSaver = (chObj.getAsJsonArray("data") == null)
+                val path = if (isDataSaver) "data-saver" else "data"
+                for (i in 0 until ds.size()) {
+                    pages.add(ChapterPage(index = i, url = "$baseUrl/$path/$hash/${ds[i].asString}"))
+                }
+            }
+            Log.d(TAG, "fallback: got ${pages.size} pages from MangaDex for '$slug' ch $chapterNumber")
+            pages
+        } catch (e: Exception) {
+            Log.w(TAG, "fetchMangaDexPagesBySlugAndNumber failed: ${e.message}")
+            emptyList()
+        }
     }
 
     /**
