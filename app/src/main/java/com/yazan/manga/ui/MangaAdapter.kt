@@ -106,9 +106,10 @@ class MangaAdapter(
             Glide.with(cover.context)
                 .load(item.cover)
                 .centerCrop()
-                .override(300, 400)  // Higher quality — still safe for memory
+                .override(300, 450)
                 .diskCacheStrategy(com.bumptech.glide.load.engine.DiskCacheStrategy.ALL)
                 .placeholder(R.color.surface_light)
+                .error(R.color.surface_light)
                 .into(cover)
 
             itemView.setOnClickListener { onClick(item) }

@@ -34,7 +34,7 @@
                 android:layout_gravity="top|start"
                 android:layout_margin="6dp"
                 android:src="@drawable/ic_delete"
-                android:background="@drawable/bg_circle_button"
+                android:background="@color/surface_light"
                 android:tint="@color/white"
                 android:visibility="gone"
                 android:contentDescription="إزالة" />

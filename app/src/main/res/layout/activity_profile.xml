@@ -146,14 +146,14 @@
                      Replaces the full-width "تغيير الاسم" button. -->
                 <ImageButton
                     android:id="@+id/btnEditName"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:layout_marginStart="8dp"
                     android:background="?attr/selectableItemBackgroundBorderless"
                     android:src="@drawable/ic_edit"
-                    android:tint="@color/text_secondary"
+                    android:tint="@color/primary"
                     android:scaleType="center"
-                    android:padding="6dp"
+                    android:padding="8dp"
                     android:visibility="gone"
                     android:contentDescription="تعديل الاسم"
                     tools:ignore="UseAppTint" />
