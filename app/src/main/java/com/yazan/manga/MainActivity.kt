@@ -85,24 +85,24 @@ class MainActivity : AppCompatActivity() {
      * Hidden if the user has no reading history or isn't signed in.
      */
     private fun hideTopSections() {
+        // Instant GONE (no animation) — animating parent views causes
+        // RecyclerView to relayout + rebind items = lag + image repeat.
         try {
             val cr = findViewById<android.view.View?>(R.id.continueReadingScroll)
-            val ss = findViewById<android.view.View?>(R.id.sourceSelectorContainer)
-            cr?.animate()?.translationY(-cr.height.toFloat())?.alpha(0f)?.setDuration(200)?.start()
-            ss?.animate()?.translationY(-ss.height.toFloat())?.alpha(0f)?.setDuration(200)?.start()
+            // Remember if it was visible so showTopSections can restore it
+            cr?.tag = cr?.visibility == View.VISIBLE
             cr?.visibility = View.GONE
-            ss?.visibility = View.GONE
+            findViewById<android.view.View?>(R.id.sourceSelectorContainer)?.visibility = View.GONE
         } catch (e: Exception) {}
     }
 
     private fun showTopSections() {
         try {
+            // Only show continueReading if user has history (check via visibility tag)
             val cr = findViewById<android.view.View?>(R.id.continueReadingScroll)
-            val ss = findViewById<android.view.View?>(R.id.sourceSelectorContainer)
-            cr?.visibility = View.VISIBLE
-            ss?.visibility = View.VISIBLE
-            cr?.animate()?.translationY(0f)?.alpha(1f)?.setDuration(200)?.start()
-            ss?.animate()?.translationY(0f)?.alpha(1f)?.setDuration(200)?.start()
+            // Restore from GONE only if it was VISIBLE before hiding
+            if (cr?.tag == true) cr.visibility = View.VISIBLE
+            findViewById<android.view.View?>(R.id.sourceSelectorContainer)?.visibility = View.VISIBLE
         } catch (e: Exception) {}
     }
 
@@ -122,9 +122,11 @@ class MainActivity : AppCompatActivity() {
                 if (container == null || scroll == null) return@runOnUiThread
                 if (entries.isEmpty()) {
                     scroll.visibility = View.GONE
+                    scroll.tag = false
                     return@runOnUiThread
                 }
                 scroll.visibility = View.VISIBLE
+                scroll.tag = true  // mark as "should be visible"
                 container.removeAllViews()
                 // Show up to 5 recent manga
                 for (entry in entries.take(5)) {
@@ -341,13 +343,15 @@ class MainActivity : AppCompatActivity() {
 
         // Hide "Continue Reading" + source selector when scrolling down,
         // show them when scrolling up (like a collapsing toolbar).
+        // Use a flag to avoid redundant visibility changes (which cause lag).
         recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            private var sectionsHidden = false
             override fun onScrolled(rv: RecyclerView, dx: Int, dy: Int) {
-                if (dy > 10) {
-                    // Scrolling down → hide
+                if (dy > 30 && !sectionsHidden) {
+                    sectionsHidden = true
                     hideTopSections()
-                } else if (dy < -10) {
-                    // Scrolling up → show
+                } else if (dy < -30 && sectionsHidden) {
+                    sectionsHidden = false
                     showTopSections()
                 }
             }

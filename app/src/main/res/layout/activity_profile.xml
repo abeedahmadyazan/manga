@@ -423,8 +423,9 @@ android:id="@+id/cardCompleted"
                     </com.google.android.material.card.MaterialCardView>
                 </LinearLayout>
             
-            
-                        <!-- ============ Reading statistics ============ -->
+            </LinearLayout>
+
+            <!-- ============ Reading statistics ============ -->
             <LinearLayout
                 android:id="@+id/readingStatsContainer"
                 android:layout_width="match_parent"
@@ -455,6 +456,32 @@ android:id="@+id/cardCompleted"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="إجمالي الفصول"
+                        android:textColor="@color/text_secondary"
+                        android:textSize="11sp"
+                        tools:ignore="HardcodedText" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:background="@drawable/bg_card"
+                    android:padding="12dp"
+                    android:layout_marginHorizontal="4dp">
+                    <TextView
+                        android:id="@+id/tvStatThisWeek"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:textColor="@color/primary"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        tools:ignore="HardcodedText" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="هذا الأسبوع"
                         android:textColor="@color/text_secondary"
                         android:textSize="11sp"
                         tools:ignore="HardcodedText" />
@@ -548,65 +575,6 @@ android:id="@+id/cardCompleted"
                 app:iconTint="@color/text_primary"
                 android:visibility="gone"
                 tools:ignore="HardcodedText" />
-
-<LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:gravity="center"
-                    android:background="@drawable/bg_card"
-                    android:padding="12dp"
-                    android:layout_marginHorizontal="4dp">
-
-                    <TextView
-                        android:id="@+id/tvStatThisWeek"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="0"
-                        android:textColor="@color/primary"
-                        android:textSize="20sp"
-                        android:textStyle="bold"
-                        tools:ignore="HardcodedText" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="هذا الأسبوع"
-                        android:textColor="@color/text_secondary"
-                        android:textSize="11sp"
-                        tools:ignore="HardcodedText" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:gravity="center"
-                    android:background="@drawable/bg_card"
-                    android:padding="12dp"
-                    android:layout_marginStart="4dp">
-
-                    <TextView
-                        android:id="@+id/tvStatToday"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="0"
-                        android:textColor="@color/primary"
-                        android:textSize="20sp"
-                        android:textStyle="bold"
-                        tools:ignore="HardcodedText" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="اليوم"
-                        android:textColor="@color/text_secondary"
-                        android:textSize="11sp"
-                        tools:ignore="HardcodedText" />
-                </LinearLayout>
-            </LinearLayout>
 
             <!-- ============ Birth date ============ -->
             <com.google.android.material.button.MaterialButton
