@@ -341,21 +341,7 @@ class MainActivity : AppCompatActivity() {
         // triggers a fade-in/out on every item, which looks like jank.
         (recyclerView.itemAnimator as? androidx.recyclerview.widget.DefaultItemAnimator)?.apply {
 
-        // Hide "Continue Reading" + source selector when scrolling down,
-        // show them when scrolling up (like a collapsing toolbar).
-        // Use a flag to avoid redundant visibility changes (which cause lag).
-        recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            private var sectionsHidden = false
-            override fun onScrolled(rv: RecyclerView, dx: Int, dy: Int) {
-                if (dy > 30 && !sectionsHidden) {
-                    sectionsHidden = true
-                    hideTopSections()
-                } else if (dy < -30 && sectionsHidden) {
-                    sectionsHidden = false
-                    showTopSections()
-                }
-            }
-        })
+
             changeDuration = 0
             addDuration = 200
             moveDuration = 200
@@ -495,18 +481,16 @@ class MainActivity : AppCompatActivity() {
 
         tabLatest.setOnClickListener {
             if (currentTab == "latest") {
-                // Already on latest → scroll to top + show hidden sections
+                // Already on latest → scroll to top
                 recyclerView.scrollToPosition(0)
-                showTopSections()
                 return@setOnClickListener
             }
             currentTab = "latest"; currentPage = 1; setActiveTab(currentTab); loadManga()
         }
         tabPopular.setOnClickListener {
             if (currentTab == "popular") {
-                // Already on popular → scroll to top + show hidden sections
+                // Already on popular → scroll to top
                 recyclerView.scrollToPosition(0)
-                showTopSections()
                 return@setOnClickListener
             }
             currentTab = "popular"; currentPage = 1; setActiveTab(currentTab); loadManga()
