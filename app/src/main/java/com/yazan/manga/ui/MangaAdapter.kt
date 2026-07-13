@@ -110,15 +110,6 @@ class MangaAdapter(
                 .diskCacheStrategy(com.bumptech.glide.load.engine.DiskCacheStrategy.ALL)
                 .placeholder(R.color.surface_light)
                 .error(R.color.surface_light)
-                .listener(object : com.bumptech.glide.request.RequestListener<android.graphics.drawable.Drawable> {
-                    override fun onLoadFailed(e: com.bumptech.glide.load.engine.GlideException?, model: Any?, target: com.bumptech.glide.request.target.Target<android.graphics.drawable.Drawable>?, isFirstResource: Boolean): Boolean {
-                        cover.setBackgroundColor(android.graphics.Color.parseColor("#1a1a2e"))
-                        return false
-                    }
-                    override fun onResourceReady(resource: android.graphics.drawable.Drawable?, model: Any?, target: com.bumptech.glide.request.target.Target<android.graphics.drawable.Drawable>?, dataSource: com.bumptech.glide.load.DataSource?, isFirstResource: Boolean): Boolean {
-                        return false
-                    }
-                })
                 .into(cover)
 
             itemView.setOnClickListener { onClick(item) }
