@@ -46,6 +46,7 @@ class RepliesActivity : BaseSwipeBackActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_replies)
+        com.yazan.manga.data.AmoledMode.applyIfEnabled(this)
 
         parentId = intent.getStringExtra("parent_id") ?: ""
         contextId = intent.getStringExtra("context_id") ?: ""

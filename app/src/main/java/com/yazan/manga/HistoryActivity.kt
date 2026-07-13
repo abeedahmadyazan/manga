@@ -26,6 +26,7 @@ class HistoryActivity : BaseSwipeBackActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_manga_list)
+        com.yazan.manga.data.AmoledMode.applyIfEnabled(this)
 
         val user = AuthManager.getCurrentUser(this)
         if (user == null) {

@@ -27,6 +27,7 @@ class DownloadsActivity : BaseSwipeBackActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_downloads)
+        com.yazan.manga.data.AmoledMode.applyIfEnabled(this)
 
         recyclerView = findViewById(R.id.downloadsRecyclerView)
         emptyState = findViewById(R.id.emptyState)

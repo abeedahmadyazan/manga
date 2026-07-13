@@ -19,6 +19,7 @@ class UserProfileActivity : BaseSwipeBackActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_profile)
+        com.yazan.manga.data.AmoledMode.applyIfEnabled(this)
 
         val email = intent.getStringExtra("user_email") ?: ""
         findViewById<ImageButton>(R.id.btnBack).setOnClickListener { finish() }

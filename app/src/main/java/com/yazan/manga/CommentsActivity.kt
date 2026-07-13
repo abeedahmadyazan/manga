@@ -50,6 +50,7 @@ class CommentsActivity : BaseSwipeBackActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_comments)
+        com.yazan.manga.data.AmoledMode.applyIfEnabled(this)
 
         contextId = intent.getStringExtra("context_id") ?: ""
         contextType = intent.getStringExtra("context_type") ?: "manga"

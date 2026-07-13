@@ -31,6 +31,7 @@ class NotificationsActivity : BaseSwipeBackActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_notifications)
+        com.yazan.manga.data.AmoledMode.applyIfEnabled(this)
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
 
         recyclerView = findViewById(R.id.notificationsRecyclerView)

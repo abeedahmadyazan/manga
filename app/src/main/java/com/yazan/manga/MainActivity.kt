@@ -21,6 +21,7 @@ import com.bumptech.glide.Glide
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.navigation.NavigationView
 import com.yazan.manga.data.AuthManager
+import com.yazan.manga.data.ReadingHistoryManager
 import com.yazan.manga.data.MangaListItem
 import com.yazan.manga.data.MangaRepository
 import com.yazan.manga.ui.MangaAdapter
@@ -54,6 +55,7 @@ class MainActivity : AppCompatActivity() {
             else androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_NO
         )
         setContentView(R.layout.activity_main)
+        com.yazan.manga.data.AmoledMode.applyIfEnabled(this)
 
         // Clear old cached data in BACKGROUND (not on main thread — prevents ANR)
         Thread {
@@ -74,6 +76,67 @@ class MainActivity : AppCompatActivity() {
         // Check broadcasts FIRST — a force-block must gate the app before content loads.
         checkBroadcasts()
         loadManga()
+        loadContinueReading()
+    }
+
+    /**
+     * Continue Reading — shows the user's most recently read manga at the top
+     * of the main screen. Tapping it opens the Reader at the last-read chapter.
+     * Hidden if the user has no reading history or isn't signed in.
+     */
+    private fun loadContinueReading() {
+        val user = AuthManager.getCurrentUser(this) ?: run {
+            findViewById<android.view.View?>(R.id.continueReadingScroll)?.visibility = View.GONE
+            return
+        }
+        if (user.email.isEmpty()) {
+            findViewById<android.view.View?>(R.id.continueReadingScroll)?.visibility = View.GONE
+            return
+        }
+        ReadingHistoryManager.listenToHistory(user.email, onUpdate = { entries ->
+            runOnUiThread {
+                val container = findViewById<android.widget.LinearLayout?>(R.id.continueReadingContainer)
+                val scroll = findViewById<android.view.View?>(R.id.continueReadingScroll)
+                if (container == null || scroll == null) return@runOnUiThread
+                if (entries.isEmpty()) {
+                    scroll.visibility = View.GONE
+                    return@runOnUiThread
+                }
+                scroll.visibility = View.VISIBLE
+                container.removeAllViews()
+                // Show up to 5 recent manga
+                for (entry in entries.take(5)) {
+                    val card = layoutInflater.inflate(R.layout.item_continue_reading, container, false)
+                    card.findViewById<android.widget.TextView?>(R.id.tvTitle)?.text = entry.mangaTitle
+                    card.findViewById<android.widget.TextView?>(R.id.tvChapter)?.text = "الفصل ${entry.chapterNumber}"
+                    // Load cover image
+                    val coverImg = card.findViewById<android.widget.ImageView?>(R.id.imgCover)
+                    if (coverImg != null && entry.mangaCover.isNotEmpty()) {
+                        com.bumptech.glide.Glide.with(this)
+                            .load(entry.mangaCover)
+                            .centerCrop()
+                            .placeholder(R.color.surface)
+                            .into(coverImg)
+                    }
+                    card.setOnClickListener {
+                        // Open the Reader at the last-read chapter
+                        val intent = Intent(this, ReaderActivity::class.java)
+                        intent.putExtra("manga_id", entry.mangaId)
+                        intent.putExtra("manga_title", entry.mangaTitle)
+                        intent.putExtra("manga_cover", entry.mangaCover)
+                        intent.putExtra("chapter_id", entry.chapterId)
+                        intent.putExtra("chapter_number", entry.chapterNumber)
+                        intent.putExtra("chapter_title", entry.chapterTitle)
+                        startActivity(intent)
+                    }
+                    container.addView(card)
+                }
+            }
+        }, onError = {
+            runOnUiThread {
+                findViewById<android.view.View?>(R.id.continueReadingScroll)?.visibility = View.GONE
+            }
+        })
     }
 
     // =============================================================

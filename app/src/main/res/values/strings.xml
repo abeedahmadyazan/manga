@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">YZ MANGA</string>
+    <!-- App shortcuts -->
+    <string name="shortcut_favorites">المفضلة</string>
+    <string name="shortcut_favorites_long">عرض المفضلة</string>
+    <string name="shortcut_history">السجل</string>
+    <string name="shortcut_history_long">سجل القراءة</string>
+    <string name="shortcut_downloads">التنزيلات</string>
+    <string name="shortcut_downloads_long">المانجا المحملة</string>
 </resources>

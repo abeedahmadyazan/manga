@@ -48,6 +48,7 @@ class MangaListActivity : BaseSwipeBackActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_manga_list)
+        com.yazan.manga.data.AmoledMode.applyIfEnabled(this)
 
         // Email: default to current user
         email = intent.getStringExtra("user_email") ?: ""

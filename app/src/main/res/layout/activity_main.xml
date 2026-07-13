@@ -138,6 +138,23 @@
             android:paddingBottom="8dp"
             android:background="@color/background_dark">
 
+            <!-- Continue Reading section (shown only if user has reading history) -->
+            <HorizontalScrollView
+                android:id="@+id/continueReadingScroll"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="none"
+                android:visibility="gone"
+                android:layout_marginBottom="8dp">
+
+                <LinearLayout
+                    android:id="@+id/continueReadingContainer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="4dp" />
+            </HorizontalScrollView>
+
             <!-- Source selector — 2 buttons -->
             <LinearLayout
                 android:layout_width="match_parent"

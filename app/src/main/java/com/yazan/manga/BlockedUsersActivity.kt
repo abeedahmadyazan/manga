@@ -42,6 +42,7 @@ class BlockedUsersActivity : BaseSwipeBackActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_blocked_users)
+        com.yazan.manga.data.AmoledMode.applyIfEnabled(this)
 
         findViewById<ImageButton>(R.id.btnBack).setOnClickListener { finish() }
 

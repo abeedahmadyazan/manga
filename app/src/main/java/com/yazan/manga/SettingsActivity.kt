@@ -39,6 +39,15 @@ class SettingsActivity : BaseSwipeBackActivity() {
             )
         }
 
+        // AMOLED Black Mode — pure black backgrounds for OLED screens
+        val switchAmoled = findViewById<SwitchCompat>(R.id.switchAmoledMode)
+        switchAmoled.isChecked = com.yazan.manga.data.AmoledMode.isEnabled(this)
+        switchAmoled.setOnCheckedChangeListener { _, isChecked ->
+            com.yazan.manga.data.AmoledMode.setEnabled(this, isChecked)
+            // Recreate the activity to apply the new background
+            recreate()
+        }
+
         // وضع القراءة
         val tvReadingMode = findViewById<TextView>(R.id.tvReadingMode)
         val readingMode = prefs.getString("reading_mode", "webtoon")

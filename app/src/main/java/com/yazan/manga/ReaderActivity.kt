@@ -64,6 +64,7 @@ class ReaderActivity : BaseSwipeBackActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_reader)
+        com.yazan.manga.data.AmoledMode.applyIfEnabled(this)
         // Keep screen on while reading
         window.addFlags(android.view.WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
         overridePendingTransition(R.anim.slide_in_bottom, R.anim.fade_out)

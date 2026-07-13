@@ -26,6 +26,7 @@ class AdminPanelActivity : BaseSwipeBackActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_admin_panel)
+        com.yazan.manga.data.AmoledMode.applyIfEnabled(this)
 
         // Add broadcast button
         val btnBroadcast = findViewById<android.widget.Button?>(R.id.btnBroadcast)
