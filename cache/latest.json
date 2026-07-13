@@ -1,7 +1,49 @@
 {
-  "updated_at": "2026-07-13T02:33:55.972799+00:00",
+  "updated_at": "2026-07-13T09:21:39.569985+00:00",
   "count": 50,
   "items": [
+    {
+      "id": "db882a6e-6716-47bc-b031-c420f42d08d5",
+      "title": "Whimsy Whimsy Witch",
+      "cover": "https://uploads.mangadex.org/covers/db882a6e-6716-47bc-b031-c420f42d08d5/9371a28d-1bce-46b3-b56e-1e5f36c199ee.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "0d4b349e-b7a2-4d63-9ce0-f864e790c4a2",
+      "title": "Veil",
+      "cover": "https://uploads.mangadex.org/covers/0d4b349e-b7a2-4d63-9ce0-f864e790c4a2/8299ead2-5d96-4f41-8ce5-b00c95505449.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "7f30dfc3-0b80-4dcc-a3b9-0cd746fac005",
+      "title": "المتحري كونان",
+      "cover": "https://uploads.mangadex.org/covers/7f30dfc3-0b80-4dcc-a3b9-0cd746fac005/b65b80fa-217c-4a71-8e8f-5d647990117a.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "f4045a9e-e5f6-4778-bd33-7a91cefc3f71",
+      "title": "For the Sake of My Future Vengeance",
+      "cover": "https://uploads.mangadex.org/covers/f4045a9e-e5f6-4778-bd33-7a91cefc3f71/53e634e3-aa3b-4dc3-9171-85e2a71d2ec8.png.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "dd406d53-05b6-4df1-b50a-670cc216d2ac",
+      "title": "The Forsaken Saintess and Her Foodie Roadtrip in Another World",
+      "cover": "https://uploads.mangadex.org/covers/dd406d53-05b6-4df1-b50a-670cc216d2ac/1d3d46b3-1916-4772-9005-608d672c7ab9.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "8211bac6-a392-4e37-b3b6-dac0f4512d24",
+      "title": "Re:ZERO -Starting Life in Another World-, Chapter 4: The Sanctuary and the Witch of Greed",
+      "cover": "https://uploads.mangadex.org/covers/8211bac6-a392-4e37-b3b6-dac0f4512d24/57feede7-b47c-4c15-876c-2318fb827b9c.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
     {
       "id": "c1f2daa5-9e93-42b9-86e8-f1ddb2916db2",
       "title": "Akabane Honeko no Bodyguard",
@@ -29,6 +71,13 @@
       "cover": "https://uploads.mangadex.org/covers/9d3d3403-1a87-4737-9803-bc3d99db1424/fac191d0-96c1-4ebb-bf79-b7616d7162ac.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
+    },
+    {
+      "id": "2d501d2e-72d5-4c3f-9741-117511622a48",
+      "title": "Inazuma Eleven GO Anthology!",
+      "cover": "https://uploads.mangadex.org/covers/2d501d2e-72d5-4c3f-9741-117511622a48/2f28ddc4-5524-44ce-a944-accb1f7b576c.png.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
     },
     {
       "id": "f7b62193-bdfb-4953-a6c6-0bd1b9a872f9",
@@ -129,13 +178,6 @@
       "status": "completed"
     },
     {
-      "id": "8211bac6-a392-4e37-b3b6-dac0f4512d24",
-      "title": "Re:ZERO -Starting Life in Another World-, Chapter 4: The Sanctuary and the Witch of Greed",
-      "cover": "https://uploads.mangadex.org/covers/8211bac6-a392-4e37-b3b6-dac0f4512d24/57feede7-b47c-4c15-876c-2318fb827b9c.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
       "id": "96ae166c-d8e1-4e9e-88cb-805b65154d7e",
       "title": "Red Blue",
       "cover": "https://uploads.mangadex.org/covers/96ae166c-d8e1-4e9e-88cb-805b65154d7e/d010f9c1-fdaa-4925-93df-dc3c06417574.jpg.256.jpg",
@@ -199,13 +241,6 @@
       "status": "ongoing"
     },
     {
-      "id": "f4045a9e-e5f6-4778-bd33-7a91cefc3f71",
-      "title": "For the Sake of My Future Vengeance",
-      "cover": "https://uploads.mangadex.org/covers/f4045a9e-e5f6-4778-bd33-7a91cefc3f71/53e634e3-aa3b-4dc3-9171-85e2a71d2ec8.png.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
       "id": "f5c25341-d6ff-4585-8548-3a48fc7654d9",
       "title": "Akira Failing in Love",
       "cover": "https://uploads.mangadex.org/covers/f5c25341-d6ff-4585-8548-3a48fc7654d9/c4ba7710-116f-45bd-b9b9-86293ca04350.jpg.256.jpg",
@@ -262,13 +297,6 @@
       "status": "completed"
     },
     {
-      "id": "dd406d53-05b6-4df1-b50a-670cc216d2ac",
-      "title": "The Forsaken Saintess and Her Foodie Roadtrip in Another World",
-      "cover": "https://uploads.mangadex.org/covers/dd406d53-05b6-4df1-b50a-670cc216d2ac/1d3d46b3-1916-4772-9005-608d672c7ab9.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
       "id": "05c2917a-e0a4-4c55-abac-8be0f8b213e4",
       "title": "ميتم المروض",
       "cover": "https://uploads.mangadex.org/covers/05c2917a-e0a4-4c55-abac-8be0f8b213e4/3b0d8439-2e7a-473f-af4f-77997c6ced09.jpg.256.jpg",
@@ -323,34 +351,6 @@
       "cover": "https://uploads.mangadex.org/covers/334019e1-18bb-4ac0-b35c-0e8efb1e481c/530583f4-80ad-4f37-92d9-441b225c9785.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
-    },
-    {
-      "id": "263deeff-c010-4ac7-bc01-6341f3e698ac",
-      "title": "Dragon Quest: The Great Adventure of Dai - Avan the Brave and the Demon King of Hellfire",
-      "cover": "https://uploads.mangadex.org/covers/263deeff-c010-4ac7-bc01-6341f3e698ac/f6a611a4-660d-4366-9636-08251c710b55.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "42caa178-b6dc-4ed1-bcbf-18f457bbd121",
-      "title": "DARLING in the FRANXX",
-      "cover": "https://uploads.mangadex.org/covers/42caa178-b6dc-4ed1-bcbf-18f457bbd121/91b60d5f-4f71-40a1-aca1-acca5389ae5c.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
-      "id": "7f1c253d-9557-4abc-b30b-929d7d8db45e",
-      "title": "August 9th, I Will Be Eaten by You.",
-      "cover": "https://uploads.mangadex.org/covers/7f1c253d-9557-4abc-b30b-929d7d8db45e/e07e4f0c-88da-4331-ac49-03b53fb733bf.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "f5b41dc4-16af-4c13-b22b-154836ec2b82",
-      "title": "Deus",
-      "cover": "https://uploads.mangadex.org/covers/f5b41dc4-16af-4c13-b22b-154836ec2b82/6a0d3c43-25be-45b5-b59c-8adb55f1c35d.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
     }
   ]
 }
