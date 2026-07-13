@@ -125,9 +125,11 @@ class BlockedUsersActivity : BaseSwipeBackActivity() {
 
         override fun onBindViewHolder(holder: VH, position: Int) {
             val b = items[position]
-            val displayName = if (b.name.isNotEmpty()) b.name else b.email.substringBefore("@")
+            val displayName = if (b.name.isNotEmpty()) b.name else "مستخدم"
             holder.tvName.text = displayName
-            holder.tvEmail.text = b.email
+            // Privacy: NEVER show anything derived from the email — no email,
+            // no first-letter, no substring. Show a neutral label only.
+            holder.tvEmail.text = "مستخدم محظور"
 
             // Avatar: decode base64 if available, otherwise show first letter.
             if (b.avatarBase64.isNotEmpty()) {
