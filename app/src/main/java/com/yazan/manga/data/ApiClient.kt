@@ -600,6 +600,75 @@ object ApiClient {
     }
 
     // =============================================================
+    //  User blocks — let users hide each other's comments
+    // =============================================================
+
+    data class BlockedUser(
+        val id: String,
+        val email: String,
+        val name: String,
+        val avatarBase64: String,
+        val createdAt: Long
+    )
+
+    data class BlockStatus(
+        val iBlockedThem: Boolean,
+        val theyBlockedMe: Boolean
+    )
+
+    /** Block a user. Returns true on success, or an error message. */
+    fun blockUser(blockedEmail: String, blockedName: String?, blockedAvatarBase64: String?): Pair<Boolean, String?> {
+        val body = JsonObject().apply {
+            addProperty("blockedEmail", blockedEmail)
+            if (blockedName != null) addProperty("blockedName", blockedName)
+            if (blockedAvatarBase64 != null) addProperty("blockedAvatarBase64", blockedAvatarBase64)
+        }
+        val (code, json) = request("POST", "/api/blocks", body)
+        if (code == 201 || code == 200) return Pair(true, null)
+        val err = json?.get("error")?.asString ?: "تعذّر الحظر"
+        return Pair(false, err)
+    }
+
+    /** Unblock a user. Returns true on success. */
+    fun unblockUser(blockedEmail: String): Pair<Boolean, String?> {
+        val (code, json) = request("DELETE", "/api/blocks", query = mapOf("email" to blockedEmail))
+        if (code == 200) return Pair(true, null)
+        val err = json?.get("error")?.asString ?: "تعذّر إلغاء الحظر"
+        return Pair(false, err)
+    }
+
+    /** List users I have blocked. */
+    fun getBlockedUsers(): List<BlockedUser> {
+        val (code, json) = request("GET", "/api/blocks")
+        if (code != 200 || json == null) return emptyList()
+        val arr = json.getAsJsonArray("blocks") ?: return emptyList()
+        val result = mutableListOf<BlockedUser>()
+        for (i in 0 until arr.size()) {
+            try {
+                val b = arr[i].asJsonObject
+                result.add(BlockedUser(
+                    id = b.get("id")?.asString ?: "",
+                    email = b.get("blockedEmail")?.asString ?: "",
+                    name = b.get("blockedName")?.asString ?: "",
+                    avatarBase64 = b.get("blockedAvatarBase64")?.asString ?: "",
+                    createdAt = b.get("createdAt")?.asLong ?: 0L
+                ))
+            } catch (e: Exception) {}
+        }
+        return result
+    }
+
+    /** Check block status between me and another user. */
+    fun checkBlockStatus(otherEmail: String): BlockStatus {
+        val (code, json) = request("GET", "/api/blocks/check", query = mapOf("email" to otherEmail))
+        if (code != 200 || json == null) return BlockStatus(false, false)
+        return BlockStatus(
+            iBlockedThem = json.get("iBlockedThem")?.asBoolean ?: false,
+            theyBlockedMe = json.get("theyBlockedMe")?.asBoolean ?: false
+        )
+    }
+
+    // =============================================================
     //  Recommendations
     // =============================================================
 

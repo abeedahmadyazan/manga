@@ -531,6 +531,24 @@ android:id="@+id/cardCompleted"
                 android:visibility="gone"
                 tools:ignore="HardcodedText" />
 
+            <!-- ============ Blocked users list ============ -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnBlockedUsers"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginTop="8dp"
+                android:text="🚫 المحظورون"
+                android:textColor="@color/text_primary"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:background="@drawable/bg_secondary_button"
+                app:backgroundTint="@null"
+                app:icon="@drawable/ic_ban"
+                app:iconGravity="textStart"
+                app:iconTint="@color/danger"
+                android:visibility="gone"
+                tools:ignore="HardcodedText" />
+
             <!-- ============ Admin panel ============ -->
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnAdminPanel"

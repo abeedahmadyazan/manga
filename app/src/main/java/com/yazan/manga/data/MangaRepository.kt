@@ -28,7 +28,6 @@ class MangaRepository(private val appContext: Context? = null) {
     private val ASQ_API = "https://asq-proxy.yznabyd.workers.dev"
     private val CORS_PROXY = "https://proxy.cors.sh/"
     private val ASQ_BASE = "https://3asq.online"
-    private val MANGALIK_BASE = "https://mangalik.net"
     private val CDN_CACHE_BASE = "https://raw.githubusercontent.com/abeedahmadyazan/manga/gh-pages/cache"
     private val CDN_CACHE_TTL_MS = 2 * 60 * 60 * 1000L  // 2 hours
 
@@ -107,9 +106,6 @@ class MangaRepository(private val appContext: Context? = null) {
                 val items = fetch3asqListing(page)
                 if (items.isNotEmpty()) Result.success(items)
                 else Result.failure(Exception("تعذّر تحميل المانجا. حاول لاحقاً."))
-            } else if (contentType == "mangalik") {
-                // مصدر 3: mangalik.net (عبر WebView — يتخطى Cloudflare)
-                fetchMangalikListing(page)
             } else {
                 // مصدر 1: MangaDex
                 fetchMangaDexList(page, "latest")
@@ -126,8 +122,6 @@ class MangaRepository(private val appContext: Context? = null) {
                 items.shuffle()
                 if (items.isNotEmpty()) Result.success(items)
                 else Result.failure(Exception("تعذّر تحميل المانجا. حاول لاحقاً."))
-            } else if (contentType == "mangalik") {
-                fetchMangalikListing(page)
             } else {
                 // مصدر 1: MangaDex popular
                 fetchMangaDexList(page, "popular")
@@ -175,8 +169,6 @@ class MangaRepository(private val appContext: Context? = null) {
                     }
                     Result.success(items)
                 }
-            } else if (contentType == "mangalik") {
-                fetchMangalikSearch(query)
             } else {
                 // Search MangaDex (مصدر 1)
                 val encoded = java.net.URLEncoder.encode(query, "UTF-8")
@@ -413,255 +405,7 @@ class MangaRepository(private val appContext: Context? = null) {
     }
 
 
-    // ============================================================
-    //  mangalik.net (مصدر 3 — عربي)
-    //  - Listing + Search: HTTP مباشر (الصفحة الرئيسية بدون CF)
-    //  - Details + Chapter pages: WebView (CF عليه الداخلية)
-    // ============================================================
 
-    /**
-     * HTTP headers that mimic a real Chrome browser — bypasses CF's basic
-     * header check on the mangalik.net home/listing pages.
-     * NOTE: do NOT set Accept-Encoding manually — OkHttp adds it automatically
-     * (gzip) and transparently decompresses the response. Setting "br" (Brotli)
-     * here would make OkHttp return garbled bytes because it can't decode Brotli
-     * without a custom interceptor.
-     */
-    private fun mangalikHeaders(referer: String? = null): Map<String, String> {
-        val h = mapOf(
-            "User-Agent" to "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
-            "Accept" to "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8",
-            "Accept-Language" to "ar,en-US;q=0.9,en;q=0.8",
-            "Sec-Ch-Ua" to "\"Not_A Brand\";v=\"8\", \"Chromium\";v=\"120\", \"Google Chrome\";v=\"120\"",
-            "Sec-Ch-Ua-Mobile" to "?0",
-            "Sec-Ch-Ua-Platform" to "\"Windows\"",
-            "Sec-Fetch-Dest" to "document",
-            "Sec-Fetch-Mode" to "navigate",
-            "Sec-Fetch-Site" to "none",
-            "Upgrade-Insecure-Requests" to "1"
-        )
-        return if (referer != null) h + ("Referer" to referer) else h
-    }
-
-    /**
-     * Fetch manga listing from mangalik.net — HTTP DIRECT (no WebView needed,
-     * the listing pages are NOT CF-protected). Returns all manga on the page.
-     */
-    private suspend fun fetchMangalikListing(page: Int): Result<List<MangaListItem>> {
-        return try {
-            val url = if (page <= 1) "$MANGALIK_BASE/" else "$MANGALIK_BASE/page/$page/"
-            val reqBuilder = Request.Builder().url(url)
-            mangalikHeaders().forEach { (k, v) -> reqBuilder.header(k, v) }
-            val req = reqBuilder.build()
-            val items = mutableListOf<MangaListItem>()
-            proxyClient.newCall(req).execute().use { resp ->
-                if (!resp.isSuccessful) {
-                    Log.w(TAG, "mangalik listing HTTP ${resp.code}")
-                    return Result.failure(Exception("تعذّر تحميل المانجا (HTTP ${resp.code})"))
-                }
-                val html = resp.body?.string() ?: ""
-                if (html.contains("Just a moment")) {
-                    Log.w(TAG, "mangalik listing hit CF challenge")
-                    return Result.failure(Exception("الموقع محمي بـ Cloudflare. حاول لاحقاً."))
-                }
-                items.addAll(parseMangalikListingHtml(html))
-            }
-            Log.d(TAG, "mangalik listing page $page: ${items.size} items")
-            if (items.isNotEmpty()) Result.success(items)
-            else Result.failure(Exception("تعذّر تحميل المانجا. حاول لاحقاً."))
-        } catch (e: Exception) {
-            Log.e(TAG, "fetchMangalikListing error: ${e.message}")
-            Result.failure(e)
-        }
-    }
-
-    /** Parse mangalik.net listing HTML → manga items. */
-    private fun parseMangalikListingHtml(html: String): List<MangaListItem> {
-        val items = mutableListOf<MangaListItem>()
-        // Madara theme: each manga card has class "page-item-detail" with an
-        // <a href="/manga/{slug}/"> and a <img data-src="cover">.
-        val cardRe = Regex("""<div[^>]*class="[^"]*page-item-detail[^"]*"[\s\S]*?</div>\s*</div>\s*</div>""")
-        val slugRe = Regex("""manga/([a-z0-9-]+)/?""")
-        val imgRe = Regex("""(?:data-src|src)="([^"]+\.(?:jpg|jpeg|webp|png))"""")
-        val titleRe = Regex("""<h3[^>]*>[\s\S]*?<a[^>]*>([^<]+)</a>""")
-        val titleRe4 = Regex("""<h4[^>]*>[\s\S]*?<a[^>]*>([^<]+)</a>""")
-        val postTitleRe = Regex("""class="[^"]*post-title[^"]*"[\s\S]*?<a[^>]*>([^<]+)</a>""")
-
-        for (m in cardRe.findAll(html)) {
-            try {
-                val block = m.value
-                val slugMatch = slugRe.find(block) ?: continue
-                val slug = slugMatch.groupValues[1]
-                val titleMatch = postTitleRe.find(block) ?: titleRe.find(block) ?: titleRe4.find(block)
-                val title = titleMatch?.groupValues?.get(1)?.trim()?.let {
-                    it.replace("&#8217;", "'").replace("&#8230;", "…").replace("&amp;", "&")
-                } ?: slug.replace("-", " ").replaceFirstChar { c -> c.uppercase() }
-                val coverMatch = imgRe.find(block)
-                val cover = coverMatch?.groupValues?.get(1)?.let { u ->
-                    if (u.startsWith("//")) "https:$u" else u
-                } ?: ""
-                if (slug.isNotEmpty()) {
-                    items.add(MangaListItem(
-                        id = "mangalik-$slug",
-                        title = title,
-                        cover = cover,
-                        source = "mangalik",
-                        status = "ongoing"
-                    ))
-                }
-            } catch (e: Exception) {}
-        }
-        return items
-    }
-
-    /** Search mangalik.net — HTTP DIRECT (search results page is NOT CF-protected). */
-    private suspend fun fetchMangalikSearch(query: String): Result<List<MangaListItem>> {
-        return try {
-            val encoded = java.net.URLEncoder.encode(query, "UTF-8")
-            val url = "$MANGALIK_BASE/?s=$encoded&post_type=wp-manga"
-            val reqBuilder = Request.Builder().url(url)
-            mangalikHeaders(referer = MANGALIK_BASE + "/").forEach { (k, v) -> reqBuilder.header(k, v) }
-            val req = reqBuilder.build()
-            val items = mutableListOf<MangaListItem>()
-            proxyClient.newCall(req).execute().use { resp ->
-                if (!resp.isSuccessful) return Result.success(emptyList())
-                val html = resp.body?.string() ?: ""
-                if (html.contains("Just a moment")) {
-                    return Result.failure(Exception("الموقع محمي بـ Cloudflare. حاول لاحقاً."))
-                }
-                items.addAll(parseMangalikListingHtml(html))
-            }
-            Log.d(TAG, "mangalik search '$query': ${items.size} items")
-            Result.success(items)
-        } catch (e: Exception) {
-            Result.failure(e)
-        }
-    }
-
-    /** Fetch manga details + chapters from mangalik.net via WebView (CF bypass). */
-    private suspend fun fetchMangalikMangaDetails(slug: String): MangaDetails? {
-        return try {
-            val ctx = appContext ?: return null
-            val url = "$MANGALIK_BASE/manga/$slug/"
-            // Extract: title, cover, description, status, chapters (number + URL).
-            // Madara theme has many variants — try a broad set of selectors.
-            val js = """
-                javascript:(function(){
-                    var title = '';
-                    var titleSelectors = ['.post-title h1', '.post-title h3', '.c-blog__head h1', 'h1.entry-title', 'h1', '.manga-title'];
-                    for (var i = 0; i < titleSelectors.length; i++) {
-                        var el = document.querySelector(titleSelectors[i]);
-                        if (el && el.textContent.trim()) { title = el.textContent.trim(); break; }
-                    }
-                    var cover = '';
-                    var coverSelectors = ['.summary_image img', '.tab-summary .c-image-hover img', '.manga-thumbnail img', 'img.wp-post-image', '.profile-manga .summary_image img'];
-                    for (var i = 0; i < coverSelectors.length; i++) {
-                        var el = document.querySelector(coverSelectors[i]);
-                        if (el) { cover = el.src || el.getAttribute('data-src') || el.getAttribute('data-lazy-src') || ''; if (cover) break; }
-                    }
-                    if (cover.indexOf('//') === 0) cover = 'https:' + cover;
-                    var desc = '';
-                    var descSelectors = ['.description-summary .summary__content', '.summary__content', '.manga-excerpt', '.tab-summary .description', '.description-summary'];
-                    for (var i = 0; i < descSelectors.length; i++) {
-                        var el = document.querySelector(descSelectors[i]);
-                        if (el && el.textContent.trim()) { desc = el.textContent.trim().substring(0, 1000); break; }
-                    }
-                    var status = '';
-                    var statusSelectors = ['.post-content .summary-content', '.post-status .summary-content', '.manga-status', 'div:has(>.summary-heading:contains("Status")) .summary-content'];
-                    for (var i = 0; i < statusSelectors.length; i++) {
-                        var el = document.querySelector(statusSelectors[i]);
-                        if (el && el.textContent.trim()) { status = el.textContent.trim(); break; }
-                    }
-                    // chapters: Madara theme uses many variants
-                    var chapters = [];
-                    var chapterSelectors = [
-                        '.listing-chapters_wol li a',
-                        '.main .listing-chapters a',
-                        '.listing-chapters a',
-                        'ul.main-version-chap li a',
-                        'ul.mini-version-chap li a',
-                        '.wp-manga-chapter a',
-                        '.chapter-list a',
-                        '.list-chapters a',
-                        'li.wp-manga-chapter a'
-                    ];
-                    var seen = {};
-                    for (var s = 0; s < chapterSelectors.length; s++) {
-                        var chs = document.querySelectorAll(chapterSelectors[s]);
-                        if (chs.length > 0) {
-                            for (var i = 0; i < chs.length; i++) {
-                                var href = chs[i].href || chs[i].getAttribute('href') || '';
-                                if (!href || href.indexOf('#') === 0) continue;
-                                if (seen[href]) continue;
-                                seen[href] = true;
-                                var m = href.match(/manga\/[^\/]+\/([^\/]+)\//);
-                                if (!m) continue;
-                                var num = m[1].replace('chapter-', '').replace('ch-', '').replace(/-/g, '.');
-                                if (!num || num === 'manga') num = m[1];
-                                // only keep numeric chapter numbers
-                                if (!/^[0-9.]+$/.test(num)) continue;
-                                chapters.push({num: num, url: href});
-                            }
-                            if (chapters.length > 0) break;
-                        }
-                    }
-                    return JSON.stringify({title: title, cover: cover, desc: desc, status: status, chapters: chapters, bodyLen: document.body ? document.body.innerHTML.length : 0});
-                })();
-            """.trimIndent()
-            val json = WebViewScraper.executeJsForString(ctx, url, js)
-            if (json.isNullOrEmpty()) {
-                Log.w(TAG, "mangalik details: empty result for $slug")
-                return null
-            }
-            Log.d(TAG, "mangalik details raw: ${json.take(300)}")
-            val o = org.json.JSONObject(json)
-            val title = o.optString("title", slug.replace("-", " ").replaceFirstChar { it.uppercase() })
-            val cover = o.optString("cover", "")
-            val desc = o.optString("desc", "")
-            val statusStr = o.optString("status", "ongoing")
-            val chArr = o.optJSONArray("chapters")
-            if (chArr == null || chArr.length() == 0) {
-                Log.w(TAG, "mangalik details: no chapters for $slug (bodyLen=${o.optInt("bodyLen")})")
-                return null
-            }
-            val chapters = mutableListOf<MangaChapter>()
-            for (i in 0 until chArr.length()) {
-                try {
-                    val ch = chArr.getJSONObject(i)
-                    val num = ch.getString("num")
-                    val cleanNum = num.replace(Regex("[^0-9.]"), "")
-                    if (cleanNum.isEmpty()) continue
-                    chapters.add(MangaChapter(
-                        id = "mangalik-$slug-$cleanNum",
-                        number = cleanNum,
-                        title = "الفصل $cleanNum",
-                        date = "",
-                        source = "mangalik"
-                    ))
-                } catch (e: Exception) {}
-            }
-            Log.d(TAG, "mangalik details '$slug': ${chapters.size} chapters")
-            MangaDetails(
-                id = "mangalik-$slug",
-                title = title,
-                cover = cover,
-                description = desc,
-                author = "",
-                artist = "",
-                status = if (statusStr.contains("مكتمل") || statusStr.contains("completed")) "completed" else "ongoing",
-                genres = listOf("مانجا"),
-                chapters = chapters.sortedByDescending { it.number.toFloatOrNull() ?: 0f },
-                source = "mangalik",
-                latestChapter = chapters.firstOrNull()?.number,
-                rating = null,
-                sources = emptyList(),
-                chaptersBySource = emptyMap()
-            )
-        } catch (e: Exception) {
-            Log.e(TAG, "fetchMangalikMangaDetails error: ${e.message}")
-            null
-        }
-    }
 
 
     private fun fetchList(url: String): List<MangaListItem> {
@@ -752,16 +496,6 @@ class MangaRepository(private val appContext: Context? = null) {
         // 3asq manga: fetch details + chapters from 3asq.online via the
         // Netlify proxy (3asq-api.netlify.app). 3asq hosts Arabic manhwa,
         // manhua, and manga — all with full Arabic chapter translations.
-        if (id.startsWith("mangalik-")) {
-            val slug = id.removePrefix("mangalik-")
-            return try {
-                val details = fetchMangalikMangaDetails(slug)
-                if (details != null) Result.success(details)
-                else Result.failure(Exception("تعذّر تحميل التفاصيل"))
-            } catch (e: Exception) {
-                Result.failure(e)
-            }
-        }
         if (id.startsWith("3asq-")) {
             val slug = id.removePrefix("3asq-")
             return try {
@@ -1200,30 +934,7 @@ class MangaRepository(private val appContext: Context? = null) {
 
     suspend fun getChapterPages(chapter: MangaChapter): Result<List<ChapterPage>> {
         return try {
-            if (chapter.source == "mangalik") {
-                // مصدر 3: mangalik.net — CF-protected, use WebView scraping.
-                // chapter.id format: "mangalik-{slug}-{chapterNum}" (slug may contain dashes)
-                val idWithoutPrefix = chapter.id.removePrefix("mangalik-")
-                val num = idWithoutPrefix.substringAfterLast("-")
-                val slug = idWithoutPrefix.substringBeforeLast("-")
-                if (slug.isNotBlank() && num.isNotBlank()) {
-                    val url = "$MANGALIK_BASE/manga/$slug/$num/"
-                    Log.d(TAG, "mangalik pages: $url")
-                    val ctx = appContext
-                    if (ctx != null) {
-                        val images = WebViewScraper.fetchChapterImages(ctx, url)
-                        if (images.isNotEmpty()) {
-                            val pages = images.mapIndexed { i, u ->
-                                ChapterPage(index = i, url = u)
-                            }
-                            return Result.success(pages)
-                        }
-                    }
-                    Result.failure(Exception("تعذّر تحميل صفحات هذا الفصل (WebView)"))
-                } else {
-                    Result.failure(Exception("معرّف الفصل غير صالح"))
-                }
-            } else if (chapter.source == "3asq") {
+            if (chapter.source == "3asq") {
                 // Extract slug and chapter number from the chapter id
                 // chapter.id format: "3asq-{slug}-{num}" where slug may contain dashes
                 // e.g. "3asq-one-piece-1188" → slug="one-piece", num="1188"

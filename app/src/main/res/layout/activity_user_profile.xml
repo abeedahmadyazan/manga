@@ -244,6 +244,25 @@
                 android:visibility="gone"
                 tools:ignore="HardcodedText" />
 
+            <!-- User block (for everyone, not just admins) — hides this user's
+                 comments from me AND my comments from them. -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnBlockUser"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginTop="8dp"
+                android:text="🚫 حظر هذا المستخدم"
+                android:textColor="@color/danger"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:background="@drawable/bg_secondary_button"
+                app:backgroundTint="@null"
+                app:icon="@drawable/ic_ban"
+                app:iconGravity="textStart"
+                app:iconTint="@color/danger"
+                android:visibility="gone"
+                tools:ignore="HardcodedText" />
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="24dp" />

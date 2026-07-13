@@ -88,6 +88,84 @@ class UserProfileActivity : BaseSwipeBackActivity() {
                     }.setNegativeButton("إلغاء", null).show()
             }
         }
+
+        // === User block button — visible to ALL signed-in users viewing someone else ===
+        // (not just admins). Hides this user's comments from me AND my comments from them.
+        val btnBlock = findViewById<com.google.android.material.button.MaterialButton?>(R.id.btnBlockUser)
+        if (currentUser != null && email != currentUser.email) {
+            btnBlock?.visibility = View.VISIBLE
+            // Async-check the current block status and update the button label.
+            Thread {
+                try {
+                    val status = com.yazan.manga.data.ApiClient.checkBlockStatus(email)
+                    runOnUiThread {
+                        if (status.iBlockedThem) {
+                            btnBlock?.text = "✓ إلغاء الحظر"
+                            btnBlock?.setTextColor(getColor(R.color.primary))
+                        } else {
+                            btnBlock?.text = "🚫 حظر هذا المستخدم"
+                            btnBlock?.setTextColor(getColor(R.color.danger))
+                        }
+                    }
+                } catch (e: Exception) {}
+            }.start()
+
+            btnBlock?.setOnClickListener {
+                // Re-check status (might have changed) then toggle
+                Thread {
+                    try {
+                        val status = com.yazan.manga.data.ApiClient.checkBlockStatus(email)
+                        if (status.iBlockedThem) {
+                            // Unblock
+                            val (ok, err) = com.yazan.manga.data.ApiClient.unblockUser(email)
+                            runOnUiThread {
+                                if (ok) {
+                                    btnBlock.text = "🚫 حظر هذا المستخدم"
+                                    btnBlock.setTextColor(getColor(R.color.danger))
+                                    Toast.makeText(this, "تم إلغاء الحظر", Toast.LENGTH_SHORT).show()
+                                } else {
+                                    Toast.makeText(this, err ?: "تعذّر إلغاء الحظر", Toast.LENGTH_LONG).show()
+                                }
+                            }
+                        } else {
+                            // Block — confirm first
+                            runOnUiThread {
+                                AlertDialog.Builder(this)
+                                    .setTitle("حظر هذا المستخدم؟")
+                                    .setMessage("لن تظهر تعليقاته لك، ولن تظهر تعليقاتك له. يمكنك إلغاء الحظر لاحقاً.")
+                                    .setPositiveButton("حظر") { _, _ ->
+                                        Thread {
+                                            // Fetch the target user's name + avatar for the block list snapshot
+                                            var name = ""
+                                            var avatar = ""
+                                            try {
+                                                val cu = com.yazan.manga.data.ApiClient.getUserProfile(email)
+                                                if (cu != null) { name = cu.name; avatar = cu.avatarBase64 }
+                                            } catch (e: Exception) {}
+                                            val (ok, err) = com.yazan.manga.data.ApiClient.blockUser(email, name, avatar)
+                                            runOnUiThread {
+                                                if (ok) {
+                                                    btnBlock.text = "✓ إلغاء الحظر"
+                                                    btnBlock.setTextColor(getColor(R.color.primary))
+                                                    Toast.makeText(this, "تم حظر المستخدم", Toast.LENGTH_SHORT).show()
+                                                } else {
+                                                    Toast.makeText(this, err ?: "تعذّر الحظر", Toast.LENGTH_LONG).show()
+                                                }
+                                            }
+                                        }.start()
+                                    }
+                                    .setNegativeButton("إلغاء", null)
+                                    .show()
+                            }
+                        }
+                    } catch (e: Exception) {
+                        runOnUiThread {
+                            Toast.makeText(this, "تعذّر التحقق من حالة الحظر", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }.start()
+            }
+        }
     }
 
     /**

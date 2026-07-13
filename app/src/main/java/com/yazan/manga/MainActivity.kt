@@ -355,10 +355,9 @@ class MainActivity : AppCompatActivity() {
 
         setActiveTab(currentTab)
 
-        // === Source selector — 3 buttons (MangaDex + 3asq + mangalik) ===
+        // === Source selector — 2 buttons (MangaDex + 3asq) ===
         val chipSource1 = findViewById<MaterialButton>(R.id.chipSource1)
         val chipSource2 = findViewById<MaterialButton>(R.id.chipSource2)
-        val chipSource3 = findViewById<MaterialButton?>(R.id.chipSource3)
 
         fun setActiveSource(source: String) {
             currentContentType = source
@@ -370,8 +369,8 @@ class MainActivity : AppCompatActivity() {
                 cornerRadius = 22f * resources.displayMetrics.density
                 setColor(getColor(R.color.surface))
             }
-            val buttons = listOfNotNull(chipSource1, chipSource2, chipSource3)
-            val types = listOf("manga", "3asq", "mangalik")
+            val buttons = listOf(chipSource1, chipSource2)
+            val types = listOf("manga", "3asq")
             buttons.forEachIndexed { i, btn ->
                 if (types[i] == source) {
                     btn.background = activeBg
@@ -388,7 +387,6 @@ class MainActivity : AppCompatActivity() {
 
         chipSource1.setOnClickListener { if (currentContentType != "manga") setActiveSource("manga") }
         chipSource2.setOnClickListener { if (currentContentType != "3asq") setActiveSource("3asq") }
-        chipSource3?.setOnClickListener { if (currentContentType != "mangalik") setActiveSource("mangalik") }
 
         setActiveSource("3asq")
 

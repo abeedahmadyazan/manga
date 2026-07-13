@@ -202,6 +202,20 @@ service cloud.firestore {
       allow update, delete: if isAdmin();
     }
 
+    // ============================================================
+    //  user_blocks — user-to-user blocking (mutual comment hiding)
+    //  Fields: blockerEmail, blockedEmail, blockedName, blockedAvatarBase64, createdAt
+    //  Principle: a user can only create/delete THEIR OWN block entries
+    //  (where blockerEmail == their auth email). All reads/writes go through
+    //  the Cloudflare API (Admin SDK), which enforces this server-side.
+    //  Direct client writes are FORBIDDEN — prevents a user from spoofing
+    //  someone else's block list.
+    // ============================================================
+    match /user_blocks/{blockId} {
+      allow read: if isSignedIn();
+      allow create, update, delete: if false;
+    }
+
     match /announcements/{announcementId} {
       allow read: if isSignedIn();
       allow create, update, delete: if isAdmin();
