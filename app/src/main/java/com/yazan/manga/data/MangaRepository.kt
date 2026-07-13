@@ -414,68 +414,54 @@ class MangaRepository(private val appContext: Context? = null) {
 
 
     // ============================================================
-    //  mangalik.net (مصدر 3 — عربي، CF-protected → WebView scraping)
+    //  mangalik.net (مصدر 3 — عربي)
+    //  - Listing + Search: HTTP مباشر (الصفحة الرئيسية بدون CF)
+    //  - Details + Chapter pages: WebView (CF عليه الداخلية)
     // ============================================================
 
     /**
-     * Fetch manga listing from mangalik.net via WebView (CF bypass).
-     * The home page lists manga cards in WordPress Madara theme format.
+     * HTTP headers that mimic a real Chrome browser — bypasses CF's basic
+     * header check on the mangalik.net home/listing pages.
+     */
+    private fun mangalikHeaders(referer: String? = null): Map<String, String> {
+        val h = mapOf(
+            "User-Agent" to "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+            "Accept" to "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8",
+            "Accept-Language" to "ar,en-US;q=0.9,en;q=0.8",
+            "Accept-Encoding" to "gzip, deflate, br",
+            "Sec-Ch-Ua" to "\"Not_A Brand\";v=\"8\", \"Chromium\";v=\"120\", \"Google Chrome\";v=\"120\"",
+            "Sec-Ch-Ua-Mobile" to "?0",
+            "Sec-Ch-Ua-Platform" to "\"Windows\"",
+            "Sec-Fetch-Dest" to "document",
+            "Sec-Fetch-Mode" to "navigate",
+            "Sec-Fetch-Site" to "none",
+            "Upgrade-Insecure-Requests" to "1"
+        )
+        return if (referer != null) h + ("Referer" to referer) else h
+    }
+
+    /**
+     * Fetch manga listing from mangalik.net — HTTP DIRECT (no WebView needed,
+     * the listing pages are NOT CF-protected). Returns all manga on the page.
      */
     private suspend fun fetchMangalikListing(page: Int): Result<List<MangaListItem>> {
         return try {
-            val ctx = appContext ?: return Result.failure(Exception("لا يوجد سياق"))
             val url = if (page <= 1) "$MANGALIK_BASE/" else "$MANGALIK_BASE/page/$page/"
-            // Injected JS: extract manga cards (slug + title + cover) from Madara theme
-            val js = """
-                javascript:(function(){
-                    var items = [];
-                    var cards = document.querySelectorAll('.page-item-detail, .c-tabs-item__content');
-                    for (var i = 0; i < cards.length; i++) {
-                        var c = cards[i];
-                        var a = c.querySelector('a[href*="/manga/"]');
-                        if (!a) continue;
-                        var href = a.href;
-                        var m = href.match(/manga\/([a-z0-9-]+)\/?/);
-                        if (!m) continue;
-                        var slug = m[1];
-                        var title = c.querySelector('.post-title a, .h4 a, .item-title a, h3 a, h4 a');
-                        title = title ? title.textContent.trim() : slug;
-                        var img = c.querySelector('img');
-                        var cover = '';
-                        if (img) {
-                            cover = img.src || img.getAttribute('data-src') || img.getAttribute('data-lazy-src') || '';
-                            if (cover.indexOf('//') === 0) cover = 'https:' + cover;
-                        }
-                        items.push({slug: slug, title: title, cover: cover});
-                    }
-                    return JSON.stringify(items);
-                })();
-            """.trimIndent()
-            val json = WebViewScraper.executeJsForString(ctx, url, js)
+            val reqBuilder = Request.Builder().url(url)
+            mangalikHeaders().forEach { (k, v) -> reqBuilder.header(k, v) }
+            val req = reqBuilder.build()
             val items = mutableListOf<MangaListItem>()
-            if (!json.isNullOrEmpty()) {
-                try {
-                    val arr = org.json.JSONArray(json)
-                    for (i in 0 until arr.length()) {
-                        try {
-                            val o = arr.getJSONObject(i)
-                            val slug = o.getString("slug")
-                            val title = o.getString("title")
-                            val cover = o.optString("cover", "")
-                            if (slug.isNotEmpty()) {
-                                items.add(MangaListItem(
-                                    id = "mangalik-$slug",
-                                    title = title,
-                                    cover = cover,
-                                    source = "mangalik",
-                                    status = "ongoing"
-                                ))
-                            }
-                        } catch (e: Exception) {}
-                    }
-                } catch (e: Exception) {
-                    Log.w(TAG, "mangalik listing parse failed: ${e.message}")
+            proxyClient.newCall(req).execute().use { resp ->
+                if (!resp.isSuccessful) {
+                    Log.w(TAG, "mangalik listing HTTP ${resp.code}")
+                    return Result.failure(Exception("تعذّر تحميل المانجا (HTTP ${resp.code})"))
                 }
+                val html = resp.body?.string() ?: ""
+                if (html.contains("Just a moment")) {
+                    Log.w(TAG, "mangalik listing hit CF challenge")
+                    return Result.failure(Exception("الموقع محمي بـ Cloudflare. حاول لاحقاً."))
+                }
+                items.addAll(parseMangalikListingHtml(html))
             }
             Log.d(TAG, "mangalik listing page $page: ${items.size} items")
             if (items.isNotEmpty()) Result.success(items)
@@ -486,59 +472,61 @@ class MangaRepository(private val appContext: Context? = null) {
         }
     }
 
-    /** Search mangalik.net via WebView (CF bypass). */
+    /** Parse mangalik.net listing HTML → manga items. */
+    private fun parseMangalikListingHtml(html: String): List<MangaListItem> {
+        val items = mutableListOf<MangaListItem>()
+        // Madara theme: each manga card has class "page-item-detail" with an
+        // <a href="/manga/{slug}/"> and a <img data-src="cover">.
+        val cardRe = Regex("""<div[^>]*class="[^"]*page-item-detail[^"]*"[\s\S]*?</div>\s*</div>\s*</div>""")
+        val slugRe = Regex("""manga/([a-z0-9-]+)/?""")
+        val imgRe = Regex("""(?:data-src|src)="([^"]+\.(?:jpg|jpeg|webp|png))"""")
+        val titleRe = Regex("""<h3[^>]*>[\s\S]*?<a[^>]*>([^<]+)</a>""")
+        val titleRe4 = Regex("""<h4[^>]*>[\s\S]*?<a[^>]*>([^<]+)</a>""")
+        val postTitleRe = Regex("""class="[^"]*post-title[^"]*"[\s\S]*?<a[^>]*>([^<]+)</a>""")
+
+        for (m in cardRe.findAll(html)) {
+            try {
+                val block = m.value
+                val slugMatch = slugRe.find(block) ?: continue
+                val slug = slugMatch.groupValues[1]
+                val titleMatch = postTitleRe.find(block) ?: titleRe.find(block) ?: titleRe4.find(block)
+                val title = titleMatch?.groupValues?.get(1)?.trim()?.let {
+                    it.replace("&#8217;", "'").replace("&#8230;", "…").replace("&amp;", "&")
+                } ?: slug.replace("-", " ").replaceFirstChar { c -> c.uppercase() }
+                val coverMatch = imgRe.find(block)
+                val cover = coverMatch?.groupValues?.get(1)?.let { u ->
+                    if (u.startsWith("//")) "https:$u" else u
+                } ?: ""
+                if (slug.isNotEmpty()) {
+                    items.add(MangaListItem(
+                        id = "mangalik-$slug",
+                        title = title,
+                        cover = cover,
+                        source = "mangalik",
+                        status = "ongoing"
+                    ))
+                }
+            } catch (e: Exception) {}
+        }
+        return items
+    }
+
+    /** Search mangalik.net — HTTP DIRECT (search results page is NOT CF-protected). */
     private suspend fun fetchMangalikSearch(query: String): Result<List<MangaListItem>> {
         return try {
-            val ctx = appContext ?: return Result.failure(Exception("لا يوجد سياق"))
             val encoded = java.net.URLEncoder.encode(query, "UTF-8")
             val url = "$MANGALIK_BASE/?s=$encoded&post_type=wp-manga"
-            val js = """
-                javascript:(function(){
-                    var items = [];
-                    var cards = document.querySelectorAll('.page-item-detail, .c-tabs-item__content, .row.c-tabs-item__content');
-                    for (var i = 0; i < cards.length; i++) {
-                        var c = cards[i];
-                        var a = c.querySelector('a[href*="/manga/"]');
-                        if (!a) continue;
-                        var m = a.href.match(/manga\/([a-z0-9-]+)\/?/);
-                        if (!m) continue;
-                        var slug = m[1];
-                        var t = c.querySelector('.post-title a, .h4 a, h3 a, h4 a');
-                        var title = t ? t.textContent.trim() : slug;
-                        var img = c.querySelector('img');
-                        var cover = '';
-                        if (img) {
-                            cover = img.src || img.getAttribute('data-src') || '';
-                            if (cover.indexOf('//') === 0) cover = 'https:' + cover;
-                        }
-                        items.push({slug: slug, title: title, cover: cover});
-                    }
-                    return JSON.stringify(items);
-                })();
-            """.trimIndent()
-            val json = WebViewScraper.executeJsForString(ctx, url, js)
+            val reqBuilder = Request.Builder().url(url)
+            mangalikHeaders(referer = MANGALIK_BASE + "/").forEach { (k, v) -> reqBuilder.header(k, v) }
+            val req = reqBuilder.build()
             val items = mutableListOf<MangaListItem>()
-            if (!json.isNullOrEmpty()) {
-                try {
-                    val arr = org.json.JSONArray(json)
-                    for (i in 0 until arr.length()) {
-                        try {
-                            val o = arr.getJSONObject(i)
-                            val slug = o.getString("slug")
-                            val title = o.getString("title")
-                            val cover = o.optString("cover", "")
-                            if (slug.isNotEmpty()) {
-                                items.add(MangaListItem(
-                                    id = "mangalik-$slug",
-                                    title = title,
-                                    cover = cover,
-                                    source = "mangalik",
-                                    status = "ongoing"
-                                ))
-                            }
-                        } catch (e: Exception) {}
-                    }
-                } catch (e: Exception) {}
+            proxyClient.newCall(req).execute().use { resp ->
+                if (!resp.isSuccessful) return Result.success(emptyList())
+                val html = resp.body?.string() ?: ""
+                if (html.contains("Just a moment")) {
+                    return Result.failure(Exception("الموقع محمي بـ Cloudflare. حاول لاحقاً."))
+                }
+                items.addAll(parseMangalikListingHtml(html))
             }
             Log.d(TAG, "mangalik search '$query': ${items.size} items")
             Result.success(items)
