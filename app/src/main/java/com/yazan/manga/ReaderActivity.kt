@@ -219,12 +219,6 @@ class ReaderActivity : BaseSwipeBackActivity() {
         btnNextPage = findViewById(R.id.btnNextPage)
         
         // Immersive mode toggle
-        topBar = findViewById(R.id.topBarOverlay)
-        bottomBarView = findViewById(R.id.bottomBar)
-        findViewById<ImageButton?>(R.id.btnImmersive)?.setOnClickListener {
-            toggleImmersive()
-        }
-
         // Next chapter button (hidden until pages are prefetched)
         findViewById<android.widget.ImageButton?>(R.id.btnNextChapter)?.setOnClickListener {
             loadNextChapter()
