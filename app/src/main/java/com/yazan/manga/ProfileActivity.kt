@@ -73,6 +73,7 @@ class ProfileActivity : BaseSwipeBackActivity() {
     private lateinit var loginProgress: ProgressBar
     private lateinit var btnLogout: MaterialButton
     private lateinit var btnChangeName: MaterialButton
+    private lateinit var btnEditName: ImageButton
     private lateinit var btnChangeUsername: MaterialButton
     private lateinit var btnEditProfileInfo: MaterialButton
     private lateinit var btnEditCountry: MaterialButton
@@ -116,6 +117,7 @@ class ProfileActivity : BaseSwipeBackActivity() {
         loginProgress = findViewById(R.id.loginProgress)
         btnLogout = findViewById(R.id.btnLogout)
         btnChangeName = findViewById(R.id.btnChangeName)
+        btnEditName = findViewById(R.id.btnEditName)
         btnChangeUsername = findViewById(R.id.btnChangeUsername)
         btnEditProfileInfo = findViewById(R.id.btnEditProfileInfo)
         btnEditCountry = findViewById(R.id.btnEditCountry)
@@ -132,6 +134,9 @@ class ProfileActivity : BaseSwipeBackActivity() {
             Toast.makeText(this, "تم تسجيل الخروج", Toast.LENGTH_SHORT).show()
         }
         btnChangeName.setOnClickListener {
+            showChangeNameDialog()
+        }
+        btnEditName.setOnClickListener {
             showChangeNameDialog()
         }
         btnChangeUsername.setOnClickListener {
@@ -854,12 +859,14 @@ class ProfileActivity : BaseSwipeBackActivity() {
             )
             statsContainer.visibility = View.VISIBLE
 
-            // Reading statistics
+            // Reading statistics (only for logged-in users)
+            findViewById<View?>(R.id.readingStatsContainer)?.visibility = View.VISIBLE
             loadReadingStats()
 
             btnLogin.visibility = View.GONE
             btnLogout.visibility = View.VISIBLE
-            btnChangeName.visibility = View.VISIBLE
+            btnChangeName.visibility = View.GONE  // hidden — replaced by pencil icon
+            btnEditName.visibility = View.VISIBLE
             btnChangeUsername.visibility = View.VISIBLE
             btnEditProfileInfo.visibility = View.VISIBLE
             btnEditCountry.visibility = View.VISIBLE
@@ -876,9 +883,11 @@ class ProfileActivity : BaseSwipeBackActivity() {
             tvEmail.visibility = View.GONE
             tvAdminBadge.visibility = View.GONE
             statsContainer.visibility = View.GONE
+            findViewById<View?>(R.id.readingStatsContainer)?.visibility = View.GONE
             btnLogin.visibility = View.VISIBLE
             btnLogout.visibility = View.GONE
             btnChangeName.visibility = View.GONE
+            btnEditName.visibility = View.GONE
             btnChangeUsername.visibility = View.GONE
             btnEditProfileInfo.visibility = View.GONE
             btnEditCountry.visibility = View.GONE

@@ -84,6 +84,28 @@ class MainActivity : AppCompatActivity() {
      * of the main screen. Tapping it opens the Reader at the last-read chapter.
      * Hidden if the user has no reading history or isn't signed in.
      */
+    private fun hideTopSections() {
+        try {
+            val cr = findViewById<android.view.View?>(R.id.continueReadingScroll)
+            val ss = findViewById<android.view.View?>(R.id.sourceSelectorContainer)
+            cr?.animate()?.translationY(-cr.height.toFloat())?.alpha(0f)?.setDuration(200)?.start()
+            ss?.animate()?.translationY(-ss.height.toFloat())?.alpha(0f)?.setDuration(200)?.start()
+            cr?.visibility = View.GONE
+            ss?.visibility = View.GONE
+        } catch (e: Exception) {}
+    }
+
+    private fun showTopSections() {
+        try {
+            val cr = findViewById<android.view.View?>(R.id.continueReadingScroll)
+            val ss = findViewById<android.view.View?>(R.id.sourceSelectorContainer)
+            cr?.visibility = View.VISIBLE
+            ss?.visibility = View.VISIBLE
+            cr?.animate()?.translationY(0f)?.alpha(1f)?.setDuration(200)?.start()
+            ss?.animate()?.translationY(0f)?.alpha(1f)?.setDuration(200)?.start()
+        } catch (e: Exception) {}
+    }
+
     private fun loadContinueReading() {
         val user = AuthManager.getCurrentUser(this) ?: run {
             findViewById<android.view.View?>(R.id.continueReadingScroll)?.visibility = View.GONE
@@ -316,6 +338,20 @@ class MainActivity : AppCompatActivity() {
         // Disable item change animations — without this, swapping the list
         // triggers a fade-in/out on every item, which looks like jank.
         (recyclerView.itemAnimator as? androidx.recyclerview.widget.DefaultItemAnimator)?.apply {
+
+        // Hide "Continue Reading" + source selector when scrolling down,
+        // show them when scrolling up (like a collapsing toolbar).
+        recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(rv: RecyclerView, dx: Int, dy: Int) {
+                if (dy > 10) {
+                    // Scrolling down → hide
+                    hideTopSections()
+                } else if (dy < -10) {
+                    // Scrolling up → show
+                    showTopSections()
+                }
+            }
+        })
             changeDuration = 0
             addDuration = 200
             moveDuration = 200
@@ -454,11 +490,21 @@ class MainActivity : AppCompatActivity() {
         setActiveSource("3asq")
 
         tabLatest.setOnClickListener {
-            if (currentTab == "latest") return@setOnClickListener
+            if (currentTab == "latest") {
+                // Already on latest → scroll to top + show hidden sections
+                recyclerView.scrollToPosition(0)
+                showTopSections()
+                return@setOnClickListener
+            }
             currentTab = "latest"; currentPage = 1; setActiveTab(currentTab); loadManga()
         }
         tabPopular.setOnClickListener {
-            if (currentTab == "popular") return@setOnClickListener
+            if (currentTab == "popular") {
+                // Already on popular → scroll to top + show hidden sections
+                recyclerView.scrollToPosition(0)
+                showTopSections()
+                return@setOnClickListener
+            }
             currentTab = "popular"; currentPage = 1; setActiveTab(currentTab); loadManga()
         }
 
