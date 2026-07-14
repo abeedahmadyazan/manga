@@ -146,7 +146,7 @@
                 android:orientation="horizontal"
                 android:gravity="center"
                 android:layout_marginBottom="8dp"
-                android:weightSum="2">
+                android:weightSum="3">
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/chipSource1"
@@ -173,6 +173,20 @@
                     android:textStyle="bold"
                     app:backgroundTint="@null"
                     android:textColor="@color/text_secondary"
+                    android:layout_marginEnd="3dp"
+                    app:cornerRadius="22dp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/chipSource3"
+                    style="@style/Widget.MaterialComponents.Button.TextButton"
+                    android:layout_width="0dp"
+                    android:layout_height="38dp"
+                    android:layout_weight="1"
+                    android:text="مصدر 3"
+                    android:textSize="11sp"
+                    android:textStyle="bold"
+                    app:backgroundTint="@null"
+                    android:textColor="@color/text_secondary"
                     app:cornerRadius="22dp" />
 
             </LinearLayout>
@@ -184,7 +198,7 @@
                 android:orientation="horizontal"
                 android:background="@drawable/bg_segmented_container"
                 android:padding="3dp"
-                android:weightSum="2">
+                android:weightSum="3">
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/tabLatest"

@@ -28,6 +28,7 @@ class MangaRepository(private val appContext: Context? = null) {
     private val ASQ_API = "https://asq-proxy.yznabyd.workers.dev"
     private val CORS_PROXY = "https://proxy.cors.sh/"
     private val ASQ_BASE = "https://3asq.online"
+    private val MANGATEK_BASE = "https://mangatek.com"
     private val CDN_CACHE_BASE = "https://raw.githubusercontent.com/abeedahmadyazan/manga/gh-pages/cache"
     private val CDN_CACHE_TTL_MS = 2 * 60 * 60 * 1000L  // 2 hours
 
@@ -106,6 +107,8 @@ class MangaRepository(private val appContext: Context? = null) {
                 val items = fetch3asqListing(page)
                 if (items.isNotEmpty()) Result.success(items)
                 else Result.failure(Exception("تعذّر تحميل المانجا. حاول لاحقاً."))
+            } else if (contentType == "mangatek") {
+                fetchMangatekListing(page)
             } else {
                 // مصدر 1: MangaDex
                 fetchMangaDexList(page, "latest")
@@ -122,6 +125,8 @@ class MangaRepository(private val appContext: Context? = null) {
                 items.shuffle()
                 if (items.isNotEmpty()) Result.success(items)
                 else Result.failure(Exception("تعذّر تحميل المانجا. حاول لاحقاً."))
+            } else if (contentType == "mangatek") {
+                fetchMangatekListing(page)
             } else {
                 // مصدر 1: MangaDex popular
                 fetchMangaDexList(page, "popular")
@@ -169,6 +174,8 @@ class MangaRepository(private val appContext: Context? = null) {
                     }
                     Result.success(items)
                 }
+            } else if (contentType == "mangatek") {
+                fetchMangatekSearch(query)
             } else {
                 // Search MangaDex (مصدر 1)
                 val encoded = java.net.URLEncoder.encode(query, "UTF-8")
@@ -408,6 +415,176 @@ class MangaRepository(private val appContext: Context? = null) {
 
 
 
+
+    // ============================================================
+    //  mangatek.com (مصدر 3 — عربي، CF-protected → StealthWebView)
+    // ============================================================
+
+    private suspend fun fetchMangatekListing(page: Int): Result<List<MangaListItem>> {
+        return try {
+            val ctx = appContext ?: return Result.failure(Exception("لا يوجد سياق"))
+            val url = "$MANGATEK_BASE/latest?sort=updated_at&page=$page"
+            val js = """
+                (function(){
+                    var items = [];
+                    var cards = document.querySelectorAll('.manga-card, .manga-item, .item, [class*="manga"]');
+                    if (cards.length === 0) {
+                        var links = document.querySelectorAll('a[href*="/manga/"]');
+                        links.forEach(function(a) {
+                            var href = a.href;
+                            var m = href.match(/manga\/([^/?#]+)/);
+                            if (!m) return;
+                            var slug = m[1];
+                            var title = a.textContent.trim();
+                            if (title.length < 2) return;
+                            var img = a.querySelector('img') || a.parentElement.querySelector('img');
+                            var cover = img ? (img.src || img.getAttribute('data-src') || '') : '';
+                            if (cover.indexOf('//') === 0) cover = 'https:' + cover;
+                            items.push({slug: slug, title: title, cover: cover});
+                        });
+                    } else {
+                        cards.forEach(function(c) {
+                            var a = c.querySelector('a[href*="/manga/"]');
+                            if (!a) return;
+                            var m = a.href.match(/manga\/([^/?#]+)/);
+                            if (!m) return;
+                            var slug = m[1];
+                            var t = c.querySelector('h3, h2, .title, .name, p');
+                            var title = t ? t.textContent.trim() : slug;
+                            var img = c.querySelector('img');
+                            var cover = img ? (img.src || img.getAttribute('data-src') || '') : '';
+                            if (cover.indexOf('//') === 0) cover = 'https:' + cover;
+                            items.push({slug: slug, title: title, cover: cover});
+                        });
+                    }
+                    var seen = {};
+                    var unique = [];
+                    items.forEach(function(i) {
+                        if (!seen[i.slug] && i.slug) { seen[i.slug] = true; unique.push(i); }
+                    });
+                    return JSON.stringify(unique);
+                })();
+            """.trimIndent()
+            val json = StealthWebView.scrape(ctx, url, js)
+            val items = mutableListOf<MangaListItem>()
+            if (!json.isNullOrEmpty()) {
+                try {
+                    val arr = JSONArray(json)
+                    for (i in 0 until arr.length()) {
+                        try {
+                            val o = arr.getJSONObject(i)
+                            val slug = o.getString("slug")
+                            val title = o.getString("title")
+                            val cover = o.optString("cover", "")
+                            if (slug.isNotEmpty()) {
+                                items.add(MangaListItem(id = "mangatek-$slug", title = title, cover = cover, source = "mangatek", status = "ongoing"))
+                            }
+                        } catch (e: Exception) {}
+                    }
+                } catch (e: Exception) { Log.w(TAG, "mangatek listing parse: ${e.message}") }
+            }
+            Log.d(TAG, "mangatek listing page $page: ${items.size} items")
+            if (items.isNotEmpty()) Result.success(items) else Result.failure(Exception("تعذّر تحميل المانجا"))
+        } catch (e: Exception) { Result.failure(e) }
+    }
+
+    private suspend fun fetchMangatekSearch(query: String): Result<List<MangaListItem>> {
+        return try {
+            val ctx = appContext ?: return Result.failure(Exception("لا يوجد سياق"))
+            val encoded = java.net.URLEncoder.encode(query, "UTF-8")
+            val url = "$MANGATEK_BASE?search=$encoded"
+            // Try the search page
+            val searchUrl = "$MANGATEK_BASE/search?q=$encoded"
+            val js = """
+                (function(){
+                    var items = [];
+                    var links = document.querySelectorAll('a[href*="/manga/"]');
+                    links.forEach(function(a) {
+                        var m = a.href.match(/manga\/([^/?#]+)/);
+                        if (!m) return;
+                        var slug = m[1];
+                        var title = a.textContent.trim();
+                        if (title.length < 2) return;
+                        var img = a.querySelector('img') || (a.parentElement && a.parentElement.querySelector('img'));
+                        var cover = img ? (img.src || img.getAttribute('data-src') || '') : '';
+                        if (cover.indexOf('//') === 0) cover = 'https:' + cover;
+                        items.push({slug: slug, title: title, cover: cover});
+                    });
+                    var seen = {}; var unique = [];
+                    items.forEach(function(i) { if (!seen[i.slug] && i.slug) { seen[i.slug] = true; unique.push(i); } });
+                    return JSON.stringify(unique);
+                })();
+            """.trimIndent()
+            val json = StealthWebView.scrape(ctx, searchUrl, js)
+            val items = mutableListOf<MangaListItem>()
+            if (!json.isNullOrEmpty()) {
+                try {
+                    val arr = JSONArray(json)
+                    for (i in 0 until arr.length()) {
+                        try {
+                            val o = arr.getJSONObject(i)
+                            items.add(MangaListItem(id = "mangatek-" + o.getString("slug"), title = o.getString("title"), cover = o.optString("cover", ""), source = "mangatek", status = "ongoing"))
+                        } catch (e: Exception) {}
+                    }
+                } catch (e: Exception) {}
+            }
+            Log.d(TAG, "mangatek search '$query': ${items.size} items")
+            Result.success(items)
+        } catch (e: Exception) { Result.failure(e) }
+    }
+
+    private suspend fun fetchMangatekDetails(slug: String): MangaDetails? {
+        return try {
+            val ctx = appContext ?: return null
+            val url = "$MANGATEK_BASE/manga/$slug"
+            val js = """
+                (function(){
+                    var title = '';
+                    var th = document.querySelector('h1, h2, .post-title h1, .manga-title');
+                    if (th) title = th.textContent.trim();
+                    var cover = '';
+                    var ci = document.querySelector('.summary_image img, .manga-cover img, img.wp-post-image');
+                    if (ci) cover = ci.src || ci.getAttribute('data-src') || '';
+                    if (cover.indexOf('//') === 0) cover = 'https:' + cover;
+                    var desc = '';
+                    var de = document.querySelector('.description-summary, .summary__content, .manga-excerpt');
+                    if (de) desc = de.textContent.trim().substring(0, 500);
+                    var chapters = [];
+                    var chs = document.querySelectorAll('a[href*="/manga/' + slug + '/"]');
+                    chs.forEach(function(a) {
+                        var href = a.href;
+                        var m = href.match(/manga\/[^/]+\/([^/?#]+)/);
+                        if (!m) return;
+                        var num = m[1].replace('chapter-', '').replace('ch-', '');
+                        if (!/^[0-9.]+$/.test(num)) return;
+                        chapters.push({num: num, url: href});
+                    });
+                    var seen = {}; var unique = [];
+                    chapters.forEach(function(c) { if (!seen[c.num]) { seen[c.num] = true; unique.push(c); } });
+                    return JSON.stringify({title: title, cover: cover, desc: desc, chapters: unique});
+                })();
+            """.trimIndent()
+            val json = StealthWebView.scrape(ctx, url, js)
+            if (json.isNullOrEmpty()) return null
+            val o = org.json.JSONObject(json)
+            val title = o.optString("title", slug.replace("-", " ").replaceFirstChar { it.uppercase() })
+            val cover = o.optString("cover", "")
+            val desc = o.optString("desc", "")
+            val chArr = o.optJSONArray("chapters") ?: return null
+            val chapters = mutableListOf<MangaChapter>()
+            for (i in 0 until chArr.length()) {
+                try {
+                    val ch = chArr.getJSONObject(i)
+                    val num = ch.getString("num")
+                    chapters.add(MangaChapter(id = "mangatek-$slug-$num", number = num, title = "الفصل $num", date = "", source = "mangatek"))
+                } catch (e: Exception) {}
+            }
+            Log.d(TAG, "mangatek details '$slug': ${chapters.size} chapters")
+            MangaDetails(id = "mangatek-$slug", title = title, cover = cover, description = desc, author = "", artist = "", status = "ongoing", genres = listOf("مانجا"), chapters = chapters.sortedByDescending { it.number.toFloatOrNull() ?: 0f }, source = "mangatek", latestChapter = chapters.firstOrNull()?.number, rating = null, sources = emptyList(), chaptersBySource = emptyMap())
+        } catch (e: Exception) { Log.e(TAG, "fetchMangatekDetails: ${e.message}"); null }
+    }
+
+
     private fun fetchList(url: String): List<MangaListItem> {
         val req = Request.Builder().url(url).header("User-Agent", UA).header("Accept", "application/json").build()
         proxyClient.newCall(req).execute().use { resp ->
@@ -496,6 +673,14 @@ class MangaRepository(private val appContext: Context? = null) {
         // 3asq manga: fetch details + chapters from 3asq.online via the
         // Netlify proxy (3asq-api.netlify.app). 3asq hosts Arabic manhwa,
         // manhua, and manga — all with full Arabic chapter translations.
+        if (id.startsWith("mangatek-")) {
+            val slug = id.removePrefix("mangatek-")
+            return try {
+                val details = fetchMangatekDetails(slug)
+                if (details != null) Result.success(details)
+                else Result.failure(Exception("تعذّر تحميل التفاصيل"))
+            } catch (e: Exception) { Result.failure(e) }
+        }
         if (id.startsWith("3asq-")) {
             val slug = id.removePrefix("3asq-")
             return try {
@@ -934,7 +1119,46 @@ class MangaRepository(private val appContext: Context? = null) {
 
     suspend fun getChapterPages(chapter: MangaChapter): Result<List<ChapterPage>> {
         return try {
-            if (chapter.source == "3asq") {
+            if (chapter.source == "mangatek") {
+                val idWithoutPrefix = chapter.id.removePrefix("mangatek-")
+                val num = idWithoutPrefix.substringAfterLast("-")
+                val slug = idWithoutPrefix.substringBeforeLast("-")
+                if (slug.isNotBlank() && num.isNotBlank()) {
+                    val url = "$MANGATEK_BASE/manga/$slug"
+                    Log.d(TAG, "mangatek pages: $url")
+                    val ctx = appContext
+                    if (ctx != null) {
+                        val images = StealthWebView.scrape(ctx, url, """
+                            (function(){
+                                var urls = [];
+                                var imgs = document.querySelectorAll('img.wp-manga-chapter-img, .reading-content img, .read-container img');
+                                for (var i = 0; i < imgs.length; i++) {
+                                    var src = imgs[i].src || imgs[i].getAttribute('data-src') || imgs[i].getAttribute('data-lazy-src') || '';
+                                    if (!src) continue;
+                                    if (src.indexOf('//') === 0) src = 'https:' + src;
+                                    if (src.indexOf('logo') >= 0 || src.indexOf('avatar') >= 0 || src.indexOf('favicon') >= 0) continue;
+                                    if (src.indexOf('wp-content/uploads') < 0 && src.indexOf('manga') < 0) continue;
+                                    urls.push(src);
+                                }
+                                return JSON.stringify(urls);
+                            })();
+                        """)
+                        if (!images.isNullOrEmpty()) {
+                            try {
+                                val arr = JSONArray(images)
+                                val pages = mutableListOf<ChapterPage>()
+                                for (i in 0 until arr.length()) {
+                                    pages.add(ChapterPage(index = i, url = arr.getString(i)))
+                                }
+                                if (pages.isNotEmpty()) return Result.success(pages)
+                            } catch (e: Exception) {}
+                        }
+                    }
+                    Result.failure(Exception("تعذّر تحميل صفحات هذا الفصل"))
+                } else {
+                    Result.failure(Exception("معرّف الفصل غير صالح"))
+                }
+            } else if (chapter.source == "3asq") {
                 // Extract slug and chapter number from the chapter id
                 // chapter.id format: "3asq-{slug}-{num}" where slug may contain dashes
                 // e.g. "3asq-one-piece-1188" → slug="one-piece", num="1188"
