@@ -107,7 +107,11 @@ class MangaRepository(private val appContext: Context? = null) {
             if (contentType == "3asq") {
                 val items = fetch3asqListing(page)
                 if (items.isNotEmpty()) Result.success(items)
-                else Result.failure(Exception("تعذّر تحميل المانجا. حاول لاحقاً."))
+                else {
+                    // 3asq is down → fallback to MangaDex automatically
+                    Log.w(TAG, "3asq listing failed, falling back to MangaDex")
+                    fetchMangaDexList(page, "latest")
+                }
             } else if (contentType == "mangatek") {
                 fetchMangatekListing(page)
             } else {
@@ -125,7 +129,10 @@ class MangaRepository(private val appContext: Context? = null) {
                 val items = fetch3asqListing(page).toMutableList()
                 items.shuffle()
                 if (items.isNotEmpty()) Result.success(items)
-                else Result.failure(Exception("تعذّر تحميل المانجا. حاول لاحقاً."))
+                else {
+                    Log.w(TAG, "3asq popular failed, falling back to MangaDex")
+                    fetchMangaDexList(page, "popular")
+                }
             } else if (contentType == "mangatek") {
                 fetchMangatekListing(page)
             } else {
@@ -155,25 +162,34 @@ class MangaRepository(private val appContext: Context? = null) {
         return try {
             if (contentType == "3asq") {
                 // Search 3asq via proxy
-                val encoded = java.net.URLEncoder.encode(query, "UTF-8")
-                val url = "$ASQ_API/search?q=$encoded"
-                val req = Request.Builder().url(url).header("Accept", "application/json").build()
-                proxyClient.newCall(req).execute().use { resp ->
-                    if (!resp.isSuccessful) return Result.success(emptyList())
-                    val body = resp.body?.string() ?: return Result.success(emptyList())
-                    val root = JsonParser.parseString(body).asJsonObject
-                    val arr = root.getAsJsonArray("items") ?: return Result.success(emptyList())
-                    val items = mutableListOf<MangaListItem>()
-                    for (i in 0 until arr.size()) {
-                        try {
-                            val item = arr[i].asJsonObject
-                            val id = item.get("id")?.asString ?: continue
-                            val title = item.get("title")?.asString ?: continue
-                            val cover = item.get("cover")?.asString ?: ""
-                            items.add(MangaListItem(id = "3asq-$id", title = title, cover = cover, source = "3asq", status = "ongoing"))
-                        } catch (e: Exception) {}
+                try {
+                    val encoded = java.net.URLEncoder.encode(query, "UTF-8")
+                    val url = "$ASQ_API/search?q=$encoded"
+                    val req = Request.Builder().url(url).header("Accept", "application/json").build()
+                    proxyClient.newCall(req).execute().use { resp ->
+                        if (!resp.isSuccessful) {
+                            // 3asq down → fallback to MangaDex search
+                            Log.w(TAG, "3asq search failed, falling back to MangaDex")
+                            return@try fetchMangaDexSearchFallback(query)
+                        }
+                        val body = resp.body?.string() ?: return@try fetchMangaDexSearchFallback(query)
+                        val root = JsonParser.parseString(body).asJsonObject
+                        val arr = root.getAsJsonArray("items") ?: return@try fetchMangaDexSearchFallback(query)
+                        val items = mutableListOf<MangaListItem>()
+                        for (i in 0 until arr.size()) {
+                            try {
+                                val item = arr[i].asJsonObject
+                                val id = item.get("id")?.asString ?: continue
+                                val title = item.get("title")?.asString ?: continue
+                                val cover = item.get("cover")?.asString ?: ""
+                                items.add(MangaListItem(id = "3asq-$id", title = title, cover = cover, source = "3asq", status = "ongoing"))
+                            } catch (e: Exception) {}
+                        }
+                        if (items.isEmpty()) fetchMangaDexSearchFallback(query) else Result.success(items)
                     }
-                    Result.success(items)
+                } catch (e: Exception) {
+                    Log.w(TAG, "3asq search exception, fallback to MangaDex")
+                    fetchMangaDexSearchFallback(query)
                 }
             } else if (contentType == "mangatek") {
                 fetchMangatekSearch(query)
@@ -417,6 +433,17 @@ class MangaRepository(private val appContext: Context? = null) {
 
 
 
+    /** Fallback: search MangaDex when 3asq is down. */
+    private fun fetchMangaDexSearchFallback(query: String): Result<List<MangaListItem>> {
+        return try {
+            val encoded = java.net.URLEncoder.encode(query, "UTF-8")
+            val offset = 0
+            val url = "https://api.mangadex.org/manga?title=$encoded&limit=20&offset=$offset&availableTranslatedLanguage[]=ar&hasAvailableChapters=true&order[relevance]=desc&includes[]=cover_art&contentRating[]=safe&contentRating[]=suggestive&contentRating[]=erotica"
+            val items = fetchList(url)
+            Result.success(items)
+        } catch (e: Exception) { Result.success(emptyList()) }
+    }
+
     // ============================================================
     //  mangatek.com (مصدر 3 — عربي، CF-protected → StealthWebView)
     // ============================================================
@@ -428,40 +455,48 @@ class MangaRepository(private val appContext: Context? = null) {
             val js = """
                 (function(){
                     var items = [];
-                    var cards = document.querySelectorAll('.manga-card, .manga-item, .item, [class*="manga"]');
-                    if (cards.length === 0) {
-                        var links = document.querySelectorAll('a[href*="/manga/"]');
-                        links.forEach(function(a) {
-                            var href = a.href;
-                            var m = href.match(/manga\/([^/?#]+)/);
-                            if (!m) return;
-                            var slug = m[1];
-                            var title = a.textContent.trim();
-                            if (title.length < 2) return;
-                            var img = a.querySelector('img') || a.parentElement.querySelector('img');
-                            var cover = img ? (img.src || img.getAttribute('data-src') || '') : '';
+                    // Try MANY selector patterns — mangatek may use any of these
+                    var allLinks = document.querySelectorAll('a[href*="/manga/"]');
+                    allLinks.forEach(function(a) {
+                        var href = a.href || '';
+                        // Extract slug from URL: /manga/{slug} or /manga/{slug}/...
+                        var m = href.match(/manga\/([^/?#]+)/);
+                        if (!m) return;
+                        var slug = m[1];
+                        if (slug === 'manga' || slug.length < 2) return;
+                        
+                        // Find title: check the link itself + nearby elements
+                        var title = '';
+                        var titleEl = a.querySelector('h1,h2,h3,h4,.title,.name,.manga-title,p,strong');
+                        if (titleEl) title = titleEl.textContent.trim();
+                        if (!title) title = a.textContent.trim();
+                        if (!title || title.length < 2) {
+                            // Try parent's text
+                            var p = a.parentElement;
+                            if (p) {
+                                var t = p.querySelector('h1,h2,h3,h4,.title,.name,p,strong');
+                                if (t) title = t.textContent.trim();
+                            }
+                        }
+                        if (!title) title = slug.replace(/-/g, ' ');
+                        
+                        // Find cover image
+                        var cover = '';
+                        var img = a.querySelector('img');
+                        if (!img && a.parentElement) img = a.parentElement.querySelector('img');
+                        if (!img && a.parentElement && a.parentElement.parentElement) img = a.parentElement.parentElement.querySelector('img');
+                        if (img) {
+                            cover = img.src || img.getAttribute('data-src') || img.getAttribute('data-lazy-src') || '';
                             if (cover.indexOf('//') === 0) cover = 'https:' + cover;
-                            items.push({slug: slug, title: title, cover: cover});
-                        });
-                    } else {
-                        cards.forEach(function(c) {
-                            var a = c.querySelector('a[href*="/manga/"]');
-                            if (!a) return;
-                            var m = a.href.match(/manga\/([^/?#]+)/);
-                            if (!m) return;
-                            var slug = m[1];
-                            var t = c.querySelector('h3, h2, .title, .name, p');
-                            var title = t ? t.textContent.trim() : slug;
-                            var img = c.querySelector('img');
-                            var cover = img ? (img.src || img.getAttribute('data-src') || '') : '';
-                            if (cover.indexOf('//') === 0) cover = 'https:' + cover;
-                            items.push({slug: slug, title: title, cover: cover});
-                        });
-                    }
-                    var seen = {};
-                    var unique = [];
+                        }
+                        
+                        items.push({slug: slug, title: title, cover: cover});
+                    });
+                    
+                    // Deduplicate by slug
+                    var seen = {}; var unique = [];
                     items.forEach(function(i) {
-                        if (!seen[i.slug] && i.slug) { seen[i.slug] = true; unique.push(i); }
+                        if (!seen[i.slug]) { seen[i.slug] = true; unique.push(i); }
                     });
                     return JSON.stringify(unique);
                 })();
