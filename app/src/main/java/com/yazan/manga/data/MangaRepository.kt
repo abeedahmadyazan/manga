@@ -106,7 +106,10 @@ class MangaRepository(private val appContext: Context? = null) {
             if (contentType == "3asq") {
                 val items = fetch3asqListing(page)
                 if (items.isNotEmpty()) Result.success(items)
-                else Result.failure(Exception("تعذّر تحميل المانجا. حاول لاحقاً."))
+                else {
+                    Log.w(TAG, "3asq down, fallback to MangaDex")
+                    fetchMangaDexList(page, "latest")
+                }
             } else {
                 // مصدر 1: MangaDex
                 fetchMangaDexList(page, "latest")
@@ -122,7 +125,10 @@ class MangaRepository(private val appContext: Context? = null) {
                 val items = fetch3asqListing(page).toMutableList()
                 items.shuffle()
                 if (items.isNotEmpty()) Result.success(items)
-                else Result.failure(Exception("تعذّر تحميل المانجا. حاول لاحقاً."))
+                else {
+                    Log.w(TAG, "3asq down, fallback to MangaDex")
+                    fetchMangaDexList(page, "popular")
+                }
             } else {
                 // مصدر 1: MangaDex popular
                 fetchMangaDexList(page, "popular")
@@ -154,10 +160,13 @@ class MangaRepository(private val appContext: Context? = null) {
                 val url = "$ASQ_API/search?q=$encoded"
                 val req = Request.Builder().url(url).header("Accept", "application/json").build()
                 proxyClient.newCall(req).execute().use { resp ->
-                    if (!resp.isSuccessful) return Result.success(emptyList())
-                    val body = resp.body?.string() ?: return Result.success(emptyList())
+                    if (!resp.isSuccessful) {
+                        Log.w(TAG, "3asq search down, fallback to MangaDex")
+                        return@use fetchMangaDexSearchFallback(query)
+                    }
+                    val body = resp.body?.string() ?: return@use fetchMangaDexSearchFallback(query)
                     val root = JsonParser.parseString(body).asJsonObject
-                    val arr = root.getAsJsonArray("items") ?: return Result.success(emptyList())
+                    val arr = root.getAsJsonArray("items") ?: return@use fetchMangaDexSearchFallback(query)
                     val items = mutableListOf<MangaListItem>()
                     for (i in 0 until arr.size()) {
                         try {
@@ -409,6 +418,16 @@ class MangaRepository(private val appContext: Context? = null) {
 
 
 
+
+    /** Fallback: search MangaDex when 3asq is down. */
+    private fun fetchMangaDexSearchFallback(query: String): Result<List<MangaListItem>> {
+        return try {
+            val encoded = java.net.URLEncoder.encode(query, "UTF-8")
+            val url = "https://api.mangadex.org/manga?title=$encoded&limit=20&availableTranslatedLanguage[]=ar&hasAvailableChapters=true&order[relevance]=desc&includes[]=cover_art&contentRating[]=safe&contentRating[]=suggestive&contentRating[]=erotica"
+            val items = fetchList(url)
+            Result.success(items)
+        } catch (e: Exception) { Result.success(emptyList()) }
+    }
 
     private fun fetchList(url: String): List<MangaListItem> {
         val req = Request.Builder().url(url).header("User-Agent", UA).header("Accept", "application/json").build()
