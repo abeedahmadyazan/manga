@@ -161,34 +161,39 @@ class MangaRepository(private val appContext: Context? = null) {
     suspend fun searchManga(query: String, page: Int = 1, contentType: String = "3asq"): Result<List<MangaListItem>> {
         return try {
             if (contentType == "3asq") {
-                // Search 3asq via proxy
+                // Search 3asq via proxy — with MangaDex fallback
+                var asqResult: Result<List<MangaListItem>>? = null
                 try {
                     val encoded = java.net.URLEncoder.encode(query, "UTF-8")
                     val url = "$ASQ_API/search?q=$encoded"
                     val req = Request.Builder().url(url).header("Accept", "application/json").build()
                     proxyClient.newCall(req).execute().use { resp ->
-                        if (!resp.isSuccessful) {
-                            // 3asq down → fallback to MangaDex search
-                            Log.w(TAG, "3asq search failed, falling back to MangaDex")
-                            return@try fetchMangaDexSearchFallback(query)
+                        if (resp.isSuccessful) {
+                            val body = resp.body?.string() ?: ""
+                            val root = JsonParser.parseString(body).asJsonObject
+                            val arr = root.getAsJsonArray("items")
+                            if (arr != null && arr.size() > 0) {
+                                val items = mutableListOf<MangaListItem>()
+                                for (i in 0 until arr.size()) {
+                                    try {
+                                        val item = arr[i].asJsonObject
+                                        val id = item.get("id")?.asString ?: continue
+                                        val title = item.get("title")?.asString ?: continue
+                                        val cover = item.get("cover")?.asString ?: ""
+                                        items.add(MangaListItem(id = "3asq-$id", title = title, cover = cover, source = "3asq", status = "ongoing"))
+                                    } catch (e: Exception) {}
+                                }
+                                if (items.isNotEmpty()) asqResult = Result.success(items)
+                            }
                         }
-                        val body = resp.body?.string() ?: return@try fetchMangaDexSearchFallback(query)
-                        val root = JsonParser.parseString(body).asJsonObject
-                        val arr = root.getAsJsonArray("items") ?: return@try fetchMangaDexSearchFallback(query)
-                        val items = mutableListOf<MangaListItem>()
-                        for (i in 0 until arr.size()) {
-                            try {
-                                val item = arr[i].asJsonObject
-                                val id = item.get("id")?.asString ?: continue
-                                val title = item.get("title")?.asString ?: continue
-                                val cover = item.get("cover")?.asString ?: ""
-                                items.add(MangaListItem(id = "3asq-$id", title = title, cover = cover, source = "3asq", status = "ongoing"))
-                            } catch (e: Exception) {}
-                        }
-                        if (items.isEmpty()) fetchMangaDexSearchFallback(query) else Result.success(items)
                     }
                 } catch (e: Exception) {
-                    Log.w(TAG, "3asq search exception, fallback to MangaDex")
+                    Log.w(TAG, "3asq search exception: ${'$'}{e.message}")
+                }
+                // Return 3asq result if we got one, otherwise fallback to MangaDex
+                if (asqResult != null) asqResult!!
+                else {
+                    Log.w(TAG, "3asq search failed, falling back to MangaDex")
                     fetchMangaDexSearchFallback(query)
                 }
             } else if (contentType == "mangatek") {
