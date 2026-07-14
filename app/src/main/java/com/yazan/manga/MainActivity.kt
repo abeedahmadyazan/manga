@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity() {
 
     private val repository = MangaRepository(this)
     private var currentTab = "latest"
-    private var currentContentType = "3asq"  // 3asq = مصدر 2, manga = مصدر 1
+    private var currentContentType = "manga"  // 3asq = مصدر 2, manga = مصدر 1
     private var currentPage = 1
     private var isLoading = false
 
@@ -390,9 +390,9 @@ class MainActivity : AppCompatActivity() {
         }
 
         chipSource1.setOnClickListener { if (currentContentType != "manga") setActiveSource("manga") }
-        chipSource2.setOnClickListener { if (currentContentType != "3asq") setActiveSource("3asq") }
+        chipSource2.setOnClickListener { if (currentContentType != "3asq") setActiveSource("manga") }
 
-        setActiveSource("3asq")
+        setActiveSource("manga")
 
         tabLatest.setOnClickListener {
             if (currentTab == "latest") {

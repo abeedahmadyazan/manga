@@ -484,8 +484,14 @@ class ReaderActivity : BaseSwipeBackActivity() {
         inner class PageVH(v: View) : RecyclerView.ViewHolder(v) {
             private val pageImage: ZoomableImageView = v.findViewById(R.id.pageImage)
             private val pageProgress: ProgressBar = v.findViewById(R.id.pageProgress)
+            private val tvProgress: TextView = v.findViewById(R.id.tvProgress)
+            private val dlProgress: ProgressBar = v.findViewById(R.id.pageDownloadProgress)
             fun bind(url: String, position: Int) {
                 pageProgress.visibility = View.VISIBLE
+                tvProgress.visibility = View.VISIBLE
+                tvProgress.text = "جارٍ التحميل..."
+                dlProgress.visibility = View.VISIBLE
+                dlProgress.progress = 0
 
                 // Adjust layout based on reading mode
                 val imageParams = pageImage.layoutParams
@@ -542,6 +548,8 @@ class ReaderActivity : BaseSwipeBackActivity() {
                             isFirstResource: Boolean
                         ): Boolean {
                             pageProgress.visibility = View.GONE
+                            tvProgress.visibility = View.GONE
+                            dlProgress.visibility = View.GONE
                             return false
                         }
                         override fun onLoadFailed(
@@ -551,6 +559,8 @@ class ReaderActivity : BaseSwipeBackActivity() {
                             isFirstResource: Boolean
                         ): Boolean {
                             pageProgress.visibility = View.GONE
+                            tvProgress.visibility = View.GONE
+                            dlProgress.visibility = View.GONE
                             return false
                         }
                     })
