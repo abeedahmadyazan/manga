@@ -1,7 +1,35 @@
 {
-  "updated_at": "2026-07-15T02:10:32.801317+00:00",
+  "updated_at": "2026-07-15T08:04:42.910212+00:00",
   "count": 50,
   "items": [
+    {
+      "id": "baa95345-24fb-47a9-83e9-434ff671f968",
+      "title": "خلف المتجر ادخن معك",
+      "cover": "https://uploads.mangadex.org/covers/baa95345-24fb-47a9-83e9-434ff671f968/2d66388f-7821-4723-8daa-f30394d882d1.png.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "5b93fa0f-0640-49b8-974e-954b9959929b",
+      "title": "Girls' Last Tour",
+      "cover": "https://uploads.mangadex.org/covers/5b93fa0f-0640-49b8-974e-954b9959929b/67d556f5-91d4-4b85-b287-2f74f008e564.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "936f0ba5-ca65-4de4-99b1-528c02a4454d",
+      "title": "Hunter x Hunter (Official Colored)",
+      "cover": "https://uploads.mangadex.org/covers/936f0ba5-ca65-4de4-99b1-528c02a4454d/c08c2728-5af5-4a6e-83e0-f665280c866c.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "0a580438-bc72-4503-940b-12a5da881b56",
+      "title": "أنتِ زهرة الحظ",
+      "cover": "https://uploads.mangadex.org/covers/0a580438-bc72-4503-940b-12a5da881b56/739831ad-7ac1-4707-871f-644188450cf5.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
     {
       "id": "25e1d17b-6a4d-4698-a4f6-bf53460c10af",
       "title": "Bus For Two",
@@ -321,34 +349,6 @@
       "id": "9d3d3403-1a87-4737-9803-bc3d99db1424",
       "title": "The Guy She Was Interested in Wasn't a Guy at All",
       "cover": "https://uploads.mangadex.org/covers/9d3d3403-1a87-4737-9803-bc3d99db1424/fac191d0-96c1-4ebb-bf79-b7616d7162ac.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "2d501d2e-72d5-4c3f-9741-117511622a48",
-      "title": "Inazuma Eleven GO Anthology!",
-      "cover": "https://uploads.mangadex.org/covers/2d501d2e-72d5-4c3f-9741-117511622a48/2f28ddc4-5524-44ce-a944-accb1f7b576c.png.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
-      "id": "db692d58-4b13-4174-ae8c-30c515c0689c",
-      "title": "Hunter x Hunter",
-      "cover": "https://uploads.mangadex.org/covers/db692d58-4b13-4174-ae8c-30c515c0689c/aa112927-f1e5-4fe4-a4db-7fd4a1536e3c.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "17a56d33-9443-433a-9e0d-70459893ed8f",
-      "title": "My Wife Is From a Thousand Years Ago",
-      "cover": "https://uploads.mangadex.org/covers/17a56d33-9443-433a-9e0d-70459893ed8f/8d105d4e-a60e-4284-8321-d0904906574e.png.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
-      "id": "b7d069cb-4ab9-4c21-a20b-38f7c269be4e",
-      "title": "One-Punch Man (Webcomic)",
-      "cover": "https://uploads.mangadex.org/covers/b7d069cb-4ab9-4c21-a20b-38f7c269be4e/4ce12757-93fe-40af-950c-b55c7500dbfa.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     }
