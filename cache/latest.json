@@ -1,11 +1,32 @@
 {
-  "updated_at": "2026-07-16T08:08:52.264493+00:00",
+  "updated_at": "2026-07-16T13:44:48.919146+00:00",
   "count": 50,
   "items": [
     {
       "id": "ab8cbb82-d0ed-45a7-8ffe-4bfa6d43d79c",
       "title": "JoJo's Bizarre Adventure Part 9 - The JOJOLands",
       "cover": "https://uploads.mangadex.org/covers/ab8cbb82-d0ed-45a7-8ffe-4bfa6d43d79c/f47d473d-7b43-4283-9e47-9a0168dc77e1.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "1afa2287-8408-4b17-9195-c42902153cfb",
+      "title": "Is It Because of Love That I Can't Resist?",
+      "cover": "https://uploads.mangadex.org/covers/1afa2287-8408-4b17-9195-c42902153cfb/28607917-9a32-4ef6-8f59-e8a383cedf98.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "85a99758-de39-471e-9f6d-800547f53d0a",
+      "title": "Tougen Anki: Legend of the Cursed Blood",
+      "cover": "https://uploads.mangadex.org/covers/85a99758-de39-471e-9f6d-800547f53d0a/e9fdf5a2-69d6-4e10-88c1-d5a50b9202c6.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "d553645b-03a3-4fc8-9a9c-57f91cbbab89",
+      "title": "Are You a Landmine, Chihara-san?",
+      "cover": "https://uploads.mangadex.org/covers/d553645b-03a3-4fc8-9a9c-57f91cbbab89/43718c35-9f27-446d-b95d-cd7a2f2de3d2.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
@@ -330,27 +351,6 @@
       "cover": "https://uploads.mangadex.org/covers/484f94e7-35c3-4cb5-a068-53d684c1439a/863ae891-3627-4070-8918-4a626dc9d1ff.png.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
-    },
-    {
-      "id": "510f29a8-99b4-46af-ba5e-916e96bc6f37",
-      "title": "Fate/type Redline",
-      "cover": "https://uploads.mangadex.org/covers/510f29a8-99b4-46af-ba5e-916e96bc6f37/c1d7aed1-9cd1-426f-bfb8-7e46594d0e29.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "f7b62193-bdfb-4953-a6c6-0bd1b9a872f9",
-      "title": "نداء البوق: لحن المعركة",
-      "cover": "https://uploads.mangadex.org/covers/f7b62193-bdfb-4953-a6c6-0bd1b9a872f9/85c12e60-fd34-402b-a62a-f2fc2fde5a28.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "c62b73e5-0cfb-4aef-9425-60393477ab6c",
-      "title": "Dragon Ball Kakumei (Doujinshi)",
-      "cover": "https://uploads.mangadex.org/covers/c62b73e5-0cfb-4aef-9425-60393477ab6c/f273e21d-926a-45ca-bd3f-5a223f9c3336.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "cancelled"
     }
   ]
 }
