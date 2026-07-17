@@ -31,7 +31,7 @@ class SettingsActivity : BaseSwipeBackActivity() {
         // ===== المظهر =====
         val switchDarkMode = findViewById<SwitchCompat>(R.id.switchDarkMode)
         val tvDarkModeLabel = findViewById<TextView?>(R.id.tvDarkMode)
-        val darkMode = prefs.getString("theme_mode", "dark")
+        val darkMode = prefs.getString("theme_mode", null) ?: if (prefs.getBoolean("dark_mode", true)) "dark" else "light"
         when (darkMode) {
             "light" -> {
                 switchDarkMode.isChecked = false

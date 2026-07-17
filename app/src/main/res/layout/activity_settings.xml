@@ -86,7 +86,6 @@
                     android:textColor="@color/text_primary"
                     android:textSize="15sp" />
 
-                </LinearLayout>
 
                 <androidx.appcompat.widget.SwitchCompat
                     android:id="@+id/switchDarkMode"
@@ -356,5 +355,6 @@
                 android:textSize="14sp"
                 tools:ignore="HardcodedText" />
         </LinearLayout>
+    </LinearLayout>
 
 </ScrollView>
