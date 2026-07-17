@@ -356,5 +356,4 @@
                 tools:ignore="HardcodedText" />
         </LinearLayout>
 
-    </LinearLayout>
 </ScrollView>
