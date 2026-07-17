@@ -1,7 +1,42 @@
 {
-  "updated_at": "2026-07-17T13:22:39.588124+00:00",
+  "updated_at": "2026-07-17T19:03:48.153549+00:00",
   "count": 50,
   "items": [
+    {
+      "id": "569963c5-6b0b-4f92-b561-e1304b78b0dc",
+      "title": "Bungo Stray Dogs: Wan!",
+      "cover": "https://uploads.mangadex.org/covers/569963c5-6b0b-4f92-b561-e1304b78b0dc/53839189-747f-451f-9803-150b428ea77b.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "c4ca02fb-8378-433b-8049-fbbea5d25cba",
+      "title": "هايميا-سينباي حسناء مهيبة!",
+      "cover": "https://uploads.mangadex.org/covers/c4ca02fb-8378-433b-8049-fbbea5d25cba/3d1dc074-3987-47ab-ad91-39202bc146e6.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "96ae166c-d8e1-4e9e-88cb-805b65154d7e",
+      "title": "Red Blue",
+      "cover": "https://uploads.mangadex.org/covers/96ae166c-d8e1-4e9e-88cb-805b65154d7e/d010f9c1-fdaa-4925-93df-dc3c06417574.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "b6886009-e60b-44a7-abc2-a575765277ba",
+      "title": "الرجل الرمادي",
+      "cover": "https://uploads.mangadex.org/covers/b6886009-e60b-44a7-abc2-a575765277ba/a8ea60f1-0fef-4af0-b26e-8b761406c114.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "b05918e4-fb1a-4b10-a919-eaecf00fd7dd",
+      "title": "Tower Dungeon",
+      "cover": "https://uploads.mangadex.org/covers/b05918e4-fb1a-4b10-a919-eaecf00fd7dd/76bdb2d5-5b1f-4ff0-a3fe-469156bb6abe.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
     {
       "id": "4393fd4e-d646-4bab-9c95-786168ccb618",
       "title": "Devilman",
@@ -76,13 +111,6 @@
       "id": "9d3d3403-1a87-4737-9803-bc3d99db1424",
       "title": "The Guy She Was Interested in Wasn't a Guy at All",
       "cover": "https://uploads.mangadex.org/covers/9d3d3403-1a87-4737-9803-bc3d99db1424/fac191d0-96c1-4ebb-bf79-b7616d7162ac.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "c4ca02fb-8378-433b-8049-fbbea5d25cba",
-      "title": "هايميا-سينباي حسناء مهيبة!",
-      "cover": "https://uploads.mangadex.org/covers/c4ca02fb-8378-433b-8049-fbbea5d25cba/3d1dc074-3987-47ab-ad91-39202bc146e6.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
@@ -167,13 +195,6 @@
       "id": "ca33a142-58fb-4fee-88b9-36ef87f02c77",
       "title": "حب نيزومي الأول",
       "cover": "https://uploads.mangadex.org/covers/ca33a142-58fb-4fee-88b9-36ef87f02c77/1911dc72-4263-45cb-a3ec-5ba34e47305e.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "96ae166c-d8e1-4e9e-88cb-805b65154d7e",
-      "title": "Red Blue",
-      "cover": "https://uploads.mangadex.org/covers/96ae166c-d8e1-4e9e-88cb-805b65154d7e/d010f9c1-fdaa-4925-93df-dc3c06417574.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
@@ -330,27 +351,6 @@
       "cover": "https://uploads.mangadex.org/covers/22d6d048-9f9f-4c3a-95c2-3b145f110e20/38ba706a-2394-4ac4-b9ef-7fcda0c39f49.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
-    },
-    {
-      "id": "52842727-59ff-46a6-9a23-5eba61487586",
-      "title": "To Love Ru (Official Colored)",
-      "cover": "https://uploads.mangadex.org/covers/52842727-59ff-46a6-9a23-5eba61487586/1b7bba8a-d22a-4f1a-8723-601a611b135a.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
-      "id": "a1c7c817-4e59-43b7-9365-09675a149a6f",
-      "title": "ون بيس",
-      "cover": "https://uploads.mangadex.org/covers/a1c7c817-4e59-43b7-9365-09675a149a6f/2f4aca53-64c7-46ac-ae85-3bc9b3169890.png.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "570d50b7-7bb5-41f3-aa8e-668177ff7a78",
-      "title": "Danganronpa the Animation Comic Anthology",
-      "cover": "https://uploads.mangadex.org/covers/570d50b7-7bb5-41f3-aa8e-668177ff7a78/04e945f2-9f1c-4237-8f1f-decb0129456e.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
     }
   ]
 }
