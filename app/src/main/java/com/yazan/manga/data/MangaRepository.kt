@@ -29,6 +29,7 @@ class MangaRepository(private val appContext: Context? = null) {
     private val ASQ_API = "https://asq-proxy.yznabyd.workers.dev"
     private val CORS_PROXY = "https://proxy.cors.sh/"
     private val ASQ_BASE = "https://3asq.online"
+    private val ARABTOONS_API = "https://arabtoons-proxy.yznabyd.workers.dev"
     private val CDN_CACHE_BASE = "https://raw.githubusercontent.com/abeedahmadyazan/manga/gh-pages/cache"
     private val CDN_CACHE_TTL_MS = 2 * 60 * 60 * 1000L  // 2 hours
 
@@ -110,6 +111,8 @@ class MangaRepository(private val appContext: Context? = null) {
                     Log.w(TAG, "3asq down, fallback to MangaDex")
                     fetchMangaDexList(page, "latest")
                 }
+            } else if (contentType == "arabtoons") {
+                fetchArabtoonsListing(page)
             } else {
                 // مصدر 1: MangaDex
                 fetchMangaDexList(page, "latest")
@@ -129,6 +132,8 @@ class MangaRepository(private val appContext: Context? = null) {
                     Log.w(TAG, "3asq down, fallback to MangaDex")
                     fetchMangaDexList(page, "popular")
                 }
+            } else if (contentType == "arabtoons") {
+                fetchArabtoonsListing(page)
             } else {
                 // مصدر 1: MangaDex popular
                 fetchMangaDexList(page, "popular")
@@ -179,6 +184,8 @@ class MangaRepository(private val appContext: Context? = null) {
                     }
                     Result.success(items)
                 }
+            } else if (contentType == "arabtoons") {
+                fetchArabtoonsSearch(query)
             } else {
                 // Search MangaDex (مصدر 1)
                 val encoded = java.net.URLEncoder.encode(query, "UTF-8")
@@ -429,6 +436,89 @@ class MangaRepository(private val appContext: Context? = null) {
         } catch (e: Exception) { Result.success(emptyList()) }
     }
 
+
+    // ============================================================
+    //  arabtoons.net (مصدر 3 — عربي +18, via arabtoons-proxy)
+    // ============================================================
+
+    private suspend fun fetchArabtoonsListing(page: Int): Result<List<MangaListItem>> {
+        return try {
+            val req = Request.Builder().url("$ARABTOONS_API/listing?page=$page").header("Accept", "application/json").build()
+            val items = mutableListOf<MangaListItem>()
+            proxyClient.newCall(req).execute().use { resp ->
+                if (!resp.isSuccessful) return Result.failure(Exception("تعذّر تحميل المانجا"))
+                val body = resp.body?.string() ?: return Result.failure(Exception("استجابة فارغة"))
+                val root = JsonParser.parseString(body).asJsonObject
+                val arr = root.getAsJsonArray("items") ?: return Result.failure(Exception("لا توجد манجا"))
+                for (i in 0 until arr.size()) {
+                    try {
+                        val item = arr[i].asJsonObject
+                        val id = item.get("id")?.asString ?: continue
+                        val title = item.get("title")?.asString ?: continue
+                        val cover = item.get("cover")?.asString ?: ""
+                        items.add(MangaListItem(id = "arabtoons-$id", title = title, cover = cover, source = "arabtoons", status = "ongoing"))
+                    } catch (e: Exception) {}
+                }
+            }
+            if (items.isNotEmpty()) Result.success(items) else Result.failure(Exception("تعذّر تحميل المانجا"))
+        } catch (e: Exception) { Result.failure(e) }
+    }
+
+    private suspend fun fetchArabtoonsSearch(query: String): Result<List<MangaListItem>> {
+        return try {
+            val encoded = java.net.URLEncoder.encode(query, "UTF-8")
+            val req = Request.Builder().url("$ARABTOONS_API/search?q=$encoded").header("Accept", "application/json").build()
+            val items = mutableListOf<MangaListItem>()
+            proxyClient.newCall(req).execute().use { resp ->
+                if (!resp.isSuccessful) return Result.success(emptyList())
+                val body = resp.body?.string() ?: return Result.success(emptyList())
+                val root = JsonParser.parseString(body).asJsonObject
+                val arr = root.getAsJsonArray("items") ?: return Result.success(emptyList())
+                for (i in 0 until arr.size()) {
+                    try {
+                        val item = arr[i].asJsonObject
+                        val id = item.get("id")?.asString ?: continue
+                        val title = item.get("title")?.asString ?: continue
+                        val cover = item.get("cover")?.asString ?: ""
+                        items.add(MangaListItem(id = "arabtoons-$id", title = title, cover = cover, source = "arabtoons", status = "ongoing"))
+                    } catch (e: Exception) {}
+                }
+            }
+            Result.success(items)
+        } catch (e: Exception) { Result.success(emptyList()) }
+    }
+
+    private suspend fun fetchArabtoonsDetails(slug: String): MangaDetails? {
+        return try {
+            val req = Request.Builder().url("$ARABTOONS_API/chapters?slug=$slug").header("Accept", "application/json").build()
+            proxyClient.newCall(req).execute().use { resp ->
+                if (!resp.isSuccessful) return null
+                val body = resp.body?.string() ?: return null
+                val root = JsonParser.parseString(body).asJsonObject
+                val title = root.get("title")?.asString ?: slug.replace("-", " ")
+                val cover = root.get("cover")?.asString ?: ""
+                val desc = root.get("description")?.asString ?: ""
+                val chArr = root.getAsJsonArray("chapters") ?: return null
+                val chapters = mutableListOf<MangaChapter>()
+                for (i in 0 until chArr.size()) {
+                    try {
+                        val ch = chArr[i].asJsonObject
+                        val num = ch.get("number")?.asString ?: continue
+                        chapters.add(MangaChapter(id = "arabtoons-$slug-$num", number = num, title = "الفصل $num", date = "", source = "arabtoons"))
+                    } catch (e: Exception) {}
+                }
+                MangaDetails(
+                    id = "arabtoons-$slug", title = title, cover = cover, description = desc,
+                    author = "", artist = "", status = "ongoing", genres = listOf("مانجا"),
+                    chapters = chapters.sortedByDescending { it.number.toFloatOrNull() ?: 0f },
+                    source = "arabtoons", latestChapter = chapters.firstOrNull()?.number,
+                    rating = null, sources = emptyList(), chaptersBySource = emptyMap()
+                )
+            }
+        } catch (e: Exception) { null }
+    }
+
+
     private fun fetchList(url: String): List<MangaListItem> {
         val req = Request.Builder().url(url).header("User-Agent", UA).header("Accept", "application/json").build()
         proxyClient.newCall(req).execute().use { resp ->
@@ -517,6 +607,14 @@ class MangaRepository(private val appContext: Context? = null) {
         // 3asq manga: fetch details + chapters from 3asq.online via the
         // Netlify proxy (3asq-api.netlify.app). 3asq hosts Arabic manhwa,
         // manhua, and manga — all with full Arabic chapter translations.
+        if (id.startsWith("arabtoons-")) {
+            val slug = id.removePrefix("arabtoons-")
+            return try {
+                val details = fetchArabtoonsDetails(slug)
+                if (details != null) Result.success(details)
+                else Result.failure(Exception("تعذّر تحميل التفاصيل"))
+            } catch (e: Exception) { Result.failure(e) }
+        }
         if (id.startsWith("3asq-")) {
             val slug = id.removePrefix("3asq-")
             return try {
@@ -955,7 +1053,36 @@ class MangaRepository(private val appContext: Context? = null) {
 
     suspend fun getChapterPages(chapter: MangaChapter): Result<List<ChapterPage>> {
         return try {
-            if (chapter.source == "3asq") {
+            if (chapter.source == "arabtoons") {
+                val idWithoutPrefix = chapter.id.removePrefix("arabtoons-")
+                val num = idWithoutPrefix.substringAfterLast("-")
+                val slug = idWithoutPrefix.substringBeforeLast("-")
+                if (slug.isNotBlank() && num.isNotBlank()) {
+                    val req = Request.Builder().url("$ARABTOONS_API/pages?slug=$slug&chapter=$num").header("Accept", "application/json").build()
+                    proxyClient.newCall(req).execute().use { resp ->
+                        if (resp.isSuccessful) {
+                            val body = resp.body?.string() ?: ""
+                            val root = JsonParser.parseString(body)
+                            if (root.isJsonObject) {
+                                val arr = root.asJsonObject.getAsJsonArray("pages")
+                                if (arr != null && arr.size() > 0) {
+                                    val pages = mutableListOf<ChapterPage>()
+                                    for (i in 0 until arr.size()) {
+                                        val p = arr[i].asJsonObject
+                                        val u = p.get("url")?.asString ?: continue
+                                        pages.add(ChapterPage(index = i, url = if (u.startsWith("//")) "https:$u" else u))
+                                    }
+                                    if (pages.isNotEmpty()) return Result.success(pages)
+                                }
+                            }
+                        }
+                    }
+                    // Fallback: direct scrape via CORS proxy
+                    val directPages = scrape3asqPagesDirect(slug, num)
+                    if (directPages.isNotEmpty()) return Result.success(directPages)
+                }
+                Result.failure(Exception("تعذّر تحميل صفحات هذا الفصل"))
+            } else if (chapter.source == "3asq") {
                 // Extract slug and chapter number from the chapter id
                 // chapter.id format: "3asq-{slug}-{num}" where slug may contain dashes
                 // e.g. "3asq-one-piece-1188" → slug="one-piece", num="1188"
