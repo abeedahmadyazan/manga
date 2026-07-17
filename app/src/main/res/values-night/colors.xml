@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Dark mode overrides -->
+    <color name="background_dark">#0a0a0f</color>
+    <color name="surface">#15151f</color>
+    <color name="card_dark">#15151f</color>
+    <color name="text_primary">#FFFFFF</color>
+    <color name="text_secondary">#9CA3AF</color>
+    <color name="divider">#2a2a3a</color>
+</resources>

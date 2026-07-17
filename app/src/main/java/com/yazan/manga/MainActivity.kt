@@ -51,9 +51,13 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         // Apply the saved dark mode setting on startup
         val prefs = getSharedPreferences("settings", android.content.Context.MODE_PRIVATE)
+        val themeMode = prefs.getString("theme_mode", "dark")
         androidx.appcompat.app.AppCompatDelegate.setDefaultNightMode(
-            if (prefs.getBoolean("dark_mode", true)) androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_YES
-            else androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_NO
+            when (themeMode) {
+                "light" -> androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_NO
+                "system" -> androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
+                else -> androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_YES
+            }
         )
         setContentView(R.layout.activity_main)
         com.yazan.manga.data.AmoledMode.applyIfEnabled(this)

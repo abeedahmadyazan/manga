@@ -30,9 +30,26 @@ class SettingsActivity : BaseSwipeBackActivity() {
 
         // ===== المظهر =====
         val switchDarkMode = findViewById<SwitchCompat>(R.id.switchDarkMode)
-        switchDarkMode.isChecked = prefs.getBoolean("dark_mode", true)
+        val tvDarkModeLabel = findViewById<TextView?>(R.id.tvDarkMode)
+        val darkMode = prefs.getString("theme_mode", "dark")
+        when (darkMode) {
+            "light" -> {
+                switchDarkMode.isChecked = false
+                tvDarkModeLabel?.text = "الوضع الفاتح"
+            }
+            "system" -> {
+                switchDarkMode.isChecked = true
+                tvDarkModeLabel?.text = "تلقائي (حسب النظام)"
+            }
+            else -> {
+                switchDarkMode.isChecked = true
+                tvDarkModeLabel?.text = "الوضع الليلي"
+            }
+        }
         switchDarkMode.setOnCheckedChangeListener { _, isChecked ->
-            prefs.edit().putBoolean("dark_mode", isChecked).apply()
+            val mode = if (isChecked) "dark" else "light"
+            prefs.edit().putString("theme_mode", mode).apply()
+            tvDarkModeLabel?.text = if (isChecked) "الوضع الليلي" else "الوضع الفاتح"
             AppCompatDelegate.setDefaultNightMode(
                 if (isChecked) AppCompatDelegate.MODE_NIGHT_YES
                 else AppCompatDelegate.MODE_NIGHT_NO

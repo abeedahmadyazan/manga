@@ -20,8 +20,8 @@ class MangaRepository(private val appContext: Context? = null) {
 
     // Separate client for 3asq proxy calls — very short timeouts to prevent ANR
     private val proxyClient = OkHttpClient.Builder()
-        .connectTimeout(5, TimeUnit.SECONDS)
-        .readTimeout(5, TimeUnit.SECONDS)
+        .connectTimeout(3, TimeUnit.SECONDS)
+        .readTimeout(3, TimeUnit.SECONDS)
         .build()
 
     private val TAG = "MangaRepo"
