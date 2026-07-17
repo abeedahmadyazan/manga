@@ -5,8 +5,8 @@
     android:layout_height="wrap_content"
     android:layout_margin="4dp"
     app:cardCornerRadius="16dp"
-    app:cardElevation="4dp"
-    app:cardBackgroundColor="@color/surface_light"
+    app:cardElevation="6dp"
+    app:cardBackgroundColor="@color/gradient_card_start"
     android:foreground="?attr/selectableItemBackground"
     android:clickable="true"
     android:focusable="true">
@@ -18,7 +18,7 @@
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="160dp">
+            android:layout_height="170dp">
 
             <ImageView
                 android:id="@+id/mangaCover"
@@ -46,7 +46,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="10dp">
+            android:padding="12dp"
+            android:background="@drawable/bg_card_gradient">
 
             <TextView
                 android:id="@+id/mangaTitle"

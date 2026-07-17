@@ -74,4 +74,21 @@
     <color name="skeleton_base">#1a1a2e</color>
     <color name="skeleton_highlight">#2a2a3e</color>
     <color name="warning">#f59e0b</color>
+
+    <!-- New gradient colors for cards -->
+    <color name="gradient_card_start">#1a2e1a</color>
+    <color name="gradient_card_end">#0d1f0d</color>
+    <color name="gradient_primary_start">#10b981</color>
+    <color name="gradient_primary_end">#059669</color>
+    <color name="gradient_dark_start">#1a1a2e</color>
+    <color name="gradient_dark_end">#0a0a0f</color>
+    <color name="card_border">#2a3a2a</color>
+    <color name="card_glow">#10b98115</color>
+    <color name="text_accent">#34d399</color>
+    <color name="text_dim">#4a5a4a</color>
+    <color name="badge_green">#10b981</color>
+    <color name="badge_blue">#3b82f6</color>
+    <color name="badge_orange">#f59e0b</color>
+    <color name="badge_red">#ef4444</color>
+    <color name="badge_purple">#8b5cf6</color>
 </resources>

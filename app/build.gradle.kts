@@ -12,8 +12,8 @@ android {
         applicationId = "com.yazan.manga"
         minSdk = 24
         targetSdk = 35
-        versionCode = 159
-        versionName = "1.0.103"
+        versionCode = 160
+        versionName = "1.0.104"
     }
 
     signingConfigs {
@@ -84,6 +84,10 @@ dependencies {
     implementation("com.google.android.material:material:1.12.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
+    implementation("com.airbnb.android:lottie:6.4.0")
+    implementation("com.facebook.shimmer:shimmer:0.5.0")
+    implementation("com.google.android.material:material:1.12.0")
+    implementation("androidx.core:core-splashscreen:1.0.1")
     implementation("androidx.recyclerview:recyclerview:1.3.2")
     implementation("androidx.cardview:cardview:1.0.0")
     implementation("androidx.drawerlayout:drawerlayout:1.2.0")

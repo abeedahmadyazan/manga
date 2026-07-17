@@ -138,7 +138,7 @@ class ReaderActivity : BaseSwipeBackActivity() {
     }
     private lateinit var repository: MangaRepository
     private lateinit var pagesRecyclerView: RecyclerView
-    private lateinit var loadingIndicator: ProgressBar
+    private lateinit var loadingIndicator: View
     private lateinit var errorText: TextView
     private lateinit var chapterTitleText: TextView
     private lateinit var pageCounter: TextView

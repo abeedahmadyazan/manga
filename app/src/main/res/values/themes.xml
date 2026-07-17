@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!-- Splash screen theme -->
+    <style name="Theme.MangaApp.Splash" parent="Theme.MangaApp">
+        <item name="android:windowBackground">@drawable/splash_background</item>
+    </style>
+
     <style name="Theme.MangaApp" parent="Theme.MaterialComponents.NoActionBar">
         <item name="colorPrimary">@color/primary</item>
         <item name="colorPrimaryVariant">@color/background_dark</item>
