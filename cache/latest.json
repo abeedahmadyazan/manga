@@ -1,7 +1,42 @@
 {
-  "updated_at": "2026-07-17T08:06:07.356704+00:00",
+  "updated_at": "2026-07-17T13:22:39.588124+00:00",
   "count": 50,
   "items": [
+    {
+      "id": "4393fd4e-d646-4bab-9c95-786168ccb618",
+      "title": "Devilman",
+      "cover": "https://uploads.mangadex.org/covers/4393fd4e-d646-4bab-9c95-786168ccb618/3199fa66-3a73-4c11-9236-9cba765e6650.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "26102334-1f7b-4a5b-a64f-107c5c24a70f",
+      "title": "Mao",
+      "cover": "https://uploads.mangadex.org/covers/26102334-1f7b-4a5b-a64f-107c5c24a70f/a4aa17d8-8c99-4f82-a80c-2d30319a9b3d.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "ef473f14-8c4d-435e-9015-b714512e69eb",
+      "title": "استدعاء اليابان",
+      "cover": "https://uploads.mangadex.org/covers/ef473f14-8c4d-435e-9015-b714512e69eb/9cd0abf9-8259-489f-8515-8ae35d89f075.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "d553645b-03a3-4fc8-9a9c-57f91cbbab89",
+      "title": "Are You a Landmine, Chihara-san?",
+      "cover": "https://uploads.mangadex.org/covers/d553645b-03a3-4fc8-9a9c-57f91cbbab89/43718c35-9f27-446d-b95d-cd7a2f2de3d2.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "29ab6984-7c1d-4d45-b925-25aa082b492e",
+      "title": "Shangri-La Frontier: From Trash-Game Hunter to God-Tier Game Master!",
+      "cover": "https://uploads.mangadex.org/covers/29ab6984-7c1d-4d45-b925-25aa082b492e/c691a3e7-7ec0-4c2f-a86a-cf04489b33aa.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
     {
       "id": "19a5c7e3-b743-4cb6-8dd8-41459bfc685d",
       "title": "تدليل فارسة لا تعرف اي شيء سوى القتال",
@@ -171,13 +206,6 @@
       "status": "ongoing"
     },
     {
-      "id": "d553645b-03a3-4fc8-9a9c-57f91cbbab89",
-      "title": "Are You a Landmine, Chihara-san?",
-      "cover": "https://uploads.mangadex.org/covers/d553645b-03a3-4fc8-9a9c-57f91cbbab89/43718c35-9f27-446d-b95d-cd7a2f2de3d2.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
       "id": "e43a7f5b-6ae7-478d-a4d5-53c8dc3ce52f",
       "title": "Wistoria: Wand and Sword",
       "cover": "https://uploads.mangadex.org/covers/e43a7f5b-6ae7-478d-a4d5-53c8dc3ce52f/715b8144-0bbe-4c00-8743-4d48d42cacd0.jpg.256.jpg",
@@ -244,13 +272,6 @@
       "id": "7f30dfc3-0b80-4dcc-a3b9-0cd746fac005",
       "title": "المتحري كونان",
       "cover": "https://uploads.mangadex.org/covers/7f30dfc3-0b80-4dcc-a3b9-0cd746fac005/b65b80fa-217c-4a71-8e8f-5d647990117a.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "29ab6984-7c1d-4d45-b925-25aa082b492e",
-      "title": "Shangri-La Frontier: From Trash-Game Hunter to God-Tier Game Master!",
-      "cover": "https://uploads.mangadex.org/covers/29ab6984-7c1d-4d45-b925-25aa082b492e/c691a3e7-7ec0-4c2f-a86a-cf04489b33aa.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
@@ -330,27 +351,6 @@
       "cover": "https://uploads.mangadex.org/covers/570d50b7-7bb5-41f3-aa8e-668177ff7a78/04e945f2-9f1c-4237-8f1f-decb0129456e.jpg.256.jpg",
       "source": "mangadex",
       "status": "completed"
-    },
-    {
-      "id": "4e7a4a0f-8391-4069-839b-de2352297dab",
-      "title": "A Couple of Cuckoos",
-      "cover": "https://uploads.mangadex.org/covers/4e7a4a0f-8391-4069-839b-de2352297dab/ad595477-786b-4ab0-b176-b0c138ebfdc5.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "b16f2554-9525-4f2a-bbe4-5b75b6605176",
-      "title": "Clevatess: The King of Dark Beasts, the Baby, and the Undead Hero",
-      "cover": "https://uploads.mangadex.org/covers/b16f2554-9525-4f2a-bbe4-5b75b6605176/0814dad9-5036-412c-b99e-61a31bab0e32.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "f6ce20ca-73c3-4fdd-9367-e2901fca780e",
-      "title": "ويلات الزمان",
-      "cover": "https://uploads.mangadex.org/covers/f6ce20ca-73c3-4fdd-9367-e2901fca780e/fed093aa-cbcf-4ca0-b80c-49eb251b1e80.png.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
     }
   ]
 }
