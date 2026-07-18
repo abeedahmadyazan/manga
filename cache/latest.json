@@ -1,11 +1,32 @@
 {
-  "updated_at": "2026-07-18T13:08:44.300996+00:00",
+  "updated_at": "2026-07-18T19:00:12.273982+00:00",
   "count": 50,
   "items": [
     {
-      "id": "85a99758-de39-471e-9f6d-800547f53d0a",
-      "title": "Tougen Anki: Legend of the Cursed Blood",
-      "cover": "https://uploads.mangadex.org/covers/85a99758-de39-471e-9f6d-800547f53d0a/e9fdf5a2-69d6-4e10-88c1-d5a50b9202c6.jpg.256.jpg",
+      "id": "7f30dfc3-0b80-4dcc-a3b9-0cd746fac005",
+      "title": "المتحري كونان",
+      "cover": "https://uploads.mangadex.org/covers/7f30dfc3-0b80-4dcc-a3b9-0cd746fac005/b65b80fa-217c-4a71-8e8f-5d647990117a.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "09c80646-fb9e-4c71-9cb8-ff1ea73499e0",
+      "title": "Sorry, Did You Wait for Me?",
+      "cover": "https://uploads.mangadex.org/covers/09c80646-fb9e-4c71-9cb8-ff1ea73499e0/7c469b4b-bc54-4288-891f-39b0f21f5ff0.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "a1c7c817-4e59-43b7-9365-09675a149a6f",
+      "title": "ون بيس",
+      "cover": "https://uploads.mangadex.org/covers/a1c7c817-4e59-43b7-9365-09675a149a6f/2f4aca53-64c7-46ac-ae85-3bc9b3169890.png.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "936f0ba5-ca65-4de4-99b1-528c02a4454d",
+      "title": "Hunter x Hunter (Official Colored)",
+      "cover": "https://uploads.mangadex.org/covers/936f0ba5-ca65-4de4-99b1-528c02a4454d/c08c2728-5af5-4a6e-83e0-f665280c866c.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
@@ -13,6 +34,13 @@
       "id": "0d4b349e-b7a2-4d63-9ce0-f864e790c4a2",
       "title": "Veil",
       "cover": "https://uploads.mangadex.org/covers/0d4b349e-b7a2-4d63-9ce0-f864e790c4a2/8299ead2-5d96-4f41-8ce5-b00c95505449.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "85a99758-de39-471e-9f6d-800547f53d0a",
+      "title": "Tougen Anki: Legend of the Cursed Blood",
+      "cover": "https://uploads.mangadex.org/covers/85a99758-de39-471e-9f6d-800547f53d0a/e9fdf5a2-69d6-4e10-88c1-d5a50b9202c6.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
@@ -323,34 +351,6 @@
       "cover": "https://uploads.mangadex.org/covers/0cfcda3b-0dcb-459b-9931-aa823e7bf403/ee1043d6-d349-4a61-9e64-689d43633e55.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
-    },
-    {
-      "id": "77296cee-0b74-415f-914d-6f29036d3906",
-      "title": "مسرحية الجبل",
-      "cover": "https://uploads.mangadex.org/covers/77296cee-0b74-415f-914d-6f29036d3906/6c06c4f2-f816-4dd8-9652-8b9764bfdde4.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "d7037b2a-874a-4360-8a7b-07f2899152fd",
-      "title": "إيروما-كن في مدرسة الشياطين",
-      "cover": "https://uploads.mangadex.org/covers/d7037b2a-874a-4360-8a7b-07f2899152fd/52d67301-401c-44c4-9d7b-529e2796f7d5.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "8211bac6-a392-4e37-b3b6-dac0f4512d24",
-      "title": "Re:ZERO -Starting Life in Another World-, Chapter 4: The Sanctuary and the Witch of Greed",
-      "cover": "https://uploads.mangadex.org/covers/8211bac6-a392-4e37-b3b6-dac0f4512d24/57feede7-b47c-4c15-876c-2318fb827b9c.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "cd9187e6-7c46-4203-b832-d9b41c22bf86",
-      "title": "Ashita wa Kitto Tomodachi Janai, Yone",
-      "cover": "https://uploads.mangadex.org/covers/cd9187e6-7c46-4203-b832-d9b41c22bf86/db1ea3a8-6db1-4ff3-a4c2-655a34296577.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
     }
   ]
 }
