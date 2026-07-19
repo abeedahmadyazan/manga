@@ -1,7 +1,56 @@
 {
-  "updated_at": "2026-07-19T02:28:03.393873+00:00",
+  "updated_at": "2026-07-19T08:13:00.620534+00:00",
   "count": 50,
   "items": [
+    {
+      "id": "ef473f14-8c4d-435e-9015-b714512e69eb",
+      "title": "استدعاء اليابان",
+      "cover": "https://uploads.mangadex.org/covers/ef473f14-8c4d-435e-9015-b714512e69eb/9cd0abf9-8259-489f-8515-8ae35d89f075.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "77c4966f-ead7-45bb-87e0-9ac618b11e8e",
+      "title": "Kunon the Sorcerer Can See",
+      "cover": "https://uploads.mangadex.org/covers/77c4966f-ead7-45bb-87e0-9ac618b11e8e/393cc1fa-a752-49aa-a688-a2a309924030.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "9d3d3403-1a87-4737-9803-bc3d99db1424",
+      "title": "The Guy She Was Interested in Wasn't a Guy at All",
+      "cover": "https://uploads.mangadex.org/covers/9d3d3403-1a87-4737-9803-bc3d99db1424/fac191d0-96c1-4ebb-bf79-b7616d7162ac.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "f7888782-0727-49b0-95ec-a3530c70f83b",
+      "title": "Hajime no Ippo: Fighting Spirit!",
+      "cover": "https://uploads.mangadex.org/covers/f7888782-0727-49b0-95ec-a3530c70f83b/8ebf0c88-0f84-4fa0-abaf-0e2f8ebdf91e.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "db692d58-4b13-4174-ae8c-30c515c0689c",
+      "title": "Hunter x Hunter",
+      "cover": "https://uploads.mangadex.org/covers/db692d58-4b13-4174-ae8c-30c515c0689c/aa112927-f1e5-4fe4-a4db-7fd4a1536e3c.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "3b6c3a0b-8752-41fc-9d3e-1310f6f28252",
+      "title": "Giant Killing",
+      "cover": "https://uploads.mangadex.org/covers/3b6c3a0b-8752-41fc-9d3e-1310f6f28252/409bcab3-e7f6-4498-a135-72c7f1d5adf2.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "5b93fa0f-0640-49b8-974e-954b9959929b",
+      "title": "Girls' Last Tour",
+      "cover": "https://uploads.mangadex.org/covers/5b93fa0f-0640-49b8-974e-954b9959929b/67d556f5-91d4-4b85-b287-2f74f008e564.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
     {
       "id": "a07320a4-afcd-413a-a451-d69a448d0c28",
       "title": "Usogui",
@@ -94,13 +143,6 @@
       "status": "ongoing"
     },
     {
-      "id": "ef473f14-8c4d-435e-9015-b714512e69eb",
-      "title": "استدعاء اليابان",
-      "cover": "https://uploads.mangadex.org/covers/ef473f14-8c4d-435e-9015-b714512e69eb/9cd0abf9-8259-489f-8515-8ae35d89f075.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
       "id": "d89cfcf7-dcb4-4af7-8c95-330c2c6167d0",
       "title": "عودة ملك الجثث",
       "cover": "https://uploads.mangadex.org/covers/d89cfcf7-dcb4-4af7-8c95-330c2c6167d0/87f1a513-3976-481e-8244-163b9545e221.jpg.256.jpg",
@@ -113,13 +155,6 @@
       "cover": "https://uploads.mangadex.org/covers/334019e1-18bb-4ac0-b35c-0e8efb1e481c/530583f4-80ad-4f37-92d9-441b225c9785.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
-    },
-    {
-      "id": "5b93fa0f-0640-49b8-974e-954b9959929b",
-      "title": "Girls' Last Tour",
-      "cover": "https://uploads.mangadex.org/covers/5b93fa0f-0640-49b8-974e-954b9959929b/67d556f5-91d4-4b85-b287-2f74f008e564.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
     },
     {
       "id": "263deeff-c010-4ac7-bc01-6341f3e698ac",
@@ -227,13 +262,6 @@
       "status": "completed"
     },
     {
-      "id": "9d3d3403-1a87-4737-9803-bc3d99db1424",
-      "title": "The Guy She Was Interested in Wasn't a Guy at All",
-      "cover": "https://uploads.mangadex.org/covers/9d3d3403-1a87-4737-9803-bc3d99db1424/fac191d0-96c1-4ebb-bf79-b7616d7162ac.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
       "id": "418be4a0-a376-4a7e-aa34-51576b2e6fa7",
       "title": "What Do You Wish For With Those Murky Eyes: Record of Highserk War",
       "cover": "https://uploads.mangadex.org/covers/418be4a0-a376-4a7e-aa34-51576b2e6fa7/ec2a4758-a8d0-4934-8a2b-e0016bcb415c.jpg.256.jpg",
@@ -321,34 +349,6 @@
       "id": "1afa2287-8408-4b17-9195-c42902153cfb",
       "title": "Is It Because of Love That I Can't Resist?",
       "cover": "https://uploads.mangadex.org/covers/1afa2287-8408-4b17-9195-c42902153cfb/28607917-9a32-4ef6-8f59-e8a383cedf98.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "e43a7f5b-6ae7-478d-a4d5-53c8dc3ce52f",
-      "title": "Wistoria: Wand and Sword",
-      "cover": "https://uploads.mangadex.org/covers/e43a7f5b-6ae7-478d-a4d5-53c8dc3ce52f/715b8144-0bbe-4c00-8743-4d48d42cacd0.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "db882a6e-6716-47bc-b031-c420f42d08d5",
-      "title": "Whimsy Whimsy Witch",
-      "cover": "https://uploads.mangadex.org/covers/db882a6e-6716-47bc-b031-c420f42d08d5/9371a28d-1bce-46b3-b56e-1e5f36c199ee.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
-      "id": "ea47525d-99df-45b5-9103-dd853f49f8c3",
-      "title": "Welcome to Demon School! Iruma-kun: IruMafia Edition",
-      "cover": "https://uploads.mangadex.org/covers/ea47525d-99df-45b5-9103-dd853f49f8c3/7ba89c43-1234-4d11-9aa6-c3a7576cd1ce.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "0cfcda3b-0dcb-459b-9931-aa823e7bf403",
-      "title": "تسع قمم",
-      "cover": "https://uploads.mangadex.org/covers/0cfcda3b-0dcb-459b-9931-aa823e7bf403/ee1043d6-d349-4a61-9e64-689d43633e55.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     }
