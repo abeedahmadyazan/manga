@@ -1,7 +1,21 @@
 {
-  "updated_at": "2026-07-20T08:54:09.423415+00:00",
+  "updated_at": "2026-07-20T14:00:44.405089+00:00",
   "count": 50,
   "items": [
+    {
+      "id": "dea77c2d-dbaa-434a-b0af-0c116642434c",
+      "title": "Ichi the Witch",
+      "cover": "https://uploads.mangadex.org/covers/dea77c2d-dbaa-434a-b0af-0c116642434c/707b5cff-60e3-40fe-8105-e9065d5f8abd.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "7431ff7d-ad63-4831-bd1e-e63aef2da6bc",
+      "title": "Arknights: Rhodes Kitchen -TIDBITS-",
+      "cover": "https://uploads.mangadex.org/covers/7431ff7d-ad63-4831-bd1e-e63aef2da6bc/ab11b5c2-2591-458b-9ba9-cb01b1b75be4.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
     {
       "id": "ab8cbb82-d0ed-45a7-8ffe-4bfa6d43d79c",
       "title": "JoJo's Bizarre Adventure Part 9 - The JOJOLands",
@@ -85,13 +99,6 @@
       "cover": "https://uploads.mangadex.org/covers/17a56d33-9443-433a-9e0d-70459893ed8f/8d105d4e-a60e-4284-8321-d0904906574e.png.256.jpg",
       "source": "mangadex",
       "status": "completed"
-    },
-    {
-      "id": "dea77c2d-dbaa-434a-b0af-0c116642434c",
-      "title": "Ichi the Witch",
-      "cover": "https://uploads.mangadex.org/covers/dea77c2d-dbaa-434a-b0af-0c116642434c/707b5cff-60e3-40fe-8105-e9065d5f8abd.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
     },
     {
       "id": "d1a9fdeb-f713-407f-960c-8326b586e6fd",
@@ -344,13 +351,6 @@
       "cover": "https://uploads.mangadex.org/covers/b05918e4-fb1a-4b10-a919-eaecf00fd7dd/76bdb2d5-5b1f-4ff0-a3fe-469156bb6abe.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
-    },
-    {
-      "id": "4393fd4e-d646-4bab-9c95-786168ccb618",
-      "title": "Devilman",
-      "cover": "https://uploads.mangadex.org/covers/4393fd4e-d646-4bab-9c95-786168ccb618/3199fa66-3a73-4c11-9236-9cba765e6650.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
     }
   ]
 }
