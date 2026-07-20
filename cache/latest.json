@@ -1,7 +1,35 @@
 {
-  "updated_at": "2026-07-20T02:43:50.034788+00:00",
+  "updated_at": "2026-07-20T08:54:09.423415+00:00",
   "count": 50,
   "items": [
+    {
+      "id": "ab8cbb82-d0ed-45a7-8ffe-4bfa6d43d79c",
+      "title": "JoJo's Bizarre Adventure Part 9 - The JOJOLands",
+      "cover": "https://uploads.mangadex.org/covers/ab8cbb82-d0ed-45a7-8ffe-4bfa6d43d79c/f47d473d-7b43-4283-9e47-9a0168dc77e1.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "9d3d3403-1a87-4737-9803-bc3d99db1424",
+      "title": "The Guy She Was Interested in Wasn't a Guy at All",
+      "cover": "https://uploads.mangadex.org/covers/9d3d3403-1a87-4737-9803-bc3d99db1424/fac191d0-96c1-4ebb-bf79-b7616d7162ac.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "61889f95-60b7-4406-a5db-b256d2a742ae",
+      "title": "Bungou Stray Dogs: The Day I Picked Up Dazai",
+      "cover": "https://uploads.mangadex.org/covers/61889f95-60b7-4406-a5db-b256d2a742ae/ad5d7cc6-4cc7-495c-9920-55b5f12b8c49.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "5b93fa0f-0640-49b8-974e-954b9959929b",
+      "title": "Girls' Last Tour",
+      "cover": "https://uploads.mangadex.org/covers/5b93fa0f-0640-49b8-974e-954b9959929b/67d556f5-91d4-4b85-b287-2f74f008e564.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
     {
       "id": "d78db808-93f7-498d-9368-e5767fd85057",
       "title": "Class 2-B Hero Destroyerz",
@@ -157,23 +185,9 @@
       "status": "ongoing"
     },
     {
-      "id": "ab8cbb82-d0ed-45a7-8ffe-4bfa6d43d79c",
-      "title": "JoJo's Bizarre Adventure Part 9 - The JOJOLands",
-      "cover": "https://uploads.mangadex.org/covers/ab8cbb82-d0ed-45a7-8ffe-4bfa6d43d79c/f47d473d-7b43-4283-9e47-9a0168dc77e1.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
       "id": "7f30dfc3-0b80-4dcc-a3b9-0cd746fac005",
       "title": "المتحري كونان",
       "cover": "https://uploads.mangadex.org/covers/7f30dfc3-0b80-4dcc-a3b9-0cd746fac005/b65b80fa-217c-4a71-8e8f-5d647990117a.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "9d3d3403-1a87-4737-9803-bc3d99db1424",
-      "title": "The Guy She Was Interested in Wasn't a Guy at All",
-      "cover": "https://uploads.mangadex.org/covers/9d3d3403-1a87-4737-9803-bc3d99db1424/fac191d0-96c1-4ebb-bf79-b7616d7162ac.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
@@ -218,13 +232,6 @@
       "cover": "https://uploads.mangadex.org/covers/3b6c3a0b-8752-41fc-9d3e-1310f6f28252/409bcab3-e7f6-4498-a135-72c7f1d5adf2.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
-    },
-    {
-      "id": "5b93fa0f-0640-49b8-974e-954b9959929b",
-      "title": "Girls' Last Tour",
-      "cover": "https://uploads.mangadex.org/covers/5b93fa0f-0640-49b8-974e-954b9959929b/67d556f5-91d4-4b85-b287-2f74f008e564.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
     },
     {
       "id": "a07320a4-afcd-413a-a451-d69a448d0c28",
@@ -344,13 +351,6 @@
       "cover": "https://uploads.mangadex.org/covers/4393fd4e-d646-4bab-9c95-786168ccb618/3199fa66-3a73-4c11-9236-9cba765e6650.jpg.256.jpg",
       "source": "mangadex",
       "status": "completed"
-    },
-    {
-      "id": "26102334-1f7b-4a5b-a64f-107c5c24a70f",
-      "title": "Mao",
-      "cover": "https://uploads.mangadex.org/covers/26102334-1f7b-4a5b-a64f-107c5c24a70f/a4aa17d8-8c99-4f82-a80c-2d30319a9b3d.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
     }
   ]
 }
