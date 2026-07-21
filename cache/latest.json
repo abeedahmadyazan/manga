@@ -1,7 +1,28 @@
 {
-  "updated_at": "2026-07-21T08:24:37.436937+00:00",
+  "updated_at": "2026-07-21T13:43:40.795090+00:00",
   "count": 50,
   "items": [
+    {
+      "id": "0a580438-bc72-4503-940b-12a5da881b56",
+      "title": "أنتِ زهرة الحظ",
+      "cover": "https://uploads.mangadex.org/covers/0a580438-bc72-4503-940b-12a5da881b56/739831ad-7ac1-4707-871f-644188450cf5.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "05c2917a-e0a4-4c55-abac-8be0f8b213e4",
+      "title": "ميتم المروض",
+      "cover": "https://uploads.mangadex.org/covers/05c2917a-e0a4-4c55-abac-8be0f8b213e4/3b0d8439-2e7a-473f-af4f-77997c6ced09.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "936f0ba5-ca65-4de4-99b1-528c02a4454d",
+      "title": "Hunter x Hunter (Official Colored)",
+      "cover": "https://uploads.mangadex.org/covers/936f0ba5-ca65-4de4-99b1-528c02a4454d/c08c2728-5af5-4a6e-83e0-f665280c866c.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
     {
       "id": "b6886009-e60b-44a7-abc2-a575765277ba",
       "title": "الرجل الرمادي",
@@ -33,14 +54,7 @@
     {
       "id": "e18fe8c6-f6dc-4f05-8462-7b2083ff9a6c",
       "title": "يوميات الصيدلة",
-      "cover": "https://uploads.mangadex.org/covers/e18fe8c6-f6dc-4f05-8462-7b2083ff9a6c/ac7b1bc8-192d-4d3f-9774-51ba823f1353.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "0a580438-bc72-4503-940b-12a5da881b56",
-      "title": "أنتِ زهرة الحظ",
-      "cover": "https://uploads.mangadex.org/covers/0a580438-bc72-4503-940b-12a5da881b56/739831ad-7ac1-4707-871f-644188450cf5.jpg.256.jpg",
+      "cover": "https://uploads.mangadex.org/covers/e18fe8c6-f6dc-4f05-8462-7b2083ff9a6c/530a4ffb-87cb-4156-bdeb-61670532e20f.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
@@ -61,7 +75,7 @@
     {
       "id": "baa95345-24fb-47a9-83e9-434ff671f968",
       "title": "خلف المتجر ادخن معك",
-      "cover": "https://uploads.mangadex.org/covers/baa95345-24fb-47a9-83e9-434ff671f968/2d66388f-7821-4723-8daa-f30394d882d1.png.256.jpg",
+      "cover": "https://uploads.mangadex.org/covers/baa95345-24fb-47a9-83e9-434ff671f968/4862f2a1-2852-4c98-a217-e3a44af83152.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
@@ -195,13 +209,6 @@
       "id": "1aa17501-0328-4d5a-bbbe-3cb7cae8c9ae",
       "title": "My Co-worker Is an Eldritch X!",
       "cover": "https://uploads.mangadex.org/covers/1aa17501-0328-4d5a-bbbe-3cb7cae8c9ae/6856c3e0-b344-4319-aa2d-d6f702c235da.png.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "936f0ba5-ca65-4de4-99b1-528c02a4454d",
-      "title": "Hunter x Hunter (Official Colored)",
-      "cover": "https://uploads.mangadex.org/covers/936f0ba5-ca65-4de4-99b1-528c02a4454d/c08c2728-5af5-4a6e-83e0-f665280c866c.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
@@ -344,13 +351,6 @@
       "cover": "https://uploads.mangadex.org/covers/f7418c7b-14ee-4889-85ae-b31fcb8b0857/e5da1168-c16c-4978-82be-ee0604d1333d.jpg.256.jpg",
       "source": "mangadex",
       "status": "completed"
-    },
-    {
-      "id": "5f64d517-c4ea-40c0-a463-fcc069d39d3b",
-      "title": "I Got a New Skill Every Time I Was Exiled, and After 100 Different Worlds, I Was Unmatched",
-      "cover": "https://uploads.mangadex.org/covers/5f64d517-c4ea-40c0-a463-fcc069d39d3b/06627437-c5b3-4d56-9f2d-317d2b750855.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
     }
   ]
 }
