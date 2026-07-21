@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-07-21T13:46:58.192352+00:00",
+  "updated_at": "2026-07-21T19:21:51.754964+00:00",
   "manga": "one-piece",
   "latest_chapter": 1188,
   "chapters": {
@@ -22,7 +22,7 @@
         "cache/chapters/1188/page-015.webp"
       ],
       "source": "3asq-cdn",
-      "cached_at": "2026-07-21T13:44:04.111445+00:00"
+      "cached_at": "2026-07-21T19:18:00.398228+00:00"
     },
     "1187": {
       "pages": [
@@ -40,7 +40,7 @@
         "cache/chapters/1187/page-012.webp"
       ],
       "source": "3asq-cdn",
-      "cached_at": "2026-07-21T13:44:24.115220+00:00"
+      "cached_at": "2026-07-21T19:18:18.211892+00:00"
     },
     "1186": {
       "pages": [
@@ -62,7 +62,7 @@
         "cache/chapters/1186/page-016.webp"
       ],
       "source": "3asq-cdn",
-      "cached_at": "2026-07-21T13:44:43.045256+00:00"
+      "cached_at": "2026-07-21T19:18:33.617272+00:00"
     },
     "1185": {
       "pages": [
@@ -83,7 +83,7 @@
         "cache/chapters/1185/page-015.webp"
       ],
       "source": "3asq-cdn",
-      "cached_at": "2026-07-21T13:45:01.131820+00:00"
+      "cached_at": "2026-07-21T19:18:51.050769+00:00"
     },
     "1184": {
       "pages": [
@@ -101,7 +101,7 @@
         "cache/chapters/1184/page-012.webp"
       ],
       "source": "3asq-cdn",
-      "cached_at": "2026-07-21T13:45:16.485457+00:00"
+      "cached_at": "2026-07-21T19:19:06.202379+00:00"
     },
     "1183": {
       "pages": [
@@ -123,7 +123,7 @@
         "cache/chapters/1183/page-016.webp"
       ],
       "source": "3asq-cdn",
-      "cached_at": "2026-07-21T13:45:39.091457+00:00"
+      "cached_at": "2026-07-21T19:19:26.718455+00:00"
     },
     "1182": {
       "pages": [
@@ -143,7 +143,7 @@
         "cache/chapters/1182/page-014.webp"
       ],
       "source": "3asq-cdn",
-      "cached_at": "2026-07-21T13:45:58.438059+00:00"
+      "cached_at": "2026-07-21T19:20:02.502439+00:00"
     },
     "1181": {
       "pages": [
@@ -161,7 +161,7 @@
         "cache/chapters/1181/page-012.webp"
       ],
       "source": "3asq-cdn",
-      "cached_at": "2026-07-21T13:46:16.261297+00:00"
+      "cached_at": "2026-07-21T19:20:35.021079+00:00"
     },
     "1180": {
       "pages": [
@@ -182,7 +182,7 @@
         "cache/chapters/1180/page-015.webp"
       ],
       "source": "3asq-cdn",
-      "cached_at": "2026-07-21T13:46:37.587758+00:00"
+      "cached_at": "2026-07-21T19:21:14.246406+00:00"
     },
     "1179": {
       "pages": [
@@ -205,7 +205,7 @@
         "cache/chapters/1179/page-017.webp"
       ],
       "source": "3asq-cdn",
-      "cached_at": "2026-07-21T13:46:58.192203+00:00"
+      "cached_at": "2026-07-21T19:21:51.754833+00:00"
     }
   },
   "note": "Latest 10 chapters cached. Older chapters via MangaDex/3asq live."
