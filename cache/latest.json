@@ -1,7 +1,63 @@
 {
-  "updated_at": "2026-07-21T02:27:24.144941+00:00",
+  "updated_at": "2026-07-21T08:24:37.436937+00:00",
   "count": 50,
   "items": [
+    {
+      "id": "b6886009-e60b-44a7-abc2-a575765277ba",
+      "title": "الرجل الرمادي",
+      "cover": "https://uploads.mangadex.org/covers/b6886009-e60b-44a7-abc2-a575765277ba/a8ea60f1-0fef-4af0-b26e-8b761406c114.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "77bee52c-d2d6-44ad-a33a-1734c1fe696a",
+      "title": "The Eminence in Shadow",
+      "cover": "https://uploads.mangadex.org/covers/77bee52c-d2d6-44ad-a33a-1734c1fe696a/6079dd31-838b-4d61-87c4-121f3ad19158.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "4141c5dc-c525-4df5-afd7-cc7d192a832f",
+      "title": "Blue Lock",
+      "cover": "https://uploads.mangadex.org/covers/4141c5dc-c525-4df5-afd7-cc7d192a832f/1975ed85-c114-42d9-b0c3-75421ba87e5d.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "d8a959f7-648e-4c8d-8f23-f1f3f8e129f3",
+      "title": "ون بنش مان",
+      "cover": "https://uploads.mangadex.org/covers/d8a959f7-648e-4c8d-8f23-f1f3f8e129f3/511fc404-e6b4-4204-bb10-e4a28f7b5271.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "e18fe8c6-f6dc-4f05-8462-7b2083ff9a6c",
+      "title": "يوميات الصيدلة",
+      "cover": "https://uploads.mangadex.org/covers/e18fe8c6-f6dc-4f05-8462-7b2083ff9a6c/ac7b1bc8-192d-4d3f-9774-51ba823f1353.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "0a580438-bc72-4503-940b-12a5da881b56",
+      "title": "أنتِ زهرة الحظ",
+      "cover": "https://uploads.mangadex.org/covers/0a580438-bc72-4503-940b-12a5da881b56/739831ad-7ac1-4707-871f-644188450cf5.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "0d4b349e-b7a2-4d63-9ce0-f864e790c4a2",
+      "title": "Veil",
+      "cover": "https://uploads.mangadex.org/covers/0d4b349e-b7a2-4d63-9ce0-f864e790c4a2/8299ead2-5d96-4f41-8ce5-b00c95505449.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "5b93fa0f-0640-49b8-974e-954b9959929b",
+      "title": "Girls' Last Tour",
+      "cover": "https://uploads.mangadex.org/covers/5b93fa0f-0640-49b8-974e-954b9959929b/67d556f5-91d4-4b85-b287-2f74f008e564.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
     {
       "id": "baa95345-24fb-47a9-83e9-434ff671f968",
       "title": "خلف المتجر ادخن معك",
@@ -73,13 +129,6 @@
       "status": "ongoing"
     },
     {
-      "id": "0a580438-bc72-4503-940b-12a5da881b56",
-      "title": "أنتِ زهرة الحظ",
-      "cover": "https://uploads.mangadex.org/covers/0a580438-bc72-4503-940b-12a5da881b56/739831ad-7ac1-4707-871f-644188450cf5.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
       "id": "db692d58-4b13-4174-ae8c-30c515c0689c",
       "title": "Hunter x Hunter",
       "cover": "https://uploads.mangadex.org/covers/db692d58-4b13-4174-ae8c-30c515c0689c/aa112927-f1e5-4fe4-a4db-7fd4a1536e3c.jpg.256.jpg",
@@ -120,13 +169,6 @@
       "cover": "https://uploads.mangadex.org/covers/61889f95-60b7-4406-a5db-b256d2a742ae/ad5d7cc6-4cc7-495c-9920-55b5f12b8c49.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
-    },
-    {
-      "id": "5b93fa0f-0640-49b8-974e-954b9959929b",
-      "title": "Girls' Last Tour",
-      "cover": "https://uploads.mangadex.org/covers/5b93fa0f-0640-49b8-974e-954b9959929b/67d556f5-91d4-4b85-b287-2f74f008e564.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
     },
     {
       "id": "ea47525d-99df-45b5-9103-dd853f49f8c3",
@@ -255,13 +297,6 @@
       "status": "ongoing"
     },
     {
-      "id": "e18fe8c6-f6dc-4f05-8462-7b2083ff9a6c",
-      "title": "يوميات الصيدلة",
-      "cover": "https://uploads.mangadex.org/covers/e18fe8c6-f6dc-4f05-8462-7b2083ff9a6c/ac7b1bc8-192d-4d3f-9774-51ba823f1353.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
       "id": "ef473f14-8c4d-435e-9015-b714512e69eb",
       "title": "استدعاء اليابان",
       "cover": "https://uploads.mangadex.org/covers/ef473f14-8c4d-435e-9015-b714512e69eb/9cd0abf9-8259-489f-8515-8ae35d89f075.jpg.256.jpg",
@@ -304,13 +339,6 @@
       "status": "ongoing"
     },
     {
-      "id": "0d4b349e-b7a2-4d63-9ce0-f864e790c4a2",
-      "title": "Veil",
-      "cover": "https://uploads.mangadex.org/covers/0d4b349e-b7a2-4d63-9ce0-f864e790c4a2/8299ead2-5d96-4f41-8ce5-b00c95505449.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
       "id": "f7418c7b-14ee-4889-85ae-b31fcb8b0857",
       "title": "It's Tough Being Neeko",
       "cover": "https://uploads.mangadex.org/covers/f7418c7b-14ee-4889-85ae-b31fcb8b0857/e5da1168-c16c-4978-82be-ee0604d1333d.jpg.256.jpg",
@@ -321,34 +349,6 @@
       "id": "5f64d517-c4ea-40c0-a463-fcc069d39d3b",
       "title": "I Got a New Skill Every Time I Was Exiled, and After 100 Different Worlds, I Was Unmatched",
       "cover": "https://uploads.mangadex.org/covers/5f64d517-c4ea-40c0-a463-fcc069d39d3b/06627437-c5b3-4d56-9f2d-317d2b750855.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "9a414441-bbad-43f1-a3a7-dc262ca790a3",
-      "title": "دیدگاه خواننده‌ی همه‌چی‌دون",
-      "cover": "https://uploads.mangadex.org/covers/9a414441-bbad-43f1-a3a7-dc262ca790a3/be18dc9a-7f1c-4ca5-b318-ffff2d7d58c3.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "ce89adb4-63fc-422e-9fbc-40ea6af4525c",
-      "title": "Terra ForMars",
-      "cover": "https://uploads.mangadex.org/covers/ce89adb4-63fc-422e-9fbc-40ea6af4525c/3e9e1fcc-d2c5-42b7-b4fe-586f569aead7.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "30196491-8fc2-4961-8886-a58f898b1b3e",
-      "title": "Berserk of Gluttony: The One that Exceeds the Concept of Levels",
-      "cover": "https://uploads.mangadex.org/covers/30196491-8fc2-4961-8886-a58f898b1b3e/1790f17f-9184-4a48-8928-c45de48b778e.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "d89cfcf7-dcb4-4af7-8c95-330c2c6167d0",
-      "title": "عودة ملك الجثث",
-      "cover": "https://uploads.mangadex.org/covers/d89cfcf7-dcb4-4af7-8c95-330c2c6167d0/87f1a513-3976-481e-8244-163b9545e221.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     }
