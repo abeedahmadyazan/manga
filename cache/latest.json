@@ -1,7 +1,21 @@
 {
-  "updated_at": "2026-07-22T02:25:37.557860+00:00",
+  "updated_at": "2026-07-22T08:24:34.849887+00:00",
   "count": 50,
   "items": [
+    {
+      "id": "356de811-ae92-48f1-b93b-cfdf0f8d02e4",
+      "title": "بما أننا نرسم الآن",
+      "cover": "https://uploads.mangadex.org/covers/356de811-ae92-48f1-b93b-cfdf0f8d02e4/4c0f235c-762d-463b-a320-4e5cedd8db51.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "5b93fa0f-0640-49b8-974e-954b9959929b",
+      "title": "Girls' Last Tour",
+      "cover": "https://uploads.mangadex.org/covers/5b93fa0f-0640-49b8-974e-954b9959929b/67d556f5-91d4-4b85-b287-2f74f008e564.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
     {
       "id": "6df76f5e-3d2e-4add-a8e7-8a9a8320c711",
       "title": "مرحبا بعودتك أليس",
@@ -41,13 +55,6 @@
       "id": "0a580438-bc72-4503-940b-12a5da881b56",
       "title": "أنتِ زهرة الحظ",
       "cover": "https://uploads.mangadex.org/covers/0a580438-bc72-4503-940b-12a5da881b56/739831ad-7ac1-4707-871f-644188450cf5.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "356de811-ae92-48f1-b93b-cfdf0f8d02e4",
-      "title": "بما أننا نرسم الآن",
-      "cover": "https://uploads.mangadex.org/covers/356de811-ae92-48f1-b93b-cfdf0f8d02e4/4c0f235c-762d-463b-a320-4e5cedd8db51.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
@@ -155,13 +162,6 @@
       "cover": "https://uploads.mangadex.org/covers/0d4b349e-b7a2-4d63-9ce0-f864e790c4a2/8299ead2-5d96-4f41-8ce5-b00c95505449.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
-    },
-    {
-      "id": "5b93fa0f-0640-49b8-974e-954b9959929b",
-      "title": "Girls' Last Tour",
-      "cover": "https://uploads.mangadex.org/covers/5b93fa0f-0640-49b8-974e-954b9959929b/67d556f5-91d4-4b85-b287-2f74f008e564.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
     },
     {
       "id": "baa95345-24fb-47a9-83e9-434ff671f968",
