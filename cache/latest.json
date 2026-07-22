@@ -1,7 +1,63 @@
 {
-  "updated_at": "2026-07-21T19:17:39.873456+00:00",
+  "updated_at": "2026-07-22T02:25:37.557860+00:00",
   "count": 50,
   "items": [
+    {
+      "id": "6df76f5e-3d2e-4add-a8e7-8a9a8320c711",
+      "title": "مرحبا بعودتك أليس",
+      "cover": "https://uploads.mangadex.org/covers/6df76f5e-3d2e-4add-a8e7-8a9a8320c711/b74cf6b4-2c2a-4189-9922-0cfc677a5f31.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "96ae166c-d8e1-4e9e-88cb-805b65154d7e",
+      "title": "Red Blue",
+      "cover": "https://uploads.mangadex.org/covers/96ae166c-d8e1-4e9e-88cb-805b65154d7e/d010f9c1-fdaa-4925-93df-dc3c06417574.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "d78db808-93f7-498d-9368-e5767fd85057",
+      "title": "Class 2-B Hero Destroyerz",
+      "cover": "https://uploads.mangadex.org/covers/d78db808-93f7-498d-9368-e5767fd85057/382e67c5-962f-4e65-a1c9-f457e03c058e.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "52ede55c-1584-4019-b85b-3902a423c3ab",
+      "title": "FAIRY TAIL: 100 Years Quest",
+      "cover": "https://uploads.mangadex.org/covers/52ede55c-1584-4019-b85b-3902a423c3ab/37814803-ad60-4d3c-b793-1c4a536c47c9.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "87ffa375-bd2c-49ba-ba0c-6d78ea07c342",
+      "title": "Medaka Kuroiwa is Impervious to My Charms",
+      "cover": "https://uploads.mangadex.org/covers/87ffa375-bd2c-49ba-ba0c-6d78ea07c342/393e9445-7032-4392-96fe-4c549903e663.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "0a580438-bc72-4503-940b-12a5da881b56",
+      "title": "أنتِ زهرة الحظ",
+      "cover": "https://uploads.mangadex.org/covers/0a580438-bc72-4503-940b-12a5da881b56/739831ad-7ac1-4707-871f-644188450cf5.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "356de811-ae92-48f1-b93b-cfdf0f8d02e4",
+      "title": "بما أننا نرسم الآن",
+      "cover": "https://uploads.mangadex.org/covers/356de811-ae92-48f1-b93b-cfdf0f8d02e4/4c0f235c-762d-463b-a320-4e5cedd8db51.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "484f94e7-35c3-4cb5-a068-53d684c1439a",
+      "title": "Baki Part 6",
+      "cover": "https://uploads.mangadex.org/covers/484f94e7-35c3-4cb5-a068-53d684c1439a/863ae891-3627-4070-8918-4a626dc9d1ff.png.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
     {
       "id": "c4ca02fb-8378-433b-8049-fbbea5d25cba",
       "title": "هايميا-سينباي حسناء مهيبة!",
@@ -31,13 +87,6 @@
       "status": "ongoing"
     },
     {
-      "id": "52ede55c-1584-4019-b85b-3902a423c3ab",
-      "title": "FAIRY TAIL: 100 Years Quest",
-      "cover": "https://uploads.mangadex.org/covers/52ede55c-1584-4019-b85b-3902a423c3ab/37814803-ad60-4d3c-b793-1c4a536c47c9.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
       "id": "1aa17501-0328-4d5a-bbbe-3cb7cae8c9ae",
       "title": "My Co-worker Is an Eldritch X!",
       "cover": "https://uploads.mangadex.org/covers/1aa17501-0328-4d5a-bbbe-3cb7cae8c9ae/6856c3e0-b344-4319-aa2d-d6f702c235da.png.256.jpg",
@@ -50,13 +99,6 @@
       "cover": "https://uploads.mangadex.org/covers/2d501d2e-72d5-4c3f-9741-117511622a48/2f28ddc4-5524-44ce-a944-accb1f7b576c.png.256.jpg",
       "source": "mangadex",
       "status": "completed"
-    },
-    {
-      "id": "0a580438-bc72-4503-940b-12a5da881b56",
-      "title": "أنتِ زهرة الحظ",
-      "cover": "https://uploads.mangadex.org/covers/0a580438-bc72-4503-940b-12a5da881b56/739831ad-7ac1-4707-871f-644188450cf5.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
     },
     {
       "id": "05c2917a-e0a4-4c55-abac-8be0f8b213e4",
@@ -143,13 +185,6 @@
       "status": "ongoing"
     },
     {
-      "id": "96ae166c-d8e1-4e9e-88cb-805b65154d7e",
-      "title": "Red Blue",
-      "cover": "https://uploads.mangadex.org/covers/96ae166c-d8e1-4e9e-88cb-805b65154d7e/d010f9c1-fdaa-4925-93df-dc3c06417574.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
       "id": "774f0f04-5023-4e2e-9c0b-f0ed382f078b",
       "title": "إينيغماتيكا",
       "cover": "https://uploads.mangadex.org/covers/774f0f04-5023-4e2e-9c0b-f0ed382f078b/a7ef08f7-5abf-4eb6-bca1-ee0279bbbde7.jpg.256.jpg",
@@ -164,16 +199,16 @@
       "status": "ongoing"
     },
     {
-      "id": "d78db808-93f7-498d-9368-e5767fd85057",
-      "title": "Class 2-B Hero Destroyerz",
-      "cover": "https://uploads.mangadex.org/covers/d78db808-93f7-498d-9368-e5767fd85057/382e67c5-962f-4e65-a1c9-f457e03c058e.jpg.256.jpg",
+      "id": "dea77c2d-dbaa-434a-b0af-0c116642434c",
+      "title": "Ichi the Witch",
+      "cover": "https://uploads.mangadex.org/covers/dea77c2d-dbaa-434a-b0af-0c116642434c/707b5cff-60e3-40fe-8105-e9065d5f8abd.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
     {
-      "id": "dea77c2d-dbaa-434a-b0af-0c116642434c",
-      "title": "Ichi the Witch",
-      "cover": "https://uploads.mangadex.org/covers/dea77c2d-dbaa-434a-b0af-0c116642434c/707b5cff-60e3-40fe-8105-e9065d5f8abd.jpg.256.jpg",
+      "id": "6670ee28-f26d-4b61-b49c-d71149cd5a6e",
+      "title": "مييروكو تشان",
+      "cover": "https://uploads.mangadex.org/covers/6670ee28-f26d-4b61-b49c-d71149cd5a6e/13d41432-d7ec-41cd-a265-5af700989aa6.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
@@ -314,41 +349,6 @@
       "id": "229e5177-2e71-4642-bd56-a9b0b0ba0e60",
       "title": "فهرس السحر",
       "cover": "https://uploads.mangadex.org/covers/229e5177-2e71-4642-bd56-a9b0b0ba0e60/7d19536b-9ba9-4ba4-8e30-6c4eb40ceeb8.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "7f30dfc3-0b80-4dcc-a3b9-0cd746fac005",
-      "title": "المتحري كونان",
-      "cover": "https://uploads.mangadex.org/covers/7f30dfc3-0b80-4dcc-a3b9-0cd746fac005/b65b80fa-217c-4a71-8e8f-5d647990117a.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "ef473f14-8c4d-435e-9015-b714512e69eb",
-      "title": "استدعاء اليابان",
-      "cover": "https://uploads.mangadex.org/covers/ef473f14-8c4d-435e-9015-b714512e69eb/9cd0abf9-8259-489f-8515-8ae35d89f075.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "77c4966f-ead7-45bb-87e0-9ac618b11e8e",
-      "title": "Kunon the Sorcerer Can See",
-      "cover": "https://uploads.mangadex.org/covers/77c4966f-ead7-45bb-87e0-9ac618b11e8e/393cc1fa-a752-49aa-a688-a2a309924030.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "f7888782-0727-49b0-95ec-a3530c70f83b",
-      "title": "Hajime no Ippo: Fighting Spirit!",
-      "cover": "https://uploads.mangadex.org/covers/f7888782-0727-49b0-95ec-a3530c70f83b/8ebf0c88-0f84-4fa0-abaf-0e2f8ebdf91e.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "3b6c3a0b-8752-41fc-9d3e-1310f6f28252",
-      "title": "Giant Killing",
-      "cover": "https://uploads.mangadex.org/covers/3b6c3a0b-8752-41fc-9d3e-1310f6f28252/409bcab3-e7f6-4498-a135-72c7f1d5adf2.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     }
