@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-07-22T13:46:27.871289+00:00",
+  "updated_at": "2026-07-22T19:13:15.662680+00:00",
   "count": 50,
   "items": [
     {
@@ -206,18 +206,18 @@
       "status": "ongoing"
     },
     {
-      "id": "296cbc31-af1a-4b5b-a34b-fee2b4cad542",
-      "title": "نجمتي",
-      "cover": "https://uploads.mangadex.org/covers/296cbc31-af1a-4b5b-a34b-fee2b4cad542/d803d885-e371-4018-b332-4cbc5935177f.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
       "id": "c4ca02fb-8378-433b-8049-fbbea5d25cba",
       "title": "هايميا-سينباي حسناء مهيبة!",
       "cover": "https://uploads.mangadex.org/covers/c4ca02fb-8378-433b-8049-fbbea5d25cba/3d1dc074-3987-47ab-ad91-39202bc146e6.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
+    },
+    {
+      "id": "296cbc31-af1a-4b5b-a34b-fee2b4cad542",
+      "title": "نجمتي",
+      "cover": "https://uploads.mangadex.org/covers/296cbc31-af1a-4b5b-a34b-fee2b4cad542/d803d885-e371-4018-b332-4cbc5935177f.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
     },
     {
       "id": "68112dc1-2b80-4f20-beb8-2f2a8716a430",
