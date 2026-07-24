@@ -1,7 +1,56 @@
 {
-  "updated_at": "2026-07-24T13:38:57.816907+00:00",
+  "updated_at": "2026-07-24T19:21:30.128707+00:00",
   "count": 50,
   "items": [
+    {
+      "id": "4242c6d3-4ee4-4b0b-9ca0-23bd57952805",
+      "title": "ليس حُبًّا بعدُ، ولكن...",
+      "cover": "https://uploads.mangadex.org/covers/4242c6d3-4ee4-4b0b-9ca0-23bd57952805/88edcefa-10ba-4d36-b4a0-d531bb44e02b.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "c4b36f15-4ee5-425f-a77d-c2e7cbb970d8",
+      "title": "NIPPON SANGOKU: The Three Nations of the Crimson Sun",
+      "cover": "https://uploads.mangadex.org/covers/c4b36f15-4ee5-425f-a77d-c2e7cbb970d8/e5c54f1b-6ea4-4dd2-ae6e-9d0e138d7c2e.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "e18fe8c6-f6dc-4f05-8462-7b2083ff9a6c",
+      "title": "يوميات الصيدلة",
+      "cover": "https://uploads.mangadex.org/covers/e18fe8c6-f6dc-4f05-8462-7b2083ff9a6c/530a4ffb-87cb-4156-bdeb-61670532e20f.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "202718c6-525e-4cec-a469-c945548cacc3",
+      "title": "I Hate That We're Childhood Friends!: My Rise to the Top of School Life with an S-Rank Beauty Begins After a Falling-Out",
+      "cover": "https://uploads.mangadex.org/covers/202718c6-525e-4cec-a469-c945548cacc3/04dd5c60-a742-4f42-9de0-80759d0e0ceb.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "51c1e7cc-23f4-4a08-a961-c1ab75e2bb33",
+      "title": "Inexpressive Kashiwada and Expressive Oota",
+      "cover": "https://uploads.mangadex.org/covers/51c1e7cc-23f4-4a08-a961-c1ab75e2bb33/3bdea205-146a-460c-ae6e-7c2b27f762ed.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "3df1a9a3-a1be-47a3-9e90-9b3e55b1d0ac",
+      "title": "الشخص الخطير في قلبي",
+      "cover": "https://uploads.mangadex.org/covers/3df1a9a3-a1be-47a3-9e90-9b3e55b1d0ac/12d521b7-01b8-4015-ab40-33ed75cc82e8.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "936f0ba5-ca65-4de4-99b1-528c02a4454d",
+      "title": "Hunter x Hunter (Official Colored)",
+      "cover": "https://uploads.mangadex.org/covers/936f0ba5-ca65-4de4-99b1-528c02a4454d/c08c2728-5af5-4a6e-83e0-f665280c866c.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
     {
       "id": "eeb2ab0e-7dbc-4f0c-b476-8181d44217a8",
       "title": "الوهم السماوي",
@@ -27,13 +76,6 @@
       "id": "9661f9e7-3c6a-448f-9b1e-2c563ed1e5e9",
       "title": "تاج الحكاية الخيالية",
       "cover": "https://uploads.mangadex.org/covers/9661f9e7-3c6a-448f-9b1e-2c563ed1e5e9/2fc71eab-02b5-4c78-8478-86b6ec87fcf5.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "202718c6-525e-4cec-a469-c945548cacc3",
-      "title": "I Hate That We're Childhood Friends!: My Rise to the Top of School Life with an S-Rank Beauty Begins After a Falling-Out",
-      "cover": "https://uploads.mangadex.org/covers/202718c6-525e-4cec-a469-c945548cacc3/04dd5c60-a742-4f42-9de0-80759d0e0ceb.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
@@ -206,13 +248,6 @@
       "status": "ongoing"
     },
     {
-      "id": "c4b36f15-4ee5-425f-a77d-c2e7cbb970d8",
-      "title": "NIPPON SANGOKU: The Three Nations of the Crimson Sun",
-      "cover": "https://uploads.mangadex.org/covers/c4b36f15-4ee5-425f-a77d-c2e7cbb970d8/e5c54f1b-6ea4-4dd2-ae6e-9d0e138d7c2e.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
       "id": "334019e1-18bb-4ac0-b35c-0e8efb1e481c",
       "title": "JoJo’s Bizarre Adventure, Part 9: The JoJoLands - Digital Colored Comics",
       "cover": "https://uploads.mangadex.org/covers/334019e1-18bb-4ac0-b35c-0e8efb1e481c/530583f4-80ad-4f37-92d9-441b225c9785.jpg.256.jpg",
@@ -314,41 +349,6 @@
       "id": "b16f2554-9525-4f2a-bbe4-5b75b6605176",
       "title": "Clevatess: The King of Dark Beasts, the Baby, and the Undead Hero",
       "cover": "https://uploads.mangadex.org/covers/b16f2554-9525-4f2a-bbe4-5b75b6605176/0814dad9-5036-412c-b99e-61a31bab0e32.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "d422ddc8-eea3-4b0a-82a4-291bbd8c9285",
-      "title": "أبناء عائلة شيونجي",
-      "cover": "https://uploads.mangadex.org/covers/d422ddc8-eea3-4b0a-82a4-291bbd8c9285/18f555fb-4fe4-4d47-8fbe-7bd101a5bc3a.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "936f0ba5-ca65-4de4-99b1-528c02a4454d",
-      "title": "Hunter x Hunter (Official Colored)",
-      "cover": "https://uploads.mangadex.org/covers/936f0ba5-ca65-4de4-99b1-528c02a4454d/c08c2728-5af5-4a6e-83e0-f665280c866c.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "6df76f5e-3d2e-4add-a8e7-8a9a8320c711",
-      "title": "مرحبا بعودتك أليس",
-      "cover": "https://uploads.mangadex.org/covers/6df76f5e-3d2e-4add-a8e7-8a9a8320c711/b74cf6b4-2c2a-4189-9922-0cfc677a5f31.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
-      "id": "d78db808-93f7-498d-9368-e5767fd85057",
-      "title": "Class 2-B Hero Destroyerz",
-      "cover": "https://uploads.mangadex.org/covers/d78db808-93f7-498d-9368-e5767fd85057/382e67c5-962f-4e65-a1c9-f457e03c058e.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "484f94e7-35c3-4cb5-a068-53d684c1439a",
-      "title": "Baki Part 6",
-      "cover": "https://uploads.mangadex.org/covers/484f94e7-35c3-4cb5-a068-53d684c1439a/863ae891-3627-4070-8918-4a626dc9d1ff.png.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     }
