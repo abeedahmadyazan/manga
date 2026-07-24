@@ -1,7 +1,35 @@
 {
-  "updated_at": "2026-07-24T02:27:24.000196+00:00",
+  "updated_at": "2026-07-24T08:23:34.845095+00:00",
   "count": 50,
   "items": [
+    {
+      "id": "1aa17501-0328-4d5a-bbbe-3cb7cae8c9ae",
+      "title": "My Co-worker Is an Eldritch X!",
+      "cover": "https://uploads.mangadex.org/covers/1aa17501-0328-4d5a-bbbe-3cb7cae8c9ae/6856c3e0-b344-4319-aa2d-d6f702c235da.png.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "25e1d17b-6a4d-4698-a4f6-bf53460c10af",
+      "title": "حافلة لإثنين",
+      "cover": "https://uploads.mangadex.org/covers/25e1d17b-6a4d-4698-a4f6-bf53460c10af/f7cd3ff9-d7a1-4b5e-b473-ee2833b82c35.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "356de811-ae92-48f1-b93b-cfdf0f8d02e4",
+      "title": "بما أننا نرسم الآن",
+      "cover": "https://uploads.mangadex.org/covers/356de811-ae92-48f1-b93b-cfdf0f8d02e4/4c0f235c-762d-463b-a320-4e5cedd8db51.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "5b93fa0f-0640-49b8-974e-954b9959929b",
+      "title": "Girls' Last Tour",
+      "cover": "https://uploads.mangadex.org/covers/5b93fa0f-0640-49b8-974e-954b9959929b/67d556f5-91d4-4b85-b287-2f74f008e564.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
     {
       "id": "85a99758-de39-471e-9f6d-800547f53d0a",
       "title": "Tougen Anki: Legend of the Cursed Blood",
@@ -199,13 +227,6 @@
       "status": "ongoing"
     },
     {
-      "id": "5b93fa0f-0640-49b8-974e-954b9959929b",
-      "title": "Girls' Last Tour",
-      "cover": "https://uploads.mangadex.org/covers/5b93fa0f-0640-49b8-974e-954b9959929b/67d556f5-91d4-4b85-b287-2f74f008e564.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
       "id": "b8faa8ab-cb4e-416f-829d-d2a6042ba5ac",
       "title": "Foreign Country Diary",
       "cover": "https://uploads.mangadex.org/covers/b8faa8ab-cb4e-416f-829d-d2a6042ba5ac/0ca2f8bf-a33c-46cb-8730-cff51b148314.png.256.jpg",
@@ -237,13 +258,6 @@
       "id": "f486a183-6660-492b-b94b-aa80960d8326",
       "title": "Dragon Ball Super (Official Colored)",
       "cover": "https://uploads.mangadex.org/covers/f486a183-6660-492b-b94b-aa80960d8326/64b86e1c-8734-43c0-b6e4-01f394ce15ad.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "1aa17501-0328-4d5a-bbbe-3cb7cae8c9ae",
-      "title": "My Co-worker Is an Eldritch X!",
-      "cover": "https://uploads.mangadex.org/covers/1aa17501-0328-4d5a-bbbe-3cb7cae8c9ae/6856c3e0-b344-4319-aa2d-d6f702c235da.png.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
@@ -300,20 +314,6 @@
       "id": "936f0ba5-ca65-4de4-99b1-528c02a4454d",
       "title": "Hunter x Hunter (Official Colored)",
       "cover": "https://uploads.mangadex.org/covers/936f0ba5-ca65-4de4-99b1-528c02a4454d/c08c2728-5af5-4a6e-83e0-f665280c866c.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "25e1d17b-6a4d-4698-a4f6-bf53460c10af",
-      "title": "Bus For Two",
-      "cover": "https://uploads.mangadex.org/covers/25e1d17b-6a4d-4698-a4f6-bf53460c10af/f7cd3ff9-d7a1-4b5e-b473-ee2833b82c35.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "356de811-ae92-48f1-b93b-cfdf0f8d02e4",
-      "title": "بما أننا نرسم الآن",
-      "cover": "https://uploads.mangadex.org/covers/356de811-ae92-48f1-b93b-cfdf0f8d02e4/4c0f235c-762d-463b-a320-4e5cedd8db51.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
