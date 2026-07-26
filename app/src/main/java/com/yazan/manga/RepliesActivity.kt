@@ -189,7 +189,34 @@ class RepliesActivity : BaseSwipeBackActivity() {
                 }
                 time.text = com.yazan.manga.data.relativeTime(r.createdAt)
                 text.text = r.text
-                btnReply.visibility = View.GONE
+                btnReply.visibility = View.VISIBLE
+                btnReply.setOnClickListener {
+                    val input = EditText(this@RepliesActivity).apply {
+                        hint = "اكتب ردك على ${r.authorName}..."
+                        setPadding(40, 24, 40, 24)
+                        minLines = 2
+                    }
+                    AlertDialog.Builder(this@RepliesActivity)
+                        .setTitle("الرد على ${r.authorName}")
+                        .setView(input)
+                        .setPositiveButton("إرسال") { _, _ ->
+                            val text = input.text.toString().trim()
+                            if (text.isNotEmpty()) {
+                                CloudCommentsManager.addComment(this@RepliesActivity, contextId, contextType, text, r.id) { success, error ->
+                                    runOnUiThread {
+                                        if (success) {
+                                            Toast.makeText(this@RepliesActivity, "تم إرسال الرد", Toast.LENGTH_SHORT).show()
+                                            loadReplies()
+                                        } else {
+                                            Toast.makeText(this@RepliesActivity, error ?: "تعذّر إرسال الرد", Toast.LENGTH_LONG).show()
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        .setNegativeButton("إلغاء", null)
+                        .show()
+                }
                 tvLikeCount.text = r.likes.size.toString()
                 tvDislikeCount.text = r.dislikes.size.toString()
                 val blue = android.graphics.Color.parseColor("#3b82f6")
@@ -243,14 +270,22 @@ class RepliesActivity : BaseSwipeBackActivity() {
 
                 btnLike.setOnClickListener {
                     if (com.yazan.manga.data.BotProtection.checkLikeTap()) {
-                        user?.let { CloudCommentsManager.toggleLike(r.id, it.email, true) {} }
+                        user?.let { 
+                            CloudCommentsManager.toggleLike(r.id, it.email, true) { success ->
+                                if (success) loadReplies()
+                            }
+                        }
                     } else {
                         Toast.makeText(this@RepliesActivity, "مهلاً، توقف قليلاً", Toast.LENGTH_SHORT).show()
                     }
                 }
                 btnDislike.setOnClickListener {
                     if (com.yazan.manga.data.BotProtection.checkLikeTap()) {
-                        user?.let { CloudCommentsManager.toggleLike(r.id, it.email, false) {} }
+                        user?.let {
+                            CloudCommentsManager.toggleLike(r.id, it.email, false) { success ->
+                                if (success) loadReplies()
+                            }
+                        }
                     } else {
                         Toast.makeText(this@RepliesActivity, "مهلاً، توقف قليلاً", Toast.LENGTH_SHORT).show()
                     }

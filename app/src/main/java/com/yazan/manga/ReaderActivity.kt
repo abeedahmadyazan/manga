@@ -401,6 +401,12 @@ class ReaderActivity : BaseSwipeBackActivity() {
         // Increment reading stats
         incrementReadingStats()
 
+        // Mark chapter as read (green eye in chapter list)
+        try {
+            getSharedPreferences("read_chapters", MODE_PRIVATE)
+                .edit().putBoolean(currentChapterId, true).apply()
+        } catch (e: Exception) {}
+
         // Prefetch next chapter in background
         prefetchNextChapter()
         val adapter = PagesAdapter(pages) { pageIndex ->

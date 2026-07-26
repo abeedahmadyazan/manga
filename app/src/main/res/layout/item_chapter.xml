@@ -22,6 +22,18 @@
         android:gravity="center_vertical"
         android:padding="14dp">
 
+        <!-- Read status eye icon -->
+        <ImageView
+            android:id="@+id/imgReadStatus"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginEnd="8dp"
+            android:src="@drawable/ic_bookmark"
+            android:tint="@color/text_secondary"
+            android:visibility="gone"
+            android:contentDescription="مقروء"
+            tools:ignore="UseAppTint" />
+
         <!-- Chapter number badge -->
         <TextView
             android:id="@+id/chapterNumber"

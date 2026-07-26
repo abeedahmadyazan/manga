@@ -82,14 +82,22 @@ class CommentsActivity : BaseSwipeBackActivity() {
             onLike = { c ->
                 // Bot protection: ignore rapid taps
                 if (com.yazan.manga.data.BotProtection.checkLikeTap()) {
-                    AuthManager.getCurrentUser(this)?.let { CloudCommentsManager.toggleLike(c.id, it.email, true) {} }
+                    AuthManager.getCurrentUser(this)?.let { 
+                        CloudCommentsManager.toggleLike(c.id, it.email, true) { success ->
+                            if (success) refreshComments()
+                        }
+                    }
                 } else {
                     Toast.makeText(this, "مهلاً، توقف قليلاً", Toast.LENGTH_SHORT).show()
                 }
             },
             onDislike = { c ->
                 if (com.yazan.manga.data.BotProtection.checkLikeTap()) {
-                    AuthManager.getCurrentUser(this)?.let { CloudCommentsManager.toggleLike(c.id, it.email, false) {} }
+                    AuthManager.getCurrentUser(this)?.let {
+                        CloudCommentsManager.toggleLike(c.id, it.email, false) { success ->
+                            if (success) refreshComments()
+                        }
+                    }
                 } else {
                     Toast.makeText(this, "مهلاً، توقف قليلاً", Toast.LENGTH_SHORT).show()
                 }

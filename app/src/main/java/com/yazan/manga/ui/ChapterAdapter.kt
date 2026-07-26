@@ -39,6 +39,19 @@ class ChapterAdapter(
     }
 
     override fun onBindViewHolder(holder: ChapterVH, position: Int) {
+        val chapter = chapters[position]
+        // Check if chapter was read (stored in SharedPreferences)
+        val prefs = holder.itemView.context.getSharedPreferences("read_chapters", android.content.Context.MODE_PRIVATE)
+        val isRead = prefs.getBoolean(chapter.id, false)
+        val imgRead = holder.itemView.findViewById<android.widget.ImageView?>(R.id.imgReadStatus)
+        if (isRead) {
+            imgRead?.visibility = android.view.View.VISIBLE
+            imgRead?.imageTintList = android.content.res.ColorStateList.valueOf(
+                android.graphics.Color.parseColor("#10b981")
+            )
+        } else {
+            imgRead?.visibility = android.view.View.GONE
+        }
         holder.bind(items[position])
     }
 
