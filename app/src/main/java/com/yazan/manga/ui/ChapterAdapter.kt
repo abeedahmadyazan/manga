@@ -39,7 +39,7 @@ class ChapterAdapter(
     }
 
     override fun onBindViewHolder(holder: ChapterVH, position: Int) {
-        val chapter = chapters[position]
+        val chapter = items[position]
         // Check if chapter was read (stored in SharedPreferences)
         val prefs = holder.itemView.context.getSharedPreferences("read_chapters", android.content.Context.MODE_PRIVATE)
         val isRead = prefs.getBoolean(chapter.id, false)

@@ -206,7 +206,7 @@ class RepliesActivity : BaseSwipeBackActivity() {
                                     runOnUiThread {
                                         if (success) {
                                             Toast.makeText(this@RepliesActivity, "تم إرسال الرد", Toast.LENGTH_SHORT).show()
-                                            loadReplies()
+                                            refreshReplies()
                                         } else {
                                             Toast.makeText(this@RepliesActivity, error ?: "تعذّر إرسال الرد", Toast.LENGTH_LONG).show()
                                         }
@@ -272,7 +272,7 @@ class RepliesActivity : BaseSwipeBackActivity() {
                     if (com.yazan.manga.data.BotProtection.checkLikeTap()) {
                         user?.let { 
                             CloudCommentsManager.toggleLike(r.id, it.email, true) { success ->
-                                if (success) loadReplies()
+                                if (success) refreshReplies()
                             }
                         }
                     } else {
@@ -283,7 +283,7 @@ class RepliesActivity : BaseSwipeBackActivity() {
                     if (com.yazan.manga.data.BotProtection.checkLikeTap()) {
                         user?.let {
                             CloudCommentsManager.toggleLike(r.id, it.email, false) { success ->
-                                if (success) loadReplies()
+                                if (success) refreshReplies()
                             }
                         }
                     } else {
