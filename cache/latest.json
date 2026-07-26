@@ -1,11 +1,11 @@
 {
-  "updated_at": "2026-07-26T08:22:55.694471+00:00",
+  "updated_at": "2026-07-26T13:15:18.987193+00:00",
   "count": 50,
   "items": [
     {
-      "id": "1aa17501-0328-4d5a-bbbe-3cb7cae8c9ae",
-      "title": "My Co-worker Is an Eldritch X!",
-      "cover": "https://uploads.mangadex.org/covers/1aa17501-0328-4d5a-bbbe-3cb7cae8c9ae/6856c3e0-b344-4319-aa2d-d6f702c235da.png.256.jpg",
+      "id": "77bee52c-d2d6-44ad-a33a-1734c1fe696a",
+      "title": "The Eminence in Shadow",
+      "cover": "https://uploads.mangadex.org/covers/77bee52c-d2d6-44ad-a33a-1734c1fe696a/6079dd31-838b-4d61-87c4-121f3ad19158.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
@@ -13,6 +13,41 @@
       "id": "9d3d3403-1a87-4737-9803-bc3d99db1424",
       "title": "The Guy She Was Interested in Wasn't a Guy at All",
       "cover": "https://uploads.mangadex.org/covers/9d3d3403-1a87-4737-9803-bc3d99db1424/fac191d0-96c1-4ebb-bf79-b7616d7162ac.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "96ae166c-d8e1-4e9e-88cb-805b65154d7e",
+      "title": "Red Blue",
+      "cover": "https://uploads.mangadex.org/covers/96ae166c-d8e1-4e9e-88cb-805b65154d7e/d010f9c1-fdaa-4925-93df-dc3c06417574.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "dea77c2d-dbaa-434a-b0af-0c116642434c",
+      "title": "Ichi the Witch",
+      "cover": "https://uploads.mangadex.org/covers/dea77c2d-dbaa-434a-b0af-0c116642434c/707b5cff-60e3-40fe-8105-e9065d5f8abd.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "ab8cbb82-d0ed-45a7-8ffe-4bfa6d43d79c",
+      "title": "JoJo's Bizarre Adventure Part 9 - The JOJOLands",
+      "cover": "https://uploads.mangadex.org/covers/ab8cbb82-d0ed-45a7-8ffe-4bfa6d43d79c/f47d473d-7b43-4283-9e47-9a0168dc77e1.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "db692d58-4b13-4174-ae8c-30c515c0689c",
+      "title": "Hunter x Hunter",
+      "cover": "https://uploads.mangadex.org/covers/db692d58-4b13-4174-ae8c-30c515c0689c/aa112927-f1e5-4fe4-a4db-7fd4a1536e3c.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "1aa17501-0328-4d5a-bbbe-3cb7cae8c9ae",
+      "title": "My Co-worker Is an Eldritch X!",
+      "cover": "https://uploads.mangadex.org/covers/1aa17501-0328-4d5a-bbbe-3cb7cae8c9ae/6856c3e0-b344-4319-aa2d-d6f702c235da.png.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
@@ -66,13 +101,6 @@
       "status": "ongoing"
     },
     {
-      "id": "96ae166c-d8e1-4e9e-88cb-805b65154d7e",
-      "title": "Red Blue",
-      "cover": "https://uploads.mangadex.org/covers/96ae166c-d8e1-4e9e-88cb-805b65154d7e/d010f9c1-fdaa-4925-93df-dc3c06417574.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
       "id": "36300a46-485b-4c05-a570-ac3b23de3952",
       "title": "If the Villainess and Villain Met and Fell in Love",
       "cover": "https://uploads.mangadex.org/covers/36300a46-485b-4c05-a570-ac3b23de3952/a8a6dd33-dab0-4921-bc13-23a198a003be.jpg.256.jpg",
@@ -106,13 +134,6 @@
       "cover": "https://uploads.mangadex.org/covers/8847f905-550d-4fe6-bcda-ac2b896789c7/e96cfe6d-7876-4558-b4bc-0930deb5060a.jpg.256.jpg",
       "source": "mangadex",
       "status": "completed"
-    },
-    {
-      "id": "77bee52c-d2d6-44ad-a33a-1734c1fe696a",
-      "title": "The Eminence in Shadow",
-      "cover": "https://uploads.mangadex.org/covers/77bee52c-d2d6-44ad-a33a-1734c1fe696a/6079dd31-838b-4d61-87c4-121f3ad19158.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
     },
     {
       "id": "fa85b2aa-370c-41c5-96ae-29b05c848f3d",
@@ -153,13 +174,6 @@
       "id": "a6a46436-9ed4-4c20-8b11-6f4a0f74b23a",
       "title": "Kabuto Mushi",
       "cover": "https://uploads.mangadex.org/covers/a6a46436-9ed4-4c20-8b11-6f4a0f74b23a/5a16e9bf-0859-4719-bd13-7e5e43e338d7.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "ab8cbb82-d0ed-45a7-8ffe-4bfa6d43d79c",
-      "title": "JoJo's Bizarre Adventure Part 9 - The JOJOLands",
-      "cover": "https://uploads.mangadex.org/covers/ab8cbb82-d0ed-45a7-8ffe-4bfa6d43d79c/f47d473d-7b43-4283-9e47-9a0168dc77e1.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
@@ -335,20 +349,6 @@
       "id": "baa95345-24fb-47a9-83e9-434ff671f968",
       "title": "خلف المتجر ادخن معك",
       "cover": "https://uploads.mangadex.org/covers/baa95345-24fb-47a9-83e9-434ff671f968/4862f2a1-2852-4c98-a217-e3a44af83152.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "b41bef1e-7df9-4255-bd82-ecf570fec566",
-      "title": "The New Gate",
-      "cover": "https://uploads.mangadex.org/covers/b41bef1e-7df9-4255-bd82-ecf570fec566/86a902f5-6590-4ebc-abef-590801f70659.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "3e3604cc-97b5-43f0-ab2c-c144debcae87",
-      "title": "Yu☆Gi☆Oh! OCG STORIES",
-      "cover": "https://uploads.mangadex.org/covers/3e3604cc-97b5-43f0-ab2c-c144debcae87/187b72db-9d6a-4753-81b2-34e41150ad9f.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     }
