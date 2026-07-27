@@ -1,7 +1,14 @@
 {
-  "updated_at": "2026-07-27T09:46:41.429200+00:00",
+  "updated_at": "2026-07-27T14:27:53.300814+00:00",
   "count": 50,
   "items": [
+    {
+      "id": "37f5cce0-8070-4ada-96e5-fa24b1bd4ff9",
+      "title": "Kaguya-sama: Love Is War",
+      "cover": "https://uploads.mangadex.org/covers/37f5cce0-8070-4ada-96e5-fa24b1bd4ff9/e21ca520-5054-4041-a07e-de8b7c683522.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
     {
       "id": "ab8cbb82-d0ed-45a7-8ffe-4bfa6d43d79c",
       "title": "JoJo's Bizarre Adventure Part 9 - The JOJOLands",
@@ -342,13 +349,6 @@
       "id": "10027822-b188-4093-a658-abb64c368ac2",
       "title": "Sekai no 4koma",
       "cover": "https://uploads.mangadex.org/covers/10027822-b188-4093-a658-abb64c368ac2/21667a08-f5b9-4270-b33e-53bb0e20c702.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "334019e1-18bb-4ac0-b35c-0e8efb1e481c",
-      "title": "JoJo’s Bizarre Adventure, Part 9: The JoJoLands - Digital Colored Comics",
-      "cover": "https://uploads.mangadex.org/covers/334019e1-18bb-4ac0-b35c-0e8efb1e481c/530583f4-80ad-4f37-92d9-441b225c9785.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     }
