@@ -385,16 +385,6 @@ class CommentsActivity : BaseSwipeBackActivity() {
             refreshComments()
         }
     }
-
-    private fun refreshComments() {
-        lifecycleScope.launch {
-            val comments = withContext(Dispatchers.IO) {
-                com.yazan.manga.data.ApiClient.getComments(contextId)
-            }
-            allComments = comments
-            updateList()
-        }
-    }
 }
 
 class CommentsAdapter(
