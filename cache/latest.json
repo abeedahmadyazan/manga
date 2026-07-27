@@ -1,7 +1,14 @@
 {
-  "updated_at": "2026-07-27T01:38:49.303171+00:00",
+  "updated_at": "2026-07-27T02:40:41.044948+00:00",
   "count": 50,
   "items": [
+    {
+      "id": "5b93fa0f-0640-49b8-974e-954b9959929b",
+      "title": "Girls' Last Tour",
+      "cover": "https://uploads.mangadex.org/covers/5b93fa0f-0640-49b8-974e-954b9959929b/67d556f5-91d4-4b85-b287-2f74f008e564.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
     {
       "id": "a08cd14f-68d4-4942-9305-2fe9d7d0339e",
       "title": "The Apothecary Is Gonna Make This Ragged Elf Happy",
@@ -197,13 +204,6 @@
       "cover": "https://uploads.mangadex.org/covers/202718c6-525e-4cec-a469-c945548cacc3/04dd5c60-a742-4f42-9de0-80759d0e0ceb.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
-    },
-    {
-      "id": "5b93fa0f-0640-49b8-974e-954b9959929b",
-      "title": "Girls' Last Tour",
-      "cover": "https://uploads.mangadex.org/covers/5b93fa0f-0640-49b8-974e-954b9959929b/67d556f5-91d4-4b85-b287-2f74f008e564.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
     },
     {
       "id": "e78a489b-6632-4d61-b00b-5206f5b8b22b",
