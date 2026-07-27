@@ -19,6 +19,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.google.android.material.button.MaterialButton
 import com.google.firebase.firestore.ListenerRegistration
 import com.yazan.manga.data.AuthManager
+import com.yazan.manga.data.AvatarCache
 import com.yazan.manga.data.CloudCommentsManager
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -34,7 +35,7 @@ class RepliesActivity : BaseSwipeBackActivity() {
     private lateinit var emptyText: TextView
     private lateinit var replyInput: EditText
     private lateinit var sendBtn: MaterialButton
-    
+
     private var parentId: String = ""
     private var contextId: String = ""
     private var contextType: String = ""
@@ -42,6 +43,7 @@ class RepliesActivity : BaseSwipeBackActivity() {
     private lateinit var titleView: TextView
     private var parentAuthor: String = "تعليق"
     private var listener: ListenerRegistration? = null
+    private lateinit var repliesAdapter: RepliesAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,7 +63,7 @@ class RepliesActivity : BaseSwipeBackActivity() {
         emptyText = findViewById(R.id.emptyText)
         replyInput = findViewById(R.id.replyInput)
         sendBtn = findViewById(R.id.btnSendReply)
-        
+
         findViewById<ImageButton>(R.id.btnBack).setOnClickListener { finish() }
 
         swipeRefresh.setOnRefreshListener {
@@ -74,6 +76,33 @@ class RepliesActivity : BaseSwipeBackActivity() {
             val text = replyInput.text.toString().trim()
             if (text.isNotEmpty()) sendReply(text)
         }
+
+        // Set up the RecyclerView once. The adapter is updated in-place via
+        // updateList() — this prevents the whole list from being recreated
+        // on every poll, which was the root cause of the avatar flicker.
+        repliesAdapter = RepliesAdapter(
+            currentUser = AuthManager.getCurrentUser(this),
+            onLike = { r ->
+                if (com.yazan.manga.data.BotProtection.checkLikeTap()) {
+                    AuthManager.getCurrentUser(this)?.let { CloudCommentsManager.toggleLike(r.id, it.email, true) {} }
+                } else {
+                    Toast.makeText(this, "مهلاً، توقف قليلاً", Toast.LENGTH_SHORT).show()
+                }
+            },
+            onDislike = { r ->
+                if (com.yazan.manga.data.BotProtection.checkLikeTap()) {
+                    AuthManager.getCurrentUser(this)?.let { CloudCommentsManager.toggleLike(r.id, it.email, false) {} }
+                } else {
+                    Toast.makeText(this, "مهلاً، توقف قليلاً", Toast.LENGTH_SHORT).show()
+                }
+            },
+            onReply = { r -> openNestedReply(r) },
+            onDelete = { r -> confirmDelete(r) },
+            onReport = { r -> showReportDialog(r) },
+            onProfile = { email -> openUserProfile(email) }
+        )
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.adapter = repliesAdapter
 
         startListening()
     }
@@ -88,7 +117,7 @@ class RepliesActivity : BaseSwipeBackActivity() {
                 // Update title with reply count
                 val count = allReplies.size
                 titleView.text = if (count > 0) "💬 $count رد" else "💬 ردود على: $parentAuthor"
-                renderReplies()
+                repliesAdapter.updateList(allReplies)
             },
             onError = { e ->
                 swipeRefresh.isRefreshing = false
@@ -116,6 +145,55 @@ class RepliesActivity : BaseSwipeBackActivity() {
     }
 
     /**
+     * Open the RepliesActivity again for a nested reply (reply-to-reply).
+     * The new screen will show replies to the reply that the user clicked on.
+     */
+    private fun openNestedReply(reply: CloudCommentsManager.Comment) {
+        val intent = android.content.Intent(this, RepliesActivity::class.java)
+        intent.putExtra("parent_id", reply.id)
+        intent.putExtra("context_id", contextId)
+        intent.putExtra("context_type", contextType)
+        intent.putExtra("parent_author", reply.authorName)
+        startActivity(intent)
+    }
+
+    private fun confirmDelete(reply: CloudCommentsManager.Comment) {
+        AlertDialog.Builder(this)
+            .setTitle("حذف الرد").setMessage("هل تريد الحذف؟")
+            .setPositiveButton("حذف") { _, _ ->
+                CloudCommentsManager.deleteComment(reply.id) { success ->
+                    runOnUiThread {
+                        if (success) {
+                            Toast.makeText(this, "تم الحذف", Toast.LENGTH_SHORT).show()
+                            allReplies = allReplies.filterNot { it.id == reply.id }
+                            repliesAdapter.updateList(allReplies)
+                        } else {
+                            Toast.makeText(this, "فشل الحذف", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }
+            }
+            .setNegativeButton("إلغاء", null).show()
+    }
+
+    private fun showReportDialog(reply: CloudCommentsManager.Comment) {
+        val reasons = arrayOf("محتوى مسيء أو غير لائق", "إهانة أو تحرش", "سبام أو تكرار", "مخالفة أخرى")
+        val checked = intArrayOf(0)
+        AlertDialog.Builder(this)
+            .setTitle("الإبلاغ عن رد ${reply.authorName}")
+            .setSingleChoiceItems(reasons, checked[0]) { _, which -> checked[0] = which }
+            .setPositiveButton("إرسال البلاغ") { _, _ ->
+                CloudCommentsManager.reportComment(this, reply, "رد", reasons[checked[0]]) { success, error ->
+                    runOnUiThread {
+                        if (success) Toast.makeText(this, "تم إرسال البلاغ", Toast.LENGTH_SHORT).show()
+                        else Toast.makeText(this, "حدث خطأ", Toast.LENGTH_LONG).show()
+                    }
+                }
+            }
+            .setNegativeButton("إلغاء", null).show()
+    }
+
+    /**
      * Re-fetch replies from the server immediately. Used by pull-to-refresh
      * and after posting a reply so the UI updates without waiting for the
      * next 5s poll cycle.
@@ -130,171 +208,7 @@ class RepliesActivity : BaseSwipeBackActivity() {
             allReplies = comments.filter { it.parentId == parentId }
             val count = allReplies.size
             titleView.text = if (count > 0) "💬 $count رد" else "💬 ردود على: $parentAuthor"
-            renderReplies()
-        }
-    }
-
-    private fun renderReplies() {
-        if (allReplies.isEmpty()) {
-            emptyText.visibility = View.VISIBLE
-            recyclerView.visibility = View.GONE
-            return
-        }
-
-        emptyText.visibility = View.GONE
-        recyclerView.visibility = View.VISIBLE
-        recyclerView.layoutManager = LinearLayoutManager(this)
-
-        val user = AuthManager.getCurrentUser(this)
-        val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault())
-
-        recyclerView.adapter = object : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-            override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-                val v = LayoutInflater.from(parent.context).inflate(R.layout.item_comment, parent, false)
-                return object : RecyclerView.ViewHolder(v) {}
-            }
-
-            override fun getItemCount() = allReplies.size
-
-            override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-                val r = allReplies[position]
-                val avatar = holder.itemView.findViewById<TextView>(R.id.commentAvatar)
-                val avatarImg = holder.itemView.findViewById<android.widget.ImageView>(R.id.commentAvatarImage)
-                val adminBadge = holder.itemView.findViewById<TextView>(R.id.commentAdminBadge)
-                val author = holder.itemView.findViewById<TextView>(R.id.commentAuthor)
-                val time = holder.itemView.findViewById<TextView>(R.id.commentTime)
-                val text = holder.itemView.findViewById<TextView>(R.id.commentText)
-                val btnLike = holder.itemView.findViewById<View>(R.id.btnLike)
-                val btnDislike = holder.itemView.findViewById<View>(R.id.btnDislike)
-                val btnReply = holder.itemView.findViewById<View>(R.id.btnReply)
-                val btnDelete = holder.itemView.findViewById<View>(R.id.btnDelete)
-                val btnReport = holder.itemView.findViewById<View>(R.id.btnReport)
-                val imgLike = holder.itemView.findViewById<android.widget.ImageView>(R.id.imgLike)
-                val tvLikeCount = holder.itemView.findViewById<TextView>(R.id.tvLikeCount)
-                val imgDislike = holder.itemView.findViewById<android.widget.ImageView>(R.id.imgDislike)
-                val tvDislikeCount = holder.itemView.findViewById<TextView>(R.id.tvDislikeCount)
-
-                avatar.text = r.authorName.firstOrNull()?.uppercaseChar()?.toString() ?: "?"
-                avatar.visibility = View.VISIBLE
-                avatarImg.visibility = View.GONE
-                // Admin: name in green pill; non-admin: plain text
-                if (r.isAdmin) {
-                    adminBadge.text = r.authorName
-                    adminBadge.visibility = View.VISIBLE
-                    author.visibility = View.GONE
-                } else {
-                    adminBadge.visibility = View.GONE
-                    author.visibility = View.VISIBLE
-                    author.text = r.authorName
-                }
-                time.text = com.yazan.manga.data.relativeTime(r.createdAt)
-                text.text = r.text
-                btnReply.visibility = View.GONE
-                tvLikeCount.text = r.likes.size.toString()
-                tvDislikeCount.text = r.dislikes.size.toString()
-                val blue = android.graphics.Color.parseColor("#3b82f6")
-                val red = android.graphics.Color.parseColor("#ef4444")
-                val gray = android.graphics.Color.parseColor("#9ca3af")
-                val liked = user != null && r.likes.contains(user.email)
-                val disliked = user != null && r.dislikes.contains(user.email)
-                imgLike.imageTintList = android.content.res.ColorStateList.valueOf(if (liked) blue else gray)
-                tvLikeCount.setTextColor(if (liked) blue else gray)
-                imgLike.isSelected = liked
-                imgDislike.imageTintList = android.content.res.ColorStateList.valueOf(if (disliked) red else gray)
-                tvDislikeCount.setTextColor(if (disliked) red else gray)
-                imgDislike.isSelected = disliked
-
-                // Fetch the latest name + avatar from the cloud
-                AuthManager.fetchCloudUser(r.authorEmail) { cu ->
-                    runOnUiThread {
-                        if (cu != null) {
-                            // Update the name in the correct place (pill for admin, plain for others)
-                            if (cu.name.isNotEmpty() && cu.name != r.authorName) {
-                                if (r.isAdmin) {
-                                    adminBadge.text = cu.name
-                                } else {
-                                    author.text = cu.name
-                                }
-                                avatar.text = cu.name.firstOrNull()?.uppercaseChar()?.toString() ?: "?"
-                            }
-                            if (cu.avatarBase64.isNotEmpty()) {
-                                try {
-                                    val bytes = android.util.Base64.decode(cu.avatarBase64, android.util.Base64.NO_WRAP)
-                                    val bmp = android.graphics.BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
-                                    if (bmp != null) {
-                                        avatar.visibility = View.GONE
-                                        avatarImg.visibility = View.VISIBLE
-                                        // Circular avatar via Glide
-                                        com.bumptech.glide.Glide.with(this@RepliesActivity)
-                                            .load(bmp)
-                                            .circleCrop()
-                                            .into(avatarImg)
-                                    }
-                                } catch (_: Exception) {}
-                            }
-                        }
-                    }
-                }
-
-                val isOwner = user?.email == r.authorEmail
-                val canDelete = isOwner || (user?.isAdmin == true)
-                btnDelete.visibility = if (canDelete) View.VISIBLE else View.GONE
-                btnReport.visibility = if (user != null && !isOwner && !r.isAdmin) View.VISIBLE else View.GONE
-
-                btnLike.setOnClickListener {
-                    if (com.yazan.manga.data.BotProtection.checkLikeTap()) {
-                        user?.let { CloudCommentsManager.toggleLike(r.id, it.email, true) {} }
-                    } else {
-                        Toast.makeText(this@RepliesActivity, "مهلاً، توقف قليلاً", Toast.LENGTH_SHORT).show()
-                    }
-                }
-                btnDislike.setOnClickListener {
-                    if (com.yazan.manga.data.BotProtection.checkLikeTap()) {
-                        user?.let { CloudCommentsManager.toggleLike(r.id, it.email, false) {} }
-                    } else {
-                        Toast.makeText(this@RepliesActivity, "مهلاً، توقف قليلاً", Toast.LENGTH_SHORT).show()
-                    }
-                }
-                btnDelete.setOnClickListener {
-                    AlertDialog.Builder(this@RepliesActivity)
-                        .setTitle("حذف الرد").setMessage("هل تريد الحذف؟")
-                        .setPositiveButton("حذف") { _, _ ->
-                            CloudCommentsManager.deleteComment(r.id) { success ->
-                                runOnUiThread {
-                                    if (success) {
-                                        Toast.makeText(this@RepliesActivity, "تم الحذف", Toast.LENGTH_SHORT).show()
-                                        // Remove locally as a fallback; the listener will also refresh
-                                        allReplies = allReplies.filterNot { it.id == r.id }
-                                        renderReplies()
-                                    } else {
-                                        Toast.makeText(this@RepliesActivity, "فشل الحذف", Toast.LENGTH_SHORT).show()
-                                    }
-                                }
-                            }
-                        }
-                        .setNegativeButton("إلغاء", null).show()
-                }
-                btnReport.setOnClickListener {
-                    val reasons = arrayOf("محتوى مسيء أو غير لائق", "إهانة أو تحرش", "سبام أو تكرار", "مخالفة أخرى")
-                    val checked = intArrayOf(0)
-                    AlertDialog.Builder(this@RepliesActivity)
-                        .setTitle("الإبلاغ عن رد ${r.authorName}")
-                        .setSingleChoiceItems(reasons, checked[0]) { _, which -> checked[0] = which }
-                        .setPositiveButton("إرسال البلاغ") { _, _ ->
-                            CloudCommentsManager.reportComment(this@RepliesActivity, r, "رد", reasons[checked[0]]) { success, error ->
-                                runOnUiThread {
-                                    if (success) Toast.makeText(this@RepliesActivity, "تم إرسال البلاغ", Toast.LENGTH_SHORT).show()
-                                    else Toast.makeText(this@RepliesActivity, "حدث خطأ", Toast.LENGTH_LONG).show()
-                                }
-                            }
-                        }
-                        .setNegativeButton("إلغاء", null).show()
-                }
-
-                author.setOnClickListener { openUserProfile(r.authorEmail) }
-                avatar.setOnClickListener { openUserProfile(r.authorEmail) }
-                avatarImg.setOnClickListener { openUserProfile(r.authorEmail) }
-            }
+            repliesAdapter.updateList(allReplies)
         }
     }
 
@@ -305,4 +219,279 @@ class RepliesActivity : BaseSwipeBackActivity() {
     }
 
     override fun onDestroy() { super.onDestroy(); listener?.remove() }
+}
+
+/**
+ * Dedicated RecyclerView adapter for replies.
+ *
+ * Key improvements over the previous inline anonymous adapter:
+ * - **Stable IDs** (setHasStableIds) — RecyclerView knows which items are
+ *   the same across updates, so it only rebinds changed items.
+ * - **DiffUtil** — only items whose text/likes/dislikes actually changed
+ *   get rebound. This prevents the avatar from being cleared + reloaded
+ *   on every 5s poll, eliminating the flicker.
+ * - **AvatarCache integration** — same pattern as CommentsAdapter: show
+ *   cached bitmap instantly, fall back to base64 → decode → cache, then
+ *   to cloud fetch. No more "?" flash on every update.
+ */
+class RepliesAdapter(
+    private var currentUser: AuthManager.User?,
+    private val onLike: (CloudCommentsManager.Comment) -> Unit,
+    private val onDislike: (CloudCommentsManager.Comment) -> Unit,
+    private val onReply: (CloudCommentsManager.Comment) -> Unit,
+    private val onDelete: (CloudCommentsManager.Comment) -> Unit,
+    private val onReport: (CloudCommentsManager.Comment) -> Unit,
+    private val onProfile: (String) -> Unit
+) : RecyclerView.Adapter<RepliesAdapter.VH>() {
+
+    private val items = mutableListOf<CloudCommentsManager.Comment>()
+    // Cache of cloud profiles: email -> CloudUser. Avoids refetching on every scroll.
+    private val cloudProfiles = mutableMapOf<String, AuthManager.CloudUser?>()
+
+    init {
+        // Stable IDs so RecyclerView doesn't rebind unchanged replies
+        // when the list updates (prevents avatar flicker).
+        setHasStableIds(true)
+    }
+
+    override fun getItemId(position: Int): Long {
+        return items[position].id.hashCode().toLong()
+    }
+
+    fun updateList(newItems: List<CloudCommentsManager.Comment>) {
+        // Use DiffUtil so only NEW/CHANGED replies are rebound. This
+        // prevents existing replies from having their avatars cleared +
+        // reloaded every time a new reply is added or a like changes.
+        val old = items.toList()
+        val diff = androidx.recyclerview.widget.DiffUtil.calculateDiff(
+            object : androidx.recyclerview.widget.DiffUtil.Callback() {
+                override fun getOldListSize() = old.size
+                override fun getNewListSize() = newItems.size
+                override fun areItemsTheSame(o: Int, n: Int) = old[o].id == newItems[n].id
+                override fun areContentsTheSame(o: Int, n: Int) =
+                    old[o].text == newItems[n].text &&
+                    old[o].likes == newItems[n].likes &&
+                    old[o].dislikes == newItems[n].dislikes &&
+                    old[o].editedAt == newItems[n].editedAt &&
+                    old[o].authorName == newItems[n].authorName
+            }
+        )
+        items.clear()
+        items.addAll(newItems)
+        diff.dispatchUpdatesTo(this)
+    }
+
+    fun updateCurrentUser(user: AuthManager.User?) {
+        currentUser = user
+        notifyDataSetChanged()
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {
+        val v = LayoutInflater.from(parent.context).inflate(R.layout.item_comment, parent, false)
+        return VH(v)
+    }
+
+    override fun getItemCount() = items.size
+
+    override fun onBindViewHolder(holder: VH, position: Int) {
+        holder.bind(items[position])
+    }
+
+    inner class VH(v: View) : RecyclerView.ViewHolder(v) {
+        private val avatar = v.findViewById<TextView>(R.id.commentAvatar)
+        private val avatarImg = v.findViewById<android.widget.ImageView>(R.id.commentAvatarImage)
+        private val adminBadge = v.findViewById<TextView>(R.id.commentAdminBadge)
+        private val author = v.findViewById<TextView>(R.id.commentAuthor)
+        private val time = v.findViewById<TextView>(R.id.commentTime)
+        private val text = v.findViewById<TextView>(R.id.commentText)
+        private val btnLike = v.findViewById<View>(R.id.btnLike)
+        private val btnDislike = v.findViewById<View>(R.id.btnDislike)
+        private val btnReply = v.findViewById<View>(R.id.btnReply)
+        private val btnDelete = v.findViewById<View>(R.id.btnDelete)
+        private val btnReport = v.findViewById<View>(R.id.btnReport)
+        private val imgLike = v.findViewById<android.widget.ImageView>(R.id.imgLike)
+        private val tvLikeCount = v.findViewById<TextView>(R.id.tvLikeCount)
+        private val imgDislike = v.findViewById<android.widget.ImageView>(R.id.imgDislike)
+        private val tvDislikeCount = v.findViewById<TextView>(R.id.tvDislikeCount)
+
+        fun bind(r: CloudCommentsManager.Comment) {
+            // === AVATAR: show cached bitmap immediately if available (0ms) ===
+            // Previously this always reset the avatar to "?" then reloaded
+            // from the cloud, causing a visible flash on every list update.
+            // Now we show the cached avatar instantly and only fall back to
+            // "?" if truly unknown.
+            val cachedBmp = AvatarCache.get(r.authorEmail)
+            if (cachedBmp != null) {
+                avatar.visibility = View.GONE
+                avatarImg.visibility = View.VISIBLE
+                com.bumptech.glide.Glide.with(itemView.context)
+                    .load(cachedBmp)
+                    .circleCrop()
+                    .diskCacheStrategy(com.bumptech.glide.load.engine.DiskCacheStrategy.ALL)
+                    .into(avatarImg)
+            } else if (r.authorAvatar.isNotEmpty()) {
+                // Decode the base64 avatar from the reply data itself and cache it
+                AvatarCache.put(r.authorEmail, r.authorAvatar)
+                avatar.visibility = View.GONE
+                avatarImg.visibility = View.VISIBLE
+                try {
+                    val bytes = android.util.Base64.decode(r.authorAvatar, android.util.Base64.NO_WRAP)
+                    val bmp = android.graphics.BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
+                    if (bmp != null) {
+                        com.bumptech.glide.Glide.with(itemView.context)
+                            .load(bmp)
+                            .circleCrop()
+                            .diskCacheStrategy(com.bumptech.glide.load.engine.DiskCacheStrategy.ALL)
+                            .into(avatarImg)
+                    } else {
+                        showLetterAvatar(r.authorName)
+                    }
+                } catch (e: Exception) {
+                    showLetterAvatar(r.authorName)
+                }
+            } else {
+                showLetterAvatar(r.authorName)
+            }
+
+            // Admin: name in green pill; non-admin: plain text
+            if (r.isAdmin) {
+                adminBadge.text = r.authorName
+                adminBadge.visibility = View.VISIBLE
+                author.visibility = View.GONE
+            } else {
+                adminBadge.visibility = View.GONE
+                author.visibility = View.VISIBLE
+                author.text = r.authorName
+            }
+            time.text = com.yazan.manga.data.relativeTime(r.createdAt)
+            text.text = r.text
+
+            // Reply button is now visible — enables reply-to-reply
+            btnReply.visibility = View.VISIBLE
+
+            // Like / dislike state
+            tvLikeCount.text = r.likes.size.toString()
+            tvDislikeCount.text = r.dislikes.size.toString()
+            val blue = android.graphics.Color.parseColor("#3b82f6")
+            val red = android.graphics.Color.parseColor("#ef4444")
+            val gray = android.graphics.Color.parseColor("#9ca3af")
+            val liked = currentUser != null && r.likes.contains(currentUser!!.email)
+            val disliked = currentUser != null && r.dislikes.contains(currentUser!!.email)
+            imgLike.imageTintList = android.content.res.ColorStateList.valueOf(if (liked) blue else gray)
+            tvLikeCount.setTextColor(if (liked) blue else gray)
+            imgLike.isSelected = liked
+            imgDislike.imageTintList = android.content.res.ColorStateList.valueOf(if (disliked) red else gray)
+            tvDislikeCount.setTextColor(if (disliked) red else gray)
+            imgDislike.isSelected = disliked
+
+            // Owner / delete / report visibility
+            val isOwner = currentUser?.email == r.authorEmail
+            val canDelete = isOwner || (currentUser?.isAdmin == true)
+            btnDelete.visibility = if (canDelete) View.VISIBLE else View.GONE
+            btnReport.visibility = if (currentUser != null && !isOwner && !r.isAdmin) View.VISIBLE else View.GONE
+
+            // Click listeners
+            btnLike.setOnClickListener { onLike(r) }
+            btnDislike.setOnClickListener { onDislike(r) }
+            btnReply.setOnClickListener { onReply(r) }
+            btnDelete.setOnClickListener { onDelete(r) }
+            btnReport.setOnClickListener { onReport(r) }
+
+            author.setOnClickListener { onProfile(r.authorEmail) }
+            avatar.setOnClickListener { onProfile(r.authorEmail) }
+            avatarImg.setOnClickListener { onProfile(r.authorEmail) }
+
+            // Fetch the latest name + avatar from the cloud (in background)
+            loadCloudProfile(r)
+        }
+
+        private fun showLetterAvatar(name: String) {
+            avatar.text = name.firstOrNull()?.uppercaseChar()?.toString() ?: "?"
+            avatar.visibility = View.VISIBLE
+            avatarImg.visibility = View.GONE
+            avatarImg.setImageDrawable(null)
+        }
+
+        /** Fetch the commenter's cloud profile (name + avatar) and update the view. */
+        private fun loadCloudProfile(r: CloudCommentsManager.Comment) {
+            // === FAST PATH: check in-memory AvatarCache first (0ms) ===
+            val cachedBmp = AvatarCache.get(r.authorEmail)
+            if (cachedBmp != null) {
+                avatar.visibility = View.GONE
+                avatarImg.visibility = View.VISIBLE
+                com.bumptech.glide.Glide.with(itemView.context)
+                    .load(cachedBmp)
+                    .circleCrop()
+                    .into(avatarImg)
+                // Still update the name from cache
+                cloudProfiles[r.authorEmail]?.let { applyProfile(r, it) }
+                return
+            }
+
+            // === MEDIUM PATH: use authorAvatar from API response ===
+            if (r.authorAvatar.isNotEmpty()) {
+                AvatarCache.put(r.authorEmail, r.authorAvatar)
+                try {
+                    val bytes = android.util.Base64.decode(r.authorAvatar, android.util.Base64.NO_WRAP)
+                    val bmp = android.graphics.BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
+                    if (bmp != null) {
+                        avatar.visibility = View.GONE
+                        avatarImg.visibility = View.VISIBLE
+                        com.bumptech.glide.Glide.with(itemView.context)
+                            .load(bmp)
+                            .circleCrop()
+                            .into(avatarImg)
+                        return
+                    }
+                } catch (e: Exception) {}
+            }
+
+            // === SLOW PATH: fetch from cloud (only if not cached) ===
+            if (cloudProfiles.containsKey(r.authorEmail)) {
+                cloudProfiles[r.authorEmail]?.let { applyProfile(r, it) }
+                return
+            }
+            cloudProfiles[r.authorEmail] = null
+            AuthManager.fetchCloudUser(r.authorEmail) { cu ->
+                cloudProfiles[r.authorEmail] = cu
+                // Cache the avatar in memory
+                if (cu?.avatarBase64?.isNotEmpty() == true) {
+                    AvatarCache.put(r.authorEmail, cu.avatarBase64)
+                }
+                if (bindingAdapterPosition != RecyclerView.NO_POSITION &&
+                    items.getOrNull(bindingAdapterPosition)?.id == r.id) {
+                    applyProfile(r, cu)
+                }
+            }
+        }
+
+        private fun applyProfile(r: CloudCommentsManager.Comment, cu: AuthManager.CloudUser?) {
+            // Update the displayed name if the cloud has a newer one — in the
+            // correct place (green pill for admins, plain text for others).
+            if (!cu?.name.isNullOrEmpty() && cu!!.name != r.authorName) {
+                if (r.isAdmin) {
+                    adminBadge.text = cu.name
+                } else {
+                    author.text = cu.name
+                }
+                avatar.text = cu.name.firstOrNull()?.uppercaseChar()?.toString() ?: "?"
+            }
+            // Show the avatar image if available (circular)
+            val b64 = cu?.avatarBase64
+            if (!b64.isNullOrEmpty()) {
+                try {
+                    val bytes = android.util.Base64.decode(b64, android.util.Base64.NO_WRAP)
+                    val bmp = android.graphics.BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
+                    if (bmp != null) {
+                        avatar.visibility = View.GONE
+                        avatarImg.visibility = View.VISIBLE
+                        com.bumptech.glide.Glide.with(itemView.context)
+                            .load(bmp)
+                            .circleCrop()
+                            .into(avatarImg)
+                    }
+                } catch (_: Exception) {}
+            }
+        }
+    }
 }

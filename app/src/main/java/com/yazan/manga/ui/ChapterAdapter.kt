@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
@@ -13,6 +14,7 @@ import com.yazan.manga.R
 import com.yazan.manga.data.DownloadManager
 import com.yazan.manga.data.MangaChapter
 import com.yazan.manga.data.MangaRepository
+import com.yazan.manga.data.ReadChaptersManager
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -50,6 +52,7 @@ class ChapterAdapter(
         private val date: TextView = view.findViewById(R.id.chapterDate)
         private val btnComments: ImageButton = view.findViewById(R.id.btnChapterComments)
         private val btnDownload: ImageButton = view.findViewById(R.id.btnChapterDownload)
+        private val imgRead: ImageView = view.findViewById(R.id.imgChapterRead)
 
         fun bind(ch: MangaChapter) {
             number.text = "فصل ${ch.number}"
@@ -61,6 +64,9 @@ class ChapterAdapter(
 
             // Reflect current download state on the icon
             refreshDownloadIcon(ch)
+
+            // Reflect read state on the eye icon
+            refreshReadIcon(ch)
 
             btnDownload.setOnClickListener {
                 val ctx = itemView.context
@@ -101,6 +107,18 @@ class ChapterAdapter(
                 btnDownload.imageTintList = android.content.res.ColorStateList.valueOf(
                     ctx.getColor(R.color.text_secondary)
                 )
+            }
+        }
+
+        /** Show the eye icon if the user has opened this chapter before. */
+        private fun refreshReadIcon(ch: MangaChapter) {
+            val ctx = itemView.context
+            val mangaId = mangaIdProvider()
+            if (mangaId.isNotBlank() && ch.id.isNotBlank() &&
+                ReadChaptersManager.isChapterRead(ctx, mangaId, ch.id)) {
+                imgRead.visibility = View.VISIBLE
+            } else {
+                imgRead.visibility = View.GONE
             }
         }
 

@@ -371,6 +371,17 @@ class ReaderActivity : BaseSwipeBackActivity() {
                             chapterTitle = chapter?.title ?: ""
                         )
                     )
+                    // Mark the chapter as read so the eye badge appears in
+                    // the chapter list. This is separate from
+                    // ReadingHistoryManager (which only keeps the latest
+                    // chapter per manga) — ReadChaptersManager records ALL
+                    // chapters ever opened, so the eye persists.
+                    com.yazan.manga.data.ReadChaptersManager.markChapterAsRead(
+                        context = this@ReaderActivity,
+                        mangaId = mangaSlug,
+                        chapterId = currentChapterId,
+                        chapterNumber = currentChapterNumber
+                    )
                 }
             }.onFailure { e ->
                 val msg = e.message.orEmpty()

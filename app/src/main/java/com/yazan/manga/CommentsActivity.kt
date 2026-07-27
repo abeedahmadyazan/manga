@@ -82,14 +82,24 @@ class CommentsActivity : BaseSwipeBackActivity() {
             onLike = { c ->
                 // Bot protection: ignore rapid taps
                 if (com.yazan.manga.data.BotProtection.checkLikeTap()) {
-                    AuthManager.getCurrentUser(this)?.let { CloudCommentsManager.toggleLike(c.id, it.email, true) {} }
+                    AuthManager.getCurrentUser(this)?.let { user ->
+                        // === Optimistic update: reflect the like instantly ===
+                        // The server-side toggle takes ~200ms, but we update
+                        // the UI immediately so the user sees instant feedback.
+                        // The next poll will confirm with fresh server data.
+                        applyOptimisticReaction(c.id, user.email, isLike = true)
+                        CloudCommentsManager.toggleLike(c.id, user.email, true) { _ -> }
+                    }
                 } else {
                     Toast.makeText(this, "مهلاً، توقف قليلاً", Toast.LENGTH_SHORT).show()
                 }
             },
             onDislike = { c ->
                 if (com.yazan.manga.data.BotProtection.checkLikeTap()) {
-                    AuthManager.getCurrentUser(this)?.let { CloudCommentsManager.toggleLike(c.id, it.email, false) {} }
+                    AuthManager.getCurrentUser(this)?.let { user ->
+                        applyOptimisticReaction(c.id, user.email, isLike = false)
+                        CloudCommentsManager.toggleLike(c.id, user.email, false) { _ -> }
+                    }
                 } else {
                     Toast.makeText(this, "مهلاً، توقف قليلاً", Toast.LENGTH_SHORT).show()
                 }
@@ -146,7 +156,7 @@ class CommentsActivity : BaseSwipeBackActivity() {
     private fun updateList() {
         // Refresh currentUser so admin status changes are reflected
         adapter.updateCurrentUser(AuthManager.getCurrentUser(this))
-        
+
         val topLevel = allComments.filter { it.parentId == null }
         val sorted = when (currentSort) {
             "oldest" -> topLevel.sortedBy { it.createdAt }
@@ -154,7 +164,7 @@ class CommentsActivity : BaseSwipeBackActivity() {
             else -> topLevel.sortedByDescending { it.createdAt }
         }
         val repliesMap = allComments.filter { it.parentId != null }.groupBy { it.parentId!! }
-        
+
         if (sorted.isEmpty()) {
             emptyText.visibility = View.VISIBLE
             recyclerView.visibility = View.GONE
@@ -163,6 +173,50 @@ class CommentsActivity : BaseSwipeBackActivity() {
             recyclerView.visibility = View.VISIBLE
         }
         adapter.updateList(sorted, repliesMap)
+    }
+
+    /**
+     * Apply a like/dislike optimistically to the local comment list.
+     *
+     * This updates the in-memory `allComments` and re-renders the list so the
+     * user sees instant feedback (icon turns blue/red, count goes up/down)
+     * without waiting for the 5-10s server poll to confirm.
+     *
+     * Toggle behavior matches the server:
+     *  - If already liked and user taps like → remove like
+     *  - If already disliked and user taps like → switch to like (remove dislike)
+     *  - If not liked → add like (and remove dislike if any)
+     * Same for dislike (mirrored).
+     *
+     * The next poll will overwrite this with fresh server data, which should
+     * match (the server does the same toggle logic).
+     */
+    private fun applyOptimisticReaction(commentId: String, userEmail: String, isLike: Boolean) {
+        val updated = allComments.map { c ->
+            if (c.id != commentId) c
+            else {
+                val likes = c.likes.toMutableList()
+                val dislikes = c.dislikes.toMutableList()
+                if (isLike) {
+                    if (likes.contains(userEmail)) {
+                        likes.remove(userEmail)  // toggle off
+                    } else {
+                        likes.add(userEmail)     // toggle on
+                        dislikes.remove(userEmail)  // remove dislike if present
+                    }
+                } else {
+                    if (dislikes.contains(userEmail)) {
+                        dislikes.remove(userEmail)  // toggle off
+                    } else {
+                        dislikes.add(userEmail)     // toggle on
+                        likes.remove(userEmail)     // remove like if present
+                    }
+                }
+                c.copy(likes = likes, dislikes = dislikes)
+            }
+        }
+        allComments = updated
+        updateList()
     }
 
     private fun sendComment(text: String) {
