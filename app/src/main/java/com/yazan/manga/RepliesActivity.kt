@@ -145,16 +145,24 @@ class RepliesActivity : BaseSwipeBackActivity() {
     }
 
     /**
-     * Open the RepliesActivity again for a nested reply (reply-to-reply).
-     * The new screen will show replies to the reply that the user clicked on.
+     * Reply to a reply inline — does NOT open a new page.
+     *
+     * Instead, puts "@username " in the reply input field so the user can
+     * type their reply. The reply is posted as a normal sibling reply (same
+     * parentId as the parent comment), but prefixed with "@username" so
+     * everyone knows who it's addressed to.
+     *
+     * This matches how YouTube/Reddit comments work — no nested pages,
+     * just a mention prefix.
      */
     private fun openNestedReply(reply: CloudCommentsManager.Comment) {
-        val intent = android.content.Intent(this, RepliesActivity::class.java)
-        intent.putExtra("parent_id", reply.id)
-        intent.putExtra("context_id", contextId)
-        intent.putExtra("context_type", contextType)
-        intent.putExtra("parent_author", reply.authorName)
-        startActivity(intent)
+        val mention = "@${reply.authorName} "
+        replyInput.setText(mention)
+        replyInput.requestFocus()
+        replyInput.setSelection(mention.length)
+        // Show keyboard
+        val imm = getSystemService(android.content.Context.INPUT_METHOD_SERVICE) as android.view.inputmethod.InputMethodManager
+        imm.showSoftInput(replyInput, android.view.inputmethod.InputMethodManager.SHOW_IMPLICIT)
     }
 
     private fun confirmDelete(reply: CloudCommentsManager.Comment) {
@@ -219,6 +227,15 @@ class RepliesActivity : BaseSwipeBackActivity() {
     }
 
     override fun onDestroy() { super.onDestroy(); listener?.remove() }
+
+    /**
+     * When returning from background, re-fetch replies immediately so the
+     * list doesn't appear empty (the polling timer may have been delayed).
+     */
+    override fun onResume() {
+        super.onResume()
+        if (contextId.isNotEmpty()) refreshReplies()
+    }
 }
 
 /**
@@ -364,7 +381,38 @@ class RepliesAdapter(
                 author.text = r.authorName
             }
             time.text = com.yazan.manga.data.relativeTime(r.createdAt)
-            text.text = r.text
+
+            // Render reply text with @mentions highlighted in emerald.
+            // This makes it visually clear who the reply is addressed to.
+            val replyText = r.text
+            if (replyText.startsWith("@")) {
+                val spaceIdx = replyText.indexOf(' ')
+                if (spaceIdx > 0) {
+                    val mention = replyText.substring(0, spaceIdx)
+                    val rest = replyText.substring(spaceIdx + 1)
+                    val spannable = android.text.SpannableStringBuilder()
+                        .append(mention)
+                        .append(" ")
+                        .append(rest)
+                    // Color the @mention in emerald + make it bold
+                    val emerald = android.graphics.Color.parseColor("#10b981")
+                    spannable.setSpan(
+                        android.text.style.ForegroundColorSpan(emerald),
+                        0, mention.length,
+                        android.text.Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+                    )
+                    spannable.setSpan(
+                        android.text.style.StyleSpan(android.graphics.Typeface.BOLD),
+                        0, mention.length,
+                        android.text.Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+                    )
+                    text.text = spannable
+                } else {
+                    text.text = replyText
+                }
+            } else {
+                text.text = replyText
+            }
 
             // Reply button is now visible — enables reply-to-reply
             btnReply.visibility = View.VISIBLE

@@ -31,11 +31,11 @@
                 android:tint="@color/text_primary"
                 android:contentDescription="القائمة" />
 
-            <!-- App logo mark (small emerald bookmark) -->
+            <!-- Single clean brand: emerald YZ box + MANGA wordmark -->
             <FrameLayout
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:layout_marginStart="4dp">
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_marginStart="6dp">
 
                 <View
                     android:layout_width="match_parent"
@@ -48,7 +48,7 @@
                     android:gravity="center"
                     android:text="YZ"
                     android:textColor="@color/white"
-                    android:textSize="16sp"
+                    android:textSize="15sp"
                     android:textStyle="bold" />
             </FrameLayout>
 
@@ -57,13 +57,13 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="YZ"
+                android:text="MANGA"
                 android:textColor="@color/text_primary"
-                android:textSize="22sp"
+                android:textSize="20sp"
                 android:textStyle="bold"
                 android:gravity="center_vertical|start"
                 android:layout_marginStart="8dp"
-                android:letterSpacing="0.02" />
+                android:letterSpacing="0.05" />
 
             <ImageButton
                 android:id="@+id/btnSearch"

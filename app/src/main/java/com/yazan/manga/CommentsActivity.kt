@@ -372,6 +372,29 @@ class CommentsActivity : BaseSwipeBackActivity() {
     }
 
     override fun onDestroy() { super.onDestroy(); listener?.remove() }
+
+    /**
+     * When the user returns to this activity from the background, the polling
+     * timer may have been delayed/killed by the system. Restart the listener
+     * so comments refresh immediately instead of showing an empty list.
+     */
+    override fun onResume() {
+        super.onResume()
+        // Re-fetch comments immediately so the list is fresh.
+        if (contextId.isNotEmpty()) {
+            refreshComments()
+        }
+    }
+
+    private fun refreshComments() {
+        lifecycleScope.launch {
+            val comments = withContext(Dispatchers.IO) {
+                com.yazan.manga.data.ApiClient.getComments(contextId)
+            }
+            allComments = comments
+            updateList()
+        }
+    }
 }
 
 class CommentsAdapter(

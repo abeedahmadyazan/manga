@@ -599,34 +599,67 @@ class MangaRepository(private val appContext: Context? = null) {
                 if (tags != null) { val gl = mutableListOf<String>(); for (i in 0 until tags.size()) { try { val t = tags[i].asJsonObject; val n = t.getAsJsonObject("attributes")?.getAsJsonObject("name")?.get("en")?.asString; if (n != null) gl.add(n) } catch (e: Exception) {} }; genres = gl }
             }
 
-            // 2. Get MangaDex Arabic chapters (cache them by number)
-            val mdChapters = getMangaDexChapters(id)
+            // === PARALLEL FETCH: run all chapter sources concurrently ===
+            // Previously these were sequential (5 calls × 1-3s each = 5-15s total).
+            // Now they run in parallel, so total time ≈ the slowest source (~3s).
+            // This dramatically speeds up opening a manga's details page.
+            val searchTitle = enTitle.ifBlank { title }
+            val slug = guessSlug(enTitle, title)
+
+            // Launch all fetches in parallel using threads (synchronous code,
+            // but each runs on its own thread so they don't block each other).
+            var mdChapters: List<MangaChapter> = emptyList()
+            var asqChapters: List<MangaChapter>? = null
+            var mpMangaId: String? = null
+            var mpChapters: List<Pair<String, String>> = emptyList()
+            var mhSlug: String? = null
+            var mhChapters: List<Pair<String, String>> = emptyList()
+
+            val threads = mutableListOf<Thread>()
+
+            // Thread 1: MangaDex chapters
+            threads.add(Thread {
+                try { mdChapters = getMangaDexChapters(id) } catch (e: Exception) { Log.w(TAG, "MD chapters failed: ${e.message}") }
+            })
+            // Thread 2: 3asq chapters
+            threads.add(Thread {
+                try {
+                    asqChapters = if (slug.isBlank()) {
+                        search3asqChapters(searchTitle)
+                    } else {
+                        fetch3asqChapters(slug)
+                    }
+                } catch (e: Exception) { Log.w(TAG, "3asq fetch failed: ${e.message}") }
+            })
+            // Thread 3: MangaPill
+            threads.add(Thread {
+                try {
+                    mpMangaId = MangaPillClient.findMangaId(searchTitle)
+                    if (mpMangaId != null) {
+                        mpChapters = MangaPillClient.fetchChapterList(mpMangaId!!)
+                    }
+                } catch (e: Exception) { Log.w(TAG, "MangaPill fetch failed: ${e.message}") }
+            })
+            // Thread 4: MangaHere
+            threads.add(Thread {
+                try {
+                    mhSlug = MangaHereClient.findMangaSlug(searchTitle)
+                    if (mhSlug != null) {
+                        mhChapters = MangaHereClient.fetchChapterList(mhSlug!!)
+                    }
+                } catch (e: Exception) { Log.w(TAG, "MangaHere fetch failed: ${e.message}") }
+            })
+
+            // Start all threads
+            threads.forEach { it.start() }
+            // Wait for all to finish (max 5 seconds each, but they run in parallel)
+            threads.forEach { it.join(5000) }
+
+            // Cache MangaDex chapter IDs
             for (ch in mdChapters) {
                 mdChapterCache[Pair(id, ch.number)] = ch.id
             }
-
-            // 3. Try 3asq for more chapters (One Piece 1187)
-            val slug = guessSlug(enTitle, title)
-            val asqChapters = try {
-                if (slug.isBlank()) {
-                    // Slug couldn't be guessed (e.g. purely Arabic title) — try
-                    // searching 3asq by the manga title instead.
-                    search3asqChapters(enTitle.ifBlank { title })
-                } else {
-                    fetch3asqChapters(slug)
-                }
-            } catch (e: Exception) {
-                Log.w(TAG, "3asq fetch failed: ${e.message}")
-                null
-            }
-
-            // 3b. MangaPill fallback — fetch chapter list so we can show it
-            // as a source AND use it as a fallback for chapter pages.
-            val mpMangaId = MangaPillClient.findMangaId(enTitle.ifBlank { title })
-            val mpChapters = if (mpMangaId != null) {
-                MangaPillClient.fetchChapterList(mpMangaId)
-            } else emptyList()
-            // Cache: chapter number -> MangaPill chapter URL path
+            // Cache MangaPill
             val mpUrlCache = mutableMapOf<String, String>()
             mpChapters.forEach { (num, url) -> mpUrlCache[num] = url }
             mpMangaIdCache[id] = mpMangaId ?: ""
@@ -634,28 +667,12 @@ class MangaRepository(private val appContext: Context? = null) {
             if (mpChapters.isNotEmpty()) {
                 Log.d(TAG, "MangaPill: ${mpChapters.size} chapters available for $enTitle")
             }
-
-            // 3c. MangaHere — additional English source for chapter listing.
-            // We use MangaHere's chapter list (often more complete than
-            // MangaPill's) but route page requests through MangaPill because
-            // MangaHere loads images via JS.
-            val mhSlug = MangaHereClient.findMangaSlug(enTitle.ifBlank { title })
-            val mhChapters = if (mhSlug != null) {
-                MangaHereClient.fetchChapterList(mhSlug)
-            } else emptyList()
-            // Cache MangaHere URL paths too — when the user picks the MangaHere
-            // source, we look up the chapter number in mpUrlCache (MangaPill)
-            // to fetch the actual images.
             if (mhChapters.isNotEmpty()) {
                 Log.d(TAG, "MangaHere: ${mhChapters.size} chapters available for $enTitle")
             }
 
             // ============================================================
-            // 4. Build the multi-source model.
-            // Each source is exposed to the user under a generic label
-            // ("المصدر 1", "المصدر 2", ...) without revealing the upstream
-            // provider. The user picks one; we look up the chapters for
-            // that source from chaptersBySource.
+            // 2. Build the multi-source model.
             // ============================================================
 
             // Build chapter lists per source.
