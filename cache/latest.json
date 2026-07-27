@@ -1,7 +1,49 @@
 {
-  "updated_at": "2026-07-27T14:27:53.300814+00:00",
+  "updated_at": "2026-07-27T19:23:57.158734+00:00",
   "count": 50,
   "items": [
+    {
+      "id": "077a3fed-1634-424f-be7a-9a96b7f07b78",
+      "title": "مملكة",
+      "cover": "https://uploads.mangadex.org/covers/077a3fed-1634-424f-be7a-9a96b7f07b78/7c1a85fe-1ce7-4b27-bde8-c668d7e766c8.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "db692d58-4b13-4174-ae8c-30c515c0689c",
+      "title": "Hunter x Hunter",
+      "cover": "https://uploads.mangadex.org/covers/db692d58-4b13-4174-ae8c-30c515c0689c/aa112927-f1e5-4fe4-a4db-7fd4a1536e3c.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "67a7dfd1-a39d-46c8-8ff2-9a24a9abaeb6",
+      "title": "Goblin Slayer",
+      "cover": "https://uploads.mangadex.org/covers/67a7dfd1-a39d-46c8-8ff2-9a24a9abaeb6/2c2de0de-6afb-4cb1-9951-613e6a255f52.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "510f29a8-99b4-46af-ba5e-916e96bc6f37",
+      "title": "Fate/type Redline",
+      "cover": "https://uploads.mangadex.org/covers/510f29a8-99b4-46af-ba5e-916e96bc6f37/c1d7aed1-9cd1-426f-bfb8-7e46594d0e29.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "51c1e7cc-23f4-4a08-a961-c1ab75e2bb33",
+      "title": "Inexpressive Kashiwada and Expressive Oota",
+      "cover": "https://uploads.mangadex.org/covers/51c1e7cc-23f4-4a08-a961-c1ab75e2bb33/3bdea205-146a-460c-ae6e-7c2b27f762ed.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "d422ddc8-eea3-4b0a-82a4-291bbd8c9285",
+      "title": "أبناء عائلة شيونجي",
+      "cover": "https://uploads.mangadex.org/covers/d422ddc8-eea3-4b0a-82a4-291bbd8c9285/18f555fb-4fe4-4d47-8fbe-7bd101a5bc3a.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
     {
       "id": "37f5cce0-8070-4ada-96e5-fa24b1bd4ff9",
       "title": "Kaguya-sama: Love Is War",
@@ -85,13 +127,6 @@
       "cover": "https://uploads.mangadex.org/covers/89daf9dc-075a-4aa5-873a-cc76bb287108/a22742de-0a55-4fef-b378-8037753616d2.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
-    },
-    {
-      "id": "51c1e7cc-23f4-4a08-a961-c1ab75e2bb33",
-      "title": "Inexpressive Kashiwada and Expressive Oota",
-      "cover": "https://uploads.mangadex.org/covers/51c1e7cc-23f4-4a08-a961-c1ab75e2bb33/3bdea205-146a-460c-ae6e-7c2b27f762ed.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
     },
     {
       "id": "d65c0332-3764-4c89-84bd-b1a4e7278ad7",
@@ -206,13 +241,6 @@
       "status": "ongoing"
     },
     {
-      "id": "db692d58-4b13-4174-ae8c-30c515c0689c",
-      "title": "Hunter x Hunter",
-      "cover": "https://uploads.mangadex.org/covers/db692d58-4b13-4174-ae8c-30c515c0689c/aa112927-f1e5-4fe4-a4db-7fd4a1536e3c.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
       "id": "1aa17501-0328-4d5a-bbbe-3cb7cae8c9ae",
       "title": "My Co-worker Is an Eldritch X!",
       "cover": "https://uploads.mangadex.org/covers/1aa17501-0328-4d5a-bbbe-3cb7cae8c9ae/6856c3e0-b344-4319-aa2d-d6f702c235da.png.256.jpg",
@@ -276,13 +304,6 @@
       "status": "ongoing"
     },
     {
-      "id": "d422ddc8-eea3-4b0a-82a4-291bbd8c9285",
-      "title": "أبناء عائلة شيونجي",
-      "cover": "https://uploads.mangadex.org/covers/d422ddc8-eea3-4b0a-82a4-291bbd8c9285/18f555fb-4fe4-4d47-8fbe-7bd101a5bc3a.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
       "id": "8847f905-550d-4fe6-bcda-ac2b896789c7",
       "title": "Golden Kamuy",
       "cover": "https://uploads.mangadex.org/covers/8847f905-550d-4fe6-bcda-ac2b896789c7/e96cfe6d-7876-4558-b4bc-0930deb5060a.jpg.256.jpg",
@@ -328,27 +349,6 @@
       "id": "77c4966f-ead7-45bb-87e0-9ac618b11e8e",
       "title": "Kunon the Sorcerer Can See",
       "cover": "https://uploads.mangadex.org/covers/77c4966f-ead7-45bb-87e0-9ac618b11e8e/393cc1fa-a752-49aa-a688-a2a309924030.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "774f0f04-5023-4e2e-9c0b-f0ed382f078b",
-      "title": "إينيغماتيكا",
-      "cover": "https://uploads.mangadex.org/covers/774f0f04-5023-4e2e-9c0b-f0ed382f078b/a7ef08f7-5abf-4eb6-bca1-ee0279bbbde7.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "eeb2ab0e-7dbc-4f0c-b476-8181d44217a8",
-      "title": "الوهم السماوي",
-      "cover": "https://uploads.mangadex.org/covers/eeb2ab0e-7dbc-4f0c-b476-8181d44217a8/525c3074-f18e-4313-940e-14f4fd873302.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "10027822-b188-4093-a658-abb64c368ac2",
-      "title": "Sekai no 4koma",
-      "cover": "https://uploads.mangadex.org/covers/10027822-b188-4093-a658-abb64c368ac2/21667a08-f5b9-4270-b33e-53bb0e20c702.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     }
