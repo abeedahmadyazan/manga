@@ -1,7 +1,28 @@
 {
-  "updated_at": "2026-07-27T19:23:57.158734+00:00",
+  "updated_at": "2026-07-28T02:15:09.241920+00:00",
   "count": 50,
   "items": [
+    {
+      "id": "0a580438-bc72-4503-940b-12a5da881b56",
+      "title": "أنتِ زهرة الحظ",
+      "cover": "https://uploads.mangadex.org/covers/0a580438-bc72-4503-940b-12a5da881b56/739831ad-7ac1-4707-871f-644188450cf5.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "f4045a9e-e5f6-4778-bd33-7a91cefc3f71",
+      "title": "For the Sake of My Future Vengeance",
+      "cover": "https://uploads.mangadex.org/covers/f4045a9e-e5f6-4778-bd33-7a91cefc3f71/53e634e3-aa3b-4dc3-9171-85e2a71d2ec8.png.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "3fba42cf-2ad6-4c30-a7ab-46cb8149208a",
+      "title": "Bungou Stray Dogs",
+      "cover": "https://uploads.mangadex.org/covers/3fba42cf-2ad6-4c30-a7ab-46cb8149208a/4494d4fb-8772-47c0-831f-f49203819297.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
     {
       "id": "077a3fed-1634-424f-be7a-9a96b7f07b78",
       "title": "مملكة",
@@ -185,13 +206,6 @@
       "status": "completed"
     },
     {
-      "id": "0a580438-bc72-4503-940b-12a5da881b56",
-      "title": "أنتِ زهرة الحظ",
-      "cover": "https://uploads.mangadex.org/covers/0a580438-bc72-4503-940b-12a5da881b56/739831ad-7ac1-4707-871f-644188450cf5.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
       "id": "77bee52c-d2d6-44ad-a33a-1734c1fe696a",
       "title": "The Eminence in Shadow",
       "cover": "https://uploads.mangadex.org/covers/77bee52c-d2d6-44ad-a33a-1734c1fe696a/6079dd31-838b-4d61-87c4-121f3ad19158.jpg.256.jpg",
@@ -335,20 +349,6 @@
       "id": "61830b36-1712-4b7b-9421-f671e9ced6d3",
       "title": "Learning to Love My Cat-like Classmate",
       "cover": "https://uploads.mangadex.org/covers/61830b36-1712-4b7b-9421-f671e9ced6d3/6076a7f6-4454-49fb-8802-89ee00aec545.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "a6a46436-9ed4-4c20-8b11-6f4a0f74b23a",
-      "title": "Kabuto Mushi",
-      "cover": "https://uploads.mangadex.org/covers/a6a46436-9ed4-4c20-8b11-6f4a0f74b23a/5a16e9bf-0859-4719-bd13-7e5e43e338d7.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "77c4966f-ead7-45bb-87e0-9ac618b11e8e",
-      "title": "Kunon the Sorcerer Can See",
-      "cover": "https://uploads.mangadex.org/covers/77c4966f-ead7-45bb-87e0-9ac618b11e8e/393cc1fa-a752-49aa-a688-a2a309924030.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     }
