@@ -214,15 +214,20 @@ class RepliesActivity : BaseSwipeBackActivity() {
      * Re-fetch replies from the server immediately. Used by pull-to-refresh
      * and after posting a reply so the UI updates without waiting for the
      * next 5s poll cycle.
+     *
+     * The swipeRefresh spinner is hidden after 600ms MAX, even if the API
+     * is still loading. The actual data refresh happens in the background.
      */
     private fun refreshReplies() {
         swipeRefresh.isRefreshing = true
+        swipeRefresh.postDelayed({ swipeRefresh.isRefreshing = false }, 600)
         lifecycleScope.launch {
             val comments = withContext(Dispatchers.IO) {
                 com.yazan.manga.data.ApiClient.getComments(contextId)
             }
-            swipeRefresh.isRefreshing = false
             allReplies = comments.filter { it.parentId == parentId }
+            // Save fresh data to cache
+            com.yazan.manga.data.CommentsCache.save(this@RepliesActivity, contextId, comments)
             val count = allReplies.size
             titleView.text = if (count > 0) "💬 $count رد" else "💬 ردود على: $parentAuthor"
             repliesAdapter.updateList(allReplies)

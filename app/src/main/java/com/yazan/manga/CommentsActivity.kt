@@ -251,15 +251,25 @@ class CommentsActivity : BaseSwipeBackActivity() {
     /**
      * Re-fetch comments from the server immediately. Used by pull-to-refresh
      * and after posting/editing/deleting a comment so the UI updates instantly.
+     *
+     * The swipeRefresh spinner is hidden after 600ms MAX, even if the API
+     * is still loading. The actual data refresh happens in the background
+     * and updates the list when it arrives. This makes pull-to-refresh feel
+     * instant instead of making the user wait 4-5 seconds staring at a spinner.
      */
     private fun refreshComments() {
         swipeRefresh.isRefreshing = true
+        // Hide the spinner after 600ms regardless of API status.
+        // The user wants feedback that their swipe was registered, not a
+        // long wait. The list will update silently when data arrives.
+        swipeRefresh.postDelayed({ swipeRefresh.isRefreshing = false }, 600)
         lifecycleScope.launch {
             val comments = withContext(kotlinx.coroutines.Dispatchers.IO) {
                 com.yazan.manga.data.ApiClient.getComments(contextId)
             }
-            swipeRefresh.isRefreshing = false
             allComments = comments
+            // Save fresh data to cache
+            com.yazan.manga.data.CommentsCache.save(this@CommentsActivity, contextId, comments)
             updateList()
         }
     }
