@@ -84,14 +84,21 @@ class RepliesActivity : BaseSwipeBackActivity() {
             currentUser = AuthManager.getCurrentUser(this),
             onLike = { r ->
                 if (com.yazan.manga.data.BotProtection.checkLikeTap()) {
-                    AuthManager.getCurrentUser(this)?.let { CloudCommentsManager.toggleLike(r.id, it.email, true) {} }
+                    AuthManager.getCurrentUser(this)?.let { user ->
+                        // === Optimistic update: reflect the like instantly ===
+                        applyOptimisticReaction(r.id, user.email, isLike = true)
+                        CloudCommentsManager.toggleLike(r.id, user.email, true) { _ -> }
+                    }
                 } else {
                     Toast.makeText(this, "مهلاً، توقف قليلاً", Toast.LENGTH_SHORT).show()
                 }
             },
             onDislike = { r ->
                 if (com.yazan.manga.data.BotProtection.checkLikeTap()) {
-                    AuthManager.getCurrentUser(this)?.let { CloudCommentsManager.toggleLike(r.id, it.email, false) {} }
+                    AuthManager.getCurrentUser(this)?.let { user ->
+                        applyOptimisticReaction(r.id, user.email, isLike = false)
+                        CloudCommentsManager.toggleLike(r.id, user.email, false) { _ -> }
+                    }
                 } else {
                     Toast.makeText(this, "مهلاً، توقف قليلاً", Toast.LENGTH_SHORT).show()
                 }
@@ -232,6 +239,42 @@ class RepliesActivity : BaseSwipeBackActivity() {
             titleView.text = if (count > 0) "💬 $count رد" else "💬 ردود على: $parentAuthor"
             repliesAdapter.updateList(allReplies)
         }
+    }
+
+    /**
+     * Apply a like/dislike optimistically to the local replies list.
+     * Same logic as CommentsActivity.applyOptimisticReaction.
+     *
+     * This updates the in-memory allReplies and re-renders so the user
+     * sees instant feedback (icon turns blue/red, count goes up/down)
+     * without waiting for the server poll to confirm.
+     */
+    private fun applyOptimisticReaction(commentId: String, userEmail: String, isLike: Boolean) {
+        val updatedComments = allReplies.map { c ->
+            if (c.id != commentId) c
+            else {
+                val likes = c.likes.toMutableList()
+                val dislikes = c.dislikes.toMutableList()
+                if (isLike) {
+                    if (likes.contains(userEmail)) {
+                        likes.remove(userEmail)
+                    } else {
+                        likes.add(userEmail)
+                        dislikes.remove(userEmail)
+                    }
+                } else {
+                    if (dislikes.contains(userEmail)) {
+                        dislikes.remove(userEmail)
+                    } else {
+                        dislikes.add(userEmail)
+                        likes.remove(userEmail)
+                    }
+                }
+                c.copy(likes = likes, dislikes = dislikes)
+            }
+        }
+        allReplies = updatedComments
+        repliesAdapter.updateList(allReplies)
     }
 
     private fun openUserProfile(email: String) {
