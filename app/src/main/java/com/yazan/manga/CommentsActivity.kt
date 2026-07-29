@@ -134,7 +134,17 @@ class CommentsActivity : BaseSwipeBackActivity() {
     }
 
     private fun startListening() {
-        loadingIndicator.visibility = View.VISIBLE
+        // === INSTANT: show cached comments while we fetch fresh ones ===
+        // This fixes the "comments disappear on background→foreground" bug.
+        // When the activity is recreated (process death), allComments is empty.
+        // We restore the last-seen comments from cache instantly, then fetch.
+        val cached = com.yazan.manga.data.CommentsCache.get(this, contextId)
+        if (cached.isNotEmpty()) {
+            allComments = cached
+            updateList()
+        } else {
+            loadingIndicator.visibility = View.VISIBLE
+        }
         // Refresh admin status so the adapter has the correct isAdmin flag
         com.yazan.manga.data.AuthManager.refreshAdminStatus(this)
         listener = CloudCommentsManager.listenToComments(
@@ -143,6 +153,8 @@ class CommentsActivity : BaseSwipeBackActivity() {
                 loadingIndicator.visibility = View.GONE
                 swipeRefresh.isRefreshing = false
                 allComments = comments
+                // Save to cache so next launch shows them instantly
+                com.yazan.manga.data.CommentsCache.save(this, contextId, comments)
                 updateList()
             },
             onError = { e ->
@@ -472,12 +484,38 @@ class CommentsAdapter(
         private val tvDislikeCount = v.findViewById<TextView>(R.id.tvDislikeCount)
 
         fun bind(c: CloudCommentsManager.Comment) {
-            // === AVATAR: show cached bitmap immediately if available ===
-            // Previously this always cleared the avatar to "?" then reloaded,
-            // causing a flash on every list update. Now we show the cached
-            // avatar instantly and only fall back to "?" if truly unknown.
+            // === AVATAR: source of truth is the API's authorAvatar field ===
+            // The API returns the user's CURRENT avatar in authorAvatar.
+            // We use it to drive the cache — if it changed, we update.
+            //
+            // Flow:
+            //  1. Show cached bitmap instantly (0ms) — even if stale, it's
+            //     better than a flash of "?"
+            //  2. If the API's authorAvatar differs from the cache (user
+            //     changed their picture), decode the new one + update cache
+            //     + re-render. This is async but visible.
+            //  3. If no authorAvatar and no cache, show first letter.
             val cachedBmp = com.yazan.manga.data.AvatarCache.get(c.authorEmail)
-            if (cachedBmp != null) {
+            val apiAvatarChanged = c.authorAvatar.isNotEmpty() &&
+                com.yazan.manga.data.AvatarCache.hasChanged(c.authorEmail, c.authorAvatar)
+
+            if (apiAvatarChanged) {
+                // API has a NEWER avatar than cache → update cache + render fresh
+                val updated = com.yazan.manga.data.AvatarCache.put(c.authorEmail, c.authorAvatar)
+                if (updated) {
+                    val freshBmp = com.yazan.manga.data.AvatarCache.get(c.authorEmail)
+                    if (freshBmp != null) {
+                        avatar.visibility = View.GONE
+                        avatarImg.visibility = View.VISIBLE
+                        com.bumptech.glide.Glide.with(itemView.context)
+                            .load(freshBmp)
+                            .circleCrop()
+                            .diskCacheStrategy(com.bumptech.glide.load.engine.DiskCacheStrategy.ALL)
+                            .into(avatarImg)
+                    }
+                }
+            } else if (cachedBmp != null) {
+                // Cache is current — show cached instantly
                 avatar.visibility = View.GONE
                 avatarImg.visibility = View.VISIBLE
                 com.bumptech.glide.Glide.with(itemView.context)
@@ -486,21 +524,18 @@ class CommentsAdapter(
                     .diskCacheStrategy(com.bumptech.glide.load.engine.DiskCacheStrategy.ALL)
                     .into(avatarImg)
             } else if (c.authorAvatar.isNotEmpty()) {
-                // Decode the base64 avatar from the comment data itself
+                // No cache but API has avatar → cache it + show
                 com.yazan.manga.data.AvatarCache.put(c.authorEmail, c.authorAvatar)
-                avatar.visibility = View.GONE
-                avatarImg.visibility = View.VISIBLE
-                try {
-                    val bytes = android.util.Base64.decode(c.authorAvatar, android.util.Base64.NO_WRAP)
-                    val bmp = android.graphics.BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
-                    if (bmp != null) {
-                        com.bumptech.glide.Glide.with(itemView.context)
-                            .load(bmp)
-                            .circleCrop()
-                            .diskCacheStrategy(com.bumptech.glide.load.engine.DiskCacheStrategy.ALL)
-                            .into(avatarImg)
-                    }
-                } catch (e: Exception) {
+                val bmp = com.yazan.manga.data.AvatarCache.get(c.authorEmail)
+                if (bmp != null) {
+                    avatar.visibility = View.GONE
+                    avatarImg.visibility = View.VISIBLE
+                    com.bumptech.glide.Glide.with(itemView.context)
+                        .load(bmp)
+                        .circleCrop()
+                        .diskCacheStrategy(com.bumptech.glide.load.engine.DiskCacheStrategy.ALL)
+                        .into(avatarImg)
+                } else {
                     avatar.text = c.authorName.firstOrNull()?.toString() ?: "?"
                     avatar.visibility = View.VISIBLE
                     avatarImg.visibility = View.GONE

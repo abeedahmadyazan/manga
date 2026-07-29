@@ -26,27 +26,43 @@ class UserProfileActivity : BaseSwipeBackActivity() {
 
         if (email.isEmpty()) { finish(); return }
 
-        // Show a loading state while we fetch from cloud
-        findViewById<TextView>(R.id.tvName).text = "جارٍ التحميل..."
-        findViewById<TextView>(R.id.tvUsername).text = ""
+        // === INSTANT: show cached profile while we fetch fresh data ===
+        // This makes opening a profile feel instant (0ms) instead of
+        // showing "جارٍ التحميل..." for 1-3 seconds.
+        val cached = com.yazan.manga.data.ProfileCache.get(this, email)
+        if (cached != null) {
+            val name = cached.name.ifEmpty { email.substringBefore("@") }
+            val username = cached.username.ifEmpty { "@${email.substringBefore("@")}" }
+            displayUserFromCloud(name, username, cached.avatarBase64, cached.isAdmin, cached.createdAt, cached.birthDate, cached.country, email)
+        } else {
+            // No cache — show loading state
+            findViewById<TextView>(R.id.tvName).text = "جارٍ التحميل..."
+            findViewById<TextView>(R.id.tvUsername).text = ""
+        }
 
         // ALWAYS fetch from cloud (not local) so every user sees the same profile
+        // AND so we update the cache with fresh data.
         AuthManager.fetchCloudUser(email) { cu ->
             runOnUiThread {
                 if (cu == null) {
-                    // Cloud fetch failed — try local as fallback
-                    val localUser = AuthManager.getUserByEmail(this, email)
-                    if (localUser != null) {
-                        displayUser(localUser.name, localUser.username, localUser.avatar, localUser.isAdmin, email)
-                    } else {
-                        // No data anywhere — show "مستخدم" with the email's first part
-                        val fallbackName = email.substringBefore("@")
-                        displayUser(fallbackName, "@$fallbackName", "", false, email)
+                    // Cloud fetch failed — if we showed cached data, keep it
+                    if (cached == null) {
+                        // Try local as fallback
+                        val localUser = AuthManager.getUserByEmail(this, email)
+                        if (localUser != null) {
+                            displayUser(localUser.name, localUser.username, localUser.avatar, localUser.isAdmin, email)
+                        } else {
+                            val fallbackName = email.substringBefore("@")
+                            displayUser(fallbackName, "@$fallbackName", "", false, email)
+                        }
                     }
                     return@runOnUiThread
                 }
 
-                // We have cloud data — display it
+                // Save to cache for next time
+                com.yazan.manga.data.ProfileCache.save(this, email, cu)
+
+                // Display fresh data
                 val name = cu.name.ifEmpty { email.substringBefore("@") }
                 val username = cu.username.ifEmpty { "@${email.substringBefore("@")}" }
                 displayUserFromCloud(name, username, cu.avatarBase64, cu.isAdmin, cu.createdAt, cu.birthDate, cu.country, email)

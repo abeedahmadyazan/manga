@@ -108,12 +108,21 @@ class RepliesActivity : BaseSwipeBackActivity() {
     }
 
     private fun startListening() {
-        swipeRefresh.isRefreshing = true
+        // === INSTANT: show cached replies while we fetch fresh ones ===
+        val cached = com.yazan.manga.data.CommentsCache.get(this, contextId)
+        if (cached.isNotEmpty()) {
+            allReplies = cached.filter { it.parentId == parentId }
+            val count = allReplies.size
+            titleView.text = if (count > 0) "💬 $count رد" else "💬 ردود على: $parentAuthor"
+            repliesAdapter.updateList(allReplies)
+        }
         listener = CloudCommentsManager.listenToComments(
             contextId = contextId,
             onUpdate = { comments ->
                 swipeRefresh.isRefreshing = false
                 allReplies = comments.filter { it.parentId == parentId }
+                // Save to cache so next launch shows them instantly
+                com.yazan.manga.data.CommentsCache.save(this, contextId, comments)
                 // Update title with reply count
                 val count = allReplies.size
                 titleView.text = if (count > 0) "💬 $count رد" else "💬 ردود على: $parentAuthor"
@@ -332,13 +341,27 @@ class RepliesAdapter(
         private val tvDislikeCount = v.findViewById<TextView>(R.id.tvDislikeCount)
 
         fun bind(r: CloudCommentsManager.Comment) {
-            // === AVATAR: show cached bitmap immediately if available (0ms) ===
-            // Previously this always reset the avatar to "?" then reloaded
-            // from the cloud, causing a visible flash on every list update.
-            // Now we show the cached avatar instantly and only fall back to
-            // "?" if truly unknown.
+            // === AVATAR: source of truth is the API's authorAvatar field ===
+            // Same logic as CommentsAdapter — check for avatar changes.
             val cachedBmp = AvatarCache.get(r.authorEmail)
-            if (cachedBmp != null) {
+            val apiAvatarChanged = r.authorAvatar.isNotEmpty() &&
+                AvatarCache.hasChanged(r.authorEmail, r.authorAvatar)
+
+            if (apiAvatarChanged) {
+                val updated = AvatarCache.put(r.authorEmail, r.authorAvatar)
+                if (updated) {
+                    val freshBmp = AvatarCache.get(r.authorEmail)
+                    if (freshBmp != null) {
+                        avatar.visibility = View.GONE
+                        avatarImg.visibility = View.VISIBLE
+                        com.bumptech.glide.Glide.with(itemView.context)
+                            .load(freshBmp)
+                            .circleCrop()
+                            .diskCacheStrategy(com.bumptech.glide.load.engine.DiskCacheStrategy.ALL)
+                            .into(avatarImg)
+                    }
+                }
+            } else if (cachedBmp != null) {
                 avatar.visibility = View.GONE
                 avatarImg.visibility = View.VISIBLE
                 com.bumptech.glide.Glide.with(itemView.context)
@@ -347,23 +370,17 @@ class RepliesAdapter(
                     .diskCacheStrategy(com.bumptech.glide.load.engine.DiskCacheStrategy.ALL)
                     .into(avatarImg)
             } else if (r.authorAvatar.isNotEmpty()) {
-                // Decode the base64 avatar from the reply data itself and cache it
                 AvatarCache.put(r.authorEmail, r.authorAvatar)
-                avatar.visibility = View.GONE
-                avatarImg.visibility = View.VISIBLE
-                try {
-                    val bytes = android.util.Base64.decode(r.authorAvatar, android.util.Base64.NO_WRAP)
-                    val bmp = android.graphics.BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
-                    if (bmp != null) {
-                        com.bumptech.glide.Glide.with(itemView.context)
-                            .load(bmp)
-                            .circleCrop()
-                            .diskCacheStrategy(com.bumptech.glide.load.engine.DiskCacheStrategy.ALL)
-                            .into(avatarImg)
-                    } else {
-                        showLetterAvatar(r.authorName)
-                    }
-                } catch (e: Exception) {
+                val bmp = AvatarCache.get(r.authorEmail)
+                if (bmp != null) {
+                    avatar.visibility = View.GONE
+                    avatarImg.visibility = View.VISIBLE
+                    com.bumptech.glide.Glide.with(itemView.context)
+                        .load(bmp)
+                        .circleCrop()
+                        .diskCacheStrategy(com.bumptech.glide.load.engine.DiskCacheStrategy.ALL)
+                        .into(avatarImg)
+                } else {
                     showLetterAvatar(r.authorName)
                 }
             } else {
