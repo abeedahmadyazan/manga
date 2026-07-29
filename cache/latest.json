@@ -1,7 +1,105 @@
 {
-  "updated_at": "2026-07-29T14:04:18.399467+00:00",
+  "updated_at": "2026-07-29T19:11:48.823918+00:00",
   "count": 50,
   "items": [
+    {
+      "id": "cf43b9e3-396a-41bc-ab72-715f66cdb7e1",
+      "title": "A-bout!",
+      "cover": "https://uploads.mangadex.org/covers/cf43b9e3-396a-41bc-ab72-715f66cdb7e1/c556e070-f1ff-405b-b71c-b2e7492aee0e.png.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "87ffa375-bd2c-49ba-ba0c-6d78ea07c342",
+      "title": "Medaka Kuroiwa is Impervious to My Charms",
+      "cover": "https://uploads.mangadex.org/covers/87ffa375-bd2c-49ba-ba0c-6d78ea07c342/cfdb2a6b-e46b-41d5-a227-151886486363.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "e5ce88e2-8c46-482d-8acf-5c6d5a64a585",
+      "title": "نوراجامي",
+      "cover": "https://uploads.mangadex.org/covers/e5ce88e2-8c46-482d-8acf-5c6d5a64a585/d8009398-6a12-473f-9af9-541b5eef50b6.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "812f9696-048f-496d-9ed4-84c99345d1fb",
+      "title": "Tales of Demons and Gods",
+      "cover": "https://uploads.mangadex.org/covers/812f9696-048f-496d-9ed4-84c99345d1fb/4dcdd628-9195-4fa8-8079-50541ed60515.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "484f94e7-35c3-4cb5-a068-53d684c1439a",
+      "title": "Baki Part 6",
+      "cover": "https://uploads.mangadex.org/covers/484f94e7-35c3-4cb5-a068-53d684c1439a/863ae891-3627-4070-8918-4a626dc9d1ff.png.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "63dbbf80-0189-4ae4-a549-68a0caa2f834",
+      "title": "ويتشريف",
+      "cover": "https://uploads.mangadex.org/covers/63dbbf80-0189-4ae4-a549-68a0caa2f834/04ae601b-1e85-4b59-bba3-7a140f7339f5.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "ea47525d-99df-45b5-9103-dd853f49f8c3",
+      "title": "Welcome to Demon School! Iruma-kun: IruMafia Edition",
+      "cover": "https://uploads.mangadex.org/covers/ea47525d-99df-45b5-9103-dd853f49f8c3/7ba89c43-1234-4d11-9aa6-c3a7576cd1ce.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "0cfcda3b-0dcb-459b-9931-aa823e7bf403",
+      "title": "تسع قمم",
+      "cover": "https://uploads.mangadex.org/covers/0cfcda3b-0dcb-459b-9931-aa823e7bf403/ee1043d6-d349-4a61-9e64-689d43633e55.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "96ae166c-d8e1-4e9e-88cb-805b65154d7e",
+      "title": "Red Blue",
+      "cover": "https://uploads.mangadex.org/covers/96ae166c-d8e1-4e9e-88cb-805b65154d7e/d010f9c1-fdaa-4925-93df-dc3c06417574.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "c4ca02fb-8378-433b-8049-fbbea5d25cba",
+      "title": "هايميا-سينباي حسناء مهيبة!",
+      "cover": "https://uploads.mangadex.org/covers/c4ca02fb-8378-433b-8049-fbbea5d25cba/3d1dc074-3987-47ab-ad91-39202bc146e6.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "77296cee-0b74-415f-914d-6f29036d3906",
+      "title": "مسرحية الجبل",
+      "cover": "https://uploads.mangadex.org/covers/77296cee-0b74-415f-914d-6f29036d3906/6c06c4f2-f816-4dd8-9652-8b9764bfdde4.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "eeb2ab0e-7dbc-4f0c-b476-8181d44217a8",
+      "title": "الوهم السماوي",
+      "cover": "https://uploads.mangadex.org/covers/eeb2ab0e-7dbc-4f0c-b476-8181d44217a8/525c3074-f18e-4313-940e-14f4fd873302.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "a76b6b97-e434-40d6-b7c5-6026d22986d6",
+      "title": "رجلة الجنية السوداء ذات القوى المتلاشية",
+      "cover": "https://uploads.mangadex.org/covers/a76b6b97-e434-40d6-b7c5-6026d22986d6/ff035bc7-9c04-4f8d-9540-46d0abaac520.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "ab8cbb82-d0ed-45a7-8ffe-4bfa6d43d79c",
+      "title": "JoJo's Bizarre Adventure Part 9 - The JOJOLands",
+      "cover": "https://uploads.mangadex.org/covers/ab8cbb82-d0ed-45a7-8ffe-4bfa6d43d79c/f47d473d-7b43-4283-9e47-9a0168dc77e1.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
     {
       "id": "a07320a4-afcd-413a-a451-d69a448d0c28",
       "title": "Usogui",
@@ -10,16 +108,16 @@
       "status": "completed"
     },
     {
-      "id": "bcfe1b36-daee-40fd-9984-d9597caf9da7",
-      "title": "فَقِيْهَةُ ٱلْمَغُوْلِ",
-      "cover": "https://uploads.mangadex.org/covers/bcfe1b36-daee-40fd-9984-d9597caf9da7/5ce19283-d717-44e2-bb69-4247640d3c75.jpg.256.jpg",
+      "id": "25e1d17b-6a4d-4698-a4f6-bf53460c10af",
+      "title": "حافلة لإثنين",
+      "cover": "https://uploads.mangadex.org/covers/25e1d17b-6a4d-4698-a4f6-bf53460c10af/f7cd3ff9-d7a1-4b5e-b473-ee2833b82c35.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
     {
-      "id": "a76b6b97-e434-40d6-b7c5-6026d22986d6",
-      "title": "رجلة الجنية السوداء ذات القوى المتلاشية",
-      "cover": "https://uploads.mangadex.org/covers/a76b6b97-e434-40d6-b7c5-6026d22986d6/ff035bc7-9c04-4f8d-9540-46d0abaac520.jpg.256.jpg",
+      "id": "bcfe1b36-daee-40fd-9984-d9597caf9da7",
+      "title": "فَقِيْهَةُ ٱلْمَغُوْلِ",
+      "cover": "https://uploads.mangadex.org/covers/bcfe1b36-daee-40fd-9984-d9597caf9da7/5ce19283-d717-44e2-bb69-4247640d3c75.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
@@ -59,37 +157,9 @@
       "status": "ongoing"
     },
     {
-      "id": "25e1d17b-6a4d-4698-a4f6-bf53460c10af",
-      "title": "حافلة لإثنين",
-      "cover": "https://uploads.mangadex.org/covers/25e1d17b-6a4d-4698-a4f6-bf53460c10af/f7cd3ff9-d7a1-4b5e-b473-ee2833b82c35.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "96ae166c-d8e1-4e9e-88cb-805b65154d7e",
-      "title": "Red Blue",
-      "cover": "https://uploads.mangadex.org/covers/96ae166c-d8e1-4e9e-88cb-805b65154d7e/d010f9c1-fdaa-4925-93df-dc3c06417574.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "cf43b9e3-396a-41bc-ab72-715f66cdb7e1",
-      "title": "A-bout!",
-      "cover": "https://uploads.mangadex.org/covers/cf43b9e3-396a-41bc-ab72-715f66cdb7e1/c556e070-f1ff-405b-b71c-b2e7492aee0e.png.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
       "id": "f4045a9e-e5f6-4778-bd33-7a91cefc3f71",
       "title": "For the Sake of My Future Vengeance",
       "cover": "https://uploads.mangadex.org/covers/f4045a9e-e5f6-4778-bd33-7a91cefc3f71/53e634e3-aa3b-4dc3-9171-85e2a71d2ec8.png.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "87ffa375-bd2c-49ba-ba0c-6d78ea07c342",
-      "title": "Medaka Kuroiwa is Impervious to My Charms",
-      "cover": "https://uploads.mangadex.org/covers/87ffa375-bd2c-49ba-ba0c-6d78ea07c342/393e9445-7032-4392-96fe-4c549903e663.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
@@ -157,13 +227,6 @@
       "status": "ongoing"
     },
     {
-      "id": "ab8cbb82-d0ed-45a7-8ffe-4bfa6d43d79c",
-      "title": "JoJo's Bizarre Adventure Part 9 - The JOJOLands",
-      "cover": "https://uploads.mangadex.org/covers/ab8cbb82-d0ed-45a7-8ffe-4bfa6d43d79c/f47d473d-7b43-4283-9e47-9a0168dc77e1.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
       "id": "1aa17501-0328-4d5a-bbbe-3cb7cae8c9ae",
       "title": "My Co-worker Is an Eldritch X!",
       "cover": "https://uploads.mangadex.org/covers/1aa17501-0328-4d5a-bbbe-3cb7cae8c9ae/6856c3e0-b344-4319-aa2d-d6f702c235da.png.256.jpg",
@@ -220,16 +283,9 @@
       "status": "completed"
     },
     {
-      "id": "e5ce88e2-8c46-482d-8acf-5c6d5a64a585",
-      "title": "نوراجامي",
-      "cover": "https://uploads.mangadex.org/covers/e5ce88e2-8c46-482d-8acf-5c6d5a64a585/d8009398-6a12-473f-9af9-541b5eef50b6.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
       "id": "936f0ba5-ca65-4de4-99b1-528c02a4454d",
       "title": "Hunter x Hunter (Official Colored)",
-      "cover": "https://uploads.mangadex.org/covers/936f0ba5-ca65-4de4-99b1-528c02a4454d/c08c2728-5af5-4a6e-83e0-f665280c866c.jpg.256.jpg",
+      "cover": "https://uploads.mangadex.org/covers/936f0ba5-ca65-4de4-99b1-528c02a4454d/128d80df-c5e4-4791-b3b7-08586e9db1b8.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
@@ -276,13 +332,6 @@
       "status": "ongoing"
     },
     {
-      "id": "ea47525d-99df-45b5-9103-dd853f49f8c3",
-      "title": "Welcome to Demon School! Iruma-kun: IruMafia Edition",
-      "cover": "https://uploads.mangadex.org/covers/ea47525d-99df-45b5-9103-dd853f49f8c3/7ba89c43-1234-4d11-9aa6-c3a7576cd1ce.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
       "id": "a08cd14f-68d4-4942-9305-2fe9d7d0339e",
       "title": "The Apothecary Is Gonna Make This Ragged Elf Happy",
       "cover": "https://uploads.mangadex.org/covers/a08cd14f-68d4-4942-9305-2fe9d7d0339e/aaf6d4a4-2aba-48af-94a0-7920a60c6d01.jpg.256.jpg",
@@ -302,55 +351,6 @@
       "cover": "https://uploads.mangadex.org/covers/89daf9dc-075a-4aa5-873a-cc76bb287108/a22742de-0a55-4fef-b378-8037753616d2.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
-    },
-    {
-      "id": "d65c0332-3764-4c89-84bd-b1a4e7278ad7",
-      "title": "Kagurabachi",
-      "cover": "https://uploads.mangadex.org/covers/d65c0332-3764-4c89-84bd-b1a4e7278ad7/ff635eea-1ace-4a20-9038-a708b4496c30.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "f5c25341-d6ff-4585-8548-3a48fc7654d9",
-      "title": "Akira Failing in Love",
-      "cover": "https://uploads.mangadex.org/covers/f5c25341-d6ff-4585-8548-3a48fc7654d9/c4ba7710-116f-45bd-b9b9-86293ca04350.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "ca33a142-58fb-4fee-88b9-36ef87f02c77",
-      "title": "حب نيزومي الأول",
-      "cover": "https://uploads.mangadex.org/covers/ca33a142-58fb-4fee-88b9-36ef87f02c77/1911dc72-4263-45cb-a3ec-5ba34e47305e.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "812f9696-048f-496d-9ed4-84c99345d1fb",
-      "title": "Tales of Demons and Gods",
-      "cover": "https://uploads.mangadex.org/covers/812f9696-048f-496d-9ed4-84c99345d1fb/4dcdd628-9195-4fa8-8079-50541ed60515.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "c4ca02fb-8378-433b-8049-fbbea5d25cba",
-      "title": "هايميا-سينباي حسناء مهيبة!",
-      "cover": "https://uploads.mangadex.org/covers/c4ca02fb-8378-433b-8049-fbbea5d25cba/3d1dc074-3987-47ab-ad91-39202bc146e6.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "9c1cd558-fba3-40f1-bb84-b320f5d1eab1",
-      "title": "Bug Ego",
-      "cover": "https://uploads.mangadex.org/covers/9c1cd558-fba3-40f1-bb84-b320f5d1eab1/a40cc882-7d6b-4e12-885c-fef2928e7b7a.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "d1a9fdeb-f713-407f-960c-8326b586e6fd",
-      "title": "Vagabond",
-      "cover": "https://uploads.mangadex.org/covers/d1a9fdeb-f713-407f-960c-8326b586e6fd/05f8dcb4-8ea1-48db-a0b1-3a8fbf695e5a.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "hiatus"
     }
   ]
 }
