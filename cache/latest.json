@@ -1,11 +1,46 @@
 {
-  "updated_at": "2026-07-30T13:53:02.234271+00:00",
+  "updated_at": "2026-07-30T19:21:51.624005+00:00",
   "count": 50,
   "items": [
+    {
+      "id": "c4ca02fb-8378-433b-8049-fbbea5d25cba",
+      "title": "هايميا-سينباي حسناء مهيبة!",
+      "cover": "https://uploads.mangadex.org/covers/c4ca02fb-8378-433b-8049-fbbea5d25cba/3d1dc074-3987-47ab-ad91-39202bc146e6.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "77296cee-0b74-415f-914d-6f29036d3906",
+      "title": "مسرحية الجبل",
+      "cover": "https://uploads.mangadex.org/covers/77296cee-0b74-415f-914d-6f29036d3906/6c06c4f2-f816-4dd8-9652-8b9764bfdde4.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "b73371d4-02dd-4db0-b448-d9afa3d698f1",
+      "title": "Aoashi",
+      "cover": "https://uploads.mangadex.org/covers/b73371d4-02dd-4db0-b448-d9afa3d698f1/8ecd4b0f-5746-4f75-a836-c132d361d9ee.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
     {
       "id": "96ae166c-d8e1-4e9e-88cb-805b65154d7e",
       "title": "Red Blue",
       "cover": "https://uploads.mangadex.org/covers/96ae166c-d8e1-4e9e-88cb-805b65154d7e/d010f9c1-fdaa-4925-93df-dc3c06417574.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "d8a959f7-648e-4c8d-8f23-f1f3f8e129f3",
+      "title": "ون بنش مان",
+      "cover": "https://uploads.mangadex.org/covers/d8a959f7-648e-4c8d-8f23-f1f3f8e129f3/511fc404-e6b4-4204-bb10-e4a28f7b5271.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "0a580438-bc72-4503-940b-12a5da881b56",
+      "title": "أنتِ زهرة الحظ",
+      "cover": "https://uploads.mangadex.org/covers/0a580438-bc72-4503-940b-12a5da881b56/739831ad-7ac1-4707-871f-644188450cf5.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
@@ -20,13 +55,6 @@
       "id": "25e1d17b-6a4d-4698-a4f6-bf53460c10af",
       "title": "حافلة لإثنين",
       "cover": "https://uploads.mangadex.org/covers/25e1d17b-6a4d-4698-a4f6-bf53460c10af/f7cd3ff9-d7a1-4b5e-b473-ee2833b82c35.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "0a580438-bc72-4503-940b-12a5da881b56",
-      "title": "أنتِ زهرة الحظ",
-      "cover": "https://uploads.mangadex.org/covers/0a580438-bc72-4503-940b-12a5da881b56/739831ad-7ac1-4707-871f-644188450cf5.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
@@ -87,23 +115,9 @@
       "status": "completed"
     },
     {
-      "id": "77296cee-0b74-415f-914d-6f29036d3906",
-      "title": "مسرحية الجبل",
-      "cover": "https://uploads.mangadex.org/covers/77296cee-0b74-415f-914d-6f29036d3906/6c06c4f2-f816-4dd8-9652-8b9764bfdde4.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
       "id": "ea47525d-99df-45b5-9103-dd853f49f8c3",
       "title": "Welcome to Demon School! Iruma-kun: IruMafia Edition",
       "cover": "https://uploads.mangadex.org/covers/ea47525d-99df-45b5-9103-dd853f49f8c3/7ba89c43-1234-4d11-9aa6-c3a7576cd1ce.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "c4ca02fb-8378-433b-8049-fbbea5d25cba",
-      "title": "هايميا-سينباي حسناء مهيبة!",
-      "cover": "https://uploads.mangadex.org/covers/c4ca02fb-8378-433b-8049-fbbea5d25cba/3d1dc074-3987-47ab-ad91-39202bc146e6.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
@@ -127,13 +141,6 @@
       "cover": "https://uploads.mangadex.org/covers/ed5dddc0-999d-4fd2-a702-9fef1ec2c955/80206db7-7ca3-4038-a8d4-04926e9a4388.jpg.256.jpg",
       "source": "mangadex",
       "status": "completed"
-    },
-    {
-      "id": "d8a959f7-648e-4c8d-8f23-f1f3f8e129f3",
-      "title": "ون بنش مان",
-      "cover": "https://uploads.mangadex.org/covers/d8a959f7-648e-4c8d-8f23-f1f3f8e129f3/511fc404-e6b4-4204-bb10-e4a28f7b5271.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
     },
     {
       "id": "cf43b9e3-396a-41bc-ab72-715f66cdb7e1",
@@ -342,13 +349,6 @@
       "id": "936f0ba5-ca65-4de4-99b1-528c02a4454d",
       "title": "Hunter x Hunter (Official Colored)",
       "cover": "https://uploads.mangadex.org/covers/936f0ba5-ca65-4de4-99b1-528c02a4454d/128d80df-c5e4-4791-b3b7-08586e9db1b8.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "d422ddc8-eea3-4b0a-82a4-291bbd8c9285",
-      "title": "أبناء عائلة شيونجي",
-      "cover": "https://uploads.mangadex.org/covers/d422ddc8-eea3-4b0a-82a4-291bbd8c9285/18f555fb-4fe4-4d47-8fbe-7bd101a5bc3a.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     }
