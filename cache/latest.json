@@ -1,7 +1,84 @@
 {
-  "updated_at": "2026-07-31T13:59:22.676696+00:00",
+  "updated_at": "2026-07-31T19:20:48.709378+00:00",
   "count": 50,
   "items": [
+    {
+      "id": "812f9696-048f-496d-9ed4-84c99345d1fb",
+      "title": "Tales of Demons and Gods",
+      "cover": "https://uploads.mangadex.org/covers/812f9696-048f-496d-9ed4-84c99345d1fb/4dcdd628-9195-4fa8-8079-50541ed60515.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "a08cd14f-68d4-4942-9305-2fe9d7d0339e",
+      "title": "The Apothecary Is Gonna Make This Ragged Elf Happy",
+      "cover": "https://uploads.mangadex.org/covers/a08cd14f-68d4-4942-9305-2fe9d7d0339e/aaf6d4a4-2aba-48af-94a0-7920a60c6d01.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "05c2917a-e0a4-4c55-abac-8be0f8b213e4",
+      "title": "ميتم المروض",
+      "cover": "https://uploads.mangadex.org/covers/05c2917a-e0a4-4c55-abac-8be0f8b213e4/3b0d8439-2e7a-473f-af4f-77997c6ced09.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "b73371d4-02dd-4db0-b448-d9afa3d698f1",
+      "title": "Aoashi",
+      "cover": "https://uploads.mangadex.org/covers/b73371d4-02dd-4db0-b448-d9afa3d698f1/8ecd4b0f-5746-4f75-a836-c132d361d9ee.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "19a5c7e3-b743-4cb6-8dd8-41459bfc685d",
+      "title": "تدليل فارسة لا تعرف اي شيء سوى القتال",
+      "cover": "https://uploads.mangadex.org/covers/19a5c7e3-b743-4cb6-8dd8-41459bfc685d/883318ff-c44b-4ea9-a456-2b5b18a34631.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "9661f9e7-3c6a-448f-9b1e-2c563ed1e5e9",
+      "title": "تاج الحكاية الخيالية",
+      "cover": "https://uploads.mangadex.org/covers/9661f9e7-3c6a-448f-9b1e-2c563ed1e5e9/2fc71eab-02b5-4c78-8478-86b6ec87fcf5.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "b5b21ca1-bba5-4b9a-8cd1-6248f731650b",
+      "title": "سجلات راغناروك",
+      "cover": "https://uploads.mangadex.org/covers/b5b21ca1-bba5-4b9a-8cd1-6248f731650b/64235ab3-3595-47ea-b65a-457b828489c2.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "61830b36-1712-4b7b-9421-f671e9ced6d3",
+      "title": "Learning to Love My Cat-like Classmate",
+      "cover": "https://uploads.mangadex.org/covers/61830b36-1712-4b7b-9421-f671e9ced6d3/6076a7f6-4454-49fb-8802-89ee00aec545.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "c4b36f15-4ee5-425f-a77d-c2e7cbb970d8",
+      "title": "NIPPON SANGOKU: The Three Nations of the Crimson Sun",
+      "cover": "https://uploads.mangadex.org/covers/c4b36f15-4ee5-425f-a77d-c2e7cbb970d8/e5c54f1b-6ea4-4dd2-ae6e-9d0e138d7c2e.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "8e95570e-93a7-494d-8e83-bd755e3b631d",
+      "title": "Fragments of the Layered City",
+      "cover": "https://uploads.mangadex.org/covers/8e95570e-93a7-494d-8e83-bd755e3b631d/cffb96dc-36e9-48b3-9570-9f99b7d6f2fc.png.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "c4ca02fb-8378-433b-8049-fbbea5d25cba",
+      "title": "هايميا-سينباي حسناء مهيبة!",
+      "cover": "https://uploads.mangadex.org/covers/c4ca02fb-8378-433b-8049-fbbea5d25cba/3d1dc074-3987-47ab-ad91-39202bc146e6.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
     {
       "id": "4141c5dc-c525-4df5-afd7-cc7d192a832f",
       "title": "Blue Lock",
@@ -80,13 +157,6 @@
       "status": "ongoing"
     },
     {
-      "id": "8e95570e-93a7-494d-8e83-bd755e3b631d",
-      "title": "Fragments of the Layered City",
-      "cover": "https://uploads.mangadex.org/covers/8e95570e-93a7-494d-8e83-bd755e3b631d/cffb96dc-36e9-48b3-9570-9f99b7d6f2fc.png.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
       "id": "25e1d17b-6a4d-4698-a4f6-bf53460c10af",
       "title": "حافلة لإثنين",
       "cover": "https://uploads.mangadex.org/covers/25e1d17b-6a4d-4698-a4f6-bf53460c10af/f7cd3ff9-d7a1-4b5e-b473-ee2833b82c35.jpg.256.jpg",
@@ -150,25 +220,11 @@
       "status": "ongoing"
     },
     {
-      "id": "c4ca02fb-8378-433b-8049-fbbea5d25cba",
-      "title": "هايميا-سينباي حسناء مهيبة!",
-      "cover": "https://uploads.mangadex.org/covers/c4ca02fb-8378-433b-8049-fbbea5d25cba/3d1dc074-3987-47ab-ad91-39202bc146e6.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
       "id": "77296cee-0b74-415f-914d-6f29036d3906",
       "title": "مسرحية الجبل",
       "cover": "https://uploads.mangadex.org/covers/77296cee-0b74-415f-914d-6f29036d3906/6c06c4f2-f816-4dd8-9652-8b9764bfdde4.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
-    },
-    {
-      "id": "b73371d4-02dd-4db0-b448-d9afa3d698f1",
-      "title": "Aoashi",
-      "cover": "https://uploads.mangadex.org/covers/b73371d4-02dd-4db0-b448-d9afa3d698f1/8ecd4b0f-5746-4f75-a836-c132d361d9ee.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
     },
     {
       "id": "96ae166c-d8e1-4e9e-88cb-805b65154d7e",
@@ -262,13 +318,6 @@
       "status": "completed"
     },
     {
-      "id": "812f9696-048f-496d-9ed4-84c99345d1fb",
-      "title": "Tales of Demons and Gods",
-      "cover": "https://uploads.mangadex.org/covers/812f9696-048f-496d-9ed4-84c99345d1fb/4dcdd628-9195-4fa8-8079-50541ed60515.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
       "id": "484f94e7-35c3-4cb5-a068-53d684c1439a",
       "title": "Baki Part 6",
       "cover": "https://uploads.mangadex.org/covers/484f94e7-35c3-4cb5-a068-53d684c1439a/863ae891-3627-4070-8918-4a626dc9d1ff.png.256.jpg",
@@ -302,55 +351,6 @@
       "cover": "https://uploads.mangadex.org/covers/db692d58-4b13-4174-ae8c-30c515c0689c/aa112927-f1e5-4fe4-a4db-7fd4a1536e3c.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
-    },
-    {
-      "id": "a07320a4-afcd-413a-a451-d69a448d0c28",
-      "title": "Usogui",
-      "cover": "https://uploads.mangadex.org/covers/a07320a4-afcd-413a-a451-d69a448d0c28/b74c8cce-42cd-4889-b75d-7944e63f9a14.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
-      "id": "b6886009-e60b-44a7-abc2-a575765277ba",
-      "title": "الرجل الرمادي",
-      "cover": "https://uploads.mangadex.org/covers/b6886009-e60b-44a7-abc2-a575765277ba/a8ea60f1-0fef-4af0-b26e-8b761406c114.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "f4045a9e-e5f6-4778-bd33-7a91cefc3f71",
-      "title": "For the Sake of My Future Vengeance",
-      "cover": "https://uploads.mangadex.org/covers/f4045a9e-e5f6-4778-bd33-7a91cefc3f71/53e634e3-aa3b-4dc3-9171-85e2a71d2ec8.png.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "30196491-8fc2-4961-8886-a58f898b1b3e",
-      "title": "Berserk of Gluttony: The One that Exceeds the Concept of Levels",
-      "cover": "https://uploads.mangadex.org/covers/30196491-8fc2-4961-8886-a58f898b1b3e/1790f17f-9184-4a48-8928-c45de48b778e.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "68112dc1-2b80-4f20-beb8-2f2a8716a430",
-      "title": "داندادان",
-      "cover": "https://uploads.mangadex.org/covers/68112dc1-2b80-4f20-beb8-2f2a8716a430/a6fe6c95-47cb-494c-a5ca-8e4bfbd7bf59.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "4e7a4a0f-8391-4069-839b-de2352297dab",
-      "title": "A Couple of Cuckoos",
-      "cover": "https://uploads.mangadex.org/covers/4e7a4a0f-8391-4069-839b-de2352297dab/ad595477-786b-4ab0-b176-b0c138ebfdc5.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "baaa0ca4-efef-4b15-b91a-c1f85692c2a7",
-      "title": "Vampire Knight",
-      "cover": "https://uploads.mangadex.org/covers/baaa0ca4-efef-4b15-b91a-c1f85692c2a7/d195f918-5f67-46a0-925f-eabc16fb40a3.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
     }
   ]
 }
