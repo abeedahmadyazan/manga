@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-01T19:05:05.625448+00:00",
+  "updated_at": "2026-08-02T02:32:06.184503+00:00",
   "count": 50,
   "items": [
     {
@@ -318,18 +318,18 @@
       "status": "ongoing"
     },
     {
-      "id": "304ceac3-8cdb-4fe7-acf7-2b6ff7a60613",
-      "title": "Attack on Titan",
-      "cover": "https://uploads.mangadex.org/covers/304ceac3-8cdb-4fe7-acf7-2b6ff7a60613/29f82b1d-b37f-455a-b630-e42bccb1422a.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
       "id": "f5c25341-d6ff-4585-8548-3a48fc7654d9",
       "title": "Akira Failing in Love",
       "cover": "https://uploads.mangadex.org/covers/f5c25341-d6ff-4585-8548-3a48fc7654d9/c4ba7710-116f-45bd-b9b9-86293ca04350.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
+    },
+    {
+      "id": "304ceac3-8cdb-4fe7-acf7-2b6ff7a60613",
+      "title": "Attack on Titan",
+      "cover": "https://uploads.mangadex.org/covers/304ceac3-8cdb-4fe7-acf7-2b6ff7a60613/29f82b1d-b37f-455a-b630-e42bccb1422a.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
     },
     {
       "id": "4f3bcae4-2d96-4c9d-932c-90181d9c873e",
