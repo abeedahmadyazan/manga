@@ -1,7 +1,35 @@
 {
-  "updated_at": "2026-08-03T09:39:12.757479+00:00",
+  "updated_at": "2026-08-03T14:33:18.784596+00:00",
   "count": 50,
   "items": [
+    {
+      "id": "b05918e4-fb1a-4b10-a919-eaecf00fd7dd",
+      "title": "Tower Dungeon",
+      "cover": "https://uploads.mangadex.org/covers/b05918e4-fb1a-4b10-a919-eaecf00fd7dd/76bdb2d5-5b1f-4ff0-a3fe-469156bb6abe.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "77c4966f-ead7-45bb-87e0-9ac618b11e8e",
+      "title": "Kunon the Sorcerer Can See",
+      "cover": "https://uploads.mangadex.org/covers/77c4966f-ead7-45bb-87e0-9ac618b11e8e/393cc1fa-a752-49aa-a688-a2a309924030.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "52842727-59ff-46a6-9a23-5eba61487586",
+      "title": "To Love Ru (Official Colored)",
+      "cover": "https://uploads.mangadex.org/covers/52842727-59ff-46a6-9a23-5eba61487586/1b7bba8a-d22a-4f1a-8723-601a611b135a.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "bcfe1b36-daee-40fd-9984-d9597caf9da7",
+      "title": "فَقِيْهَةُ ٱلْمَغُوْلِ",
+      "cover": "https://uploads.mangadex.org/covers/bcfe1b36-daee-40fd-9984-d9597caf9da7/5ce19283-d717-44e2-bb69-4247640d3c75.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
     {
       "id": "12ac16ec-8894-420b-bc03-eade9340dfd8",
       "title": "Trinity Seven - The 7 Magicians",
@@ -297,13 +325,6 @@
       "status": "ongoing"
     },
     {
-      "id": "52842727-59ff-46a6-9a23-5eba61487586",
-      "title": "To Love Ru (Official Colored)",
-      "cover": "https://uploads.mangadex.org/covers/52842727-59ff-46a6-9a23-5eba61487586/1b7bba8a-d22a-4f1a-8723-601a611b135a.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
       "id": "b5b21ca1-bba5-4b9a-8cd1-6248f731650b",
       "title": "سجلات راغناروك",
       "cover": "https://uploads.mangadex.org/covers/b5b21ca1-bba5-4b9a-8cd1-6248f731650b/64235ab3-3595-47ea-b65a-457b828489c2.jpg.256.jpg",
@@ -328,27 +349,6 @@
       "id": "ea0e7020-2b2f-4f17-9251-fee3632dc135",
       "title": "My Yandere Girlfriend Lurks in the Dungeon and Kills Me Over and Over Again",
       "cover": "https://uploads.mangadex.org/covers/ea0e7020-2b2f-4f17-9251-fee3632dc135/4979315b-7bbd-4d17-9e61-d49f07d1245d.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "18ef1e92-f574-4c8c-99af-555e44ba418e",
-      "title": "Eastern Thorned Poet Hermit ~ Wild and Horned Hermit.",
-      "cover": "https://uploads.mangadex.org/covers/18ef1e92-f574-4c8c-99af-555e44ba418e/f8de2bd4-b519-4b34-9272-dd4e765e2de5.png.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
-      "id": "4e0ab019-afcb-4fd9-98eb-fcb28cf7fc81",
-      "title": "مانجا الملكة النحلة شوكهو ميساكي - مينتل-آوت",
-      "cover": "https://uploads.mangadex.org/covers/4e0ab019-afcb-4fd9-98eb-fcb28cf7fc81/71450b93-c970-42e6-bb65-93f45b8e9ac3.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "61830b36-1712-4b7b-9421-f671e9ced6d3",
-      "title": "Learning to Love My Cat-like Classmate",
-      "cover": "https://uploads.mangadex.org/covers/61830b36-1712-4b7b-9421-f671e9ced6d3/6076a7f6-4454-49fb-8802-89ee00aec545.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     }
