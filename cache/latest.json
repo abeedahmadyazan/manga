@@ -1,7 +1,28 @@
 {
-  "updated_at": "2026-08-04T08:32:29.507845+00:00",
+  "updated_at": "2026-08-04T14:05:00.560454+00:00",
   "count": 50,
   "items": [
+    {
+      "id": "e0589f47-72f9-4e9a-ac31-5b88bcad6220",
+      "title": "The Wrong Way to Use Healing Magic",
+      "cover": "https://uploads.mangadex.org/covers/e0589f47-72f9-4e9a-ac31-5b88bcad6220/5bc559d6-5434-46d9-89b4-44964a1b8233.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "c4b36f15-4ee5-425f-a77d-c2e7cbb970d8",
+      "title": "NIPPON SANGOKU: The Three Nations of the Crimson Sun",
+      "cover": "https://uploads.mangadex.org/covers/c4b36f15-4ee5-425f-a77d-c2e7cbb970d8/e5c54f1b-6ea4-4dd2-ae6e-9d0e138d7c2e.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "b5b21ca1-bba5-4b9a-8cd1-6248f731650b",
+      "title": "سجلات راغناروك",
+      "cover": "https://uploads.mangadex.org/covers/b5b21ca1-bba5-4b9a-8cd1-6248f731650b/64235ab3-3595-47ea-b65a-457b828489c2.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
     {
       "id": "dea77c2d-dbaa-434a-b0af-0c116642434c",
       "title": "Ichi the Witch",
@@ -328,27 +349,6 @@
       "id": "f5c25341-d6ff-4585-8548-3a48fc7654d9",
       "title": "Akira Failing in Love",
       "cover": "https://uploads.mangadex.org/covers/f5c25341-d6ff-4585-8548-3a48fc7654d9/c4ba7710-116f-45bd-b9b9-86293ca04350.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "ce89adb4-63fc-422e-9fbc-40ea6af4525c",
-      "title": "Terra ForMars",
-      "cover": "https://uploads.mangadex.org/covers/ce89adb4-63fc-422e-9fbc-40ea6af4525c/3e9e1fcc-d2c5-42b7-b4fe-586f569aead7.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "30f3ac69-21b6-45ad-a110-d011b7aaadaa",
-      "title": "Fly Me to The Moon",
-      "cover": "https://uploads.mangadex.org/covers/30f3ac69-21b6-45ad-a110-d011b7aaadaa/fb735d33-b723-4446-9258-eefbffae222f.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "77bee52c-d2d6-44ad-a33a-1734c1fe696a",
-      "title": "The Eminence in Shadow",
-      "cover": "https://uploads.mangadex.org/covers/77bee52c-d2d6-44ad-a33a-1734c1fe696a/6079dd31-838b-4d61-87c4-121f3ad19158.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     }
