@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-04T14:05:00.560454+00:00",
+  "updated_at": "2026-08-04T19:28:14.068091+00:00",
   "count": 50,
   "items": [
     {
@@ -227,18 +227,18 @@
       "status": "ongoing"
     },
     {
+      "id": "b41bef1e-7df9-4255-bd82-ecf570fec566",
+      "title": "The New Gate",
+      "cover": "https://uploads.mangadex.org/covers/b41bef1e-7df9-4255-bd82-ecf570fec566/73ebbea7-545e-4a8c-82f4-d75f2e89a280.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
       "id": "6a468761-5bd6-4de0-a0cb-47cb456ac2e0",
       "title": "A Returner's Magic Should Be Special",
       "cover": "https://uploads.mangadex.org/covers/6a468761-5bd6-4de0-a0cb-47cb456ac2e0/98162533-1838-4639-8419-2f19f8af651b.png.256.jpg",
       "source": "mangadex",
       "status": "completed"
-    },
-    {
-      "id": "b41bef1e-7df9-4255-bd82-ecf570fec566",
-      "title": "The New Gate",
-      "cover": "https://uploads.mangadex.org/covers/b41bef1e-7df9-4255-bd82-ecf570fec566/86a902f5-6590-4ebc-abef-590801f70659.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
     },
     {
       "id": "89daf9dc-075a-4aa5-873a-cc76bb287108",
@@ -250,7 +250,7 @@
     {
       "id": "4141c5dc-c525-4df5-afd7-cc7d192a832f",
       "title": "Blue Lock",
-      "cover": "https://uploads.mangadex.org/covers/4141c5dc-c525-4df5-afd7-cc7d192a832f/1975ed85-c114-42d9-b0c3-75421ba87e5d.jpg.256.jpg",
+      "cover": "https://uploads.mangadex.org/covers/4141c5dc-c525-4df5-afd7-cc7d192a832f/7ee723d4-b926-4a81-acd9-53adb3fbe461.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
