@@ -1,7 +1,49 @@
 {
-  "updated_at": "2026-08-06T02:21:17.054961+00:00",
+  "updated_at": "2026-08-06T08:31:46.049410+00:00",
   "count": 50,
   "items": [
+    {
+      "id": "ab8cbb82-d0ed-45a7-8ffe-4bfa6d43d79c",
+      "title": "JoJo's Bizarre Adventure Part 9 - The JOJOLands",
+      "cover": "https://uploads.mangadex.org/covers/ab8cbb82-d0ed-45a7-8ffe-4bfa6d43d79c/f47d473d-7b43-4283-9e47-9a0168dc77e1.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "1693697a-783c-4d3c-a2d3-dc069e137a23",
+      "title": "I Have No Home",
+      "cover": "https://uploads.mangadex.org/covers/1693697a-783c-4d3c-a2d3-dc069e137a23/bc55de2a-47dd-41cb-9338-75b3f0650a69.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "5b93fa0f-0640-49b8-974e-954b9959929b",
+      "title": "Girls' Last Tour",
+      "cover": "https://uploads.mangadex.org/covers/5b93fa0f-0640-49b8-974e-954b9959929b/67d556f5-91d4-4b85-b287-2f74f008e564.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "77296cee-0b74-415f-914d-6f29036d3906",
+      "title": "مسرحية الجبل",
+      "cover": "https://uploads.mangadex.org/covers/77296cee-0b74-415f-914d-6f29036d3906/6c06c4f2-f816-4dd8-9652-8b9764bfdde4.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "d7037b2a-874a-4360-8a7b-07f2899152fd",
+      "title": "إيروما-كن في مدرسة الشياطين",
+      "cover": "https://uploads.mangadex.org/covers/d7037b2a-874a-4360-8a7b-07f2899152fd/52d67301-401c-44c4-9d7b-529e2796f7d5.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "7f30dfc3-0b80-4dcc-a3b9-0cd746fac005",
+      "title": "المتحري كونان",
+      "cover": "https://uploads.mangadex.org/covers/7f30dfc3-0b80-4dcc-a3b9-0cd746fac005/b65b80fa-217c-4a71-8e8f-5d647990117a.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
     {
       "id": "baa95345-24fb-47a9-83e9-434ff671f968",
       "title": "خلف المتجر ادخن معك",
@@ -13,13 +55,6 @@
       "id": "418791c0-35cf-4f87-936b-acd9cddf0989",
       "title": "The Fragrant Flower Blooms with Dignity",
       "cover": "https://uploads.mangadex.org/covers/418791c0-35cf-4f87-936b-acd9cddf0989/717e5c78-69bd-46e9-a5b4-dc3ca143d4a4.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "77296cee-0b74-415f-914d-6f29036d3906",
-      "title": "مسرحية الجبل",
-      "cover": "https://uploads.mangadex.org/covers/77296cee-0b74-415f-914d-6f29036d3906/6c06c4f2-f816-4dd8-9652-8b9764bfdde4.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
@@ -41,13 +76,6 @@
       "id": "356de811-ae92-48f1-b93b-cfdf0f8d02e4",
       "title": "بما أننا نرسم الآن",
       "cover": "https://uploads.mangadex.org/covers/356de811-ae92-48f1-b93b-cfdf0f8d02e4/4c0f235c-762d-463b-a320-4e5cedd8db51.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "7f30dfc3-0b80-4dcc-a3b9-0cd746fac005",
-      "title": "المتحري كونان",
-      "cover": "https://uploads.mangadex.org/covers/7f30dfc3-0b80-4dcc-a3b9-0cd746fac005/b65b80fa-217c-4a71-8e8f-5d647990117a.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
@@ -78,13 +106,6 @@
       "cover": "https://uploads.mangadex.org/covers/c4b36f15-4ee5-425f-a77d-c2e7cbb970d8/e5c54f1b-6ea4-4dd2-ae6e-9d0e138d7c2e.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
-    },
-    {
-      "id": "1693697a-783c-4d3c-a2d3-dc069e137a23",
-      "title": "I Have No Home",
-      "cover": "https://uploads.mangadex.org/covers/1693697a-783c-4d3c-a2d3-dc069e137a23/bc55de2a-47dd-41cb-9338-75b3f0650a69.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
     },
     {
       "id": "a77742b1-befd-49a4-bff5-1ad4e6b0ef7b",
@@ -176,13 +197,6 @@
       "cover": "https://uploads.mangadex.org/covers/db692d58-4b13-4174-ae8c-30c515c0689c/aa112927-f1e5-4fe4-a4db-7fd4a1536e3c.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
-    },
-    {
-      "id": "5b93fa0f-0640-49b8-974e-954b9959929b",
-      "title": "Girls' Last Tour",
-      "cover": "https://uploads.mangadex.org/covers/5b93fa0f-0640-49b8-974e-954b9959929b/67d556f5-91d4-4b85-b287-2f74f008e564.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
     },
     {
       "id": "202718c6-525e-4cec-a469-c945548cacc3",
@@ -290,13 +304,6 @@
       "status": "ongoing"
     },
     {
-      "id": "ab8cbb82-d0ed-45a7-8ffe-4bfa6d43d79c",
-      "title": "JoJo's Bizarre Adventure Part 9 - The JOJOLands",
-      "cover": "https://uploads.mangadex.org/covers/ab8cbb82-d0ed-45a7-8ffe-4bfa6d43d79c/f47d473d-7b43-4283-9e47-9a0168dc77e1.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
       "id": "9d563964-e935-47d4-812a-abfd2f625384",
       "title": "Shijou Saikyou no Deshi Kenichi",
       "cover": "https://uploads.mangadex.org/covers/9d563964-e935-47d4-812a-abfd2f625384/8c3bfc36-77ad-4ec4-8321-5d7770493650.jpg.256.jpg",
@@ -342,13 +349,6 @@
       "id": "bcfe1b36-daee-40fd-9984-d9597caf9da7",
       "title": "فَقِيْهَةُ ٱلْمَغُوْلِ",
       "cover": "https://uploads.mangadex.org/covers/bcfe1b36-daee-40fd-9984-d9597caf9da7/5ce19283-d717-44e2-bb69-4247640d3c75.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "12ac16ec-8894-420b-bc03-eade9340dfd8",
-      "title": "Trinity Seven - The 7 Magicians",
-      "cover": "https://uploads.mangadex.org/covers/12ac16ec-8894-420b-bc03-eade9340dfd8/85c1b863-ef69-4c76-9313-e2b4f06b24db.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     }
