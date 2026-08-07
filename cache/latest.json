@@ -1,7 +1,28 @@
 {
-  "updated_at": "2026-08-07T07:11:20.908287+00:00",
+  "updated_at": "2026-08-07T12:56:43.243024+00:00",
   "count": 50,
   "items": [
+    {
+      "id": "6670ee28-f26d-4b61-b49c-d71149cd5a6e",
+      "title": "مييروكو تشان",
+      "cover": "https://uploads.mangadex.org/covers/6670ee28-f26d-4b61-b49c-d71149cd5a6e/13d41432-d7ec-41cd-a265-5af700989aa6.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "38179337-1640-4927-8851-9bedd8d19e82",
+      "title": "Aren't You Too Sweet Salt-God Sato-San?",
+      "cover": "https://uploads.mangadex.org/covers/38179337-1640-4927-8851-9bedd8d19e82/82765507-ec2b-48df-a0f0-c53ba4d71d6d.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "510f29a8-99b4-46af-ba5e-916e96bc6f37",
+      "title": "Fate/type Redline",
+      "cover": "https://uploads.mangadex.org/covers/510f29a8-99b4-46af-ba5e-916e96bc6f37/c1d7aed1-9cd1-426f-bfb8-7e46594d0e29.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
     {
       "id": "bcfe1b36-daee-40fd-9984-d9597caf9da7",
       "title": "فَقِيْهَةُ ٱلْمَغُوْلِ",
@@ -328,27 +349,6 @@
       "id": "d78db808-93f7-498d-9368-e5767fd85057",
       "title": "Class 2-B Hero Destroyerz",
       "cover": "https://uploads.mangadex.org/covers/d78db808-93f7-498d-9368-e5767fd85057/382e67c5-962f-4e65-a1c9-f457e03c058e.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "05c2917a-e0a4-4c55-abac-8be0f8b213e4",
-      "title": "ميتم المروض",
-      "cover": "https://uploads.mangadex.org/covers/05c2917a-e0a4-4c55-abac-8be0f8b213e4/3b0d8439-2e7a-473f-af4f-77997c6ced09.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "19a5c7e3-b743-4cb6-8dd8-41459bfc685d",
-      "title": "تدليل فارسة لا تعرف اي شيء سوى القتال",
-      "cover": "https://uploads.mangadex.org/covers/19a5c7e3-b743-4cb6-8dd8-41459bfc685d/883318ff-c44b-4ea9-a456-2b5b18a34631.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "4141c5dc-c525-4df5-afd7-cc7d192a832f",
-      "title": "Blue Lock",
-      "cover": "https://uploads.mangadex.org/covers/4141c5dc-c525-4df5-afd7-cc7d192a832f/7ee723d4-b926-4a81-acd9-53adb3fbe461.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     }
