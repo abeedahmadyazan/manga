@@ -1,7 +1,14 @@
 {
-  "updated_at": "2026-08-06T23:55:53.553394+00:00",
+  "updated_at": "2026-08-07T02:36:45.913739+00:00",
   "count": 50,
   "items": [
+    {
+      "id": "936f0ba5-ca65-4de4-99b1-528c02a4454d",
+      "title": "Hunter x Hunter (Official Colored)",
+      "cover": "https://uploads.mangadex.org/covers/936f0ba5-ca65-4de4-99b1-528c02a4454d/128d80df-c5e4-4791-b3b7-08586e9db1b8.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
     {
       "id": "4e7a4a0f-8391-4069-839b-de2352297dab",
       "title": "A Couple of Cuckoos",
@@ -342,13 +349,6 @@
       "id": "b5b21ca1-bba5-4b9a-8cd1-6248f731650b",
       "title": "سجلات راغناروك",
       "cover": "https://uploads.mangadex.org/covers/b5b21ca1-bba5-4b9a-8cd1-6248f731650b/64235ab3-3595-47ea-b65a-457b828489c2.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "dea77c2d-dbaa-434a-b0af-0c116642434c",
-      "title": "Ichi the Witch",
-      "cover": "https://uploads.mangadex.org/covers/dea77c2d-dbaa-434a-b0af-0c116642434c/707b5cff-60e3-40fe-8105-e9065d5f8abd.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     }
