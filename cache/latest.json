@@ -1,7 +1,35 @@
 {
-  "updated_at": "2026-08-08T12:41:33.987995+00:00",
+  "updated_at": "2026-08-08T18:33:09.777580+00:00",
   "count": 50,
   "items": [
+    {
+      "id": "484f94e7-35c3-4cb5-a068-53d684c1439a",
+      "title": "Baki Part 6",
+      "cover": "https://uploads.mangadex.org/covers/484f94e7-35c3-4cb5-a068-53d684c1439a/863ae891-3627-4070-8918-4a626dc9d1ff.png.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "774f0f04-5023-4e2e-9c0b-f0ed382f078b",
+      "title": "إينيغماتيكا",
+      "cover": "https://uploads.mangadex.org/covers/774f0f04-5023-4e2e-9c0b-f0ed382f078b/52af04b0-778c-44c5-bce3-a33ae4924a1b.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "7f30dfc3-0b80-4dcc-a3b9-0cd746fac005",
+      "title": "المتحري كونان",
+      "cover": "https://uploads.mangadex.org/covers/7f30dfc3-0b80-4dcc-a3b9-0cd746fac005/b65b80fa-217c-4a71-8e8f-5d647990117a.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "ca131ef8-e35d-4afc-9b8e-8aac806895f3",
+      "title": "Dissolving Series",
+      "cover": "https://uploads.mangadex.org/covers/ca131ef8-e35d-4afc-9b8e-8aac806895f3/dda70d64-8311-42b5-be02-3c694789ad7e.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
     {
       "id": "3ad8d2f2-1afe-43da-a88b-0a790c64939e",
       "title": "دَينُونَة ماريا",
@@ -55,13 +83,6 @@
       "id": "334019e1-18bb-4ac0-b35c-0e8efb1e481c",
       "title": "JoJo’s Bizarre Adventure, Part 9: The JoJoLands - Digital Colored Comics",
       "cover": "https://uploads.mangadex.org/covers/334019e1-18bb-4ac0-b35c-0e8efb1e481c/530583f4-80ad-4f37-92d9-441b225c9785.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "7f30dfc3-0b80-4dcc-a3b9-0cd746fac005",
-      "title": "المتحري كونان",
-      "cover": "https://uploads.mangadex.org/covers/7f30dfc3-0b80-4dcc-a3b9-0cd746fac005/b65b80fa-217c-4a71-8e8f-5d647990117a.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
@@ -330,27 +351,6 @@
       "cover": "https://uploads.mangadex.org/covers/52842727-59ff-46a6-9a23-5eba61487586/1b7bba8a-d22a-4f1a-8723-601a611b135a.jpg.256.jpg",
       "source": "mangadex",
       "status": "completed"
-    },
-    {
-      "id": "63dbbf80-0189-4ae4-a549-68a0caa2f834",
-      "title": "ويتشريف",
-      "cover": "https://uploads.mangadex.org/covers/63dbbf80-0189-4ae4-a549-68a0caa2f834/04ae601b-1e85-4b59-bba3-7a140f7339f5.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "774f0f04-5023-4e2e-9c0b-f0ed382f078b",
-      "title": "إينيغماتيكا",
-      "cover": "https://uploads.mangadex.org/covers/774f0f04-5023-4e2e-9c0b-f0ed382f078b/52af04b0-778c-44c5-bce3-a33ae4924a1b.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "3179df8b-400e-45b8-907f-9108033cef60",
-      "title": "حب يمر عبر منشور زجاجي",
-      "cover": "https://uploads.mangadex.org/covers/3179df8b-400e-45b8-907f-9108033cef60/3e7779aa-3fd9-4578-b01f-8676bae093ff.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
     }
   ]
 }
