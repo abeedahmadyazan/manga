@@ -1,7 +1,35 @@
 {
-  "updated_at": "2026-08-08T01:20:49.764055+00:00",
+  "updated_at": "2026-08-08T06:47:33.310966+00:00",
   "count": 50,
   "items": [
+    {
+      "id": "e41721c0-f7cf-49c1-9712-8543e1ea7c99",
+      "title": "Witch Hunter",
+      "cover": "https://uploads.mangadex.org/covers/e41721c0-f7cf-49c1-9712-8543e1ea7c99/1315f953-c535-4011-aed3-501f60757713.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "5b93fa0f-0640-49b8-974e-954b9959929b",
+      "title": "Girls' Last Tour",
+      "cover": "https://uploads.mangadex.org/covers/5b93fa0f-0640-49b8-974e-954b9959929b/67d556f5-91d4-4b85-b287-2f74f008e564.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "f7b62193-bdfb-4953-a6c6-0bd1b9a872f9",
+      "title": "نداء البوق: لحن المعركة",
+      "cover": "https://uploads.mangadex.org/covers/f7b62193-bdfb-4953-a6c6-0bd1b9a872f9/85c12e60-fd34-402b-a62a-f2fc2fde5a28.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "334019e1-18bb-4ac0-b35c-0e8efb1e481c",
+      "title": "JoJo’s Bizarre Adventure, Part 9: The JoJoLands - Digital Colored Comics",
+      "cover": "https://uploads.mangadex.org/covers/334019e1-18bb-4ac0-b35c-0e8efb1e481c/530583f4-80ad-4f37-92d9-441b225c9785.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
     {
       "id": "7f30dfc3-0b80-4dcc-a3b9-0cd746fac005",
       "title": "المتحري كونان",
@@ -106,13 +134,6 @@
       "cover": "https://uploads.mangadex.org/covers/9422a147-c0c8-400d-9106-57cb8ece3dba/7076f364-e1fb-4ddd-8745-cf0c7edc35c5.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
-    },
-    {
-      "id": "5b93fa0f-0640-49b8-974e-954b9959929b",
-      "title": "Girls' Last Tour",
-      "cover": "https://uploads.mangadex.org/covers/5b93fa0f-0640-49b8-974e-954b9959929b/67d556f5-91d4-4b85-b287-2f74f008e564.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
     },
     {
       "id": "936f0ba5-ca65-4de4-99b1-528c02a4454d",
@@ -328,27 +349,6 @@
       "id": "f8f3f045-01b5-4216-8f41-d947d8b448b0",
       "title": "Kindergarten WARS",
       "cover": "https://uploads.mangadex.org/covers/f8f3f045-01b5-4216-8f41-d947d8b448b0/ce0461d1-273f-47f4-bb91-0c297e12143d.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "484f94e7-35c3-4cb5-a068-53d684c1439a",
-      "title": "Baki Part 6",
-      "cover": "https://uploads.mangadex.org/covers/484f94e7-35c3-4cb5-a068-53d684c1439a/863ae891-3627-4070-8918-4a626dc9d1ff.png.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "67e7453b-9ee5-4ae5-9316-215b03e4a71d",
-      "title": "Witch Hat Atelier",
-      "cover": "https://uploads.mangadex.org/covers/67e7453b-9ee5-4ae5-9316-215b03e4a71d/534baa34-19e6-45f1-93f2-e173476fe368.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "a08cd14f-68d4-4942-9305-2fe9d7d0339e",
-      "title": "The Apothecary Is Gonna Make This Ragged Elf Happy",
-      "cover": "https://uploads.mangadex.org/covers/a08cd14f-68d4-4942-9305-2fe9d7d0339e/aaf6d4a4-2aba-48af-94a0-7920a60c6d01.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     }
