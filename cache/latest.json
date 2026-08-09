@@ -1,7 +1,49 @@
 {
-  "updated_at": "2026-08-09T01:25:39.830506+00:00",
+  "updated_at": "2026-08-09T06:51:59.662928+00:00",
   "count": 50,
   "items": [
+    {
+      "id": "67e7453b-9ee5-4ae5-9316-215b03e4a71d",
+      "title": "Witch Hat Atelier",
+      "cover": "https://uploads.mangadex.org/covers/67e7453b-9ee5-4ae5-9316-215b03e4a71d/534baa34-19e6-45f1-93f2-e173476fe368.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "0a580438-bc72-4503-940b-12a5da881b56",
+      "title": "أنتِ زهرة الحظ",
+      "cover": "https://uploads.mangadex.org/covers/0a580438-bc72-4503-940b-12a5da881b56/a64a8d8b-1c71-496e-a0a7-0c1da501da6c.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "db692d58-4b13-4174-ae8c-30c515c0689c",
+      "title": "Hunter x Hunter",
+      "cover": "https://uploads.mangadex.org/covers/db692d58-4b13-4174-ae8c-30c515c0689c/aa112927-f1e5-4fe4-a4db-7fd4a1536e3c.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "5b93fa0f-0640-49b8-974e-954b9959929b",
+      "title": "Girls' Last Tour",
+      "cover": "https://uploads.mangadex.org/covers/5b93fa0f-0640-49b8-974e-954b9959929b/67d556f5-91d4-4b85-b287-2f74f008e564.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "89daf9dc-075a-4aa5-873a-cc76bb287108",
+      "title": "The Way of the Househusband",
+      "cover": "https://uploads.mangadex.org/covers/89daf9dc-075a-4aa5-873a-cc76bb287108/a22742de-0a55-4fef-b378-8037753616d2.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "c1f2daa5-9e93-42b9-86e8-f1ddb2916db2",
+      "title": "Akabane Honeko no Bodyguard",
+      "cover": "https://uploads.mangadex.org/covers/c1f2daa5-9e93-42b9-86e8-f1ddb2916db2/49d26ddc-5715-4ea4-ae72-a4b53151cc51.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
     {
       "id": "418791c0-35cf-4f87-936b-acd9cddf0989",
       "title": "The Fragrant Flower Blooms with Dignity",
@@ -92,13 +134,6 @@
       "cover": "https://uploads.mangadex.org/covers/e41721c0-f7cf-49c1-9712-8543e1ea7c99/1315f953-c535-4011-aed3-501f60757713.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
-    },
-    {
-      "id": "5b93fa0f-0640-49b8-974e-954b9959929b",
-      "title": "Girls' Last Tour",
-      "cover": "https://uploads.mangadex.org/covers/5b93fa0f-0640-49b8-974e-954b9959929b/67d556f5-91d4-4b85-b287-2f74f008e564.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
     },
     {
       "id": "f7b62193-bdfb-4953-a6c6-0bd1b9a872f9",
@@ -316,41 +351,6 @@
       "cover": "https://uploads.mangadex.org/covers/1693697a-783c-4d3c-a2d3-dc069e137a23/bc55de2a-47dd-41cb-9338-75b3f0650a69.jpg.256.jpg",
       "source": "mangadex",
       "status": "completed"
-    },
-    {
-      "id": "baa95345-24fb-47a9-83e9-434ff671f968",
-      "title": "خلف المتجر ادخن معك",
-      "cover": "https://uploads.mangadex.org/covers/baa95345-24fb-47a9-83e9-434ff671f968/4862f2a1-2852-4c98-a217-e3a44af83152.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "356de811-ae92-48f1-b93b-cfdf0f8d02e4",
-      "title": "بما أننا نرسم الآن",
-      "cover": "https://uploads.mangadex.org/covers/356de811-ae92-48f1-b93b-cfdf0f8d02e4/4c0f235c-762d-463b-a320-4e5cedd8db51.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "a1c7c817-4e59-43b7-9365-09675a149a6f",
-      "title": "ون بيس",
-      "cover": "https://uploads.mangadex.org/covers/a1c7c817-4e59-43b7-9365-09675a149a6f/2f4aca53-64c7-46ac-ae85-3bc9b3169890.png.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "4d6decd4-835d-4905-9534-2571dae07bcd",
-      "title": "Lord El-Melloi II-sei no Jikenbo",
-      "cover": "https://uploads.mangadex.org/covers/4d6decd4-835d-4905-9534-2571dae07bcd/5f347aae-bf45-4dcb-828d-2c507db71d2f.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "c4b36f15-4ee5-425f-a77d-c2e7cbb970d8",
-      "title": "NIPPON SANGOKU: The Three Nations of the Crimson Sun",
-      "cover": "https://uploads.mangadex.org/covers/c4b36f15-4ee5-425f-a77d-c2e7cbb970d8/e5c54f1b-6ea4-4dd2-ae6e-9d0e138d7c2e.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
     }
   ]
 }
