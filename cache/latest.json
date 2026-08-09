@@ -1,7 +1,35 @@
 {
-  "updated_at": "2026-08-08T18:33:09.777580+00:00",
+  "updated_at": "2026-08-09T01:25:39.830506+00:00",
   "count": 50,
   "items": [
+    {
+      "id": "418791c0-35cf-4f87-936b-acd9cddf0989",
+      "title": "The Fragrant Flower Blooms with Dignity",
+      "cover": "https://uploads.mangadex.org/covers/418791c0-35cf-4f87-936b-acd9cddf0989/717e5c78-69bd-46e9-a5b4-dc3ca143d4a4.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "ca33a142-58fb-4fee-88b9-36ef87f02c77",
+      "title": "حب نيزومي الأول",
+      "cover": "https://uploads.mangadex.org/covers/ca33a142-58fb-4fee-88b9-36ef87f02c77/1911dc72-4263-45cb-a3ec-5ba34e47305e.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "a6a46436-9ed4-4c20-8b11-6f4a0f74b23a",
+      "title": "Kabuto Mushi",
+      "cover": "https://uploads.mangadex.org/covers/a6a46436-9ed4-4c20-8b11-6f4a0f74b23a/5a16e9bf-0859-4719-bd13-7e5e43e338d7.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "52ede55c-1584-4019-b85b-3902a423c3ab",
+      "title": "FAIRY TAIL: 100 Years Quest",
+      "cover": "https://uploads.mangadex.org/covers/52ede55c-1584-4019-b85b-3902a423c3ab/8e18a9d7-27ed-48ff-924b-a397df5ba0a0.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
     {
       "id": "484f94e7-35c3-4cb5-a068-53d684c1439a",
       "title": "Baki Part 6",
@@ -297,23 +325,9 @@
       "status": "ongoing"
     },
     {
-      "id": "418791c0-35cf-4f87-936b-acd9cddf0989",
-      "title": "The Fragrant Flower Blooms with Dignity",
-      "cover": "https://uploads.mangadex.org/covers/418791c0-35cf-4f87-936b-acd9cddf0989/717e5c78-69bd-46e9-a5b4-dc3ca143d4a4.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
       "id": "356de811-ae92-48f1-b93b-cfdf0f8d02e4",
       "title": "بما أننا نرسم الآن",
       "cover": "https://uploads.mangadex.org/covers/356de811-ae92-48f1-b93b-cfdf0f8d02e4/4c0f235c-762d-463b-a320-4e5cedd8db51.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "a6a46436-9ed4-4c20-8b11-6f4a0f74b23a",
-      "title": "Kabuto Mushi",
-      "cover": "https://uploads.mangadex.org/covers/a6a46436-9ed4-4c20-8b11-6f4a0f74b23a/5a16e9bf-0859-4719-bd13-7e5e43e338d7.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
@@ -337,20 +351,6 @@
       "cover": "https://uploads.mangadex.org/covers/c4b36f15-4ee5-425f-a77d-c2e7cbb970d8/e5c54f1b-6ea4-4dd2-ae6e-9d0e138d7c2e.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
-    },
-    {
-      "id": "a77742b1-befd-49a4-bff5-1ad4e6b0ef7b",
-      "title": "Chainsaw Man",
-      "cover": "https://uploads.mangadex.org/covers/a77742b1-befd-49a4-bff5-1ad4e6b0ef7b/6e518bd1-5f60-446b-8832-bfe6bf74834b.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
-      "id": "52842727-59ff-46a6-9a23-5eba61487586",
-      "title": "To Love Ru (Official Colored)",
-      "cover": "https://uploads.mangadex.org/covers/52842727-59ff-46a6-9a23-5eba61487586/1b7bba8a-d22a-4f1a-8723-601a611b135a.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
     }
   ]
 }
