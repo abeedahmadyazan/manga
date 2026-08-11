@@ -1,7 +1,28 @@
 {
-  "updated_at": "2026-08-11T01:26:00.911079+00:00",
+  "updated_at": "2026-08-11T07:02:15.074953+00:00",
   "count": 50,
   "items": [
+    {
+      "id": "ab8cbb82-d0ed-45a7-8ffe-4bfa6d43d79c",
+      "title": "JoJo's Bizarre Adventure Part 9 - The JOJOLands",
+      "cover": "https://uploads.mangadex.org/covers/ab8cbb82-d0ed-45a7-8ffe-4bfa6d43d79c/f47d473d-7b43-4283-9e47-9a0168dc77e1.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "5b93fa0f-0640-49b8-974e-954b9959929b",
+      "title": "Girls' Last Tour",
+      "cover": "https://uploads.mangadex.org/covers/5b93fa0f-0640-49b8-974e-954b9959929b/67d556f5-91d4-4b85-b287-2f74f008e564.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "ad75039d-686c-457f-b478-e56fc3b3c069",
+      "title": "I Started Working a Housekeeping Job and Ended up Being Liked by the Family of the Most Beautiful Girl in School.",
+      "cover": "https://uploads.mangadex.org/covers/ad75039d-686c-457f-b478-e56fc3b3c069/d11151a2-0f4e-49e8-9c19-1be626a044fa.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
     {
       "id": "418791c0-35cf-4f87-936b-acd9cddf0989",
       "title": "The Fragrant Flower Blooms with Dignity",
@@ -143,13 +164,6 @@
       "status": "ongoing"
     },
     {
-      "id": "5b93fa0f-0640-49b8-974e-954b9959929b",
-      "title": "Girls' Last Tour",
-      "cover": "https://uploads.mangadex.org/covers/5b93fa0f-0640-49b8-974e-954b9959929b/67d556f5-91d4-4b85-b287-2f74f008e564.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
       "id": "301e6eaa-6bbe-4661-9ec6-25069aa4f4c4",
       "title": "Waltz",
       "cover": "https://uploads.mangadex.org/covers/301e6eaa-6bbe-4661-9ec6-25069aa4f4c4/c10be80e-af73-47ea-9256-cbf0105800fd.jpg.256.jpg",
@@ -167,13 +181,6 @@
       "id": "f6ce20ca-73c3-4fdd-9367-e2901fca780e",
       "title": "ويلات الزمان",
       "cover": "https://uploads.mangadex.org/covers/f6ce20ca-73c3-4fdd-9367-e2901fca780e/fed093aa-cbcf-4ca0-b80c-49eb251b1e80.png.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "ab8cbb82-d0ed-45a7-8ffe-4bfa6d43d79c",
-      "title": "JoJo's Bizarre Adventure Part 9 - The JOJOLands",
-      "cover": "https://uploads.mangadex.org/covers/ab8cbb82-d0ed-45a7-8ffe-4bfa6d43d79c/f47d473d-7b43-4283-9e47-9a0168dc77e1.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
@@ -342,13 +349,6 @@
       "id": "52ede55c-1584-4019-b85b-3902a423c3ab",
       "title": "FAIRY TAIL: 100 Years Quest",
       "cover": "https://uploads.mangadex.org/covers/52ede55c-1584-4019-b85b-3902a423c3ab/8e18a9d7-27ed-48ff-924b-a397df5ba0a0.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "484f94e7-35c3-4cb5-a068-53d684c1439a",
-      "title": "Baki Part 6",
-      "cover": "https://uploads.mangadex.org/covers/484f94e7-35c3-4cb5-a068-53d684c1439a/863ae891-3627-4070-8918-4a626dc9d1ff.png.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     }
