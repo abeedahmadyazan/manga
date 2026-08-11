@@ -1,7 +1,49 @@
 {
-  "updated_at": "2026-08-11T12:57:44.741635+00:00",
+  "updated_at": "2026-08-11T18:58:19.835138+00:00",
   "count": 50,
   "items": [
+    {
+      "id": "d8a959f7-648e-4c8d-8f23-f1f3f8e129f3",
+      "title": "ون بنش مان",
+      "cover": "https://uploads.mangadex.org/covers/d8a959f7-648e-4c8d-8f23-f1f3f8e129f3/511fc404-e6b4-4204-bb10-e4a28f7b5271.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "a6a46436-9ed4-4c20-8b11-6f4a0f74b23a",
+      "title": "Kabuto Mushi",
+      "cover": "https://uploads.mangadex.org/covers/a6a46436-9ed4-4c20-8b11-6f4a0f74b23a/5a16e9bf-0859-4719-bd13-7e5e43e338d7.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "bd6d0982-0091-4945-ad70-c028ed3c0917",
+      "title": "موشوكو تينسي",
+      "cover": "https://uploads.mangadex.org/covers/bd6d0982-0091-4945-ad70-c028ed3c0917/6a9f3d32-b7bb-478a-9c76-54868276c26f.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "6370bf37-e997-4a5b-8651-3c5bb60c9c3a",
+      "title": "Mia is back",
+      "cover": "https://uploads.mangadex.org/covers/6370bf37-e997-4a5b-8651-3c5bb60c9c3a/ad5a5253-5bb7-4e6f-ba13-2869fe72ee0e.png.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "6e52262f-bcd5-49c4-b93a-f4652d189844",
+      "title": "The Founder Of Diabolism",
+      "cover": "https://uploads.mangadex.org/covers/6e52262f-bcd5-49c4-b93a-f4652d189844/a12ee1bb-f633-4250-a714-372df26f0780.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "510f29a8-99b4-46af-ba5e-916e96bc6f37",
+      "title": "Fate/type Redline",
+      "cover": "https://uploads.mangadex.org/covers/510f29a8-99b4-46af-ba5e-916e96bc6f37/c1d7aed1-9cd1-426f-bfb8-7e46594d0e29.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
     {
       "id": "6134ba15-d83a-4356-a555-62caa0127cc2",
       "title": "Gekiman! - Devilman Chapter",
@@ -164,13 +206,6 @@
       "status": "completed"
     },
     {
-      "id": "bd6d0982-0091-4945-ad70-c028ed3c0917",
-      "title": "موشوكو تينسي",
-      "cover": "https://uploads.mangadex.org/covers/bd6d0982-0091-4945-ad70-c028ed3c0917/6a9f3d32-b7bb-478a-9c76-54868276c26f.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
       "id": "301e6eaa-6bbe-4661-9ec6-25069aa4f4c4",
       "title": "Waltz",
       "cover": "https://uploads.mangadex.org/covers/301e6eaa-6bbe-4661-9ec6-25069aa4f4c4/c10be80e-af73-47ea-9256-cbf0105800fd.jpg.256.jpg",
@@ -314,41 +349,6 @@
       "id": "29ab6984-7c1d-4d45-b925-25aa082b492e",
       "title": "Shangri-La Frontier: From Trash-Game Hunter to God-Tier Game Master!",
       "cover": "https://uploads.mangadex.org/covers/29ab6984-7c1d-4d45-b925-25aa082b492e/c691a3e7-7ec0-4c2f-a86a-cf04489b33aa.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "510f29a8-99b4-46af-ba5e-916e96bc6f37",
-      "title": "Fate/type Redline",
-      "cover": "https://uploads.mangadex.org/covers/510f29a8-99b4-46af-ba5e-916e96bc6f37/c1d7aed1-9cd1-426f-bfb8-7e46594d0e29.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "67e7453b-9ee5-4ae5-9316-215b03e4a71d",
-      "title": "Witch Hat Atelier",
-      "cover": "https://uploads.mangadex.org/covers/67e7453b-9ee5-4ae5-9316-215b03e4a71d/534baa34-19e6-45f1-93f2-e173476fe368.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "c1f2daa5-9e93-42b9-86e8-f1ddb2916db2",
-      "title": "Akabane Honeko no Bodyguard",
-      "cover": "https://uploads.mangadex.org/covers/c1f2daa5-9e93-42b9-86e8-f1ddb2916db2/49d26ddc-5715-4ea4-ae72-a4b53151cc51.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
-      "id": "ca33a142-58fb-4fee-88b9-36ef87f02c77",
-      "title": "حب نيزومي الأول",
-      "cover": "https://uploads.mangadex.org/covers/ca33a142-58fb-4fee-88b9-36ef87f02c77/1911dc72-4263-45cb-a3ec-5ba34e47305e.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "a6a46436-9ed4-4c20-8b11-6f4a0f74b23a",
-      "title": "Kabuto Mushi",
-      "cover": "https://uploads.mangadex.org/covers/a6a46436-9ed4-4c20-8b11-6f4a0f74b23a/5a16e9bf-0859-4719-bd13-7e5e43e338d7.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     }
