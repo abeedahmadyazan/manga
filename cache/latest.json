@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-12T07:20:27.529615+00:00",
+  "updated_at": "2026-08-12T13:02:29.882524+00:00",
   "count": 50,
   "items": [
     {
@@ -8,6 +8,34 @@
       "cover": "https://uploads.mangadex.org/covers/c086153a-0162-412a-9914-a7b2633d0cd3/ffb4eb56-af0a-4aeb-afd9-fa8bb857cf4b.jpg.256.jpg",
       "source": "mangadex",
       "status": "completed"
+    },
+    {
+      "id": "e5ce88e2-8c46-482d-8acf-5c6d5a64a585",
+      "title": "نوراجامي",
+      "cover": "https://uploads.mangadex.org/covers/e5ce88e2-8c46-482d-8acf-5c6d5a64a585/d8009398-6a12-473f-9af9-541b5eef50b6.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "936f0ba5-ca65-4de4-99b1-528c02a4454d",
+      "title": "Hunter x Hunter (Official Colored)",
+      "cover": "https://uploads.mangadex.org/covers/936f0ba5-ca65-4de4-99b1-528c02a4454d/128d80df-c5e4-4791-b3b7-08586e9db1b8.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "d36bea9f-853f-4908-9957-5514b1903e36",
+      "title": "Marika's Love Meter Malfunction",
+      "cover": "https://uploads.mangadex.org/covers/d36bea9f-853f-4908-9957-5514b1903e36/4b5daf86-5fc1-4316-ba94-cb96f093bd89.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "30196491-8fc2-4961-8886-a58f898b1b3e",
+      "title": "Berserk of Gluttony: The One that Exceeds the Concept of Levels",
+      "cover": "https://uploads.mangadex.org/covers/30196491-8fc2-4961-8886-a58f898b1b3e/1790f17f-9184-4a48-8928-c45de48b778e.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
     },
     {
       "id": "67e7453b-9ee5-4ae5-9316-215b03e4a71d",
@@ -57,13 +85,6 @@
       "cover": "https://uploads.mangadex.org/covers/c4ca02fb-8378-433b-8049-fbbea5d25cba/3d1dc074-3987-47ab-ad91-39202bc146e6.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
-    },
-    {
-      "id": "e5ce88e2-8c46-482d-8acf-5c6d5a64a585",
-      "title": "نوراجامي",
-      "cover": "https://uploads.mangadex.org/covers/e5ce88e2-8c46-482d-8acf-5c6d5a64a585/d8009398-6a12-473f-9af9-541b5eef50b6.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
     },
     {
       "id": "d8a959f7-648e-4c8d-8f23-f1f3f8e129f3",
@@ -328,27 +349,6 @@
       "id": "e7d7219c-a12b-484f-b29d-6013beac61b2",
       "title": "Random Chat",
       "cover": "https://uploads.mangadex.org/covers/e7d7219c-a12b-484f-b29d-6013beac61b2/5cbec9cf-9f3e-4824-938d-4a7ac98f950f.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
-      "id": "d1a9fdeb-f713-407f-960c-8326b586e6fd",
-      "title": "Vagabond",
-      "cover": "https://uploads.mangadex.org/covers/d1a9fdeb-f713-407f-960c-8326b586e6fd/05f8dcb4-8ea1-48db-a0b1-3a8fbf695e5a.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "hiatus"
-    },
-    {
-      "id": "0cfcda3b-0dcb-459b-9931-aa823e7bf403",
-      "title": "تسع قمم",
-      "cover": "https://uploads.mangadex.org/covers/0cfcda3b-0dcb-459b-9931-aa823e7bf403/2f960366-7159-4f17-b3bf-b5f52e9860f7.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "4393fd4e-d646-4bab-9c95-786168ccb618",
-      "title": "Devilman",
-      "cover": "https://uploads.mangadex.org/covers/4393fd4e-d646-4bab-9c95-786168ccb618/3199fa66-3a73-4c11-9236-9cba765e6650.jpg.256.jpg",
       "source": "mangadex",
       "status": "completed"
     }
