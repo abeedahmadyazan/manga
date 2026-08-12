@@ -1,13 +1,62 @@
 {
-  "updated_at": "2026-08-12T13:02:29.882524+00:00",
+  "updated_at": "2026-08-12T18:58:35.494070+00:00",
   "count": 50,
   "items": [
+    {
+      "id": "d78db808-93f7-498d-9368-e5767fd85057",
+      "title": "Class 2-B Hero Destroyerz",
+      "cover": "https://uploads.mangadex.org/covers/d78db808-93f7-498d-9368-e5767fd85057/382e67c5-962f-4e65-a1c9-f457e03c058e.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "d8a959f7-648e-4c8d-8f23-f1f3f8e129f3",
+      "title": "ون بنش مان",
+      "cover": "https://uploads.mangadex.org/covers/d8a959f7-648e-4c8d-8f23-f1f3f8e129f3/511fc404-e6b4-4204-bb10-e4a28f7b5271.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "7f30dfc3-0b80-4dcc-a3b9-0cd746fac005",
+      "title": "المتحري كونان",
+      "cover": "https://uploads.mangadex.org/covers/7f30dfc3-0b80-4dcc-a3b9-0cd746fac005/b65b80fa-217c-4a71-8e8f-5d647990117a.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "c4ca02fb-8378-433b-8049-fbbea5d25cba",
+      "title": "هايميا-سينباي حسناء مهيبة!",
+      "cover": "https://uploads.mangadex.org/covers/c4ca02fb-8378-433b-8049-fbbea5d25cba/3d1dc074-3987-47ab-ad91-39202bc146e6.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "1693697a-783c-4d3c-a2d3-dc069e137a23",
+      "title": "I Have No Home",
+      "cover": "https://uploads.mangadex.org/covers/1693697a-783c-4d3c-a2d3-dc069e137a23/bc55de2a-47dd-41cb-9338-75b3f0650a69.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
     {
       "id": "c086153a-0162-412a-9914-a7b2633d0cd3",
       "title": "JoJo's Bizarre Adventure Part 8 - JoJolion",
       "cover": "https://uploads.mangadex.org/covers/c086153a-0162-412a-9914-a7b2633d0cd3/ffb4eb56-af0a-4aeb-afd9-fa8bb857cf4b.jpg.256.jpg",
       "source": "mangadex",
       "status": "completed"
+    },
+    {
+      "id": "0a580438-bc72-4503-940b-12a5da881b56",
+      "title": "أنتِ زهرة الحظ",
+      "cover": "https://uploads.mangadex.org/covers/0a580438-bc72-4503-940b-12a5da881b56/a64a8d8b-1c71-496e-a0a7-0c1da501da6c.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "356de811-ae92-48f1-b93b-cfdf0f8d02e4",
+      "title": "بما أننا نرسم الآن",
+      "cover": "https://uploads.mangadex.org/covers/356de811-ae92-48f1-b93b-cfdf0f8d02e4/4c0f235c-762d-463b-a320-4e5cedd8db51.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
     },
     {
       "id": "e5ce88e2-8c46-482d-8acf-5c6d5a64a585",
@@ -52,13 +101,6 @@
       "status": "ongoing"
     },
     {
-      "id": "7f30dfc3-0b80-4dcc-a3b9-0cd746fac005",
-      "title": "المتحري كونان",
-      "cover": "https://uploads.mangadex.org/covers/7f30dfc3-0b80-4dcc-a3b9-0cd746fac005/b65b80fa-217c-4a71-8e8f-5d647990117a.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
       "id": "5b93fa0f-0640-49b8-974e-954b9959929b",
       "title": "Girls' Last Tour",
       "cover": "https://uploads.mangadex.org/covers/5b93fa0f-0640-49b8-974e-954b9959929b/67d556f5-91d4-4b85-b287-2f74f008e564.jpg.256.jpg",
@@ -76,20 +118,6 @@
       "id": "62b74aa6-24df-4b91-b76d-39e7ab3c3ca5",
       "title": "حقيقي",
       "cover": "https://uploads.mangadex.org/covers/62b74aa6-24df-4b91-b76d-39e7ab3c3ca5/447b6696-a834-444a-bf17-034648ffeef1.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "c4ca02fb-8378-433b-8049-fbbea5d25cba",
-      "title": "هايميا-سينباي حسناء مهيبة!",
-      "cover": "https://uploads.mangadex.org/covers/c4ca02fb-8378-433b-8049-fbbea5d25cba/3d1dc074-3987-47ab-ad91-39202bc146e6.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "d8a959f7-648e-4c8d-8f23-f1f3f8e129f3",
-      "title": "ون بنش مان",
-      "cover": "https://uploads.mangadex.org/covers/d8a959f7-648e-4c8d-8f23-f1f3f8e129f3/511fc404-e6b4-4204-bb10-e4a28f7b5271.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
@@ -234,32 +262,11 @@
       "status": "ongoing"
     },
     {
-      "id": "0a580438-bc72-4503-940b-12a5da881b56",
-      "title": "أنتِ زهرة الحظ",
-      "cover": "https://uploads.mangadex.org/covers/0a580438-bc72-4503-940b-12a5da881b56/a64a8d8b-1c71-496e-a0a7-0c1da501da6c.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
       "id": "812f9696-048f-496d-9ed4-84c99345d1fb",
       "title": "Tales of Demons and Gods",
       "cover": "https://uploads.mangadex.org/covers/812f9696-048f-496d-9ed4-84c99345d1fb/4dcdd628-9195-4fa8-8079-50541ed60515.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
-    },
-    {
-      "id": "356de811-ae92-48f1-b93b-cfdf0f8d02e4",
-      "title": "بما أننا نرسم الآن",
-      "cover": "https://uploads.mangadex.org/covers/356de811-ae92-48f1-b93b-cfdf0f8d02e4/4c0f235c-762d-463b-a320-4e5cedd8db51.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "1693697a-783c-4d3c-a2d3-dc069e137a23",
-      "title": "I Have No Home",
-      "cover": "https://uploads.mangadex.org/covers/1693697a-783c-4d3c-a2d3-dc069e137a23/bc55de2a-47dd-41cb-9338-75b3f0650a69.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
     },
     {
       "id": "db692d58-4b13-4174-ae8c-30c515c0689c",
@@ -314,13 +321,6 @@
       "id": "34b47146-a72e-43d8-9ea5-935a5956f09f",
       "title": "OMORI",
       "cover": "https://uploads.mangadex.org/covers/34b47146-a72e-43d8-9ea5-935a5956f09f/38d8fe5e-f9bb-433f-bbf1-a821b0d0e7e3.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "d78db808-93f7-498d-9368-e5767fd85057",
-      "title": "Class 2-B Hero Destroyerz",
-      "cover": "https://uploads.mangadex.org/covers/d78db808-93f7-498d-9368-e5767fd85057/382e67c5-962f-4e65-a1c9-f457e03c058e.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
