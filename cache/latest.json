@@ -1,11 +1,39 @@
 {
-  "updated_at": "2026-08-12T01:42:36.920135+00:00",
+  "updated_at": "2026-08-12T07:20:27.529615+00:00",
   "count": 50,
   "items": [
     {
       "id": "c086153a-0162-412a-9914-a7b2633d0cd3",
       "title": "JoJo's Bizarre Adventure Part 8 - JoJolion",
       "cover": "https://uploads.mangadex.org/covers/c086153a-0162-412a-9914-a7b2633d0cd3/ffb4eb56-af0a-4aeb-afd9-fa8bb857cf4b.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "67e7453b-9ee5-4ae5-9316-215b03e4a71d",
+      "title": "Witch Hat Atelier",
+      "cover": "https://uploads.mangadex.org/covers/67e7453b-9ee5-4ae5-9316-215b03e4a71d/534baa34-19e6-45f1-93f2-e173476fe368.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "f4045a9e-e5f6-4778-bd33-7a91cefc3f71",
+      "title": "For the Sake of My Future Vengeance",
+      "cover": "https://uploads.mangadex.org/covers/f4045a9e-e5f6-4778-bd33-7a91cefc3f71/53e634e3-aa3b-4dc3-9171-85e2a71d2ec8.png.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "7f30dfc3-0b80-4dcc-a3b9-0cd746fac005",
+      "title": "المتحري كونان",
+      "cover": "https://uploads.mangadex.org/covers/7f30dfc3-0b80-4dcc-a3b9-0cd746fac005/b65b80fa-217c-4a71-8e8f-5d647990117a.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "5b93fa0f-0640-49b8-974e-954b9959929b",
+      "title": "Girls' Last Tour",
+      "cover": "https://uploads.mangadex.org/covers/5b93fa0f-0640-49b8-974e-954b9959929b/67d556f5-91d4-4b85-b287-2f74f008e564.jpg.256.jpg",
       "source": "mangadex",
       "status": "completed"
     },
@@ -92,13 +120,6 @@
       "cover": "https://uploads.mangadex.org/covers/ab8cbb82-d0ed-45a7-8ffe-4bfa6d43d79c/f47d473d-7b43-4283-9e47-9a0168dc77e1.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
-    },
-    {
-      "id": "5b93fa0f-0640-49b8-974e-954b9959929b",
-      "title": "Girls' Last Tour",
-      "cover": "https://uploads.mangadex.org/covers/5b93fa0f-0640-49b8-974e-954b9959929b/67d556f5-91d4-4b85-b287-2f74f008e564.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
     },
     {
       "id": "ad75039d-686c-457f-b478-e56fc3b3c069",
@@ -202,13 +223,6 @@
       "id": "812f9696-048f-496d-9ed4-84c99345d1fb",
       "title": "Tales of Demons and Gods",
       "cover": "https://uploads.mangadex.org/covers/812f9696-048f-496d-9ed4-84c99345d1fb/4dcdd628-9195-4fa8-8079-50541ed60515.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "f4045a9e-e5f6-4778-bd33-7a91cefc3f71",
-      "title": "For the Sake of My Future Vengeance",
-      "cover": "https://uploads.mangadex.org/covers/f4045a9e-e5f6-4778-bd33-7a91cefc3f71/53e634e3-aa3b-4dc3-9171-85e2a71d2ec8.png.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
@@ -337,20 +351,6 @@
       "cover": "https://uploads.mangadex.org/covers/4393fd4e-d646-4bab-9c95-786168ccb618/3199fa66-3a73-4c11-9236-9cba765e6650.jpg.256.jpg",
       "source": "mangadex",
       "status": "completed"
-    },
-    {
-      "id": "141609b6-cf86-4266-904c-6648f389cdc9",
-      "title": "RuriDragon",
-      "cover": "https://uploads.mangadex.org/covers/141609b6-cf86-4266-904c-6648f389cdc9/216d1ce9-2195-4ad3-9502-be95b06a3502.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "9d9b04ad-9a83-49f4-8ae4-a9a3780fe9c0",
-      "title": "Sakamoto Days",
-      "cover": "https://uploads.mangadex.org/covers/9d9b04ad-9a83-49f4-8ae4-a9a3780fe9c0/f3f1d565-3a66-484a-be9b-28e1b03d9c51.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
     }
   ]
 }
