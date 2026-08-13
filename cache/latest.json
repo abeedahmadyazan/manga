@@ -1,7 +1,70 @@
 {
-  "updated_at": "2026-08-12T18:58:35.494070+00:00",
+  "updated_at": "2026-08-13T01:45:46.852396+00:00",
   "count": 50,
   "items": [
+    {
+      "id": "c4ca02fb-8378-433b-8049-fbbea5d25cba",
+      "title": "هايميا-سينباي حسناء مهيبة!",
+      "cover": "https://uploads.mangadex.org/covers/c4ca02fb-8378-433b-8049-fbbea5d25cba/3d1dc074-3987-47ab-ad91-39202bc146e6.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "372f6905-f0b8-464f-91e5-7d4ac585cb7f",
+      "title": "Itadakimasu, wa Koi no Aji",
+      "cover": "https://uploads.mangadex.org/covers/372f6905-f0b8-464f-91e5-7d4ac585cb7f/856349b7-452e-4ac4-a1d3-17e0d4258c96.png.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "8e5ff937-0d9a-40d5-b7ed-9f37a70901fb",
+      "title": "A Side of Him Only I Know",
+      "cover": "https://uploads.mangadex.org/covers/8e5ff937-0d9a-40d5-b7ed-9f37a70901fb/13d38877-dd98-4912-a0c1-92e0c4bac4a3.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "665766a3-905d-4a71-a90a-bd2c75d1a81f",
+      "title": "Alice in Borderland",
+      "cover": "https://uploads.mangadex.org/covers/665766a3-905d-4a71-a90a-bd2c75d1a81f/aa02f5a2-e068-4a53-bf3c-2c77f23f43b6.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "ac23805e-6d7a-498f-9c58-b45a2d5e7326",
+      "title": "Child of God",
+      "cover": "https://uploads.mangadex.org/covers/ac23805e-6d7a-498f-9c58-b45a2d5e7326/aead3ce2-526b-4bac-a5f6-31255fe8c67d.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "4413d794-e0da-4a6e-b61a-afd5758914e6",
+      "title": "Blooming Love",
+      "cover": "https://uploads.mangadex.org/covers/4413d794-e0da-4a6e-b61a-afd5758914e6/ed6014a9-862c-42d3-ac38-b4e2de20b6b7.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "25e1d17b-6a4d-4698-a4f6-bf53460c10af",
+      "title": "حافلة لإثنين",
+      "cover": "https://uploads.mangadex.org/covers/25e1d17b-6a4d-4698-a4f6-bf53460c10af/f7cd3ff9-d7a1-4b5e-b473-ee2833b82c35.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "1693697a-783c-4d3c-a2d3-dc069e137a23",
+      "title": "I Have No Home",
+      "cover": "https://uploads.mangadex.org/covers/1693697a-783c-4d3c-a2d3-dc069e137a23/bc55de2a-47dd-41cb-9338-75b3f0650a69.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "bcfe1b36-daee-40fd-9984-d9597caf9da7",
+      "title": "فَقِيْهَةُ ٱلْمَغُوْلِ",
+      "cover": "https://uploads.mangadex.org/covers/bcfe1b36-daee-40fd-9984-d9597caf9da7/5ce19283-d717-44e2-bb69-4247640d3c75.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
     {
       "id": "d78db808-93f7-498d-9368-e5767fd85057",
       "title": "Class 2-B Hero Destroyerz",
@@ -22,20 +85,6 @@
       "cover": "https://uploads.mangadex.org/covers/7f30dfc3-0b80-4dcc-a3b9-0cd746fac005/b65b80fa-217c-4a71-8e8f-5d647990117a.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
-    },
-    {
-      "id": "c4ca02fb-8378-433b-8049-fbbea5d25cba",
-      "title": "هايميا-سينباي حسناء مهيبة!",
-      "cover": "https://uploads.mangadex.org/covers/c4ca02fb-8378-433b-8049-fbbea5d25cba/3d1dc074-3987-47ab-ad91-39202bc146e6.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "1693697a-783c-4d3c-a2d3-dc069e137a23",
-      "title": "I Have No Home",
-      "cover": "https://uploads.mangadex.org/covers/1693697a-783c-4d3c-a2d3-dc069e137a23/bc55de2a-47dd-41cb-9338-75b3f0650a69.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
     },
     {
       "id": "c086153a-0162-412a-9914-a7b2633d0cd3",
@@ -234,13 +283,6 @@
       "status": "ongoing"
     },
     {
-      "id": "bcfe1b36-daee-40fd-9984-d9597caf9da7",
-      "title": "فَقِيْهَةُ ٱلْمَغُوْلِ",
-      "cover": "https://uploads.mangadex.org/covers/bcfe1b36-daee-40fd-9984-d9597caf9da7/5ce19283-d717-44e2-bb69-4247640d3c75.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
       "id": "b8faa8ab-cb4e-416f-829d-d2a6042ba5ac",
       "title": "Foreign Country Diary",
       "cover": "https://uploads.mangadex.org/covers/b8faa8ab-cb4e-416f-829d-d2a6042ba5ac/0ca2f8bf-a33c-46cb-8730-cff51b148314.png.256.jpg",
@@ -290,13 +332,6 @@
       "status": "completed"
     },
     {
-      "id": "25e1d17b-6a4d-4698-a4f6-bf53460c10af",
-      "title": "حافلة لإثنين",
-      "cover": "https://uploads.mangadex.org/covers/25e1d17b-6a4d-4698-a4f6-bf53460c10af/f7cd3ff9-d7a1-4b5e-b473-ee2833b82c35.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
       "id": "f6ce20ca-73c3-4fdd-9367-e2901fca780e",
       "title": "ويلات الزمان",
       "cover": "https://uploads.mangadex.org/covers/f6ce20ca-73c3-4fdd-9367-e2901fca780e/fed093aa-cbcf-4ca0-b80c-49eb251b1e80.png.256.jpg",
@@ -314,41 +349,6 @@
       "id": "a07320a4-afcd-413a-a451-d69a448d0c28",
       "title": "Usogui",
       "cover": "https://uploads.mangadex.org/covers/a07320a4-afcd-413a-a451-d69a448d0c28/b74c8cce-42cd-4889-b75d-7944e63f9a14.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
-      "id": "34b47146-a72e-43d8-9ea5-935a5956f09f",
-      "title": "OMORI",
-      "cover": "https://uploads.mangadex.org/covers/34b47146-a72e-43d8-9ea5-935a5956f09f/38d8fe5e-f9bb-433f-bbf1-a821b0d0e7e3.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "d65c0332-3764-4c89-84bd-b1a4e7278ad7",
-      "title": "Kagurabachi",
-      "cover": "https://uploads.mangadex.org/covers/d65c0332-3764-4c89-84bd-b1a4e7278ad7/ff635eea-1ace-4a20-9038-a708b4496c30.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "077a3fed-1634-424f-be7a-9a96b7f07b78",
-      "title": "مملكة",
-      "cover": "https://uploads.mangadex.org/covers/077a3fed-1634-424f-be7a-9a96b7f07b78/7c1a85fe-1ce7-4b27-bde8-c668d7e766c8.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "11b74211-f4c0-4f08-b5a4-c491da0d0c0b",
-      "title": "Choujin X",
-      "cover": "https://uploads.mangadex.org/covers/11b74211-f4c0-4f08-b5a4-c491da0d0c0b/a024c8ce-5fbc-4fea-9363-6b8eee3477e7.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "e7d7219c-a12b-484f-b29d-6013beac61b2",
-      "title": "Random Chat",
-      "cover": "https://uploads.mangadex.org/covers/e7d7219c-a12b-484f-b29d-6013beac61b2/5cbec9cf-9f3e-4824-938d-4a7ac98f950f.jpg.256.jpg",
       "source": "mangadex",
       "status": "completed"
     }
