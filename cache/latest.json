@@ -1,7 +1,14 @@
 {
-  "updated_at": "2026-08-13T07:22:21.732731+00:00",
+  "updated_at": "2026-08-13T13:03:13.951877+00:00",
   "count": 50,
   "items": [
+    {
+      "id": "843c31ff-d390-4199-bc3b-94b0dfc63632",
+      "title": "Baki Side Story: Retsu Kaioh Doesn't Mind Even If It's in Another World",
+      "cover": "https://uploads.mangadex.org/covers/843c31ff-d390-4199-bc3b-94b0dfc63632/ac1f2f10-dd90-4d58-a93c-2f992789bde2.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
     {
       "id": "61889f95-60b7-4406-a5db-b256d2a742ae",
       "title": "Bungou Stray Dogs: The Day I Picked Up Dazai",
@@ -342,13 +349,6 @@
       "id": "a92bd70d-a716-4e48-90c6-137682742137",
       "title": "Ron Kamonohashi: Deranged Detective",
       "cover": "https://uploads.mangadex.org/covers/a92bd70d-a716-4e48-90c6-137682742137/e807ef94-ce90-4aae-99f6-e91fe7a42e60.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
-      "id": "301e6eaa-6bbe-4661-9ec6-25069aa4f4c4",
-      "title": "Waltz",
-      "cover": "https://uploads.mangadex.org/covers/301e6eaa-6bbe-4661-9ec6-25069aa4f4c4/c10be80e-af73-47ea-9256-cbf0105800fd.jpg.256.jpg",
       "source": "mangadex",
       "status": "completed"
     }
