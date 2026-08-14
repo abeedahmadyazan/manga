@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-14T01:43:20.629734+00:00",
+  "updated_at": "2026-08-14T07:20:36.238478+00:00",
   "count": 50,
   "items": [
     {
@@ -8,6 +8,20 @@
       "cover": "https://uploads.mangadex.org/covers/bcfe1b36-daee-40fd-9984-d9597caf9da7/5ce19283-d717-44e2-bb69-4247640d3c75.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
+    },
+    {
+      "id": "a08cd14f-68d4-4942-9305-2fe9d7d0339e",
+      "title": "The Apothecary Is Gonna Make This Ragged Elf Happy",
+      "cover": "https://uploads.mangadex.org/covers/a08cd14f-68d4-4942-9305-2fe9d7d0339e/aaf6d4a4-2aba-48af-94a0-7920a60c6d01.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "5b93fa0f-0640-49b8-974e-954b9959929b",
+      "title": "Girls' Last Tour",
+      "cover": "https://uploads.mangadex.org/covers/5b93fa0f-0640-49b8-974e-954b9959929b/67d556f5-91d4-4b85-b287-2f74f008e564.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
     },
     {
       "id": "2f4e5f5b-d930-4266-8c8a-c4cf9a81e51f",
@@ -106,13 +120,6 @@
       "cover": "https://uploads.mangadex.org/covers/29ab6984-7c1d-4d45-b925-25aa082b492e/c691a3e7-7ec0-4c2f-a86a-cf04489b33aa.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
-    },
-    {
-      "id": "5b93fa0f-0640-49b8-974e-954b9959929b",
-      "title": "Girls' Last Tour",
-      "cover": "https://uploads.mangadex.org/covers/5b93fa0f-0640-49b8-974e-954b9959929b/67d556f5-91d4-4b85-b287-2f74f008e564.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
     },
     {
       "id": "3df1a9a3-a1be-47a3-9e90-9b3e55b1d0ac",
@@ -342,13 +349,6 @@
       "id": "dea77c2d-dbaa-434a-b0af-0c116642434c",
       "title": "Ichi the Witch",
       "cover": "https://uploads.mangadex.org/covers/dea77c2d-dbaa-434a-b0af-0c116642434c/707b5cff-60e3-40fe-8105-e9065d5f8abd.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "b05918e4-fb1a-4b10-a919-eaecf00fd7dd",
-      "title": "Tower Dungeon",
-      "cover": "https://uploads.mangadex.org/covers/b05918e4-fb1a-4b10-a919-eaecf00fd7dd/76bdb2d5-5b1f-4ff0-a3fe-469156bb6abe.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     }
