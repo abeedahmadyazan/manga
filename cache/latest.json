@@ -1,7 +1,63 @@
 {
-  "updated_at": "2026-08-14T07:20:36.238478+00:00",
+  "updated_at": "2026-08-14T12:59:41.535526+00:00",
   "count": 50,
   "items": [
+    {
+      "id": "a07320a4-afcd-413a-a451-d69a448d0c28",
+      "title": "Usogui",
+      "cover": "https://uploads.mangadex.org/covers/a07320a4-afcd-413a-a451-d69a448d0c28/b74c8cce-42cd-4889-b75d-7944e63f9a14.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "356de811-ae92-48f1-b93b-cfdf0f8d02e4",
+      "title": "بما أننا نرسم الآن",
+      "cover": "https://uploads.mangadex.org/covers/356de811-ae92-48f1-b93b-cfdf0f8d02e4/4c0f235c-762d-463b-a320-4e5cedd8db51.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "e0589f47-72f9-4e9a-ac31-5b88bcad6220",
+      "title": "The Wrong Way to Use Healing Magic",
+      "cover": "https://uploads.mangadex.org/covers/e0589f47-72f9-4e9a-ac31-5b88bcad6220/5bc559d6-5434-46d9-89b4-44964a1b8233.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "e5ce88e2-8c46-482d-8acf-5c6d5a64a585",
+      "title": "نوراجامي",
+      "cover": "https://uploads.mangadex.org/covers/e5ce88e2-8c46-482d-8acf-5c6d5a64a585/d8009398-6a12-473f-9af9-541b5eef50b6.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "9661f9e7-3c6a-448f-9b1e-2c563ed1e5e9",
+      "title": "تاج الحكاية الخيالية",
+      "cover": "https://uploads.mangadex.org/covers/9661f9e7-3c6a-448f-9b1e-2c563ed1e5e9/2fc71eab-02b5-4c78-8478-86b6ec87fcf5.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "d7037b2a-874a-4360-8a7b-07f2899152fd",
+      "title": "إيروما-كن في مدرسة الشياطين",
+      "cover": "https://uploads.mangadex.org/covers/d7037b2a-874a-4360-8a7b-07f2899152fd/52d67301-401c-44c4-9d7b-529e2796f7d5.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "51c1e7cc-23f4-4a08-a961-c1ab75e2bb33",
+      "title": "Inexpressive Kashiwada and Expressive Oota",
+      "cover": "https://uploads.mangadex.org/covers/51c1e7cc-23f4-4a08-a961-c1ab75e2bb33/3bdea205-146a-460c-ae6e-7c2b27f762ed.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "843c31ff-d390-4199-bc3b-94b0dfc63632",
+      "title": "Baki Side Story: Retsu Kaioh Doesn't Mind Even If It's in Another World",
+      "cover": "https://uploads.mangadex.org/covers/843c31ff-d390-4199-bc3b-94b0dfc63632/ac1f2f10-dd90-4d58-a93c-2f992789bde2.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
     {
       "id": "bcfe1b36-daee-40fd-9984-d9597caf9da7",
       "title": "فَقِيْهَةُ ٱلْمَغُوْلِ",
@@ -22,6 +78,20 @@
       "cover": "https://uploads.mangadex.org/covers/5b93fa0f-0640-49b8-974e-954b9959929b/67d556f5-91d4-4b85-b287-2f74f008e564.jpg.256.jpg",
       "source": "mangadex",
       "status": "completed"
+    },
+    {
+      "id": "908fe918-ee36-4858-b321-4ba7aadbc817",
+      "title": "فصل المانجا الدراسي الأخير",
+      "cover": "https://uploads.mangadex.org/covers/908fe918-ee36-4858-b321-4ba7aadbc817/40ab3a75-add8-46e0-8731-dc1630b6aa37.png.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "baa95345-24fb-47a9-83e9-434ff671f968",
+      "title": "خلف المتجر ادخن معك",
+      "cover": "https://uploads.mangadex.org/covers/baa95345-24fb-47a9-83e9-434ff671f968/4862f2a1-2852-4c98-a217-e3a44af83152.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
     },
     {
       "id": "2f4e5f5b-d930-4266-8c8a-c4cf9a81e51f",
@@ -80,13 +150,6 @@
       "status": "completed"
     },
     {
-      "id": "908fe918-ee36-4858-b321-4ba7aadbc817",
-      "title": "فصل المانجا الدراسي الأخير",
-      "cover": "https://uploads.mangadex.org/covers/908fe918-ee36-4858-b321-4ba7aadbc817/40ab3a75-add8-46e0-8731-dc1630b6aa37.png.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
       "id": "9d3d3403-1a87-4737-9803-bc3d99db1424",
       "title": "The Guy She Was Interested in Wasn't a Guy at All",
       "cover": "https://uploads.mangadex.org/covers/9d3d3403-1a87-4737-9803-bc3d99db1424/fac191d0-96c1-4ebb-bf79-b7616d7162ac.jpg.256.jpg",
@@ -99,13 +162,6 @@
       "cover": "https://uploads.mangadex.org/covers/665766a3-905d-4a71-a90a-bd2c75d1a81f/aa02f5a2-e068-4a53-bf3c-2c77f23f43b6.jpg.256.jpg",
       "source": "mangadex",
       "status": "completed"
-    },
-    {
-      "id": "843c31ff-d390-4199-bc3b-94b0dfc63632",
-      "title": "Baki Side Story: Retsu Kaioh Doesn't Mind Even If It's in Another World",
-      "cover": "https://uploads.mangadex.org/covers/843c31ff-d390-4199-bc3b-94b0dfc63632/ac1f2f10-dd90-4d58-a93c-2f992789bde2.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
     },
     {
       "id": "61889f95-60b7-4406-a5db-b256d2a742ae",
@@ -197,20 +253,6 @@
       "cover": "https://uploads.mangadex.org/covers/0a580438-bc72-4503-940b-12a5da881b56/a64a8d8b-1c71-496e-a0a7-0c1da501da6c.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
-    },
-    {
-      "id": "356de811-ae92-48f1-b93b-cfdf0f8d02e4",
-      "title": "بما أننا نرسم الآن",
-      "cover": "https://uploads.mangadex.org/covers/356de811-ae92-48f1-b93b-cfdf0f8d02e4/4c0f235c-762d-463b-a320-4e5cedd8db51.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "e5ce88e2-8c46-482d-8acf-5c6d5a64a585",
-      "title": "نوراجامي",
-      "cover": "https://uploads.mangadex.org/covers/e5ce88e2-8c46-482d-8acf-5c6d5a64a585/d8009398-6a12-473f-9af9-541b5eef50b6.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
     },
     {
       "id": "936f0ba5-ca65-4de4-99b1-528c02a4454d",
@@ -307,48 +349,6 @@
       "id": "ad75039d-686c-457f-b478-e56fc3b3c069",
       "title": "I Started Working a Housekeeping Job and Ended up Being Liked by the Family of the Most Beautiful Girl in School.",
       "cover": "https://uploads.mangadex.org/covers/ad75039d-686c-457f-b478-e56fc3b3c069/d11151a2-0f4e-49e8-9c19-1be626a044fa.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "202718c6-525e-4cec-a469-c945548cacc3",
-      "title": "I Hate That We're Childhood Friends!: My Rise to the Top of School Life with an S-Rank Beauty Begins After a Falling-Out",
-      "cover": "https://uploads.mangadex.org/covers/202718c6-525e-4cec-a469-c945548cacc3/04dd5c60-a742-4f42-9de0-80759d0e0ceb.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "98017a70-5580-40fb-9d69-69e377325484",
-      "title": "I Picked Up This World's Strategy Guide",
-      "cover": "https://uploads.mangadex.org/covers/98017a70-5580-40fb-9d69-69e377325484/d21ac77f-8982-43a7-bf62-7946d225e642.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "77296cee-0b74-415f-914d-6f29036d3906",
-      "title": "مسرحية الجبل",
-      "cover": "https://uploads.mangadex.org/covers/77296cee-0b74-415f-914d-6f29036d3906/6c06c4f2-f816-4dd8-9652-8b9764bfdde4.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "a460ab18-22c1-47eb-a08a-9ee85fe37ec8",
-      "title": "Bleach (Official Colored)",
-      "cover": "https://uploads.mangadex.org/covers/a460ab18-22c1-47eb-a08a-9ee85fe37ec8/7c8f9203-2b82-41f2-beb3-e7fb00e151e2.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
-      "id": "a093857c-9a7b-42f8-9ac3-0ef4313b3248",
-      "title": "Gizmorizer",
-      "cover": "https://uploads.mangadex.org/covers/a093857c-9a7b-42f8-9ac3-0ef4313b3248/fe32489c-c1b4-4b18-a76f-1e620260b55b.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
-      "id": "dea77c2d-dbaa-434a-b0af-0c116642434c",
-      "title": "Ichi the Witch",
-      "cover": "https://uploads.mangadex.org/covers/dea77c2d-dbaa-434a-b0af-0c116642434c/707b5cff-60e3-40fe-8105-e9065d5f8abd.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     }
