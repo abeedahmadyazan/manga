@@ -1,7 +1,35 @@
 {
-  "updated_at": "2026-08-14T18:49:56.295897+00:00",
+  "updated_at": "2026-08-15T01:04:29.962293+00:00",
   "count": 50,
   "items": [
+    {
+      "id": "4e7a4a0f-8391-4069-839b-de2352297dab",
+      "title": "A Couple of Cuckoos",
+      "cover": "https://uploads.mangadex.org/covers/4e7a4a0f-8391-4069-839b-de2352297dab/ad595477-786b-4ab0-b176-b0c138ebfdc5.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "7f30dfc3-0b80-4dcc-a3b9-0cd746fac005",
+      "title": "المتحري كونان",
+      "cover": "https://uploads.mangadex.org/covers/7f30dfc3-0b80-4dcc-a3b9-0cd746fac005/b65b80fa-217c-4a71-8e8f-5d647990117a.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "263deeff-c010-4ac7-bc01-6341f3e698ac",
+      "title": "Dragon Quest: The Great Adventure of Dai - Avan the Brave and the Demon King of Hellfire",
+      "cover": "https://uploads.mangadex.org/covers/263deeff-c010-4ac7-bc01-6341f3e698ac/f6a611a4-660d-4366-9636-08251c710b55.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "87ffa375-bd2c-49ba-ba0c-6d78ea07c342",
+      "title": "Medaka Kuroiwa is Impervious to My Charms",
+      "cover": "https://uploads.mangadex.org/covers/87ffa375-bd2c-49ba-ba0c-6d78ea07c342/e410b2ef-b97e-45c1-b861-140b2fe6ee01.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
     {
       "id": "319df2e2-e6a6-4e3a-a31c-68539c140a84",
       "title": "Slam Dunk!",
@@ -22,13 +50,6 @@
       "cover": "https://uploads.mangadex.org/covers/2d501d2e-72d5-4c3f-9741-117511622a48/2f28ddc4-5524-44ce-a944-accb1f7b576c.png.256.jpg",
       "source": "mangadex",
       "status": "completed"
-    },
-    {
-      "id": "7f30dfc3-0b80-4dcc-a3b9-0cd746fac005",
-      "title": "المتحري كونان",
-      "cover": "https://uploads.mangadex.org/covers/7f30dfc3-0b80-4dcc-a3b9-0cd746fac005/b65b80fa-217c-4a71-8e8f-5d647990117a.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
     },
     {
       "id": "510f29a8-99b4-46af-ba5e-916e96bc6f37",
@@ -328,27 +349,6 @@
       "id": "d36bea9f-853f-4908-9957-5514b1903e36",
       "title": "Marika's Love Meter Malfunction",
       "cover": "https://uploads.mangadex.org/covers/d36bea9f-853f-4908-9957-5514b1903e36/4b5daf86-5fc1-4316-ba94-cb96f093bd89.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "30196491-8fc2-4961-8886-a58f898b1b3e",
-      "title": "Berserk of Gluttony: The One that Exceeds the Concept of Levels",
-      "cover": "https://uploads.mangadex.org/covers/30196491-8fc2-4961-8886-a58f898b1b3e/1790f17f-9184-4a48-8928-c45de48b778e.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "67e7453b-9ee5-4ae5-9316-215b03e4a71d",
-      "title": "Witch Hat Atelier",
-      "cover": "https://uploads.mangadex.org/covers/67e7453b-9ee5-4ae5-9316-215b03e4a71d/534baa34-19e6-45f1-93f2-e173476fe368.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "f4045a9e-e5f6-4778-bd33-7a91cefc3f71",
-      "title": "For the Sake of My Future Vengeance",
-      "cover": "https://uploads.mangadex.org/covers/f4045a9e-e5f6-4778-bd33-7a91cefc3f71/53e634e3-aa3b-4dc3-9171-85e2a71d2ec8.png.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     }
