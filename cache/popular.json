@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-15T12:32:24.555584+00:00",
+  "updated_at": "2026-08-15T18:24:15.981529+00:00",
   "count": 50,
   "items": [
     {
@@ -164,18 +164,18 @@
       "status": "ongoing"
     },
     {
-      "id": "5f64d517-c4ea-40c0-a463-fcc069d39d3b",
-      "title": "I Got a New Skill Every Time I Was Exiled, and After 100 Different Worlds, I Was Unmatched",
-      "cover": "https://uploads.mangadex.org/covers/5f64d517-c4ea-40c0-a463-fcc069d39d3b/6f6c4aaa-5c8b-4ef3-bdc7-30015de55663.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
       "id": "b4c93297-b32f-4f90-b619-55456a38b0aa",
       "title": "More than a Married Couple, but Not Lovers",
       "cover": "https://uploads.mangadex.org/covers/b4c93297-b32f-4f90-b619-55456a38b0aa/dd1804e7-56a5-4beb-90ac-d573dee7f1d1.jpg.256.jpg",
       "source": "mangadex",
       "status": "hiatus"
+    },
+    {
+      "id": "5f64d517-c4ea-40c0-a463-fcc069d39d3b",
+      "title": "I Got a New Skill Every Time I Was Exiled, and After 100 Different Worlds, I Was Unmatched",
+      "cover": "https://uploads.mangadex.org/covers/5f64d517-c4ea-40c0-a463-fcc069d39d3b/6f6c4aaa-5c8b-4ef3-bdc7-30015de55663.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
     },
     {
       "id": "37f5cce0-8070-4ada-96e5-fa24b1bd4ff9",

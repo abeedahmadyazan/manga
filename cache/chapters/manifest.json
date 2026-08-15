@@ -1,7 +1,210 @@
 {
-  "updated_at": "2026-08-15T12:32:44.393677+00:00",
+  "updated_at": "2026-08-15T18:27:51.292022+00:00",
   "manga": "one-piece",
-  "latest_chapter": null,
-  "chapters": {},
-  "note": "cache update failed"
+  "latest_chapter": 1190,
+  "chapters": {
+    "1190": {
+      "pages": [
+        "cache/chapters/1190/page-001.webp",
+        "cache/chapters/1190/page-002.webp",
+        "cache/chapters/1190/page-003.webp",
+        "cache/chapters/1190/page-004.webp",
+        "cache/chapters/1190/page-005.webp",
+        "cache/chapters/1190/page-006.webp",
+        "cache/chapters/1190/page-007.webp",
+        "cache/chapters/1190/page-008.webp",
+        "cache/chapters/1190/page-009.webp",
+        "cache/chapters/1190/page-010.webp",
+        "cache/chapters/1190/page-011.webp",
+        "cache/chapters/1190/page-012.webp",
+        "cache/chapters/1190/page-013.webp",
+        "cache/chapters/1190/page-014.webp",
+        "cache/chapters/1190/page-015.webp",
+        "cache/chapters/1190/page-016.webp"
+      ],
+      "source": "3asq-cdn",
+      "cached_at": "2026-08-15T18:24:39.798870+00:00"
+    },
+    "1189": {
+      "pages": [
+        "cache/chapters/1189/page-001.webp",
+        "cache/chapters/1189/page-002.webp",
+        "cache/chapters/1189/page-003.webp",
+        "cache/chapters/1189/page-004.webp",
+        "cache/chapters/1189/page-005.webp",
+        "cache/chapters/1189/page-006.webp",
+        "cache/chapters/1189/page-007.webp",
+        "cache/chapters/1189/page-008.webp",
+        "cache/chapters/1189/page-009.webp",
+        "cache/chapters/1189/page-010.webp",
+        "cache/chapters/1189/page-011.webp",
+        "cache/chapters/1189/page-012.webp",
+        "cache/chapters/1189/page-013.webp",
+        "cache/chapters/1189/page-014.webp"
+      ],
+      "source": "3asq-cdn",
+      "cached_at": "2026-08-15T18:24:58.530595+00:00"
+    },
+    "1188": {
+      "pages": [
+        "cache/chapters/1188/page-001.webp",
+        "cache/chapters/1188/page-002.webp",
+        "cache/chapters/1188/page-003.webp",
+        "cache/chapters/1188/page-004.webp",
+        "cache/chapters/1188/page-005.webp",
+        "cache/chapters/1188/page-006.webp",
+        "cache/chapters/1188/page-007.webp",
+        "cache/chapters/1188/page-008.webp",
+        "cache/chapters/1188/page-009.webp",
+        "cache/chapters/1188/page-010.webp",
+        "cache/chapters/1188/page-011.webp",
+        "cache/chapters/1188/page-012.webp",
+        "cache/chapters/1188/page-013.webp",
+        "cache/chapters/1188/page-014.webp",
+        "cache/chapters/1188/page-015.webp"
+      ],
+      "source": "3asq-cdn",
+      "cached_at": "2026-08-15T18:25:18.394316+00:00"
+    },
+    "1187": {
+      "pages": [
+        "cache/chapters/1187/page-001.webp",
+        "cache/chapters/1187/page-002.webp",
+        "cache/chapters/1187/page-003.webp",
+        "cache/chapters/1187/page-004.webp",
+        "cache/chapters/1187/page-005.webp",
+        "cache/chapters/1187/page-006.webp",
+        "cache/chapters/1187/page-007.webp",
+        "cache/chapters/1187/page-008.webp",
+        "cache/chapters/1187/page-009.webp",
+        "cache/chapters/1187/page-010.webp",
+        "cache/chapters/1187/page-011.webp",
+        "cache/chapters/1187/page-012.webp"
+      ],
+      "source": "3asq-cdn",
+      "cached_at": "2026-08-15T18:25:38.101734+00:00"
+    },
+    "1186": {
+      "pages": [
+        "cache/chapters/1186/page-001.webp",
+        "cache/chapters/1186/page-002.webp",
+        "cache/chapters/1186/page-003.webp",
+        "cache/chapters/1186/page-004.webp",
+        "cache/chapters/1186/page-005.webp",
+        "cache/chapters/1186/page-006.webp",
+        "cache/chapters/1186/page-007.webp",
+        "cache/chapters/1186/page-008.webp",
+        "cache/chapters/1186/page-009.webp",
+        "cache/chapters/1186/page-010.webp",
+        "cache/chapters/1186/page-011.webp",
+        "cache/chapters/1186/page-012.webp",
+        "cache/chapters/1186/page-013.webp",
+        "cache/chapters/1186/page-014.webp",
+        "cache/chapters/1186/page-015.webp",
+        "cache/chapters/1186/page-016.webp"
+      ],
+      "source": "3asq-cdn",
+      "cached_at": "2026-08-15T18:25:55.890438+00:00"
+    },
+    "1185": {
+      "pages": [
+        "cache/chapters/1185/page-001.webp",
+        "cache/chapters/1185/page-002.webp",
+        "cache/chapters/1185/page-003.webp",
+        "cache/chapters/1185/page-004.webp",
+        "cache/chapters/1185/page-005.webp",
+        "cache/chapters/1185/page-006.webp",
+        "cache/chapters/1185/page-007.webp",
+        "cache/chapters/1185/page-008.webp",
+        "cache/chapters/1185/page-009.webp",
+        "cache/chapters/1185/page-010.webp",
+        "cache/chapters/1185/page-011.webp",
+        "cache/chapters/1185/page-012.webp",
+        "cache/chapters/1185/page-013.webp",
+        "cache/chapters/1185/page-014.webp",
+        "cache/chapters/1185/page-015.webp"
+      ],
+      "source": "3asq-cdn",
+      "cached_at": "2026-08-15T18:26:15.051095+00:00"
+    },
+    "1184": {
+      "pages": [
+        "cache/chapters/1184/page-001.webp",
+        "cache/chapters/1184/page-002.webp",
+        "cache/chapters/1184/page-003.webp",
+        "cache/chapters/1184/page-004.webp",
+        "cache/chapters/1184/page-005.webp",
+        "cache/chapters/1184/page-006.webp",
+        "cache/chapters/1184/page-007.webp",
+        "cache/chapters/1184/page-008.webp",
+        "cache/chapters/1184/page-009.webp",
+        "cache/chapters/1184/page-010.webp",
+        "cache/chapters/1184/page-011.webp",
+        "cache/chapters/1184/page-012.webp"
+      ],
+      "source": "3asq-cdn",
+      "cached_at": "2026-08-15T18:26:31.091533+00:00"
+    },
+    "1183": {
+      "pages": [
+        "cache/chapters/1183/page-001.webp",
+        "cache/chapters/1183/page-002.webp",
+        "cache/chapters/1183/page-003.webp",
+        "cache/chapters/1183/page-004.webp",
+        "cache/chapters/1183/page-005.webp",
+        "cache/chapters/1183/page-006.webp",
+        "cache/chapters/1183/page-007.webp",
+        "cache/chapters/1183/page-008.webp",
+        "cache/chapters/1183/page-009.webp",
+        "cache/chapters/1183/page-010.webp",
+        "cache/chapters/1183/page-011.webp",
+        "cache/chapters/1183/page-012.webp",
+        "cache/chapters/1183/page-013.webp",
+        "cache/chapters/1183/page-014.webp",
+        "cache/chapters/1183/page-015.webp",
+        "cache/chapters/1183/page-016.webp"
+      ],
+      "source": "3asq-cdn",
+      "cached_at": "2026-08-15T18:26:52.334737+00:00"
+    },
+    "1182": {
+      "pages": [
+        "cache/chapters/1182/page-001.webp",
+        "cache/chapters/1182/page-002.webp",
+        "cache/chapters/1182/page-003.webp",
+        "cache/chapters/1182/page-004.webp",
+        "cache/chapters/1182/page-005.webp",
+        "cache/chapters/1182/page-006.webp",
+        "cache/chapters/1182/page-007.webp",
+        "cache/chapters/1182/page-008.webp",
+        "cache/chapters/1182/page-009.webp",
+        "cache/chapters/1182/page-010.webp",
+        "cache/chapters/1182/page-011.webp",
+        "cache/chapters/1182/page-012.webp",
+        "cache/chapters/1182/page-013.webp",
+        "cache/chapters/1182/page-014.webp"
+      ],
+      "source": "3asq-cdn",
+      "cached_at": "2026-08-15T18:27:16.175288+00:00"
+    },
+    "1181": {
+      "pages": [
+        "cache/chapters/1181/page-001.webp",
+        "cache/chapters/1181/page-002.webp",
+        "cache/chapters/1181/page-003.webp",
+        "cache/chapters/1181/page-004.webp",
+        "cache/chapters/1181/page-005.webp",
+        "cache/chapters/1181/page-006.webp",
+        "cache/chapters/1181/page-007.webp",
+        "cache/chapters/1181/page-008.webp",
+        "cache/chapters/1181/page-009.webp",
+        "cache/chapters/1181/page-010.webp",
+        "cache/chapters/1181/page-011.webp",
+        "cache/chapters/1181/page-012.webp"
+      ],
+      "source": "3asq-cdn",
+      "cached_at": "2026-08-15T18:27:51.291891+00:00"
+    }
+  },
+  "note": "Latest 10 chapters cached. Older chapters via MangaDex/3asq live."
 }
