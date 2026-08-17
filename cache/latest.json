@@ -1,13 +1,111 @@
 {
-  "updated_at": "2026-08-16T18:23:52.630327+00:00",
+  "updated_at": "2026-08-17T01:05:32.553977+00:00",
   "count": 50,
   "items": [
+    {
+      "id": "a460ab18-22c1-47eb-a08a-9ee85fe37ec8",
+      "title": "Bleach (Official Colored)",
+      "cover": "https://uploads.mangadex.org/covers/a460ab18-22c1-47eb-a08a-9ee85fe37ec8/7c8f9203-2b82-41f2-beb3-e7fb00e151e2.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "b73371d4-02dd-4db0-b448-d9afa3d698f1",
+      "title": "Aoashi",
+      "cover": "https://uploads.mangadex.org/covers/b73371d4-02dd-4db0-b448-d9afa3d698f1/8ecd4b0f-5746-4f75-a836-c132d361d9ee.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "7f30dfc3-0b80-4dcc-a3b9-0cd746fac005",
+      "title": "المتحري كونان",
+      "cover": "https://uploads.mangadex.org/covers/7f30dfc3-0b80-4dcc-a3b9-0cd746fac005/b65b80fa-217c-4a71-8e8f-5d647990117a.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "d36bea9f-853f-4908-9957-5514b1903e36",
+      "title": "Marika's Love Meter Malfunction",
+      "cover": "https://uploads.mangadex.org/covers/d36bea9f-853f-4908-9957-5514b1903e36/4b5daf86-5fc1-4316-ba94-cb96f093bd89.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "ac23805e-6d7a-498f-9c58-b45a2d5e7326",
+      "title": "Child of God",
+      "cover": "https://uploads.mangadex.org/covers/ac23805e-6d7a-498f-9c58-b45a2d5e7326/aead3ce2-526b-4bac-a5f6-31255fe8c67d.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
     {
       "id": "9d3d3403-1a87-4737-9803-bc3d99db1424",
       "title": "The Guy She Was Interested in Wasn't a Guy at All",
       "cover": "https://uploads.mangadex.org/covers/9d3d3403-1a87-4737-9803-bc3d99db1424/fac191d0-96c1-4ebb-bf79-b7616d7162ac.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
+    },
+    {
+      "id": "59ef045c-0712-4f15-bb54-52bffd87481b",
+      "title": "Hitoner",
+      "cover": "https://uploads.mangadex.org/covers/59ef045c-0712-4f15-bb54-52bffd87481b/0b9fa6bb-d07b-4269-9e4d-8ec156ccef48.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "484f94e7-35c3-4cb5-a068-53d684c1439a",
+      "title": "Baki Part 6",
+      "cover": "https://uploads.mangadex.org/covers/484f94e7-35c3-4cb5-a068-53d684c1439a/863ae891-3627-4070-8918-4a626dc9d1ff.png.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "30196491-8fc2-4961-8886-a58f898b1b3e",
+      "title": "Berserk of Gluttony: The One that Exceeds the Concept of Levels",
+      "cover": "https://uploads.mangadex.org/covers/30196491-8fc2-4961-8886-a58f898b1b3e/1790f17f-9184-4a48-8928-c45de48b778e.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "6b958848-c885-4735-9201-12ee77abcb3c",
+      "title": "جاسوس x عائله",
+      "cover": "https://uploads.mangadex.org/covers/6b958848-c885-4735-9201-12ee77abcb3c/91a35e78-62b2-41fe-9869-ce051f2d1070.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "885bed69-7d08-47a8-b25c-a37759c97c5f",
+      "title": "Kengan Ashura",
+      "cover": "https://uploads.mangadex.org/covers/885bed69-7d08-47a8-b25c-a37759c97c5f/63aa176e-852d-445b-93ac-d24aa5042a15.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "ca33a142-58fb-4fee-88b9-36ef87f02c77",
+      "title": "حب نيزومي الأول",
+      "cover": "https://uploads.mangadex.org/covers/ca33a142-58fb-4fee-88b9-36ef87f02c77/1911dc72-4263-45cb-a3ec-5ba34e47305e.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "858e2de7-afba-4096-9aa7-1fccac0119c9",
+      "title": "DIG IT",
+      "cover": "https://uploads.mangadex.org/covers/858e2de7-afba-4096-9aa7-1fccac0119c9/a57adc47-e988-475d-a6fe-2f595fd3c915.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "c4ca02fb-8378-433b-8049-fbbea5d25cba",
+      "title": "هايميا-سينباي حسناء مهيبة!",
+      "cover": "https://uploads.mangadex.org/covers/c4ca02fb-8378-433b-8049-fbbea5d25cba/7ab29404-0ebd-4862-ad4e-e4ea1ffe231f.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "52842727-59ff-46a6-9a23-5eba61487586",
+      "title": "To Love Ru (Official Colored)",
+      "cover": "https://uploads.mangadex.org/covers/52842727-59ff-46a6-9a23-5eba61487586/1b7bba8a-d22a-4f1a-8723-601a611b135a.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
     },
     {
       "id": "1afa2287-8408-4b17-9195-c42902153cfb",
@@ -185,13 +283,6 @@
       "status": "completed"
     },
     {
-      "id": "ac23805e-6d7a-498f-9c58-b45a2d5e7326",
-      "title": "Child of God",
-      "cover": "https://uploads.mangadex.org/covers/ac23805e-6d7a-498f-9c58-b45a2d5e7326/aead3ce2-526b-4bac-a5f6-31255fe8c67d.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
       "id": "2f4e5f5b-d930-4266-8c8a-c4cf9a81e51f",
       "title": "The Great Jahy Will Not Be Defeated!",
       "cover": "https://uploads.mangadex.org/covers/2f4e5f5b-d930-4266-8c8a-c4cf9a81e51f/da817d36-05c3-4810-bdb7-96345a311097.jpg.256.jpg",
@@ -211,13 +302,6 @@
       "cover": "https://uploads.mangadex.org/covers/25e1d17b-6a4d-4698-a4f6-bf53460c10af/f7cd3ff9-d7a1-4b5e-b473-ee2833b82c35.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
-    },
-    {
-      "id": "52842727-59ff-46a6-9a23-5eba61487586",
-      "title": "To Love Ru (Official Colored)",
-      "cover": "https://uploads.mangadex.org/covers/52842727-59ff-46a6-9a23-5eba61487586/1b7bba8a-d22a-4f1a-8723-601a611b135a.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
     },
     {
       "id": "84703c86-eb83-45ec-8fc5-f34a25115893",
@@ -241,13 +325,6 @@
       "status": "ongoing"
     },
     {
-      "id": "7f30dfc3-0b80-4dcc-a3b9-0cd746fac005",
-      "title": "المتحري كونان",
-      "cover": "https://uploads.mangadex.org/covers/7f30dfc3-0b80-4dcc-a3b9-0cd746fac005/b65b80fa-217c-4a71-8e8f-5d647990117a.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
       "id": "e5ce88e2-8c46-482d-8acf-5c6d5a64a585",
       "title": "نوراجامي",
       "cover": "https://uploads.mangadex.org/covers/e5ce88e2-8c46-482d-8acf-5c6d5a64a585/d8009398-6a12-473f-9af9-541b5eef50b6.jpg.256.jpg",
@@ -258,13 +335,6 @@
       "id": "a6a46436-9ed4-4c20-8b11-6f4a0f74b23a",
       "title": "Kabuto Mushi",
       "cover": "https://uploads.mangadex.org/covers/a6a46436-9ed4-4c20-8b11-6f4a0f74b23a/5a16e9bf-0859-4719-bd13-7e5e43e338d7.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "c4ca02fb-8378-433b-8049-fbbea5d25cba",
-      "title": "هايميا-سينباي حسناء مهيبة!",
-      "cover": "https://uploads.mangadex.org/covers/c4ca02fb-8378-433b-8049-fbbea5d25cba/7ab29404-0ebd-4862-ad4e-e4ea1ffe231f.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
@@ -281,76 +351,6 @@
       "cover": "https://uploads.mangadex.org/covers/6670ee28-f26d-4b61-b49c-d71149cd5a6e/13d41432-d7ec-41cd-a265-5af700989aa6.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
-    },
-    {
-      "id": "fa85b2aa-370c-41c5-96ae-29b05c848f3d",
-      "title": "Innocent",
-      "cover": "https://uploads.mangadex.org/covers/fa85b2aa-370c-41c5-96ae-29b05c848f3d/3d562b75-ca28-4a65-87a9-2e3f73657456.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
-      "id": "f4045a9e-e5f6-4778-bd33-7a91cefc3f71",
-      "title": "For the Sake of My Future Vengeance",
-      "cover": "https://uploads.mangadex.org/covers/f4045a9e-e5f6-4778-bd33-7a91cefc3f71/53e634e3-aa3b-4dc3-9171-85e2a71d2ec8.png.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "c4b36f15-4ee5-425f-a77d-c2e7cbb970d8",
-      "title": "NIPPON SANGOKU: The Three Nations of the Crimson Sun",
-      "cover": "https://uploads.mangadex.org/covers/c4b36f15-4ee5-425f-a77d-c2e7cbb970d8/e5c54f1b-6ea4-4dd2-ae6e-9d0e138d7c2e.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "4e7a4a0f-8391-4069-839b-de2352297dab",
-      "title": "A Couple of Cuckoos",
-      "cover": "https://uploads.mangadex.org/covers/4e7a4a0f-8391-4069-839b-de2352297dab/ad595477-786b-4ab0-b176-b0c138ebfdc5.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "263deeff-c010-4ac7-bc01-6341f3e698ac",
-      "title": "Dragon Quest: The Great Adventure of Dai - Avan the Brave and the Demon King of Hellfire",
-      "cover": "https://uploads.mangadex.org/covers/263deeff-c010-4ac7-bc01-6341f3e698ac/f6a611a4-660d-4366-9636-08251c710b55.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "87ffa375-bd2c-49ba-ba0c-6d78ea07c342",
-      "title": "Medaka Kuroiwa is Impervious to My Charms",
-      "cover": "https://uploads.mangadex.org/covers/87ffa375-bd2c-49ba-ba0c-6d78ea07c342/e410b2ef-b97e-45c1-b861-140b2fe6ee01.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "319df2e2-e6a6-4e3a-a31c-68539c140a84",
-      "title": "Slam Dunk!",
-      "cover": "https://uploads.mangadex.org/covers/319df2e2-e6a6-4e3a-a31c-68539c140a84/a845455f-52d0-4cc4-92a8-bd5bad7d69b9.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
-      "id": "2d501d2e-72d5-4c3f-9741-117511622a48",
-      "title": "Inazuma Eleven GO Anthology!",
-      "cover": "https://uploads.mangadex.org/covers/2d501d2e-72d5-4c3f-9741-117511622a48/2f28ddc4-5524-44ce-a944-accb1f7b576c.png.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
-      "id": "b73371d4-02dd-4db0-b448-d9afa3d698f1",
-      "title": "Aoashi",
-      "cover": "https://uploads.mangadex.org/covers/b73371d4-02dd-4db0-b448-d9afa3d698f1/8ecd4b0f-5746-4f75-a836-c132d361d9ee.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
-      "id": "9d563964-e935-47d4-812a-abfd2f625384",
-      "title": "Shijou Saikyou no Deshi Kenichi",
-      "cover": "https://uploads.mangadex.org/covers/9d563964-e935-47d4-812a-abfd2f625384/8c3bfc36-77ad-4ec4-8321-5d7770493650.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
     }
   ]
 }
