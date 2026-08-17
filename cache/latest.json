@@ -1,7 +1,28 @@
 {
-  "updated_at": "2026-08-17T01:05:32.553977+00:00",
+  "updated_at": "2026-08-17T06:49:13.919257+00:00",
   "count": 50,
   "items": [
+    {
+      "id": "1693697a-783c-4d3c-a2d3-dc069e137a23",
+      "title": "I Have No Home",
+      "cover": "https://uploads.mangadex.org/covers/1693697a-783c-4d3c-a2d3-dc069e137a23/bc55de2a-47dd-41cb-9338-75b3f0650a69.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "5b93fa0f-0640-49b8-974e-954b9959929b",
+      "title": "Girls' Last Tour",
+      "cover": "https://uploads.mangadex.org/covers/5b93fa0f-0640-49b8-974e-954b9959929b/67d556f5-91d4-4b85-b287-2f74f008e564.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "04598a65-4f1f-4807-a419-d79ca7f67457",
+      "title": "Under Ninja",
+      "cover": "https://uploads.mangadex.org/covers/04598a65-4f1f-4807-a419-d79ca7f67457/4c5713f4-249e-4745-a09e-2f3c33e6497a.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
     {
       "id": "a460ab18-22c1-47eb-a08a-9ee85fe37ec8",
       "title": "Bleach (Official Colored)",
@@ -262,13 +283,6 @@
       "status": "ongoing"
     },
     {
-      "id": "5b93fa0f-0640-49b8-974e-954b9959929b",
-      "title": "Girls' Last Tour",
-      "cover": "https://uploads.mangadex.org/covers/5b93fa0f-0640-49b8-974e-954b9959929b/67d556f5-91d4-4b85-b287-2f74f008e564.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
       "id": "63dbbf80-0189-4ae4-a549-68a0caa2f834",
       "title": "ويتشريف",
       "cover": "https://uploads.mangadex.org/covers/63dbbf80-0189-4ae4-a549-68a0caa2f834/04ae601b-1e85-4b59-bba3-7a140f7339f5.jpg.256.jpg",
@@ -335,20 +349,6 @@
       "id": "a6a46436-9ed4-4c20-8b11-6f4a0f74b23a",
       "title": "Kabuto Mushi",
       "cover": "https://uploads.mangadex.org/covers/a6a46436-9ed4-4c20-8b11-6f4a0f74b23a/5a16e9bf-0859-4719-bd13-7e5e43e338d7.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "a77742b1-befd-49a4-bff5-1ad4e6b0ef7b",
-      "title": "Chainsaw Man",
-      "cover": "https://uploads.mangadex.org/covers/a77742b1-befd-49a4-bff5-1ad4e6b0ef7b/6e518bd1-5f60-446b-8832-bfe6bf74834b.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
-      "id": "6670ee28-f26d-4b61-b49c-d71149cd5a6e",
-      "title": "مييروكو تشان",
-      "cover": "https://uploads.mangadex.org/covers/6670ee28-f26d-4b61-b49c-d71149cd5a6e/13d41432-d7ec-41cd-a265-5af700989aa6.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     }
