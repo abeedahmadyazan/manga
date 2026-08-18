@@ -1,7 +1,56 @@
 {
-  "updated_at": "2026-08-18T01:03:24.607605+00:00",
+  "updated_at": "2026-08-18T06:38:09.927402+00:00",
   "count": 50,
   "items": [
+    {
+      "id": "4141c5dc-c525-4df5-afd7-cc7d192a832f",
+      "title": "Blue Lock",
+      "cover": "https://uploads.mangadex.org/covers/4141c5dc-c525-4df5-afd7-cc7d192a832f/7ee723d4-b926-4a81-acd9-53adb3fbe461.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "98017a70-5580-40fb-9d69-69e377325484",
+      "title": "I Picked Up This World's Strategy Guide",
+      "cover": "https://uploads.mangadex.org/covers/98017a70-5580-40fb-9d69-69e377325484/d21ac77f-8982-43a7-bf62-7946d225e642.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "3df1a9a3-a1be-47a3-9e90-9b3e55b1d0ac",
+      "title": "الشخص الخطير في قلبي",
+      "cover": "https://uploads.mangadex.org/covers/3df1a9a3-a1be-47a3-9e90-9b3e55b1d0ac/12d521b7-01b8-4015-ab40-33ed75cc82e8.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "296cbc31-af1a-4b5b-a34b-fee2b4cad542",
+      "title": "نجمتي",
+      "cover": "https://uploads.mangadex.org/covers/296cbc31-af1a-4b5b-a34b-fee2b4cad542/d803d885-e371-4018-b332-4cbc5935177f.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "5b93fa0f-0640-49b8-974e-954b9959929b",
+      "title": "Girls' Last Tour",
+      "cover": "https://uploads.mangadex.org/covers/5b93fa0f-0640-49b8-974e-954b9959929b/67d556f5-91d4-4b85-b287-2f74f008e564.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "9d3d3403-1a87-4737-9803-bc3d99db1424",
+      "title": "The Guy She Was Interested in Wasn't a Guy at All",
+      "cover": "https://uploads.mangadex.org/covers/9d3d3403-1a87-4737-9803-bc3d99db1424/fac191d0-96c1-4ebb-bf79-b7616d7162ac.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "34019331-7377-4e2c-837e-f6e1ab2b5ef7",
+      "title": "The Seven Deadly Sins: Four Knights of the Apocalypse",
+      "cover": "https://uploads.mangadex.org/covers/34019331-7377-4e2c-837e-f6e1ab2b5ef7/a39f3c03-c459-4261-b3e7-0268ff691c00.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
     {
       "id": "8e5ff937-0d9a-40d5-b7ed-9f37a70901fb",
       "title": "A Side of Him Only I Know",
@@ -143,13 +192,6 @@
       "status": "completed"
     },
     {
-      "id": "5b93fa0f-0640-49b8-974e-954b9959929b",
-      "title": "Girls' Last Tour",
-      "cover": "https://uploads.mangadex.org/covers/5b93fa0f-0640-49b8-974e-954b9959929b/67d556f5-91d4-4b85-b287-2f74f008e564.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
       "id": "04598a65-4f1f-4807-a419-d79ca7f67457",
       "title": "Under Ninja",
       "cover": "https://uploads.mangadex.org/covers/04598a65-4f1f-4807-a419-d79ca7f67457/4c5713f4-249e-4745-a09e-2f3c33e6497a.jpg.256.jpg",
@@ -176,13 +218,6 @@
       "cover": "https://uploads.mangadex.org/covers/ac23805e-6d7a-498f-9c58-b45a2d5e7326/aead3ce2-526b-4bac-a5f6-31255fe8c67d.jpg.256.jpg",
       "source": "mangadex",
       "status": "completed"
-    },
-    {
-      "id": "9d3d3403-1a87-4737-9803-bc3d99db1424",
-      "title": "The Guy She Was Interested in Wasn't a Guy at All",
-      "cover": "https://uploads.mangadex.org/covers/9d3d3403-1a87-4737-9803-bc3d99db1424/fac191d0-96c1-4ebb-bf79-b7616d7162ac.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
     },
     {
       "id": "59ef045c-0712-4f15-bb54-52bffd87481b",
@@ -316,41 +351,6 @@
       "cover": "https://uploads.mangadex.org/covers/ab41d97a-0725-4f37-85db-da001d4ff0dc/ee6715e9-50fd-4151-bcdd-7ead078178e0.jpg.256.jpg",
       "source": "mangadex",
       "status": "completed"
-    },
-    {
-      "id": "e18fe8c6-f6dc-4f05-8462-7b2083ff9a6c",
-      "title": "يوميات الصيدلة",
-      "cover": "https://uploads.mangadex.org/covers/e18fe8c6-f6dc-4f05-8462-7b2083ff9a6c/530a4ffb-87cb-4156-bdeb-61670532e20f.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "ad75039d-686c-457f-b478-e56fc3b3c069",
-      "title": "I Started Working a Housekeeping Job and Ended up Being Liked by the Family of the Most Beautiful Girl in School.",
-      "cover": "https://uploads.mangadex.org/covers/ad75039d-686c-457f-b478-e56fc3b3c069/d11151a2-0f4e-49e8-9c19-1be626a044fa.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "737a846b-2e67-4d63-9f7e-f54b3beebac4",
-      "title": "Please Go Home, Miss Akutsu!",
-      "cover": "https://uploads.mangadex.org/covers/737a846b-2e67-4d63-9f7e-f54b3beebac4/55c88bab-b253-48c8-9d94-221f9473952a.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "46e9cae5-4407-4576-9b9e-4c517ae9298e",
-      "title": "Yakusoku no Neverland",
-      "cover": "https://uploads.mangadex.org/covers/46e9cae5-4407-4576-9b9e-4c517ae9298e/e023b6b0-76c7-4dfd-8ec2-ce7a26b90a05.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
-      "id": "89daf9dc-075a-4aa5-873a-cc76bb287108",
-      "title": "The Way of the Househusband",
-      "cover": "https://uploads.mangadex.org/covers/89daf9dc-075a-4aa5-873a-cc76bb287108/a22742de-0a55-4fef-b378-8037753616d2.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
     }
   ]
 }
