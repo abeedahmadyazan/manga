@@ -1,7 +1,21 @@
 {
-  "updated_at": "2026-08-19T06:38:39.591232+00:00",
+  "updated_at": "2026-08-19T12:40:19.864661+00:00",
   "count": 50,
   "items": [
+    {
+      "id": "423aefd6-f63d-4d3b-9a70-ba8ec9ad2c37",
+      "title": "FAIRY TAIL Re:Fantasia",
+      "cover": "https://uploads.mangadex.org/covers/423aefd6-f63d-4d3b-9a70-ba8ec9ad2c37/d8f86465-1fdb-44f6-a236-339debd1a329.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "12ac16ec-8894-420b-bc03-eade9340dfd8",
+      "title": "Trinity Seven - The 7 Magicians",
+      "cover": "https://uploads.mangadex.org/covers/12ac16ec-8894-420b-bc03-eade9340dfd8/85c1b863-ef69-4c76-9313-e2b4f06b24db.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
     {
       "id": "67e7453b-9ee5-4ae5-9316-215b03e4a71d",
       "title": "Witch Hat Atelier",
@@ -20,13 +34,6 @@
       "id": "ab8cbb82-d0ed-45a7-8ffe-4bfa6d43d79c",
       "title": "JoJo's Bizarre Adventure Part 9 - The JOJOLands",
       "cover": "https://uploads.mangadex.org/covers/ab8cbb82-d0ed-45a7-8ffe-4bfa6d43d79c/f47d473d-7b43-4283-9e47-9a0168dc77e1.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "423aefd6-f63d-4d3b-9a70-ba8ec9ad2c37",
-      "title": "FAIRY TAIL Re:Fantasia",
-      "cover": "https://uploads.mangadex.org/covers/423aefd6-f63d-4d3b-9a70-ba8ec9ad2c37/d8f86465-1fdb-44f6-a236-339debd1a329.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
@@ -342,13 +349,6 @@
       "id": "04598a65-4f1f-4807-a419-d79ca7f67457",
       "title": "Under Ninja",
       "cover": "https://uploads.mangadex.org/covers/04598a65-4f1f-4807-a419-d79ca7f67457/4c5713f4-249e-4745-a09e-2f3c33e6497a.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "7f30dfc3-0b80-4dcc-a3b9-0cd746fac005",
-      "title": "المتحري كونان",
-      "cover": "https://uploads.mangadex.org/covers/7f30dfc3-0b80-4dcc-a3b9-0cd746fac005/b65b80fa-217c-4a71-8e8f-5d647990117a.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     }
