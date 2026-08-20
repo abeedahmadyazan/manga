@@ -1,7 +1,49 @@
 {
-  "updated_at": "2026-08-20T12:42:30.704017+00:00",
+  "updated_at": "2026-08-20T18:34:38.465246+00:00",
   "count": 50,
   "items": [
+    {
+      "id": "858e2de7-afba-4096-9aa7-1fccac0119c9",
+      "title": "DIG IT",
+      "cover": "https://uploads.mangadex.org/covers/858e2de7-afba-4096-9aa7-1fccac0119c9/a57adc47-e988-475d-a6fe-2f595fd3c915.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "a07320a4-afcd-413a-a451-d69a448d0c28",
+      "title": "Usogui",
+      "cover": "https://uploads.mangadex.org/covers/a07320a4-afcd-413a-a451-d69a448d0c28/b74c8cce-42cd-4889-b75d-7944e63f9a14.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "ed5dddc0-999d-4fd2-a702-9fef1ec2c955",
+      "title": "Blue Box",
+      "cover": "https://uploads.mangadex.org/covers/ed5dddc0-999d-4fd2-a702-9fef1ec2c955/80206db7-7ca3-4038-a8d4-04926e9a4388.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "c4ca02fb-8378-433b-8049-fbbea5d25cba",
+      "title": "هايميا-سينباي حسناء مهيبة!",
+      "cover": "https://uploads.mangadex.org/covers/c4ca02fb-8378-433b-8049-fbbea5d25cba/7ab29404-0ebd-4862-ad4e-e4ea1ffe231f.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "4393fd4e-d646-4bab-9c95-786168ccb618",
+      "title": "Devilman",
+      "cover": "https://uploads.mangadex.org/covers/4393fd4e-d646-4bab-9c95-786168ccb618/3199fa66-3a73-4c11-9236-9cba765e6650.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "e05dd982-6d09-4f3d-8e8e-6c9ae65b5857",
+      "title": "The Color of the End: Mission in the Apocalypse",
+      "cover": "https://uploads.mangadex.org/covers/e05dd982-6d09-4f3d-8e8e-6c9ae65b5857/120f5f17-4eac-4c0e-9c08-7fef0420c968.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
     {
       "id": "510f29a8-99b4-46af-ba5e-916e96bc6f37",
       "title": "Fate/type Redline",
@@ -15,13 +57,6 @@
       "cover": "https://uploads.mangadex.org/covers/68112dc1-2b80-4f20-beb8-2f2a8716a430/a6fe6c95-47cb-494c-a5ca-8e4bfbd7bf59.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
-    },
-    {
-      "id": "ed5dddc0-999d-4fd2-a702-9fef1ec2c955",
-      "title": "Blue Box",
-      "cover": "https://uploads.mangadex.org/covers/ed5dddc0-999d-4fd2-a702-9fef1ec2c955/80206db7-7ca3-4038-a8d4-04926e9a4388.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
     },
     {
       "id": "ef473f14-8c4d-435e-9015-b714512e69eb",
@@ -155,13 +190,6 @@
       "cover": "https://uploads.mangadex.org/covers/29ab6984-7c1d-4d45-b925-25aa082b492e/c691a3e7-7ec0-4c2f-a86a-cf04489b33aa.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
-    },
-    {
-      "id": "a07320a4-afcd-413a-a451-d69a448d0c28",
-      "title": "Usogui",
-      "cover": "https://uploads.mangadex.org/covers/a07320a4-afcd-413a-a451-d69a448d0c28/b74c8cce-42cd-4889-b75d-7944e63f9a14.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
     },
     {
       "id": "1693697a-783c-4d3c-a2d3-dc069e137a23",
@@ -321,34 +349,6 @@
       "id": "d36bea9f-853f-4908-9957-5514b1903e36",
       "title": "Marika's Love Meter Malfunction",
       "cover": "https://uploads.mangadex.org/covers/d36bea9f-853f-4908-9957-5514b1903e36/4b5daf86-5fc1-4316-ba94-cb96f093bd89.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "98017a70-5580-40fb-9d69-69e377325484",
-      "title": "I Picked Up This World's Strategy Guide",
-      "cover": "https://uploads.mangadex.org/covers/98017a70-5580-40fb-9d69-69e377325484/d21ac77f-8982-43a7-bf62-7946d225e642.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "3df1a9a3-a1be-47a3-9e90-9b3e55b1d0ac",
-      "title": "الشخص الخطير في قلبي",
-      "cover": "https://uploads.mangadex.org/covers/3df1a9a3-a1be-47a3-9e90-9b3e55b1d0ac/12d521b7-01b8-4015-ab40-33ed75cc82e8.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "296cbc31-af1a-4b5b-a34b-fee2b4cad542",
-      "title": "نجمتي",
-      "cover": "https://uploads.mangadex.org/covers/296cbc31-af1a-4b5b-a34b-fee2b4cad542/d803d885-e371-4018-b332-4cbc5935177f.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
-      "id": "34019331-7377-4e2c-837e-f6e1ab2b5ef7",
-      "title": "The Seven Deadly Sins: Four Knights of the Apocalypse",
-      "cover": "https://uploads.mangadex.org/covers/34019331-7377-4e2c-837e-f6e1ab2b5ef7/a39f3c03-c459-4261-b3e7-0268ff691c00.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     }
