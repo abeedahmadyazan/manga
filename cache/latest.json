@@ -1,7 +1,70 @@
 {
-  "updated_at": "2026-08-20T01:04:00.505395+00:00",
+  "updated_at": "2026-08-20T06:40:44.544972+00:00",
   "count": 50,
   "items": [
+    {
+      "id": "e18fe8c6-f6dc-4f05-8462-7b2083ff9a6c",
+      "title": "يوميات الصيدلة",
+      "cover": "https://uploads.mangadex.org/covers/e18fe8c6-f6dc-4f05-8462-7b2083ff9a6c/530a4ffb-87cb-4156-bdeb-61670532e20f.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "4141c5dc-c525-4df5-afd7-cc7d192a832f",
+      "title": "Blue Lock",
+      "cover": "https://uploads.mangadex.org/covers/4141c5dc-c525-4df5-afd7-cc7d192a832f/7ee723d4-b926-4a81-acd9-53adb3fbe461.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "d00bd104-d9b2-4ee9-a088-b5065d1c406a",
+      "title": "A Certain Scientific Railgun",
+      "cover": "https://uploads.mangadex.org/covers/d00bd104-d9b2-4ee9-a088-b5065d1c406a/34cb96d6-2a3c-47d0-9f56-102d40a65ea8.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "77296cee-0b74-415f-914d-6f29036d3906",
+      "title": "مسرحية الجبل",
+      "cover": "https://uploads.mangadex.org/covers/77296cee-0b74-415f-914d-6f29036d3906/6c06c4f2-f816-4dd8-9652-8b9764bfdde4.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "d7037b2a-874a-4360-8a7b-07f2899152fd",
+      "title": "إيروما-كن في مدرسة الشياطين",
+      "cover": "https://uploads.mangadex.org/covers/d7037b2a-874a-4360-8a7b-07f2899152fd/52d67301-401c-44c4-9d7b-529e2796f7d5.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "96ae166c-d8e1-4e9e-88cb-805b65154d7e",
+      "title": "Red Blue",
+      "cover": "https://uploads.mangadex.org/covers/96ae166c-d8e1-4e9e-88cb-805b65154d7e/d010f9c1-fdaa-4925-93df-dc3c06417574.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "5b93fa0f-0640-49b8-974e-954b9959929b",
+      "title": "Girls' Last Tour",
+      "cover": "https://uploads.mangadex.org/covers/5b93fa0f-0640-49b8-974e-954b9959929b/67d556f5-91d4-4b85-b287-2f74f008e564.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "418791c0-35cf-4f87-936b-acd9cddf0989",
+      "title": "The Fragrant Flower Blooms with Dignity",
+      "cover": "https://uploads.mangadex.org/covers/418791c0-35cf-4f87-936b-acd9cddf0989/717e5c78-69bd-46e9-a5b4-dc3ca143d4a4.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "b16f2554-9525-4f2a-bbe4-5b75b6605176",
+      "title": "Clevatess: The King of Dark Beasts, the Baby, and the Undead Hero",
+      "cover": "https://uploads.mangadex.org/covers/b16f2554-9525-4f2a-bbe4-5b75b6605176/0814dad9-5036-412c-b99e-61a31bab0e32.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
     {
       "id": "bcfe1b36-daee-40fd-9984-d9597caf9da7",
       "title": "فَقِيْهَةُ ٱلْمَغُوْلِ",
@@ -13,13 +76,6 @@
       "id": "ea47525d-99df-45b5-9103-dd853f49f8c3",
       "title": "Welcome to Demon School! Iruma-kun: IruMafia Edition",
       "cover": "https://uploads.mangadex.org/covers/ea47525d-99df-45b5-9103-dd853f49f8c3/7ba89c43-1234-4d11-9aa6-c3a7576cd1ce.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "77296cee-0b74-415f-914d-6f29036d3906",
-      "title": "مسرحية الجبل",
-      "cover": "https://uploads.mangadex.org/covers/77296cee-0b74-415f-914d-6f29036d3906/6c06c4f2-f816-4dd8-9652-8b9764bfdde4.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
@@ -101,13 +157,6 @@
       "status": "ongoing"
     },
     {
-      "id": "b16f2554-9525-4f2a-bbe4-5b75b6605176",
-      "title": "Clevatess: The King of Dark Beasts, the Baby, and the Undead Hero",
-      "cover": "https://uploads.mangadex.org/covers/b16f2554-9525-4f2a-bbe4-5b75b6605176/0814dad9-5036-412c-b99e-61a31bab0e32.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
       "id": "0cfcda3b-0dcb-459b-9931-aa823e7bf403",
       "title": "تسع قمم",
       "cover": "https://uploads.mangadex.org/covers/0cfcda3b-0dcb-459b-9931-aa823e7bf403/2f960366-7159-4f17-b3bf-b5f52e9860f7.jpg.256.jpg",
@@ -148,13 +197,6 @@
       "cover": "https://uploads.mangadex.org/covers/12ac16ec-8894-420b-bc03-eade9340dfd8/85c1b863-ef69-4c76-9313-e2b4f06b24db.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
-    },
-    {
-      "id": "5b93fa0f-0640-49b8-974e-954b9959929b",
-      "title": "Girls' Last Tour",
-      "cover": "https://uploads.mangadex.org/covers/5b93fa0f-0640-49b8-974e-954b9959929b/67d556f5-91d4-4b85-b287-2f74f008e564.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
     },
     {
       "id": "59ef045c-0712-4f15-bb54-52bffd87481b",
@@ -262,13 +304,6 @@
       "status": "ongoing"
     },
     {
-      "id": "4141c5dc-c525-4df5-afd7-cc7d192a832f",
-      "title": "Blue Lock",
-      "cover": "https://uploads.mangadex.org/covers/4141c5dc-c525-4df5-afd7-cc7d192a832f/7ee723d4-b926-4a81-acd9-53adb3fbe461.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
       "id": "98017a70-5580-40fb-9d69-69e377325484",
       "title": "I Picked Up This World's Strategy Guide",
       "cover": "https://uploads.mangadex.org/covers/98017a70-5580-40fb-9d69-69e377325484/d21ac77f-8982-43a7-bf62-7946d225e642.jpg.256.jpg",
@@ -316,41 +351,6 @@
       "cover": "https://uploads.mangadex.org/covers/c4ca02fb-8378-433b-8049-fbbea5d25cba/7ab29404-0ebd-4862-ad4e-e4ea1ffe231f.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
-    },
-    {
-      "id": "4242c6d3-4ee4-4b0b-9ca0-23bd57952805",
-      "title": "ليس حُبًّا بعدُ، ولكن...",
-      "cover": "https://uploads.mangadex.org/covers/4242c6d3-4ee4-4b0b-9ca0-23bd57952805/88edcefa-10ba-4d36-b4a0-d531bb44e02b.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "a460ab18-22c1-47eb-a08a-9ee85fe37ec8",
-      "title": "Bleach (Official Colored)",
-      "cover": "https://uploads.mangadex.org/covers/a460ab18-22c1-47eb-a08a-9ee85fe37ec8/7c8f9203-2b82-41f2-beb3-e7fb00e151e2.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
-      "id": "a6a46436-9ed4-4c20-8b11-6f4a0f74b23a",
-      "title": "Kabuto Mushi",
-      "cover": "https://uploads.mangadex.org/covers/a6a46436-9ed4-4c20-8b11-6f4a0f74b23a/5a16e9bf-0859-4719-bd13-7e5e43e338d7.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "d00bd104-d9b2-4ee9-a088-b5065d1c406a",
-      "title": "A Certain Scientific Railgun",
-      "cover": "https://uploads.mangadex.org/covers/d00bd104-d9b2-4ee9-a088-b5065d1c406a/34cb96d6-2a3c-47d0-9f56-102d40a65ea8.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
-      "id": "b73371d4-02dd-4db0-b448-d9afa3d698f1",
-      "title": "Aoashi",
-      "cover": "https://uploads.mangadex.org/covers/b73371d4-02dd-4db0-b448-d9afa3d698f1/8ecd4b0f-5746-4f75-a836-c132d361d9ee.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
     }
   ]
 }
