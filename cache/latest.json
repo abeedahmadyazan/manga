@@ -1,7 +1,35 @@
 {
-  "updated_at": "2026-08-20T06:40:44.544972+00:00",
+  "updated_at": "2026-08-20T12:42:30.704017+00:00",
   "count": 50,
   "items": [
+    {
+      "id": "510f29a8-99b4-46af-ba5e-916e96bc6f37",
+      "title": "Fate/type Redline",
+      "cover": "https://uploads.mangadex.org/covers/510f29a8-99b4-46af-ba5e-916e96bc6f37/c1d7aed1-9cd1-426f-bfb8-7e46594d0e29.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "68112dc1-2b80-4f20-beb8-2f2a8716a430",
+      "title": "داندادان",
+      "cover": "https://uploads.mangadex.org/covers/68112dc1-2b80-4f20-beb8-2f2a8716a430/a6fe6c95-47cb-494c-a5ca-8e4bfbd7bf59.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "ed5dddc0-999d-4fd2-a702-9fef1ec2c955",
+      "title": "Blue Box",
+      "cover": "https://uploads.mangadex.org/covers/ed5dddc0-999d-4fd2-a702-9fef1ec2c955/80206db7-7ca3-4038-a8d4-04926e9a4388.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "ef473f14-8c4d-435e-9015-b714512e69eb",
+      "title": "استدعاء اليابان",
+      "cover": "https://uploads.mangadex.org/covers/ef473f14-8c4d-435e-9015-b714512e69eb/9cd0abf9-8259-489f-8515-8ae35d89f075.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
     {
       "id": "e18fe8c6-f6dc-4f05-8462-7b2083ff9a6c",
       "title": "يوميات الصيدلة",
@@ -143,20 +171,6 @@
       "status": "completed"
     },
     {
-      "id": "ed5dddc0-999d-4fd2-a702-9fef1ec2c955",
-      "title": "Blue Box",
-      "cover": "https://uploads.mangadex.org/covers/ed5dddc0-999d-4fd2-a702-9fef1ec2c955/80206db7-7ca3-4038-a8d4-04926e9a4388.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
-      "id": "510f29a8-99b4-46af-ba5e-916e96bc6f37",
-      "title": "Fate/type Redline",
-      "cover": "https://uploads.mangadex.org/covers/510f29a8-99b4-46af-ba5e-916e96bc6f37/c1d7aed1-9cd1-426f-bfb8-7e46594d0e29.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
       "id": "0cfcda3b-0dcb-459b-9931-aa823e7bf403",
       "title": "تسع قمم",
       "cover": "https://uploads.mangadex.org/covers/0cfcda3b-0dcb-459b-9931-aa823e7bf403/2f960366-7159-4f17-b3bf-b5f52e9860f7.jpg.256.jpg",
@@ -174,6 +188,13 @@
       "id": "9c1cd558-fba3-40f1-bb84-b320f5d1eab1",
       "title": "Bug Ego",
       "cover": "https://uploads.mangadex.org/covers/9c1cd558-fba3-40f1-bb84-b320f5d1eab1/a40cc882-7d6b-4e12-885c-fef2928e7b7a.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "a1c7c817-4e59-43b7-9365-09675a149a6f",
+      "title": "ون بيس",
+      "cover": "https://uploads.mangadex.org/covers/a1c7c817-4e59-43b7-9365-09675a149a6f/2f4aca53-64c7-46ac-ae85-3bc9b3169890.png.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
@@ -328,27 +349,6 @@
       "id": "34019331-7377-4e2c-837e-f6e1ab2b5ef7",
       "title": "The Seven Deadly Sins: Four Knights of the Apocalypse",
       "cover": "https://uploads.mangadex.org/covers/34019331-7377-4e2c-837e-f6e1ab2b5ef7/a39f3c03-c459-4261-b3e7-0268ff691c00.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "8e5ff937-0d9a-40d5-b7ed-9f37a70901fb",
-      "title": "A Side of Him Only I Know",
-      "cover": "https://uploads.mangadex.org/covers/8e5ff937-0d9a-40d5-b7ed-9f37a70901fb/13d38877-dd98-4912-a0c1-92e0c4bac4a3.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "60a1627e-1753-4e14-be50-4ec41e3e8b47",
-      "title": "COLOR/LESS",
-      "cover": "https://uploads.mangadex.org/covers/60a1627e-1753-4e14-be50-4ec41e3e8b47/02f3246e-5719-486f-83e6-c80cf8c8e492.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
-      "id": "c4ca02fb-8378-433b-8049-fbbea5d25cba",
-      "title": "هايميا-سينباي حسناء مهيبة!",
-      "cover": "https://uploads.mangadex.org/covers/c4ca02fb-8378-433b-8049-fbbea5d25cba/7ab29404-0ebd-4862-ad4e-e4ea1ffe231f.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     }
