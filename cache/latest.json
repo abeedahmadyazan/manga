@@ -1,7 +1,42 @@
 {
-  "updated_at": "2026-08-20T18:34:38.465246+00:00",
+  "updated_at": "2026-08-21T01:07:44.991839+00:00",
   "count": 50,
   "items": [
+    {
+      "id": "ac23805e-6d7a-498f-9c58-b45a2d5e7326",
+      "title": "Child of God",
+      "cover": "https://uploads.mangadex.org/covers/ac23805e-6d7a-498f-9c58-b45a2d5e7326/aead3ce2-526b-4bac-a5f6-31255fe8c67d.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "ab41d97a-0725-4f37-85db-da001d4ff0dc",
+      "title": "درب من الدم",
+      "cover": "https://uploads.mangadex.org/covers/ab41d97a-0725-4f37-85db-da001d4ff0dc/ee6715e9-50fd-4151-bcdd-7ead078178e0.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "c4ca02fb-8378-433b-8049-fbbea5d25cba",
+      "title": "هايميا-سينباي حسناء مهيبة!",
+      "cover": "https://uploads.mangadex.org/covers/c4ca02fb-8378-433b-8049-fbbea5d25cba/7ab29404-0ebd-4862-ad4e-e4ea1ffe231f.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "b6886009-e60b-44a7-abc2-a575765277ba",
+      "title": "الرجل الرمادي",
+      "cover": "https://uploads.mangadex.org/covers/b6886009-e60b-44a7-abc2-a575765277ba/a8ea60f1-0fef-4af0-b26e-8b761406c114.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "510f29a8-99b4-46af-ba5e-916e96bc6f37",
+      "title": "Fate/type Redline",
+      "cover": "https://uploads.mangadex.org/covers/510f29a8-99b4-46af-ba5e-916e96bc6f37/c1d7aed1-9cd1-426f-bfb8-7e46594d0e29.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
     {
       "id": "858e2de7-afba-4096-9aa7-1fccac0119c9",
       "title": "DIG IT",
@@ -24,13 +59,6 @@
       "status": "completed"
     },
     {
-      "id": "c4ca02fb-8378-433b-8049-fbbea5d25cba",
-      "title": "هايميا-سينباي حسناء مهيبة!",
-      "cover": "https://uploads.mangadex.org/covers/c4ca02fb-8378-433b-8049-fbbea5d25cba/7ab29404-0ebd-4862-ad4e-e4ea1ffe231f.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
       "id": "4393fd4e-d646-4bab-9c95-786168ccb618",
       "title": "Devilman",
       "cover": "https://uploads.mangadex.org/covers/4393fd4e-d646-4bab-9c95-786168ccb618/3199fa66-3a73-4c11-9236-9cba765e6650.jpg.256.jpg",
@@ -41,13 +69,6 @@
       "id": "e05dd982-6d09-4f3d-8e8e-6c9ae65b5857",
       "title": "The Color of the End: Mission in the Apocalypse",
       "cover": "https://uploads.mangadex.org/covers/e05dd982-6d09-4f3d-8e8e-6c9ae65b5857/120f5f17-4eac-4c0e-9c08-7fef0420c968.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "510f29a8-99b4-46af-ba5e-916e96bc6f37",
-      "title": "Fate/type Redline",
-      "cover": "https://uploads.mangadex.org/covers/510f29a8-99b4-46af-ba5e-916e96bc6f37/c1d7aed1-9cd1-426f-bfb8-7e46594d0e29.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
@@ -143,13 +164,6 @@
       "status": "ongoing"
     },
     {
-      "id": "ac23805e-6d7a-498f-9c58-b45a2d5e7326",
-      "title": "Child of God",
-      "cover": "https://uploads.mangadex.org/covers/ac23805e-6d7a-498f-9c58-b45a2d5e7326/aead3ce2-526b-4bac-a5f6-31255fe8c67d.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
       "id": "25e1d17b-6a4d-4698-a4f6-bf53460c10af",
       "title": "حافلة لإثنين",
       "cover": "https://uploads.mangadex.org/covers/25e1d17b-6a4d-4698-a4f6-bf53460c10af/f7cd3ff9-d7a1-4b5e-b473-ee2833b82c35.jpg.256.jpg",
@@ -162,13 +176,6 @@
       "cover": "https://uploads.mangadex.org/covers/ab8cbb82-d0ed-45a7-8ffe-4bfa6d43d79c/f47d473d-7b43-4283-9e47-9a0168dc77e1.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
-    },
-    {
-      "id": "ab41d97a-0725-4f37-85db-da001d4ff0dc",
-      "title": "درب من الدم",
-      "cover": "https://uploads.mangadex.org/covers/ab41d97a-0725-4f37-85db-da001d4ff0dc/ee6715e9-50fd-4151-bcdd-7ead078178e0.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
     },
     {
       "id": "61d81be6-2759-4cc4-9815-7952a3449149",
@@ -344,13 +351,6 @@
       "cover": "https://uploads.mangadex.org/covers/319df2e2-e6a6-4e3a-a31c-68539c140a84/a845455f-52d0-4cc4-92a8-bd5bad7d69b9.jpg.256.jpg",
       "source": "mangadex",
       "status": "completed"
-    },
-    {
-      "id": "d36bea9f-853f-4908-9957-5514b1903e36",
-      "title": "Marika's Love Meter Malfunction",
-      "cover": "https://uploads.mangadex.org/covers/d36bea9f-853f-4908-9957-5514b1903e36/4b5daf86-5fc1-4316-ba94-cb96f093bd89.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
     }
   ]
 }
