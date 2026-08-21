@@ -1,7 +1,56 @@
 {
-  "updated_at": "2026-08-21T01:07:44.991839+00:00",
+  "updated_at": "2026-08-21T06:40:36.899543+00:00",
   "count": 50,
   "items": [
+    {
+      "id": "a1c7c817-4e59-43b7-9365-09675a149a6f",
+      "title": "ون بيس",
+      "cover": "https://uploads.mangadex.org/covers/a1c7c817-4e59-43b7-9365-09675a149a6f/2f4aca53-64c7-46ac-ae85-3bc9b3169890.png.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "61889f95-60b7-4406-a5db-b256d2a742ae",
+      "title": "Bungou Stray Dogs: The Day I Picked Up Dazai",
+      "cover": "https://uploads.mangadex.org/covers/61889f95-60b7-4406-a5db-b256d2a742ae/ad5d7cc6-4cc7-495c-9920-55b5f12b8c49.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "5b93fa0f-0640-49b8-974e-954b9959929b",
+      "title": "Girls' Last Tour",
+      "cover": "https://uploads.mangadex.org/covers/5b93fa0f-0640-49b8-974e-954b9959929b/67d556f5-91d4-4b85-b287-2f74f008e564.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "19a5c7e3-b743-4cb6-8dd8-41459bfc685d",
+      "title": "تدليل فارسة لا تعرف اي شيء سوى القتال",
+      "cover": "https://uploads.mangadex.org/covers/19a5c7e3-b743-4cb6-8dd8-41459bfc685d/883318ff-c44b-4ea9-a456-2b5b18a34631.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "d7037b2a-874a-4360-8a7b-07f2899152fd",
+      "title": "إيروما-كن في مدرسة الشياطين",
+      "cover": "https://uploads.mangadex.org/covers/d7037b2a-874a-4360-8a7b-07f2899152fd/52d67301-401c-44c4-9d7b-529e2796f7d5.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "b16f2554-9525-4f2a-bbe4-5b75b6605176",
+      "title": "Clevatess: The King of Dark Beasts, the Baby, and the Undead Hero",
+      "cover": "https://uploads.mangadex.org/covers/b16f2554-9525-4f2a-bbe4-5b75b6605176/0814dad9-5036-412c-b99e-61a31bab0e32.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "52ede55c-1584-4019-b85b-3902a423c3ab",
+      "title": "FAIRY TAIL: 100 Years Quest",
+      "cover": "https://uploads.mangadex.org/covers/52ede55c-1584-4019-b85b-3902a423c3ab/8e18a9d7-27ed-48ff-924b-a397df5ba0a0.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
     {
       "id": "ac23805e-6d7a-498f-9c58-b45a2d5e7326",
       "title": "Child of God",
@@ -115,13 +164,6 @@
       "status": "ongoing"
     },
     {
-      "id": "d7037b2a-874a-4360-8a7b-07f2899152fd",
-      "title": "إيروما-كن في مدرسة الشياطين",
-      "cover": "https://uploads.mangadex.org/covers/d7037b2a-874a-4360-8a7b-07f2899152fd/52d67301-401c-44c4-9d7b-529e2796f7d5.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
       "id": "96ae166c-d8e1-4e9e-88cb-805b65154d7e",
       "title": "Red Blue",
       "cover": "https://uploads.mangadex.org/covers/96ae166c-d8e1-4e9e-88cb-805b65154d7e/d010f9c1-fdaa-4925-93df-dc3c06417574.jpg.256.jpg",
@@ -129,23 +171,9 @@
       "status": "ongoing"
     },
     {
-      "id": "5b93fa0f-0640-49b8-974e-954b9959929b",
-      "title": "Girls' Last Tour",
-      "cover": "https://uploads.mangadex.org/covers/5b93fa0f-0640-49b8-974e-954b9959929b/67d556f5-91d4-4b85-b287-2f74f008e564.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
       "id": "418791c0-35cf-4f87-936b-acd9cddf0989",
       "title": "The Fragrant Flower Blooms with Dignity",
       "cover": "https://uploads.mangadex.org/covers/418791c0-35cf-4f87-936b-acd9cddf0989/717e5c78-69bd-46e9-a5b4-dc3ca143d4a4.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "b16f2554-9525-4f2a-bbe4-5b75b6605176",
-      "title": "Clevatess: The King of Dark Beasts, the Baby, and the Undead Hero",
-      "cover": "https://uploads.mangadex.org/covers/b16f2554-9525-4f2a-bbe4-5b75b6605176/0814dad9-5036-412c-b99e-61a31bab0e32.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
@@ -227,13 +255,6 @@
       "status": "ongoing"
     },
     {
-      "id": "a1c7c817-4e59-43b7-9365-09675a149a6f",
-      "title": "ون بيس",
-      "cover": "https://uploads.mangadex.org/covers/a1c7c817-4e59-43b7-9365-09675a149a6f/2f4aca53-64c7-46ac-ae85-3bc9b3169890.png.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
       "id": "11b74211-f4c0-4f08-b5a4-c491da0d0c0b",
       "title": "Choujin X",
       "cover": "https://uploads.mangadex.org/covers/11b74211-f4c0-4f08-b5a4-c491da0d0c0b/a024c8ce-5fbc-4fea-9363-6b8eee3477e7.jpg.256.jpg",
@@ -304,13 +325,6 @@
       "status": "ongoing"
     },
     {
-      "id": "52ede55c-1584-4019-b85b-3902a423c3ab",
-      "title": "FAIRY TAIL: 100 Years Quest",
-      "cover": "https://uploads.mangadex.org/covers/52ede55c-1584-4019-b85b-3902a423c3ab/8e18a9d7-27ed-48ff-924b-a397df5ba0a0.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
       "id": "6134ba15-d83a-4356-a555-62caa0127cc2",
       "title": "Gekiman! - Devilman Chapter",
       "cover": "https://uploads.mangadex.org/covers/6134ba15-d83a-4356-a555-62caa0127cc2/c1588b03-1ee2-4cab-8361-7fb75c7760de.jpg.256.jpg",
@@ -337,20 +351,6 @@
       "cover": "https://uploads.mangadex.org/covers/d89cfcf7-dcb4-4af7-8c95-330c2c6167d0/ecf61b0f-bb4b-4865-a7a4-9407abc1ba49.png.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
-    },
-    {
-      "id": "229e5177-2e71-4642-bd56-a9b0b0ba0e60",
-      "title": "فهرس السحر",
-      "cover": "https://uploads.mangadex.org/covers/229e5177-2e71-4642-bd56-a9b0b0ba0e60/7d19536b-9ba9-4ba4-8e30-6c4eb40ceeb8.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "319df2e2-e6a6-4e3a-a31c-68539c140a84",
-      "title": "Slam Dunk!",
-      "cover": "https://uploads.mangadex.org/covers/319df2e2-e6a6-4e3a-a31c-68539c140a84/a845455f-52d0-4cc4-92a8-bd5bad7d69b9.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
     }
   ]
 }
