@@ -1,11 +1,46 @@
 {
-  "updated_at": "2026-08-22T06:34:40.405161+00:00",
+  "updated_at": "2026-08-22T12:33:03.410044+00:00",
   "count": 50,
   "items": [
+    {
+      "id": "baaa0ca4-efef-4b15-b91a-c1f85692c2a7",
+      "title": "Vampire Knight",
+      "cover": "https://uploads.mangadex.org/covers/baaa0ca4-efef-4b15-b91a-c1f85692c2a7/d195f918-5f67-46a0-925f-eabc16fb40a3.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
     {
       "id": "ac23805e-6d7a-498f-9c58-b45a2d5e7326",
       "title": "Child of God",
       "cover": "https://uploads.mangadex.org/covers/ac23805e-6d7a-498f-9c58-b45a2d5e7326/aead3ce2-526b-4bac-a5f6-31255fe8c67d.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "67e7453b-9ee5-4ae5-9316-215b03e4a71d",
+      "title": "Witch Hat Atelier",
+      "cover": "https://uploads.mangadex.org/covers/67e7453b-9ee5-4ae5-9316-215b03e4a71d/a9feeb2a-4b34-4a52-93fb-ab948e743503.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "ed5dddc0-999d-4fd2-a702-9fef1ec2c955",
+      "title": "Blue Box",
+      "cover": "https://uploads.mangadex.org/covers/ed5dddc0-999d-4fd2-a702-9fef1ec2c955/80206db7-7ca3-4038-a8d4-04926e9a4388.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "843c31ff-d390-4199-bc3b-94b0dfc63632",
+      "title": "Baki Side Story: Retsu Kaioh Doesn't Mind Even If It's in Another World",
+      "cover": "https://uploads.mangadex.org/covers/843c31ff-d390-4199-bc3b-94b0dfc63632/ac1f2f10-dd90-4d58-a93c-2f992789bde2.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "ab41d97a-0725-4f37-85db-da001d4ff0dc",
+      "title": "درب من الدم",
+      "cover": "https://uploads.mangadex.org/covers/ab41d97a-0725-4f37-85db-da001d4ff0dc/ee6715e9-50fd-4151-bcdd-7ead078178e0.jpg.256.jpg",
       "source": "mangadex",
       "status": "completed"
     },
@@ -171,13 +206,6 @@
       "status": "ongoing"
     },
     {
-      "id": "ed5dddc0-999d-4fd2-a702-9fef1ec2c955",
-      "title": "Blue Box",
-      "cover": "https://uploads.mangadex.org/covers/ed5dddc0-999d-4fd2-a702-9fef1ec2c955/80206db7-7ca3-4038-a8d4-04926e9a4388.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
       "id": "229e5177-2e71-4642-bd56-a9b0b0ba0e60",
       "title": "فهرس السحر",
       "cover": "https://uploads.mangadex.org/covers/229e5177-2e71-4642-bd56-a9b0b0ba0e60/7d19536b-9ba9-4ba4-8e30-6c4eb40ceeb8.jpg.256.jpg",
@@ -192,13 +220,6 @@
       "status": "ongoing"
     },
     {
-      "id": "ab41d97a-0725-4f37-85db-da001d4ff0dc",
-      "title": "درب من الدم",
-      "cover": "https://uploads.mangadex.org/covers/ab41d97a-0725-4f37-85db-da001d4ff0dc/ee6715e9-50fd-4151-bcdd-7ead078178e0.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
       "id": "52ede55c-1584-4019-b85b-3902a423c3ab",
       "title": "FAIRY TAIL: 100 Years Quest",
       "cover": "https://uploads.mangadex.org/covers/52ede55c-1584-4019-b85b-3902a423c3ab/8e18a9d7-27ed-48ff-924b-a397df5ba0a0.jpg.256.jpg",
@@ -209,13 +230,6 @@
       "id": "85a99758-de39-471e-9f6d-800547f53d0a",
       "title": "Tougen Anki: Legend of the Cursed Blood",
       "cover": "https://uploads.mangadex.org/covers/85a99758-de39-471e-9f6d-800547f53d0a/e9fdf5a2-69d6-4e10-88c1-d5a50b9202c6.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "843c31ff-d390-4199-bc3b-94b0dfc63632",
-      "title": "Baki Side Story: Retsu Kaioh Doesn't Mind Even If It's in Another World",
-      "cover": "https://uploads.mangadex.org/covers/843c31ff-d390-4199-bc3b-94b0dfc63632/ac1f2f10-dd90-4d58-a93c-2f992789bde2.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
@@ -335,20 +349,6 @@
       "id": "61d81be6-2759-4cc4-9815-7952a3449149",
       "title": "Tensei Shitara Slime Datta Ken - Clayman Revenge",
       "cover": "https://uploads.mangadex.org/covers/61d81be6-2759-4cc4-9815-7952a3449149/1eebb672-3aa3-4f1d-99c6-ba298420bf54.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "87ffa375-bd2c-49ba-ba0c-6d78ea07c342",
-      "title": "Medaka Kuroiwa is Impervious to My Charms",
-      "cover": "https://uploads.mangadex.org/covers/87ffa375-bd2c-49ba-ba0c-6d78ea07c342/e410b2ef-b97e-45c1-b861-140b2fe6ee01.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "29ab6984-7c1d-4d45-b925-25aa082b492e",
-      "title": "Shangri-La Frontier: From Trash-Game Hunter to God-Tier Game Master!",
-      "cover": "https://uploads.mangadex.org/covers/29ab6984-7c1d-4d45-b925-25aa082b492e/c691a3e7-7ec0-4c2f-a86a-cf04489b33aa.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     }
