@@ -1,7 +1,63 @@
 {
-  "updated_at": "2026-08-23T18:24:42.956236+00:00",
+  "updated_at": "2026-08-24T01:06:39.546993+00:00",
   "count": 50,
   "items": [
+    {
+      "id": "17a56d33-9443-433a-9e0d-70459893ed8f",
+      "title": "My Wife Is From a Thousand Years Ago",
+      "cover": "https://uploads.mangadex.org/covers/17a56d33-9443-433a-9e0d-70459893ed8f/8d105d4e-a60e-4284-8321-d0904906574e.png.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "d78db808-93f7-498d-9368-e5767fd85057",
+      "title": "Class 2-B Hero Destroyerz",
+      "cover": "https://uploads.mangadex.org/covers/d78db808-93f7-498d-9368-e5767fd85057/382e67c5-962f-4e65-a1c9-f457e03c058e.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "d65c0332-3764-4c89-84bd-b1a4e7278ad7",
+      "title": "Kagurabachi",
+      "cover": "https://uploads.mangadex.org/covers/d65c0332-3764-4c89-84bd-b1a4e7278ad7/ff635eea-1ace-4a20-9038-a708b4496c30.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "80422e14-b9ad-4fda-970f-de370d5fa4e5",
+      "title": "صنع في الهاوية",
+      "cover": "https://uploads.mangadex.org/covers/80422e14-b9ad-4fda-970f-de370d5fa4e5/a9c2d5fa-6c12-434b-ab80-630e6d862cf8.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "c4ca02fb-8378-433b-8049-fbbea5d25cba",
+      "title": "هايميا-سينباي حسناء مهيبة!",
+      "cover": "https://uploads.mangadex.org/covers/c4ca02fb-8378-433b-8049-fbbea5d25cba/7ab29404-0ebd-4862-ad4e-e4ea1ffe231f.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "03d60b4c-551a-4f3d-925b-a67135cd616a",
+      "title": "بين قلم التعليم والأصفاد والزواج الفعلي",
+      "cover": "https://uploads.mangadex.org/covers/03d60b4c-551a-4f3d-925b-a67135cd616a/125f1298-6e0a-44ec-bdfa-9f7a82e70a57.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "0a580438-bc72-4503-940b-12a5da881b56",
+      "title": "أنتِ زهرة الحظ",
+      "cover": "https://uploads.mangadex.org/covers/0a580438-bc72-4503-940b-12a5da881b56/a64a8d8b-1c71-496e-a0a7-0c1da501da6c.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "9d3d3403-1a87-4737-9803-bc3d99db1424",
+      "title": "The Guy She Was Interested in Wasn't a Guy at All",
+      "cover": "https://uploads.mangadex.org/covers/9d3d3403-1a87-4737-9803-bc3d99db1424/fac191d0-96c1-4ebb-bf79-b7616d7162ac.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
     {
       "id": "dea77c2d-dbaa-434a-b0af-0c116642434c",
       "title": "Ichi the Witch",
@@ -66,13 +122,6 @@
       "status": "completed"
     },
     {
-      "id": "9d3d3403-1a87-4737-9803-bc3d99db1424",
-      "title": "The Guy She Was Interested in Wasn't a Guy at All",
-      "cover": "https://uploads.mangadex.org/covers/9d3d3403-1a87-4737-9803-bc3d99db1424/fac191d0-96c1-4ebb-bf79-b7616d7162ac.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
       "id": "c4b36f15-4ee5-425f-a77d-c2e7cbb970d8",
       "title": "NIPPON SANGOKU: The Three Nations of the Crimson Sun",
       "cover": "https://uploads.mangadex.org/covers/c4b36f15-4ee5-425f-a77d-c2e7cbb970d8/e5c54f1b-6ea4-4dd2-ae6e-9d0e138d7c2e.jpg.256.jpg",
@@ -92,13 +141,6 @@
       "cover": "https://uploads.mangadex.org/covers/04c892b3-a202-46f5-ad11-0d433e712ab8/becea310-21e9-464d-b1ed-b23f1b9d3996.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
-    },
-    {
-      "id": "59f47645-66a9-443e-8228-788313c3ae3c",
-      "title": "Tokyo Ghoul: re",
-      "cover": "https://uploads.mangadex.org/covers/59f47645-66a9-443e-8228-788313c3ae3c/c41d1081-cdb2-4c90-8028-61844823515b.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
     },
     {
       "id": "67e7453b-9ee5-4ae5-9316-215b03e4a71d",
@@ -150,11 +192,11 @@
       "status": "ongoing"
     },
     {
-      "id": "80422e14-b9ad-4fda-970f-de370d5fa4e5",
-      "title": "صنع في الهاوية",
-      "cover": "https://uploads.mangadex.org/covers/80422e14-b9ad-4fda-970f-de370d5fa4e5/a9c2d5fa-6c12-434b-ab80-630e6d862cf8.jpg.256.jpg",
+      "id": "59f47645-66a9-443e-8228-788313c3ae3c",
+      "title": "Tokyo Ghoul: re",
+      "cover": "https://uploads.mangadex.org/covers/59f47645-66a9-443e-8228-788313c3ae3c/c41d1081-cdb2-4c90-8028-61844823515b.jpg.256.jpg",
       "source": "mangadex",
-      "status": "ongoing"
+      "status": "completed"
     },
     {
       "id": "ad75039d-686c-457f-b478-e56fc3b3c069",
@@ -167,13 +209,6 @@
       "id": "510f29a8-99b4-46af-ba5e-916e96bc6f37",
       "title": "Fate/type Redline",
       "cover": "https://uploads.mangadex.org/covers/510f29a8-99b4-46af-ba5e-916e96bc6f37/c1d7aed1-9cd1-426f-bfb8-7e46594d0e29.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "c4ca02fb-8378-433b-8049-fbbea5d25cba",
-      "title": "هايميا-سينباي حسناء مهيبة!",
-      "cover": "https://uploads.mangadex.org/covers/c4ca02fb-8378-433b-8049-fbbea5d25cba/7ab29404-0ebd-4862-ad4e-e4ea1ffe231f.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
@@ -283,13 +318,6 @@
       "status": "ongoing"
     },
     {
-      "id": "0a580438-bc72-4503-940b-12a5da881b56",
-      "title": "أنتِ زهرة الحظ",
-      "cover": "https://uploads.mangadex.org/covers/0a580438-bc72-4503-940b-12a5da881b56/a64a8d8b-1c71-496e-a0a7-0c1da501da6c.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
       "id": "a6a46436-9ed4-4c20-8b11-6f4a0f74b23a",
       "title": "Kabuto Mushi",
       "cover": "https://uploads.mangadex.org/covers/a6a46436-9ed4-4c20-8b11-6f4a0f74b23a/5a16e9bf-0859-4719-bd13-7e5e43e338d7.jpg.256.jpg",
@@ -321,34 +349,6 @@
       "id": "59ef045c-0712-4f15-bb54-52bffd87481b",
       "title": "محب الهيتو",
       "cover": "https://uploads.mangadex.org/covers/59ef045c-0712-4f15-bb54-52bffd87481b/0b9fa6bb-d07b-4269-9e4d-8ec156ccef48.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "38179337-1640-4927-8851-9bedd8d19e82",
-      "title": "Aren't You Too Sweet Salt-God Sato-San?",
-      "cover": "https://uploads.mangadex.org/covers/38179337-1640-4927-8851-9bedd8d19e82/82765507-ec2b-48df-a0f0-c53ba4d71d6d.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "229e5177-2e71-4642-bd56-a9b0b0ba0e60",
-      "title": "فهرس السحر",
-      "cover": "https://uploads.mangadex.org/covers/229e5177-2e71-4642-bd56-a9b0b0ba0e60/7d19536b-9ba9-4ba4-8e30-6c4eb40ceeb8.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "26102334-1f7b-4a5b-a64f-107c5c24a70f",
-      "title": "Mao",
-      "cover": "https://uploads.mangadex.org/covers/26102334-1f7b-4a5b-a64f-107c5c24a70f/2a179e58-6067-4f7f-a40a-4f472b67a219.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "52ede55c-1584-4019-b85b-3902a423c3ab",
-      "title": "FAIRY TAIL: 100 Years Quest",
-      "cover": "https://uploads.mangadex.org/covers/52ede55c-1584-4019-b85b-3902a423c3ab/8e18a9d7-27ed-48ff-924b-a397df5ba0a0.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     }
