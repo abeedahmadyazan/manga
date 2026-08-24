@@ -1,7 +1,49 @@
 {
-  "updated_at": "2026-08-24T01:06:39.546993+00:00",
+  "updated_at": "2026-08-24T06:52:50.544095+00:00",
   "count": 50,
   "items": [
+    {
+      "id": "8e95570e-93a7-494d-8e83-bd755e3b631d",
+      "title": "Fragments of the Layered City",
+      "cover": "https://uploads.mangadex.org/covers/8e95570e-93a7-494d-8e83-bd755e3b631d/cffb96dc-36e9-48b3-9570-9f99b7d6f2fc.png.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "67e7453b-9ee5-4ae5-9316-215b03e4a71d",
+      "title": "Witch Hat Atelier",
+      "cover": "https://uploads.mangadex.org/covers/67e7453b-9ee5-4ae5-9316-215b03e4a71d/a9feeb2a-4b34-4a52-93fb-ab948e743503.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "0a580438-bc72-4503-940b-12a5da881b56",
+      "title": "أنتِ زهرة الحظ",
+      "cover": "https://uploads.mangadex.org/covers/0a580438-bc72-4503-940b-12a5da881b56/a64a8d8b-1c71-496e-a0a7-0c1da501da6c.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "5b93fa0f-0640-49b8-974e-954b9959929b",
+      "title": "Girls' Last Tour",
+      "cover": "https://uploads.mangadex.org/covers/5b93fa0f-0640-49b8-974e-954b9959929b/67d556f5-91d4-4b85-b287-2f74f008e564.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "3e3604cc-97b5-43f0-ab2c-c144debcae87",
+      "title": "Yu☆Gi☆Oh! OCG STORIES",
+      "cover": "https://uploads.mangadex.org/covers/3e3604cc-97b5-43f0-ab2c-c144debcae87/187b72db-9d6a-4753-81b2-34e41150ad9f.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "077a3fed-1634-424f-be7a-9a96b7f07b78",
+      "title": "مملكة",
+      "cover": "https://uploads.mangadex.org/covers/077a3fed-1634-424f-be7a-9a96b7f07b78/8bc7a592-764d-4a89-a0ae-741347b894ce.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
     {
       "id": "17a56d33-9443-433a-9e0d-70459893ed8f",
       "title": "My Wife Is From a Thousand Years Ago",
@@ -41,13 +83,6 @@
       "id": "03d60b4c-551a-4f3d-925b-a67135cd616a",
       "title": "بين قلم التعليم والأصفاد والزواج الفعلي",
       "cover": "https://uploads.mangadex.org/covers/03d60b4c-551a-4f3d-925b-a67135cd616a/125f1298-6e0a-44ec-bdfa-9f7a82e70a57.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "0a580438-bc72-4503-940b-12a5da881b56",
-      "title": "أنتِ زهرة الحظ",
-      "cover": "https://uploads.mangadex.org/covers/0a580438-bc72-4503-940b-12a5da881b56/a64a8d8b-1c71-496e-a0a7-0c1da501da6c.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
@@ -136,27 +171,6 @@
       "status": "completed"
     },
     {
-      "id": "04c892b3-a202-46f5-ad11-0d433e712ab8",
-      "title": "Dealing with Mikadono Sisters is a Breeze",
-      "cover": "https://uploads.mangadex.org/covers/04c892b3-a202-46f5-ad11-0d433e712ab8/becea310-21e9-464d-b1ed-b23f1b9d3996.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "67e7453b-9ee5-4ae5-9316-215b03e4a71d",
-      "title": "Witch Hat Atelier",
-      "cover": "https://uploads.mangadex.org/covers/67e7453b-9ee5-4ae5-9316-215b03e4a71d/a9feeb2a-4b34-4a52-93fb-ab948e743503.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "ed5dddc0-999d-4fd2-a702-9fef1ec2c955",
-      "title": "Blue Box",
-      "cover": "https://uploads.mangadex.org/covers/ed5dddc0-999d-4fd2-a702-9fef1ec2c955/80206db7-7ca3-4038-a8d4-04926e9a4388.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
       "id": "db692d58-4b13-4174-ae8c-30c515c0689c",
       "title": "Hunter x Hunter",
       "cover": "https://uploads.mangadex.org/covers/db692d58-4b13-4174-ae8c-30c515c0689c/aa112927-f1e5-4fe4-a4db-7fd4a1536e3c.jpg.256.jpg",
@@ -164,9 +178,16 @@
       "status": "ongoing"
     },
     {
-      "id": "5b93fa0f-0640-49b8-974e-954b9959929b",
-      "title": "Girls' Last Tour",
-      "cover": "https://uploads.mangadex.org/covers/5b93fa0f-0640-49b8-974e-954b9959929b/67d556f5-91d4-4b85-b287-2f74f008e564.jpg.256.jpg",
+      "id": "04c892b3-a202-46f5-ad11-0d433e712ab8",
+      "title": "Dealing with Mikadono Sisters is a Breeze",
+      "cover": "https://uploads.mangadex.org/covers/04c892b3-a202-46f5-ad11-0d433e712ab8/becea310-21e9-464d-b1ed-b23f1b9d3996.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "ed5dddc0-999d-4fd2-a702-9fef1ec2c955",
+      "title": "Blue Box",
+      "cover": "https://uploads.mangadex.org/covers/ed5dddc0-999d-4fd2-a702-9fef1ec2c955/80206db7-7ca3-4038-a8d4-04926e9a4388.jpg.256.jpg",
       "source": "mangadex",
       "status": "completed"
     },
@@ -328,27 +349,6 @@
       "id": "3df1a9a3-a1be-47a3-9e90-9b3e55b1d0ac",
       "title": "الشخص الخطير في قلبي",
       "cover": "https://uploads.mangadex.org/covers/3df1a9a3-a1be-47a3-9e90-9b3e55b1d0ac/12d521b7-01b8-4015-ab40-33ed75cc82e8.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "96ae166c-d8e1-4e9e-88cb-805b65154d7e",
-      "title": "Red Blue",
-      "cover": "https://uploads.mangadex.org/covers/96ae166c-d8e1-4e9e-88cb-805b65154d7e/d010f9c1-fdaa-4925-93df-dc3c06417574.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "4393fd4e-d646-4bab-9c95-786168ccb618",
-      "title": "Devilman",
-      "cover": "https://uploads.mangadex.org/covers/4393fd4e-d646-4bab-9c95-786168ccb618/3199fa66-3a73-4c11-9236-9cba765e6650.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
-      "id": "59ef045c-0712-4f15-bb54-52bffd87481b",
-      "title": "محب الهيتو",
-      "cover": "https://uploads.mangadex.org/covers/59ef045c-0712-4f15-bb54-52bffd87481b/0b9fa6bb-d07b-4269-9e4d-8ec156ccef48.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     }
