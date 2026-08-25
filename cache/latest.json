@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-25T06:41:09.550925+00:00",
+  "updated_at": "2026-08-25T12:41:28.408884+00:00",
   "count": 50,
   "items": [
     {
@@ -8,6 +8,27 @@
       "cover": "https://uploads.mangadex.org/covers/e5357466-c8a2-4259-9b02-2580185bd2bb/11cde992-1cd2-4e84-af10-31f9ff71e69b.jpg.256.jpg",
       "source": "mangadex",
       "status": "completed"
+    },
+    {
+      "id": "114f08df-91de-4504-a5c7-8eaf51ff695c",
+      "title": "Kitakubu Katsudou Kiroku",
+      "cover": "https://uploads.mangadex.org/covers/114f08df-91de-4504-a5c7-8eaf51ff695c/5951f5b7-d8cc-4f11-ba21-a01e300de2eb.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "dea77c2d-dbaa-434a-b0af-0c116642434c",
+      "title": "Ichi the Witch",
+      "cover": "https://uploads.mangadex.org/covers/dea77c2d-dbaa-434a-b0af-0c116642434c/707b5cff-60e3-40fe-8105-e9065d5f8abd.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "4e0ab019-afcb-4fd9-98eb-fcb28cf7fc81",
+      "title": "مانجا الملكة النحلة شوكهو ميساكي - مينتل-آوت",
+      "cover": "https://uploads.mangadex.org/covers/4e0ab019-afcb-4fd9-98eb-fcb28cf7fc81/71450b93-c970-42e6-bb65-93f45b8e9ac3.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
     },
     {
       "id": "eeb2ab0e-7dbc-4f0c-b476-8181d44217a8",
@@ -108,6 +129,13 @@
       "status": "ongoing"
     },
     {
+      "id": "68112dc1-2b80-4f20-beb8-2f2a8716a430",
+      "title": "داندادان",
+      "cover": "https://uploads.mangadex.org/covers/68112dc1-2b80-4f20-beb8-2f2a8716a430/a6fe6c95-47cb-494c-a5ca-8e4bfbd7bf59.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
       "id": "d8a959f7-648e-4c8d-8f23-f1f3f8e129f3",
       "title": "ون بنش مان",
       "cover": "https://uploads.mangadex.org/covers/d8a959f7-648e-4c8d-8f23-f1f3f8e129f3/511fc404-e6b4-4204-bb10-e4a28f7b5271.jpg.256.jpg",
@@ -127,13 +155,6 @@
       "cover": "https://uploads.mangadex.org/covers/bcfe1b36-daee-40fd-9984-d9597caf9da7/5ce19283-d717-44e2-bb69-4247640d3c75.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
-    },
-    {
-      "id": "114f08df-91de-4504-a5c7-8eaf51ff695c",
-      "title": "Kitakubu Katsudou Kiroku",
-      "cover": "https://uploads.mangadex.org/covers/114f08df-91de-4504-a5c7-8eaf51ff695c/5951f5b7-d8cc-4f11-ba21-a01e300de2eb.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
     },
     {
       "id": "0a580438-bc72-4503-940b-12a5da881b56",
@@ -213,16 +234,9 @@
       "status": "ongoing"
     },
     {
-      "id": "dea77c2d-dbaa-434a-b0af-0c116642434c",
-      "title": "Ichi the Witch",
-      "cover": "https://uploads.mangadex.org/covers/dea77c2d-dbaa-434a-b0af-0c116642434c/707b5cff-60e3-40fe-8105-e9065d5f8abd.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
       "id": "ca33a142-58fb-4fee-88b9-36ef87f02c77",
       "title": "حب نيزومي الأول",
-      "cover": "https://uploads.mangadex.org/covers/ca33a142-58fb-4fee-88b9-36ef87f02c77/ea2df7b2-7baf-488c-a90e-61bc5e5f275e.png.256.jpg",
+      "cover": "https://uploads.mangadex.org/covers/ca33a142-58fb-4fee-88b9-36ef87f02c77/7e8317ea-78bf-4090-a2ee-ab07041e4458.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
@@ -265,6 +279,20 @@
       "id": "c4b36f15-4ee5-425f-a77d-c2e7cbb970d8",
       "title": "NIPPON SANGOKU: The Three Nations of the Crimson Sun",
       "cover": "https://uploads.mangadex.org/covers/c4b36f15-4ee5-425f-a77d-c2e7cbb970d8/e5c54f1b-6ea4-4dd2-ae6e-9d0e138d7c2e.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "c1e284bc-0436-42fe-b571-fa35a94279ce",
+      "title": "Drama Queen",
+      "cover": "https://uploads.mangadex.org/covers/c1e284bc-0436-42fe-b571-fa35a94279ce/d9582cb1-ce15-4a09-a514-5186b43c01d2.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "9d9b04ad-9a83-49f4-8ae4-a9a3780fe9c0",
+      "title": "Sakamoto Days",
+      "cover": "https://uploads.mangadex.org/covers/9d9b04ad-9a83-49f4-8ae4-a9a3780fe9c0/f3f1d565-3a66-484a-be9b-28e1b03d9c51.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
@@ -321,34 +349,6 @@
       "id": "59f47645-66a9-443e-8228-788313c3ae3c",
       "title": "Tokyo Ghoul: re",
       "cover": "https://uploads.mangadex.org/covers/59f47645-66a9-443e-8228-788313c3ae3c/c41d1081-cdb2-4c90-8028-61844823515b.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
-      "id": "ad75039d-686c-457f-b478-e56fc3b3c069",
-      "title": "I Started Working a Housekeeping Job and Ended up Being Liked by the Family of the Most Beautiful Girl in School.",
-      "cover": "https://uploads.mangadex.org/covers/ad75039d-686c-457f-b478-e56fc3b3c069/d11151a2-0f4e-49e8-9c19-1be626a044fa.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "510f29a8-99b4-46af-ba5e-916e96bc6f37",
-      "title": "Fate/type Redline",
-      "cover": "https://uploads.mangadex.org/covers/510f29a8-99b4-46af-ba5e-916e96bc6f37/c1d7aed1-9cd1-426f-bfb8-7e46594d0e29.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "936f0ba5-ca65-4de4-99b1-528c02a4454d",
-      "title": "Hunter x Hunter (Official Colored)",
-      "cover": "https://uploads.mangadex.org/covers/936f0ba5-ca65-4de4-99b1-528c02a4454d/128d80df-c5e4-4791-b3b7-08586e9db1b8.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "319df2e2-e6a6-4e3a-a31c-68539c140a84",
-      "title": "Slam Dunk!",
-      "cover": "https://uploads.mangadex.org/covers/319df2e2-e6a6-4e3a-a31c-68539c140a84/a845455f-52d0-4cc4-92a8-bd5bad7d69b9.jpg.256.jpg",
       "source": "mangadex",
       "status": "completed"
     }
