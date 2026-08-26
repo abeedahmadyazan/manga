@@ -1,7 +1,42 @@
 {
-  "updated_at": "2026-08-26T06:42:42.686837+00:00",
+  "updated_at": "2026-08-26T12:46:04.269905+00:00",
   "count": 50,
   "items": [
+    {
+      "id": "1693697a-783c-4d3c-a2d3-dc069e137a23",
+      "title": "I Have No Home",
+      "cover": "https://uploads.mangadex.org/covers/1693697a-783c-4d3c-a2d3-dc069e137a23/bc55de2a-47dd-41cb-9338-75b3f0650a69.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "202718c6-525e-4cec-a469-c945548cacc3",
+      "title": "I Hate That We're Childhood Friends!: My Rise to the Top of School Life with an S-Rank Beauty Begins After a Falling-Out",
+      "cover": "https://uploads.mangadex.org/covers/202718c6-525e-4cec-a469-c945548cacc3/04dd5c60-a742-4f42-9de0-80759d0e0ceb.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "77bee52c-d2d6-44ad-a33a-1734c1fe696a",
+      "title": "The Eminence in Shadow",
+      "cover": "https://uploads.mangadex.org/covers/77bee52c-d2d6-44ad-a33a-1734c1fe696a/6079dd31-838b-4d61-87c4-121f3ad19158.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "0fc2cafc-0c2f-419c-a891-5c0745080800",
+      "title": "Bungou Stray Dogs: STORM BRINGER",
+      "cover": "https://uploads.mangadex.org/covers/0fc2cafc-0c2f-419c-a891-5c0745080800/c02fdf49-68ab-4333-a875-6ac9db65c269.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "d00bd104-d9b2-4ee9-a088-b5065d1c406a",
+      "title": "A Certain Scientific Railgun",
+      "cover": "https://uploads.mangadex.org/covers/d00bd104-d9b2-4ee9-a088-b5065d1c406a/34cb96d6-2a3c-47d0-9f56-102d40a65ea8.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
     {
       "id": "5b93fa0f-0640-49b8-974e-954b9959929b",
       "title": "Girls' Last Tour",
@@ -143,13 +178,6 @@
       "status": "ongoing"
     },
     {
-      "id": "1693697a-783c-4d3c-a2d3-dc069e137a23",
-      "title": "I Have No Home",
-      "cover": "https://uploads.mangadex.org/covers/1693697a-783c-4d3c-a2d3-dc069e137a23/bc55de2a-47dd-41cb-9338-75b3f0650a69.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
       "id": "30196491-8fc2-4961-8886-a58f898b1b3e",
       "title": "Berserk of Gluttony: The One that Exceeds the Concept of Levels",
       "cover": "https://uploads.mangadex.org/covers/30196491-8fc2-4961-8886-a58f898b1b3e/1790f17f-9184-4a48-8928-c45de48b778e.jpg.256.jpg",
@@ -216,13 +244,6 @@
       "id": "db692d58-4b13-4174-ae8c-30c515c0689c",
       "title": "Hunter x Hunter",
       "cover": "https://uploads.mangadex.org/covers/db692d58-4b13-4174-ae8c-30c515c0689c/aa112927-f1e5-4fe4-a4db-7fd4a1536e3c.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "202718c6-525e-4cec-a469-c945548cacc3",
-      "title": "I Hate That We're Childhood Friends!: My Rise to the Top of School Life with an S-Rank Beauty Begins After a Falling-Out",
-      "cover": "https://uploads.mangadex.org/covers/202718c6-525e-4cec-a469-c945548cacc3/04dd5c60-a742-4f42-9de0-80759d0e0ceb.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
@@ -304,6 +325,13 @@
       "status": "ongoing"
     },
     {
+      "id": "46e9cae5-4407-4576-9b9e-4c517ae9298e",
+      "title": "أرض الأحلام الموعودة",
+      "cover": "https://uploads.mangadex.org/covers/46e9cae5-4407-4576-9b9e-4c517ae9298e/e023b6b0-76c7-4dfd-8ec2-ce7a26b90a05.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
       "id": "17a56d33-9443-433a-9e0d-70459893ed8f",
       "title": "My Wife Is From a Thousand Years Ago",
       "cover": "https://uploads.mangadex.org/covers/17a56d33-9443-433a-9e0d-70459893ed8f/8d105d4e-a60e-4284-8321-d0904906574e.png.256.jpg",
@@ -323,34 +351,6 @@
       "cover": "https://uploads.mangadex.org/covers/80422e14-b9ad-4fda-970f-de370d5fa4e5/a9c2d5fa-6c12-434b-ab80-630e6d862cf8.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
-    },
-    {
-      "id": "03d60b4c-551a-4f3d-925b-a67135cd616a",
-      "title": "بين قلم التعليم والأصفاد والزواج الفعلي",
-      "cover": "https://uploads.mangadex.org/covers/03d60b4c-551a-4f3d-925b-a67135cd616a/125f1298-6e0a-44ec-bdfa-9f7a82e70a57.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "9d3d3403-1a87-4737-9803-bc3d99db1424",
-      "title": "The Guy She Was Interested in Wasn't a Guy at All",
-      "cover": "https://uploads.mangadex.org/covers/9d3d3403-1a87-4737-9803-bc3d99db1424/fac191d0-96c1-4ebb-bf79-b7616d7162ac.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "ca33a142-58fb-4fee-88b9-36ef87f02c77",
-      "title": "حب نيزومي الأول",
-      "cover": "https://uploads.mangadex.org/covers/ca33a142-58fb-4fee-88b9-36ef87f02c77/7e8317ea-78bf-4090-a2ee-ab07041e4458.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "d1a9fdeb-f713-407f-960c-8326b586e6fd",
-      "title": "Vagabond",
-      "cover": "https://uploads.mangadex.org/covers/d1a9fdeb-f713-407f-960c-8326b586e6fd/05f8dcb4-8ea1-48db-a0b1-3a8fbf695e5a.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "hiatus"
     }
   ]
 }
