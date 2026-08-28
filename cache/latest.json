@@ -1,7 +1,70 @@
 {
-  "updated_at": "2026-08-27T21:43:16.287465+00:00",
+  "updated_at": "2026-08-28T09:26:45.626926+00:00",
   "count": 50,
   "items": [
+    {
+      "id": "774f0f04-5023-4e2e-9c0b-f0ed382f078b",
+      "title": "إينيغماتيكا",
+      "cover": "https://uploads.mangadex.org/covers/774f0f04-5023-4e2e-9c0b-f0ed382f078b/9f0534e0-6163-49a2-b515-4798f7aa85fa.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "2a7ee7fc-11f1-4482-84a9-82a428293cd9",
+      "title": "A Guilty Victim-Player's Hustle Play",
+      "cover": "https://uploads.mangadex.org/covers/2a7ee7fc-11f1-4482-84a9-82a428293cd9/f98bf8d9-8c37-48d8-a3c4-0ec15bf37f70.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "5b93fa0f-0640-49b8-974e-954b9959929b",
+      "title": "Girls' Last Tour",
+      "cover": "https://uploads.mangadex.org/covers/5b93fa0f-0640-49b8-974e-954b9959929b/67d556f5-91d4-4b85-b287-2f74f008e564.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "ef473f14-8c4d-435e-9015-b714512e69eb",
+      "title": "استدعاء اليابان",
+      "cover": "https://uploads.mangadex.org/covers/ef473f14-8c4d-435e-9015-b714512e69eb/9cd0abf9-8259-489f-8515-8ae35d89f075.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "fd2d7c3e-87ab-4775-a1e3-17403994043b",
+      "title": "The Witch and the Mercenary",
+      "cover": "https://uploads.mangadex.org/covers/fd2d7c3e-87ab-4775-a1e3-17403994043b/e0269401-b1ab-4a06-8452-74996f6eaa8f.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "26102334-1f7b-4a5b-a64f-107c5c24a70f",
+      "title": "Mao",
+      "cover": "https://uploads.mangadex.org/covers/26102334-1f7b-4a5b-a64f-107c5c24a70f/2a179e58-6067-4f7f-a40a-4f472b67a219.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "d7037b2a-874a-4360-8a7b-07f2899152fd",
+      "title": "إيروما-كن في مدرسة الشياطين",
+      "cover": "https://uploads.mangadex.org/covers/d7037b2a-874a-4360-8a7b-07f2899152fd/52d67301-401c-44c4-9d7b-529e2796f7d5.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "7f30dfc3-0b80-4dcc-a3b9-0cd746fac005",
+      "title": "المتحري كونان",
+      "cover": "https://uploads.mangadex.org/covers/7f30dfc3-0b80-4dcc-a3b9-0cd746fac005/e67075b1-7ffc-4fe8-abd1-c8f3b32c28eb.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "d422ddc8-eea3-4b0a-82a4-291bbd8c9285",
+      "title": "أبناء عائلة شيونجي",
+      "cover": "https://uploads.mangadex.org/covers/d422ddc8-eea3-4b0a-82a4-291bbd8c9285/18f555fb-4fe4-4d47-8fbe-7bd101a5bc3a.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
     {
       "id": "a6a46436-9ed4-4c20-8b11-6f4a0f74b23a",
       "title": "Kabuto Mushi",
@@ -87,6 +150,20 @@
       "status": "ongoing"
     },
     {
+      "id": "8a38bcc4-0a52-4a46-9d02-7fc802048b1d",
+      "title": "Shinobi Undercover",
+      "cover": "https://uploads.mangadex.org/covers/8a38bcc4-0a52-4a46-9d02-7fc802048b1d/da513bdd-26f8-48a1-9b11-4f4e9b35f245.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "11b74211-f4c0-4f08-b5a4-c491da0d0c0b",
+      "title": "Choujin X",
+      "cover": "https://uploads.mangadex.org/covers/11b74211-f4c0-4f08-b5a4-c491da0d0c0b/a024c8ce-5fbc-4fea-9363-6b8eee3477e7.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
       "id": "ea47525d-99df-45b5-9103-dd853f49f8c3",
       "title": "Welcome to Demon School! Iruma-kun: IruMafia Edition",
       "cover": "https://uploads.mangadex.org/covers/ea47525d-99df-45b5-9103-dd853f49f8c3/7ba89c43-1234-4d11-9aa6-c3a7576cd1ce.jpg.256.jpg",
@@ -136,13 +213,6 @@
       "status": "ongoing"
     },
     {
-      "id": "d7037b2a-874a-4360-8a7b-07f2899152fd",
-      "title": "إيروما-كن في مدرسة الشياطين",
-      "cover": "https://uploads.mangadex.org/covers/d7037b2a-874a-4360-8a7b-07f2899152fd/52d67301-401c-44c4-9d7b-529e2796f7d5.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
       "id": "b5b21ca1-bba5-4b9a-8cd1-6248f731650b",
       "title": "سجلات راغناروك",
       "cover": "https://uploads.mangadex.org/covers/b5b21ca1-bba5-4b9a-8cd1-6248f731650b/64235ab3-3595-47ea-b65a-457b828489c2.jpg.256.jpg",
@@ -171,13 +241,6 @@
       "status": "completed"
     },
     {
-      "id": "5b93fa0f-0640-49b8-974e-954b9959929b",
-      "title": "Girls' Last Tour",
-      "cover": "https://uploads.mangadex.org/covers/5b93fa0f-0640-49b8-974e-954b9959929b/67d556f5-91d4-4b85-b287-2f74f008e564.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
       "id": "733d95ce-4dc2-4c02-a177-6cb772b18317",
       "title": "The Girl I Saved on the Train Turned out to Be My Childhood Friend",
       "cover": "https://uploads.mangadex.org/covers/733d95ce-4dc2-4c02-a177-6cb772b18317/e284f7bb-ca82-407b-b0e1-31dd52b8f65c.jpg.256.jpg",
@@ -190,13 +253,6 @@
       "cover": "https://uploads.mangadex.org/covers/37f5cce0-8070-4ada-96e5-fa24b1bd4ff9/e21ca520-5054-4041-a07e-de8b7c683522.jpg.256.jpg",
       "source": "mangadex",
       "status": "completed"
-    },
-    {
-      "id": "7f30dfc3-0b80-4dcc-a3b9-0cd746fac005",
-      "title": "المتحري كونان",
-      "cover": "https://uploads.mangadex.org/covers/7f30dfc3-0b80-4dcc-a3b9-0cd746fac005/e67075b1-7ffc-4fe8-abd1-c8f3b32c28eb.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
     },
     {
       "id": "423aefd6-f63d-4d3b-9a70-ba8ec9ad2c37",
@@ -218,13 +274,6 @@
       "cover": "https://uploads.mangadex.org/covers/1693697a-783c-4d3c-a2d3-dc069e137a23/bc55de2a-47dd-41cb-9338-75b3f0650a69.jpg.256.jpg",
       "source": "mangadex",
       "status": "completed"
-    },
-    {
-      "id": "774f0f04-5023-4e2e-9c0b-f0ed382f078b",
-      "title": "إينيغماتيكا",
-      "cover": "https://uploads.mangadex.org/covers/774f0f04-5023-4e2e-9c0b-f0ed382f078b/9f0534e0-6163-49a2-b515-4798f7aa85fa.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
     },
     {
       "id": "63dbbf80-0189-4ae4-a549-68a0caa2f834",
@@ -283,6 +332,13 @@
       "status": "completed"
     },
     {
+      "id": "9c1cd558-fba3-40f1-bb84-b320f5d1eab1",
+      "title": "Bug Ego",
+      "cover": "https://uploads.mangadex.org/covers/9c1cd558-fba3-40f1-bb84-b320f5d1eab1/a40cc882-7d6b-4e12-885c-fef2928e7b7a.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
       "id": "949b20c3-de22-4e7b-989f-b26a8cdf7ecb",
       "title": "DOGSRED",
       "cover": "https://uploads.mangadex.org/covers/949b20c3-de22-4e7b-989f-b26a8cdf7ecb/6e8848cc-68f2-4f96-a832-5f300a624980.jpg.256.jpg",
@@ -295,62 +351,6 @@
       "cover": "https://uploads.mangadex.org/covers/0b094aab-0cfb-4837-a49b-7267bdb86bec/94721030-863d-4b1d-b97e-72391515b98c.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
-    },
-    {
-      "id": "4413d794-e0da-4a6e-b61a-afd5758914e6",
-      "title": "Blooming Love",
-      "cover": "https://uploads.mangadex.org/covers/4413d794-e0da-4a6e-b61a-afd5758914e6/ed6014a9-862c-42d3-ac38-b4e2de20b6b7.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
-      "id": "141609b6-cf86-4266-904c-6648f389cdc9",
-      "title": "RuriDragon",
-      "cover": "https://uploads.mangadex.org/covers/141609b6-cf86-4266-904c-6648f389cdc9/216d1ce9-2195-4ad3-9502-be95b06a3502.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "ed5dddc0-999d-4fd2-a702-9fef1ec2c955",
-      "title": "Blue Box",
-      "cover": "https://uploads.mangadex.org/covers/ed5dddc0-999d-4fd2-a702-9fef1ec2c955/80206db7-7ca3-4038-a8d4-04926e9a4388.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
-      "id": "73743311-2118-42eb-9af2-c64d05e97edd",
-      "title": "Ghost Girl",
-      "cover": "https://uploads.mangadex.org/covers/73743311-2118-42eb-9af2-c64d05e97edd/c1342299-b5b1-4489-afc7-d989cf1a07b8.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "hiatus"
-    },
-    {
-      "id": "84703c86-eb83-45ec-8fc5-f34a25115893",
-      "title": "Dai Dark",
-      "cover": "https://uploads.mangadex.org/covers/84703c86-eb83-45ec-8fc5-f34a25115893/e3a1e78b-7147-45f3-9c7f-ee398fa9c437.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "114f08df-91de-4504-a5c7-8eaf51ff695c",
-      "title": "Kitakubu Katsudou Kiroku",
-      "cover": "https://uploads.mangadex.org/covers/114f08df-91de-4504-a5c7-8eaf51ff695c/5951f5b7-d8cc-4f11-ba21-a01e300de2eb.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
-      "id": "319df2e2-e6a6-4e3a-a31c-68539c140a84",
-      "title": "Slam Dunk!",
-      "cover": "https://uploads.mangadex.org/covers/319df2e2-e6a6-4e3a-a31c-68539c140a84/a845455f-52d0-4cc4-92a8-bd5bad7d69b9.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
-      "id": "a77742b1-befd-49a4-bff5-1ad4e6b0ef7b",
-      "title": "Chainsaw Man",
-      "cover": "https://uploads.mangadex.org/covers/a77742b1-befd-49a4-bff5-1ad4e6b0ef7b/6e518bd1-5f60-446b-8832-bfe6bf74834b.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
     }
   ]
 }
