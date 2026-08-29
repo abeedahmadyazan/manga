@@ -1,11 +1,46 @@
 {
-  "updated_at": "2026-08-29T05:34:39.209463+00:00",
+  "updated_at": "2026-08-29T12:15:45.561309+00:00",
   "count": 50,
   "items": [
+    {
+      "id": "bbaa17c4-0f36-4bbb-9861-34fc8fdf20fc",
+      "title": "EDENS ZERO",
+      "cover": "https://uploads.mangadex.org/covers/bbaa17c4-0f36-4bbb-9861-34fc8fdf20fc/c17ea08e-ba67-4f81-b54f-2d545fa1c62e.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "4d6decd4-835d-4905-9534-2571dae07bcd",
+      "title": "Lord El-Melloi II-sei no Jikenbo",
+      "cover": "https://uploads.mangadex.org/covers/4d6decd4-835d-4905-9534-2571dae07bcd/5f347aae-bf45-4dcb-828d-2c507db71d2f.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
     {
       "id": "30196491-8fc2-4961-8886-a58f898b1b3e",
       "title": "Berserk of Gluttony: The One that Exceeds the Concept of Levels",
       "cover": "https://uploads.mangadex.org/covers/30196491-8fc2-4961-8886-a58f898b1b3e/1790f17f-9184-4a48-8928-c45de48b778e.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "b5b21ca1-bba5-4b9a-8cd1-6248f731650b",
+      "title": "سجلات راغناروك",
+      "cover": "https://uploads.mangadex.org/covers/b5b21ca1-bba5-4b9a-8cd1-6248f731650b/64235ab3-3595-47ea-b65a-457b828489c2.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "d553645b-03a3-4fc8-9a9c-57f91cbbab89",
+      "title": "Are You a Landmine, Chihara-san?",
+      "cover": "https://uploads.mangadex.org/covers/d553645b-03a3-4fc8-9a9c-57f91cbbab89/4878d139-e5ee-49eb-aeb6-1c2f9025624e.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "8e95570e-93a7-494d-8e83-bd755e3b631d",
+      "title": "Fragments of the Layered City",
+      "cover": "https://uploads.mangadex.org/covers/8e95570e-93a7-494d-8e83-bd755e3b631d/cffb96dc-36e9-48b3-9570-9f99b7d6f2fc.png.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
@@ -27,13 +62,6 @@
       "id": "334019e1-18bb-4ac0-b35c-0e8efb1e481c",
       "title": "JoJo’s Bizarre Adventure, Part 9: The JoJoLands - Digital Colored Comics",
       "cover": "https://uploads.mangadex.org/covers/334019e1-18bb-4ac0-b35c-0e8efb1e481c/530583f4-80ad-4f37-92d9-441b225c9785.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "b5b21ca1-bba5-4b9a-8cd1-6248f731650b",
-      "title": "سجلات راغناروك",
-      "cover": "https://uploads.mangadex.org/covers/b5b21ca1-bba5-4b9a-8cd1-6248f731650b/64235ab3-3595-47ea-b65a-457b828489c2.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
@@ -99,13 +127,6 @@
       "cover": "https://uploads.mangadex.org/covers/a07320a4-afcd-413a-a451-d69a448d0c28/b74c8cce-42cd-4889-b75d-7944e63f9a14.jpg.256.jpg",
       "source": "mangadex",
       "status": "completed"
-    },
-    {
-      "id": "d553645b-03a3-4fc8-9a9c-57f91cbbab89",
-      "title": "Are You a Landmine, Chihara-san?",
-      "cover": "https://uploads.mangadex.org/covers/d553645b-03a3-4fc8-9a9c-57f91cbbab89/4878d139-e5ee-49eb-aeb6-1c2f9025624e.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
     },
     {
       "id": "c4ca02fb-8378-433b-8049-fbbea5d25cba",
@@ -271,7 +292,7 @@
     {
       "id": "8a38bcc4-0a52-4a46-9d02-7fc802048b1d",
       "title": "Shinobi Undercover",
-      "cover": "https://uploads.mangadex.org/covers/8a38bcc4-0a52-4a46-9d02-7fc802048b1d/da513bdd-26f8-48a1-9b11-4f4e9b35f245.jpg.256.jpg",
+      "cover": "https://uploads.mangadex.org/covers/8a38bcc4-0a52-4a46-9d02-7fc802048b1d/c5695518-7681-4f96-a2a9-7f13ee460196.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
@@ -330,27 +351,6 @@
       "cover": "https://uploads.mangadex.org/covers/77bee52c-d2d6-44ad-a33a-1734c1fe696a/6079dd31-838b-4d61-87c4-121f3ad19158.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
-    },
-    {
-      "id": "46e9cae5-4407-4576-9b9e-4c517ae9298e",
-      "title": "أرض الأحلام الموعودة",
-      "cover": "https://uploads.mangadex.org/covers/46e9cae5-4407-4576-9b9e-4c517ae9298e/e023b6b0-76c7-4dfd-8ec2-ce7a26b90a05.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
-      "id": "733d95ce-4dc2-4c02-a177-6cb772b18317",
-      "title": "The Girl I Saved on the Train Turned out to Be My Childhood Friend",
-      "cover": "https://uploads.mangadex.org/covers/733d95ce-4dc2-4c02-a177-6cb772b18317/e284f7bb-ca82-407b-b0e1-31dd52b8f65c.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
-      "id": "37f5cce0-8070-4ada-96e5-fa24b1bd4ff9",
-      "title": "Kaguya-sama: Love Is War",
-      "cover": "https://uploads.mangadex.org/covers/37f5cce0-8070-4ada-96e5-fa24b1bd4ff9/e21ca520-5054-4041-a07e-de8b7c683522.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
     }
   ]
 }
