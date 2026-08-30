@@ -1,7 +1,49 @@
 {
-  "updated_at": "2026-08-30T16:00:57.218511+00:00",
+  "updated_at": "2026-08-30T20:32:15.708247+00:00",
   "count": 50,
   "items": [
+    {
+      "id": "25e1d17b-6a4d-4698-a4f6-bf53460c10af",
+      "title": "حافلة لإثنين",
+      "cover": "https://uploads.mangadex.org/covers/25e1d17b-6a4d-4698-a4f6-bf53460c10af/f7cd3ff9-d7a1-4b5e-b473-ee2833b82c35.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "04598a65-4f1f-4807-a419-d79ca7f67457",
+      "title": "Under Ninja",
+      "cover": "https://uploads.mangadex.org/covers/04598a65-4f1f-4807-a419-d79ca7f67457/4c5713f4-249e-4745-a09e-2f3c33e6497a.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "72b7a112-9f87-4b78-a19f-90a2748ccd80",
+      "title": "Re:ZERO -Starting Life in Another World-, Sword Demon Love Ballad",
+      "cover": "https://uploads.mangadex.org/covers/72b7a112-9f87-4b78-a19f-90a2748ccd80/9860be18-09cb-4adb-8dc8-bfdfb3e5492e.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "ca33a142-58fb-4fee-88b9-36ef87f02c77",
+      "title": "حب نيزومي الأول",
+      "cover": "https://uploads.mangadex.org/covers/ca33a142-58fb-4fee-88b9-36ef87f02c77/7e8317ea-78bf-4090-a2ee-ab07041e4458.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "d1a9fdeb-f713-407f-960c-8326b586e6fd",
+      "title": "Vagabond",
+      "cover": "https://uploads.mangadex.org/covers/d1a9fdeb-f713-407f-960c-8326b586e6fd/05f8dcb4-8ea1-48db-a0b1-3a8fbf695e5a.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "hiatus"
+    },
+    {
+      "id": "a07320a4-afcd-413a-a451-d69a448d0c28",
+      "title": "Usogui",
+      "cover": "https://uploads.mangadex.org/covers/a07320a4-afcd-413a-a451-d69a448d0c28/b74c8cce-42cd-4889-b75d-7944e63f9a14.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
     {
       "id": "4e0ab019-afcb-4fd9-98eb-fcb28cf7fc81",
       "title": "مانجا الملكة النحلة شوكهو ميساكي - مينتل-آوت",
@@ -48,13 +90,6 @@
       "id": "e18fe8c6-f6dc-4f05-8462-7b2083ff9a6c",
       "title": "يوميات الصيدلة",
       "cover": "https://uploads.mangadex.org/covers/e18fe8c6-f6dc-4f05-8462-7b2083ff9a6c/530a4ffb-87cb-4156-bdeb-61670532e20f.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "25e1d17b-6a4d-4698-a4f6-bf53460c10af",
-      "title": "حافلة لإثنين",
-      "cover": "https://uploads.mangadex.org/covers/25e1d17b-6a4d-4698-a4f6-bf53460c10af/f7cd3ff9-d7a1-4b5e-b473-ee2833b82c35.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
@@ -171,13 +206,6 @@
       "status": "ongoing"
     },
     {
-      "id": "ca33a142-58fb-4fee-88b9-36ef87f02c77",
-      "title": "حب نيزومي الأول",
-      "cover": "https://uploads.mangadex.org/covers/ca33a142-58fb-4fee-88b9-36ef87f02c77/7e8317ea-78bf-4090-a2ee-ab07041e4458.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
       "id": "3b6c3a0b-8752-41fc-9d3e-1310f6f28252",
       "title": "Giant Killing",
       "cover": "https://uploads.mangadex.org/covers/3b6c3a0b-8752-41fc-9d3e-1310f6f28252/409bcab3-e7f6-4498-a135-72c7f1d5adf2.jpg.256.jpg",
@@ -190,13 +218,6 @@
       "cover": "https://uploads.mangadex.org/covers/30f3ac69-21b6-45ad-a110-d011b7aaadaa/fb735d33-b723-4446-9258-eefbffae222f.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
-    },
-    {
-      "id": "a07320a4-afcd-413a-a451-d69a448d0c28",
-      "title": "Usogui",
-      "cover": "https://uploads.mangadex.org/covers/a07320a4-afcd-413a-a451-d69a448d0c28/b74c8cce-42cd-4889-b75d-7944e63f9a14.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
     },
     {
       "id": "c4ca02fb-8378-433b-8049-fbbea5d25cba",
@@ -330,27 +351,6 @@
       "cover": "https://uploads.mangadex.org/covers/a460ab18-22c1-47eb-a08a-9ee85fe37ec8/7c8f9203-2b82-41f2-beb3-e7fb00e151e2.jpg.256.jpg",
       "source": "mangadex",
       "status": "completed"
-    },
-    {
-      "id": "774f0f04-5023-4e2e-9c0b-f0ed382f078b",
-      "title": "إينيغماتيكا",
-      "cover": "https://uploads.mangadex.org/covers/774f0f04-5023-4e2e-9c0b-f0ed382f078b/9f0534e0-6163-49a2-b515-4798f7aa85fa.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "2a7ee7fc-11f1-4482-84a9-82a428293cd9",
-      "title": "A Guilty Victim-Player's Hustle Play",
-      "cover": "https://uploads.mangadex.org/covers/2a7ee7fc-11f1-4482-84a9-82a428293cd9/f98bf8d9-8c37-48d8-a3c4-0ec15bf37f70.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "ef473f14-8c4d-435e-9015-b714512e69eb",
-      "title": "استدعاء اليابان",
-      "cover": "https://uploads.mangadex.org/covers/ef473f14-8c4d-435e-9015-b714512e69eb/9cd0abf9-8259-489f-8515-8ae35d89f075.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
     }
   ]
 }
