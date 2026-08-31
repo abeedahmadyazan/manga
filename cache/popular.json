@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-31T03:32:33.593120+00:00",
+  "updated_at": "2026-08-31T12:39:45.686822+00:00",
   "count": 50,
   "items": [
     {
@@ -185,18 +185,18 @@
       "status": "completed"
     },
     {
-      "id": "d90ea6cb-7bc3-4d80-8af0-28557e6c4e17",
-      "title": "Delicious in Dungeon",
-      "cover": "https://uploads.mangadex.org/covers/d90ea6cb-7bc3-4d80-8af0-28557e6c4e17/d3430039-ea47-48c3-9b8b-cf80200d7f0b.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
       "id": "c4ca02fb-8378-433b-8049-fbbea5d25cba",
       "title": "هايميا-سينباي حسناء مهيبة!",
       "cover": "https://uploads.mangadex.org/covers/c4ca02fb-8378-433b-8049-fbbea5d25cba/7ab29404-0ebd-4862-ad4e-e4ea1ffe231f.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
+    },
+    {
+      "id": "d90ea6cb-7bc3-4d80-8af0-28557e6c4e17",
+      "title": "Delicious in Dungeon",
+      "cover": "https://uploads.mangadex.org/covers/d90ea6cb-7bc3-4d80-8af0-28557e6c4e17/d3430039-ea47-48c3-9b8b-cf80200d7f0b.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
     },
     {
       "id": "e0589f47-72f9-4e9a-ac31-5b88bcad6220",
