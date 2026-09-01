@@ -1,13 +1,76 @@
 {
-  "updated_at": "2026-09-01T11:04:38.555947+00:00",
+  "updated_at": "2026-09-01T16:02:20.728427+00:00",
   "count": 50,
   "items": [
+    {
+      "id": "858e2de7-afba-4096-9aa7-1fccac0119c9",
+      "title": "DIG IT",
+      "cover": "https://uploads.mangadex.org/covers/858e2de7-afba-4096-9aa7-1fccac0119c9/a57adc47-e988-475d-a6fe-2f595fd3c915.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "07e2dbbd-a681-41d2-85e4-944735cc42e1",
+      "title": "Love Unseen Beneath the Clear Night Sky",
+      "cover": "https://uploads.mangadex.org/covers/07e2dbbd-a681-41d2-85e4-944735cc42e1/5159ea9f-2b44-4607-bd37-518724074af9.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "ad75039d-686c-457f-b478-e56fc3b3c069",
+      "title": "I Started Working a Housekeeping Job and Ended up Being Liked by the Family of the Most Beautiful Girl in School.",
+      "cover": "https://uploads.mangadex.org/covers/ad75039d-686c-457f-b478-e56fc3b3c069/d11151a2-0f4e-49e8-9c19-1be626a044fa.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "34019331-7377-4e2c-837e-f6e1ab2b5ef7",
+      "title": "The Seven Deadly Sins: Four Knights of the Apocalypse",
+      "cover": "https://uploads.mangadex.org/covers/34019331-7377-4e2c-837e-f6e1ab2b5ef7/a39f3c03-c459-4261-b3e7-0268ff691c00.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "936f0ba5-ca65-4de4-99b1-528c02a4454d",
+      "title": "Hunter x Hunter (Official Colored)",
+      "cover": "https://uploads.mangadex.org/covers/936f0ba5-ca65-4de4-99b1-528c02a4454d/128d80df-c5e4-4791-b3b7-08586e9db1b8.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "db692d58-4b13-4174-ae8c-30c515c0689c",
+      "title": "Hunter x Hunter",
+      "cover": "https://uploads.mangadex.org/covers/db692d58-4b13-4174-ae8c-30c515c0689c/aa112927-f1e5-4fe4-a4db-7fd4a1536e3c.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "f5c25341-d6ff-4585-8548-3a48fc7654d9",
+      "title": "Akira Failing in Love",
+      "cover": "https://uploads.mangadex.org/covers/f5c25341-d6ff-4585-8548-3a48fc7654d9/26f901ef-4583-4646-ad71-0fe412ad7fec.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
     {
       "id": "04598a65-4f1f-4807-a419-d79ca7f67457",
       "title": "Under Ninja",
       "cover": "https://uploads.mangadex.org/covers/04598a65-4f1f-4807-a419-d79ca7f67457/4c5713f4-249e-4745-a09e-2f3c33e6497a.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
+    },
+    {
+      "id": "6d6d9fda-5cd3-40ac-948b-776b1a1a0eb1",
+      "title": "الفتاة التي أُحب نسيت نظارتها",
+      "cover": "https://uploads.mangadex.org/covers/6d6d9fda-5cd3-40ac-948b-776b1a1a0eb1/e56be766-2872-4edf-a3b3-74d32ecd9096.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "66f1298e-68c0-4cc8-9a9d-640104092bf5",
+      "title": "I’m the Only Monster Tamer in the World and Was Mistaken for the Demon Lord",
+      "cover": "https://uploads.mangadex.org/covers/66f1298e-68c0-4cc8-9a9d-640104092bf5/aa692dce-6be2-43d9-a573-0b41f345ab71.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
     },
     {
       "id": "3eaabe03-d2bd-43f3-af71-bd1db4ab564a",
@@ -29,6 +92,13 @@
       "cover": "https://uploads.mangadex.org/covers/52ede55c-1584-4019-b85b-3902a423c3ab/8e18a9d7-27ed-48ff-924b-a397df5ba0a0.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
+    },
+    {
+      "id": "4e7a7758-40a9-47e6-9b0c-2acb2804900c",
+      "title": "Bring the Love",
+      "cover": "https://uploads.mangadex.org/covers/4e7a7758-40a9-47e6-9b0c-2acb2804900c/60733ff0-b491-4511-9fdc-976200d50f79.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
     },
     {
       "id": "8e95570e-93a7-494d-8e83-bd755e3b631d",
@@ -57,6 +127,13 @@
       "cover": "https://uploads.mangadex.org/covers/4141c5dc-c525-4df5-afd7-cc7d192a832f/7ee723d4-b926-4a81-acd9-53adb3fbe461.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
+    },
+    {
+      "id": "2fe66428-2172-4567-9460-229c9ad260e5",
+      "title": "Together Forever",
+      "cover": "https://uploads.mangadex.org/covers/2fe66428-2172-4567-9460-229c9ad260e5/ae6ec189-fd42-460c-ad32-52a3c230fac1.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
     },
     {
       "id": "a76b6b97-e434-40d6-b7c5-6026d22986d6",
@@ -143,6 +220,13 @@
       "status": "completed"
     },
     {
+      "id": "fd2d7c3e-87ab-4775-a1e3-17403994043b",
+      "title": "The Witch and the Mercenary",
+      "cover": "https://uploads.mangadex.org/covers/fd2d7c3e-87ab-4775-a1e3-17403994043b/e0269401-b1ab-4a06-8452-74996f6eaa8f.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
       "id": "ac783473-e74c-4ed4-b3d7-89e50b171b5f",
       "title": "GALAXIAS",
       "cover": "https://uploads.mangadex.org/covers/ac783473-e74c-4ed4-b3d7-89e50b171b5f/3e8692a1-ed94-403f-8f9a-51b319108782.jpg.256.jpg",
@@ -199,13 +283,6 @@
       "status": "ongoing"
     },
     {
-      "id": "34019331-7377-4e2c-837e-f6e1ab2b5ef7",
-      "title": "The Seven Deadly Sins: Four Knights of the Apocalypse",
-      "cover": "https://uploads.mangadex.org/covers/34019331-7377-4e2c-837e-f6e1ab2b5ef7/a39f3c03-c459-4261-b3e7-0268ff691c00.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
       "id": "32fdfe9b-6e11-4a13-9e36-dcd8ea77b4e4",
       "title": "Rent-A-Girlfriend",
       "cover": "https://uploads.mangadex.org/covers/32fdfe9b-6e11-4a13-9e36-dcd8ea77b4e4/b47b08ca-66f0-4a0a-808c-84baf59c43ca.jpg.256.jpg",
@@ -255,13 +332,6 @@
       "status": "ongoing"
     },
     {
-      "id": "ad75039d-686c-457f-b478-e56fc3b3c069",
-      "title": "I Started Working a Housekeeping Job and Ended up Being Liked by the Family of the Most Beautiful Girl in School.",
-      "cover": "https://uploads.mangadex.org/covers/ad75039d-686c-457f-b478-e56fc3b3c069/d11151a2-0f4e-49e8-9c19-1be626a044fa.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
       "id": "baa95345-24fb-47a9-83e9-434ff671f968",
       "title": "خلف المتجر ادخن معك",
       "cover": "https://uploads.mangadex.org/covers/baa95345-24fb-47a9-83e9-434ff671f968/4862f2a1-2852-4c98-a217-e3a44af83152.jpg.256.jpg",
@@ -279,76 +349,6 @@
       "id": "19a5c7e3-b743-4cb6-8dd8-41459bfc685d",
       "title": "تدليل فارسة لا تعرف اي شيء سوى القتال",
       "cover": "https://uploads.mangadex.org/covers/19a5c7e3-b743-4cb6-8dd8-41459bfc685d/883318ff-c44b-4ea9-a456-2b5b18a34631.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "1693697a-783c-4d3c-a2d3-dc069e137a23",
-      "title": "I Have No Home",
-      "cover": "https://uploads.mangadex.org/covers/1693697a-783c-4d3c-a2d3-dc069e137a23/bc55de2a-47dd-41cb-9338-75b3f0650a69.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
-      "id": "baaa0ca4-efef-4b15-b91a-c1f85692c2a7",
-      "title": "Vampire Knight",
-      "cover": "https://uploads.mangadex.org/covers/baaa0ca4-efef-4b15-b91a-c1f85692c2a7/d195f918-5f67-46a0-925f-eabc16fb40a3.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
-      "id": "2063ced4-bf94-4471-8772-75f6720be008",
-      "title": "Kengan Omega",
-      "cover": "https://uploads.mangadex.org/covers/2063ced4-bf94-4471-8772-75f6720be008/5efb6b63-6d7e-402a-81a5-0f508dddb5e2.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "d65c0332-3764-4c89-84bd-b1a4e7278ad7",
-      "title": "Kagurabachi",
-      "cover": "https://uploads.mangadex.org/covers/d65c0332-3764-4c89-84bd-b1a4e7278ad7/542aebdc-b4d0-4fb2-b7c3-c726412814ea.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "d78db808-93f7-498d-9368-e5767fd85057",
-      "title": "Class 2-B Hero Destroyerz",
-      "cover": "https://uploads.mangadex.org/covers/d78db808-93f7-498d-9368-e5767fd85057/efab4d5e-bb0d-454e-b147-296ce250aa82.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "9d9b04ad-9a83-49f4-8ae4-a9a3780fe9c0",
-      "title": "Sakamoto Days",
-      "cover": "https://uploads.mangadex.org/covers/9d9b04ad-9a83-49f4-8ae4-a9a3780fe9c0/f3f1d565-3a66-484a-be9b-28e1b03d9c51.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "dea77c2d-dbaa-434a-b0af-0c116642434c",
-      "title": "Ichi the Witch",
-      "cover": "https://uploads.mangadex.org/covers/dea77c2d-dbaa-434a-b0af-0c116642434c/707b5cff-60e3-40fe-8105-e9065d5f8abd.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "25e1d17b-6a4d-4698-a4f6-bf53460c10af",
-      "title": "حافلة لإثنين",
-      "cover": "https://uploads.mangadex.org/covers/25e1d17b-6a4d-4698-a4f6-bf53460c10af/f7cd3ff9-d7a1-4b5e-b473-ee2833b82c35.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "72b7a112-9f87-4b78-a19f-90a2748ccd80",
-      "title": "Re:ZERO -Starting Life in Another World-, Sword Demon Love Ballad",
-      "cover": "https://uploads.mangadex.org/covers/72b7a112-9f87-4b78-a19f-90a2748ccd80/9860be18-09cb-4adb-8dc8-bfdfb3e5492e.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
-      "id": "ca33a142-58fb-4fee-88b9-36ef87f02c77",
-      "title": "حب نيزومي الأول",
-      "cover": "https://uploads.mangadex.org/covers/ca33a142-58fb-4fee-88b9-36ef87f02c77/7e8317ea-78bf-4090-a2ee-ab07041e4458.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     }
