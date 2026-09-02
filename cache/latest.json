@@ -1,13 +1,41 @@
 {
-  "updated_at": "2026-09-02T02:48:51.692513+00:00",
+  "updated_at": "2026-09-02T10:36:36.961131+00:00",
   "count": 50,
   "items": [
+    {
+      "id": "510f29a8-99b4-46af-ba5e-916e96bc6f37",
+      "title": "Fate/type Redline",
+      "cover": "https://uploads.mangadex.org/covers/510f29a8-99b4-46af-ba5e-916e96bc6f37/c1d7aed1-9cd1-426f-bfb8-7e46594d0e29.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "097ba2ca-4f27-439d-b74b-623443924e75",
+      "title": "ليس لِلحرب وجهٌ أنثوي",
+      "cover": "https://uploads.mangadex.org/covers/097ba2ca-4f27-439d-b74b-623443924e75/3dd0c4db-e251-483c-a2ea-8f615b5fa49e.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "96ae166c-d8e1-4e9e-88cb-805b65154d7e",
+      "title": "Red Blue",
+      "cover": "https://uploads.mangadex.org/covers/96ae166c-d8e1-4e9e-88cb-805b65154d7e/d010f9c1-fdaa-4925-93df-dc3c06417574.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
     {
       "id": "a0a5528a-c4a8-4495-a966-6877c12856ba",
       "title": "TRUMP",
       "cover": "https://uploads.mangadex.org/covers/a0a5528a-c4a8-4495-a966-6877c12856ba/8cec91f3-ac76-460f-9d42-3d1b4163c0e3.jpg.256.jpg",
       "source": "mangadex",
       "status": "completed"
+    },
+    {
+      "id": "9d9b04ad-9a83-49f4-8ae4-a9a3780fe9c0",
+      "title": "Sakamoto Days",
+      "cover": "https://uploads.mangadex.org/covers/9d9b04ad-9a83-49f4-8ae4-a9a3780fe9c0/f3f1d565-3a66-484a-be9b-28e1b03d9c51.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
     },
     {
       "id": "25e1d17b-6a4d-4698-a4f6-bf53460c10af",
@@ -69,13 +97,6 @@
       "id": "4e7a4a0f-8391-4069-839b-de2352297dab",
       "title": "A Couple of Cuckoos",
       "cover": "https://uploads.mangadex.org/covers/4e7a4a0f-8391-4069-839b-de2352297dab/ad595477-786b-4ab0-b176-b0c138ebfdc5.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "9d9b04ad-9a83-49f4-8ae4-a9a3780fe9c0",
-      "title": "Sakamoto Days",
-      "cover": "https://uploads.mangadex.org/covers/9d9b04ad-9a83-49f4-8ae4-a9a3780fe9c0/f3f1d565-3a66-484a-be9b-28e1b03d9c51.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
@@ -328,27 +349,6 @@
       "id": "7bb7e5ae-a784-4009-98b2-8ad4a7541548",
       "title": "Ace of the Diamond: Act II",
       "cover": "https://uploads.mangadex.org/covers/7bb7e5ae-a784-4009-98b2-8ad4a7541548/63c9b16e-e1f3-4eb2-ac6d-191e74d0a05a.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
-      "id": "ac783473-e74c-4ed4-b3d7-89e50b171b5f",
-      "title": "GALAXIAS",
-      "cover": "https://uploads.mangadex.org/covers/ac783473-e74c-4ed4-b3d7-89e50b171b5f/3e8692a1-ed94-403f-8f9a-51b319108782.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "0a580438-bc72-4503-940b-12a5da881b56",
-      "title": "أنتِ زهرة الحظ",
-      "cover": "https://uploads.mangadex.org/covers/0a580438-bc72-4503-940b-12a5da881b56/a64a8d8b-1c71-496e-a0a7-0c1da501da6c.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "5923081c-ad82-4a8b-a509-89ebe752db01",
-      "title": "Rave Master",
-      "cover": "https://uploads.mangadex.org/covers/5923081c-ad82-4a8b-a509-89ebe752db01/f6b7697e-cd88-4366-9b9a-6f25499bef80.jpg.256.jpg",
       "source": "mangadex",
       "status": "completed"
     }
