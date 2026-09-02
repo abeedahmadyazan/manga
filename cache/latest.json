@@ -1,7 +1,70 @@
 {
-  "updated_at": "2026-09-02T10:36:36.961131+00:00",
+  "updated_at": "2026-09-02T15:56:57.905117+00:00",
   "count": 50,
   "items": [
+    {
+      "id": "c4ca02fb-8378-433b-8049-fbbea5d25cba",
+      "title": "هايميا-سينباي حسناء مهيبة!",
+      "cover": "https://uploads.mangadex.org/covers/c4ca02fb-8378-433b-8049-fbbea5d25cba/7ab29404-0ebd-4862-ad4e-e4ea1ffe231f.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "1693697a-783c-4d3c-a2d3-dc069e137a23",
+      "title": "I Have No Home",
+      "cover": "https://uploads.mangadex.org/covers/1693697a-783c-4d3c-a2d3-dc069e137a23/bc55de2a-47dd-41cb-9338-75b3f0650a69.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "423aefd6-f63d-4d3b-9a70-ba8ec9ad2c37",
+      "title": "FAIRY TAIL Re:Fantasia",
+      "cover": "https://uploads.mangadex.org/covers/423aefd6-f63d-4d3b-9a70-ba8ec9ad2c37/d8f86465-1fdb-44f6-a236-339debd1a329.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "d7037b2a-874a-4360-8a7b-07f2899152fd",
+      "title": "إيروما-كن في مدرسة الشياطين",
+      "cover": "https://uploads.mangadex.org/covers/d7037b2a-874a-4360-8a7b-07f2899152fd/52d67301-401c-44c4-9d7b-529e2796f7d5.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "67e7453b-9ee5-4ae5-9316-215b03e4a71d",
+      "title": "Witch Hat Atelier",
+      "cover": "https://uploads.mangadex.org/covers/67e7453b-9ee5-4ae5-9316-215b03e4a71d/a9feeb2a-4b34-4a52-93fb-ab948e743503.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "25e1d17b-6a4d-4698-a4f6-bf53460c10af",
+      "title": "حافلة لإثنين",
+      "cover": "https://uploads.mangadex.org/covers/25e1d17b-6a4d-4698-a4f6-bf53460c10af/f7cd3ff9-d7a1-4b5e-b473-ee2833b82c35.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "5c9d1254-f074-4b5c-8795-6f0641b2597b",
+      "title": "Girl and Science",
+      "cover": "https://uploads.mangadex.org/covers/5c9d1254-f074-4b5c-8795-6f0641b2597b/f606b3ce-4f64-400e-8a1c-265698f68d01.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "bcfe1b36-daee-40fd-9984-d9597caf9da7",
+      "title": "فَقِيْهَةُ ٱلْمَغُوْلِ",
+      "cover": "https://uploads.mangadex.org/covers/bcfe1b36-daee-40fd-9984-d9597caf9da7/5ce19283-d717-44e2-bb69-4247640d3c75.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "52ede55c-1584-4019-b85b-3902a423c3ab",
+      "title": "FAIRY TAIL: 100 Years Quest",
+      "cover": "https://uploads.mangadex.org/covers/52ede55c-1584-4019-b85b-3902a423c3ab/8e18a9d7-27ed-48ff-924b-a397df5ba0a0.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
     {
       "id": "510f29a8-99b4-46af-ba5e-916e96bc6f37",
       "title": "Fate/type Redline",
@@ -34,13 +97,6 @@
       "id": "9d9b04ad-9a83-49f4-8ae4-a9a3780fe9c0",
       "title": "Sakamoto Days",
       "cover": "https://uploads.mangadex.org/covers/9d9b04ad-9a83-49f4-8ae4-a9a3780fe9c0/f3f1d565-3a66-484a-be9b-28e1b03d9c51.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "25e1d17b-6a4d-4698-a4f6-bf53460c10af",
-      "title": "حافلة لإثنين",
-      "cover": "https://uploads.mangadex.org/covers/25e1d17b-6a4d-4698-a4f6-bf53460c10af/f7cd3ff9-d7a1-4b5e-b473-ee2833b82c35.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
@@ -115,20 +171,6 @@
       "status": "ongoing"
     },
     {
-      "id": "423aefd6-f63d-4d3b-9a70-ba8ec9ad2c37",
-      "title": "FAIRY TAIL Re:Fantasia",
-      "cover": "https://uploads.mangadex.org/covers/423aefd6-f63d-4d3b-9a70-ba8ec9ad2c37/d8f86465-1fdb-44f6-a236-339debd1a329.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "bcfe1b36-daee-40fd-9984-d9597caf9da7",
-      "title": "فَقِيْهَةُ ٱلْمَغُوْلِ",
-      "cover": "https://uploads.mangadex.org/covers/bcfe1b36-daee-40fd-9984-d9597caf9da7/5ce19283-d717-44e2-bb69-4247640d3c75.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
       "id": "a07320a4-afcd-413a-a451-d69a448d0c28",
       "title": "Usogui",
       "cover": "https://uploads.mangadex.org/covers/a07320a4-afcd-413a-a451-d69a448d0c28/b74c8cce-42cd-4889-b75d-7944e63f9a14.jpg.256.jpg",
@@ -150,13 +192,6 @@
       "status": "ongoing"
     },
     {
-      "id": "52ede55c-1584-4019-b85b-3902a423c3ab",
-      "title": "FAIRY TAIL: 100 Years Quest",
-      "cover": "https://uploads.mangadex.org/covers/52ede55c-1584-4019-b85b-3902a423c3ab/8e18a9d7-27ed-48ff-924b-a397df5ba0a0.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
       "id": "92cc40d1-4430-4aa9-ac8e-7284438670ac",
       "title": "Clockwork Apple",
       "cover": "https://uploads.mangadex.org/covers/92cc40d1-4430-4aa9-ac8e-7284438670ac/cd5add27-8091-4622-9ad7-b0d0564ea4a2.jpg.256.jpg",
@@ -164,9 +199,23 @@
       "status": "completed"
     },
     {
+      "id": "88949f72-43b8-48af-94a0-dc639e44be07",
+      "title": "On and Off: Work-Life Imbalance",
+      "cover": "https://uploads.mangadex.org/covers/88949f72-43b8-48af-94a0-dc639e44be07/320293c8-1cc7-488f-a453-25b17cba7132.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
       "id": "858e2de7-afba-4096-9aa7-1fccac0119c9",
       "title": "DIG IT",
       "cover": "https://uploads.mangadex.org/covers/858e2de7-afba-4096-9aa7-1fccac0119c9/a57adc47-e988-475d-a6fe-2f595fd3c915.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "59ef045c-0712-4f15-bb54-52bffd87481b",
+      "title": "محب الهيتو",
+      "cover": "https://uploads.mangadex.org/covers/59ef045c-0712-4f15-bb54-52bffd87481b/a3d7397d-3319-44fc-89d1-c54346c474ff.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
@@ -227,13 +276,6 @@
       "status": "completed"
     },
     {
-      "id": "5c9d1254-f074-4b5c-8795-6f0641b2597b",
-      "title": "Girl and Science",
-      "cover": "https://uploads.mangadex.org/covers/5c9d1254-f074-4b5c-8795-6f0641b2597b/f606b3ce-4f64-400e-8a1c-265698f68d01.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
       "id": "4e7a7758-40a9-47e6-9b0c-2acb2804900c",
       "title": "Bring the Love",
       "cover": "https://uploads.mangadex.org/covers/4e7a7758-40a9-47e6-9b0c-2acb2804900c/60733ff0-b491-4511-9fdc-976200d50f79.jpg.256.jpg",
@@ -244,13 +286,6 @@
       "id": "8e95570e-93a7-494d-8e83-bd755e3b631d",
       "title": "Fragments of the Layered City",
       "cover": "https://uploads.mangadex.org/covers/8e95570e-93a7-494d-8e83-bd755e3b631d/cffb96dc-36e9-48b3-9570-9f99b7d6f2fc.png.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "67e7453b-9ee5-4ae5-9316-215b03e4a71d",
-      "title": "Witch Hat Atelier",
-      "cover": "https://uploads.mangadex.org/covers/67e7453b-9ee5-4ae5-9316-215b03e4a71d/a9feeb2a-4b34-4a52-93fb-ab948e743503.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
@@ -316,41 +351,6 @@
       "cover": "https://uploads.mangadex.org/covers/af7cc594-4f6a-4c0a-8f74-16748910dee5/8dec8f9f-9762-4f47-9ad6-2ccd3c721043.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
-    },
-    {
-      "id": "51c1e7cc-23f4-4a08-a961-c1ab75e2bb33",
-      "title": "Inexpressive Kashiwada and Expressive Oota",
-      "cover": "https://uploads.mangadex.org/covers/51c1e7cc-23f4-4a08-a961-c1ab75e2bb33/3bdea205-146a-460c-ae6e-7c2b27f762ed.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
-      "id": "cdae359d-5fa9-4d4e-b11a-69dd32b09742",
-      "title": "Apotheosis: Ascension to Godhood",
-      "cover": "https://uploads.mangadex.org/covers/cdae359d-5fa9-4d4e-b11a-69dd32b09742/601a10fc-61aa-4102-9387-f6bf613fb934.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
-      "id": "b73371d4-02dd-4db0-b448-d9afa3d698f1",
-      "title": "Aoashi",
-      "cover": "https://uploads.mangadex.org/covers/b73371d4-02dd-4db0-b448-d9afa3d698f1/8ecd4b0f-5746-4f75-a836-c132d361d9ee.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
-      "id": "fd2d7c3e-87ab-4775-a1e3-17403994043b",
-      "title": "The Witch and the Mercenary",
-      "cover": "https://uploads.mangadex.org/covers/fd2d7c3e-87ab-4775-a1e3-17403994043b/e0269401-b1ab-4a06-8452-74996f6eaa8f.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "7bb7e5ae-a784-4009-98b2-8ad4a7541548",
-      "title": "Ace of the Diamond: Act II",
-      "cover": "https://uploads.mangadex.org/covers/7bb7e5ae-a784-4009-98b2-8ad4a7541548/63c9b16e-e1f3-4eb2-ac6d-191e74d0a05a.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
     }
   ]
 }
