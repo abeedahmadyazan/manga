@@ -1,7 +1,35 @@
 {
-  "updated_at": "2026-09-03T10:39:36.368409+00:00",
+  "updated_at": "2026-09-03T15:45:37.522151+00:00",
   "count": 50,
   "items": [
+    {
+      "id": "26102334-1f7b-4a5b-a64f-107c5c24a70f",
+      "title": "Mao",
+      "cover": "https://uploads.mangadex.org/covers/26102334-1f7b-4a5b-a64f-107c5c24a70f/2a179e58-6067-4f7f-a40a-4f472b67a219.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "077812bd-6ee9-4756-a508-9148b254661e",
+      "title": "I Reincarnated as a Mob Villain in a Game and Decided to Become the Final Boss. But for Some Reason, Everyone Thinks I'm the Best King Ever - Can Someone Please Tell Me Why?!",
+      "cover": "https://uploads.mangadex.org/covers/077812bd-6ee9-4756-a508-9148b254661e/4a133c57-e712-4820-8cc7-10a6498bb494.png.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "ea47525d-99df-45b5-9103-dd853f49f8c3",
+      "title": "Welcome to Demon School! Iruma-kun: IruMafia Edition",
+      "cover": "https://uploads.mangadex.org/covers/ea47525d-99df-45b5-9103-dd853f49f8c3/7ba89c43-1234-4d11-9aa6-c3a7576cd1ce.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "e0589f47-72f9-4e9a-ac31-5b88bcad6220",
+      "title": "The Wrong Way to Use Healing Magic",
+      "cover": "https://uploads.mangadex.org/covers/e0589f47-72f9-4e9a-ac31-5b88bcad6220/5bc559d6-5434-46d9-89b4-44964a1b8233.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
     {
       "id": "5c9d1254-f074-4b5c-8795-6f0641b2597b",
       "title": "Girl and Science",
@@ -97,13 +125,6 @@
       "id": "dea77c2d-dbaa-434a-b0af-0c116642434c",
       "title": "Ichi the Witch",
       "cover": "https://uploads.mangadex.org/covers/dea77c2d-dbaa-434a-b0af-0c116642434c/707b5cff-60e3-40fe-8105-e9065d5f8abd.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "ea47525d-99df-45b5-9103-dd853f49f8c3",
-      "title": "Welcome to Demon School! Iruma-kun: IruMafia Edition",
-      "cover": "https://uploads.mangadex.org/covers/ea47525d-99df-45b5-9103-dd853f49f8c3/7ba89c43-1234-4d11-9aa6-c3a7576cd1ce.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
@@ -328,27 +349,6 @@
       "id": "ad75039d-686c-457f-b478-e56fc3b3c069",
       "title": "I Started Working a Housekeeping Job and Ended up Being Liked by the Family of the Most Beautiful Girl in School.",
       "cover": "https://uploads.mangadex.org/covers/ad75039d-686c-457f-b478-e56fc3b3c069/d11151a2-0f4e-49e8-9c19-1be626a044fa.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "34019331-7377-4e2c-837e-f6e1ab2b5ef7",
-      "title": "The Seven Deadly Sins: Four Knights of the Apocalypse",
-      "cover": "https://uploads.mangadex.org/covers/34019331-7377-4e2c-837e-f6e1ab2b5ef7/a39f3c03-c459-4261-b3e7-0268ff691c00.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "936f0ba5-ca65-4de4-99b1-528c02a4454d",
-      "title": "Hunter x Hunter (Official Colored)",
-      "cover": "https://uploads.mangadex.org/covers/936f0ba5-ca65-4de4-99b1-528c02a4454d/128d80df-c5e4-4791-b3b7-08586e9db1b8.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "db692d58-4b13-4174-ae8c-30c515c0689c",
-      "title": "Hunter x Hunter",
-      "cover": "https://uploads.mangadex.org/covers/db692d58-4b13-4174-ae8c-30c515c0689c/aa112927-f1e5-4fe4-a4db-7fd4a1536e3c.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     }
