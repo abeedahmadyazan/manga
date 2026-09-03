@@ -1,7 +1,70 @@
 {
-  "updated_at": "2026-09-03T15:45:37.522151+00:00",
+  "updated_at": "2026-09-03T20:29:04.535991+00:00",
   "count": 50,
   "items": [
+    {
+      "id": "1ffca916-3ad7-46d2-9591-a9b39e639971",
+      "title": "Second Life Ranker",
+      "cover": "https://uploads.mangadex.org/covers/1ffca916-3ad7-46d2-9591-a9b39e639971/60aef1af-2df0-46aa-8270-e1ad9d287289.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "hiatus"
+    },
+    {
+      "id": "0a580438-bc72-4503-940b-12a5da881b56",
+      "title": "أنتِ زهرة الحظ",
+      "cover": "https://uploads.mangadex.org/covers/0a580438-bc72-4503-940b-12a5da881b56/a64a8d8b-1c71-496e-a0a7-0c1da501da6c.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "af7cc594-4f6a-4c0a-8f74-16748910dee5",
+      "title": "Akagami no Shirayukihime",
+      "cover": "https://uploads.mangadex.org/covers/af7cc594-4f6a-4c0a-8f74-16748910dee5/8dec8f9f-9762-4f47-9ad6-2ccd3c721043.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "fa85b2aa-370c-41c5-96ae-29b05c848f3d",
+      "title": "Innocent",
+      "cover": "https://uploads.mangadex.org/covers/fa85b2aa-370c-41c5-96ae-29b05c848f3d/3d562b75-ca28-4a65-87a9-2e3f73657456.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "b6886009-e60b-44a7-abc2-a575765277ba",
+      "title": "الرجل الرمادي",
+      "cover": "https://uploads.mangadex.org/covers/b6886009-e60b-44a7-abc2-a575765277ba/a8ea60f1-0fef-4af0-b26e-8b761406c114.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "85a99758-de39-471e-9f6d-800547f53d0a",
+      "title": "Tougen Anki: Legend of the Cursed Blood",
+      "cover": "https://uploads.mangadex.org/covers/85a99758-de39-471e-9f6d-800547f53d0a/e9fdf5a2-69d6-4e10-88c1-d5a50b9202c6.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "a07320a4-afcd-413a-a451-d69a448d0c28",
+      "title": "Usogui",
+      "cover": "https://uploads.mangadex.org/covers/a07320a4-afcd-413a-a451-d69a448d0c28/b74c8cce-42cd-4889-b75d-7944e63f9a14.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "858e2de7-afba-4096-9aa7-1fccac0119c9",
+      "title": "DIG IT",
+      "cover": "https://uploads.mangadex.org/covers/858e2de7-afba-4096-9aa7-1fccac0119c9/a57adc47-e988-475d-a6fe-2f595fd3c915.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "4393fd4e-d646-4bab-9c95-786168ccb618",
+      "title": "Devilman",
+      "cover": "https://uploads.mangadex.org/covers/4393fd4e-d646-4bab-9c95-786168ccb618/3199fa66-3a73-4c11-9236-9cba765e6650.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
     {
       "id": "26102334-1f7b-4a5b-a64f-107c5c24a70f",
       "title": "Mao",
@@ -13,6 +76,13 @@
       "id": "077812bd-6ee9-4756-a508-9148b254661e",
       "title": "I Reincarnated as a Mob Villain in a Game and Decided to Become the Final Boss. But for Some Reason, Everyone Thinks I'm the Best King Ever - Can Someone Please Tell Me Why?!",
       "cover": "https://uploads.mangadex.org/covers/077812bd-6ee9-4756-a508-9148b254661e/4a133c57-e712-4820-8cc7-10a6498bb494.png.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "c4ca02fb-8378-433b-8049-fbbea5d25cba",
+      "title": "هايميا-سينباي حسناء مهيبة!",
+      "cover": "https://uploads.mangadex.org/covers/c4ca02fb-8378-433b-8049-fbbea5d25cba/7ab29404-0ebd-4862-ad4e-e4ea1ffe231f.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
@@ -48,13 +118,6 @@
       "id": "67e7453b-9ee5-4ae5-9316-215b03e4a71d",
       "title": "Witch Hat Atelier",
       "cover": "https://uploads.mangadex.org/covers/67e7453b-9ee5-4ae5-9316-215b03e4a71d/a9feeb2a-4b34-4a52-93fb-ab948e743503.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "c4ca02fb-8378-433b-8049-fbbea5d25cba",
-      "title": "هايميا-سينباي حسناء مهيبة!",
-      "cover": "https://uploads.mangadex.org/covers/c4ca02fb-8378-433b-8049-fbbea5d25cba/7ab29404-0ebd-4862-ad4e-e4ea1ffe231f.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
@@ -129,13 +192,6 @@
       "status": "ongoing"
     },
     {
-      "id": "1ffca916-3ad7-46d2-9591-a9b39e639971",
-      "title": "Second Life Ranker",
-      "cover": "https://uploads.mangadex.org/covers/1ffca916-3ad7-46d2-9591-a9b39e639971/60aef1af-2df0-46aa-8270-e1ad9d287289.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "hiatus"
-    },
-    {
       "id": "0cfcda3b-0dcb-459b-9931-aa823e7bf403",
       "title": "تسع قمم",
       "cover": "https://uploads.mangadex.org/covers/0cfcda3b-0dcb-459b-9931-aa823e7bf403/2f960366-7159-4f17-b3bf-b5f52e9860f7.jpg.256.jpg",
@@ -160,13 +216,6 @@
       "id": "0fc2cafc-0c2f-419c-a891-5c0745080800",
       "title": "Bungou Stray Dogs: STORM BRINGER",
       "cover": "https://uploads.mangadex.org/covers/0fc2cafc-0c2f-419c-a891-5c0745080800/c02fdf49-68ab-4333-a875-6ac9db65c269.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "858e2de7-afba-4096-9aa7-1fccac0119c9",
-      "title": "DIG IT",
-      "cover": "https://uploads.mangadex.org/covers/858e2de7-afba-4096-9aa7-1fccac0119c9/a57adc47-e988-475d-a6fe-2f595fd3c915.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
@@ -297,58 +346,9 @@
       "status": "ongoing"
     },
     {
-      "id": "a07320a4-afcd-413a-a451-d69a448d0c28",
-      "title": "Usogui",
-      "cover": "https://uploads.mangadex.org/covers/a07320a4-afcd-413a-a451-d69a448d0c28/b74c8cce-42cd-4889-b75d-7944e63f9a14.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
       "id": "9422a147-c0c8-400d-9106-57cb8ece3dba",
       "title": "You are Ms. servant",
       "cover": "https://uploads.mangadex.org/covers/9422a147-c0c8-400d-9106-57cb8ece3dba/7076f364-e1fb-4ddd-8745-cf0c7edc35c5.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "4141c5dc-c525-4df5-afd7-cc7d192a832f",
-      "title": "Blue Lock",
-      "cover": "https://uploads.mangadex.org/covers/4141c5dc-c525-4df5-afd7-cc7d192a832f/7ee723d4-b926-4a81-acd9-53adb3fbe461.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "92cc40d1-4430-4aa9-ac8e-7284438670ac",
-      "title": "Clockwork Apple",
-      "cover": "https://uploads.mangadex.org/covers/92cc40d1-4430-4aa9-ac8e-7284438670ac/cd5add27-8091-4622-9ad7-b0d0564ea4a2.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
-      "id": "88949f72-43b8-48af-94a0-dc639e44be07",
-      "title": "On and Off: Work-Life Imbalance",
-      "cover": "https://uploads.mangadex.org/covers/88949f72-43b8-48af-94a0-dc639e44be07/320293c8-1cc7-488f-a453-25b17cba7132.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "59ef045c-0712-4f15-bb54-52bffd87481b",
-      "title": "محب الهيتو",
-      "cover": "https://uploads.mangadex.org/covers/59ef045c-0712-4f15-bb54-52bffd87481b/a3d7397d-3319-44fc-89d1-c54346c474ff.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "07e2dbbd-a681-41d2-85e4-944735cc42e1",
-      "title": "Love Unseen Beneath the Clear Night Sky",
-      "cover": "https://uploads.mangadex.org/covers/07e2dbbd-a681-41d2-85e4-944735cc42e1/5159ea9f-2b44-4607-bd37-518724074af9.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "ad75039d-686c-457f-b478-e56fc3b3c069",
-      "title": "I Started Working a Housekeeping Job and Ended up Being Liked by the Family of the Most Beautiful Girl in School.",
-      "cover": "https://uploads.mangadex.org/covers/ad75039d-686c-457f-b478-e56fc3b3c069/d11151a2-0f4e-49e8-9c19-1be626a044fa.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     }
