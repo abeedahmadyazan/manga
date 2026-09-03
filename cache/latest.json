@@ -1,13 +1,34 @@
 {
-  "updated_at": "2026-09-02T20:29:23.452231+00:00",
+  "updated_at": "2026-09-03T02:52:55.833187+00:00",
   "count": 50,
   "items": [
+    {
+      "id": "418791c0-35cf-4f87-936b-acd9cddf0989",
+      "title": "The Fragrant Flower Blooms with Dignity",
+      "cover": "https://uploads.mangadex.org/covers/418791c0-35cf-4f87-936b-acd9cddf0989/6e823d0e-103a-4cf9-a312-a3a292ccb12d.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "3eaabe03-d2bd-43f3-af71-bd1db4ab564a",
+      "title": "Isekai Executioner: The Serial Killer in Another World",
+      "cover": "https://uploads.mangadex.org/covers/3eaabe03-d2bd-43f3-af71-bd1db4ab564a/55b1bc21-07ab-4820-93a7-b0a9aa627899.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
     {
       "id": "e5ce88e2-8c46-482d-8acf-5c6d5a64a585",
       "title": "نوراجامي",
       "cover": "https://uploads.mangadex.org/covers/e5ce88e2-8c46-482d-8acf-5c6d5a64a585/d8009398-6a12-473f-9af9-541b5eef50b6.jpg.256.jpg",
       "source": "mangadex",
       "status": "completed"
+    },
+    {
+      "id": "63dbbf80-0189-4ae4-a549-68a0caa2f834",
+      "title": "ويتشريف",
+      "cover": "https://uploads.mangadex.org/covers/63dbbf80-0189-4ae4-a549-68a0caa2f834/04ae601b-1e85-4b59-bba3-7a140f7339f5.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
     },
     {
       "id": "52ede55c-1584-4019-b85b-3902a423c3ab",
@@ -52,13 +73,6 @@
       "status": "ongoing"
     },
     {
-      "id": "63dbbf80-0189-4ae4-a549-68a0caa2f834",
-      "title": "ويتشريف",
-      "cover": "https://uploads.mangadex.org/covers/63dbbf80-0189-4ae4-a549-68a0caa2f834/04ae601b-1e85-4b59-bba3-7a140f7339f5.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
       "id": "244c9d4f-e5fb-4590-9b96-4da191977b33",
       "title": "Skip and Loafer",
       "cover": "https://uploads.mangadex.org/covers/244c9d4f-e5fb-4590-9b96-4da191977b33/1c784052-b65a-42a5-a4d4-e5fa612a28c8.jpg.256.jpg",
@@ -90,6 +104,13 @@
       "id": "858e2de7-afba-4096-9aa7-1fccac0119c9",
       "title": "DIG IT",
       "cover": "https://uploads.mangadex.org/covers/858e2de7-afba-4096-9aa7-1fccac0119c9/a57adc47-e988-475d-a6fe-2f595fd3c915.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "f8f3f045-01b5-4216-8f41-d947d8b448b0",
+      "title": "Kindergarten WARS",
+      "cover": "https://uploads.mangadex.org/covers/f8f3f045-01b5-4216-8f41-d947d8b448b0/ce0461d1-273f-47f4-bb91-0c297e12143d.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
@@ -174,13 +195,6 @@
       "id": "9d9b04ad-9a83-49f4-8ae4-a9a3780fe9c0",
       "title": "Sakamoto Days",
       "cover": "https://uploads.mangadex.org/covers/9d9b04ad-9a83-49f4-8ae4-a9a3780fe9c0/f3f1d565-3a66-484a-be9b-28e1b03d9c51.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "3eaabe03-d2bd-43f3-af71-bd1db4ab564a",
-      "title": "Isekai Executioner: The Serial Killer in Another World",
-      "cover": "https://uploads.mangadex.org/covers/3eaabe03-d2bd-43f3-af71-bd1db4ab564a/55b1bc21-07ab-4820-93a7-b0a9aa627899.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
@@ -337,20 +351,6 @@
       "cover": "https://uploads.mangadex.org/covers/6d6d9fda-5cd3-40ac-948b-776b1a1a0eb1/e56be766-2872-4edf-a3b3-74d32ecd9096.jpg.256.jpg",
       "source": "mangadex",
       "status": "completed"
-    },
-    {
-      "id": "4e7a7758-40a9-47e6-9b0c-2acb2804900c",
-      "title": "Bring the Love",
-      "cover": "https://uploads.mangadex.org/covers/4e7a7758-40a9-47e6-9b0c-2acb2804900c/60733ff0-b491-4511-9fdc-976200d50f79.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
-      "id": "8e95570e-93a7-494d-8e83-bd755e3b631d",
-      "title": "Fragments of the Layered City",
-      "cover": "https://uploads.mangadex.org/covers/8e95570e-93a7-494d-8e83-bd755e3b631d/cffb96dc-36e9-48b3-9570-9f99b7d6f2fc.png.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
     }
   ]
 }
