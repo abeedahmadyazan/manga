@@ -1,18 +1,46 @@
 {
-  "updated_at": "2026-09-04T15:44:25.060620+00:00",
+  "updated_at": "2026-09-04T20:14:58.564874+00:00",
   "count": 50,
   "items": [
-    {
-      "id": "3df1a9a3-a1be-47a3-9e90-9b3e55b1d0ac",
-      "title": "الشخص الخطير في قلبي",
-      "cover": "https://uploads.mangadex.org/covers/3df1a9a3-a1be-47a3-9e90-9b3e55b1d0ac/12d521b7-01b8-4015-ab40-33ed75cc82e8.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
     {
       "id": "17ce37ea-1cda-4429-b062-c4b627814225",
       "title": "سيراف النهاية",
       "cover": "https://uploads.mangadex.org/covers/17ce37ea-1cda-4429-b062-c4b627814225/31e31704-e6e2-474a-a857-b18580a0057b.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "eeb2ab0e-7dbc-4f0c-b476-8181d44217a8",
+      "title": "الوهم السماوي",
+      "cover": "https://uploads.mangadex.org/covers/eeb2ab0e-7dbc-4f0c-b476-8181d44217a8/525c3074-f18e-4313-940e-14f4fd873302.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "a07320a4-afcd-413a-a451-d69a448d0c28",
+      "title": "Usogui",
+      "cover": "https://uploads.mangadex.org/covers/a07320a4-afcd-413a-a451-d69a448d0c28/b74c8cce-42cd-4889-b75d-7944e63f9a14.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "d89cfcf7-dcb4-4af7-8c95-330c2c6167d0",
+      "title": "عودة ملك الجثث",
+      "cover": "https://uploads.mangadex.org/covers/d89cfcf7-dcb4-4af7-8c95-330c2c6167d0/ecf61b0f-bb4b-4865-a7a4-9407abc1ba49.png.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "c4ca02fb-8378-433b-8049-fbbea5d25cba",
+      "title": "هايميا-سينباي حسناء مهيبة!",
+      "cover": "https://uploads.mangadex.org/covers/c4ca02fb-8378-433b-8049-fbbea5d25cba/7ab29404-0ebd-4862-ad4e-e4ea1ffe231f.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "3df1a9a3-a1be-47a3-9e90-9b3e55b1d0ac",
+      "title": "الشخص الخطير في قلبي",
+      "cover": "https://uploads.mangadex.org/covers/3df1a9a3-a1be-47a3-9e90-9b3e55b1d0ac/12d521b7-01b8-4015-ab40-33ed75cc82e8.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
@@ -61,7 +89,7 @@
     {
       "id": "d7037b2a-874a-4360-8a7b-07f2899152fd",
       "title": "إيروما-كن في مدرسة الشياطين",
-      "cover": "https://uploads.mangadex.org/covers/d7037b2a-874a-4360-8a7b-07f2899152fd/52d67301-401c-44c4-9d7b-529e2796f7d5.jpg.256.jpg",
+      "cover": "https://uploads.mangadex.org/covers/d7037b2a-874a-4360-8a7b-07f2899152fd/6917a533-d70c-49cb-84af-1aa7ccff3d02.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
@@ -83,13 +111,6 @@
       "id": "abcf6720-91b4-4e06-876e-955af17e74f2",
       "title": "Don't eat me, Tokiwa-kun",
       "cover": "https://uploads.mangadex.org/covers/abcf6720-91b4-4e06-876e-955af17e74f2/4527ab6f-4bdf-4099-9602-bcb794f047d4.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "c4ca02fb-8378-433b-8049-fbbea5d25cba",
-      "title": "هايميا-سينباي حسناء مهيبة!",
-      "cover": "https://uploads.mangadex.org/covers/c4ca02fb-8378-433b-8049-fbbea5d25cba/7ab29404-0ebd-4862-ad4e-e4ea1ffe231f.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
@@ -162,13 +183,6 @@
       "cover": "https://uploads.mangadex.org/covers/85a99758-de39-471e-9f6d-800547f53d0a/e9fdf5a2-69d6-4e10-88c1-d5a50b9202c6.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
-    },
-    {
-      "id": "a07320a4-afcd-413a-a451-d69a448d0c28",
-      "title": "Usogui",
-      "cover": "https://uploads.mangadex.org/covers/a07320a4-afcd-413a-a451-d69a448d0c28/b74c8cce-42cd-4889-b75d-7944e63f9a14.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
     },
     {
       "id": "858e2de7-afba-4096-9aa7-1fccac0119c9",
@@ -335,20 +349,6 @@
       "id": "097ba2ca-4f27-439d-b74b-623443924e75",
       "title": "ليس لِلحرب وجهٌ أنثوي",
       "cover": "https://uploads.mangadex.org/covers/097ba2ca-4f27-439d-b74b-623443924e75/3dd0c4db-e251-483c-a2ea-8f615b5fa49e.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "9d9b04ad-9a83-49f4-8ae4-a9a3780fe9c0",
-      "title": "Sakamoto Days",
-      "cover": "https://uploads.mangadex.org/covers/9d9b04ad-9a83-49f4-8ae4-a9a3780fe9c0/f3f1d565-3a66-484a-be9b-28e1b03d9c51.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "1aa17501-0328-4d5a-bbbe-3cb7cae8c9ae",
-      "title": "My Co-worker Is an Eldritch X!",
-      "cover": "https://uploads.mangadex.org/covers/1aa17501-0328-4d5a-bbbe-3cb7cae8c9ae/6856c3e0-b344-4319-aa2d-d6f702c235da.png.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     }
