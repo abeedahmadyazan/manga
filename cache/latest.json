@@ -1,7 +1,35 @@
 {
-  "updated_at": "2026-09-05T09:56:20.685200+00:00",
+  "updated_at": "2026-09-05T14:33:30.535860+00:00",
   "count": 50,
   "items": [
+    {
+      "id": "30f3ac69-21b6-45ad-a110-d011b7aaadaa",
+      "title": "Fly Me to The Moon",
+      "cover": "https://uploads.mangadex.org/covers/30f3ac69-21b6-45ad-a110-d011b7aaadaa/fb735d33-b723-4446-9258-eefbffae222f.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "8a3d319d-2d10-4364-928c-0f30fd367c24",
+      "title": "Hinamatsuri",
+      "cover": "https://uploads.mangadex.org/covers/8a3d319d-2d10-4364-928c-0f30fd367c24/e363bb77-6e1c-4e87-91ab-944ae1db6e11.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "db692d58-4b13-4174-ae8c-30c515c0689c",
+      "title": "Hunter x Hunter",
+      "cover": "https://uploads.mangadex.org/covers/db692d58-4b13-4174-ae8c-30c515c0689c/aa112927-f1e5-4fe4-a4db-7fd4a1536e3c.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "5c9d1254-f074-4b5c-8795-6f0641b2597b",
+      "title": "Girl and Science",
+      "cover": "https://uploads.mangadex.org/covers/5c9d1254-f074-4b5c-8795-6f0641b2597b/f606b3ce-4f64-400e-8a1c-265698f68d01.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
     {
       "id": "f5c25341-d6ff-4585-8548-3a48fc7654d9",
       "title": "Akira Failing in Love",
@@ -50,13 +78,6 @@
       "cover": "https://uploads.mangadex.org/covers/cbf174ca-af25-4410-82fa-498a6df9ad3c/793ba37f-6b51-4293-b13c-6e8afa968197.png.256.jpg",
       "source": "mangadex",
       "status": "completed"
-    },
-    {
-      "id": "30f3ac69-21b6-45ad-a110-d011b7aaadaa",
-      "title": "Fly Me to The Moon",
-      "cover": "https://uploads.mangadex.org/covers/30f3ac69-21b6-45ad-a110-d011b7aaadaa/fb735d33-b723-4446-9258-eefbffae222f.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
     },
     {
       "id": "334019e1-18bb-4ac0-b35c-0e8efb1e481c",
@@ -155,13 +176,6 @@
       "cover": "https://uploads.mangadex.org/covers/77296cee-0b74-415f-914d-6f29036d3906/6c06c4f2-f816-4dd8-9652-8b9764bfdde4.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
-    },
-    {
-      "id": "5c9d1254-f074-4b5c-8795-6f0641b2597b",
-      "title": "Girl and Science",
-      "cover": "https://uploads.mangadex.org/covers/5c9d1254-f074-4b5c-8795-6f0641b2597b/f606b3ce-4f64-400e-8a1c-265698f68d01.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
     },
     {
       "id": "96ae166c-d8e1-4e9e-88cb-805b65154d7e",
@@ -335,20 +349,6 @@
       "id": "63dbbf80-0189-4ae4-a549-68a0caa2f834",
       "title": "ويتشريف",
       "cover": "https://uploads.mangadex.org/covers/63dbbf80-0189-4ae4-a549-68a0caa2f834/04ae601b-1e85-4b59-bba3-7a140f7339f5.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "52ede55c-1584-4019-b85b-3902a423c3ab",
-      "title": "FAIRY TAIL: 100 Years Quest",
-      "cover": "https://uploads.mangadex.org/covers/52ede55c-1584-4019-b85b-3902a423c3ab/8e18a9d7-27ed-48ff-924b-a397df5ba0a0.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "dea77c2d-dbaa-434a-b0af-0c116642434c",
-      "title": "Ichi the Witch",
-      "cover": "https://uploads.mangadex.org/covers/dea77c2d-dbaa-434a-b0af-0c116642434c/707b5cff-60e3-40fe-8105-e9065d5f8abd.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     }
