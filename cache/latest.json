@@ -1,7 +1,49 @@
 {
-  "updated_at": "2026-09-07T02:50:09.490059+00:00",
+  "updated_at": "2026-09-07T11:32:54.191576+00:00",
   "count": 50,
   "items": [
+    {
+      "id": "3d25d7da-893f-400e-9aeb-6163773c671a",
+      "title": "Delusion Telepathy",
+      "cover": "https://uploads.mangadex.org/covers/3d25d7da-893f-400e-9aeb-6163773c671a/0e6104af-8499-40cc-a8c3-6ebef89ccf94.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "cf43b9e3-396a-41bc-ab72-715f66cdb7e1",
+      "title": "A-bout!",
+      "cover": "https://uploads.mangadex.org/covers/cf43b9e3-396a-41bc-ab72-715f66cdb7e1/c556e070-f1ff-405b-b71c-b2e7492aee0e.png.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "f5c25341-d6ff-4585-8548-3a48fc7654d9",
+      "title": "Akira Failing in Love",
+      "cover": "https://uploads.mangadex.org/covers/f5c25341-d6ff-4585-8548-3a48fc7654d9/26f901ef-4583-4646-ad71-0fe412ad7fec.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "eeb2ab0e-7dbc-4f0c-b476-8181d44217a8",
+      "title": "الوهم السماوي",
+      "cover": "https://uploads.mangadex.org/covers/eeb2ab0e-7dbc-4f0c-b476-8181d44217a8/525c3074-f18e-4313-940e-14f4fd873302.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "2b13e058-6726-4079-9609-dacf00c23ecb",
+      "title": "Steins;Gate - Brownian Motion of Love and Hate",
+      "cover": "https://uploads.mangadex.org/covers/2b13e058-6726-4079-9609-dacf00c23ecb/b5c93ad5-6cd6-4aa5-8b1d-99bfb13f6221.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "67e7453b-9ee5-4ae5-9316-215b03e4a71d",
+      "title": "Witch Hat Atelier",
+      "cover": "https://uploads.mangadex.org/covers/67e7453b-9ee5-4ae5-9316-215b03e4a71d/a9feeb2a-4b34-4a52-93fb-ab948e743503.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
     {
       "id": "36300a46-485b-4c05-a570-ac3b23de3952",
       "title": "If the Villainess and Villain Met and Fell in Love",
@@ -122,6 +164,13 @@
       "status": "ongoing"
     },
     {
+      "id": "db692d58-4b13-4174-ae8c-30c515c0689c",
+      "title": "Hunter x Hunter",
+      "cover": "https://uploads.mangadex.org/covers/db692d58-4b13-4174-ae8c-30c515c0689c/aa112927-f1e5-4fe4-a4db-7fd4a1536e3c.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
       "id": "bcfe1b36-daee-40fd-9984-d9597caf9da7",
       "title": "فَقِيْهَةُ ٱلْمَغُوْلِ",
       "cover": "https://uploads.mangadex.org/covers/bcfe1b36-daee-40fd-9984-d9597caf9da7/5ce19283-d717-44e2-bb69-4247640d3c75.jpg.256.jpg",
@@ -153,13 +202,6 @@
       "id": "8211bac6-a392-4e37-b3b6-dac0f4512d24",
       "title": "Re:ZERO -Starting Life in Another World-, Chapter 4: The Sanctuary and the Witch of Greed",
       "cover": "https://uploads.mangadex.org/covers/8211bac6-a392-4e37-b3b6-dac0f4512d24/57feede7-b47c-4c15-876c-2318fb827b9c.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "67e7453b-9ee5-4ae5-9316-215b03e4a71d",
-      "title": "Witch Hat Atelier",
-      "cover": "https://uploads.mangadex.org/covers/67e7453b-9ee5-4ae5-9316-215b03e4a71d/a9feeb2a-4b34-4a52-93fb-ab948e743503.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
@@ -248,20 +290,6 @@
       "status": "completed"
     },
     {
-      "id": "db692d58-4b13-4174-ae8c-30c515c0689c",
-      "title": "Hunter x Hunter",
-      "cover": "https://uploads.mangadex.org/covers/db692d58-4b13-4174-ae8c-30c515c0689c/aa112927-f1e5-4fe4-a4db-7fd4a1536e3c.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "f5c25341-d6ff-4585-8548-3a48fc7654d9",
-      "title": "Akira Failing in Love",
-      "cover": "https://uploads.mangadex.org/covers/f5c25341-d6ff-4585-8548-3a48fc7654d9/26f901ef-4583-4646-ad71-0fe412ad7fec.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
       "id": "d553645b-03a3-4fc8-9a9c-57f91cbbab89",
       "title": "Are You a Landmine, Chihara-san?",
       "cover": "https://uploads.mangadex.org/covers/d553645b-03a3-4fc8-9a9c-57f91cbbab89/4878d139-e5ee-49eb-aeb6-1c2f9025624e.jpg.256.jpg",
@@ -323,34 +351,6 @@
       "cover": "https://uploads.mangadex.org/covers/4c4feee0-7307-4532-b6c6-cbb552d61529/e53b1b1a-65f4-4f89-8f05-bc6524ba52ad.jpg.256.jpg",
       "source": "mangadex",
       "status": "completed"
-    },
-    {
-      "id": "263deeff-c010-4ac7-bc01-6341f3e698ac",
-      "title": "Dragon Quest: The Great Adventure of Dai - Avan the Brave and the Demon King of Hellfire",
-      "cover": "https://uploads.mangadex.org/covers/263deeff-c010-4ac7-bc01-6341f3e698ac/774442b3-f96c-417c-a873-43b682eecf0c.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "17ce37ea-1cda-4429-b062-c4b627814225",
-      "title": "سيراف النهاية",
-      "cover": "https://uploads.mangadex.org/covers/17ce37ea-1cda-4429-b062-c4b627814225/31e31704-e6e2-474a-a857-b18580a0057b.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "eeb2ab0e-7dbc-4f0c-b476-8181d44217a8",
-      "title": "الوهم السماوي",
-      "cover": "https://uploads.mangadex.org/covers/eeb2ab0e-7dbc-4f0c-b476-8181d44217a8/525c3074-f18e-4313-940e-14f4fd873302.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "d89cfcf7-dcb4-4af7-8c95-330c2c6167d0",
-      "title": "عودة ملك الجثث",
-      "cover": "https://uploads.mangadex.org/covers/d89cfcf7-dcb4-4af7-8c95-330c2c6167d0/ecf61b0f-bb4b-4865-a7a4-9407abc1ba49.png.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
     }
   ]
 }
