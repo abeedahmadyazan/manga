@@ -1,7 +1,21 @@
 {
-  "updated_at": "2026-09-08T10:33:10.503259+00:00",
+  "updated_at": "2026-09-08T15:57:29.525503+00:00",
   "count": 50,
   "items": [
+    {
+      "id": "ea47525d-99df-45b5-9103-dd853f49f8c3",
+      "title": "Welcome to Demon School! Iruma-kun: IruMafia Edition",
+      "cover": "https://uploads.mangadex.org/covers/ea47525d-99df-45b5-9103-dd853f49f8c3/7ba89c43-1234-4d11-9aa6-c3a7576cd1ce.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "5c9d1254-f074-4b5c-8795-6f0641b2597b",
+      "title": "Girl and Science",
+      "cover": "https://uploads.mangadex.org/covers/5c9d1254-f074-4b5c-8795-6f0641b2597b/f606b3ce-4f64-400e-8a1c-265698f68d01.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
     {
       "id": "cf43b9e3-396a-41bc-ab72-715f66cdb7e1",
       "title": "A-bout!",
@@ -106,13 +120,6 @@
       "cover": "https://uploads.mangadex.org/covers/1ffca916-3ad7-46d2-9591-a9b39e639971/60aef1af-2df0-46aa-8270-e1ad9d287289.jpg.256.jpg",
       "source": "mangadex",
       "status": "hiatus"
-    },
-    {
-      "id": "5c9d1254-f074-4b5c-8795-6f0641b2597b",
-      "title": "Girl and Science",
-      "cover": "https://uploads.mangadex.org/covers/5c9d1254-f074-4b5c-8795-6f0641b2597b/f606b3ce-4f64-400e-8a1c-265698f68d01.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
     },
     {
       "id": "c4b36f15-4ee5-425f-a77d-c2e7cbb970d8",
@@ -342,13 +349,6 @@
       "id": "843c31ff-d390-4199-bc3b-94b0dfc63632",
       "title": "Baki Side Story: Retsu Kaioh Doesn't Mind Even If It's in Another World",
       "cover": "https://uploads.mangadex.org/covers/843c31ff-d390-4199-bc3b-94b0dfc63632/07dbd2f5-68cf-49e2-afe6-af7dd4d26f70.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "30f3ac69-21b6-45ad-a110-d011b7aaadaa",
-      "title": "Fly Me to The Moon",
-      "cover": "https://uploads.mangadex.org/covers/30f3ac69-21b6-45ad-a110-d011b7aaadaa/fb735d33-b723-4446-9258-eefbffae222f.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     }
