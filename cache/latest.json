@@ -1,7 +1,35 @@
 {
-  "updated_at": "2026-09-07T21:05:58.828287+00:00",
+  "updated_at": "2026-09-08T02:59:39.133985+00:00",
   "count": 50,
   "items": [
+    {
+      "id": "8a38bcc4-0a52-4a46-9d02-7fc802048b1d",
+      "title": "Shinobi Undercover",
+      "cover": "https://uploads.mangadex.org/covers/8a38bcc4-0a52-4a46-9d02-7fc802048b1d/612ae2e5-ed10-4d05-abb2-ee3b7a781737.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "baa95345-24fb-47a9-83e9-434ff671f968",
+      "title": "خلف المتجر ادخن معك",
+      "cover": "https://uploads.mangadex.org/covers/baa95345-24fb-47a9-83e9-434ff671f968/4862f2a1-2852-4c98-a217-e3a44af83152.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "3eaabe03-d2bd-43f3-af71-bd1db4ab564a",
+      "title": "Isekai Executioner: The Serial Killer in Another World",
+      "cover": "https://uploads.mangadex.org/covers/3eaabe03-d2bd-43f3-af71-bd1db4ab564a/55b1bc21-07ab-4820-93a7-b0a9aa627899.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "bd6d0982-0091-4945-ad70-c028ed3c0917",
+      "title": "موشوكو تينسي",
+      "cover": "https://uploads.mangadex.org/covers/bd6d0982-0091-4945-ad70-c028ed3c0917/6a9f3d32-b7bb-478a-9c76-54868276c26f.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
     {
       "id": "34019331-7377-4e2c-837e-f6e1ab2b5ef7",
       "title": "The Seven Deadly Sins: Four Knights of the Apocalypse",
@@ -136,13 +164,6 @@
       "status": "ongoing"
     },
     {
-      "id": "baa95345-24fb-47a9-83e9-434ff671f968",
-      "title": "خلف المتجر ادخن معك",
-      "cover": "https://uploads.mangadex.org/covers/baa95345-24fb-47a9-83e9-434ff671f968/4862f2a1-2852-4c98-a217-e3a44af83152.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
       "id": "077812bd-6ee9-4756-a508-9148b254661e",
       "title": "I Reincarnated as a Mob Villain in a Game and Decided to Become the Final Boss. But for Some Reason, Everyone Thinks I'm the Best King Ever - Can Someone Please Tell Me Why?!",
       "cover": "https://uploads.mangadex.org/covers/077812bd-6ee9-4756-a508-9148b254661e/4a133c57-e712-4820-8cc7-10a6498bb494.png.256.jpg",
@@ -160,13 +181,6 @@
       "id": "d65c0332-3764-4c89-84bd-b1a4e7278ad7",
       "title": "Kagurabachi",
       "cover": "https://uploads.mangadex.org/covers/d65c0332-3764-4c89-84bd-b1a4e7278ad7/3edb80b9-dae6-4483-984d-2e7f8b02b702.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "3eaabe03-d2bd-43f3-af71-bd1db4ab564a",
-      "title": "Isekai Executioner: The Serial Killer in Another World",
-      "cover": "https://uploads.mangadex.org/covers/3eaabe03-d2bd-43f3-af71-bd1db4ab564a/55b1bc21-07ab-4820-93a7-b0a9aa627899.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
@@ -337,20 +351,6 @@
       "cover": "https://uploads.mangadex.org/covers/8a3d319d-2d10-4364-928c-0f30fd367c24/e363bb77-6e1c-4e87-91ab-944ae1db6e11.jpg.256.jpg",
       "source": "mangadex",
       "status": "completed"
-    },
-    {
-      "id": "d553645b-03a3-4fc8-9a9c-57f91cbbab89",
-      "title": "Are You a Landmine, Chihara-san?",
-      "cover": "https://uploads.mangadex.org/covers/d553645b-03a3-4fc8-9a9c-57f91cbbab89/4878d139-e5ee-49eb-aeb6-1c2f9025624e.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "59ef045c-0712-4f15-bb54-52bffd87481b",
-      "title": "محب الهيتو",
-      "cover": "https://uploads.mangadex.org/covers/59ef045c-0712-4f15-bb54-52bffd87481b/f0e8af3d-6458-4a79-bf8a-5e970373c967.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
     }
   ]
 }
