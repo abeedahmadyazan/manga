@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-09T03:00:47.330085+00:00",
+  "updated_at": "2026-09-09T10:44:35.779220+00:00",
   "count": 50,
   "items": [
     {
@@ -87,18 +87,18 @@
       "status": "ongoing"
     },
     {
-      "id": "e18fe8c6-f6dc-4f05-8462-7b2083ff9a6c",
-      "title": "يوميات الصيدلة",
-      "cover": "https://uploads.mangadex.org/covers/e18fe8c6-f6dc-4f05-8462-7b2083ff9a6c/530a4ffb-87cb-4156-bdeb-61670532e20f.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
       "id": "c52b2ce3-7f95-469c-96b0-479524fb7a1a",
       "title": "جوجوتسو كايسن",
       "cover": "https://uploads.mangadex.org/covers/c52b2ce3-7f95-469c-96b0-479524fb7a1a/6d9134b2-21ea-4d02-ac2b-7c0d1c6a2aaa.jpg.256.jpg",
       "source": "mangadex",
       "status": "completed"
+    },
+    {
+      "id": "e18fe8c6-f6dc-4f05-8462-7b2083ff9a6c",
+      "title": "يوميات الصيدلة",
+      "cover": "https://uploads.mangadex.org/covers/e18fe8c6-f6dc-4f05-8462-7b2083ff9a6c/530a4ffb-87cb-4156-bdeb-61670532e20f.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
     },
     {
       "id": "418791c0-35cf-4f87-936b-acd9cddf0989",
@@ -269,16 +269,16 @@
       "status": "completed"
     },
     {
-      "id": "baa95345-24fb-47a9-83e9-434ff671f968",
-      "title": "خلف المتجر ادخن معك",
-      "cover": "https://uploads.mangadex.org/covers/baa95345-24fb-47a9-83e9-434ff671f968/4862f2a1-2852-4c98-a217-e3a44af83152.jpg.256.jpg",
+      "id": "fa197a3e-6dd6-470d-91e4-c0130a1392d3",
+      "title": "Reincarnated as a Dragon Hatchling",
+      "cover": "https://uploads.mangadex.org/covers/fa197a3e-6dd6-470d-91e4-c0130a1392d3/c2f12477-2941-4cca-9d67-212781ae0922.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
     {
-      "id": "fa197a3e-6dd6-470d-91e4-c0130a1392d3",
-      "title": "Reincarnated as a Dragon Hatchling",
-      "cover": "https://uploads.mangadex.org/covers/fa197a3e-6dd6-470d-91e4-c0130a1392d3/c2f12477-2941-4cca-9d67-212781ae0922.jpg.256.jpg",
+      "id": "baa95345-24fb-47a9-83e9-434ff671f968",
+      "title": "خلف المتجر ادخن معك",
+      "cover": "https://uploads.mangadex.org/covers/baa95345-24fb-47a9-83e9-434ff671f968/4862f2a1-2852-4c98-a217-e3a44af83152.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
