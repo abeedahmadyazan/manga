@@ -1,7 +1,91 @@
 {
-  "updated_at": "2026-09-09T10:44:35.779220+00:00",
+  "updated_at": "2026-09-09T15:53:38.932146+00:00",
   "count": 50,
   "items": [
+    {
+      "id": "dea77c2d-dbaa-434a-b0af-0c116642434c",
+      "title": "Ichi the Witch",
+      "cover": "https://uploads.mangadex.org/covers/dea77c2d-dbaa-434a-b0af-0c116642434c/707b5cff-60e3-40fe-8105-e9065d5f8abd.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "c4ca02fb-8378-433b-8049-fbbea5d25cba",
+      "title": "هايميا-سينباي حسناء مهيبة!",
+      "cover": "https://uploads.mangadex.org/covers/c4ca02fb-8378-433b-8049-fbbea5d25cba/7ab29404-0ebd-4862-ad4e-e4ea1ffe231f.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "733d95ce-4dc2-4c02-a177-6cb772b18317",
+      "title": "The Girl I Saved on the Train Turned out to Be My Childhood Friend",
+      "cover": "https://uploads.mangadex.org/covers/733d95ce-4dc2-4c02-a177-6cb772b18317/e284f7bb-ca82-407b-b0e1-31dd52b8f65c.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "d64b0768-bebe-433c-b923-99870503c0a3",
+      "title": "Dark Gathering",
+      "cover": "https://uploads.mangadex.org/covers/d64b0768-bebe-433c-b923-99870503c0a3/6ba0bedc-fd0f-45c1-954d-bd61df43f83b.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "96ae166c-d8e1-4e9e-88cb-805b65154d7e",
+      "title": "Red Blue",
+      "cover": "https://uploads.mangadex.org/covers/96ae166c-d8e1-4e9e-88cb-805b65154d7e/d010f9c1-fdaa-4925-93df-dc3c06417574.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "cf43b9e3-396a-41bc-ab72-715f66cdb7e1",
+      "title": "A-bout!",
+      "cover": "https://uploads.mangadex.org/covers/cf43b9e3-396a-41bc-ab72-715f66cdb7e1/c556e070-f1ff-405b-b71c-b2e7492aee0e.png.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "61830b36-1712-4b7b-9421-f671e9ced6d3",
+      "title": "Learning to Love My Cat-like Classmate",
+      "cover": "https://uploads.mangadex.org/covers/61830b36-1712-4b7b-9421-f671e9ced6d3/6076a7f6-4454-49fb-8802-89ee00aec545.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "c5bf33f1-498d-425b-b22b-83d4ccb8c341",
+      "title": "Level 0 Demon King Becomes an Adventurer in Another World",
+      "cover": "https://uploads.mangadex.org/covers/c5bf33f1-498d-425b-b22b-83d4ccb8c341/2e4bcb66-834c-434b-988f-18dedcfcbfe8.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "f2e91f99-6c3b-4a66-a3f7-9da13f68c416",
+      "title": "Ragna Crimson",
+      "cover": "https://uploads.mangadex.org/covers/f2e91f99-6c3b-4a66-a3f7-9da13f68c416/f55b2f9c-59e9-475e-9de9-e2aa4dfc2560.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "a4b39b6e-a448-4644-a540-64ceff1d8305",
+      "title": "Toilet-Bound Hanako-kun",
+      "cover": "https://uploads.mangadex.org/covers/a4b39b6e-a448-4644-a540-64ceff1d8305/2c300b23-9ca4-4dd3-8722-7fe1d7bc8548.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "87ffa375-bd2c-49ba-ba0c-6d78ea07c342",
+      "title": "Medaka Kuroiwa is Impervious to My Charms",
+      "cover": "https://uploads.mangadex.org/covers/87ffa375-bd2c-49ba-ba0c-6d78ea07c342/e410b2ef-b97e-45c1-b861-140b2fe6ee01.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "4e0ab019-afcb-4fd9-98eb-fcb28cf7fc81",
+      "title": "مانجا الملكة النحلة شوكهو ميساكي - مينتل-آوت",
+      "cover": "https://uploads.mangadex.org/covers/4e0ab019-afcb-4fd9-98eb-fcb28cf7fc81/71450b93-c970-42e6-bb65-93f45b8e9ac3.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
     {
       "id": "1ffca916-3ad7-46d2-9591-a9b39e639971",
       "title": "Second Life Ranker",
@@ -38,16 +122,9 @@
       "status": "ongoing"
     },
     {
-      "id": "cf43b9e3-396a-41bc-ab72-715f66cdb7e1",
-      "title": "A-bout!",
-      "cover": "https://uploads.mangadex.org/covers/cf43b9e3-396a-41bc-ab72-715f66cdb7e1/c556e070-f1ff-405b-b71c-b2e7492aee0e.png.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
-      "id": "d64b0768-bebe-433c-b923-99870503c0a3",
-      "title": "Dark Gathering",
-      "cover": "https://uploads.mangadex.org/covers/d64b0768-bebe-433c-b923-99870503c0a3/6ba0bedc-fd0f-45c1-954d-bd61df43f83b.jpg.256.jpg",
+      "id": "2063ced4-bf94-4471-8772-75f6720be008",
+      "title": "Kengan Omega",
+      "cover": "https://uploads.mangadex.org/covers/2063ced4-bf94-4471-8772-75f6720be008/48f3ed49-f8cf-478d-af42-164560e12022.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
@@ -87,13 +164,6 @@
       "status": "ongoing"
     },
     {
-      "id": "a4b39b6e-a448-4644-a540-64ceff1d8305",
-      "title": "Toilet-Bound Hanako-kun",
-      "cover": "https://uploads.mangadex.org/covers/a4b39b6e-a448-4644-a540-64ceff1d8305/2c300b23-9ca4-4dd3-8722-7fe1d7bc8548.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
       "id": "e1d8b192-fa28-4651-bdaf-d4e0d4418ea8",
       "title": "مذكرة فانيتاس",
       "cover": "https://uploads.mangadex.org/covers/e1d8b192-fa28-4651-bdaf-d4e0d4418ea8/cc05ec6d-203d-4efe-9118-18f4c1953f11.jpg.256.jpg",
@@ -106,13 +176,6 @@
       "cover": "https://uploads.mangadex.org/covers/8cc979c5-9c2d-4c16-9e83-e0a30dbcc6c7/39c4007a-bf3f-4f0a-b4ff-7ea690bcadea.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
-    },
-    {
-      "id": "733d95ce-4dc2-4c02-a177-6cb772b18317",
-      "title": "The Girl I Saved on the Train Turned out to Be My Childhood Friend",
-      "cover": "https://uploads.mangadex.org/covers/733d95ce-4dc2-4c02-a177-6cb772b18317/e284f7bb-ca82-407b-b0e1-31dd52b8f65c.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
     },
     {
       "id": "22228a24-2dcc-4195-a5d8-357dd4a311f0",
@@ -129,20 +192,6 @@
       "status": "ongoing"
     },
     {
-      "id": "f2e91f99-6c3b-4a66-a3f7-9da13f68c416",
-      "title": "Ragna Crimson",
-      "cover": "https://uploads.mangadex.org/covers/f2e91f99-6c3b-4a66-a3f7-9da13f68c416/f55b2f9c-59e9-475e-9de9-e2aa4dfc2560.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "87ffa375-bd2c-49ba-ba0c-6d78ea07c342",
-      "title": "Medaka Kuroiwa is Impervious to My Charms",
-      "cover": "https://uploads.mangadex.org/covers/87ffa375-bd2c-49ba-ba0c-6d78ea07c342/e410b2ef-b97e-45c1-b861-140b2fe6ee01.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
       "id": "6d6d9fda-5cd3-40ac-948b-776b1a1a0eb1",
       "title": "الفتاة التي أُحب نسيت نظارتها",
       "cover": "https://uploads.mangadex.org/covers/6d6d9fda-5cd3-40ac-948b-776b1a1a0eb1/e56be766-2872-4edf-a3b3-74d32ecd9096.jpg.256.jpg",
@@ -150,9 +199,23 @@
       "status": "completed"
     },
     {
+      "id": "4a6b625c-0c5e-4a2d-829f-d897832deec3",
+      "title": "YoRHa - Pearl Harbor Descent Record - A NieR:Automata Story",
+      "cover": "https://uploads.mangadex.org/covers/4a6b625c-0c5e-4a2d-829f-d897832deec3/a753d9e0-a5f9-4db2-96bf-37e19584e4fe.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
       "id": "a460ab18-22c1-47eb-a08a-9ee85fe37ec8",
       "title": "Bleach (Official Colored)",
       "cover": "https://uploads.mangadex.org/covers/a460ab18-22c1-47eb-a08a-9ee85fe37ec8/7c8f9203-2b82-41f2-beb3-e7fb00e151e2.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "f3ab48b2-e07c-4f21-b205-ceb0f4309451",
+      "title": "Re:ZERO -Starting Life in Another World-, Chapter 2: A Week at the Mansion",
+      "cover": "https://uploads.mangadex.org/covers/f3ab48b2-e07c-4f21-b205-ceb0f4309451/3306c55c-1278-40af-9818-7064e6eba24b.jpg.256.jpg",
       "source": "mangadex",
       "status": "completed"
     },
@@ -174,13 +237,6 @@
       "id": "6057cba5-2300-4579-9acd-f19efd150270",
       "title": "YanOta: The Delinquent and the Otaku",
       "cover": "https://uploads.mangadex.org/covers/6057cba5-2300-4579-9acd-f19efd150270/6da0f331-c1cf-4fb1-bd6a-555632948961.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "c4ca02fb-8378-433b-8049-fbbea5d25cba",
-      "title": "هايميا-سينباي حسناء مهيبة!",
-      "cover": "https://uploads.mangadex.org/covers/c4ca02fb-8378-433b-8049-fbbea5d25cba/7ab29404-0ebd-4862-ad4e-e4ea1ffe231f.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
@@ -209,6 +265,13 @@
       "id": "e18fe8c6-f6dc-4f05-8462-7b2083ff9a6c",
       "title": "يوميات الصيدلة",
       "cover": "https://uploads.mangadex.org/covers/e18fe8c6-f6dc-4f05-8462-7b2083ff9a6c/530a4ffb-87cb-4156-bdeb-61670532e20f.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "59ef045c-0712-4f15-bb54-52bffd87481b",
+      "title": "محب الهيتو",
+      "cover": "https://uploads.mangadex.org/covers/59ef045c-0712-4f15-bb54-52bffd87481b/f0e8af3d-6458-4a79-bf8a-5e970373c967.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
@@ -288,69 +351,6 @@
       "cover": "https://uploads.mangadex.org/covers/c4b36f15-4ee5-425f-a77d-c2e7cbb970d8/e5c54f1b-6ea4-4dd2-ae6e-9d0e138d7c2e.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
-    },
-    {
-      "id": "229e5177-2e71-4642-bd56-a9b0b0ba0e60",
-      "title": "فهرس السحر",
-      "cover": "https://uploads.mangadex.org/covers/229e5177-2e71-4642-bd56-a9b0b0ba0e60/aed17872-eed9-47d2-b3ab-e13e3870ad29.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "356de811-ae92-48f1-b93b-cfdf0f8d02e4",
-      "title": "بما أننا نرسم الآن",
-      "cover": "https://uploads.mangadex.org/covers/356de811-ae92-48f1-b93b-cfdf0f8d02e4/4c0f235c-762d-463b-a320-4e5cedd8db51.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "b5b21ca1-bba5-4b9a-8cd1-6248f731650b",
-      "title": "سجلات راغناروك",
-      "cover": "https://uploads.mangadex.org/covers/b5b21ca1-bba5-4b9a-8cd1-6248f731650b/64235ab3-3595-47ea-b65a-457b828489c2.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "51c1e7cc-23f4-4a08-a961-c1ab75e2bb33",
-      "title": "Inexpressive Kashiwada and Expressive Oota",
-      "cover": "https://uploads.mangadex.org/covers/51c1e7cc-23f4-4a08-a961-c1ab75e2bb33/3bdea205-146a-460c-ae6e-7c2b27f762ed.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
-      "id": "202718c6-525e-4cec-a469-c945548cacc3",
-      "title": "I Hate That We're Childhood Friends!: My Rise to the Top of School Life with an S-Rank Beauty Begins After a Falling-Out",
-      "cover": "https://uploads.mangadex.org/covers/202718c6-525e-4cec-a469-c945548cacc3/04dd5c60-a742-4f42-9de0-80759d0e0ceb.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "3d25d7da-893f-400e-9aeb-6163773c671a",
-      "title": "Delusion Telepathy",
-      "cover": "https://uploads.mangadex.org/covers/3d25d7da-893f-400e-9aeb-6163773c671a/0e6104af-8499-40cc-a8c3-6ebef89ccf94.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
-      "id": "f5c25341-d6ff-4585-8548-3a48fc7654d9",
-      "title": "Akira Failing in Love",
-      "cover": "https://uploads.mangadex.org/covers/f5c25341-d6ff-4585-8548-3a48fc7654d9/26f901ef-4583-4646-ad71-0fe412ad7fec.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "eeb2ab0e-7dbc-4f0c-b476-8181d44217a8",
-      "title": "الوهم السماوي",
-      "cover": "https://uploads.mangadex.org/covers/eeb2ab0e-7dbc-4f0c-b476-8181d44217a8/525c3074-f18e-4313-940e-14f4fd873302.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "2b13e058-6726-4079-9609-dacf00c23ecb",
-      "title": "Steins;Gate - Brownian Motion of Love and Hate",
-      "cover": "https://uploads.mangadex.org/covers/2b13e058-6726-4079-9609-dacf00c23ecb/b5c93ad5-6cd6-4aa5-8b1d-99bfb13f6221.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
     }
   ]
 }
