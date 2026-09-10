@@ -1,7 +1,21 @@
 {
-  "updated_at": "2026-09-10T10:35:04.123249+00:00",
+  "updated_at": "2026-09-10T15:48:47.594052+00:00",
   "count": 50,
   "items": [
+    {
+      "id": "d64b0768-bebe-433c-b923-99870503c0a3",
+      "title": "Dark Gathering",
+      "cover": "https://uploads.mangadex.org/covers/d64b0768-bebe-433c-b923-99870503c0a3/6ba0bedc-fd0f-45c1-954d-bd61df43f83b.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "0a580438-bc72-4503-940b-12a5da881b56",
+      "title": "أنتِ زهرة الحظ",
+      "cover": "https://uploads.mangadex.org/covers/0a580438-bc72-4503-940b-12a5da881b56/a64a8d8b-1c71-496e-a0a7-0c1da501da6c.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
     {
       "id": "c4ca02fb-8378-433b-8049-fbbea5d25cba",
       "title": "هايميا-سينباي حسناء مهيبة!",
@@ -10,16 +24,72 @@
       "status": "ongoing"
     },
     {
-      "id": "4141c5dc-c525-4df5-afd7-cc7d192a832f",
-      "title": "Blue Lock",
-      "cover": "https://uploads.mangadex.org/covers/4141c5dc-c525-4df5-afd7-cc7d192a832f/7ee723d4-b926-4a81-acd9-53adb3fbe461.jpg.256.jpg",
+      "id": "d553645b-03a3-4fc8-9a9c-57f91cbbab89",
+      "title": "Are You a Landmine, Chihara-san?",
+      "cover": "https://uploads.mangadex.org/covers/d553645b-03a3-4fc8-9a9c-57f91cbbab89/4878d139-e5ee-49eb-aeb6-1c2f9025624e.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
+    },
+    {
+      "id": "c4b36f15-4ee5-425f-a77d-c2e7cbb970d8",
+      "title": "NIPPON SANGOKU: The Three Nations of the Crimson Sun",
+      "cover": "https://uploads.mangadex.org/covers/c4b36f15-4ee5-425f-a77d-c2e7cbb970d8/e5c54f1b-6ea4-4dd2-ae6e-9d0e138d7c2e.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "29ab6984-7c1d-4d45-b925-25aa082b492e",
+      "title": "Shangri-La Frontier: From Trash-Game Hunter to God-Tier Game Master!",
+      "cover": "https://uploads.mangadex.org/covers/29ab6984-7c1d-4d45-b925-25aa082b492e/c691a3e7-7ec0-4c2f-a86a-cf04489b33aa.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "4644da00-8f23-44a8-aa99-e3661dcee901",
+      "title": "Trigun Maximum",
+      "cover": "https://uploads.mangadex.org/covers/4644da00-8f23-44a8-aa99-e3661dcee901/d75ab09e-4e47-4d2e-9aa8-925c9f47bfd0.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "cf43b9e3-396a-41bc-ab72-715f66cdb7e1",
+      "title": "A-bout!",
+      "cover": "https://uploads.mangadex.org/covers/cf43b9e3-396a-41bc-ab72-715f66cdb7e1/c556e070-f1ff-405b-b71c-b2e7492aee0e.png.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
     },
     {
       "id": "d8a959f7-648e-4c8d-8f23-f1f3f8e129f3",
       "title": "ون بنش مان",
       "cover": "https://uploads.mangadex.org/covers/d8a959f7-648e-4c8d-8f23-f1f3f8e129f3/511fc404-e6b4-4204-bb10-e4a28f7b5271.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "356de811-ae92-48f1-b93b-cfdf0f8d02e4",
+      "title": "بما أننا نرسم الآن",
+      "cover": "https://uploads.mangadex.org/covers/356de811-ae92-48f1-b93b-cfdf0f8d02e4/4c0f235c-762d-463b-a320-4e5cedd8db51.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "e43a7f5b-6ae7-478d-a4d5-53c8dc3ce52f",
+      "title": "Wistoria: Wand and Sword",
+      "cover": "https://uploads.mangadex.org/covers/e43a7f5b-6ae7-478d-a4d5-53c8dc3ce52f/84a7a4f7-5776-4d74-b7af-e2a5b39338d0.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "5c9d1254-f074-4b5c-8795-6f0641b2597b",
+      "title": "Girl and Science",
+      "cover": "https://uploads.mangadex.org/covers/5c9d1254-f074-4b5c-8795-6f0641b2597b/f606b3ce-4f64-400e-8a1c-265698f68d01.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "4141c5dc-c525-4df5-afd7-cc7d192a832f",
+      "title": "Blue Lock",
+      "cover": "https://uploads.mangadex.org/covers/4141c5dc-c525-4df5-afd7-cc7d192a832f/7ee723d4-b926-4a81-acd9-53adb3fbe461.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
@@ -80,13 +150,6 @@
       "status": "completed"
     },
     {
-      "id": "0a580438-bc72-4503-940b-12a5da881b56",
-      "title": "أنتِ زهرة الحظ",
-      "cover": "https://uploads.mangadex.org/covers/0a580438-bc72-4503-940b-12a5da881b56/a64a8d8b-1c71-496e-a0a7-0c1da501da6c.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
       "id": "418791c0-35cf-4f87-936b-acd9cddf0989",
       "title": "The Fragrant Flower Blooms with Dignity",
       "cover": "https://uploads.mangadex.org/covers/418791c0-35cf-4f87-936b-acd9cddf0989/6e823d0e-103a-4cf9-a312-a3a292ccb12d.jpg.256.jpg",
@@ -104,13 +167,6 @@
       "id": "fa197a3e-6dd6-470d-91e4-c0130a1392d3",
       "title": "Reincarnated as a Dragon Hatchling",
       "cover": "https://uploads.mangadex.org/covers/fa197a3e-6dd6-470d-91e4-c0130a1392d3/c2f12477-2941-4cca-9d67-212781ae0922.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "29ab6984-7c1d-4d45-b925-25aa082b492e",
-      "title": "Shangri-La Frontier: From Trash-Game Hunter to God-Tier Game Master!",
-      "cover": "https://uploads.mangadex.org/covers/29ab6984-7c1d-4d45-b925-25aa082b492e/c691a3e7-7ec0-4c2f-a86a-cf04489b33aa.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
@@ -206,20 +262,6 @@
       "status": "completed"
     },
     {
-      "id": "d64b0768-bebe-433c-b923-99870503c0a3",
-      "title": "Dark Gathering",
-      "cover": "https://uploads.mangadex.org/covers/d64b0768-bebe-433c-b923-99870503c0a3/6ba0bedc-fd0f-45c1-954d-bd61df43f83b.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "cf43b9e3-396a-41bc-ab72-715f66cdb7e1",
-      "title": "A-bout!",
-      "cover": "https://uploads.mangadex.org/covers/cf43b9e3-396a-41bc-ab72-715f66cdb7e1/c556e070-f1ff-405b-b71c-b2e7492aee0e.png.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
       "id": "61830b36-1712-4b7b-9421-f671e9ced6d3",
       "title": "Learning to Love My Cat-like Classmate",
       "cover": "https://uploads.mangadex.org/covers/61830b36-1712-4b7b-9421-f671e9ced6d3/6076a7f6-4454-49fb-8802-89ee00aec545.jpg.256.jpg",
@@ -276,13 +318,6 @@
       "status": "ongoing"
     },
     {
-      "id": "5c9d1254-f074-4b5c-8795-6f0641b2597b",
-      "title": "Girl and Science",
-      "cover": "https://uploads.mangadex.org/covers/5c9d1254-f074-4b5c-8795-6f0641b2597b/f606b3ce-4f64-400e-8a1c-265698f68d01.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
       "id": "2d501d2e-72d5-4c3f-9741-117511622a48",
       "title": "Inazuma Eleven GO Anthology!",
       "cover": "https://uploads.mangadex.org/covers/2d501d2e-72d5-4c3f-9741-117511622a48/2f28ddc4-5524-44ce-a944-accb1f7b576c.png.256.jpg",
@@ -316,41 +351,6 @@
       "cover": "https://uploads.mangadex.org/covers/ca33a142-58fb-4fee-88b9-36ef87f02c77/7e8317ea-78bf-4090-a2ee-ab07041e4458.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
-    },
-    {
-      "id": "e1d8b192-fa28-4651-bdaf-d4e0d4418ea8",
-      "title": "مذكرة فانيتاس",
-      "cover": "https://uploads.mangadex.org/covers/e1d8b192-fa28-4651-bdaf-d4e0d4418ea8/cc05ec6d-203d-4efe-9118-18f4c1953f11.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "hiatus"
-    },
-    {
-      "id": "8cc979c5-9c2d-4c16-9e83-e0a30dbcc6c7",
-      "title": "A Man and His Cat",
-      "cover": "https://uploads.mangadex.org/covers/8cc979c5-9c2d-4c16-9e83-e0a30dbcc6c7/39c4007a-bf3f-4f0a-b4ff-7ea690bcadea.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "22228a24-2dcc-4195-a5d8-357dd4a311f0",
-      "title": "Hibi wa Sugiredo Meshi Umashi",
-      "cover": "https://uploads.mangadex.org/covers/22228a24-2dcc-4195-a5d8-357dd4a311f0/51bca179-4a59-4aa6-92f2-2d07625213ab.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "bc634b22-0c05-4a55-9b7e-3f55438a1ad3",
-      "title": "نوزاكي-كون من مجلة الفتيات الشهرية",
-      "cover": "https://uploads.mangadex.org/covers/bc634b22-0c05-4a55-9b7e-3f55438a1ad3/a904b267-d5cb-4b12-a091-a5d6108d0ed0.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "6d6d9fda-5cd3-40ac-948b-776b1a1a0eb1",
-      "title": "الفتاة التي أُحب نسيت نظارتها",
-      "cover": "https://uploads.mangadex.org/covers/6d6d9fda-5cd3-40ac-948b-776b1a1a0eb1/e56be766-2872-4edf-a3b3-74d32ecd9096.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
     }
   ]
 }
