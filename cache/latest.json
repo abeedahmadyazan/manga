@@ -1,7 +1,35 @@
 {
-  "updated_at": "2026-09-11T02:57:10.614973+00:00",
+  "updated_at": "2026-09-11T10:34:57.953829+00:00",
   "count": 50,
   "items": [
+    {
+      "id": "63dbbf80-0189-4ae4-a549-68a0caa2f834",
+      "title": "ويتشريف",
+      "cover": "https://uploads.mangadex.org/covers/63dbbf80-0189-4ae4-a549-68a0caa2f834/04ae601b-1e85-4b59-bba3-7a140f7339f5.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "25e1d17b-6a4d-4698-a4f6-bf53460c10af",
+      "title": "حافلة لإثنين",
+      "cover": "https://uploads.mangadex.org/covers/25e1d17b-6a4d-4698-a4f6-bf53460c10af/f7cd3ff9-d7a1-4b5e-b473-ee2833b82c35.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "a1c7c817-4e59-43b7-9365-09675a149a6f",
+      "title": "ون بيس",
+      "cover": "https://uploads.mangadex.org/covers/a1c7c817-4e59-43b7-9365-09675a149a6f/2f4aca53-64c7-46ac-ae85-3bc9b3169890.png.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "cf43b9e3-396a-41bc-ab72-715f66cdb7e1",
+      "title": "A-bout!",
+      "cover": "https://uploads.mangadex.org/covers/cf43b9e3-396a-41bc-ab72-715f66cdb7e1/c556e070-f1ff-405b-b71c-b2e7492aee0e.png.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
     {
       "id": "d553645b-03a3-4fc8-9a9c-57f91cbbab89",
       "title": "Are You a Landmine, Chihara-san?",
@@ -34,13 +62,6 @@
       "id": "c4ca02fb-8378-433b-8049-fbbea5d25cba",
       "title": "هايميا-سينباي حسناء مهيبة!",
       "cover": "https://uploads.mangadex.org/covers/c4ca02fb-8378-433b-8049-fbbea5d25cba/7ab29404-0ebd-4862-ad4e-e4ea1ffe231f.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "63dbbf80-0189-4ae4-a549-68a0caa2f834",
-      "title": "ويتشريف",
-      "cover": "https://uploads.mangadex.org/covers/63dbbf80-0189-4ae4-a549-68a0caa2f834/04ae601b-1e85-4b59-bba3-7a140f7339f5.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
@@ -111,13 +132,6 @@
       "id": "4644da00-8f23-44a8-aa99-e3661dcee901",
       "title": "Trigun Maximum",
       "cover": "https://uploads.mangadex.org/covers/4644da00-8f23-44a8-aa99-e3661dcee901/d75ab09e-4e47-4d2e-9aa8-925c9f47bfd0.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
-      "id": "cf43b9e3-396a-41bc-ab72-715f66cdb7e1",
-      "title": "A-bout!",
-      "cover": "https://uploads.mangadex.org/covers/cf43b9e3-396a-41bc-ab72-715f66cdb7e1/c556e070-f1ff-405b-b71c-b2e7492aee0e.png.256.jpg",
       "source": "mangadex",
       "status": "completed"
     },
@@ -234,13 +248,6 @@
       "status": "ongoing"
     },
     {
-      "id": "25e1d17b-6a4d-4698-a4f6-bf53460c10af",
-      "title": "حافلة لإثنين",
-      "cover": "https://uploads.mangadex.org/covers/25e1d17b-6a4d-4698-a4f6-bf53460c10af/f7cd3ff9-d7a1-4b5e-b473-ee2833b82c35.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
       "id": "ea47525d-99df-45b5-9103-dd853f49f8c3",
       "title": "Welcome to Demon School! Iruma-kun: IruMafia Edition",
       "cover": "https://uploads.mangadex.org/covers/ea47525d-99df-45b5-9103-dd853f49f8c3/7ba89c43-1234-4d11-9aa6-c3a7576cd1ce.jpg.256.jpg",
@@ -344,13 +351,6 @@
       "cover": "https://uploads.mangadex.org/covers/4e0ab019-afcb-4fd9-98eb-fcb28cf7fc81/71450b93-c970-42e6-bb65-93f45b8e9ac3.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
-    },
-    {
-      "id": "1ffca916-3ad7-46d2-9591-a9b39e639971",
-      "title": "Second Life Ranker",
-      "cover": "https://uploads.mangadex.org/covers/1ffca916-3ad7-46d2-9591-a9b39e639971/60aef1af-2df0-46aa-8270-e1ad9d287289.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "hiatus"
     }
   ]
 }
