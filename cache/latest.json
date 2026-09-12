@@ -1,7 +1,56 @@
 {
-  "updated_at": "2026-09-12T03:04:04.814536+00:00",
+  "updated_at": "2026-09-12T10:03:47.516949+00:00",
   "count": 50,
   "items": [
+    {
+      "id": "0a580438-bc72-4503-940b-12a5da881b56",
+      "title": "أنتِ زهرة الحظ",
+      "cover": "https://uploads.mangadex.org/covers/0a580438-bc72-4503-940b-12a5da881b56/a64a8d8b-1c71-496e-a0a7-0c1da501da6c.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "a0a5528a-c4a8-4495-a966-6877c12856ba",
+      "title": "TRUMP",
+      "cover": "https://uploads.mangadex.org/covers/a0a5528a-c4a8-4495-a966-6877c12856ba/8cec91f3-ac76-460f-9d42-3d1b4163c0e3.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "244c9d4f-e5fb-4590-9b96-4da191977b33",
+      "title": "Skip and Loafer",
+      "cover": "https://uploads.mangadex.org/covers/244c9d4f-e5fb-4590-9b96-4da191977b33/1c784052-b65a-42a5-a4d4-e5fa612a28c8.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "67e7453b-9ee5-4ae5-9316-215b03e4a71d",
+      "title": "Witch Hat Atelier",
+      "cover": "https://uploads.mangadex.org/covers/67e7453b-9ee5-4ae5-9316-215b03e4a71d/a9feeb2a-4b34-4a52-93fb-ab948e743503.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "936f0ba5-ca65-4de4-99b1-528c02a4454d",
+      "title": "Hunter x Hunter (Official Colored)",
+      "cover": "https://uploads.mangadex.org/covers/936f0ba5-ca65-4de4-99b1-528c02a4454d/128d80df-c5e4-4791-b3b7-08586e9db1b8.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "d422ddc8-eea3-4b0a-82a4-291bbd8c9285",
+      "title": "أبناء عائلة شيونجي",
+      "cover": "https://uploads.mangadex.org/covers/d422ddc8-eea3-4b0a-82a4-291bbd8c9285/18f555fb-4fe4-4d47-8fbe-7bd101a5bc3a.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "e05dd982-6d09-4f3d-8e8e-6c9ae65b5857",
+      "title": "The Color of the End: Mission in the Apocalypse",
+      "cover": "https://uploads.mangadex.org/covers/e05dd982-6d09-4f3d-8e8e-6c9ae65b5857/120f5f17-4eac-4c0e-9c08-7fef0420c968.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
     {
       "id": "334019e1-18bb-4ac0-b35c-0e8efb1e481c",
       "title": "JoJo’s Bizarre Adventure, Part 9: The JoJoLands - Digital Colored Comics",
@@ -185,23 +234,9 @@
       "status": "ongoing"
     },
     {
-      "id": "a0a5528a-c4a8-4495-a966-6877c12856ba",
-      "title": "TRUMP",
-      "cover": "https://uploads.mangadex.org/covers/a0a5528a-c4a8-4495-a966-6877c12856ba/8cec91f3-ac76-460f-9d42-3d1b4163c0e3.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
       "id": "d64b0768-bebe-433c-b923-99870503c0a3",
       "title": "Dark Gathering",
       "cover": "https://uploads.mangadex.org/covers/d64b0768-bebe-433c-b923-99870503c0a3/6ba0bedc-fd0f-45c1-954d-bd61df43f83b.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "0a580438-bc72-4503-940b-12a5da881b56",
-      "title": "أنتِ زهرة الحظ",
-      "cover": "https://uploads.mangadex.org/covers/0a580438-bc72-4503-940b-12a5da881b56/a64a8d8b-1c71-496e-a0a7-0c1da501da6c.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
@@ -262,13 +297,6 @@
       "status": "ongoing"
     },
     {
-      "id": "67e7453b-9ee5-4ae5-9316-215b03e4a71d",
-      "title": "Witch Hat Atelier",
-      "cover": "https://uploads.mangadex.org/covers/67e7453b-9ee5-4ae5-9316-215b03e4a71d/a9feeb2a-4b34-4a52-93fb-ab948e743503.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
       "id": "bd6d0982-0091-4945-ad70-c028ed3c0917",
       "title": "موشوكو تينسي",
       "cover": "https://uploads.mangadex.org/covers/bd6d0982-0091-4945-ad70-c028ed3c0917/6a9f3d32-b7bb-478a-9c76-54868276c26f.jpg.256.jpg",
@@ -321,34 +349,6 @@
       "id": "3eaabe03-d2bd-43f3-af71-bd1db4ab564a",
       "title": "Isekai Executioner: The Serial Killer in Another World",
       "cover": "https://uploads.mangadex.org/covers/3eaabe03-d2bd-43f3-af71-bd1db4ab564a/55b1bc21-07ab-4820-93a7-b0a9aa627899.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "ea47525d-99df-45b5-9103-dd853f49f8c3",
-      "title": "Welcome to Demon School! Iruma-kun: IruMafia Edition",
-      "cover": "https://uploads.mangadex.org/covers/ea47525d-99df-45b5-9103-dd853f49f8c3/7ba89c43-1234-4d11-9aa6-c3a7576cd1ce.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "db692d58-4b13-4174-ae8c-30c515c0689c",
-      "title": "Hunter x Hunter",
-      "cover": "https://uploads.mangadex.org/covers/db692d58-4b13-4174-ae8c-30c515c0689c/aa112927-f1e5-4fe4-a4db-7fd4a1536e3c.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "858e2de7-afba-4096-9aa7-1fccac0119c9",
-      "title": "DIG IT",
-      "cover": "https://uploads.mangadex.org/covers/858e2de7-afba-4096-9aa7-1fccac0119c9/a57adc47-e988-475d-a6fe-2f595fd3c915.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "84703c86-eb83-45ec-8fc5-f34a25115893",
-      "title": "Dai Dark",
-      "cover": "https://uploads.mangadex.org/covers/84703c86-eb83-45ec-8fc5-f34a25115893/e3a1e78b-7147-45f3-9c7f-ee398fa9c437.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     }
