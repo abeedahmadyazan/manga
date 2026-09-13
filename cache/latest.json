@@ -1,7 +1,35 @@
 {
-  "updated_at": "2026-09-12T20:09:55.546032+00:00",
+  "updated_at": "2026-09-13T03:04:57.328799+00:00",
   "count": 50,
   "items": [
+    {
+      "id": "11b74211-f4c0-4f08-b5a4-c491da0d0c0b",
+      "title": "Choujin X",
+      "cover": "https://uploads.mangadex.org/covers/11b74211-f4c0-4f08-b5a4-c491da0d0c0b/a024c8ce-5fbc-4fea-9363-6b8eee3477e7.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "3b6c3a0b-8752-41fc-9d3e-1310f6f28252",
+      "title": "Giant Killing",
+      "cover": "https://uploads.mangadex.org/covers/3b6c3a0b-8752-41fc-9d3e-1310f6f28252/409bcab3-e7f6-4498-a135-72c7f1d5adf2.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "f6ce20ca-73c3-4fdd-9367-e2901fca780e",
+      "title": "ويلات الزمان",
+      "cover": "https://uploads.mangadex.org/covers/f6ce20ca-73c3-4fdd-9367-e2901fca780e/fed093aa-cbcf-4ca0-b80c-49eb251b1e80.png.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "858e2de7-afba-4096-9aa7-1fccac0119c9",
+      "title": "DIG IT",
+      "cover": "https://uploads.mangadex.org/covers/858e2de7-afba-4096-9aa7-1fccac0119c9/a57adc47-e988-475d-a6fe-2f595fd3c915.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
     {
       "id": "22d6d048-9f9f-4c3a-95c2-3b145f110e20",
       "title": "I'm in Love with the Villainess",
@@ -269,13 +297,6 @@
       "status": "ongoing"
     },
     {
-      "id": "f6ce20ca-73c3-4fdd-9367-e2901fca780e",
-      "title": "ويلات الزمان",
-      "cover": "https://uploads.mangadex.org/covers/f6ce20ca-73c3-4fdd-9367-e2901fca780e/fed093aa-cbcf-4ca0-b80c-49eb251b1e80.png.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
       "id": "c4b36f15-4ee5-425f-a77d-c2e7cbb970d8",
       "title": "NIPPON SANGOKU: The Three Nations of the Crimson Sun",
       "cover": "https://uploads.mangadex.org/covers/c4b36f15-4ee5-425f-a77d-c2e7cbb970d8/e5c54f1b-6ea4-4dd2-ae6e-9d0e138d7c2e.jpg.256.jpg",
@@ -328,27 +349,6 @@
       "id": "96ae166c-d8e1-4e9e-88cb-805b65154d7e",
       "title": "Red Blue",
       "cover": "https://uploads.mangadex.org/covers/96ae166c-d8e1-4e9e-88cb-805b65154d7e/1719b5a1-f476-4822-b83a-29bad41aaf17.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "bd6d0982-0091-4945-ad70-c028ed3c0917",
-      "title": "موشوكو تينسي",
-      "cover": "https://uploads.mangadex.org/covers/bd6d0982-0091-4945-ad70-c028ed3c0917/6a9f3d32-b7bb-478a-9c76-54868276c26f.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "f5c25341-d6ff-4585-8548-3a48fc7654d9",
-      "title": "Akira Failing in Love",
-      "cover": "https://uploads.mangadex.org/covers/f5c25341-d6ff-4585-8548-3a48fc7654d9/26bd1cd9-bb1b-42d8-aa92-f916122c606c.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "77296cee-0b74-415f-914d-6f29036d3906",
-      "title": "مسرحية الجبل",
-      "cover": "https://uploads.mangadex.org/covers/77296cee-0b74-415f-914d-6f29036d3906/6c06c4f2-f816-4dd8-9652-8b9764bfdde4.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     }
