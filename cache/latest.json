@@ -1,11 +1,123 @@
 {
-  "updated_at": "2026-09-15T16:13:17.371228+00:00",
+  "updated_at": "2026-09-15T20:51:30.395658+00:00",
   "count": 50,
   "items": [
     {
       "id": "334019e1-18bb-4ac0-b35c-0e8efb1e481c",
       "title": "JoJo’s Bizarre Adventure, Part 9: The JoJoLands - Digital Colored Comics",
       "cover": "https://uploads.mangadex.org/covers/334019e1-18bb-4ac0-b35c-0e8efb1e481c/530583f4-80ad-4f37-92d9-441b225c9785.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "11b74211-f4c0-4f08-b5a4-c491da0d0c0b",
+      "title": "Choujin X",
+      "cover": "https://uploads.mangadex.org/covers/11b74211-f4c0-4f08-b5a4-c491da0d0c0b/a024c8ce-5fbc-4fea-9363-6b8eee3477e7.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "9ded1dbf-495b-43a2-a65c-6d220a67fc0e",
+      "title": "Just Listen to the Song",
+      "cover": "https://uploads.mangadex.org/covers/9ded1dbf-495b-43a2-a65c-6d220a67fc0e/4edb16b9-6163-4387-af9e-408600db0ff9.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "34019331-7377-4e2c-837e-f6e1ab2b5ef7",
+      "title": "The Seven Deadly Sins: Four Knights of the Apocalypse",
+      "cover": "https://uploads.mangadex.org/covers/34019331-7377-4e2c-837e-f6e1ab2b5ef7/89099c0b-6ae9-4082-af05-229704937453.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "c4ca02fb-8378-433b-8049-fbbea5d25cba",
+      "title": "هايميا-سينباي حسناء مهيبة!",
+      "cover": "https://uploads.mangadex.org/covers/c4ca02fb-8378-433b-8049-fbbea5d25cba/7ab29404-0ebd-4862-ad4e-e4ea1ffe231f.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "25e1d17b-6a4d-4698-a4f6-bf53460c10af",
+      "title": "حافلة لإثنين",
+      "cover": "https://uploads.mangadex.org/covers/25e1d17b-6a4d-4698-a4f6-bf53460c10af/f7cd3ff9-d7a1-4b5e-b473-ee2833b82c35.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "22228a24-2dcc-4195-a5d8-357dd4a311f0",
+      "title": "Hibi wa Sugiredo Meshi Umashi",
+      "cover": "https://uploads.mangadex.org/covers/22228a24-2dcc-4195-a5d8-357dd4a311f0/51bca179-4a59-4aa6-92f2-2d07625213ab.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "87ffa375-bd2c-49ba-ba0c-6d78ea07c342",
+      "title": "Medaka Kuroiwa is Impervious to My Charms",
+      "cover": "https://uploads.mangadex.org/covers/87ffa375-bd2c-49ba-ba0c-6d78ea07c342/e410b2ef-b97e-45c1-b861-140b2fe6ee01.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "991e9f15-8368-4843-a78a-5605918f9c3e",
+      "title": "Tatsuki Fujimoto Short Story Collection",
+      "cover": "https://uploads.mangadex.org/covers/991e9f15-8368-4843-a78a-5605918f9c3e/71863bda-f2f4-4570-b8ac-5c8d59de88fd.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "52ede55c-1584-4019-b85b-3902a423c3ab",
+      "title": "FAIRY TAIL: 100 Years Quest",
+      "cover": "https://uploads.mangadex.org/covers/52ede55c-1584-4019-b85b-3902a423c3ab/8e18a9d7-27ed-48ff-924b-a397df5ba0a0.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "4e7a4a0f-8391-4069-839b-de2352297dab",
+      "title": "A Couple of Cuckoos",
+      "cover": "https://uploads.mangadex.org/covers/4e7a4a0f-8391-4069-839b-de2352297dab/71c97191-000a-4f6a-b42f-f14941d286cd.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "71f3e1de-4a47-48f5-89b6-75c54e3047da",
+      "title": "Quit Laughing, Shijima",
+      "cover": "https://uploads.mangadex.org/covers/71f3e1de-4a47-48f5-89b6-75c54e3047da/ba518a60-6c70-41c4-909c-a9e5076011f1.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "858e2de7-afba-4096-9aa7-1fccac0119c9",
+      "title": "DIG IT",
+      "cover": "https://uploads.mangadex.org/covers/858e2de7-afba-4096-9aa7-1fccac0119c9/a57adc47-e988-475d-a6fe-2f595fd3c915.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "96ae166c-d8e1-4e9e-88cb-805b65154d7e",
+      "title": "Red Blue",
+      "cover": "https://uploads.mangadex.org/covers/96ae166c-d8e1-4e9e-88cb-805b65154d7e/1719b5a1-f476-4822-b83a-29bad41aaf17.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "423aefd6-f63d-4d3b-9a70-ba8ec9ad2c37",
+      "title": "FAIRY TAIL Re:Fantasia",
+      "cover": "https://uploads.mangadex.org/covers/423aefd6-f63d-4d3b-9a70-ba8ec9ad2c37/d8f86465-1fdb-44f6-a236-339debd1a329.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "bd6d0982-0091-4945-ad70-c028ed3c0917",
+      "title": "موشوكو تينسي",
+      "cover": "https://uploads.mangadex.org/covers/bd6d0982-0091-4945-ad70-c028ed3c0917/6a9f3d32-b7bb-478a-9c76-54868276c26f.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "68112dc1-2b80-4f20-beb8-2f2a8716a430",
+      "title": "داندادان",
+      "cover": "https://uploads.mangadex.org/covers/68112dc1-2b80-4f20-beb8-2f2a8716a430/971f79d4-ae64-4e9f-a874-2d2995eafafa.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
@@ -136,13 +248,6 @@
       "status": "completed"
     },
     {
-      "id": "25e1d17b-6a4d-4698-a4f6-bf53460c10af",
-      "title": "حافلة لإثنين",
-      "cover": "https://uploads.mangadex.org/covers/25e1d17b-6a4d-4698-a4f6-bf53460c10af/f7cd3ff9-d7a1-4b5e-b473-ee2833b82c35.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
       "id": "ad75039d-686c-457f-b478-e56fc3b3c069",
       "title": "I Started Working a Housekeeping Job and Ended up Being Liked by the Family of the Most Beautiful Girl in School.",
       "cover": "https://uploads.mangadex.org/covers/ad75039d-686c-457f-b478-e56fc3b3c069/d11151a2-0f4e-49e8-9c19-1be626a044fa.jpg.256.jpg",
@@ -171,25 +276,11 @@
       "status": "ongoing"
     },
     {
-      "id": "4e7a4a0f-8391-4069-839b-de2352297dab",
-      "title": "A Couple of Cuckoos",
-      "cover": "https://uploads.mangadex.org/covers/4e7a4a0f-8391-4069-839b-de2352297dab/71c97191-000a-4f6a-b42f-f14941d286cd.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
       "id": "b0b721ff-c388-4486-aa0f-c2b0bb321512",
       "title": "Frieren: Beyond Journey's End",
       "cover": "https://uploads.mangadex.org/covers/b0b721ff-c388-4486-aa0f-c2b0bb321512/b9a049b0-186b-4714-a83e-bb965458914a.jpg.256.jpg",
       "source": "mangadex",
       "status": "hiatus"
-    },
-    {
-      "id": "bd6d0982-0091-4945-ad70-c028ed3c0917",
-      "title": "موشوكو تينسي",
-      "cover": "https://uploads.mangadex.org/covers/bd6d0982-0091-4945-ad70-c028ed3c0917/6a9f3d32-b7bb-478a-9c76-54868276c26f.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
     },
     {
       "id": "e7d7219c-a12b-484f-b29d-6013beac61b2",
@@ -258,97 +349,6 @@
       "id": "e18fe8c6-f6dc-4f05-8462-7b2083ff9a6c",
       "title": "يوميات الصيدلة",
       "cover": "https://uploads.mangadex.org/covers/e18fe8c6-f6dc-4f05-8462-7b2083ff9a6c/530a4ffb-87cb-4156-bdeb-61670532e20f.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "510f29a8-99b4-46af-ba5e-916e96bc6f37",
-      "title": "Fate/type Redline",
-      "cover": "https://uploads.mangadex.org/covers/510f29a8-99b4-46af-ba5e-916e96bc6f37/c1d7aed1-9cd1-426f-bfb8-7e46594d0e29.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "d553645b-03a3-4fc8-9a9c-57f91cbbab89",
-      "title": "Are You a Landmine, Chihara-san?",
-      "cover": "https://uploads.mangadex.org/covers/d553645b-03a3-4fc8-9a9c-57f91cbbab89/4878d139-e5ee-49eb-aeb6-1c2f9025624e.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "f7888782-0727-49b0-95ec-a3530c70f83b",
-      "title": "Hajime no Ippo: Fighting Spirit!",
-      "cover": "https://uploads.mangadex.org/covers/f7888782-0727-49b0-95ec-a3530c70f83b/8ebf0c88-0f84-4fa0-abaf-0e2f8ebdf91e.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "51c1e7cc-23f4-4a08-a961-c1ab75e2bb33",
-      "title": "Inexpressive Kashiwada and Expressive Oota",
-      "cover": "https://uploads.mangadex.org/covers/51c1e7cc-23f4-4a08-a961-c1ab75e2bb33/3bdea205-146a-460c-ae6e-7c2b27f762ed.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
-      "id": "f4045a9e-e5f6-4778-bd33-7a91cefc3f71",
-      "title": "For the Sake of My Future Vengeance",
-      "cover": "https://uploads.mangadex.org/covers/f4045a9e-e5f6-4778-bd33-7a91cefc3f71/53e634e3-aa3b-4dc3-9171-85e2a71d2ec8.png.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "11b74211-f4c0-4f08-b5a4-c491da0d0c0b",
-      "title": "Choujin X",
-      "cover": "https://uploads.mangadex.org/covers/11b74211-f4c0-4f08-b5a4-c491da0d0c0b/a024c8ce-5fbc-4fea-9363-6b8eee3477e7.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "3b6c3a0b-8752-41fc-9d3e-1310f6f28252",
-      "title": "Giant Killing",
-      "cover": "https://uploads.mangadex.org/covers/3b6c3a0b-8752-41fc-9d3e-1310f6f28252/409bcab3-e7f6-4498-a135-72c7f1d5adf2.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "f6ce20ca-73c3-4fdd-9367-e2901fca780e",
-      "title": "ويلات الزمان",
-      "cover": "https://uploads.mangadex.org/covers/f6ce20ca-73c3-4fdd-9367-e2901fca780e/fed093aa-cbcf-4ca0-b80c-49eb251b1e80.png.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "858e2de7-afba-4096-9aa7-1fccac0119c9",
-      "title": "DIG IT",
-      "cover": "https://uploads.mangadex.org/covers/858e2de7-afba-4096-9aa7-1fccac0119c9/a57adc47-e988-475d-a6fe-2f595fd3c915.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "22d6d048-9f9f-4c3a-95c2-3b145f110e20",
-      "title": "I'm in Love with the Villainess",
-      "cover": "https://uploads.mangadex.org/covers/22d6d048-9f9f-4c3a-95c2-3b145f110e20/38ba706a-2394-4ac4-b9ef-7fcda0c39f49.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "a08cd14f-68d4-4942-9305-2fe9d7d0339e",
-      "title": "The Apothecary Is Gonna Make This Ragged Elf Happy",
-      "cover": "https://uploads.mangadex.org/covers/a08cd14f-68d4-4942-9305-2fe9d7d0339e/aaf6d4a4-2aba-48af-94a0-7920a60c6d01.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "89daf9dc-075a-4aa5-873a-cc76bb287108",
-      "title": "The Way of the Househusband",
-      "cover": "https://uploads.mangadex.org/covers/89daf9dc-075a-4aa5-873a-cc76bb287108/a22742de-0a55-4fef-b378-8037753616d2.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "ea0e7020-2b2f-4f17-9251-fee3632dc135",
-      "title": "My Yandere Girlfriend Lurks in the Dungeon and Kills Me Over and Over Again",
-      "cover": "https://uploads.mangadex.org/covers/ea0e7020-2b2f-4f17-9251-fee3632dc135/4979315b-7bbd-4d17-9e61-d49f07d1245d.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     }
