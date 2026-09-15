@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-15T03:20:40.344693+00:00",
+  "updated_at": "2026-09-15T11:03:02.412385+00:00",
   "count": 50,
   "items": [
     {
@@ -10,9 +10,23 @@
       "status": "ongoing"
     },
     {
+      "id": "d64b0768-bebe-433c-b923-99870503c0a3",
+      "title": "Dark Gathering",
+      "cover": "https://uploads.mangadex.org/covers/d64b0768-bebe-433c-b923-99870503c0a3/6ba0bedc-fd0f-45c1-954d-bd61df43f83b.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
       "id": "8e95570e-93a7-494d-8e83-bd755e3b631d",
       "title": "Fragments of the Layered City",
       "cover": "https://uploads.mangadex.org/covers/8e95570e-93a7-494d-8e83-bd755e3b631d/cffb96dc-36e9-48b3-9570-9f99b7d6f2fc.png.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "bcfe1b36-daee-40fd-9984-d9597caf9da7",
+      "title": "فَقِيْهَةُ ٱلْمَغُوْلِ",
+      "cover": "https://uploads.mangadex.org/covers/bcfe1b36-daee-40fd-9984-d9597caf9da7/5ce19283-d717-44e2-bb69-4247640d3c75.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
@@ -120,13 +134,6 @@
       "cover": "https://uploads.mangadex.org/covers/b0b721ff-c388-4486-aa0f-c2b0bb321512/b9a049b0-186b-4714-a83e-bb965458914a.jpg.256.jpg",
       "source": "mangadex",
       "status": "hiatus"
-    },
-    {
-      "id": "bcfe1b36-daee-40fd-9984-d9597caf9da7",
-      "title": "فَقِيْهَةُ ٱلْمَغُوْلِ",
-      "cover": "https://uploads.mangadex.org/covers/bcfe1b36-daee-40fd-9984-d9597caf9da7/5ce19283-d717-44e2-bb69-4247640d3c75.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
     },
     {
       "id": "bd6d0982-0091-4945-ad70-c028ed3c0917",
@@ -307,13 +314,6 @@
       "id": "36300a46-485b-4c05-a570-ac3b23de3952",
       "title": "If the Villainess and Villain Met and Fell in Love",
       "cover": "https://uploads.mangadex.org/covers/36300a46-485b-4c05-a570-ac3b23de3952/a8a6dd33-dab0-4921-bc13-23a198a003be.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "d64b0768-bebe-433c-b923-99870503c0a3",
-      "title": "Dark Gathering",
-      "cover": "https://uploads.mangadex.org/covers/d64b0768-bebe-433c-b923-99870503c0a3/6ba0bedc-fd0f-45c1-954d-bd61df43f83b.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
