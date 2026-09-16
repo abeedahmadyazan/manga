@@ -1,11 +1,53 @@
 {
-  "updated_at": "2026-09-15T20:51:30.395658+00:00",
+  "updated_at": "2026-09-16T03:16:53.287342+00:00",
   "count": 50,
   "items": [
     {
       "id": "334019e1-18bb-4ac0-b35c-0e8efb1e481c",
       "title": "JoJo’s Bizarre Adventure, Part 9: The JoJoLands - Digital Colored Comics",
       "cover": "https://uploads.mangadex.org/covers/334019e1-18bb-4ac0-b35c-0e8efb1e481c/530583f4-80ad-4f37-92d9-441b225c9785.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "8a38bcc4-0a52-4a46-9d02-7fc802048b1d",
+      "title": "Shinobi Undercover",
+      "cover": "https://uploads.mangadex.org/covers/8a38bcc4-0a52-4a46-9d02-7fc802048b1d/612ae2e5-ed10-4d05-abb2-ee3b7a781737.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "bbaa17c4-0f36-4bbb-9861-34fc8fdf20fc",
+      "title": "EDENS ZERO",
+      "cover": "https://uploads.mangadex.org/covers/bbaa17c4-0f36-4bbb-9861-34fc8fdf20fc/c17ea08e-ba67-4f81-b54f-2d545fa1c62e.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "a76b6b97-e434-40d6-b7c5-6026d22986d6",
+      "title": "رجلة الجنية السوداء ذات القوى المتلاشية",
+      "cover": "https://uploads.mangadex.org/covers/a76b6b97-e434-40d6-b7c5-6026d22986d6/8f40381d-188c-4a28-b492-25c07a7684a5.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "4e7a4a0f-8391-4069-839b-de2352297dab",
+      "title": "A Couple of Cuckoos",
+      "cover": "https://uploads.mangadex.org/covers/4e7a4a0f-8391-4069-839b-de2352297dab/71c97191-000a-4f6a-b42f-f14941d286cd.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "52ede55c-1584-4019-b85b-3902a423c3ab",
+      "title": "FAIRY TAIL: 100 Years Quest",
+      "cover": "https://uploads.mangadex.org/covers/52ede55c-1584-4019-b85b-3902a423c3ab/8e18a9d7-27ed-48ff-924b-a397df5ba0a0.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "4141c5dc-c525-4df5-afd7-cc7d192a832f",
+      "title": "Blue Lock",
+      "cover": "https://uploads.mangadex.org/covers/4141c5dc-c525-4df5-afd7-cc7d192a832f/7ee723d4-b926-4a81-acd9-53adb3fbe461.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
@@ -66,20 +108,6 @@
       "status": "completed"
     },
     {
-      "id": "52ede55c-1584-4019-b85b-3902a423c3ab",
-      "title": "FAIRY TAIL: 100 Years Quest",
-      "cover": "https://uploads.mangadex.org/covers/52ede55c-1584-4019-b85b-3902a423c3ab/8e18a9d7-27ed-48ff-924b-a397df5ba0a0.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "4e7a4a0f-8391-4069-839b-de2352297dab",
-      "title": "A Couple of Cuckoos",
-      "cover": "https://uploads.mangadex.org/covers/4e7a4a0f-8391-4069-839b-de2352297dab/71c97191-000a-4f6a-b42f-f14941d286cd.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
       "id": "71f3e1de-4a47-48f5-89b6-75c54e3047da",
       "title": "Quit Laughing, Shijima",
       "cover": "https://uploads.mangadex.org/covers/71f3e1de-4a47-48f5-89b6-75c54e3047da/ba518a60-6c70-41c4-909c-a9e5076011f1.jpg.256.jpg",
@@ -125,13 +153,6 @@
       "id": "7f30dfc3-0b80-4dcc-a3b9-0cd746fac005",
       "title": "المتحري كونان",
       "cover": "https://uploads.mangadex.org/covers/7f30dfc3-0b80-4dcc-a3b9-0cd746fac005/e67075b1-7ffc-4fe8-abd1-c8f3b32c28eb.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "a76b6b97-e434-40d6-b7c5-6026d22986d6",
-      "title": "رجلة الجنية السوداء ذات القوى المتلاشية",
-      "cover": "https://uploads.mangadex.org/covers/a76b6b97-e434-40d6-b7c5-6026d22986d6/8f40381d-188c-4a28-b492-25c07a7684a5.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
@@ -328,27 +349,6 @@
       "id": "a2c1d849-af05-4bbc-b2a7-866ebb10331f",
       "title": "One Piece (Official Colored)",
       "cover": "https://uploads.mangadex.org/covers/a2c1d849-af05-4bbc-b2a7-866ebb10331f/da0341d8-5526-452c-8bd3-dc8e3cd89f99.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "d1a9fdeb-f713-407f-960c-8326b586e6fd",
-      "title": "Vagabond",
-      "cover": "https://uploads.mangadex.org/covers/d1a9fdeb-f713-407f-960c-8326b586e6fd/05f8dcb4-8ea1-48db-a0b1-3a8fbf695e5a.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "hiatus"
-    },
-    {
-      "id": "b41bef1e-7df9-4255-bd82-ecf570fec566",
-      "title": "The New Gate",
-      "cover": "https://uploads.mangadex.org/covers/b41bef1e-7df9-4255-bd82-ecf570fec566/73ebbea7-545e-4a8c-82f4-d75f2e89a280.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "e18fe8c6-f6dc-4f05-8462-7b2083ff9a6c",
-      "title": "يوميات الصيدلة",
-      "cover": "https://uploads.mangadex.org/covers/e18fe8c6-f6dc-4f05-8462-7b2083ff9a6c/530a4ffb-87cb-4156-bdeb-61670532e20f.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     }
