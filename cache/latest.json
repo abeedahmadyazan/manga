@@ -1,7 +1,63 @@
 {
-  "updated_at": "2026-09-16T20:51:31.100422+00:00",
+  "updated_at": "2026-09-17T03:22:34.499898+00:00",
   "count": 50,
   "items": [
+    {
+      "id": "30f3ac69-21b6-45ad-a110-d011b7aaadaa",
+      "title": "Fly Me to The Moon",
+      "cover": "https://uploads.mangadex.org/covers/30f3ac69-21b6-45ad-a110-d011b7aaadaa/fb735d33-b723-4446-9258-eefbffae222f.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "423aefd6-f63d-4d3b-9a70-ba8ec9ad2c37",
+      "title": "FAIRY TAIL Re:Fantasia",
+      "cover": "https://uploads.mangadex.org/covers/423aefd6-f63d-4d3b-9a70-ba8ec9ad2c37/d8f86465-1fdb-44f6-a236-339debd1a329.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "418791c0-35cf-4f87-936b-acd9cddf0989",
+      "title": "The Fragrant Flower Blooms with Dignity",
+      "cover": "https://uploads.mangadex.org/covers/418791c0-35cf-4f87-936b-acd9cddf0989/6e823d0e-103a-4cf9-a312-a3a292ccb12d.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "63dbbf80-0189-4ae4-a549-68a0caa2f834",
+      "title": "ويتشريف",
+      "cover": "https://uploads.mangadex.org/covers/63dbbf80-0189-4ae4-a549-68a0caa2f834/04ae601b-1e85-4b59-bba3-7a140f7339f5.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "77296cee-0b74-415f-914d-6f29036d3906",
+      "title": "مسرحية الجبل",
+      "cover": "https://uploads.mangadex.org/covers/77296cee-0b74-415f-914d-6f29036d3906/6c06c4f2-f816-4dd8-9652-8b9764bfdde4.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "cf43b9e3-396a-41bc-ab72-715f66cdb7e1",
+      "title": "A-bout!",
+      "cover": "https://uploads.mangadex.org/covers/cf43b9e3-396a-41bc-ab72-715f66cdb7e1/c556e070-f1ff-405b-b71c-b2e7492aee0e.png.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "a460ab18-22c1-47eb-a08a-9ee85fe37ec8",
+      "title": "Bleach (Official Colored)",
+      "cover": "https://uploads.mangadex.org/covers/a460ab18-22c1-47eb-a08a-9ee85fe37ec8/7c8f9203-2b82-41f2-beb3-e7fb00e151e2.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "29ab6984-7c1d-4d45-b925-25aa082b492e",
+      "title": "Shangri-La Frontier: From Trash-Game Hunter to God-Tier Game Master!",
+      "cover": "https://uploads.mangadex.org/covers/29ab6984-7c1d-4d45-b925-25aa082b492e/c691a3e7-7ec0-4c2f-a86a-cf04489b33aa.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
     {
       "id": "ea47525d-99df-45b5-9103-dd853f49f8c3",
       "title": "Welcome to Demon School! Iruma-kun: IruMafia Edition",
@@ -45,13 +101,6 @@
       "status": "ongoing"
     },
     {
-      "id": "cf43b9e3-396a-41bc-ab72-715f66cdb7e1",
-      "title": "A-bout!",
-      "cover": "https://uploads.mangadex.org/covers/cf43b9e3-396a-41bc-ab72-715f66cdb7e1/c556e070-f1ff-405b-b71c-b2e7492aee0e.png.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
       "id": "d64b0768-bebe-433c-b923-99870503c0a3",
       "title": "Dark Gathering",
       "cover": "https://uploads.mangadex.org/covers/d64b0768-bebe-433c-b923-99870503c0a3/6ba0bedc-fd0f-45c1-954d-bd61df43f83b.jpg.256.jpg",
@@ -66,23 +115,9 @@
       "status": "completed"
     },
     {
-      "id": "77296cee-0b74-415f-914d-6f29036d3906",
-      "title": "مسرحية الجبل",
-      "cover": "https://uploads.mangadex.org/covers/77296cee-0b74-415f-914d-6f29036d3906/6c06c4f2-f816-4dd8-9652-8b9764bfdde4.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
       "id": "484f94e7-35c3-4cb5-a068-53d684c1439a",
       "title": "Baki Part 6",
       "cover": "https://uploads.mangadex.org/covers/484f94e7-35c3-4cb5-a068-53d684c1439a/863ae891-3627-4070-8918-4a626dc9d1ff.png.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "63dbbf80-0189-4ae4-a549-68a0caa2f834",
-      "title": "ويتشريف",
-      "cover": "https://uploads.mangadex.org/covers/63dbbf80-0189-4ae4-a549-68a0caa2f834/04ae601b-1e85-4b59-bba3-7a140f7339f5.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
@@ -262,13 +297,6 @@
       "status": "ongoing"
     },
     {
-      "id": "423aefd6-f63d-4d3b-9a70-ba8ec9ad2c37",
-      "title": "FAIRY TAIL Re:Fantasia",
-      "cover": "https://uploads.mangadex.org/covers/423aefd6-f63d-4d3b-9a70-ba8ec9ad2c37/d8f86465-1fdb-44f6-a236-339debd1a329.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
       "id": "bd6d0982-0091-4945-ad70-c028ed3c0917",
       "title": "موشوكو تينسي",
       "cover": "https://uploads.mangadex.org/covers/bd6d0982-0091-4945-ad70-c028ed3c0917/6a9f3d32-b7bb-478a-9c76-54868276c26f.jpg.256.jpg",
@@ -321,34 +349,6 @@
       "id": "8e95570e-93a7-494d-8e83-bd755e3b631d",
       "title": "Fragments of the Layered City",
       "cover": "https://uploads.mangadex.org/covers/8e95570e-93a7-494d-8e83-bd755e3b631d/cffb96dc-36e9-48b3-9570-9f99b7d6f2fc.png.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "85a99758-de39-471e-9f6d-800547f53d0a",
-      "title": "Tougen Anki: Legend of the Cursed Blood",
-      "cover": "https://uploads.mangadex.org/covers/85a99758-de39-471e-9f6d-800547f53d0a/e9fdf5a2-69d6-4e10-88c1-d5a50b9202c6.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "0a580438-bc72-4503-940b-12a5da881b56",
-      "title": "أنتِ زهرة الحظ",
-      "cover": "https://uploads.mangadex.org/covers/0a580438-bc72-4503-940b-12a5da881b56/a64a8d8b-1c71-496e-a0a7-0c1da501da6c.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "1ffca916-3ad7-46d2-9591-a9b39e639971",
-      "title": "Second Life Ranker",
-      "cover": "https://uploads.mangadex.org/covers/1ffca916-3ad7-46d2-9591-a9b39e639971/60aef1af-2df0-46aa-8270-e1ad9d287289.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "hiatus"
-    },
-    {
-      "id": "9356fa3f-9ecd-4ff7-a7fe-241884680079",
-      "title": "!اسکیپ بیت",
-      "cover": "https://uploads.mangadex.org/covers/9356fa3f-9ecd-4ff7-a7fe-241884680079/8d301baf-7d52-400c-8b8d-ae13642fb867.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     }
