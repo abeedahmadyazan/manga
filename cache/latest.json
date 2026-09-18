@@ -1,7 +1,35 @@
 {
-  "updated_at": "2026-09-18T03:08:27.948963+00:00",
+  "updated_at": "2026-09-18T10:33:00.948509+00:00",
   "count": 50,
   "items": [
+    {
+      "id": "ab8cbb82-d0ed-45a7-8ffe-4bfa6d43d79c",
+      "title": "JoJo's Bizarre Adventure Part 9 - The JOJOLands",
+      "cover": "https://uploads.mangadex.org/covers/ab8cbb82-d0ed-45a7-8ffe-4bfa6d43d79c/802e6e10-f90b-41da-a605-2309a7aae34f.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "d00bd104-d9b2-4ee9-a088-b5065d1c406a",
+      "title": "A Certain Scientific Railgun",
+      "cover": "https://uploads.mangadex.org/covers/d00bd104-d9b2-4ee9-a088-b5065d1c406a/34cb96d6-2a3c-47d0-9f56-102d40a65ea8.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "77c4966f-ead7-45bb-87e0-9ac618b11e8e",
+      "title": "Kunon the Sorcerer Can See",
+      "cover": "https://uploads.mangadex.org/covers/77c4966f-ead7-45bb-87e0-9ac618b11e8e/393cc1fa-a752-49aa-a688-a2a309924030.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "4141c5dc-c525-4df5-afd7-cc7d192a832f",
+      "title": "Blue Lock",
+      "cover": "https://uploads.mangadex.org/covers/4141c5dc-c525-4df5-afd7-cc7d192a832f/7ee723d4-b926-4a81-acd9-53adb3fbe461.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
     {
       "id": "858e2de7-afba-4096-9aa7-1fccac0119c9",
       "title": "DIG IT",
@@ -10,16 +38,23 @@
       "status": "ongoing"
     },
     {
-      "id": "d7037b2a-874a-4360-8a7b-07f2899152fd",
-      "title": "إيروما-كن في مدرسة الشياطين",
-      "cover": "https://uploads.mangadex.org/covers/d7037b2a-874a-4360-8a7b-07f2899152fd/6917a533-d70c-49cb-84af-1aa7ccff3d02.jpg.256.jpg",
+      "id": "774f0f04-5023-4e2e-9c0b-f0ed382f078b",
+      "title": "إينيغماتيكا",
+      "cover": "https://uploads.mangadex.org/covers/774f0f04-5023-4e2e-9c0b-f0ed382f078b/9f0534e0-6163-49a2-b515-4798f7aa85fa.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
     {
-      "id": "ab8cbb82-d0ed-45a7-8ffe-4bfa6d43d79c",
-      "title": "JoJo's Bizarre Adventure Part 9 - The JOJOLands",
-      "cover": "https://uploads.mangadex.org/covers/ab8cbb82-d0ed-45a7-8ffe-4bfa6d43d79c/802e6e10-f90b-41da-a605-2309a7aae34f.jpg.256.jpg",
+      "id": "34019331-7377-4e2c-837e-f6e1ab2b5ef7",
+      "title": "The Seven Deadly Sins: Four Knights of the Apocalypse",
+      "cover": "https://uploads.mangadex.org/covers/34019331-7377-4e2c-837e-f6e1ab2b5ef7/89099c0b-6ae9-4082-af05-229704937453.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "d7037b2a-874a-4360-8a7b-07f2899152fd",
+      "title": "إيروما-كن في مدرسة الشياطين",
+      "cover": "https://uploads.mangadex.org/covers/d7037b2a-874a-4360-8a7b-07f2899152fd/6917a533-d70c-49cb-84af-1aa7ccff3d02.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
@@ -297,13 +332,6 @@
       "status": "ongoing"
     },
     {
-      "id": "4141c5dc-c525-4df5-afd7-cc7d192a832f",
-      "title": "Blue Lock",
-      "cover": "https://uploads.mangadex.org/covers/4141c5dc-c525-4df5-afd7-cc7d192a832f/7ee723d4-b926-4a81-acd9-53adb3fbe461.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
       "id": "c37d93a8-9c50-49b3-bd71-143937f4288e",
       "title": "Gantz: E",
       "cover": "https://uploads.mangadex.org/covers/c37d93a8-9c50-49b3-bd71-143937f4288e/7c723851-b64d-423a-86a9-953f41358a94.jpg.256.jpg",
@@ -321,34 +349,6 @@
       "id": "a76b6b97-e434-40d6-b7c5-6026d22986d6",
       "title": "رجلة الجنية السوداء ذات القوى المتلاشية",
       "cover": "https://uploads.mangadex.org/covers/a76b6b97-e434-40d6-b7c5-6026d22986d6/8f40381d-188c-4a28-b492-25c07a7684a5.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "4e7a4a0f-8391-4069-839b-de2352297dab",
-      "title": "A Couple of Cuckoos",
-      "cover": "https://uploads.mangadex.org/covers/4e7a4a0f-8391-4069-839b-de2352297dab/71c97191-000a-4f6a-b42f-f14941d286cd.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "11b74211-f4c0-4f08-b5a4-c491da0d0c0b",
-      "title": "Choujin X",
-      "cover": "https://uploads.mangadex.org/covers/11b74211-f4c0-4f08-b5a4-c491da0d0c0b/a024c8ce-5fbc-4fea-9363-6b8eee3477e7.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "9ded1dbf-495b-43a2-a65c-6d220a67fc0e",
-      "title": "Just Listen to the Song",
-      "cover": "https://uploads.mangadex.org/covers/9ded1dbf-495b-43a2-a65c-6d220a67fc0e/4edb16b9-6163-4387-af9e-408600db0ff9.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
-      "id": "34019331-7377-4e2c-837e-f6e1ab2b5ef7",
-      "title": "The Seven Deadly Sins: Four Knights of the Apocalypse",
-      "cover": "https://uploads.mangadex.org/covers/34019331-7377-4e2c-837e-f6e1ab2b5ef7/89099c0b-6ae9-4082-af05-229704937453.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     }
