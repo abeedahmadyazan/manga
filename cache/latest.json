@@ -1,7 +1,28 @@
 {
-  "updated_at": "2026-09-19T03:05:05.071860+00:00",
+  "updated_at": "2026-09-19T10:17:10.846077+00:00",
   "count": 50,
   "items": [
+    {
+      "id": "a4b39b6e-a448-4644-a540-64ceff1d8305",
+      "title": "Toilet-Bound Hanako-kun",
+      "cover": "https://uploads.mangadex.org/covers/a4b39b6e-a448-4644-a540-64ceff1d8305/2c300b23-9ca4-4dd3-8722-7fe1d7bc8548.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "b0b721ff-c388-4486-aa0f-c2b0bb321512",
+      "title": "Frieren: Beyond Journey's End",
+      "cover": "https://uploads.mangadex.org/covers/b0b721ff-c388-4486-aa0f-c2b0bb321512/b9a049b0-186b-4714-a83e-bb965458914a.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "hiatus"
+    },
+    {
+      "id": "4242c6d3-4ee4-4b0b-9ca0-23bd57952805",
+      "title": "ليس حُبًّا بعدُ، ولكن...",
+      "cover": "https://uploads.mangadex.org/covers/4242c6d3-4ee4-4b0b-9ca0-23bd57952805/c0df0d1a-d8a2-4fb9-844e-8e128bb81c67.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
     {
       "id": "334019e1-18bb-4ac0-b35c-0e8efb1e481c",
       "title": "JoJo’s Bizarre Adventure, Part 9: The JoJoLands - Digital Colored Comics",
@@ -50,13 +71,6 @@
       "cover": "https://uploads.mangadex.org/covers/8847f905-550d-4fe6-bcda-ac2b896789c7/e96cfe6d-7876-4558-b4bc-0930deb5060a.jpg.256.jpg",
       "source": "mangadex",
       "status": "completed"
-    },
-    {
-      "id": "a4b39b6e-a448-4644-a540-64ceff1d8305",
-      "title": "Toilet-Bound Hanako-kun",
-      "cover": "https://uploads.mangadex.org/covers/a4b39b6e-a448-4644-a540-64ceff1d8305/2c300b23-9ca4-4dd3-8722-7fe1d7bc8548.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
     },
     {
       "id": "484f94e7-35c3-4cb5-a068-53d684c1439a",
@@ -173,7 +187,7 @@
     {
       "id": "ab8cbb82-d0ed-45a7-8ffe-4bfa6d43d79c",
       "title": "JoJo's Bizarre Adventure Part 9 - The JOJOLands",
-      "cover": "https://uploads.mangadex.org/covers/ab8cbb82-d0ed-45a7-8ffe-4bfa6d43d79c/802e6e10-f90b-41da-a605-2309a7aae34f.jpg.256.jpg",
+      "cover": "https://uploads.mangadex.org/covers/ab8cbb82-d0ed-45a7-8ffe-4bfa6d43d79c/88e8a8ea-91ed-4db6-937b-4dd0048e74d5.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
@@ -299,7 +313,7 @@
     {
       "id": "356de811-ae92-48f1-b93b-cfdf0f8d02e4",
       "title": "بما أننا نرسم الآن",
-      "cover": "https://uploads.mangadex.org/covers/356de811-ae92-48f1-b93b-cfdf0f8d02e4/4c0f235c-762d-463b-a320-4e5cedd8db51.jpg.256.jpg",
+      "cover": "https://uploads.mangadex.org/covers/356de811-ae92-48f1-b93b-cfdf0f8d02e4/60e2c515-06d0-4d61-8aec-5f180f19b1af.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
@@ -307,13 +321,6 @@
       "id": "d553645b-03a3-4fc8-9a9c-57f91cbbab89",
       "title": "Are You a Landmine, Chihara-san?",
       "cover": "https://uploads.mangadex.org/covers/d553645b-03a3-4fc8-9a9c-57f91cbbab89/4878d139-e5ee-49eb-aeb6-1c2f9025624e.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "4242c6d3-4ee4-4b0b-9ca0-23bd57952805",
-      "title": "ليس حُبًّا بعدُ، ولكن...",
-      "cover": "https://uploads.mangadex.org/covers/4242c6d3-4ee4-4b0b-9ca0-23bd57952805/c0df0d1a-d8a2-4fb9-844e-8e128bb81c67.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
@@ -344,13 +351,6 @@
       "cover": "https://uploads.mangadex.org/covers/63dbbf80-0189-4ae4-a549-68a0caa2f834/04ae601b-1e85-4b59-bba3-7a140f7339f5.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
-    },
-    {
-      "id": "a460ab18-22c1-47eb-a08a-9ee85fe37ec8",
-      "title": "Bleach (Official Colored)",
-      "cover": "https://uploads.mangadex.org/covers/a460ab18-22c1-47eb-a08a-9ee85fe37ec8/7c8f9203-2b82-41f2-beb3-e7fb00e151e2.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
     }
   ]
 }

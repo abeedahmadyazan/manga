@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-19T03:05:05.071860+00:00",
+  "updated_at": "2026-09-19T10:17:10.846077+00:00",
   "count": 50,
   "items": [
     {
@@ -24,18 +24,18 @@
       "status": "ongoing"
     },
     {
-      "id": "a77742b1-befd-49a4-bff5-1ad4e6b0ef7b",
-      "title": "Chainsaw Man",
-      "cover": "https://uploads.mangadex.org/covers/a77742b1-befd-49a4-bff5-1ad4e6b0ef7b/6e518bd1-5f60-446b-8832-bfe6bf74834b.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
       "id": "b0b721ff-c388-4486-aa0f-c2b0bb321512",
       "title": "Frieren: Beyond Journey's End",
       "cover": "https://uploads.mangadex.org/covers/b0b721ff-c388-4486-aa0f-c2b0bb321512/b9a049b0-186b-4714-a83e-bb965458914a.jpg.256.jpg",
       "source": "mangadex",
       "status": "hiatus"
+    },
+    {
+      "id": "a77742b1-befd-49a4-bff5-1ad4e6b0ef7b",
+      "title": "Chainsaw Man",
+      "cover": "https://uploads.mangadex.org/covers/a77742b1-befd-49a4-bff5-1ad4e6b0ef7b/6e518bd1-5f60-446b-8832-bfe6bf74834b.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
     },
     {
       "id": "d8a959f7-648e-4c8d-8f23-f1f3f8e129f3",
