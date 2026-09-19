@@ -1,7 +1,35 @@
 {
-  "updated_at": "2026-09-19T15:20:50.413590+00:00",
+  "updated_at": "2026-09-19T20:01:13.432531+00:00",
   "count": 50,
   "items": [
+    {
+      "id": "c4b36f15-4ee5-425f-a77d-c2e7cbb970d8",
+      "title": "NIPPON SANGOKU: The Three Nations of the Crimson Sun",
+      "cover": "https://uploads.mangadex.org/covers/c4b36f15-4ee5-425f-a77d-c2e7cbb970d8/e5c54f1b-6ea4-4dd2-ae6e-9d0e138d7c2e.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "d36bea9f-853f-4908-9957-5514b1903e36",
+      "title": "Marika's Love Meter Malfunction",
+      "cover": "https://uploads.mangadex.org/covers/d36bea9f-853f-4908-9957-5514b1903e36/4b5daf86-5fc1-4316-ba94-cb96f093bd89.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "52842727-59ff-46a6-9a23-5eba61487586",
+      "title": "To Love Ru (Official Colored)",
+      "cover": "https://uploads.mangadex.org/covers/52842727-59ff-46a6-9a23-5eba61487586/1b7bba8a-d22a-4f1a-8723-601a611b135a.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "6e156d65-cf65-4d5b-9d04-52f2f8100fbf",
+      "title": "Apocalypse Bringer Mynoghra: World Conquest Starts with the Civilization of Ruin",
+      "cover": "https://uploads.mangadex.org/covers/6e156d65-cf65-4d5b-9d04-52f2f8100fbf/03ff0d8e-8c07-42f8-9db3-49ef13ebf352.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
     {
       "id": "4242c6d3-4ee4-4b0b-9ca0-23bd57952805",
       "title": "ليس حُبًّا بعدُ، ولكن...",
@@ -323,34 +351,6 @@
       "cover": "https://uploads.mangadex.org/covers/510f29a8-99b4-46af-ba5e-916e96bc6f37/c1d7aed1-9cd1-426f-bfb8-7e46594d0e29.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
-    },
-    {
-      "id": "fa85b2aa-370c-41c5-96ae-29b05c848f3d",
-      "title": "Innocent",
-      "cover": "https://uploads.mangadex.org/covers/fa85b2aa-370c-41c5-96ae-29b05c848f3d/3d562b75-ca28-4a65-87a9-2e3f73657456.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
-      "id": "356de811-ae92-48f1-b93b-cfdf0f8d02e4",
-      "title": "بما أننا نرسم الآن",
-      "cover": "https://uploads.mangadex.org/covers/356de811-ae92-48f1-b93b-cfdf0f8d02e4/60e2c515-06d0-4d61-8aec-5f180f19b1af.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "d553645b-03a3-4fc8-9a9c-57f91cbbab89",
-      "title": "Are You a Landmine, Chihara-san?",
-      "cover": "https://uploads.mangadex.org/covers/d553645b-03a3-4fc8-9a9c-57f91cbbab89/4878d139-e5ee-49eb-aeb6-1c2f9025624e.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "319df2e2-e6a6-4e3a-a31c-68539c140a84",
-      "title": "Slam Dunk!",
-      "cover": "https://uploads.mangadex.org/covers/319df2e2-e6a6-4e3a-a31c-68539c140a84/a845455f-52d0-4cc4-92a8-bd5bad7d69b9.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
     }
   ]
 }
