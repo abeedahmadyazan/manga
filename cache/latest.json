@@ -1,18 +1,25 @@
 {
-  "updated_at": "2026-09-21T03:15:49.371301+00:00",
+  "updated_at": "2026-09-21T11:58:18.558015+00:00",
   "count": 50,
   "items": [
     {
-      "id": "cf43b9e3-396a-41bc-ab72-715f66cdb7e1",
-      "title": "A-bout!",
-      "cover": "https://uploads.mangadex.org/covers/cf43b9e3-396a-41bc-ab72-715f66cdb7e1/c556e070-f1ff-405b-b71c-b2e7492aee0e.png.256.jpg",
+      "id": "d00bd104-d9b2-4ee9-a088-b5065d1c406a",
+      "title": "A Certain Scientific Railgun",
+      "cover": "https://uploads.mangadex.org/covers/d00bd104-d9b2-4ee9-a088-b5065d1c406a/34cb96d6-2a3c-47d0-9f56-102d40a65ea8.jpg.256.jpg",
       "source": "mangadex",
       "status": "completed"
     },
     {
-      "id": "9d3d3403-1a87-4737-9803-bc3d99db1424",
-      "title": "The Guy She Was Interested in Wasn't a Guy at All",
-      "cover": "https://uploads.mangadex.org/covers/9d3d3403-1a87-4737-9803-bc3d99db1424/fac191d0-96c1-4ebb-bf79-b7616d7162ac.jpg.256.jpg",
+      "id": "4c4feee0-7307-4532-b6c6-cbb552d61529",
+      "title": "The City of Imprisoned Love",
+      "cover": "https://uploads.mangadex.org/covers/4c4feee0-7307-4532-b6c6-cbb552d61529/e53b1b1a-65f4-4f89-8f05-bc6524ba52ad.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "936f0ba5-ca65-4de4-99b1-528c02a4454d",
+      "title": "Hunter x Hunter (Official Colored)",
+      "cover": "https://uploads.mangadex.org/covers/936f0ba5-ca65-4de4-99b1-528c02a4454d/128d80df-c5e4-4791-b3b7-08586e9db1b8.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
@@ -22,6 +29,41 @@
       "cover": "https://uploads.mangadex.org/covers/3df1a9a3-a1be-47a3-9e90-9b3e55b1d0ac/580b9129-f75c-41d8-80b6-7146a7355452.jpg.256.jpg",
       "source": "mangadex",
       "status": "completed"
+    },
+    {
+      "id": "e0589f47-72f9-4e9a-ac31-5b88bcad6220",
+      "title": "The Wrong Way to Use Healing Magic",
+      "cover": "https://uploads.mangadex.org/covers/e0589f47-72f9-4e9a-ac31-5b88bcad6220/5bc559d6-5434-46d9-89b4-44964a1b8233.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "cf43b9e3-396a-41bc-ab72-715f66cdb7e1",
+      "title": "A-bout!",
+      "cover": "https://uploads.mangadex.org/covers/cf43b9e3-396a-41bc-ab72-715f66cdb7e1/c556e070-f1ff-405b-b71c-b2e7492aee0e.png.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "a0a5528a-c4a8-4495-a966-6877c12856ba",
+      "title": "TRUMP",
+      "cover": "https://uploads.mangadex.org/covers/a0a5528a-c4a8-4495-a966-6877c12856ba/8cec91f3-ac76-460f-9d42-3d1b4163c0e3.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "858e2de7-afba-4096-9aa7-1fccac0119c9",
+      "title": "DIG IT",
+      "cover": "https://uploads.mangadex.org/covers/858e2de7-afba-4096-9aa7-1fccac0119c9/a57adc47-e988-475d-a6fe-2f595fd3c915.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "9d3d3403-1a87-4737-9803-bc3d99db1424",
+      "title": "The Guy She Was Interested in Wasn't a Guy at All",
+      "cover": "https://uploads.mangadex.org/covers/9d3d3403-1a87-4737-9803-bc3d99db1424/fac191d0-96c1-4ebb-bf79-b7616d7162ac.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
     },
     {
       "id": "bd6d0982-0091-4945-ad70-c028ed3c0917",
@@ -241,13 +283,6 @@
       "status": "completed"
     },
     {
-      "id": "936f0ba5-ca65-4de4-99b1-528c02a4454d",
-      "title": "Hunter x Hunter (Official Colored)",
-      "cover": "https://uploads.mangadex.org/covers/936f0ba5-ca65-4de4-99b1-528c02a4454d/128d80df-c5e4-4791-b3b7-08586e9db1b8.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
       "id": "a4b39b6e-a448-4644-a540-64ceff1d8305",
       "title": "Toilet-Bound Hanako-kun",
       "cover": "https://uploads.mangadex.org/covers/a4b39b6e-a448-4644-a540-64ceff1d8305/2c300b23-9ca4-4dd3-8722-7fe1d7bc8548.jpg.256.jpg",
@@ -267,13 +302,6 @@
       "cover": "https://uploads.mangadex.org/covers/334019e1-18bb-4ac0-b35c-0e8efb1e481c/530583f4-80ad-4f37-92d9-441b225c9785.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
-    },
-    {
-      "id": "a0a5528a-c4a8-4495-a966-6877c12856ba",
-      "title": "TRUMP",
-      "cover": "https://uploads.mangadex.org/covers/a0a5528a-c4a8-4495-a966-6877c12856ba/8cec91f3-ac76-460f-9d42-3d1b4163c0e3.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
     },
     {
       "id": "263deeff-c010-4ac7-bc01-6341f3e698ac",
@@ -321,34 +349,6 @@
       "id": "77296cee-0b74-415f-914d-6f29036d3906",
       "title": "مسرحية الجبل",
       "cover": "https://uploads.mangadex.org/covers/77296cee-0b74-415f-914d-6f29036d3906/6c06c4f2-f816-4dd8-9652-8b9764bfdde4.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "29ab6984-7c1d-4d45-b925-25aa082b492e",
-      "title": "Shangri-La Frontier: From Trash-Game Hunter to God-Tier Game Master!",
-      "cover": "https://uploads.mangadex.org/covers/29ab6984-7c1d-4d45-b925-25aa082b492e/c691a3e7-7ec0-4c2f-a86a-cf04489b33aa.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "9c1cd558-fba3-40f1-bb84-b320f5d1eab1",
-      "title": "Bug Ego",
-      "cover": "https://uploads.mangadex.org/covers/9c1cd558-fba3-40f1-bb84-b320f5d1eab1/a40cc882-7d6b-4e12-885c-fef2928e7b7a.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "0a580438-bc72-4503-940b-12a5da881b56",
-      "title": "أنتِ زهرة الحظ",
-      "cover": "https://uploads.mangadex.org/covers/0a580438-bc72-4503-940b-12a5da881b56/a64a8d8b-1c71-496e-a0a7-0c1da501da6c.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "423aefd6-f63d-4d3b-9a70-ba8ec9ad2c37",
-      "title": "FAIRY TAIL Re:Fantasia",
-      "cover": "https://uploads.mangadex.org/covers/423aefd6-f63d-4d3b-9a70-ba8ec9ad2c37/d8f86465-1fdb-44f6-a236-339debd1a329.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     }
