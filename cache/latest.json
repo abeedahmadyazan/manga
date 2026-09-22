@@ -1,13 +1,55 @@
 {
-  "updated_at": "2026-09-22T16:15:10.847107+00:00",
+  "updated_at": "2026-09-22T20:52:22.629689+00:00",
   "count": 50,
   "items": [
+    {
+      "id": "19c8ff73-5282-435f-b0ff-3ba492230150",
+      "title": "Kurosaki-kun no Iinari ni Nante Naranai",
+      "cover": "https://uploads.mangadex.org/covers/19c8ff73-5282-435f-b0ff-3ba492230150/ce703032-c82b-4f36-aca0-42a4255c689e.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "f6ce20ca-73c3-4fdd-9367-e2901fca780e",
+      "title": "ويلات الزمان",
+      "cover": "https://uploads.mangadex.org/covers/f6ce20ca-73c3-4fdd-9367-e2901fca780e/fed093aa-cbcf-4ca0-b80c-49eb251b1e80.png.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
     {
       "id": "cf43b9e3-396a-41bc-ab72-715f66cdb7e1",
       "title": "A-bout!",
       "cover": "https://uploads.mangadex.org/covers/cf43b9e3-396a-41bc-ab72-715f66cdb7e1/c556e070-f1ff-405b-b71c-b2e7492aee0e.png.256.jpg",
       "source": "mangadex",
       "status": "completed"
+    },
+    {
+      "id": "843c31ff-d390-4199-bc3b-94b0dfc63632",
+      "title": "Baki Side Story: Retsu Kaioh Doesn't Mind Even If It's in Another World",
+      "cover": "https://uploads.mangadex.org/covers/843c31ff-d390-4199-bc3b-94b0dfc63632/07dbd2f5-68cf-49e2-afe6-af7dd4d26f70.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "30196491-8fc2-4961-8886-a58f898b1b3e",
+      "title": "Berserk of Gluttony: The One that Exceeds the Concept of Levels",
+      "cover": "https://uploads.mangadex.org/covers/30196491-8fc2-4961-8886-a58f898b1b3e/1790f17f-9184-4a48-8928-c45de48b778e.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "a07320a4-afcd-413a-a451-d69a448d0c28",
+      "title": "Usogui",
+      "cover": "https://uploads.mangadex.org/covers/a07320a4-afcd-413a-a451-d69a448d0c28/b74c8cce-42cd-4889-b75d-7944e63f9a14.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "356de811-ae92-48f1-b93b-cfdf0f8d02e4",
+      "title": "بما أننا نرسم الآن",
+      "cover": "https://uploads.mangadex.org/covers/356de811-ae92-48f1-b93b-cfdf0f8d02e4/60e2c515-06d0-4d61-8aec-5f180f19b1af.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
     },
     {
       "id": "4d6decd4-835d-4905-9534-2571dae07bcd",
@@ -104,20 +146,6 @@
       "id": "ca33a142-58fb-4fee-88b9-36ef87f02c77",
       "title": "حب نيزومي الأول",
       "cover": "https://uploads.mangadex.org/covers/ca33a142-58fb-4fee-88b9-36ef87f02c77/7e8317ea-78bf-4090-a2ee-ab07041e4458.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "a07320a4-afcd-413a-a451-d69a448d0c28",
-      "title": "Usogui",
-      "cover": "https://uploads.mangadex.org/covers/a07320a4-afcd-413a-a451-d69a448d0c28/b74c8cce-42cd-4889-b75d-7944e63f9a14.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
-      "id": "843c31ff-d390-4199-bc3b-94b0dfc63632",
-      "title": "Baki Side Story: Retsu Kaioh Doesn't Mind Even If It's in Another World",
-      "cover": "https://uploads.mangadex.org/covers/843c31ff-d390-4199-bc3b-94b0dfc63632/07dbd2f5-68cf-49e2-afe6-af7dd4d26f70.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
@@ -323,34 +351,6 @@
       "cover": "https://uploads.mangadex.org/covers/6e156d65-cf65-4d5b-9d04-52f2f8100fbf/03ff0d8e-8c07-42f8-9db3-49ef13ebf352.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
-    },
-    {
-      "id": "4242c6d3-4ee4-4b0b-9ca0-23bd57952805",
-      "title": "ليس حُبًّا بعدُ، ولكن...",
-      "cover": "https://uploads.mangadex.org/covers/4242c6d3-4ee4-4b0b-9ca0-23bd57952805/c0df0d1a-d8a2-4fb9-844e-8e128bb81c67.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "0d4b349e-b7a2-4d63-9ce0-f864e790c4a2",
-      "title": "Veil",
-      "cover": "https://uploads.mangadex.org/covers/0d4b349e-b7a2-4d63-9ce0-f864e790c4a2/8299ead2-5d96-4f41-8ce5-b00c95505449.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "1c01dcad-8e60-4fdd-8dd4-ddc5c200ba36",
-      "title": "100 Ghost Stories That Will Lead to My Own Death",
-      "cover": "https://uploads.mangadex.org/covers/1c01dcad-8e60-4fdd-8dd4-ddc5c200ba36/fcc9deaf-e68a-4986-99ea-53ea25ea2ce6.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
-      "id": "18ef1e92-f574-4c8c-99af-555e44ba418e",
-      "title": "Eastern Thorned Poet Hermit ~ Wild and Horned Hermit.",
-      "cover": "https://uploads.mangadex.org/covers/18ef1e92-f574-4c8c-99af-555e44ba418e/f8de2bd4-b519-4b34-9272-dd4e765e2de5.png.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
     }
   ]
 }
