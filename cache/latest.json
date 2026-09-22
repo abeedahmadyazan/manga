@@ -1,7 +1,35 @@
 {
-  "updated_at": "2026-09-21T18:04:15.554780+00:00",
+  "updated_at": "2026-09-22T03:15:13.836098+00:00",
   "count": 50,
   "items": [
+    {
+      "id": "c4b36f15-4ee5-425f-a77d-c2e7cbb970d8",
+      "title": "NIPPON SANGOKU: The Three Nations of the Crimson Sun",
+      "cover": "https://uploads.mangadex.org/covers/c4b36f15-4ee5-425f-a77d-c2e7cbb970d8/e5c54f1b-6ea4-4dd2-ae6e-9d0e138d7c2e.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "8e95570e-93a7-494d-8e83-bd755e3b631d",
+      "title": "Fragments of the Layered City",
+      "cover": "https://uploads.mangadex.org/covers/8e95570e-93a7-494d-8e83-bd755e3b631d/cffb96dc-36e9-48b3-9570-9f99b7d6f2fc.png.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "cf43b9e3-396a-41bc-ab72-715f66cdb7e1",
+      "title": "A-bout!",
+      "cover": "https://uploads.mangadex.org/covers/cf43b9e3-396a-41bc-ab72-715f66cdb7e1/c556e070-f1ff-405b-b71c-b2e7492aee0e.png.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "ca33a142-58fb-4fee-88b9-36ef87f02c77",
+      "title": "حب نيزومي الأول",
+      "cover": "https://uploads.mangadex.org/covers/ca33a142-58fb-4fee-88b9-36ef87f02c77/7e8317ea-78bf-4090-a2ee-ab07041e4458.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
     {
       "id": "a07320a4-afcd-413a-a451-d69a448d0c28",
       "title": "Usogui",
@@ -29,13 +57,6 @@
       "cover": "https://uploads.mangadex.org/covers/9d3d3403-1a87-4737-9803-bc3d99db1424/fac191d0-96c1-4ebb-bf79-b7616d7162ac.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
-    },
-    {
-      "id": "cf43b9e3-396a-41bc-ab72-715f66cdb7e1",
-      "title": "A-bout!",
-      "cover": "https://uploads.mangadex.org/covers/cf43b9e3-396a-41bc-ab72-715f66cdb7e1/c556e070-f1ff-405b-b71c-b2e7492aee0e.png.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
     },
     {
       "id": "5c9d1254-f074-4b5c-8795-6f0641b2597b",
@@ -122,13 +143,6 @@
       "status": "ongoing"
     },
     {
-      "id": "d1a9fdeb-f713-407f-960c-8326b586e6fd",
-      "title": "Vagabond",
-      "cover": "https://uploads.mangadex.org/covers/d1a9fdeb-f713-407f-960c-8326b586e6fd/05f8dcb4-8ea1-48db-a0b1-3a8fbf695e5a.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "hiatus"
-    },
-    {
       "id": "3169544f-4b87-4a14-917b-f73600941f55",
       "title": "Noa-Senpai is My Friend.",
       "cover": "https://uploads.mangadex.org/covers/3169544f-4b87-4a14-917b-f73600941f55/84843c19-ee1d-47c7-b670-454e65c78337.jpg.256.jpg",
@@ -148,13 +162,6 @@
       "cover": "https://uploads.mangadex.org/covers/ff5ef336-72d7-45a2-bc69-c2ae8fbfeec8/e8ea3a56-09db-47bf-85f0-0bfa17b3ccc1.jpg.256.jpg",
       "source": "mangadex",
       "status": "completed"
-    },
-    {
-      "id": "c4b36f15-4ee5-425f-a77d-c2e7cbb970d8",
-      "title": "NIPPON SANGOKU: The Three Nations of the Crimson Sun",
-      "cover": "https://uploads.mangadex.org/covers/c4b36f15-4ee5-425f-a77d-c2e7cbb970d8/e5c54f1b-6ea4-4dd2-ae6e-9d0e138d7c2e.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
     },
     {
       "id": "d64b0768-bebe-433c-b923-99870503c0a3",
@@ -209,13 +216,6 @@
       "id": "0cfcda3b-0dcb-459b-9931-aa823e7bf403",
       "title": "تسع قمم",
       "cover": "https://uploads.mangadex.org/covers/0cfcda3b-0dcb-459b-9931-aa823e7bf403/2f960366-7159-4f17-b3bf-b5f52e9860f7.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "ca33a142-58fb-4fee-88b9-36ef87f02c77",
-      "title": "حب نيزومي الأول",
-      "cover": "https://uploads.mangadex.org/covers/ca33a142-58fb-4fee-88b9-36ef87f02c77/7e8317ea-78bf-4090-a2ee-ab07041e4458.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
