@@ -1,7 +1,42 @@
 {
-  "updated_at": "2026-09-22T20:52:22.629689+00:00",
+  "updated_at": "2026-09-23T03:15:48.928255+00:00",
   "count": 50,
   "items": [
+    {
+      "id": "ea0e7020-2b2f-4f17-9251-fee3632dc135",
+      "title": "My Yandere Girlfriend Lurks in the Dungeon and Kills Me Over and Over Again",
+      "cover": "https://uploads.mangadex.org/covers/ea0e7020-2b2f-4f17-9251-fee3632dc135/4979315b-7bbd-4d17-9e61-d49f07d1245d.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "ea47525d-99df-45b5-9103-dd853f49f8c3",
+      "title": "Welcome to Demon School! Iruma-kun: IruMafia Edition",
+      "cover": "https://uploads.mangadex.org/covers/ea47525d-99df-45b5-9103-dd853f49f8c3/7ba89c43-1234-4d11-9aa6-c3a7576cd1ce.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "4e7a4a0f-8391-4069-839b-de2352297dab",
+      "title": "A Couple of Cuckoos",
+      "cover": "https://uploads.mangadex.org/covers/4e7a4a0f-8391-4069-839b-de2352297dab/71c97191-000a-4f6a-b42f-f14941d286cd.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "cf43b9e3-396a-41bc-ab72-715f66cdb7e1",
+      "title": "A-bout!",
+      "cover": "https://uploads.mangadex.org/covers/cf43b9e3-396a-41bc-ab72-715f66cdb7e1/c556e070-f1ff-405b-b71c-b2e7492aee0e.png.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "c4ca02fb-8378-433b-8049-fbbea5d25cba",
+      "title": "هايميا-سينباي حسناء مهيبة!",
+      "cover": "https://uploads.mangadex.org/covers/c4ca02fb-8378-433b-8049-fbbea5d25cba/7ab29404-0ebd-4862-ad4e-e4ea1ffe231f.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
     {
       "id": "19c8ff73-5282-435f-b0ff-3ba492230150",
       "title": "Kurosaki-kun no Iinari ni Nante Naranai",
@@ -15,13 +50,6 @@
       "cover": "https://uploads.mangadex.org/covers/f6ce20ca-73c3-4fdd-9367-e2901fca780e/fed093aa-cbcf-4ca0-b80c-49eb251b1e80.png.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
-    },
-    {
-      "id": "cf43b9e3-396a-41bc-ab72-715f66cdb7e1",
-      "title": "A-bout!",
-      "cover": "https://uploads.mangadex.org/covers/cf43b9e3-396a-41bc-ab72-715f66cdb7e1/c556e070-f1ff-405b-b71c-b2e7492aee0e.png.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
     },
     {
       "id": "843c31ff-d390-4199-bc3b-94b0dfc63632",
@@ -227,13 +255,6 @@
       "status": "ongoing"
     },
     {
-      "id": "4e7a4a0f-8391-4069-839b-de2352297dab",
-      "title": "A Couple of Cuckoos",
-      "cover": "https://uploads.mangadex.org/covers/4e7a4a0f-8391-4069-839b-de2352297dab/71c97191-000a-4f6a-b42f-f14941d286cd.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
       "id": "3169544f-4b87-4a14-917b-f73600941f55",
       "title": "Noa-Senpai is My Friend.",
       "cover": "https://uploads.mangadex.org/covers/3169544f-4b87-4a14-917b-f73600941f55/84843c19-ee1d-47c7-b670-454e65c78337.jpg.256.jpg",
@@ -272,6 +293,13 @@
       "id": "e18fe8c6-f6dc-4f05-8462-7b2083ff9a6c",
       "title": "يوميات الصيدلة",
       "cover": "https://uploads.mangadex.org/covers/e18fe8c6-f6dc-4f05-8462-7b2083ff9a6c/530a4ffb-87cb-4156-bdeb-61670532e20f.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "c1e284bc-0436-42fe-b571-fa35a94279ce",
+      "title": "Drama Queen",
+      "cover": "https://uploads.mangadex.org/covers/c1e284bc-0436-42fe-b571-fa35a94279ce/68519e4d-6893-47a9-ab4f-d37e899da3d8.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
@@ -321,34 +349,6 @@
       "id": "25e1d17b-6a4d-4698-a4f6-bf53460c10af",
       "title": "حافلة لإثنين",
       "cover": "https://uploads.mangadex.org/covers/25e1d17b-6a4d-4698-a4f6-bf53460c10af/f7cd3ff9-d7a1-4b5e-b473-ee2833b82c35.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "a6a46436-9ed4-4c20-8b11-6f4a0f74b23a",
-      "title": "Kabuto Mushi",
-      "cover": "https://uploads.mangadex.org/covers/a6a46436-9ed4-4c20-8b11-6f4a0f74b23a/5a16e9bf-0859-4719-bd13-7e5e43e338d7.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "baaa0ca4-efef-4b15-b91a-c1f85692c2a7",
-      "title": "Vampire Knight",
-      "cover": "https://uploads.mangadex.org/covers/baaa0ca4-efef-4b15-b91a-c1f85692c2a7/d195f918-5f67-46a0-925f-eabc16fb40a3.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
-      "id": "d36bea9f-853f-4908-9957-5514b1903e36",
-      "title": "Marika's Love Meter Malfunction",
-      "cover": "https://uploads.mangadex.org/covers/d36bea9f-853f-4908-9957-5514b1903e36/4b5daf86-5fc1-4316-ba94-cb96f093bd89.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "6e156d65-cf65-4d5b-9d04-52f2f8100fbf",
-      "title": "Apocalypse Bringer Mynoghra: World Conquest Starts with the Civilization of Ruin",
-      "cover": "https://uploads.mangadex.org/covers/6e156d65-cf65-4d5b-9d04-52f2f8100fbf/03ff0d8e-8c07-42f8-9db3-49ef13ebf352.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     }
