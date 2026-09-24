@@ -1,7 +1,42 @@
 {
-  "updated_at": "2026-09-24T03:05:34.890122+00:00",
+  "updated_at": "2026-09-24T11:05:32.875650+00:00",
   "count": 50,
   "items": [
+    {
+      "id": "936f0ba5-ca65-4de4-99b1-528c02a4454d",
+      "title": "Hunter x Hunter (Official Colored)",
+      "cover": "https://uploads.mangadex.org/covers/936f0ba5-ca65-4de4-99b1-528c02a4454d/128d80df-c5e4-4791-b3b7-08586e9db1b8.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "46e9cae5-4407-4576-9b9e-4c517ae9298e",
+      "title": "أرض الأحلام الموعودة",
+      "cover": "https://uploads.mangadex.org/covers/46e9cae5-4407-4576-9b9e-4c517ae9298e/e023b6b0-76c7-4dfd-8ec2-ce7a26b90a05.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "d8a959f7-648e-4c8d-8f23-f1f3f8e129f3",
+      "title": "ون بنش مان",
+      "cover": "https://uploads.mangadex.org/covers/d8a959f7-648e-4c8d-8f23-f1f3f8e129f3/511fc404-e6b4-4204-bb10-e4a28f7b5271.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "e4148575-6572-425f-9a60-50d94d423b58",
+      "title": "Baki Side Story: Gaia & Sikorsky - Sometimes Nomura—Two yet Three People Living Together",
+      "cover": "https://uploads.mangadex.org/covers/e4148575-6572-425f-9a60-50d94d423b58/8a19f307-4d2a-465c-99c4-81e49b0ba7ee.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "bcfe1b36-daee-40fd-9984-d9597caf9da7",
+      "title": "فَقِيْهَةُ ٱلْمَغُوْلِ",
+      "cover": "https://uploads.mangadex.org/covers/bcfe1b36-daee-40fd-9984-d9597caf9da7/5ce19283-d717-44e2-bb69-4247640d3c75.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
     {
       "id": "c4ca02fb-8378-433b-8049-fbbea5d25cba",
       "title": "هايميا-سينباي حسناء مهيبة!",
@@ -117,7 +152,7 @@
     {
       "id": "63dbbf80-0189-4ae4-a549-68a0caa2f834",
       "title": "ويتشريف",
-      "cover": "https://uploads.mangadex.org/covers/63dbbf80-0189-4ae4-a549-68a0caa2f834/04ae601b-1e85-4b59-bba3-7a140f7339f5.jpg.256.jpg",
+      "cover": "https://uploads.mangadex.org/covers/63dbbf80-0189-4ae4-a549-68a0caa2f834/05f68285-5512-4f20-b6be-764fa4b5789a.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
@@ -164,25 +199,11 @@
       "status": "completed"
     },
     {
-      "id": "bcfe1b36-daee-40fd-9984-d9597caf9da7",
-      "title": "فَقِيْهَةُ ٱلْمَغُوْلِ",
-      "cover": "https://uploads.mangadex.org/covers/bcfe1b36-daee-40fd-9984-d9597caf9da7/5ce19283-d717-44e2-bb69-4247640d3c75.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
       "id": "a460ab18-22c1-47eb-a08a-9ee85fe37ec8",
       "title": "Bleach (Official Colored)",
       "cover": "https://uploads.mangadex.org/covers/a460ab18-22c1-47eb-a08a-9ee85fe37ec8/7c8f9203-2b82-41f2-beb3-e7fb00e151e2.jpg.256.jpg",
       "source": "mangadex",
       "status": "completed"
-    },
-    {
-      "id": "e4148575-6572-425f-9a60-50d94d423b58",
-      "title": "Baki Side Story: Gaia & Sikorsky - Sometimes Nomura—Two yet Three People Living Together",
-      "cover": "https://uploads.mangadex.org/covers/e4148575-6572-425f-9a60-50d94d423b58/8a19f307-4d2a-465c-99c4-81e49b0ba7ee.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
     },
     {
       "id": "5c9d1254-f074-4b5c-8795-6f0641b2597b",
@@ -328,27 +349,6 @@
       "id": "8c1d7d0c-e0b7-4170-941d-29f652c3c19d",
       "title": "The Apothecary Diaries: Maomao's Notes from the Inner Palace",
       "cover": "https://uploads.mangadex.org/covers/8c1d7d0c-e0b7-4170-941d-29f652c3c19d/48ca2ef4-7bb3-4286-935a-b4f23d8041b3.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "8e95570e-93a7-494d-8e83-bd755e3b631d",
-      "title": "Fragments of the Layered City",
-      "cover": "https://uploads.mangadex.org/covers/8e95570e-93a7-494d-8e83-bd755e3b631d/cffb96dc-36e9-48b3-9570-9f99b7d6f2fc.png.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "ca33a142-58fb-4fee-88b9-36ef87f02c77",
-      "title": "حب نيزومي الأول",
-      "cover": "https://uploads.mangadex.org/covers/ca33a142-58fb-4fee-88b9-36ef87f02c77/7e8317ea-78bf-4090-a2ee-ab07041e4458.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "61830b36-1712-4b7b-9421-f671e9ced6d3",
-      "title": "Learning to Love My Cat-like Classmate",
-      "cover": "https://uploads.mangadex.org/covers/61830b36-1712-4b7b-9421-f671e9ced6d3/6076a7f6-4454-49fb-8802-89ee00aec545.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     }
