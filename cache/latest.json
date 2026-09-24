@@ -1,7 +1,91 @@
 {
-  "updated_at": "2026-09-24T11:05:32.875650+00:00",
+  "updated_at": "2026-09-24T16:28:51.411640+00:00",
   "count": 50,
   "items": [
+    {
+      "id": "e1809b04-f7dd-4327-9669-ca83884a1403",
+      "title": "Reverend Insanity Remake",
+      "cover": "https://uploads.mangadex.org/covers/e1809b04-f7dd-4327-9669-ca83884a1403/a635e356-db7a-4384-b80c-d306d4b9ba76.png.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "ab8cbb82-d0ed-45a7-8ffe-4bfa6d43d79c",
+      "title": "JoJo's Bizarre Adventure Part 9 - The JOJOLands",
+      "cover": "https://uploads.mangadex.org/covers/ab8cbb82-d0ed-45a7-8ffe-4bfa6d43d79c/88e8a8ea-91ed-4db6-937b-4dd0048e74d5.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "29ab6984-7c1d-4d45-b925-25aa082b492e",
+      "title": "Shangri-La Frontier: From Trash-Game Hunter to God-Tier Game Master!",
+      "cover": "https://uploads.mangadex.org/covers/29ab6984-7c1d-4d45-b925-25aa082b492e/5b700d62-c041-4537-b9f7-36302ca87f2f.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "ad75039d-686c-457f-b478-e56fc3b3c069",
+      "title": "I Started Working a Housekeeping Job and Ended up Being Liked by the Family of the Most Beautiful Girl in School.",
+      "cover": "https://uploads.mangadex.org/covers/ad75039d-686c-457f-b478-e56fc3b3c069/d11151a2-0f4e-49e8-9c19-1be626a044fa.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "87ffa375-bd2c-49ba-ba0c-6d78ea07c342",
+      "title": "Medaka Kuroiwa is Impervious to My Charms",
+      "cover": "https://uploads.mangadex.org/covers/87ffa375-bd2c-49ba-ba0c-6d78ea07c342/e410b2ef-b97e-45c1-b861-140b2fe6ee01.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "843c31ff-d390-4199-bc3b-94b0dfc63632",
+      "title": "Baki Side Story: Retsu Kaioh Doesn't Mind Even If It's in Another World",
+      "cover": "https://uploads.mangadex.org/covers/843c31ff-d390-4199-bc3b-94b0dfc63632/07dbd2f5-68cf-49e2-afe6-af7dd4d26f70.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "fa85b2aa-370c-41c5-96ae-29b05c848f3d",
+      "title": "Innocent",
+      "cover": "https://uploads.mangadex.org/covers/fa85b2aa-370c-41c5-96ae-29b05c848f3d/3d562b75-ca28-4a65-87a9-2e3f73657456.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "0cfcda3b-0dcb-459b-9931-aa823e7bf403",
+      "title": "تسع قمم",
+      "cover": "https://uploads.mangadex.org/covers/0cfcda3b-0dcb-459b-9931-aa823e7bf403/2f960366-7159-4f17-b3bf-b5f52e9860f7.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "c4ca02fb-8378-433b-8049-fbbea5d25cba",
+      "title": "هايميا-سينباي حسناء مهيبة!",
+      "cover": "https://uploads.mangadex.org/covers/c4ca02fb-8378-433b-8049-fbbea5d25cba/7ab29404-0ebd-4862-ad4e-e4ea1ffe231f.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "d8a959f7-648e-4c8d-8f23-f1f3f8e129f3",
+      "title": "ون بنش مان",
+      "cover": "https://uploads.mangadex.org/covers/d8a959f7-648e-4c8d-8f23-f1f3f8e129f3/511fc404-e6b4-4204-bb10-e4a28f7b5271.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "52842727-59ff-46a6-9a23-5eba61487586",
+      "title": "To Love Ru (Official Colored)",
+      "cover": "https://uploads.mangadex.org/covers/52842727-59ff-46a6-9a23-5eba61487586/1b7bba8a-d22a-4f1a-8723-601a611b135a.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "5c9d1254-f074-4b5c-8795-6f0641b2597b",
+      "title": "Girl and Science",
+      "cover": "https://uploads.mangadex.org/covers/5c9d1254-f074-4b5c-8795-6f0641b2597b/f606b3ce-4f64-400e-8a1c-265698f68d01.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
     {
       "id": "936f0ba5-ca65-4de4-99b1-528c02a4454d",
       "title": "Hunter x Hunter (Official Colored)",
@@ -17,13 +101,6 @@
       "status": "completed"
     },
     {
-      "id": "d8a959f7-648e-4c8d-8f23-f1f3f8e129f3",
-      "title": "ون بنش مان",
-      "cover": "https://uploads.mangadex.org/covers/d8a959f7-648e-4c8d-8f23-f1f3f8e129f3/511fc404-e6b4-4204-bb10-e4a28f7b5271.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
       "id": "e4148575-6572-425f-9a60-50d94d423b58",
       "title": "Baki Side Story: Gaia & Sikorsky - Sometimes Nomura—Two yet Three People Living Together",
       "cover": "https://uploads.mangadex.org/covers/e4148575-6572-425f-9a60-50d94d423b58/8a19f307-4d2a-465c-99c4-81e49b0ba7ee.jpg.256.jpg",
@@ -34,13 +111,6 @@
       "id": "bcfe1b36-daee-40fd-9984-d9597caf9da7",
       "title": "فَقِيْهَةُ ٱلْمَغُوْلِ",
       "cover": "https://uploads.mangadex.org/covers/bcfe1b36-daee-40fd-9984-d9597caf9da7/5ce19283-d717-44e2-bb69-4247640d3c75.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "c4ca02fb-8378-433b-8049-fbbea5d25cba",
-      "title": "هايميا-سينباي حسناء مهيبة!",
-      "cover": "https://uploads.mangadex.org/covers/c4ca02fb-8378-433b-8049-fbbea5d25cba/7ab29404-0ebd-4862-ad4e-e4ea1ffe231f.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
@@ -115,13 +185,6 @@
       "status": "completed"
     },
     {
-      "id": "87ffa375-bd2c-49ba-ba0c-6d78ea07c342",
-      "title": "Medaka Kuroiwa is Impervious to My Charms",
-      "cover": "https://uploads.mangadex.org/covers/87ffa375-bd2c-49ba-ba0c-6d78ea07c342/e410b2ef-b97e-45c1-b861-140b2fe6ee01.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
       "id": "abcf6720-91b4-4e06-876e-955af17e74f2",
       "title": "Don't eat me, Tokiwa-kun",
       "cover": "https://uploads.mangadex.org/covers/abcf6720-91b4-4e06-876e-955af17e74f2/4527ab6f-4bdf-4099-9602-bcb794f047d4.jpg.256.jpg",
@@ -157,13 +220,6 @@
       "status": "ongoing"
     },
     {
-      "id": "843c31ff-d390-4199-bc3b-94b0dfc63632",
-      "title": "Baki Side Story: Retsu Kaioh Doesn't Mind Even If It's in Another World",
-      "cover": "https://uploads.mangadex.org/covers/843c31ff-d390-4199-bc3b-94b0dfc63632/07dbd2f5-68cf-49e2-afe6-af7dd4d26f70.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
       "id": "4e7a4a0f-8391-4069-839b-de2352297dab",
       "title": "A Couple of Cuckoos",
       "cover": "https://uploads.mangadex.org/covers/4e7a4a0f-8391-4069-839b-de2352297dab/71c97191-000a-4f6a-b42f-f14941d286cd.jpg.256.jpg",
@@ -185,13 +241,6 @@
       "status": "ongoing"
     },
     {
-      "id": "0cfcda3b-0dcb-459b-9931-aa823e7bf403",
-      "title": "تسع قمم",
-      "cover": "https://uploads.mangadex.org/covers/0cfcda3b-0dcb-459b-9931-aa823e7bf403/2f960366-7159-4f17-b3bf-b5f52e9860f7.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
       "id": "a07320a4-afcd-413a-a451-d69a448d0c28",
       "title": "Usogui",
       "cover": "https://uploads.mangadex.org/covers/a07320a4-afcd-413a-a451-d69a448d0c28/b74c8cce-42cd-4889-b75d-7944e63f9a14.jpg.256.jpg",
@@ -202,13 +251,6 @@
       "id": "a460ab18-22c1-47eb-a08a-9ee85fe37ec8",
       "title": "Bleach (Official Colored)",
       "cover": "https://uploads.mangadex.org/covers/a460ab18-22c1-47eb-a08a-9ee85fe37ec8/7c8f9203-2b82-41f2-beb3-e7fb00e151e2.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
-      "id": "5c9d1254-f074-4b5c-8795-6f0641b2597b",
-      "title": "Girl and Science",
-      "cover": "https://uploads.mangadex.org/covers/5c9d1254-f074-4b5c-8795-6f0641b2597b/f606b3ce-4f64-400e-8a1c-265698f68d01.jpg.256.jpg",
       "source": "mangadex",
       "status": "completed"
     },
@@ -307,48 +349,6 @@
       "id": "b05918e4-fb1a-4b10-a919-eaecf00fd7dd",
       "title": "Tower Dungeon",
       "cover": "https://uploads.mangadex.org/covers/b05918e4-fb1a-4b10-a919-eaecf00fd7dd/66d623c6-4e9d-4ced-acbe-3f5fcfeecbed.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "4393fd4e-d646-4bab-9c95-786168ccb618",
-      "title": "Devilman",
-      "cover": "https://uploads.mangadex.org/covers/4393fd4e-d646-4bab-9c95-786168ccb618/3199fa66-3a73-4c11-9236-9cba765e6650.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
-      "id": "77c4966f-ead7-45bb-87e0-9ac618b11e8e",
-      "title": "Kunon the Sorcerer Can See",
-      "cover": "https://uploads.mangadex.org/covers/77c4966f-ead7-45bb-87e0-9ac618b11e8e/393cc1fa-a752-49aa-a688-a2a309924030.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "52842727-59ff-46a6-9a23-5eba61487586",
-      "title": "To Love Ru (Official Colored)",
-      "cover": "https://uploads.mangadex.org/covers/52842727-59ff-46a6-9a23-5eba61487586/1b7bba8a-d22a-4f1a-8723-601a611b135a.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
-      "id": "f7888782-0727-49b0-95ec-a3530c70f83b",
-      "title": "Hajime no Ippo: Fighting Spirit!",
-      "cover": "https://uploads.mangadex.org/covers/f7888782-0727-49b0-95ec-a3530c70f83b/8ebf0c88-0f84-4fa0-abaf-0e2f8ebdf91e.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "80422e14-b9ad-4fda-970f-de370d5fa4e5",
-      "title": "صنع في الهاوية",
-      "cover": "https://uploads.mangadex.org/covers/80422e14-b9ad-4fda-970f-de370d5fa4e5/a9c2d5fa-6c12-434b-ab80-630e6d862cf8.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "8c1d7d0c-e0b7-4170-941d-29f652c3c19d",
-      "title": "The Apothecary Diaries: Maomao's Notes from the Inner Palace",
-      "cover": "https://uploads.mangadex.org/covers/8c1d7d0c-e0b7-4170-941d-29f652c3c19d/48ca2ef4-7bb3-4286-935a-b4f23d8041b3.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     }
