@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-29T21:50:33.069432+00:00",
+  "updated_at": "2026-09-30T03:55:47.437728+00:00",
   "count": 50,
   "items": [
     {
@@ -213,18 +213,18 @@
       "status": "ongoing"
     },
     {
-      "id": "296cbc31-af1a-4b5b-a34b-fee2b4cad542",
-      "title": "نجمتي",
-      "cover": "https://uploads.mangadex.org/covers/296cbc31-af1a-4b5b-a34b-fee2b4cad542/d803d885-e371-4018-b332-4cbc5935177f.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
       "id": "68112dc1-2b80-4f20-beb8-2f2a8716a430",
       "title": "داندادان",
       "cover": "https://uploads.mangadex.org/covers/68112dc1-2b80-4f20-beb8-2f2a8716a430/971f79d4-ae64-4e9f-a874-2d2995eafafa.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
+    },
+    {
+      "id": "296cbc31-af1a-4b5b-a34b-fee2b4cad542",
+      "title": "نجمتي",
+      "cover": "https://uploads.mangadex.org/covers/296cbc31-af1a-4b5b-a34b-fee2b4cad542/d803d885-e371-4018-b332-4cbc5935177f.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
     },
     {
       "id": "b41bef1e-7df9-4255-bd82-ecf570fec566",
