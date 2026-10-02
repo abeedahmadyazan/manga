@@ -1,11 +1,46 @@
 {
-  "updated_at": "2026-10-02T04:00:23.250197+00:00",
+  "updated_at": "2026-10-02T11:51:48.119836+00:00",
   "count": 50,
   "items": [
     {
-      "id": "8a38bcc4-0a52-4a46-9d02-7fc802048b1d",
-      "title": "Shinobi Undercover",
-      "cover": "https://uploads.mangadex.org/covers/8a38bcc4-0a52-4a46-9d02-7fc802048b1d/612ae2e5-ed10-4d05-abb2-ee3b7a781737.jpg.256.jpg",
+      "id": "5c9d1254-f074-4b5c-8795-6f0641b2597b",
+      "title": "Girl and Science",
+      "cover": "https://uploads.mangadex.org/covers/5c9d1254-f074-4b5c-8795-6f0641b2597b/f606b3ce-4f64-400e-8a1c-265698f68d01.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "38179337-1640-4927-8851-9bedd8d19e82",
+      "title": "Aren't You Too Sweet Salt-God Sato-San?",
+      "cover": "https://uploads.mangadex.org/covers/38179337-1640-4927-8851-9bedd8d19e82/82765507-ec2b-48df-a0f0-c53ba4d71d6d.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "7066efc8-b73f-4b17-8b8d-6060a5412590",
+      "title": "Kill Blue",
+      "cover": "https://uploads.mangadex.org/covers/7066efc8-b73f-4b17-8b8d-6060a5412590/ccc07c8c-b896-4c2c-81c3-a684f1f1a188.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "843c31ff-d390-4199-bc3b-94b0dfc63632",
+      "title": "Baki Side Story: Retsu Kaioh Doesn't Mind Even If It's in Another World",
+      "cover": "https://uploads.mangadex.org/covers/843c31ff-d390-4199-bc3b-94b0dfc63632/07dbd2f5-68cf-49e2-afe6-af7dd4d26f70.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "bcfe1b36-daee-40fd-9984-d9597caf9da7",
+      "title": "فَقِيْهَةُ ٱلْمَغُوْلِ",
+      "cover": "https://uploads.mangadex.org/covers/bcfe1b36-daee-40fd-9984-d9597caf9da7/5ce19283-d717-44e2-bb69-4247640d3c75.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "4e0ab019-afcb-4fd9-98eb-fcb28cf7fc81",
+      "title": "مانجا الملكة النحلة شوكهو ميساكي - مينتل-آوت",
+      "cover": "https://uploads.mangadex.org/covers/4e0ab019-afcb-4fd9-98eb-fcb28cf7fc81/71450b93-c970-42e6-bb65-93f45b8e9ac3.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
@@ -13,6 +48,27 @@
       "id": "fffbfac3-b7ad-41ee-9581-b4d90ecec941",
       "title": "Grand Blue Dreaming",
       "cover": "https://uploads.mangadex.org/covers/fffbfac3-b7ad-41ee-9581-b4d90ecec941/b6842627-f562-43e1-9f67-148abcf11310.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "991e9f15-8368-4843-a78a-5605918f9c3e",
+      "title": "Tatsuki Fujimoto Short Story Collection",
+      "cover": "https://uploads.mangadex.org/covers/991e9f15-8368-4843-a78a-5605918f9c3e/71863bda-f2f4-4570-b8ac-5c8d59de88fd.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "77c4966f-ead7-45bb-87e0-9ac618b11e8e",
+      "title": "Kunon the Sorcerer Can See",
+      "cover": "https://uploads.mangadex.org/covers/77c4966f-ead7-45bb-87e0-9ac618b11e8e/393cc1fa-a752-49aa-a688-a2a309924030.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "8a38bcc4-0a52-4a46-9d02-7fc802048b1d",
+      "title": "Shinobi Undercover",
+      "cover": "https://uploads.mangadex.org/covers/8a38bcc4-0a52-4a46-9d02-7fc802048b1d/612ae2e5-ed10-4d05-abb2-ee3b7a781737.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
@@ -80,13 +136,6 @@
       "status": "ongoing"
     },
     {
-      "id": "bcfe1b36-daee-40fd-9984-d9597caf9da7",
-      "title": "فَقِيْهَةُ ٱلْمَغُوْلِ",
-      "cover": "https://uploads.mangadex.org/covers/bcfe1b36-daee-40fd-9984-d9597caf9da7/5ce19283-d717-44e2-bb69-4247640d3c75.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
       "id": "512cd78f-cbb8-460a-bafd-e8840c0f7c31",
       "title": "Sword Art Online: Unital Ring",
       "cover": "https://uploads.mangadex.org/covers/512cd78f-cbb8-460a-bafd-e8840c0f7c31/ca55cadb-356d-4d3b-b83c-1f1478a09ee6.jpg.256.jpg",
@@ -104,13 +153,6 @@
       "id": "a2c1d849-af05-4bbc-b2a7-866ebb10331f",
       "title": "One Piece (Official Colored)",
       "cover": "https://uploads.mangadex.org/covers/a2c1d849-af05-4bbc-b2a7-866ebb10331f/da0341d8-5526-452c-8bd3-dc8e3cd89f99.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "843c31ff-d390-4199-bc3b-94b0dfc63632",
-      "title": "Baki Side Story: Retsu Kaioh Doesn't Mind Even If It's in Another World",
-      "cover": "https://uploads.mangadex.org/covers/843c31ff-d390-4199-bc3b-94b0dfc63632/07dbd2f5-68cf-49e2-afe6-af7dd4d26f70.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
@@ -309,48 +351,6 @@
       "cover": "https://uploads.mangadex.org/covers/0cfcda3b-0dcb-459b-9931-aa823e7bf403/2f960366-7159-4f17-b3bf-b5f52e9860f7.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
-    },
-    {
-      "id": "569963c5-6b0b-4f92-b561-e1304b78b0dc",
-      "title": "Bungo Stray Dogs: Wan!",
-      "cover": "https://uploads.mangadex.org/covers/569963c5-6b0b-4f92-b561-e1304b78b0dc/53839189-747f-451f-9803-150b428ea77b.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "3169544f-4b87-4a14-917b-f73600941f55",
-      "title": "Noa-Senpai is My Friend.",
-      "cover": "https://uploads.mangadex.org/covers/3169544f-4b87-4a14-917b-f73600941f55/8d62b061-c180-4a1f-94c3-36b95dd9f3ec.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "a07320a4-afcd-413a-a451-d69a448d0c28",
-      "title": "Usogui",
-      "cover": "https://uploads.mangadex.org/covers/a07320a4-afcd-413a-a451-d69a448d0c28/b74c8cce-42cd-4889-b75d-7944e63f9a14.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
-      "id": "25e1d17b-6a4d-4698-a4f6-bf53460c10af",
-      "title": "حافلة لإثنين",
-      "cover": "https://uploads.mangadex.org/covers/25e1d17b-6a4d-4698-a4f6-bf53460c10af/f7cd3ff9-d7a1-4b5e-b473-ee2833b82c35.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "5c9d1254-f074-4b5c-8795-6f0641b2597b",
-      "title": "Girl and Science",
-      "cover": "https://uploads.mangadex.org/covers/5c9d1254-f074-4b5c-8795-6f0641b2597b/f606b3ce-4f64-400e-8a1c-265698f68d01.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
-      "id": "52842727-59ff-46a6-9a23-5eba61487586",
-      "title": "To Love Ru (Official Colored)",
-      "cover": "https://uploads.mangadex.org/covers/52842727-59ff-46a6-9a23-5eba61487586/1b7bba8a-d22a-4f1a-8723-601a611b135a.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
     }
   ]
 }
