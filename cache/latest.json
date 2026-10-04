@@ -1,7 +1,70 @@
 {
-  "updated_at": "2026-10-04T04:15:05.088860+00:00",
+  "updated_at": "2026-10-04T11:46:16.048961+00:00",
   "count": 50,
   "items": [
+    {
+      "id": "1693697a-783c-4d3c-a2d3-dc069e137a23",
+      "title": "I Have No Home",
+      "cover": "https://uploads.mangadex.org/covers/1693697a-783c-4d3c-a2d3-dc069e137a23/bc55de2a-47dd-41cb-9338-75b3f0650a69.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "b6886009-e60b-44a7-abc2-a575765277ba",
+      "title": "الرجل الرمادي",
+      "cover": "https://uploads.mangadex.org/covers/b6886009-e60b-44a7-abc2-a575765277ba/a8ea60f1-0fef-4af0-b26e-8b761406c114.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "9d3d3403-1a87-4737-9803-bc3d99db1424",
+      "title": "The Guy She Was Interested in Wasn't a Guy at All",
+      "cover": "https://uploads.mangadex.org/covers/9d3d3403-1a87-4737-9803-bc3d99db1424/fac191d0-96c1-4ebb-bf79-b7616d7162ac.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "51c1e7cc-23f4-4a08-a961-c1ab75e2bb33",
+      "title": "عديمة التعبير كاشيوادا و مفرط التعبير اوتا",
+      "cover": "https://uploads.mangadex.org/covers/51c1e7cc-23f4-4a08-a961-c1ab75e2bb33/3bdea205-146a-460c-ae6e-7c2b27f762ed.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "334019e1-18bb-4ac0-b35c-0e8efb1e481c",
+      "title": "JoJo’s Bizarre Adventure, Part 9: The JoJoLands - Digital Colored Comics",
+      "cover": "https://uploads.mangadex.org/covers/334019e1-18bb-4ac0-b35c-0e8efb1e481c/530583f4-80ad-4f37-92d9-441b225c9785.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "bcfe1b36-daee-40fd-9984-d9597caf9da7",
+      "title": "فَقِيْهَةُ ٱلْمَغُوْلِ",
+      "cover": "https://uploads.mangadex.org/covers/bcfe1b36-daee-40fd-9984-d9597caf9da7/5ce19283-d717-44e2-bb69-4247640d3c75.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "3169544f-4b87-4a14-917b-f73600941f55",
+      "title": "Noa-Senpai is My Friend.",
+      "cover": "https://uploads.mangadex.org/covers/3169544f-4b87-4a14-917b-f73600941f55/8d62b061-c180-4a1f-94c3-36b95dd9f3ec.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "db692d58-4b13-4174-ae8c-30c515c0689c",
+      "title": "Hunter x Hunter",
+      "cover": "https://uploads.mangadex.org/covers/db692d58-4b13-4174-ae8c-30c515c0689c/aa112927-f1e5-4fe4-a4db-7fd4a1536e3c.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "ef473f14-8c4d-435e-9015-b714512e69eb",
+      "title": "استدعاء اليابان",
+      "cover": "https://uploads.mangadex.org/covers/ef473f14-8c4d-435e-9015-b714512e69eb/9cd0abf9-8259-489f-8515-8ae35d89f075.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
     {
       "id": "f4045a9e-e5f6-4778-bd33-7a91cefc3f71",
       "title": "For the Sake of My Future Vengeance",
@@ -76,13 +139,6 @@
       "id": "843c31ff-d390-4199-bc3b-94b0dfc63632",
       "title": "Baki Side Story: Retsu Kaioh Doesn't Mind Even If It's in Another World",
       "cover": "https://uploads.mangadex.org/covers/843c31ff-d390-4199-bc3b-94b0dfc63632/07dbd2f5-68cf-49e2-afe6-af7dd4d26f70.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "3169544f-4b87-4a14-917b-f73600941f55",
-      "title": "Noa-Senpai is My Friend.",
-      "cover": "https://uploads.mangadex.org/covers/3169544f-4b87-4a14-917b-f73600941f55/8d62b061-c180-4a1f-94c3-36b95dd9f3ec.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
@@ -213,13 +269,6 @@
       "status": "ongoing"
     },
     {
-      "id": "334019e1-18bb-4ac0-b35c-0e8efb1e481c",
-      "title": "JoJo’s Bizarre Adventure, Part 9: The JoJoLands - Digital Colored Comics",
-      "cover": "https://uploads.mangadex.org/covers/334019e1-18bb-4ac0-b35c-0e8efb1e481c/530583f4-80ad-4f37-92d9-441b225c9785.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
       "id": "4ed7f3b1-7496-4e0a-8ac0-642ef90d02e2",
       "title": "Baki Gaiden: Shin Chiharu",
       "cover": "https://uploads.mangadex.org/covers/4ed7f3b1-7496-4e0a-8ac0-642ef90d02e2/e312d133-dc6d-41f0-9ccc-38bfe0406ee4.png.256.jpg",
@@ -262,23 +311,9 @@
       "status": "ongoing"
     },
     {
-      "id": "51c1e7cc-23f4-4a08-a961-c1ab75e2bb33",
-      "title": "عديمة التعبير كاشيوادا و مفرط التعبير اوتا",
-      "cover": "https://uploads.mangadex.org/covers/51c1e7cc-23f4-4a08-a961-c1ab75e2bb33/3bdea205-146a-460c-ae6e-7c2b27f762ed.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
       "id": "38179337-1640-4927-8851-9bedd8d19e82",
       "title": "Aren't You Too Sweet Salt-God Sato-San?",
       "cover": "https://uploads.mangadex.org/covers/38179337-1640-4927-8851-9bedd8d19e82/82765507-ec2b-48df-a0f0-c53ba4d71d6d.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "bcfe1b36-daee-40fd-9984-d9597caf9da7",
-      "title": "فَقِيْهَةُ ٱلْمَغُوْلِ",
-      "cover": "https://uploads.mangadex.org/covers/bcfe1b36-daee-40fd-9984-d9597caf9da7/5ce19283-d717-44e2-bb69-4247640d3c75.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
@@ -314,41 +349,6 @@
       "id": "8e95570e-93a7-494d-8e83-bd755e3b631d",
       "title": "Fragments of the Layered City",
       "cover": "https://uploads.mangadex.org/covers/8e95570e-93a7-494d-8e83-bd755e3b631d/cffb96dc-36e9-48b3-9570-9f99b7d6f2fc.png.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "c1f2daa5-9e93-42b9-86e8-f1ddb2916db2",
-      "title": "Akabane Honeko no Bodyguard",
-      "cover": "https://uploads.mangadex.org/covers/c1f2daa5-9e93-42b9-86e8-f1ddb2916db2/49d26ddc-5715-4ea4-ae72-a4b53151cc51.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
-      "id": "c4ca02fb-8378-433b-8049-fbbea5d25cba",
-      "title": "هايميا-سينباي حسناء مهيبة!",
-      "cover": "https://uploads.mangadex.org/covers/c4ca02fb-8378-433b-8049-fbbea5d25cba/7ab29404-0ebd-4862-ad4e-e4ea1ffe231f.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "2f4e5f5b-d930-4266-8c8a-c4cf9a81e51f",
-      "title": "The Great Jahy Will Not Be Defeated!",
-      "cover": "https://uploads.mangadex.org/covers/2f4e5f5b-d930-4266-8c8a-c4cf9a81e51f/da817d36-05c3-4810-bdb7-96345a311097.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "c62b73e5-0cfb-4aef-9425-60393477ab6c",
-      "title": "Dragon Ball Kakumei (Doujinshi)",
-      "cover": "https://uploads.mangadex.org/covers/c62b73e5-0cfb-4aef-9425-60393477ab6c/f273e21d-926a-45ca-bd3f-5a223f9c3336.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "cancelled"
-    },
-    {
-      "id": "63dbbf80-0189-4ae4-a549-68a0caa2f834",
-      "title": "ويتشريف",
-      "cover": "https://uploads.mangadex.org/covers/63dbbf80-0189-4ae4-a549-68a0caa2f834/05f68285-5512-4f20-b6be-764fa4b5789a.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     }
