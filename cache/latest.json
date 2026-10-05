@@ -1,18 +1,109 @@
 {
-  "updated_at": "2026-10-05T13:34:13.076729+00:00",
+  "updated_at": "2026-10-05T23:43:37.780878+00:00",
   "count": 50,
   "items": [
     {
-      "id": "f5c25341-d6ff-4585-8548-3a48fc7654d9",
-      "title": "Akira Failing in Love",
-      "cover": "https://uploads.mangadex.org/covers/f5c25341-d6ff-4585-8548-3a48fc7654d9/26bd1cd9-bb1b-42d8-aa92-f916122c606c.jpg.256.jpg",
+      "id": "67a7dfd1-a39d-46c8-8ff2-9a24a9abaeb6",
+      "title": "Goblin Slayer",
+      "cover": "https://uploads.mangadex.org/covers/67a7dfd1-a39d-46c8-8ff2-9a24a9abaeb6/2c2de0de-6afb-4cb1-9951-613e6a255f52.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
+    },
+    {
+      "id": "b8faa8ab-cb4e-416f-829d-d2a6042ba5ac",
+      "title": "Ikoku Nikki",
+      "cover": "https://uploads.mangadex.org/covers/b8faa8ab-cb4e-416f-829d-d2a6042ba5ac/0ca2f8bf-a33c-46cb-8730-cff51b148314.png.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
     },
     {
       "id": "812f9696-048f-496d-9ed4-84c99345d1fb",
       "title": "Tales of Demons and Gods",
       "cover": "https://uploads.mangadex.org/covers/812f9696-048f-496d-9ed4-84c99345d1fb/4dcdd628-9195-4fa8-8079-50541ed60515.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "77bee52c-d2d6-44ad-a33a-1734c1fe696a",
+      "title": "The Eminence in Shadow",
+      "cover": "https://uploads.mangadex.org/covers/77bee52c-d2d6-44ad-a33a-1734c1fe696a/6079dd31-838b-4d61-87c4-121f3ad19158.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "a1c7c817-4e59-43b7-9365-09675a149a6f",
+      "title": "ون بيس",
+      "cover": "https://uploads.mangadex.org/covers/a1c7c817-4e59-43b7-9365-09675a149a6f/2f4aca53-64c7-46ac-ae85-3bc9b3169890.png.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "a0a5528a-c4a8-4495-a966-6877c12856ba",
+      "title": "TRUMP",
+      "cover": "https://uploads.mangadex.org/covers/a0a5528a-c4a8-4495-a966-6877c12856ba/8cec91f3-ac76-460f-9d42-3d1b4163c0e3.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "c37d93a8-9c50-49b3-bd71-143937f4288e",
+      "title": "Gantz: E",
+      "cover": "https://uploads.mangadex.org/covers/c37d93a8-9c50-49b3-bd71-143937f4288e/7c723851-b64d-423a-86a9-953f41358a94.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "68112dc1-2b80-4f20-beb8-2f2a8716a430",
+      "title": "داندادان",
+      "cover": "https://uploads.mangadex.org/covers/68112dc1-2b80-4f20-beb8-2f2a8716a430/971f79d4-ae64-4e9f-a874-2d2995eafafa.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "fffbfac3-b7ad-41ee-9581-b4d90ecec941",
+      "title": "Grand Blue Dreaming",
+      "cover": "https://uploads.mangadex.org/covers/fffbfac3-b7ad-41ee-9581-b4d90ecec941/b6842627-f562-43e1-9f67-148abcf11310.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "a07320a4-afcd-413a-a451-d69a448d0c28",
+      "title": "Usogui",
+      "cover": "https://uploads.mangadex.org/covers/a07320a4-afcd-413a-a451-d69a448d0c28/b74c8cce-42cd-4889-b75d-7944e63f9a14.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "b6886009-e60b-44a7-abc2-a575765277ba",
+      "title": "الرجل الرمادي",
+      "cover": "https://uploads.mangadex.org/covers/b6886009-e60b-44a7-abc2-a575765277ba/a8ea60f1-0fef-4af0-b26e-8b761406c114.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "77296cee-0b74-415f-914d-6f29036d3906",
+      "title": "مسرحية الجبل",
+      "cover": "https://uploads.mangadex.org/covers/77296cee-0b74-415f-914d-6f29036d3906/6cfbaeb6-59ae-4971-bfaa-3b026b6c9ad9.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "5c9d1254-f074-4b5c-8795-6f0641b2597b",
+      "title": "Girl and Science",
+      "cover": "https://uploads.mangadex.org/covers/5c9d1254-f074-4b5c-8795-6f0641b2597b/f606b3ce-4f64-400e-8a1c-265698f68d01.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "843c31ff-d390-4199-bc3b-94b0dfc63632",
+      "title": "Baki Side Story: Retsu Kaioh Doesn't Mind Even If It's in Another World",
+      "cover": "https://uploads.mangadex.org/covers/843c31ff-d390-4199-bc3b-94b0dfc63632/07dbd2f5-68cf-49e2-afe6-af7dd4d26f70.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "f5c25341-d6ff-4585-8548-3a48fc7654d9",
+      "title": "Akira Failing in Love",
+      "cover": "https://uploads.mangadex.org/covers/f5c25341-d6ff-4585-8548-3a48fc7654d9/26bd1cd9-bb1b-42d8-aa92-f916122c606c.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
@@ -150,13 +241,6 @@
       "status": "ongoing"
     },
     {
-      "id": "a07320a4-afcd-413a-a451-d69a448d0c28",
-      "title": "Usogui",
-      "cover": "https://uploads.mangadex.org/covers/a07320a4-afcd-413a-a451-d69a448d0c28/b74c8cce-42cd-4889-b75d-7944e63f9a14.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
       "id": "ff5ef336-72d7-45a2-bc69-c2ae8fbfeec8",
       "title": "I Am a Hero",
       "cover": "https://uploads.mangadex.org/covers/ff5ef336-72d7-45a2-bc69-c2ae8fbfeec8/e8ea3a56-09db-47bf-85f0-0bfa17b3ccc1.jpg.256.jpg",
@@ -206,25 +290,11 @@
       "status": "completed"
     },
     {
-      "id": "5c9d1254-f074-4b5c-8795-6f0641b2597b",
-      "title": "Girl and Science",
-      "cover": "https://uploads.mangadex.org/covers/5c9d1254-f074-4b5c-8795-6f0641b2597b/f606b3ce-4f64-400e-8a1c-265698f68d01.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
       "id": "baaa0ca4-efef-4b15-b91a-c1f85692c2a7",
       "title": "Vampire Knight",
       "cover": "https://uploads.mangadex.org/covers/baaa0ca4-efef-4b15-b91a-c1f85692c2a7/d195f918-5f67-46a0-925f-eabc16fb40a3.jpg.256.jpg",
       "source": "mangadex",
       "status": "completed"
-    },
-    {
-      "id": "b6886009-e60b-44a7-abc2-a575765277ba",
-      "title": "الرجل الرمادي",
-      "cover": "https://uploads.mangadex.org/covers/b6886009-e60b-44a7-abc2-a575765277ba/a8ea60f1-0fef-4af0-b26e-8b761406c114.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
     },
     {
       "id": "9d3d3403-1a87-4737-9803-bc3d99db1424",
@@ -279,76 +349,6 @@
       "id": "a76b6b97-e434-40d6-b7c5-6026d22986d6",
       "title": "رجلة الجنية السوداء ذات القوى المتلاشية",
       "cover": "https://uploads.mangadex.org/covers/a76b6b97-e434-40d6-b7c5-6026d22986d6/8f40381d-188c-4a28-b492-25c07a7684a5.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "858e2de7-afba-4096-9aa7-1fccac0119c9",
-      "title": "أستوعبها",
-      "cover": "https://uploads.mangadex.org/covers/858e2de7-afba-4096-9aa7-1fccac0119c9/a57adc47-e988-475d-a6fe-2f595fd3c915.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "1887bb79-d747-4f35-9f9d-0c08e477f138",
-      "title": "I Have a Dragon in My Body",
-      "cover": "https://uploads.mangadex.org/covers/1887bb79-d747-4f35-9f9d-0c08e477f138/77f53445-a1a3-473f-913f-f980afeafbbb.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "hiatus"
-    },
-    {
-      "id": "cf43b9e3-396a-41bc-ab72-715f66cdb7e1",
-      "title": "A-bout!",
-      "cover": "https://uploads.mangadex.org/covers/cf43b9e3-396a-41bc-ab72-715f66cdb7e1/c556e070-f1ff-405b-b71c-b2e7492aee0e.png.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
-      "id": "36300a46-485b-4c05-a570-ac3b23de3952",
-      "title": "If the Villainess and Villain Met and Fell in Love",
-      "cover": "https://uploads.mangadex.org/covers/36300a46-485b-4c05-a570-ac3b23de3952/a8a6dd33-dab0-4921-bc13-23a198a003be.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "737a846b-2e67-4d63-9f7e-f54b3beebac4",
-      "title": "Please Go Home, Miss Akutsu!",
-      "cover": "https://uploads.mangadex.org/covers/737a846b-2e67-4d63-9f7e-f54b3beebac4/55c88bab-b253-48c8-9d94-221f9473952a.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "hiatus"
-    },
-    {
-      "id": "843c31ff-d390-4199-bc3b-94b0dfc63632",
-      "title": "Baki Side Story: Retsu Kaioh Doesn't Mind Even If It's in Another World",
-      "cover": "https://uploads.mangadex.org/covers/843c31ff-d390-4199-bc3b-94b0dfc63632/07dbd2f5-68cf-49e2-afe6-af7dd4d26f70.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "7f30dfc3-0b80-4dcc-a3b9-0cd746fac005",
-      "title": "المتحري كونان",
-      "cover": "https://uploads.mangadex.org/covers/7f30dfc3-0b80-4dcc-a3b9-0cd746fac005/e67075b1-7ffc-4fe8-abd1-c8f3b32c28eb.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "30f3ac69-21b6-45ad-a110-d011b7aaadaa",
-      "title": "Fly Me to The Moon",
-      "cover": "https://uploads.mangadex.org/covers/30f3ac69-21b6-45ad-a110-d011b7aaadaa/fb735d33-b723-4446-9258-eefbffae222f.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "59ef045c-0712-4f15-bb54-52bffd87481b",
-      "title": "محب الهيتو",
-      "cover": "https://uploads.mangadex.org/covers/59ef045c-0712-4f15-bb54-52bffd87481b/f0e8af3d-6458-4a79-bf8a-5e970373c967.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "d553645b-03a3-4fc8-9a9c-57f91cbbab89",
-      "title": "Are You a Landmine, Chihara-san?",
-      "cover": "https://uploads.mangadex.org/covers/d553645b-03a3-4fc8-9a9c-57f91cbbab89/4878d139-e5ee-49eb-aeb6-1c2f9025624e.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     }
