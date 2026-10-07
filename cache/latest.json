@@ -1,7 +1,21 @@
 {
-  "updated_at": "2026-10-06T22:18:46.027985+00:00",
+  "updated_at": "2026-10-07T04:14:44.144996+00:00",
   "count": 50,
   "items": [
+    {
+      "id": "d553645b-03a3-4fc8-9a9c-57f91cbbab89",
+      "title": "Are You a Landmine, Chihara-san?",
+      "cover": "https://uploads.mangadex.org/covers/d553645b-03a3-4fc8-9a9c-57f91cbbab89/4878d139-e5ee-49eb-aeb6-1c2f9025624e.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "356de811-ae92-48f1-b93b-cfdf0f8d02e4",
+      "title": "بما أننا نرسم الآن",
+      "cover": "https://uploads.mangadex.org/covers/356de811-ae92-48f1-b93b-cfdf0f8d02e4/60e2c515-06d0-4d61-8aec-5f180f19b1af.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
     {
       "id": "25e1d17b-6a4d-4698-a4f6-bf53460c10af",
       "title": "حافلة لإثنين",
@@ -199,13 +213,6 @@
       "status": "ongoing"
     },
     {
-      "id": "d553645b-03a3-4fc8-9a9c-57f91cbbab89",
-      "title": "Are You a Landmine, Chihara-san?",
-      "cover": "https://uploads.mangadex.org/covers/d553645b-03a3-4fc8-9a9c-57f91cbbab89/4878d139-e5ee-49eb-aeb6-1c2f9025624e.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
       "id": "67a7dfd1-a39d-46c8-8ff2-9a24a9abaeb6",
       "title": "Goblin Slayer",
       "cover": "https://uploads.mangadex.org/covers/67a7dfd1-a39d-46c8-8ff2-9a24a9abaeb6/2c2de0de-6afb-4cb1-9951-613e6a255f52.jpg.256.jpg",
@@ -342,13 +349,6 @@
       "id": "d65c0332-3764-4c89-84bd-b1a4e7278ad7",
       "title": "Kagurabachi",
       "cover": "https://uploads.mangadex.org/covers/d65c0332-3764-4c89-84bd-b1a4e7278ad7/3edb80b9-dae6-4483-984d-2e7f8b02b702.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "3b6c3a0b-8752-41fc-9d3e-1310f6f28252",
-      "title": "Giant Killing",
-      "cover": "https://uploads.mangadex.org/covers/3b6c3a0b-8752-41fc-9d3e-1310f6f28252/409bcab3-e7f6-4498-a135-72c7f1d5adf2.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     }
