@@ -1,7 +1,49 @@
 {
-  "updated_at": "2026-10-07T04:14:44.144996+00:00",
+  "updated_at": "2026-10-07T12:37:56.999587+00:00",
   "count": 50,
   "items": [
+    {
+      "id": "34019331-7377-4e2c-837e-f6e1ab2b5ef7",
+      "title": "The Seven Deadly Sins: Four Knights of the Apocalypse",
+      "cover": "https://uploads.mangadex.org/covers/34019331-7377-4e2c-837e-f6e1ab2b5ef7/89099c0b-6ae9-4082-af05-229704937453.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "bcfe1b36-daee-40fd-9984-d9597caf9da7",
+      "title": "فَقِيْهَةُ ٱلْمَغُوْلِ",
+      "cover": "https://uploads.mangadex.org/covers/bcfe1b36-daee-40fd-9984-d9597caf9da7/5ce19283-d717-44e2-bb69-4247640d3c75.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "0b70b1bc-984a-4ccd-8023-d8dc06f06ed4",
+      "title": "DIGIMON EGGS",
+      "cover": "https://uploads.mangadex.org/covers/0b70b1bc-984a-4ccd-8023-d8dc06f06ed4/d5bbbbf3-0c61-4d93-b01b-5addf756b3b9.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "843c31ff-d390-4199-bc3b-94b0dfc63632",
+      "title": "Baki Side Story: Retsu Kaioh Doesn't Mind Even If It's in Another World",
+      "cover": "https://uploads.mangadex.org/covers/843c31ff-d390-4199-bc3b-94b0dfc63632/07dbd2f5-68cf-49e2-afe6-af7dd4d26f70.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "0cfcda3b-0dcb-459b-9931-aa823e7bf403",
+      "title": "تسع قمم",
+      "cover": "https://uploads.mangadex.org/covers/0cfcda3b-0dcb-459b-9931-aa823e7bf403/dc2a9c50-9063-46ee-abae-bf8f1f9eb04a.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "db692d58-4b13-4174-ae8c-30c515c0689c",
+      "title": "Hunter x Hunter",
+      "cover": "https://uploads.mangadex.org/covers/db692d58-4b13-4174-ae8c-30c515c0689c/aa112927-f1e5-4fe4-a4db-7fd4a1536e3c.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "hiatus"
+    },
     {
       "id": "d553645b-03a3-4fc8-9a9c-57f91cbbab89",
       "title": "Are You a Landmine, Chihara-san?",
@@ -157,6 +199,13 @@
       "status": "ongoing"
     },
     {
+      "id": "b41bef1e-7df9-4255-bd82-ecf570fec566",
+      "title": "The New Gate",
+      "cover": "https://uploads.mangadex.org/covers/b41bef1e-7df9-4255-bd82-ecf570fec566/73ebbea7-545e-4a8c-82f4-d75f2e89a280.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
       "id": "4e0ab019-afcb-4fd9-98eb-fcb28cf7fc81",
       "title": "مانجا الملكة النحلة شوكهو ميساكي - مينتل-آوت",
       "cover": "https://uploads.mangadex.org/covers/4e0ab019-afcb-4fd9-98eb-fcb28cf7fc81/71450b93-c970-42e6-bb65-93f45b8e9ac3.jpg.256.jpg",
@@ -192,13 +241,6 @@
       "status": "ongoing"
     },
     {
-      "id": "bcfe1b36-daee-40fd-9984-d9597caf9da7",
-      "title": "فَقِيْهَةُ ٱلْمَغُوْلِ",
-      "cover": "https://uploads.mangadex.org/covers/bcfe1b36-daee-40fd-9984-d9597caf9da7/5ce19283-d717-44e2-bb69-4247640d3c75.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
       "id": "1693697a-783c-4d3c-a2d3-dc069e137a23",
       "title": "I Have No Home",
       "cover": "https://uploads.mangadex.org/covers/1693697a-783c-4d3c-a2d3-dc069e137a23/bc55de2a-47dd-41cb-9338-75b3f0650a69.jpg.256.jpg",
@@ -225,13 +267,6 @@
       "cover": "https://uploads.mangadex.org/covers/b8faa8ab-cb4e-416f-829d-d2a6042ba5ac/0ca2f8bf-a33c-46cb-8730-cff51b148314.png.256.jpg",
       "source": "mangadex",
       "status": "completed"
-    },
-    {
-      "id": "0b70b1bc-984a-4ccd-8023-d8dc06f06ed4",
-      "title": "DIGIMON EGGS",
-      "cover": "https://uploads.mangadex.org/covers/0b70b1bc-984a-4ccd-8023-d8dc06f06ed4/d5bbbbf3-0c61-4d93-b01b-5addf756b3b9.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
     },
     {
       "id": "812f9696-048f-496d-9ed4-84c99345d1fb",
@@ -290,13 +325,6 @@
       "status": "ongoing"
     },
     {
-      "id": "843c31ff-d390-4199-bc3b-94b0dfc63632",
-      "title": "Baki Side Story: Retsu Kaioh Doesn't Mind Even If It's in Another World",
-      "cover": "https://uploads.mangadex.org/covers/843c31ff-d390-4199-bc3b-94b0dfc63632/07dbd2f5-68cf-49e2-afe6-af7dd4d26f70.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
       "id": "f5c25341-d6ff-4585-8548-3a48fc7654d9",
       "title": "Akira Failing in Love",
       "cover": "https://uploads.mangadex.org/covers/f5c25341-d6ff-4585-8548-3a48fc7654d9/26bd1cd9-bb1b-42d8-aa92-f916122c606c.jpg.256.jpg",
@@ -323,34 +351,6 @@
       "cover": "https://uploads.mangadex.org/covers/d00bd104-d9b2-4ee9-a088-b5065d1c406a/34cb96d6-2a3c-47d0-9f56-102d40a65ea8.jpg.256.jpg",
       "source": "mangadex",
       "status": "completed"
-    },
-    {
-      "id": "229e5177-2e71-4642-bd56-a9b0b0ba0e60",
-      "title": "فهرس السحر",
-      "cover": "https://uploads.mangadex.org/covers/229e5177-2e71-4642-bd56-a9b0b0ba0e60/ff3aeb49-5268-4228-b07c-aada1f5b4a81.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "ad75039d-686c-457f-b478-e56fc3b3c069",
-      "title": "I Started Working a Housekeeping Job and Ended up Being Liked by the Family of the Most Beautiful Girl in School.",
-      "cover": "https://uploads.mangadex.org/covers/ad75039d-686c-457f-b478-e56fc3b3c069/d11151a2-0f4e-49e8-9c19-1be626a044fa.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "077812bd-6ee9-4756-a508-9148b254661e",
-      "title": "I Reincarnated as a Mob Villain in a Game and Decided to Become the Final Boss. But for Some Reason, Everyone Thinks I'm the Best King Ever - Can Someone Please Tell Me Why?!",
-      "cover": "https://uploads.mangadex.org/covers/077812bd-6ee9-4756-a508-9148b254661e/61c732b8-1f6c-43df-a5a2-5cd30310677e.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "d65c0332-3764-4c89-84bd-b1a4e7278ad7",
-      "title": "Kagurabachi",
-      "cover": "https://uploads.mangadex.org/covers/d65c0332-3764-4c89-84bd-b1a4e7278ad7/3edb80b9-dae6-4483-984d-2e7f8b02b702.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
     }
   ]
 }
