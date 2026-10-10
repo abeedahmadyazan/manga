@@ -1,7 +1,63 @@
 {
-  "updated_at": "2026-10-10T16:56:48.096556+00:00",
+  "updated_at": "2026-10-10T21:08:56.075470+00:00",
   "count": 50,
   "items": [
+    {
+      "id": "85a99758-de39-471e-9f6d-800547f53d0a",
+      "title": "Tougen Anki: Legend of the Cursed Blood",
+      "cover": "https://uploads.mangadex.org/covers/85a99758-de39-471e-9f6d-800547f53d0a/139b8f72-68fe-4d57-bd70-a210402eb173.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "a0a5528a-c4a8-4495-a966-6877c12856ba",
+      "title": "TRUMP",
+      "cover": "https://uploads.mangadex.org/covers/a0a5528a-c4a8-4495-a966-6877c12856ba/8cec91f3-ac76-460f-9d42-3d1b4163c0e3.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "52842727-59ff-46a6-9a23-5eba61487586",
+      "title": "To Love Ru (Official Colored)",
+      "cover": "https://uploads.mangadex.org/covers/52842727-59ff-46a6-9a23-5eba61487586/1b7bba8a-d22a-4f1a-8723-601a611b135a.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "a07320a4-afcd-413a-a451-d69a448d0c28",
+      "title": "Usogui",
+      "cover": "https://uploads.mangadex.org/covers/a07320a4-afcd-413a-a451-d69a448d0c28/b74c8cce-42cd-4889-b75d-7944e63f9a14.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "f5c25341-d6ff-4585-8548-3a48fc7654d9",
+      "title": "Akira Failing in Love",
+      "cover": "https://uploads.mangadex.org/covers/f5c25341-d6ff-4585-8548-3a48fc7654d9/26bd1cd9-bb1b-42d8-aa92-f916122c606c.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "b8faa8ab-cb4e-416f-829d-d2a6042ba5ac",
+      "title": "Ikoku Nikki",
+      "cover": "https://uploads.mangadex.org/covers/b8faa8ab-cb4e-416f-829d-d2a6042ba5ac/0ca2f8bf-a33c-46cb-8730-cff51b148314.png.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "0d4b349e-b7a2-4d63-9ce0-f864e790c4a2",
+      "title": "Veil",
+      "cover": "https://uploads.mangadex.org/covers/0d4b349e-b7a2-4d63-9ce0-f864e790c4a2/8299ead2-5d96-4f41-8ce5-b00c95505449.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "11b74211-f4c0-4f08-b5a4-c491da0d0c0b",
+      "title": "Choujin X",
+      "cover": "https://uploads.mangadex.org/covers/11b74211-f4c0-4f08-b5a4-c491da0d0c0b/a024c8ce-5fbc-4fea-9363-6b8eee3477e7.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
     {
       "id": "774f0f04-5023-4e2e-9c0b-f0ed382f078b",
       "title": "إينيغماتيكا",
@@ -101,20 +157,6 @@
       "status": "ongoing"
     },
     {
-      "id": "f5c25341-d6ff-4585-8548-3a48fc7654d9",
-      "title": "Akira Failing in Love",
-      "cover": "https://uploads.mangadex.org/covers/f5c25341-d6ff-4585-8548-3a48fc7654d9/26bd1cd9-bb1b-42d8-aa92-f916122c606c.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "a0a5528a-c4a8-4495-a966-6877c12856ba",
-      "title": "TRUMP",
-      "cover": "https://uploads.mangadex.org/covers/a0a5528a-c4a8-4495-a966-6877c12856ba/8cec91f3-ac76-460f-9d42-3d1b4163c0e3.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
       "id": "1d9fad4e-b81a-4498-8cce-e5ddfb1e4f03",
       "title": "Moriarty the Patriot",
       "cover": "https://uploads.mangadex.org/covers/1d9fad4e-b81a-4498-8cce-e5ddfb1e4f03/f93a39cf-8ad1-41d0-a1e9-ded7a19316ee.jpg.256.jpg",
@@ -150,13 +192,6 @@
       "status": "ongoing"
     },
     {
-      "id": "85a99758-de39-471e-9f6d-800547f53d0a",
-      "title": "Tougen Anki: Legend of the Cursed Blood",
-      "cover": "https://uploads.mangadex.org/covers/85a99758-de39-471e-9f6d-800547f53d0a/139b8f72-68fe-4d57-bd70-a210402eb173.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
       "id": "6370bf37-e997-4a5b-8651-3c5bb60c9c3a",
       "title": "Mia is back",
       "cover": "https://uploads.mangadex.org/covers/6370bf37-e997-4a5b-8651-3c5bb60c9c3a/ad5a5253-5bb7-4e6f-ba13-2869fe72ee0e.png.256.jpg",
@@ -169,13 +204,6 @@
       "cover": "https://uploads.mangadex.org/covers/8a1b2e8c-afd9-4c43-ba96-0eb1507a4ddf/65b8053b-a0dc-4c8e-a7d6-72d186e462ea.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
-    },
-    {
-      "id": "a07320a4-afcd-413a-a451-d69a448d0c28",
-      "title": "Usogui",
-      "cover": "https://uploads.mangadex.org/covers/a07320a4-afcd-413a-a451-d69a448d0c28/b74c8cce-42cd-4889-b75d-7944e63f9a14.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
     },
     {
       "id": "ca33a142-58fb-4fee-88b9-36ef87f02c77",
@@ -321,34 +349,6 @@
       "id": "a08cd14f-68d4-4942-9305-2fe9d7d0339e",
       "title": "The Apothecary Is Gonna Make This Ragged Elf Happy",
       "cover": "https://uploads.mangadex.org/covers/a08cd14f-68d4-4942-9305-2fe9d7d0339e/866bfb72-2fc6-40d4-b925-8020ad08ec42.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "b41bef1e-7df9-4255-bd82-ecf570fec566",
-      "title": "The New Gate",
-      "cover": "https://uploads.mangadex.org/covers/b41bef1e-7df9-4255-bd82-ecf570fec566/73ebbea7-545e-4a8c-82f4-d75f2e89a280.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "843c31ff-d390-4199-bc3b-94b0dfc63632",
-      "title": "Baki Side Story: Retsu Kaioh Doesn't Mind Even If It's in Another World",
-      "cover": "https://uploads.mangadex.org/covers/843c31ff-d390-4199-bc3b-94b0dfc63632/07dbd2f5-68cf-49e2-afe6-af7dd4d26f70.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "0cfcda3b-0dcb-459b-9931-aa823e7bf403",
-      "title": "تسع قمم",
-      "cover": "https://uploads.mangadex.org/covers/0cfcda3b-0dcb-459b-9931-aa823e7bf403/dc2a9c50-9063-46ee-abae-bf8f1f9eb04a.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "4e0ab019-afcb-4fd9-98eb-fcb28cf7fc81",
-      "title": "مانجا الملكة النحلة شوكهو ميساكي - مينتل-آوت",
-      "cover": "https://uploads.mangadex.org/covers/4e0ab019-afcb-4fd9-98eb-fcb28cf7fc81/71450b93-c970-42e6-bb65-93f45b8e9ac3.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     }
