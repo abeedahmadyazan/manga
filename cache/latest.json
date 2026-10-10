@@ -1,7 +1,63 @@
 {
-  "updated_at": "2026-10-10T11:53:36.888558+00:00",
+  "updated_at": "2026-10-10T16:56:48.096556+00:00",
   "count": 50,
   "items": [
+    {
+      "id": "774f0f04-5023-4e2e-9c0b-f0ed382f078b",
+      "title": "إينيغماتيكا",
+      "cover": "https://uploads.mangadex.org/covers/774f0f04-5023-4e2e-9c0b-f0ed382f078b/9f0534e0-6163-49a2-b515-4798f7aa85fa.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "3169544f-4b87-4a14-917b-f73600941f55",
+      "title": "Noa-Senpai is My Friend.",
+      "cover": "https://uploads.mangadex.org/covers/3169544f-4b87-4a14-917b-f73600941f55/8d62b061-c180-4a1f-94c3-36b95dd9f3ec.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "a6a46436-9ed4-4c20-8b11-6f4a0f74b23a",
+      "title": "Kabuto Mushi",
+      "cover": "https://uploads.mangadex.org/covers/a6a46436-9ed4-4c20-8b11-6f4a0f74b23a/5a16e9bf-0859-4719-bd13-7e5e43e338d7.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "9aa3ca66-b1d0-4cc5-aec7-66990f026b78",
+      "title": "Detective Xeno and the Seven Locked Murder Rooms",
+      "cover": "https://uploads.mangadex.org/covers/9aa3ca66-b1d0-4cc5-aec7-66990f026b78/b50bde05-79d5-4f8b-a345-85d3d205396d.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "334019e1-18bb-4ac0-b35c-0e8efb1e481c",
+      "title": "JoJo’s Bizarre Adventure, Part 9: The JoJoLands - Digital Colored Comics",
+      "cover": "https://uploads.mangadex.org/covers/334019e1-18bb-4ac0-b35c-0e8efb1e481c/530583f4-80ad-4f37-92d9-441b225c9785.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "4ed7f3b1-7496-4e0a-8ac0-642ef90d02e2",
+      "title": "Baki Gaiden: Shin Chiharu",
+      "cover": "https://uploads.mangadex.org/covers/4ed7f3b1-7496-4e0a-8ac0-642ef90d02e2/e312d133-dc6d-41f0-9ccc-38bfe0406ee4.png.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "5c9d1254-f074-4b5c-8795-6f0641b2597b",
+      "title": "Girl and Science",
+      "cover": "https://uploads.mangadex.org/covers/5c9d1254-f074-4b5c-8795-6f0641b2597b/f606b3ce-4f64-400e-8a1c-265698f68d01.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "6670ee28-f26d-4b61-b49c-d71149cd5a6e",
+      "title": "مييروكو تشان",
+      "cover": "https://uploads.mangadex.org/covers/6670ee28-f26d-4b61-b49c-d71149cd5a6e/13d41432-d7ec-41cd-a265-5af700989aa6.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
     {
       "id": "e43a7f5b-6ae7-478d-a4d5-53c8dc3ce52f",
       "title": "Wistoria: Wand and Sword",
@@ -136,13 +192,6 @@
       "status": "ongoing"
     },
     {
-      "id": "334019e1-18bb-4ac0-b35c-0e8efb1e481c",
-      "title": "JoJo’s Bizarre Adventure, Part 9: The JoJoLands - Digital Colored Comics",
-      "cover": "https://uploads.mangadex.org/covers/334019e1-18bb-4ac0-b35c-0e8efb1e481c/530583f4-80ad-4f37-92d9-441b225c9785.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
       "id": "b73371d4-02dd-4db0-b448-d9afa3d698f1",
       "title": "Aoashi",
       "cover": "https://uploads.mangadex.org/covers/b73371d4-02dd-4db0-b448-d9afa3d698f1/8ecd4b0f-5746-4f75-a836-c132d361d9ee.jpg.256.jpg",
@@ -162,13 +211,6 @@
       "cover": "https://uploads.mangadex.org/covers/d422ddc8-eea3-4b0a-82a4-291bbd8c9285/18f555fb-4fe4-4d47-8fbe-7bd101a5bc3a.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
-    },
-    {
-      "id": "5c9d1254-f074-4b5c-8795-6f0641b2597b",
-      "title": "Girl and Science",
-      "cover": "https://uploads.mangadex.org/covers/5c9d1254-f074-4b5c-8795-6f0641b2597b/f606b3ce-4f64-400e-8a1c-265698f68d01.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
     },
     {
       "id": "b6886009-e60b-44a7-abc2-a575765277ba",
@@ -307,48 +349,6 @@
       "id": "4e0ab019-afcb-4fd9-98eb-fcb28cf7fc81",
       "title": "مانجا الملكة النحلة شوكهو ميساكي - مينتل-آوت",
       "cover": "https://uploads.mangadex.org/covers/4e0ab019-afcb-4fd9-98eb-fcb28cf7fc81/71450b93-c970-42e6-bb65-93f45b8e9ac3.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "96ae166c-d8e1-4e9e-88cb-805b65154d7e",
-      "title": "Red Blue",
-      "cover": "https://uploads.mangadex.org/covers/96ae166c-d8e1-4e9e-88cb-805b65154d7e/1719b5a1-f476-4822-b83a-29bad41aaf17.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "0a580438-bc72-4503-940b-12a5da881b56",
-      "title": "أنتِ زهرة الحظ",
-      "cover": "https://uploads.mangadex.org/covers/0a580438-bc72-4503-940b-12a5da881b56/58b42b36-0dc5-4e50-ac2e-cdfb311b63c6.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "52842727-59ff-46a6-9a23-5eba61487586",
-      "title": "To Love Ru (Official Colored)",
-      "cover": "https://uploads.mangadex.org/covers/52842727-59ff-46a6-9a23-5eba61487586/1b7bba8a-d22a-4f1a-8723-601a611b135a.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
-      "id": "2f4e5f5b-d930-4266-8c8a-c4cf9a81e51f",
-      "title": "The Great Jahy Will Not Be Defeated!",
-      "cover": "https://uploads.mangadex.org/covers/2f4e5f5b-d930-4266-8c8a-c4cf9a81e51f/da817d36-05c3-4810-bdb7-96345a311097.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "0b70b1bc-984a-4ccd-8023-d8dc06f06ed4",
-      "title": "DIGIMON EGGS",
-      "cover": "https://uploads.mangadex.org/covers/0b70b1bc-984a-4ccd-8023-d8dc06f06ed4/d5bbbbf3-0c61-4d93-b01b-5addf756b3b9.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "356de811-ae92-48f1-b93b-cfdf0f8d02e4",
-      "title": "بما أننا نرسم الآن",
-      "cover": "https://uploads.mangadex.org/covers/356de811-ae92-48f1-b93b-cfdf0f8d02e4/60e2c515-06d0-4d61-8aec-5f180f19b1af.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     }
