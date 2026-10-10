@@ -1,7 +1,28 @@
 {
-  "updated_at": "2026-10-10T04:16:26.872505+00:00",
+  "updated_at": "2026-10-10T11:53:36.888558+00:00",
   "count": 50,
   "items": [
+    {
+      "id": "e43a7f5b-6ae7-478d-a4d5-53c8dc3ce52f",
+      "title": "Wistoria: Wand and Sword",
+      "cover": "https://uploads.mangadex.org/covers/e43a7f5b-6ae7-478d-a4d5-53c8dc3ce52f/84a7a4f7-5776-4d74-b7af-e2a5b39338d0.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "db692d58-4b13-4174-ae8c-30c515c0689c",
+      "title": "Hunter x Hunter",
+      "cover": "https://uploads.mangadex.org/covers/db692d58-4b13-4174-ae8c-30c515c0689c/aa112927-f1e5-4fe4-a4db-7fd4a1536e3c.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "hiatus"
+    },
+    {
+      "id": "4141c5dc-c525-4df5-afd7-cc7d192a832f",
+      "title": "Blue Lock",
+      "cover": "https://uploads.mangadex.org/covers/4141c5dc-c525-4df5-afd7-cc7d192a832f/7ee723d4-b926-4a81-acd9-53adb3fbe461.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
     {
       "id": "f486a183-6660-492b-b94b-aa80960d8326",
       "title": "دراغون بول سوبر",
@@ -20,13 +41,6 @@
       "id": "25e1d17b-6a4d-4698-a4f6-bf53460c10af",
       "title": "حافلة لإثنين",
       "cover": "https://uploads.mangadex.org/covers/25e1d17b-6a4d-4698-a4f6-bf53460c10af/f7cd3ff9-d7a1-4b5e-b473-ee2833b82c35.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "4141c5dc-c525-4df5-afd7-cc7d192a832f",
-      "title": "Blue Lock",
-      "cover": "https://uploads.mangadex.org/covers/4141c5dc-c525-4df5-afd7-cc7d192a832f/7ee723d4-b926-4a81-acd9-53adb3fbe461.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
@@ -332,23 +346,9 @@
       "status": "ongoing"
     },
     {
-      "id": "db692d58-4b13-4174-ae8c-30c515c0689c",
-      "title": "Hunter x Hunter",
-      "cover": "https://uploads.mangadex.org/covers/db692d58-4b13-4174-ae8c-30c515c0689c/aa112927-f1e5-4fe4-a4db-7fd4a1536e3c.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "hiatus"
-    },
-    {
       "id": "356de811-ae92-48f1-b93b-cfdf0f8d02e4",
       "title": "بما أننا نرسم الآن",
       "cover": "https://uploads.mangadex.org/covers/356de811-ae92-48f1-b93b-cfdf0f8d02e4/60e2c515-06d0-4d61-8aec-5f180f19b1af.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "7f1c253d-9557-4abc-b30b-929d7d8db45e",
-      "title": "August 9th, I Will Be Eaten by You.",
-      "cover": "https://uploads.mangadex.org/covers/7f1c253d-9557-4abc-b30b-929d7d8db45e/e07e4f0c-88da-4331-ac49-03b53fb733bf.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     }
