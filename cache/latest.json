@@ -1,7 +1,28 @@
 {
-  "updated_at": "2026-10-12T04:16:14.265703+00:00",
+  "updated_at": "2026-10-12T14:23:27.947089+00:00",
   "count": 50,
   "items": [
+    {
+      "id": "5c9d1254-f074-4b5c-8795-6f0641b2597b",
+      "title": "Girl and Science",
+      "cover": "https://uploads.mangadex.org/covers/5c9d1254-f074-4b5c-8795-6f0641b2597b/f606b3ce-4f64-400e-8a1c-265698f68d01.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "510f29a8-99b4-46af-ba5e-916e96bc6f37",
+      "title": "Fate/type Redline",
+      "cover": "https://uploads.mangadex.org/covers/510f29a8-99b4-46af-ba5e-916e96bc6f37/c1d7aed1-9cd1-426f-bfb8-7e46594d0e29.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "8211bac6-a392-4e37-b3b6-dac0f4512d24",
+      "title": "Re:ZERO -Starting Life in Another World-, Chapter 4: The Sanctuary and the Witch of Greed",
+      "cover": "https://uploads.mangadex.org/covers/8211bac6-a392-4e37-b3b6-dac0f4512d24/57feede7-b47c-4c15-876c-2318fb827b9c.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
     {
       "id": "936f0ba5-ca65-4de4-99b1-528c02a4454d",
       "title": "Hunter x Hunter (Official Colored)",
@@ -94,13 +115,6 @@
       "status": "ongoing"
     },
     {
-      "id": "8211bac6-a392-4e37-b3b6-dac0f4512d24",
-      "title": "Re:ZERO -Starting Life in Another World-, Chapter 4: The Sanctuary and the Witch of Greed",
-      "cover": "https://uploads.mangadex.org/covers/8211bac6-a392-4e37-b3b6-dac0f4512d24/57feede7-b47c-4c15-876c-2318fb827b9c.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
       "id": "ed5dddc0-999d-4fd2-a702-9fef1ec2c955",
       "title": "Blue Box",
       "cover": "https://uploads.mangadex.org/covers/ed5dddc0-999d-4fd2-a702-9fef1ec2c955/584fde4c-a60b-433d-a0b5-8d113f8b75a9.jpg.256.jpg",
@@ -169,13 +183,6 @@
       "cover": "https://uploads.mangadex.org/covers/4d6decd4-835d-4905-9534-2571dae07bcd/5f347aae-bf45-4dcb-828d-2c507db71d2f.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
-    },
-    {
-      "id": "5c9d1254-f074-4b5c-8795-6f0641b2597b",
-      "title": "Girl and Science",
-      "cover": "https://uploads.mangadex.org/covers/5c9d1254-f074-4b5c-8795-6f0641b2597b/f606b3ce-4f64-400e-8a1c-265698f68d01.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
     },
     {
       "id": "71f3e1de-4a47-48f5-89b6-75c54e3047da",
@@ -342,13 +349,6 @@
       "id": "4ed7f3b1-7496-4e0a-8ac0-642ef90d02e2",
       "title": "Baki Gaiden: Shin Chiharu",
       "cover": "https://uploads.mangadex.org/covers/4ed7f3b1-7496-4e0a-8ac0-642ef90d02e2/e312d133-dc6d-41f0-9ccc-38bfe0406ee4.png.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "6670ee28-f26d-4b61-b49c-d71149cd5a6e",
-      "title": "مييروكو تشان",
-      "cover": "https://uploads.mangadex.org/covers/6670ee28-f26d-4b61-b49c-d71149cd5a6e/13d41432-d7ec-41cd-a265-5af700989aa6.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     }
