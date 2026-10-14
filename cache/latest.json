@@ -1,7 +1,35 @@
 {
-  "updated_at": "2026-10-14T03:29:05.310363+00:00",
+  "updated_at": "2026-10-14T11:09:21.007967+00:00",
   "count": 50,
   "items": [
+    {
+      "id": "936f0ba5-ca65-4de4-99b1-528c02a4454d",
+      "title": "Hunter x Hunter (Official Colored)",
+      "cover": "https://uploads.mangadex.org/covers/936f0ba5-ca65-4de4-99b1-528c02a4454d/128d80df-c5e4-4791-b3b7-08586e9db1b8.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "7215b1e8-bac1-49a2-83d9-ed62335dd849",
+      "title": "Please Marry Me with Divorce in Mind",
+      "cover": "https://uploads.mangadex.org/covers/7215b1e8-bac1-49a2-83d9-ed62335dd849/5ea84372-9a27-437c-a822-300628fc8105.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "da36a727-7686-4e92-8fac-94bc292b8e91",
+      "title": "ساحر المكتبة العظيم",
+      "cover": "https://uploads.mangadex.org/covers/da36a727-7686-4e92-8fac-94bc292b8e91/f40f8db2-b1d2-46de-b029-a3a10c333dc2.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "96ae166c-d8e1-4e9e-88cb-805b65154d7e",
+      "title": "Red Blue",
+      "cover": "https://uploads.mangadex.org/covers/96ae166c-d8e1-4e9e-88cb-805b65154d7e/1719b5a1-f476-4822-b83a-29bad41aaf17.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
     {
       "id": "4242c6d3-4ee4-4b0b-9ca0-23bd57952805",
       "title": "ليس حُبًّا بعدُ، ولكن...",
@@ -227,13 +255,6 @@
       "status": "ongoing"
     },
     {
-      "id": "936f0ba5-ca65-4de4-99b1-528c02a4454d",
-      "title": "Hunter x Hunter (Official Colored)",
-      "cover": "https://uploads.mangadex.org/covers/936f0ba5-ca65-4de4-99b1-528c02a4454d/128d80df-c5e4-4791-b3b7-08586e9db1b8.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
       "id": "8e95570e-93a7-494d-8e83-bd755e3b631d",
       "title": "Fragments of the Layered City",
       "cover": "https://uploads.mangadex.org/covers/8e95570e-93a7-494d-8e83-bd755e3b631d/cffb96dc-36e9-48b3-9570-9f99b7d6f2fc.png.256.jpg",
@@ -328,27 +349,6 @@
       "id": "9d9b04ad-9a83-49f4-8ae4-a9a3780fe9c0",
       "title": "Sakamoto Days",
       "cover": "https://uploads.mangadex.org/covers/9d9b04ad-9a83-49f4-8ae4-a9a3780fe9c0/f3f1d565-3a66-484a-be9b-28e1b03d9c51.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "8df8074d-c9b8-4526-b74b-ee287590608f",
-      "title": "Under Doctor",
-      "cover": "https://uploads.mangadex.org/covers/8df8074d-c9b8-4526-b74b-ee287590608f/417734da-b142-4793-959b-920f00b6e94b.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "c1e284bc-0436-42fe-b571-fa35a94279ce",
-      "title": "Drama Queen",
-      "cover": "https://uploads.mangadex.org/covers/c1e284bc-0436-42fe-b571-fa35a94279ce/68519e4d-6893-47a9-ab4f-d37e899da3d8.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "a1c7c817-4e59-43b7-9365-09675a149a6f",
-      "title": "ون بيس",
-      "cover": "https://uploads.mangadex.org/covers/a1c7c817-4e59-43b7-9365-09675a149a6f/2f4aca53-64c7-46ac-ae85-3bc9b3169890.png.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     }
