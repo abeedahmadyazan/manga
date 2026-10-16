@@ -1,7 +1,63 @@
 {
-  "updated_at": "2026-10-16T16:03:13.248872+00:00",
+  "updated_at": "2026-10-16T20:29:21.628767+00:00",
   "count": 50,
   "items": [
+    {
+      "id": "84703c86-eb83-45ec-8fc5-f34a25115893",
+      "title": "Dai Dark",
+      "cover": "https://uploads.mangadex.org/covers/84703c86-eb83-45ec-8fc5-f34a25115893/e3a1e78b-7147-45f3-9c7f-ee398fa9c437.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "e4148575-6572-425f-9a60-50d94d423b58",
+      "title": "Baki Side Story: Gaia & Sikorsky - Sometimes Nomura—Two yet Three People Living Together",
+      "cover": "https://uploads.mangadex.org/covers/e4148575-6572-425f-9a60-50d94d423b58/8a19f307-4d2a-465c-99c4-81e49b0ba7ee.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "334019e1-18bb-4ac0-b35c-0e8efb1e481c",
+      "title": "JoJo’s Bizarre Adventure, Part 9: The JoJoLands - Digital Colored Comics",
+      "cover": "https://uploads.mangadex.org/covers/334019e1-18bb-4ac0-b35c-0e8efb1e481c/530583f4-80ad-4f37-92d9-441b225c9785.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "25e1d17b-6a4d-4698-a4f6-bf53460c10af",
+      "title": "حافلة لإثنين",
+      "cover": "https://uploads.mangadex.org/covers/25e1d17b-6a4d-4698-a4f6-bf53460c10af/f7cd3ff9-d7a1-4b5e-b473-ee2833b82c35.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "a460ab18-22c1-47eb-a08a-9ee85fe37ec8",
+      "title": "Bleach (Official Colored)",
+      "cover": "https://uploads.mangadex.org/covers/a460ab18-22c1-47eb-a08a-9ee85fe37ec8/7c8f9203-2b82-41f2-beb3-e7fb00e151e2.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "e39eb61f-f538-46fe-b8bf-db115ec51d1d",
+      "title": "Reiri",
+      "cover": "https://uploads.mangadex.org/covers/e39eb61f-f538-46fe-b8bf-db115ec51d1d/aea38014-4fbb-47b6-8aca-f118217fc23d.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "774f0f04-5023-4e2e-9c0b-f0ed382f078b",
+      "title": "إينيغماتيكا",
+      "cover": "https://uploads.mangadex.org/covers/774f0f04-5023-4e2e-9c0b-f0ed382f078b/9f0534e0-6163-49a2-b515-4798f7aa85fa.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "05c2917a-e0a4-4c55-abac-8be0f8b213e4",
+      "title": "ميتم المروض",
+      "cover": "https://uploads.mangadex.org/covers/05c2917a-e0a4-4c55-abac-8be0f8b213e4/e6d99b5d-1c4e-4a07-b59c-5095d74fcada.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
     {
       "id": "85a99758-de39-471e-9f6d-800547f53d0a",
       "title": "Tougen Anki: Legend of the Cursed Blood",
@@ -20,13 +76,6 @@
       "id": "b5b21ca1-bba5-4b9a-8cd1-6248f731650b",
       "title": "سجلات راغناروك",
       "cover": "https://uploads.mangadex.org/covers/b5b21ca1-bba5-4b9a-8cd1-6248f731650b/64235ab3-3595-47ea-b65a-457b828489c2.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "774f0f04-5023-4e2e-9c0b-f0ed382f078b",
-      "title": "إينيغماتيكا",
-      "cover": "https://uploads.mangadex.org/covers/774f0f04-5023-4e2e-9c0b-f0ed382f078b/9f0534e0-6163-49a2-b515-4798f7aa85fa.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
@@ -141,13 +190,6 @@
       "cover": "https://uploads.mangadex.org/covers/52842727-59ff-46a6-9a23-5eba61487586/1b7bba8a-d22a-4f1a-8723-601a611b135a.jpg.256.jpg",
       "source": "mangadex",
       "status": "completed"
-    },
-    {
-      "id": "e4148575-6572-425f-9a60-50d94d423b58",
-      "title": "Baki Side Story: Gaia & Sikorsky - Sometimes Nomura—Two yet Three People Living Together",
-      "cover": "https://uploads.mangadex.org/covers/e4148575-6572-425f-9a60-50d94d423b58/8a19f307-4d2a-465c-99c4-81e49b0ba7ee.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
     },
     {
       "id": "ad75039d-686c-457f-b478-e56fc3b3c069",
@@ -304,51 +346,9 @@
       "status": "ongoing"
     },
     {
-      "id": "25e1d17b-6a4d-4698-a4f6-bf53460c10af",
-      "title": "حافلة لإثنين",
-      "cover": "https://uploads.mangadex.org/covers/25e1d17b-6a4d-4698-a4f6-bf53460c10af/f7cd3ff9-d7a1-4b5e-b473-ee2833b82c35.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
       "id": "52ede55c-1584-4019-b85b-3902a423c3ab",
       "title": "FAIRY TAIL: 100 Years Quest",
       "cover": "https://uploads.mangadex.org/covers/52ede55c-1584-4019-b85b-3902a423c3ab/8e18a9d7-27ed-48ff-924b-a397df5ba0a0.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "936f0ba5-ca65-4de4-99b1-528c02a4454d",
-      "title": "Hunter x Hunter (Official Colored)",
-      "cover": "https://uploads.mangadex.org/covers/936f0ba5-ca65-4de4-99b1-528c02a4454d/128d80df-c5e4-4791-b3b7-08586e9db1b8.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "7215b1e8-bac1-49a2-83d9-ed62335dd849",
-      "title": "Please Marry Me with Divorce in Mind",
-      "cover": "https://uploads.mangadex.org/covers/7215b1e8-bac1-49a2-83d9-ed62335dd849/5ea84372-9a27-437c-a822-300628fc8105.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
-      "id": "da36a727-7686-4e92-8fac-94bc292b8e91",
-      "title": "ساحر المكتبة العظيم",
-      "cover": "https://uploads.mangadex.org/covers/da36a727-7686-4e92-8fac-94bc292b8e91/f40f8db2-b1d2-46de-b029-a3a10c333dc2.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "4242c6d3-4ee4-4b0b-9ca0-23bd57952805",
-      "title": "ليس حُبًّا بعدُ، ولكن...",
-      "cover": "https://uploads.mangadex.org/covers/4242c6d3-4ee4-4b0b-9ca0-23bd57952805/c0df0d1a-d8a2-4fb9-844e-8e128bb81c67.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "8a38bcc4-0a52-4a46-9d02-7fc802048b1d",
-      "title": "Shinobi Undercover",
-      "cover": "https://uploads.mangadex.org/covers/8a38bcc4-0a52-4a46-9d02-7fc802048b1d/2fd4b15d-7575-49ec-add2-d1ff0759543a.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     }
