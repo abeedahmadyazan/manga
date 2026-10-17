@@ -1,7 +1,28 @@
 {
-  "updated_at": "2026-10-16T20:29:21.628767+00:00",
+  "updated_at": "2026-10-17T02:56:31.411240+00:00",
   "count": 50,
   "items": [
+    {
+      "id": "774f0f04-5023-4e2e-9c0b-f0ed382f078b",
+      "title": "إينيغماتيكا",
+      "cover": "https://uploads.mangadex.org/covers/774f0f04-5023-4e2e-9c0b-f0ed382f078b/9f0534e0-6163-49a2-b515-4798f7aa85fa.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "e05dd982-6d09-4f3d-8e8e-6c9ae65b5857",
+      "title": "The Color of the End: Mission in the Apocalypse",
+      "cover": "https://uploads.mangadex.org/covers/e05dd982-6d09-4f3d-8e8e-6c9ae65b5857/120f5f17-4eac-4c0e-9c08-7fef0420c968.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "263deeff-c010-4ac7-bc01-6341f3e698ac",
+      "title": "Dragon Quest: The Great Adventure of Dai - Avan the Brave and the Demon King of Hellfire",
+      "cover": "https://uploads.mangadex.org/covers/263deeff-c010-4ac7-bc01-6341f3e698ac/774442b3-f96c-417c-a873-43b682eecf0c.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
     {
       "id": "84703c86-eb83-45ec-8fc5-f34a25115893",
       "title": "Dai Dark",
@@ -43,13 +64,6 @@
       "cover": "https://uploads.mangadex.org/covers/e39eb61f-f538-46fe-b8bf-db115ec51d1d/aea38014-4fbb-47b6-8aca-f118217fc23d.jpg.256.jpg",
       "source": "mangadex",
       "status": "completed"
-    },
-    {
-      "id": "774f0f04-5023-4e2e-9c0b-f0ed382f078b",
-      "title": "إينيغماتيكا",
-      "cover": "https://uploads.mangadex.org/covers/774f0f04-5023-4e2e-9c0b-f0ed382f078b/9f0534e0-6163-49a2-b515-4798f7aa85fa.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
     },
     {
       "id": "05c2917a-e0a4-4c55-abac-8be0f8b213e4",
@@ -335,20 +349,6 @@
       "id": "484f94e7-35c3-4cb5-a068-53d684c1439a",
       "title": "Baki Part 6",
       "cover": "https://uploads.mangadex.org/covers/484f94e7-35c3-4cb5-a068-53d684c1439a/863ae891-3627-4070-8918-4a626dc9d1ff.png.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "418791c0-35cf-4f87-936b-acd9cddf0989",
-      "title": "The Fragrant Flower Blooms with Dignity",
-      "cover": "https://uploads.mangadex.org/covers/418791c0-35cf-4f87-936b-acd9cddf0989/6e823d0e-103a-4cf9-a312-a3a292ccb12d.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "52ede55c-1584-4019-b85b-3902a423c3ab",
-      "title": "FAIRY TAIL: 100 Years Quest",
-      "cover": "https://uploads.mangadex.org/covers/52ede55c-1584-4019-b85b-3902a423c3ab/8e18a9d7-27ed-48ff-924b-a397df5ba0a0.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     }
