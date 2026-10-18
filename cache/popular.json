@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-17T20:05:36.230078+00:00",
+  "updated_at": "2026-10-18T02:58:58.890907+00:00",
   "count": 50,
   "items": [
     {
@@ -262,18 +262,18 @@
       "status": "ongoing"
     },
     {
-      "id": "5d1fc77e-706a-4fc5-bea8-486c9be0145d",
-      "title": "فينلاند ساغا",
-      "cover": "https://uploads.mangadex.org/covers/5d1fc77e-706a-4fc5-bea8-486c9be0145d/7fa60f5d-285a-40c5-8a1d-9cf375eaf897.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
       "id": "baa95345-24fb-47a9-83e9-434ff671f968",
       "title": "خلف المتجر ادخن معك",
       "cover": "https://uploads.mangadex.org/covers/baa95345-24fb-47a9-83e9-434ff671f968/4862f2a1-2852-4c98-a217-e3a44af83152.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
+    },
+    {
+      "id": "5d1fc77e-706a-4fc5-bea8-486c9be0145d",
+      "title": "فينلاند ساغا",
+      "cover": "https://uploads.mangadex.org/covers/5d1fc77e-706a-4fc5-bea8-486c9be0145d/7fa60f5d-285a-40c5-8a1d-9cf375eaf897.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
     },
     {
       "id": "fa197a3e-6dd6-470d-91e4-c0130a1392d3",
