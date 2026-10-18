@@ -1,11 +1,46 @@
 {
-  "updated_at": "2026-10-18T02:58:58.890907+00:00",
+  "updated_at": "2026-10-18T10:22:31.854827+00:00",
   "count": 50,
   "items": [
     {
       "id": "ab8cbb82-d0ed-45a7-8ffe-4bfa6d43d79c",
       "title": "JoJo's Bizarre Adventure Part 9 - The JOJOLands",
       "cover": "https://uploads.mangadex.org/covers/ab8cbb82-d0ed-45a7-8ffe-4bfa6d43d79c/88e8a8ea-91ed-4db6-937b-4dd0048e74d5.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "5c9d1254-f074-4b5c-8795-6f0641b2597b",
+      "title": "Girl and Science",
+      "cover": "https://uploads.mangadex.org/covers/5c9d1254-f074-4b5c-8795-6f0641b2597b/f606b3ce-4f64-400e-8a1c-265698f68d01.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "e4148575-6572-425f-9a60-50d94d423b58",
+      "title": "Baki Side Story: Gaia & Sikorsky - Sometimes Nomura—Two yet Three People Living Together",
+      "cover": "https://uploads.mangadex.org/covers/e4148575-6572-425f-9a60-50d94d423b58/8a19f307-4d2a-465c-99c4-81e49b0ba7ee.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "0b094aab-0cfb-4837-a49b-7267bdb86bec",
+      "title": "Boruto: Two Blue Vortex",
+      "cover": "https://uploads.mangadex.org/covers/0b094aab-0cfb-4837-a49b-7267bdb86bec/baf472db-4658-46fb-8130-d4abdd43f171.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "9d3d3403-1a87-4737-9803-bc3d99db1424",
+      "title": "The Guy She Was Interested in Wasn't a Guy at All",
+      "cover": "https://uploads.mangadex.org/covers/9d3d3403-1a87-4737-9803-bc3d99db1424/fac191d0-96c1-4ebb-bf79-b7616d7162ac.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "dea77c2d-dbaa-434a-b0af-0c116642434c",
+      "title": "Ichi the Witch",
+      "cover": "https://uploads.mangadex.org/covers/dea77c2d-dbaa-434a-b0af-0c116642434c/fb86f4d6-40cd-4cae-b557-fc0981d670ee.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
@@ -115,13 +150,6 @@
       "status": "hiatus"
     },
     {
-      "id": "5c9d1254-f074-4b5c-8795-6f0641b2597b",
-      "title": "Girl and Science",
-      "cover": "https://uploads.mangadex.org/covers/5c9d1254-f074-4b5c-8795-6f0641b2597b/f606b3ce-4f64-400e-8a1c-265698f68d01.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
       "id": "4c3e41c6-da40-4df1-9978-1c26f7130166",
       "title": "DBVS",
       "cover": "https://uploads.mangadex.org/covers/4c3e41c6-da40-4df1-9978-1c26f7130166/32aaf5e2-b5ea-406c-9e61-16e4e192511e.jpg.256.jpg",
@@ -174,13 +202,6 @@
       "id": "84703c86-eb83-45ec-8fc5-f34a25115893",
       "title": "Dai Dark",
       "cover": "https://uploads.mangadex.org/covers/84703c86-eb83-45ec-8fc5-f34a25115893/e3a1e78b-7147-45f3-9c7f-ee398fa9c437.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "e4148575-6572-425f-9a60-50d94d423b58",
-      "title": "Baki Side Story: Gaia & Sikorsky - Sometimes Nomura—Two yet Three People Living Together",
-      "cover": "https://uploads.mangadex.org/covers/e4148575-6572-425f-9a60-50d94d423b58/8a19f307-4d2a-465c-99c4-81e49b0ba7ee.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
@@ -328,27 +349,6 @@
       "id": "63dbbf80-0189-4ae4-a549-68a0caa2f834",
       "title": "ويتشريف",
       "cover": "https://uploads.mangadex.org/covers/63dbbf80-0189-4ae4-a549-68a0caa2f834/05f68285-5512-4f20-b6be-764fa4b5789a.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "52842727-59ff-46a6-9a23-5eba61487586",
-      "title": "To Love Ru (Official Colored)",
-      "cover": "https://uploads.mangadex.org/covers/52842727-59ff-46a6-9a23-5eba61487586/1b7bba8a-d22a-4f1a-8723-601a611b135a.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
-      "id": "ad75039d-686c-457f-b478-e56fc3b3c069",
-      "title": "I Started Working a Housekeeping Job and Ended up Being Liked by the Family of the Most Beautiful Girl in School.",
-      "cover": "https://uploads.mangadex.org/covers/ad75039d-686c-457f-b478-e56fc3b3c069/d11151a2-0f4e-49e8-9c19-1be626a044fa.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "229e5177-2e71-4642-bd56-a9b0b0ba0e60",
-      "title": "فهرس السحر",
-      "cover": "https://uploads.mangadex.org/covers/229e5177-2e71-4642-bd56-a9b0b0ba0e60/ff3aeb49-5268-4228-b07c-aada1f5b4a81.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     }
