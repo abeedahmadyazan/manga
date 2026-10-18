@@ -1,11 +1,32 @@
 {
-  "updated_at": "2026-10-18T10:22:31.854827+00:00",
+  "updated_at": "2026-10-18T15:21:35.353513+00:00",
   "count": 50,
   "items": [
     {
       "id": "ab8cbb82-d0ed-45a7-8ffe-4bfa6d43d79c",
       "title": "JoJo's Bizarre Adventure Part 9 - The JOJOLands",
       "cover": "https://uploads.mangadex.org/covers/ab8cbb82-d0ed-45a7-8ffe-4bfa6d43d79c/88e8a8ea-91ed-4db6-937b-4dd0048e74d5.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "c4ca02fb-8378-433b-8049-fbbea5d25cba",
+      "title": "هايميا-سينباي حسناء مهيبة!",
+      "cover": "https://uploads.mangadex.org/covers/c4ca02fb-8378-433b-8049-fbbea5d25cba/7ab29404-0ebd-4862-ad4e-e4ea1ffe231f.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "9d3d3403-1a87-4737-9803-bc3d99db1424",
+      "title": "The Guy She Was Interested in Wasn't a Guy at All",
+      "cover": "https://uploads.mangadex.org/covers/9d3d3403-1a87-4737-9803-bc3d99db1424/fac191d0-96c1-4ebb-bf79-b7616d7162ac.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "34b47146-a72e-43d8-9ea5-935a5956f09f",
+      "title": "أوموري",
+      "cover": "https://uploads.mangadex.org/covers/34b47146-a72e-43d8-9ea5-935a5956f09f/38d8fe5e-f9bb-433f-bbf1-a821b0d0e7e3.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
@@ -27,13 +48,6 @@
       "id": "0b094aab-0cfb-4837-a49b-7267bdb86bec",
       "title": "Boruto: Two Blue Vortex",
       "cover": "https://uploads.mangadex.org/covers/0b094aab-0cfb-4837-a49b-7267bdb86bec/baf472db-4658-46fb-8130-d4abdd43f171.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "9d3d3403-1a87-4737-9803-bc3d99db1424",
-      "title": "The Guy She Was Interested in Wasn't a Guy at All",
-      "cover": "https://uploads.mangadex.org/covers/9d3d3403-1a87-4737-9803-bc3d99db1424/fac191d0-96c1-4ebb-bf79-b7616d7162ac.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
@@ -335,20 +349,6 @@
       "id": "d7037b2a-874a-4360-8a7b-07f2899152fd",
       "title": "إيروما-كن في مدرسة الشياطين",
       "cover": "https://uploads.mangadex.org/covers/d7037b2a-874a-4360-8a7b-07f2899152fd/59ab55ed-a537-426e-b755-6337740df580.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "a08cd14f-68d4-4942-9305-2fe9d7d0339e",
-      "title": "The Apothecary Is Gonna Make This Ragged Elf Happy",
-      "cover": "https://uploads.mangadex.org/covers/a08cd14f-68d4-4942-9305-2fe9d7d0339e/866bfb72-2fc6-40d4-b925-8020ad08ec42.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "63dbbf80-0189-4ae4-a549-68a0caa2f834",
-      "title": "ويتشريف",
-      "cover": "https://uploads.mangadex.org/covers/63dbbf80-0189-4ae4-a549-68a0caa2f834/05f68285-5512-4f20-b6be-764fa4b5789a.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     }
