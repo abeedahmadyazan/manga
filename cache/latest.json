@@ -1,7 +1,98 @@
 {
-  "updated_at": "2026-10-18T20:04:41.624349+00:00",
+  "updated_at": "2026-10-19T03:12:05.057031+00:00",
   "count": 50,
   "items": [
+    {
+      "id": "a0a5528a-c4a8-4495-a966-6877c12856ba",
+      "title": "TRUMP",
+      "cover": "https://uploads.mangadex.org/covers/a0a5528a-c4a8-4495-a966-6877c12856ba/8cec91f3-ac76-460f-9d42-3d1b4163c0e3.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "9d9b04ad-9a83-49f4-8ae4-a9a3780fe9c0",
+      "title": "Sakamoto Days",
+      "cover": "https://uploads.mangadex.org/covers/9d9b04ad-9a83-49f4-8ae4-a9a3780fe9c0/f3f1d565-3a66-484a-be9b-28e1b03d9c51.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "8e95570e-93a7-494d-8e83-bd755e3b631d",
+      "title": "Fragments of the Layered City",
+      "cover": "https://uploads.mangadex.org/covers/8e95570e-93a7-494d-8e83-bd755e3b631d/cffb96dc-36e9-48b3-9570-9f99b7d6f2fc.png.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "52ede55c-1584-4019-b85b-3902a423c3ab",
+      "title": "FAIRY TAIL: 100 Years Quest",
+      "cover": "https://uploads.mangadex.org/covers/52ede55c-1584-4019-b85b-3902a423c3ab/8e18a9d7-27ed-48ff-924b-a397df5ba0a0.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "abcf6720-91b4-4e06-876e-955af17e74f2",
+      "title": "Don't eat me, Tokiwa-kun",
+      "cover": "https://uploads.mangadex.org/covers/abcf6720-91b4-4e06-876e-955af17e74f2/4527ab6f-4bdf-4099-9602-bcb794f047d4.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "a4b39b6e-a448-4644-a540-64ceff1d8305",
+      "title": "Toilet-Bound Hanako-kun",
+      "cover": "https://uploads.mangadex.org/covers/a4b39b6e-a448-4644-a540-64ceff1d8305/2c300b23-9ca4-4dd3-8722-7fe1d7bc8548.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "8df8074d-c9b8-4526-b74b-ee287590608f",
+      "title": "Under Doctor",
+      "cover": "https://uploads.mangadex.org/covers/8df8074d-c9b8-4526-b74b-ee287590608f/417734da-b142-4793-959b-920f00b6e94b.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "d78db808-93f7-498d-9368-e5767fd85057",
+      "title": "Class 2-B Hero Destroyerz",
+      "cover": "https://uploads.mangadex.org/covers/d78db808-93f7-498d-9368-e5767fd85057/946d7f0f-e48a-4df4-a789-d7688f0aa2b9.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "d65c0332-3764-4c89-84bd-b1a4e7278ad7",
+      "title": "Kagurabachi",
+      "cover": "https://uploads.mangadex.org/covers/d65c0332-3764-4c89-84bd-b1a4e7278ad7/3edb80b9-dae6-4483-984d-2e7f8b02b702.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "077812bd-6ee9-4756-a508-9148b254661e",
+      "title": "I Reincarnated as a Mob Villain in a Game and Decided to Become the Final Boss. But for Some Reason, Everyone Thinks I'm the Best King Ever - Can Someone Please Tell Me Why?!",
+      "cover": "https://uploads.mangadex.org/covers/077812bd-6ee9-4756-a508-9148b254661e/61c732b8-1f6c-43df-a5a2-5cd30310677e.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "ab8cbb82-d0ed-45a7-8ffe-4bfa6d43d79c",
+      "title": "JoJo's Bizarre Adventure Part 9 - The JOJOLands",
+      "cover": "https://uploads.mangadex.org/covers/ab8cbb82-d0ed-45a7-8ffe-4bfa6d43d79c/88e8a8ea-91ed-4db6-937b-4dd0048e74d5.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "3fba42cf-2ad6-4c30-a7ab-46cb8149208a",
+      "title": "كلاب الأدب الشاردة",
+      "cover": "https://uploads.mangadex.org/covers/3fba42cf-2ad6-4c30-a7ab-46cb8149208a/4494d4fb-8772-47c0-831f-f49203819297.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "9c1cd558-fba3-40f1-bb84-b320f5d1eab1",
+      "title": "Bug Ego",
+      "cover": "https://uploads.mangadex.org/covers/9c1cd558-fba3-40f1-bb84-b320f5d1eab1/a40cc882-7d6b-4e12-885c-fef2928e7b7a.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
     {
       "id": "356de811-ae92-48f1-b93b-cfdf0f8d02e4",
       "title": "بما أننا نرسم الآن",
@@ -64,13 +155,6 @@
       "cover": "https://uploads.mangadex.org/covers/a07320a4-afcd-413a-a451-d69a448d0c28/b74c8cce-42cd-4889-b75d-7944e63f9a14.jpg.256.jpg",
       "source": "mangadex",
       "status": "completed"
-    },
-    {
-      "id": "ab8cbb82-d0ed-45a7-8ffe-4bfa6d43d79c",
-      "title": "JoJo's Bizarre Adventure Part 9 - The JOJOLands",
-      "cover": "https://uploads.mangadex.org/covers/ab8cbb82-d0ed-45a7-8ffe-4bfa6d43d79c/88e8a8ea-91ed-4db6-937b-4dd0048e74d5.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
     },
     {
       "id": "141609b6-cf86-4266-904c-6648f389cdc9",
@@ -178,13 +262,6 @@
       "status": "ongoing"
     },
     {
-      "id": "a0a5528a-c4a8-4495-a966-6877c12856ba",
-      "title": "TRUMP",
-      "cover": "https://uploads.mangadex.org/covers/a0a5528a-c4a8-4495-a966-6877c12856ba/8cec91f3-ac76-460f-9d42-3d1b4163c0e3.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
       "id": "03d60b4c-551a-4f3d-925b-a67135cd616a",
       "title": "بين قلم التعليم والأصفاد والزواج الفعلي",
       "cover": "https://uploads.mangadex.org/covers/03d60b4c-551a-4f3d-925b-a67135cd616a/125f1298-6e0a-44ec-bdfa-9f7a82e70a57.jpg.256.jpg",
@@ -272,83 +349,6 @@
       "id": "263deeff-c010-4ac7-bc01-6341f3e698ac",
       "title": "Dragon Quest: The Great Adventure of Dai - Avan the Brave and the Demon King of Hellfire",
       "cover": "https://uploads.mangadex.org/covers/263deeff-c010-4ac7-bc01-6341f3e698ac/774442b3-f96c-417c-a873-43b682eecf0c.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "84703c86-eb83-45ec-8fc5-f34a25115893",
-      "title": "Dai Dark",
-      "cover": "https://uploads.mangadex.org/covers/84703c86-eb83-45ec-8fc5-f34a25115893/e3a1e78b-7147-45f3-9c7f-ee398fa9c437.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "334019e1-18bb-4ac0-b35c-0e8efb1e481c",
-      "title": "JoJo’s Bizarre Adventure, Part 9: The JoJoLands - Digital Colored Comics",
-      "cover": "https://uploads.mangadex.org/covers/334019e1-18bb-4ac0-b35c-0e8efb1e481c/530583f4-80ad-4f37-92d9-441b225c9785.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "a460ab18-22c1-47eb-a08a-9ee85fe37ec8",
-      "title": "Bleach (Official Colored)",
-      "cover": "https://uploads.mangadex.org/covers/a460ab18-22c1-47eb-a08a-9ee85fe37ec8/7c8f9203-2b82-41f2-beb3-e7fb00e151e2.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
-      "id": "e39eb61f-f538-46fe-b8bf-db115ec51d1d",
-      "title": "Reiri",
-      "cover": "https://uploads.mangadex.org/covers/e39eb61f-f538-46fe-b8bf-db115ec51d1d/aea38014-4fbb-47b6-8aca-f118217fc23d.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
-      "id": "05c2917a-e0a4-4c55-abac-8be0f8b213e4",
-      "title": "ميتم المروض",
-      "cover": "https://uploads.mangadex.org/covers/05c2917a-e0a4-4c55-abac-8be0f8b213e4/e6d99b5d-1c4e-4a07-b59c-5095d74fcada.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "85a99758-de39-471e-9f6d-800547f53d0a",
-      "title": "Tougen Anki: Legend of the Cursed Blood",
-      "cover": "https://uploads.mangadex.org/covers/85a99758-de39-471e-9f6d-800547f53d0a/139b8f72-68fe-4d57-bd70-a210402eb173.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "30f3ac69-21b6-45ad-a110-d011b7aaadaa",
-      "title": "Fly Me to The Moon",
-      "cover": "https://uploads.mangadex.org/covers/30f3ac69-21b6-45ad-a110-d011b7aaadaa/dec4d1c5-d2e0-4cdd-b4e2-c8243c9f4341.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "b5b21ca1-bba5-4b9a-8cd1-6248f731650b",
-      "title": "سجلات راغناروك",
-      "cover": "https://uploads.mangadex.org/covers/b5b21ca1-bba5-4b9a-8cd1-6248f731650b/64235ab3-3595-47ea-b65a-457b828489c2.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "f6ce20ca-73c3-4fdd-9367-e2901fca780e",
-      "title": "ويلات الزمان",
-      "cover": "https://uploads.mangadex.org/covers/f6ce20ca-73c3-4fdd-9367-e2901fca780e/fbf55840-15be-4ebd-86fc-4af2fa0368f7.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "89daf9dc-075a-4aa5-873a-cc76bb287108",
-      "title": "The Way of the Househusband",
-      "cover": "https://uploads.mangadex.org/covers/89daf9dc-075a-4aa5-873a-cc76bb287108/a22742de-0a55-4fef-b378-8037753616d2.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "38179337-1640-4927-8851-9bedd8d19e82",
-      "title": "Aren't You Too Sweet Salt-God Sato-San?",
-      "cover": "https://uploads.mangadex.org/covers/38179337-1640-4927-8851-9bedd8d19e82/5466e035-50de-4ff5-86bf-29525a862203.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     }
