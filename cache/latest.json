@@ -1,7 +1,28 @@
 {
-  "updated_at": "2026-10-20T10:55:03.087785+00:00",
+  "updated_at": "2026-10-20T16:20:18.896142+00:00",
   "count": 50,
   "items": [
+    {
+      "id": "c37d93a8-9c50-49b3-bd71-143937f4288e",
+      "title": "Gantz: E",
+      "cover": "https://uploads.mangadex.org/covers/c37d93a8-9c50-49b3-bd71-143937f4288e/c8755224-2f04-4185-876c-9520ae2009d5.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "5c9d1254-f074-4b5c-8795-6f0641b2597b",
+      "title": "Girl and Science",
+      "cover": "https://uploads.mangadex.org/covers/5c9d1254-f074-4b5c-8795-6f0641b2597b/f606b3ce-4f64-400e-8a1c-265698f68d01.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "29ab6984-7c1d-4d45-b925-25aa082b492e",
+      "title": "Shangri-La Frontier: From Trash-Game Hunter to God-Tier Game Master!",
+      "cover": "https://uploads.mangadex.org/covers/29ab6984-7c1d-4d45-b925-25aa082b492e/0367d616-0570-459a-9525-1d2083aad788.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
     {
       "id": "6a1d1cb1-ecd5-40d9-89ff-9d88e40b136b",
       "title": "طوكيو غول",
@@ -34,13 +55,6 @@
       "id": "4141c5dc-c525-4df5-afd7-cc7d192a832f",
       "title": "Blue Lock",
       "cover": "https://uploads.mangadex.org/covers/4141c5dc-c525-4df5-afd7-cc7d192a832f/7ee723d4-b926-4a81-acd9-53adb3fbe461.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "c37d93a8-9c50-49b3-bd71-143937f4288e",
-      "title": "Gantz: E",
-      "cover": "https://uploads.mangadex.org/covers/c37d93a8-9c50-49b3-bd71-143937f4288e/c8755224-2f04-4185-876c-9520ae2009d5.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
@@ -162,13 +176,6 @@
       "cover": "https://uploads.mangadex.org/covers/fe9b4485-550a-4823-84eb-8680283b5d9f/88fd8bb3-836f-477e-8148-dbd87428a4f3.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
-    },
-    {
-      "id": "5c9d1254-f074-4b5c-8795-6f0641b2597b",
-      "title": "Girl and Science",
-      "cover": "https://uploads.mangadex.org/covers/5c9d1254-f074-4b5c-8795-6f0641b2597b/f606b3ce-4f64-400e-8a1c-265698f68d01.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
     },
     {
       "id": "b4c93297-b32f-4f90-b619-55456a38b0aa",
@@ -344,13 +351,6 @@
       "cover": "https://uploads.mangadex.org/covers/b8faa8ab-cb4e-416f-829d-d2a6042ba5ac/0ca2f8bf-a33c-46cb-8730-cff51b148314.png.256.jpg",
       "source": "mangadex",
       "status": "completed"
-    },
-    {
-      "id": "d553645b-03a3-4fc8-9a9c-57f91cbbab89",
-      "title": "Are You a Landmine, Chihara-san?",
-      "cover": "https://uploads.mangadex.org/covers/d553645b-03a3-4fc8-9a9c-57f91cbbab89/4878d139-e5ee-49eb-aeb6-1c2f9025624e.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
     }
   ]
 }
