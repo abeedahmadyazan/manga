@@ -1,7 +1,35 @@
 {
-  "updated_at": "2026-10-20T03:20:50.235917+00:00",
+  "updated_at": "2026-10-20T10:55:03.087785+00:00",
   "count": 50,
   "items": [
+    {
+      "id": "6a1d1cb1-ecd5-40d9-89ff-9d88e40b136b",
+      "title": "طوكيو غول",
+      "cover": "https://uploads.mangadex.org/covers/6a1d1cb1-ecd5-40d9-89ff-9d88e40b136b/040e8ae9-4ddd-49d2-8986-56782b391714.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "b16f2554-9525-4f2a-bbe4-5b75b6605176",
+      "title": "Clevatess: The King of Dark Beasts, the Baby, and the Undead Hero",
+      "cover": "https://uploads.mangadex.org/covers/b16f2554-9525-4f2a-bbe4-5b75b6605176/552e05c9-84f1-4b8f-820e-4f00dbc67329.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "0a580438-bc72-4503-940b-12a5da881b56",
+      "title": "أنتِ زهرة الحظ",
+      "cover": "https://uploads.mangadex.org/covers/0a580438-bc72-4503-940b-12a5da881b56/58b42b36-0dc5-4e50-ac2e-cdfb311b63c6.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "c4b36f15-4ee5-425f-a77d-c2e7cbb970d8",
+      "title": "NIPPON SANGOKU: The Three Nations of the Crimson Sun",
+      "cover": "https://uploads.mangadex.org/covers/c4b36f15-4ee5-425f-a77d-c2e7cbb970d8/e5c54f1b-6ea4-4dd2-ae6e-9d0e138d7c2e.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
     {
       "id": "4141c5dc-c525-4df5-afd7-cc7d192a832f",
       "title": "Blue Lock",
@@ -22,13 +50,6 @@
       "cover": "https://uploads.mangadex.org/covers/3169544f-4b87-4a14-917b-f73600941f55/9ead7eb9-9959-4353-8478-b56d121ad87c.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
-    },
-    {
-      "id": "6a1d1cb1-ecd5-40d9-89ff-9d88e40b136b",
-      "title": "طوكيو غول",
-      "cover": "https://uploads.mangadex.org/covers/6a1d1cb1-ecd5-40d9-89ff-9d88e40b136b/040e8ae9-4ddd-49d2-8986-56782b391714.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
     },
     {
       "id": "356de811-ae92-48f1-b93b-cfdf0f8d02e4",
@@ -101,13 +122,6 @@
       "status": "completed"
     },
     {
-      "id": "0a580438-bc72-4503-940b-12a5da881b56",
-      "title": "أنتِ زهرة الحظ",
-      "cover": "https://uploads.mangadex.org/covers/0a580438-bc72-4503-940b-12a5da881b56/58b42b36-0dc5-4e50-ac2e-cdfb311b63c6.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
       "id": "a76b6b97-e434-40d6-b7c5-6026d22986d6",
       "title": "رجلة الجنية السوداء ذات القوى المتلاشية",
       "cover": "https://uploads.mangadex.org/covers/a76b6b97-e434-40d6-b7c5-6026d22986d6/8f40381d-188c-4a28-b492-25c07a7684a5.jpg.256.jpg",
@@ -162,13 +176,6 @@
       "cover": "https://uploads.mangadex.org/covers/b4c93297-b32f-4f90-b619-55456a38b0aa/dd1804e7-56a5-4beb-90ac-d573dee7f1d1.jpg.256.jpg",
       "source": "mangadex",
       "status": "hiatus"
-    },
-    {
-      "id": "c4b36f15-4ee5-425f-a77d-c2e7cbb970d8",
-      "title": "NIPPON SANGOKU: The Three Nations of the Crimson Sun",
-      "cover": "https://uploads.mangadex.org/covers/c4b36f15-4ee5-425f-a77d-c2e7cbb970d8/e5c54f1b-6ea4-4dd2-ae6e-9d0e138d7c2e.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
     },
     {
       "id": "a0a5528a-c4a8-4495-a966-6877c12856ba",
@@ -344,13 +351,6 @@
       "cover": "https://uploads.mangadex.org/covers/d553645b-03a3-4fc8-9a9c-57f91cbbab89/4878d139-e5ee-49eb-aeb6-1c2f9025624e.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
-    },
-    {
-      "id": "7431ff7d-ad63-4831-bd1e-e63aef2da6bc",
-      "title": "Arknights: Rhodes Kitchen -TIDBITS-",
-      "cover": "https://uploads.mangadex.org/covers/7431ff7d-ad63-4831-bd1e-e63aef2da6bc/ab11b5c2-2591-458b-9ba9-cb01b1b75be4.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
     }
   ]
 }
