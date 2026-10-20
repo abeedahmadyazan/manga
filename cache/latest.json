@@ -1,7 +1,42 @@
 {
-  "updated_at": "2026-10-19T21:58:52.317748+00:00",
+  "updated_at": "2026-10-20T03:20:50.235917+00:00",
   "count": 50,
   "items": [
+    {
+      "id": "4141c5dc-c525-4df5-afd7-cc7d192a832f",
+      "title": "Blue Lock",
+      "cover": "https://uploads.mangadex.org/covers/4141c5dc-c525-4df5-afd7-cc7d192a832f/7ee723d4-b926-4a81-acd9-53adb3fbe461.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "c37d93a8-9c50-49b3-bd71-143937f4288e",
+      "title": "Gantz: E",
+      "cover": "https://uploads.mangadex.org/covers/c37d93a8-9c50-49b3-bd71-143937f4288e/c8755224-2f04-4185-876c-9520ae2009d5.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "3169544f-4b87-4a14-917b-f73600941f55",
+      "title": "Noa-Senpai is My Friend.",
+      "cover": "https://uploads.mangadex.org/covers/3169544f-4b87-4a14-917b-f73600941f55/9ead7eb9-9959-4353-8478-b56d121ad87c.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "6a1d1cb1-ecd5-40d9-89ff-9d88e40b136b",
+      "title": "طوكيو غول",
+      "cover": "https://uploads.mangadex.org/covers/6a1d1cb1-ecd5-40d9-89ff-9d88e40b136b/040e8ae9-4ddd-49d2-8986-56782b391714.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "356de811-ae92-48f1-b93b-cfdf0f8d02e4",
+      "title": "بما أننا نرسم الآن",
+      "cover": "https://uploads.mangadex.org/covers/356de811-ae92-48f1-b93b-cfdf0f8d02e4/60e2c515-06d0-4d61-8aec-5f180f19b1af.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
     {
       "id": "e1d8b192-fa28-4651-bdaf-d4e0d4418ea8",
       "title": "مذكرة فانيتاس",
@@ -20,13 +55,6 @@
       "id": "3fba42cf-2ad6-4c30-a7ab-46cb8149208a",
       "title": "كلاب الأدب الشاردة",
       "cover": "https://uploads.mangadex.org/covers/3fba42cf-2ad6-4c30-a7ab-46cb8149208a/4494d4fb-8772-47c0-831f-f49203819297.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "c37d93a8-9c50-49b3-bd71-143937f4288e",
-      "title": "Gantz: E",
-      "cover": "https://uploads.mangadex.org/covers/c37d93a8-9c50-49b3-bd71-143937f4288e/c8755224-2f04-4185-876c-9520ae2009d5.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
@@ -108,25 +136,11 @@
       "status": "completed"
     },
     {
-      "id": "356de811-ae92-48f1-b93b-cfdf0f8d02e4",
-      "title": "بما أننا نرسم الآن",
-      "cover": "https://uploads.mangadex.org/covers/356de811-ae92-48f1-b93b-cfdf0f8d02e4/60e2c515-06d0-4d61-8aec-5f180f19b1af.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
       "id": "a6a46436-9ed4-4c20-8b11-6f4a0f74b23a",
       "title": "Kabuto Mushi",
       "cover": "https://uploads.mangadex.org/covers/a6a46436-9ed4-4c20-8b11-6f4a0f74b23a/5a16e9bf-0859-4719-bd13-7e5e43e338d7.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
-    },
-    {
-      "id": "6a1d1cb1-ecd5-40d9-89ff-9d88e40b136b",
-      "title": "طوكيو غول",
-      "cover": "https://uploads.mangadex.org/covers/6a1d1cb1-ecd5-40d9-89ff-9d88e40b136b/040e8ae9-4ddd-49d2-8986-56782b391714.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
     },
     {
       "id": "fe9b4485-550a-4823-84eb-8680283b5d9f",
@@ -241,13 +255,6 @@
       "status": "ongoing"
     },
     {
-      "id": "3169544f-4b87-4a14-917b-f73600941f55",
-      "title": "Noa-Senpai is My Friend.",
-      "cover": "https://uploads.mangadex.org/covers/3169544f-4b87-4a14-917b-f73600941f55/9ead7eb9-9959-4353-8478-b56d121ad87c.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
       "id": "4e7a4a0f-8391-4069-839b-de2352297dab",
       "title": "A Couple of Cuckoos",
       "cover": "https://uploads.mangadex.org/covers/4e7a4a0f-8391-4069-839b-de2352297dab/71c97191-000a-4f6a-b42f-f14941d286cd.jpg.256.jpg",
@@ -344,13 +351,6 @@
       "cover": "https://uploads.mangadex.org/covers/7431ff7d-ad63-4831-bd1e-e63aef2da6bc/ab11b5c2-2591-458b-9ba9-cb01b1b75be4.jpg.256.jpg",
       "source": "mangadex",
       "status": "completed"
-    },
-    {
-      "id": "baa95345-24fb-47a9-83e9-434ff671f968",
-      "title": "خلف المتجر ادخن معك",
-      "cover": "https://uploads.mangadex.org/covers/baa95345-24fb-47a9-83e9-434ff671f968/4862f2a1-2852-4c98-a217-e3a44af83152.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
     }
   ]
 }
