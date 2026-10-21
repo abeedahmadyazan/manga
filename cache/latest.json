@@ -1,7 +1,28 @@
 {
-  "updated_at": "2026-10-21T03:16:00.599725+00:00",
+  "updated_at": "2026-10-21T11:08:34.290102+00:00",
   "count": 50,
   "items": [
+    {
+      "id": "baaa0ca4-efef-4b15-b91a-c1f85692c2a7",
+      "title": "Vampire Knight",
+      "cover": "https://uploads.mangadex.org/covers/baaa0ca4-efef-4b15-b91a-c1f85692c2a7/d195f918-5f67-46a0-925f-eabc16fb40a3.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "c37d93a8-9c50-49b3-bd71-143937f4288e",
+      "title": "Gantz: E",
+      "cover": "https://uploads.mangadex.org/covers/c37d93a8-9c50-49b3-bd71-143937f4288e/c8755224-2f04-4185-876c-9520ae2009d5.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "8c1d7d0c-e0b7-4170-941d-29f652c3c19d",
+      "title": "The Apothecary Diaries: Maomao's Notes from the Inner Palace",
+      "cover": "https://uploads.mangadex.org/covers/8c1d7d0c-e0b7-4170-941d-29f652c3c19d/48ca2ef4-7bb3-4286-935a-b4f23d8041b3.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
     {
       "id": "38179337-1640-4927-8851-9bedd8d19e82",
       "title": "Aren't You Too Sweet Salt-God Sato-San?",
@@ -118,13 +139,6 @@
       "id": "0b094aab-0cfb-4837-a49b-7267bdb86bec",
       "title": "Boruto: Two Blue Vortex",
       "cover": "https://uploads.mangadex.org/covers/0b094aab-0cfb-4837-a49b-7267bdb86bec/baf472db-4658-46fb-8130-d4abdd43f171.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "c37d93a8-9c50-49b3-bd71-143937f4288e",
-      "title": "Gantz: E",
-      "cover": "https://uploads.mangadex.org/covers/c37d93a8-9c50-49b3-bd71-143937f4288e/c8755224-2f04-4185-876c-9520ae2009d5.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
@@ -335,20 +349,6 @@
       "id": "077812bd-6ee9-4756-a508-9148b254661e",
       "title": "I Reincarnated as a Mob Villain in a Game and Decided to Become the Final Boss. But for Some Reason, Everyone Thinks I'm the Best King Ever - Can Someone Please Tell Me Why?!",
       "cover": "https://uploads.mangadex.org/covers/077812bd-6ee9-4756-a508-9148b254661e/61c732b8-1f6c-43df-a5a2-5cd30310677e.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "9c1cd558-fba3-40f1-bb84-b320f5d1eab1",
-      "title": "Bug Ego",
-      "cover": "https://uploads.mangadex.org/covers/9c1cd558-fba3-40f1-bb84-b320f5d1eab1/a40cc882-7d6b-4e12-885c-fef2928e7b7a.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "2f4e5f5b-d930-4266-8c8a-c4cf9a81e51f",
-      "title": "The Great Jahy Will Not Be Defeated!",
-      "cover": "https://uploads.mangadex.org/covers/2f4e5f5b-d930-4266-8c8a-c4cf9a81e51f/da817d36-05c3-4810-bdb7-96345a311097.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     }
