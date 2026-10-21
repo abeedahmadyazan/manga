@@ -1,11 +1,18 @@
 {
-  "updated_at": "2026-10-21T11:08:34.290102+00:00",
+  "updated_at": "2026-10-21T16:35:26.347788+00:00",
   "count": 50,
   "items": [
     {
-      "id": "baaa0ca4-efef-4b15-b91a-c1f85692c2a7",
-      "title": "Vampire Knight",
-      "cover": "https://uploads.mangadex.org/covers/baaa0ca4-efef-4b15-b91a-c1f85692c2a7/d195f918-5f67-46a0-925f-eabc16fb40a3.jpg.256.jpg",
+      "id": "6a1d1cb1-ecd5-40d9-89ff-9d88e40b136b",
+      "title": "طوكيو غول",
+      "cover": "https://uploads.mangadex.org/covers/6a1d1cb1-ecd5-40d9-89ff-9d88e40b136b/040e8ae9-4ddd-49d2-8986-56782b391714.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "a07320a4-afcd-413a-a451-d69a448d0c28",
+      "title": "Usogui",
+      "cover": "https://uploads.mangadex.org/covers/a07320a4-afcd-413a-a451-d69a448d0c28/b74c8cce-42cd-4889-b75d-7944e63f9a14.jpg.256.jpg",
       "source": "mangadex",
       "status": "completed"
     },
@@ -15,6 +22,41 @@
       "cover": "https://uploads.mangadex.org/covers/c37d93a8-9c50-49b3-bd71-143937f4288e/c8755224-2f04-4185-876c-9520ae2009d5.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
+    },
+    {
+      "id": "510f29a8-99b4-46af-ba5e-916e96bc6f37",
+      "title": "Fate/type Redline",
+      "cover": "https://uploads.mangadex.org/covers/510f29a8-99b4-46af-ba5e-916e96bc6f37/c1d7aed1-9cd1-426f-bfb8-7e46594d0e29.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "ad75039d-686c-457f-b478-e56fc3b3c069",
+      "title": "I Started Working a Housekeeping Job and Ended up Being Liked by the Family of the Most Beautiful Girl in School.",
+      "cover": "https://uploads.mangadex.org/covers/ad75039d-686c-457f-b478-e56fc3b3c069/d11151a2-0f4e-49e8-9c19-1be626a044fa.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "484f94e7-35c3-4cb5-a068-53d684c1439a",
+      "title": "Baki Part 6",
+      "cover": "https://uploads.mangadex.org/covers/484f94e7-35c3-4cb5-a068-53d684c1439a/863ae891-3627-4070-8918-4a626dc9d1ff.png.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "25e1d17b-6a4d-4698-a4f6-bf53460c10af",
+      "title": "حافلة لإثنين",
+      "cover": "https://uploads.mangadex.org/covers/25e1d17b-6a4d-4698-a4f6-bf53460c10af/f7cd3ff9-d7a1-4b5e-b473-ee2833b82c35.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "baaa0ca4-efef-4b15-b91a-c1f85692c2a7",
+      "title": "Vampire Knight",
+      "cover": "https://uploads.mangadex.org/covers/baaa0ca4-efef-4b15-b91a-c1f85692c2a7/d195f918-5f67-46a0-925f-eabc16fb40a3.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
     },
     {
       "id": "8c1d7d0c-e0b7-4170-941d-29f652c3c19d",
@@ -34,13 +76,6 @@
       "id": "9d3d3403-1a87-4737-9803-bc3d99db1424",
       "title": "The Guy She Was Interested in Wasn't a Guy at All",
       "cover": "https://uploads.mangadex.org/covers/9d3d3403-1a87-4737-9803-bc3d99db1424/fac191d0-96c1-4ebb-bf79-b7616d7162ac.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "25e1d17b-6a4d-4698-a4f6-bf53460c10af",
-      "title": "حافلة لإثنين",
-      "cover": "https://uploads.mangadex.org/covers/25e1d17b-6a4d-4698-a4f6-bf53460c10af/f7cd3ff9-d7a1-4b5e-b473-ee2833b82c35.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
@@ -73,23 +108,9 @@
       "status": "ongoing"
     },
     {
-      "id": "a07320a4-afcd-413a-a451-d69a448d0c28",
-      "title": "Usogui",
-      "cover": "https://uploads.mangadex.org/covers/a07320a4-afcd-413a-a451-d69a448d0c28/b74c8cce-42cd-4889-b75d-7944e63f9a14.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
       "id": "52842727-59ff-46a6-9a23-5eba61487586",
       "title": "To Love Ru (Official Colored)",
       "cover": "https://uploads.mangadex.org/covers/52842727-59ff-46a6-9a23-5eba61487586/1b7bba8a-d22a-4f1a-8723-601a611b135a.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
-      "id": "6a1d1cb1-ecd5-40d9-89ff-9d88e40b136b",
-      "title": "طوكيو غول",
-      "cover": "https://uploads.mangadex.org/covers/6a1d1cb1-ecd5-40d9-89ff-9d88e40b136b/040e8ae9-4ddd-49d2-8986-56782b391714.jpg.256.jpg",
       "source": "mangadex",
       "status": "completed"
     },
@@ -190,13 +211,6 @@
       "cover": "https://uploads.mangadex.org/covers/e1d8b192-fa28-4651-bdaf-d4e0d4418ea8/cc05ec6d-203d-4efe-9118-18f4c1953f11.jpg.256.jpg",
       "source": "mangadex",
       "status": "hiatus"
-    },
-    {
-      "id": "510f29a8-99b4-46af-ba5e-916e96bc6f37",
-      "title": "Fate/type Redline",
-      "cover": "https://uploads.mangadex.org/covers/510f29a8-99b4-46af-ba5e-916e96bc6f37/c1d7aed1-9cd1-426f-bfb8-7e46594d0e29.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
     },
     {
       "id": "3fba42cf-2ad6-4c30-a7ab-46cb8149208a",
@@ -335,20 +349,6 @@
       "id": "d78db808-93f7-498d-9368-e5767fd85057",
       "title": "Class 2-B Hero Destroyerz",
       "cover": "https://uploads.mangadex.org/covers/d78db808-93f7-498d-9368-e5767fd85057/946d7f0f-e48a-4df4-a789-d7688f0aa2b9.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "d65c0332-3764-4c89-84bd-b1a4e7278ad7",
-      "title": "Kagurabachi",
-      "cover": "https://uploads.mangadex.org/covers/d65c0332-3764-4c89-84bd-b1a4e7278ad7/3edb80b9-dae6-4483-984d-2e7f8b02b702.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "077812bd-6ee9-4756-a508-9148b254661e",
-      "title": "I Reincarnated as a Mob Villain in a Game and Decided to Become the Final Boss. But for Some Reason, Everyone Thinks I'm the Best King Ever - Can Someone Please Tell Me Why?!",
-      "cover": "https://uploads.mangadex.org/covers/077812bd-6ee9-4756-a508-9148b254661e/61c732b8-1f6c-43df-a5a2-5cd30310677e.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     }
