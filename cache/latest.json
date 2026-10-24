@@ -1,7 +1,42 @@
 {
-  "updated_at": "2026-10-23T20:58:09.026034+00:00",
+  "updated_at": "2026-10-24T03:13:53.199721+00:00",
   "count": 50,
   "items": [
+    {
+      "id": "d553645b-03a3-4fc8-9a9c-57f91cbbab89",
+      "title": "Are You a Landmine, Chihara-san?",
+      "cover": "https://uploads.mangadex.org/covers/d553645b-03a3-4fc8-9a9c-57f91cbbab89/4878d139-e5ee-49eb-aeb6-1c2f9025624e.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "7066efc8-b73f-4b17-8b8d-6060a5412590",
+      "title": "Kill Blue",
+      "cover": "https://uploads.mangadex.org/covers/7066efc8-b73f-4b17-8b8d-6060a5412590/ccc07c8c-b896-4c2c-81c3-a684f1f1a188.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "0a580438-bc72-4503-940b-12a5da881b56",
+      "title": "أنتِ زهرة الحظ",
+      "cover": "https://uploads.mangadex.org/covers/0a580438-bc72-4503-940b-12a5da881b56/58b42b36-0dc5-4e50-ac2e-cdfb311b63c6.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "25e1d17b-6a4d-4698-a4f6-bf53460c10af",
+      "title": "حافلة لإثنين",
+      "cover": "https://uploads.mangadex.org/covers/25e1d17b-6a4d-4698-a4f6-bf53460c10af/64c63729-ed1c-47bb-a13f-8fc5d963693c.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "59f47645-66a9-443e-8228-788313c3ae3c",
+      "title": "Tokyo Ghoul: re",
+      "cover": "https://uploads.mangadex.org/covers/59f47645-66a9-443e-8228-788313c3ae3c/c41d1081-cdb2-4c90-8028-61844823515b.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
     {
       "id": "c4ca02fb-8378-433b-8049-fbbea5d25cba",
       "title": "هايميا-سينباي حسناء مهيبة!",
@@ -36,13 +71,6 @@
       "cover": "https://uploads.mangadex.org/covers/334019e1-18bb-4ac0-b35c-0e8efb1e481c/530583f4-80ad-4f37-92d9-441b225c9785.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
-    },
-    {
-      "id": "0a580438-bc72-4503-940b-12a5da881b56",
-      "title": "أنتِ زهرة الحظ",
-      "cover": "https://uploads.mangadex.org/covers/0a580438-bc72-4503-940b-12a5da881b56/58b42b36-0dc5-4e50-ac2e-cdfb311b63c6.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
     },
     {
       "id": "61830b36-1712-4b7b-9421-f671e9ced6d3",
@@ -90,13 +118,6 @@
       "id": "85a99758-de39-471e-9f6d-800547f53d0a",
       "title": "Tougen Anki: Legend of the Cursed Blood",
       "cover": "https://uploads.mangadex.org/covers/85a99758-de39-471e-9f6d-800547f53d0a/139b8f72-68fe-4d57-bd70-a210402eb173.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "d553645b-03a3-4fc8-9a9c-57f91cbbab89",
-      "title": "Are You a Landmine, Chihara-san?",
-      "cover": "https://uploads.mangadex.org/covers/d553645b-03a3-4fc8-9a9c-57f91cbbab89/4878d139-e5ee-49eb-aeb6-1c2f9025624e.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
@@ -276,6 +297,13 @@
       "status": "ongoing"
     },
     {
+      "id": "89daf9dc-075a-4aa5-873a-cc76bb287108",
+      "title": "The Way of the Househusband",
+      "cover": "https://uploads.mangadex.org/covers/89daf9dc-075a-4aa5-873a-cc76bb287108/a22742de-0a55-4fef-b378-8037753616d2.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
       "id": "d8a959f7-648e-4c8d-8f23-f1f3f8e129f3",
       "title": "ون بنش مان",
       "cover": "https://uploads.mangadex.org/covers/d8a959f7-648e-4c8d-8f23-f1f3f8e129f3/d22cfde3-268a-48a3-b5ed-73772834764d.jpg.256.jpg",
@@ -321,34 +349,6 @@
       "id": "87ffa375-bd2c-49ba-ba0c-6d78ea07c342",
       "title": "Medaka Kuroiwa is Impervious to My Charms",
       "cover": "https://uploads.mangadex.org/covers/87ffa375-bd2c-49ba-ba0c-6d78ea07c342/28e38262-232a-4f48-bc32-4ac04dc07c88.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "ea47525d-99df-45b5-9103-dd853f49f8c3",
-      "title": "Welcome to Demon School! Iruma-kun: IruMafia Edition",
-      "cover": "https://uploads.mangadex.org/covers/ea47525d-99df-45b5-9103-dd853f49f8c3/36bf283d-531f-4937-a3a7-2a8a05ccae2e.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "55a96d76-10a2-4c4b-bc60-3a4aa8325e50",
-      "title": "Orient",
-      "cover": "https://uploads.mangadex.org/covers/55a96d76-10a2-4c4b-bc60-3a4aa8325e50/c4b24719-8137-4fba-a685-b22834bd1177.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
-      "id": "0b094aab-0cfb-4837-a49b-7267bdb86bec",
-      "title": "Boruto: Two Blue Vortex",
-      "cover": "https://uploads.mangadex.org/covers/0b094aab-0cfb-4837-a49b-7267bdb86bec/baf472db-4658-46fb-8130-d4abdd43f171.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "0cfcda3b-0dcb-459b-9931-aa823e7bf403",
-      "title": "تسع قمم",
-      "cover": "https://uploads.mangadex.org/covers/0cfcda3b-0dcb-459b-9931-aa823e7bf403/dc2a9c50-9063-46ee-abae-bf8f1f9eb04a.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     }
