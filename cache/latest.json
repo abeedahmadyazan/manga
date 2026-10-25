@@ -1,7 +1,14 @@
 {
-  "updated_at": "2026-10-25T03:08:45.282968+00:00",
+  "updated_at": "2026-10-25T10:41:28.656031+00:00",
   "count": 50,
   "items": [
+    {
+      "id": "9d3d3403-1a87-4737-9803-bc3d99db1424",
+      "title": "The Guy She Was Interested in Wasn't a Guy at All",
+      "cover": "https://uploads.mangadex.org/covers/9d3d3403-1a87-4737-9803-bc3d99db1424/fac191d0-96c1-4ebb-bf79-b7616d7162ac.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
     {
       "id": "b16f2554-9525-4f2a-bbe4-5b75b6605176",
       "title": "Clevatess: The King of Dark Beasts, the Baby, and the Undead Hero",
@@ -342,13 +349,6 @@
       "id": "77296cee-0b74-415f-914d-6f29036d3906",
       "title": "مسرحية الجبل",
       "cover": "https://uploads.mangadex.org/covers/77296cee-0b74-415f-914d-6f29036d3906/6cfbaeb6-59ae-4971-bfaa-3b026b6c9ad9.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "e0589f47-72f9-4e9a-ac31-5b88bcad6220",
-      "title": "The Wrong Way to Use Healing Magic",
-      "cover": "https://uploads.mangadex.org/covers/e0589f47-72f9-4e9a-ac31-5b88bcad6220/f00600e5-f528-4239-84da-8810222dda78.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     }
