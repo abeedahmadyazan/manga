@@ -1,7 +1,49 @@
 {
-  "updated_at": "2026-10-26T22:16:44.410129+00:00",
+  "updated_at": "2026-10-27T03:39:37.769227+00:00",
   "count": 50,
   "items": [
+    {
+      "id": "4141c5dc-c525-4df5-afd7-cc7d192a832f",
+      "title": "Blue Lock",
+      "cover": "https://uploads.mangadex.org/covers/4141c5dc-c525-4df5-afd7-cc7d192a832f/7ee723d4-b926-4a81-acd9-53adb3fbe461.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "db692d58-4b13-4174-ae8c-30c515c0689c",
+      "title": "Hunter x Hunter",
+      "cover": "https://uploads.mangadex.org/covers/db692d58-4b13-4174-ae8c-30c515c0689c/aa112927-f1e5-4fe4-a4db-7fd4a1536e3c.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "hiatus"
+    },
+    {
+      "id": "ea47525d-99df-45b5-9103-dd853f49f8c3",
+      "title": "Welcome to Demon School! Iruma-kun: IruMafia Edition",
+      "cover": "https://uploads.mangadex.org/covers/ea47525d-99df-45b5-9103-dd853f49f8c3/36bf283d-531f-4937-a3a7-2a8a05ccae2e.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "ad75039d-686c-457f-b478-e56fc3b3c069",
+      "title": "I Started Working a Housekeeping Job and Ended up Being Liked by the Family of the Most Beautiful Girl in School.",
+      "cover": "https://uploads.mangadex.org/covers/ad75039d-686c-457f-b478-e56fc3b3c069/d11151a2-0f4e-49e8-9c19-1be626a044fa.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "1aa17501-0328-4d5a-bbbe-3cb7cae8c9ae",
+      "title": "My Co-worker Is an Eldritch X!",
+      "cover": "https://uploads.mangadex.org/covers/1aa17501-0328-4d5a-bbbe-3cb7cae8c9ae/6856c3e0-b344-4319-aa2d-d6f702c235da.png.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "d4ad9513-115e-477f-b366-d27b440261b2",
+      "title": "Dragon Ball AF (Young Jijii)",
+      "cover": "https://uploads.mangadex.org/covers/d4ad9513-115e-477f-b366-d27b440261b2/1b1defc7-2c6e-4829-885c-b0487b810ac3.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
     {
       "id": "a6a46436-9ed4-4c20-8b11-6f4a0f74b23a",
       "title": "Kabuto Mushi",
@@ -283,13 +325,6 @@
       "status": "ongoing"
     },
     {
-      "id": "4141c5dc-c525-4df5-afd7-cc7d192a832f",
-      "title": "Blue Lock",
-      "cover": "https://uploads.mangadex.org/covers/4141c5dc-c525-4df5-afd7-cc7d192a832f/7ee723d4-b926-4a81-acd9-53adb3fbe461.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
       "id": "774f0f04-5023-4e2e-9c0b-f0ed382f078b",
       "title": "إينيغماتيكا",
       "cover": "https://uploads.mangadex.org/covers/774f0f04-5023-4e2e-9c0b-f0ed382f078b/9f0534e0-6163-49a2-b515-4798f7aa85fa.jpg.256.jpg",
@@ -314,41 +349,6 @@
       "id": "418791c0-35cf-4f87-936b-acd9cddf0989",
       "title": "The Fragrant Flower Blooms with Dignity",
       "cover": "https://uploads.mangadex.org/covers/418791c0-35cf-4f87-936b-acd9cddf0989/6e823d0e-103a-4cf9-a312-a3a292ccb12d.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "908fe918-ee36-4858-b321-4ba7aadbc817",
-      "title": "فصل المانجا الدراسي الأخير",
-      "cover": "https://uploads.mangadex.org/covers/908fe918-ee36-4858-b321-4ba7aadbc817/40ab3a75-add8-46e0-8731-dc1630b6aa37.png.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "d422ddc8-eea3-4b0a-82a4-291bbd8c9285",
-      "title": "أبناء عائلة شيونجي",
-      "cover": "https://uploads.mangadex.org/covers/d422ddc8-eea3-4b0a-82a4-291bbd8c9285/18f555fb-4fe4-4d47-8fbe-7bd101a5bc3a.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "b6886009-e60b-44a7-abc2-a575765277ba",
-      "title": "الرجل الرمادي",
-      "cover": "https://uploads.mangadex.org/covers/b6886009-e60b-44a7-abc2-a575765277ba/a8ea60f1-0fef-4af0-b26e-8b761406c114.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "c086153a-0162-412a-9914-a7b2633d0cd3",
-      "title": "JoJo's Bizarre Adventure Part 8 - JoJolion",
-      "cover": "https://uploads.mangadex.org/covers/c086153a-0162-412a-9914-a7b2633d0cd3/ffb4eb56-af0a-4aeb-afd9-fa8bb857cf4b.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
-      "id": "baa95345-24fb-47a9-83e9-434ff671f968",
-      "title": "خلف المتجر ادخن معك",
-      "cover": "https://uploads.mangadex.org/covers/baa95345-24fb-47a9-83e9-434ff671f968/4862f2a1-2852-4c98-a217-e3a44af83152.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     }
