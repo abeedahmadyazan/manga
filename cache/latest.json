@@ -1,7 +1,49 @@
 {
-  "updated_at": "2026-10-28T03:56:03.202608+00:00",
+  "updated_at": "2026-10-28T12:05:30.351858+00:00",
   "count": 50,
   "items": [
+    {
+      "id": "bcfe1b36-daee-40fd-9984-d9597caf9da7",
+      "title": "فَقِيْهَةُ ٱلْمَغُوْلِ",
+      "cover": "https://uploads.mangadex.org/covers/bcfe1b36-daee-40fd-9984-d9597caf9da7/5ce19283-d717-44e2-bb69-4247640d3c75.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "5c9d1254-f074-4b5c-8795-6f0641b2597b",
+      "title": "Girl and Science",
+      "cover": "https://uploads.mangadex.org/covers/5c9d1254-f074-4b5c-8795-6f0641b2597b/f606b3ce-4f64-400e-8a1c-265698f68d01.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "27472687-8e66-4abd-b940-655b426623b1",
+      "title": "Wicked Mega Man",
+      "cover": "https://uploads.mangadex.org/covers/27472687-8e66-4abd-b940-655b426623b1/0298d108-e35d-477c-99e3-d9eb2ec2899c.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "c62b73e5-0cfb-4aef-9425-60393477ab6c",
+      "title": "Dragon Ball Kakumei (Doujinshi)",
+      "cover": "https://uploads.mangadex.org/covers/c62b73e5-0cfb-4aef-9425-60393477ab6c/f273e21d-926a-45ca-bd3f-5a223f9c3336.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "cancelled"
+    },
+    {
+      "id": "63dbbf80-0189-4ae4-a549-68a0caa2f834",
+      "title": "ويتشريف",
+      "cover": "https://uploads.mangadex.org/covers/63dbbf80-0189-4ae4-a549-68a0caa2f834/05f68285-5512-4f20-b6be-764fa4b5789a.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "936f0ba5-ca65-4de4-99b1-528c02a4454d",
+      "title": "Hunter x Hunter (Official Colored)",
+      "cover": "https://uploads.mangadex.org/covers/936f0ba5-ca65-4de4-99b1-528c02a4454d/128d80df-c5e4-4791-b3b7-08586e9db1b8.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
     {
       "id": "ea47525d-99df-45b5-9103-dd853f49f8c3",
       "title": "Welcome to Demon School! Iruma-kun: IruMafia Edition",
@@ -120,13 +162,6 @@
       "cover": "https://uploads.mangadex.org/covers/774f0f04-5023-4e2e-9c0b-f0ed382f078b/9f0534e0-6163-49a2-b515-4798f7aa85fa.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
-    },
-    {
-      "id": "5c9d1254-f074-4b5c-8795-6f0641b2597b",
-      "title": "Girl and Science",
-      "cover": "https://uploads.mangadex.org/covers/5c9d1254-f074-4b5c-8795-6f0641b2597b/f606b3ce-4f64-400e-8a1c-265698f68d01.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
     },
     {
       "id": "b4c93297-b32f-4f90-b619-55456a38b0aa",
@@ -314,41 +349,6 @@
       "id": "d65c0332-3764-4c89-84bd-b1a4e7278ad7",
       "title": "Kagurabachi",
       "cover": "https://uploads.mangadex.org/covers/d65c0332-3764-4c89-84bd-b1a4e7278ad7/3edb80b9-dae6-4483-984d-2e7f8b02b702.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "04598a65-4f1f-4807-a419-d79ca7f67457",
-      "title": "Under Ninja",
-      "cover": "https://uploads.mangadex.org/covers/04598a65-4f1f-4807-a419-d79ca7f67457/4c5713f4-249e-4745-a09e-2f3c33e6497a.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "34f72e29-1bda-40df-ae93-0e1c32d96ea6",
-      "title": "Witch Craft Works",
-      "cover": "https://uploads.mangadex.org/covers/34f72e29-1bda-40df-ae93-0e1c32d96ea6/6bb0efb3-e4c7-47ef-bb2b-28b8a56cb7fe.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
-      "id": "a1c7c817-4e59-43b7-9365-09675a149a6f",
-      "title": "ون بيس",
-      "cover": "https://uploads.mangadex.org/covers/a1c7c817-4e59-43b7-9365-09675a149a6f/2f4aca53-64c7-46ac-ae85-3bc9b3169890.png.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "3ad8d2f2-1afe-43da-a88b-0a790c64939e",
-      "title": "دَينُونَة ماريا",
-      "cover": "https://uploads.mangadex.org/covers/3ad8d2f2-1afe-43da-a88b-0a790c64939e/54ee1212-1e12-40e7-86e5-03dfccc1e2b7.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "87ebd557-8394-4f16-8afe-a8644e555ddc",
-      "title": "Hirayasumi",
-      "cover": "https://uploads.mangadex.org/covers/87ebd557-8394-4f16-8afe-a8644e555ddc/75a77918-462c-4dab-8a23-1246eb093fc7.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     }
