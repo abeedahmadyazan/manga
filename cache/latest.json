@@ -1,7 +1,42 @@
 {
-  "updated_at": "2026-10-31T11:40:15.206876+00:00",
+  "updated_at": "2026-10-31T16:48:20.054442+00:00",
   "count": 50,
   "items": [
+    {
+      "id": "7f1c253d-9557-4abc-b30b-929d7d8db45e",
+      "title": "August 9th, I Will Be Eaten by You.",
+      "cover": "https://uploads.mangadex.org/covers/7f1c253d-9557-4abc-b30b-929d7d8db45e/e07e4f0c-88da-4331-ac49-03b53fb733bf.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "a92bd70d-a716-4e48-90c6-137682742137",
+      "title": "Ron Kamonohashi: Deranged Detective",
+      "cover": "https://uploads.mangadex.org/covers/a92bd70d-a716-4e48-90c6-137682742137/e807ef94-ce90-4aae-99f6-e91fe7a42e60.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "510f29a8-99b4-46af-ba5e-916e96bc6f37",
+      "title": "Fate/type Redline",
+      "cover": "https://uploads.mangadex.org/covers/510f29a8-99b4-46af-ba5e-916e96bc6f37/c1d7aed1-9cd1-426f-bfb8-7e46594d0e29.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "4e0ab019-afcb-4fd9-98eb-fcb28cf7fc81",
+      "title": "مانجا الملكة النحلة شوكهو ميساكي - مينتل-آوت",
+      "cover": "https://uploads.mangadex.org/covers/4e0ab019-afcb-4fd9-98eb-fcb28cf7fc81/71450b93-c970-42e6-bb65-93f45b8e9ac3.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "5c9d1254-f074-4b5c-8795-6f0641b2597b",
+      "title": "Girl and Science",
+      "cover": "https://uploads.mangadex.org/covers/5c9d1254-f074-4b5c-8795-6f0641b2597b/f606b3ce-4f64-400e-8a1c-265698f68d01.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
     {
       "id": "f4045a9e-e5f6-4778-bd33-7a91cefc3f71",
       "title": "For the Sake of My Future Vengeance",
@@ -150,25 +185,11 @@
       "status": "completed"
     },
     {
-      "id": "510f29a8-99b4-46af-ba5e-916e96bc6f37",
-      "title": "Fate/type Redline",
-      "cover": "https://uploads.mangadex.org/covers/510f29a8-99b4-46af-ba5e-916e96bc6f37/c1d7aed1-9cd1-426f-bfb8-7e46594d0e29.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
       "id": "9661f9e7-3c6a-448f-9b1e-2c563ed1e5e9",
       "title": "تاج الحكاية الخيالية",
       "cover": "https://uploads.mangadex.org/covers/9661f9e7-3c6a-448f-9b1e-2c563ed1e5e9/bb9d92b7-e944-4f9f-ad18-da8083db1568.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
-    },
-    {
-      "id": "5c9d1254-f074-4b5c-8795-6f0641b2597b",
-      "title": "Girl and Science",
-      "cover": "https://uploads.mangadex.org/covers/5c9d1254-f074-4b5c-8795-6f0641b2597b/f606b3ce-4f64-400e-8a1c-265698f68d01.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
     },
     {
       "id": "38179337-1640-4927-8851-9bedd8d19e82",
@@ -328,27 +349,6 @@
       "id": "356de811-ae92-48f1-b93b-cfdf0f8d02e4",
       "title": "بما أننا نرسم الآن",
       "cover": "https://uploads.mangadex.org/covers/356de811-ae92-48f1-b93b-cfdf0f8d02e4/60e2c515-06d0-4d61-8aec-5f180f19b1af.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "80c4c4bc-be9c-400a-8cc0-57b1d0b8a87f",
-      "title": "حلقت فجلبت فتاة مدرسة ثانوية إلى المنزل",
-      "cover": "https://uploads.mangadex.org/covers/80c4c4bc-be9c-400a-8cc0-57b1d0b8a87f/a0e289f6-2cb1-4886-bbfe-aa76dede0a77.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
-      "id": "c4b36f15-4ee5-425f-a77d-c2e7cbb970d8",
-      "title": "NIPPON SANGOKU: The Three Nations of the Crimson Sun",
-      "cover": "https://uploads.mangadex.org/covers/c4b36f15-4ee5-425f-a77d-c2e7cbb970d8/e5c54f1b-6ea4-4dd2-ae6e-9d0e138d7c2e.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "d553645b-03a3-4fc8-9a9c-57f91cbbab89",
-      "title": "Are You a Landmine, Chihara-san?",
-      "cover": "https://uploads.mangadex.org/covers/d553645b-03a3-4fc8-9a9c-57f91cbbab89/4878d139-e5ee-49eb-aeb6-1c2f9025624e.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     }
