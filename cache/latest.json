@@ -1,7 +1,28 @@
 {
-  "updated_at": "2026-10-31T03:59:18.639719+00:00",
+  "updated_at": "2026-10-31T11:40:15.206876+00:00",
   "count": 50,
   "items": [
+    {
+      "id": "f4045a9e-e5f6-4778-bd33-7a91cefc3f71",
+      "title": "For the Sake of My Future Vengeance",
+      "cover": "https://uploads.mangadex.org/covers/f4045a9e-e5f6-4778-bd33-7a91cefc3f71/53e634e3-aa3b-4dc3-9171-85e2a71d2ec8.png.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "f7b62193-bdfb-4953-a6c6-0bd1b9a872f9",
+      "title": "نداء البوق: لحن المعركة",
+      "cover": "https://uploads.mangadex.org/covers/f7b62193-bdfb-4953-a6c6-0bd1b9a872f9/85c12e60-fd34-402b-a62a-f2fc2fde5a28.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "4d6decd4-835d-4905-9534-2571dae07bcd",
+      "title": "Lord El-Melloi II-sei no Jikenbo",
+      "cover": "https://uploads.mangadex.org/covers/4d6decd4-835d-4905-9534-2571dae07bcd/5f347aae-bf45-4dcb-828d-2c507db71d2f.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
     {
       "id": "4141c5dc-c525-4df5-afd7-cc7d192a832f",
       "title": "Blue Lock",
@@ -318,13 +339,6 @@
       "status": "completed"
     },
     {
-      "id": "f7b62193-bdfb-4953-a6c6-0bd1b9a872f9",
-      "title": "نداء البوق: لحن المعركة",
-      "cover": "https://uploads.mangadex.org/covers/f7b62193-bdfb-4953-a6c6-0bd1b9a872f9/85c12e60-fd34-402b-a62a-f2fc2fde5a28.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
       "id": "c4b36f15-4ee5-425f-a77d-c2e7cbb970d8",
       "title": "NIPPON SANGOKU: The Three Nations of the Crimson Sun",
       "cover": "https://uploads.mangadex.org/covers/c4b36f15-4ee5-425f-a77d-c2e7cbb970d8/e5c54f1b-6ea4-4dd2-ae6e-9d0e138d7c2e.jpg.256.jpg",
@@ -335,20 +349,6 @@
       "id": "d553645b-03a3-4fc8-9a9c-57f91cbbab89",
       "title": "Are You a Landmine, Chihara-san?",
       "cover": "https://uploads.mangadex.org/covers/d553645b-03a3-4fc8-9a9c-57f91cbbab89/4878d139-e5ee-49eb-aeb6-1c2f9025624e.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "e5ce88e2-8c46-482d-8acf-5c6d5a64a585",
-      "title": "نوراجامي",
-      "cover": "https://uploads.mangadex.org/covers/e5ce88e2-8c46-482d-8acf-5c6d5a64a585/d8009398-6a12-473f-9af9-541b5eef50b6.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
-      "id": "9422a147-c0c8-400d-9106-57cb8ece3dba",
-      "title": "You are Ms. servant",
-      "cover": "https://uploads.mangadex.org/covers/9422a147-c0c8-400d-9106-57cb8ece3dba/7076f364-e1fb-4ddd-8745-cf0c7edc35c5.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     }
