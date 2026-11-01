@@ -1,13 +1,41 @@
 {
-  "updated_at": "2026-11-01T12:39:29.022248+00:00",
+  "updated_at": "2026-11-01T21:40:52.126488+00:00",
   "count": 50,
   "items": [
     {
-      "id": "a92bd70d-a716-4e48-90c6-137682742137",
-      "title": "Ron Kamonohashi: Deranged Detective",
-      "cover": "https://uploads.mangadex.org/covers/a92bd70d-a716-4e48-90c6-137682742137/e807ef94-ce90-4aae-99f6-e91fe7a42e60.jpg.256.jpg",
+      "id": "a6a46436-9ed4-4c20-8b11-6f4a0f74b23a",
+      "title": "Kabuto Mushi",
+      "cover": "https://uploads.mangadex.org/covers/a6a46436-9ed4-4c20-8b11-6f4a0f74b23a/5a16e9bf-0859-4719-bd13-7e5e43e338d7.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "d78db808-93f7-498d-9368-e5767fd85057",
+      "title": "Class 2-B Hero Destroyerz",
+      "cover": "https://uploads.mangadex.org/covers/d78db808-93f7-498d-9368-e5767fd85057/946d7f0f-e48a-4df4-a789-d7688f0aa2b9.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "a1c7c817-4e59-43b7-9365-09675a149a6f",
+      "title": "ون بيس",
+      "cover": "https://uploads.mangadex.org/covers/a1c7c817-4e59-43b7-9365-09675a149a6f/2f4aca53-64c7-46ac-ae85-3bc9b3169890.png.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "b8faa8ab-cb4e-416f-829d-d2a6042ba5ac",
+      "title": "Ikoku Nikki",
+      "cover": "https://uploads.mangadex.org/covers/b8faa8ab-cb4e-416f-829d-d2a6042ba5ac/0ca2f8bf-a33c-46cb-8730-cff51b148314.png.256.jpg",
       "source": "mangadex",
       "status": "completed"
+    },
+    {
+      "id": "04c892b3-a202-46f5-ad11-0d433e712ab8",
+      "title": "Dealing with Mikadono Sisters is a Breeze",
+      "cover": "https://uploads.mangadex.org/covers/04c892b3-a202-46f5-ad11-0d433e712ab8/63756802-4e2b-4a46-a27e-2ab2654247c0.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
     },
     {
       "id": "b5b21ca1-bba5-4b9a-8cd1-6248f731650b",
@@ -17,11 +45,60 @@
       "status": "ongoing"
     },
     {
-      "id": "2d501d2e-72d5-4c3f-9741-117511622a48",
-      "title": "Inazuma Eleven GO Anthology!",
-      "cover": "https://uploads.mangadex.org/covers/2d501d2e-72d5-4c3f-9741-117511622a48/2f28ddc4-5524-44ce-a944-accb1f7b576c.png.256.jpg",
+      "id": "b4c93297-b32f-4f90-b619-55456a38b0aa",
+      "title": "More than a Married Couple, but Not Lovers",
+      "cover": "https://uploads.mangadex.org/covers/b4c93297-b32f-4f90-b619-55456a38b0aa/dd1804e7-56a5-4beb-90ac-d573dee7f1d1.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "hiatus"
+    },
+    {
+      "id": "3169544f-4b87-4a14-917b-f73600941f55",
+      "title": "Noa-Senpai is My Friend.",
+      "cover": "https://uploads.mangadex.org/covers/3169544f-4b87-4a14-917b-f73600941f55/9ead7eb9-9959-4353-8478-b56d121ad87c.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "1116ca63-ca60-46b4-8161-908749a1c2fb",
+      "title": "Flowering Harbor",
+      "cover": "https://uploads.mangadex.org/covers/1116ca63-ca60-46b4-8161-908749a1c2fb/f368a146-5049-4b08-9acb-bc5c54068e1e.jpg.256.jpg",
       "source": "mangadex",
       "status": "completed"
+    },
+    {
+      "id": "569963c5-6b0b-4f92-b561-e1304b78b0dc",
+      "title": "Bungo Stray Dogs: Wan!",
+      "cover": "https://uploads.mangadex.org/covers/569963c5-6b0b-4f92-b561-e1304b78b0dc/53839189-747f-451f-9803-150b428ea77b.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "ff5ef336-72d7-45a2-bc69-c2ae8fbfeec8",
+      "title": "I Am a Hero",
+      "cover": "https://uploads.mangadex.org/covers/ff5ef336-72d7-45a2-bc69-c2ae8fbfeec8/e8ea3a56-09db-47bf-85f0-0bfa17b3ccc1.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "9d9b04ad-9a83-49f4-8ae4-a9a3780fe9c0",
+      "title": "Sakamoto Days",
+      "cover": "https://uploads.mangadex.org/covers/9d9b04ad-9a83-49f4-8ae4-a9a3780fe9c0/f3f1d565-3a66-484a-be9b-28e1b03d9c51.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "774f0f04-5023-4e2e-9c0b-f0ed382f078b",
+      "title": "إينيغماتيكا",
+      "cover": "https://uploads.mangadex.org/covers/774f0f04-5023-4e2e-9c0b-f0ed382f078b/9ec551ba-02ff-4b01-90fc-573efe95f6b6.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "4242c6d3-4ee4-4b0b-9ca0-23bd57952805",
+      "title": "ليس حُبًّا بعدُ، ولكن...",
+      "cover": "https://uploads.mangadex.org/covers/4242c6d3-4ee4-4b0b-9ca0-23bd57952805/c0df0d1a-d8a2-4fb9-844e-8e128bb81c67.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
     },
     {
       "id": "9d3d3403-1a87-4737-9803-bc3d99db1424",
@@ -29,6 +106,41 @@
       "cover": "https://uploads.mangadex.org/covers/9d3d3403-1a87-4737-9803-bc3d99db1424/fac191d0-96c1-4ebb-bf79-b7616d7162ac.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
+    },
+    {
+      "id": "e0589f47-72f9-4e9a-ac31-5b88bcad6220",
+      "title": "The Wrong Way to Use Healing Magic",
+      "cover": "https://uploads.mangadex.org/covers/e0589f47-72f9-4e9a-ac31-5b88bcad6220/f00600e5-f528-4239-84da-8810222dda78.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "141609b6-cf86-4266-904c-6648f389cdc9",
+      "title": "RuriDragon",
+      "cover": "https://uploads.mangadex.org/covers/141609b6-cf86-4266-904c-6648f389cdc9/216d1ce9-2195-4ad3-9502-be95b06a3502.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "5c9d1254-f074-4b5c-8795-6f0641b2597b",
+      "title": "Girl and Science",
+      "cover": "https://uploads.mangadex.org/covers/5c9d1254-f074-4b5c-8795-6f0641b2597b/f606b3ce-4f64-400e-8a1c-265698f68d01.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "a92bd70d-a716-4e48-90c6-137682742137",
+      "title": "Ron Kamonohashi: Deranged Detective",
+      "cover": "https://uploads.mangadex.org/covers/a92bd70d-a716-4e48-90c6-137682742137/e807ef94-ce90-4aae-99f6-e91fe7a42e60.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "2d501d2e-72d5-4c3f-9741-117511622a48",
+      "title": "Inazuma Eleven GO Anthology!",
+      "cover": "https://uploads.mangadex.org/covers/2d501d2e-72d5-4c3f-9741-117511622a48/2f28ddc4-5524-44ce-a944-accb1f7b576c.png.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
     },
     {
       "id": "d7037b2a-874a-4360-8a7b-07f2899152fd",
@@ -108,13 +220,6 @@
       "status": "ongoing"
     },
     {
-      "id": "5c9d1254-f074-4b5c-8795-6f0641b2597b",
-      "title": "Girl and Science",
-      "cover": "https://uploads.mangadex.org/covers/5c9d1254-f074-4b5c-8795-6f0641b2597b/f606b3ce-4f64-400e-8a1c-265698f68d01.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
       "id": "f7b62193-bdfb-4953-a6c6-0bd1b9a872f9",
       "title": "نداء البوق: لحن المعركة",
       "cover": "https://uploads.mangadex.org/covers/f7b62193-bdfb-4953-a6c6-0bd1b9a872f9/85c12e60-fd34-402b-a62a-f2fc2fde5a28.jpg.256.jpg",
@@ -132,13 +237,6 @@
       "id": "4141c5dc-c525-4df5-afd7-cc7d192a832f",
       "title": "Blue Lock",
       "cover": "https://uploads.mangadex.org/covers/4141c5dc-c525-4df5-afd7-cc7d192a832f/7ee723d4-b926-4a81-acd9-53adb3fbe461.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "3169544f-4b87-4a14-917b-f73600941f55",
-      "title": "Noa-Senpai is My Friend.",
-      "cover": "https://uploads.mangadex.org/covers/3169544f-4b87-4a14-917b-f73600941f55/9ead7eb9-9959-4353-8478-b56d121ad87c.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
@@ -251,104 +349,6 @@
       "id": "6134ba15-d83a-4356-a555-62caa0127cc2",
       "title": "Gekiman! - Devilman Chapter",
       "cover": "https://uploads.mangadex.org/covers/6134ba15-d83a-4356-a555-62caa0127cc2/c1588b03-1ee2-4cab-8361-7fb75c7760de.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
-      "id": "9661f9e7-3c6a-448f-9b1e-2c563ed1e5e9",
-      "title": "تاج الحكاية الخيالية",
-      "cover": "https://uploads.mangadex.org/covers/9661f9e7-3c6a-448f-9b1e-2c563ed1e5e9/bb9d92b7-e944-4f9f-ad18-da8083db1568.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "38179337-1640-4927-8851-9bedd8d19e82",
-      "title": "Aren't You Too Sweet Salt-God Sato-San?",
-      "cover": "https://uploads.mangadex.org/covers/38179337-1640-4927-8851-9bedd8d19e82/5466e035-50de-4ff5-86bf-29525a862203.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "77296cee-0b74-415f-914d-6f29036d3906",
-      "title": "مسرحية الجبل",
-      "cover": "https://uploads.mangadex.org/covers/77296cee-0b74-415f-914d-6f29036d3906/6cfbaeb6-59ae-4971-bfaa-3b026b6c9ad9.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "baaa0ca4-efef-4b15-b91a-c1f85692c2a7",
-      "title": "Vampire Knight",
-      "cover": "https://uploads.mangadex.org/covers/baaa0ca4-efef-4b15-b91a-c1f85692c2a7/d195f918-5f67-46a0-925f-eabc16fb40a3.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
-      "id": "59ef045c-0712-4f15-bb54-52bffd87481b",
-      "title": "محب الهيتو",
-      "cover": "https://uploads.mangadex.org/covers/59ef045c-0712-4f15-bb54-52bffd87481b/f0e8af3d-6458-4a79-bf8a-5e970373c967.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "db692d58-4b13-4174-ae8c-30c515c0689c",
-      "title": "Hunter x Hunter",
-      "cover": "https://uploads.mangadex.org/covers/db692d58-4b13-4174-ae8c-30c515c0689c/aa112927-f1e5-4fe4-a4db-7fd4a1536e3c.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "hiatus"
-    },
-    {
-      "id": "29ab6984-7c1d-4d45-b925-25aa082b492e",
-      "title": "Shangri-La Frontier: From Trash-Game Hunter to God-Tier Game Master!",
-      "cover": "https://uploads.mangadex.org/covers/29ab6984-7c1d-4d45-b925-25aa082b492e/0367d616-0570-459a-9525-1d2083aad788.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "af7cc594-4f6a-4c0a-8f74-16748910dee5",
-      "title": "Akagami no Shirayukihime",
-      "cover": "https://uploads.mangadex.org/covers/af7cc594-4f6a-4c0a-8f74-16748910dee5/8dec8f9f-9762-4f47-9ad6-2ccd3c721043.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "fd2d7c3e-87ab-4775-a1e3-17403994043b",
-      "title": "The Witch and the Mercenary",
-      "cover": "https://uploads.mangadex.org/covers/fd2d7c3e-87ab-4775-a1e3-17403994043b/e0269401-b1ab-4a06-8452-74996f6eaa8f.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "52ede55c-1584-4019-b85b-3902a423c3ab",
-      "title": "FAIRY TAIL: 100 Years Quest",
-      "cover": "https://uploads.mangadex.org/covers/52ede55c-1584-4019-b85b-3902a423c3ab/8e18a9d7-27ed-48ff-924b-a397df5ba0a0.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "512cd78f-cbb8-460a-bafd-e8840c0f7c31",
-      "title": "Sword Art Online: Unital Ring",
-      "cover": "https://uploads.mangadex.org/covers/512cd78f-cbb8-460a-bafd-e8840c0f7c31/ca55cadb-356d-4d3b-b83c-1f1478a09ee6.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "a76b6b97-e434-40d6-b7c5-6026d22986d6",
-      "title": "رجلة الجنية السوداء ذات القوى المتلاشية",
-      "cover": "https://uploads.mangadex.org/covers/a76b6b97-e434-40d6-b7c5-6026d22986d6/8f40381d-188c-4a28-b492-25c07a7684a5.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "484f94e7-35c3-4cb5-a068-53d684c1439a",
-      "title": "Baki Part 6",
-      "cover": "https://uploads.mangadex.org/covers/484f94e7-35c3-4cb5-a068-53d684c1439a/863ae891-3627-4070-8918-4a626dc9d1ff.png.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "b8faa8ab-cb4e-416f-829d-d2a6042ba5ac",
-      "title": "Ikoku Nikki",
-      "cover": "https://uploads.mangadex.org/covers/b8faa8ab-cb4e-416f-829d-d2a6042ba5ac/0ca2f8bf-a33c-46cb-8730-cff51b148314.png.256.jpg",
       "source": "mangadex",
       "status": "completed"
     }
