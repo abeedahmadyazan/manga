@@ -1,7 +1,28 @@
 {
-  "updated_at": "2026-11-02T04:21:03.159158+00:00",
+  "updated_at": "2026-11-02T14:43:50.006367+00:00",
   "count": 50,
   "items": [
+    {
+      "id": "5c9d1254-f074-4b5c-8795-6f0641b2597b",
+      "title": "Girl and Science",
+      "cover": "https://uploads.mangadex.org/covers/5c9d1254-f074-4b5c-8795-6f0641b2597b/f606b3ce-4f64-400e-8a1c-265698f68d01.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "097ba2ca-4f27-439d-b74b-623443924e75",
+      "title": "ليس لِلحرب وجهٌ أنثوي",
+      "cover": "https://uploads.mangadex.org/covers/097ba2ca-4f27-439d-b74b-623443924e75/3dd0c4db-e251-483c-a2ea-8f615b5fa49e.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "936f0ba5-ca65-4de4-99b1-528c02a4454d",
+      "title": "Hunter x Hunter (Official Colored)",
+      "cover": "https://uploads.mangadex.org/covers/936f0ba5-ca65-4de4-99b1-528c02a4454d/128d80df-c5e4-4791-b3b7-08586e9db1b8.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
     {
       "id": "ad75039d-686c-457f-b478-e56fc3b3c069",
       "title": "I Started Working a Housekeeping Job and Ended up Being Liked by the Family of the Most Beautiful Girl in School.",
@@ -162,13 +183,6 @@
       "cover": "https://uploads.mangadex.org/covers/141609b6-cf86-4266-904c-6648f389cdc9/216d1ce9-2195-4ad3-9502-be95b06a3502.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
-    },
-    {
-      "id": "5c9d1254-f074-4b5c-8795-6f0641b2597b",
-      "title": "Girl and Science",
-      "cover": "https://uploads.mangadex.org/covers/5c9d1254-f074-4b5c-8795-6f0641b2597b/f606b3ce-4f64-400e-8a1c-265698f68d01.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
     },
     {
       "id": "a92bd70d-a716-4e48-90c6-137682742137",
@@ -335,20 +349,6 @@
       "id": "b340d77a-6bfe-4f33-8352-4d305ecf264c",
       "title": "Daemons of the Shadow Realm",
       "cover": "https://uploads.mangadex.org/covers/b340d77a-6bfe-4f33-8352-4d305ecf264c/6bab033f-f78d-48ff-9a11-7cd37e959dbd.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "8847f905-550d-4fe6-bcda-ac2b896789c7",
-      "title": "Golden Kamuy",
-      "cover": "https://uploads.mangadex.org/covers/8847f905-550d-4fe6-bcda-ac2b896789c7/e96cfe6d-7876-4558-b4bc-0930deb5060a.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
-      "id": "34019331-7377-4e2c-837e-f6e1ab2b5ef7",
-      "title": "The Seven Deadly Sins: Four Knights of the Apocalypse",
-      "cover": "https://uploads.mangadex.org/covers/34019331-7377-4e2c-837e-f6e1ab2b5ef7/89099c0b-6ae9-4082-af05-229704937453.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     }
