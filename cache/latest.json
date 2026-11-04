@@ -1,7 +1,42 @@
 {
-  "updated_at": "2026-11-03T22:53:41.819838+00:00",
+  "updated_at": "2026-11-04T04:47:53.533905+00:00",
   "count": 50,
   "items": [
+    {
+      "id": "22d6d048-9f9f-4c3a-95c2-3b145f110e20",
+      "title": "I'm in Love with the Villainess",
+      "cover": "https://uploads.mangadex.org/covers/22d6d048-9f9f-4c3a-95c2-3b145f110e20/38ba706a-2394-4ac4-b9ef-7fcda0c39f49.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "8a38bcc4-0a52-4a46-9d02-7fc802048b1d",
+      "title": "Shinobi Undercover",
+      "cover": "https://uploads.mangadex.org/covers/8a38bcc4-0a52-4a46-9d02-7fc802048b1d/2fd4b15d-7575-49ec-add2-d1ff0759543a.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "3169544f-4b87-4a14-917b-f73600941f55",
+      "title": "Noa-Senpai is My Friend.",
+      "cover": "https://uploads.mangadex.org/covers/3169544f-4b87-4a14-917b-f73600941f55/9ead7eb9-9959-4353-8478-b56d121ad87c.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "114f08df-91de-4504-a5c7-8eaf51ff695c",
+      "title": "Kitakubu Katsudou Kiroku",
+      "cover": "https://uploads.mangadex.org/covers/114f08df-91de-4504-a5c7-8eaf51ff695c/5951f5b7-d8cc-4f11-ba21-a01e300de2eb.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "b4c93297-b32f-4f90-b619-55456a38b0aa",
+      "title": "More than a Married Couple, but Not Lovers",
+      "cover": "https://uploads.mangadex.org/covers/b4c93297-b32f-4f90-b619-55456a38b0aa/dd1804e7-56a5-4beb-90ac-d573dee7f1d1.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
     {
       "id": "d00bd104-d9b2-4ee9-a088-b5065d1c406a",
       "title": "A Certain Scientific Railgun",
@@ -27,13 +62,6 @@
       "id": "87ffa375-bd2c-49ba-ba0c-6d78ea07c342",
       "title": "Medaka Kuroiwa is Impervious to My Charms",
       "cover": "https://uploads.mangadex.org/covers/87ffa375-bd2c-49ba-ba0c-6d78ea07c342/28e38262-232a-4f48-bc32-4ac04dc07c88.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "b4c93297-b32f-4f90-b619-55456a38b0aa",
-      "title": "More than a Married Couple, but Not Lovers",
-      "cover": "https://uploads.mangadex.org/covers/b4c93297-b32f-4f90-b619-55456a38b0aa/dd1804e7-56a5-4beb-90ac-d573dee7f1d1.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
@@ -90,6 +118,13 @@
       "id": "59ef045c-0712-4f15-bb54-52bffd87481b",
       "title": "محب الهيتو",
       "cover": "https://uploads.mangadex.org/covers/59ef045c-0712-4f15-bb54-52bffd87481b/f0e8af3d-6458-4a79-bf8a-5e970373c967.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "66147372-c339-4435-b4f6-a164099973b3",
+      "title": "فصل العقول الجماعية",
+      "cover": "https://uploads.mangadex.org/covers/66147372-c339-4435-b4f6-a164099973b3/7327c3c7-a2d4-4c75-9a3b-c2bd94160d42.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
@@ -255,13 +290,6 @@
       "status": "ongoing"
     },
     {
-      "id": "3169544f-4b87-4a14-917b-f73600941f55",
-      "title": "Noa-Senpai is My Friend.",
-      "cover": "https://uploads.mangadex.org/covers/3169544f-4b87-4a14-917b-f73600941f55/9ead7eb9-9959-4353-8478-b56d121ad87c.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
       "id": "1116ca63-ca60-46b4-8161-908749a1c2fb",
       "title": "Flowering Harbor",
       "cover": "https://uploads.mangadex.org/covers/1116ca63-ca60-46b4-8161-908749a1c2fb/f368a146-5049-4b08-9acb-bc5c54068e1e.jpg.256.jpg",
@@ -323,34 +351,6 @@
       "cover": "https://uploads.mangadex.org/covers/a92bd70d-a716-4e48-90c6-137682742137/e807ef94-ce90-4aae-99f6-e91fe7a42e60.jpg.256.jpg",
       "source": "mangadex",
       "status": "completed"
-    },
-    {
-      "id": "2d501d2e-72d5-4c3f-9741-117511622a48",
-      "title": "Inazuma Eleven GO Anthology!",
-      "cover": "https://uploads.mangadex.org/covers/2d501d2e-72d5-4c3f-9741-117511622a48/2f28ddc4-5524-44ce-a944-accb1f7b576c.png.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
-      "id": "d7037b2a-874a-4360-8a7b-07f2899152fd",
-      "title": "إيروما-كن في مدرسة الشياطين",
-      "cover": "https://uploads.mangadex.org/covers/d7037b2a-874a-4360-8a7b-07f2899152fd/59ab55ed-a537-426e-b755-6337740df580.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "cbf174ca-af25-4410-82fa-498a6df9ad3c",
-      "title": "BE BLUES! ~นักเตะเลือดซามูไร~",
-      "cover": "https://uploads.mangadex.org/covers/cbf174ca-af25-4410-82fa-498a6df9ad3c/793ba37f-6b51-4293-b13c-6e8afa968197.png.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
-      "id": "61830b36-1712-4b7b-9421-f671e9ced6d3",
-      "title": "تَعَلُم حب زميلتي القططية",
-      "cover": "https://uploads.mangadex.org/covers/61830b36-1712-4b7b-9421-f671e9ced6d3/ce6d27a5-a1bb-42e0-96a9-c1405964d39d.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
     }
   ]
 }
