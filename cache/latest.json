@@ -1,7 +1,84 @@
 {
-  "updated_at": "2026-11-05T05:02:01.624365+00:00",
+  "updated_at": "2026-11-05T13:58:13.144241+00:00",
   "count": 50,
   "items": [
+    {
+      "id": "26102334-1f7b-4a5b-a64f-107c5c24a70f",
+      "title": "Mao",
+      "cover": "https://uploads.mangadex.org/covers/26102334-1f7b-4a5b-a64f-107c5c24a70f/156b9fd5-0bb1-441f-958c-ed273888b69b.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "17ce37ea-1cda-4429-b062-c4b627814225",
+      "title": "سيراف النهاية",
+      "cover": "https://uploads.mangadex.org/covers/17ce37ea-1cda-4429-b062-c4b627814225/31e31704-e6e2-474a-a857-b18580a0057b.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "5c9d1254-f074-4b5c-8795-6f0641b2597b",
+      "title": "Girl and Science",
+      "cover": "https://uploads.mangadex.org/covers/5c9d1254-f074-4b5c-8795-6f0641b2597b/f606b3ce-4f64-400e-8a1c-265698f68d01.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "f5c25341-d6ff-4585-8548-3a48fc7654d9",
+      "title": "Akira Failing in Love",
+      "cover": "https://uploads.mangadex.org/covers/f5c25341-d6ff-4585-8548-3a48fc7654d9/26bd1cd9-bb1b-42d8-aa92-f916122c606c.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "b4c93297-b32f-4f90-b619-55456a38b0aa",
+      "title": "More than a Married Couple, but Not Lovers",
+      "cover": "https://uploads.mangadex.org/covers/b4c93297-b32f-4f90-b619-55456a38b0aa/dd1804e7-56a5-4beb-90ac-d573dee7f1d1.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "87ffa375-bd2c-49ba-ba0c-6d78ea07c342",
+      "title": "Medaka Kuroiwa is Impervious to My Charms",
+      "cover": "https://uploads.mangadex.org/covers/87ffa375-bd2c-49ba-ba0c-6d78ea07c342/28e38262-232a-4f48-bc32-4ac04dc07c88.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "c4ca02fb-8378-433b-8049-fbbea5d25cba",
+      "title": "هايميا-سينباي حسناء مهيبة!",
+      "cover": "https://uploads.mangadex.org/covers/c4ca02fb-8378-433b-8049-fbbea5d25cba/7ab29404-0ebd-4862-ad4e-e4ea1ffe231f.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "d8a959f7-648e-4c8d-8f23-f1f3f8e129f3",
+      "title": "ون بنش مان",
+      "cover": "https://uploads.mangadex.org/covers/d8a959f7-648e-4c8d-8f23-f1f3f8e129f3/d22cfde3-268a-48a3-b5ed-73772834764d.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "c4b36f15-4ee5-425f-a77d-c2e7cbb970d8",
+      "title": "NIPPON SANGOKU: The Three Nations of the Crimson Sun",
+      "cover": "https://uploads.mangadex.org/covers/c4b36f15-4ee5-425f-a77d-c2e7cbb970d8/e5c54f1b-6ea4-4dd2-ae6e-9d0e138d7c2e.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "e41721c0-f7cf-49c1-9712-8543e1ea7c99",
+      "title": "Witch Hunter",
+      "cover": "https://uploads.mangadex.org/covers/e41721c0-f7cf-49c1-9712-8543e1ea7c99/1315f953-c535-4011-aed3-501f60757713.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "29ab6984-7c1d-4d45-b925-25aa082b492e",
+      "title": "Shangri-La Frontier: From Trash-Game Hunter to God-Tier Game Master!",
+      "cover": "https://uploads.mangadex.org/covers/29ab6984-7c1d-4d45-b925-25aa082b492e/0367d616-0570-459a-9525-1d2083aad788.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
     {
       "id": "37f5cce0-8070-4ada-96e5-fa24b1bd4ff9",
       "title": "Kaguya-sama: Love Is War",
@@ -24,13 +101,6 @@
       "status": "completed"
     },
     {
-      "id": "b4c93297-b32f-4f90-b619-55456a38b0aa",
-      "title": "More than a Married Couple, but Not Lovers",
-      "cover": "https://uploads.mangadex.org/covers/b4c93297-b32f-4f90-b619-55456a38b0aa/dd1804e7-56a5-4beb-90ac-d573dee7f1d1.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
       "id": "d64b0768-bebe-433c-b923-99870503c0a3",
       "title": "Dark Gathering",
       "cover": "https://uploads.mangadex.org/covers/d64b0768-bebe-433c-b923-99870503c0a3/6ba0bedc-fd0f-45c1-954d-bd61df43f83b.jpg.256.jpg",
@@ -41,13 +111,6 @@
       "id": "418791c0-35cf-4f87-936b-acd9cddf0989",
       "title": "The Fragrant Flower Blooms with Dignity",
       "cover": "https://uploads.mangadex.org/covers/418791c0-35cf-4f87-936b-acd9cddf0989/6e823d0e-103a-4cf9-a312-a3a292ccb12d.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "c4ca02fb-8378-433b-8049-fbbea5d25cba",
-      "title": "هايميا-سينباي حسناء مهيبة!",
-      "cover": "https://uploads.mangadex.org/covers/c4ca02fb-8378-433b-8049-fbbea5d25cba/7ab29404-0ebd-4862-ad4e-e4ea1ffe231f.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
@@ -69,13 +132,6 @@
       "id": "37f1ddff-38a5-4e42-ba9a-ce967702dfb6",
       "title": "Bartlet Fairy Basslet",
       "cover": "https://uploads.mangadex.org/covers/37f1ddff-38a5-4e42-ba9a-ce967702dfb6/22ed72bc-6a4c-4a55-9d7a-059b1b2a3c9d.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "d8a959f7-648e-4c8d-8f23-f1f3f8e129f3",
-      "title": "ون بنش مان",
-      "cover": "https://uploads.mangadex.org/covers/d8a959f7-648e-4c8d-8f23-f1f3f8e129f3/d22cfde3-268a-48a3-b5ed-73772834764d.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
@@ -192,13 +248,6 @@
       "status": "ongoing"
     },
     {
-      "id": "5c9d1254-f074-4b5c-8795-6f0641b2597b",
-      "title": "Girl and Science",
-      "cover": "https://uploads.mangadex.org/covers/5c9d1254-f074-4b5c-8795-6f0641b2597b/f606b3ce-4f64-400e-8a1c-265698f68d01.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
       "id": "bcfe1b36-daee-40fd-9984-d9597caf9da7",
       "title": "فَقِيْهَةُ ٱلْمَغُوْلِ",
       "cover": "https://uploads.mangadex.org/covers/bcfe1b36-daee-40fd-9984-d9597caf9da7/5ce19283-d717-44e2-bb69-4247640d3c75.jpg.256.jpg",
@@ -269,20 +318,6 @@
       "status": "ongoing"
     },
     {
-      "id": "87ffa375-bd2c-49ba-ba0c-6d78ea07c342",
-      "title": "Medaka Kuroiwa is Impervious to My Charms",
-      "cover": "https://uploads.mangadex.org/covers/87ffa375-bd2c-49ba-ba0c-6d78ea07c342/28e38262-232a-4f48-bc32-4ac04dc07c88.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "c4b36f15-4ee5-425f-a77d-c2e7cbb970d8",
-      "title": "NIPPON SANGOKU: The Three Nations of the Crimson Sun",
-      "cover": "https://uploads.mangadex.org/covers/c4b36f15-4ee5-425f-a77d-c2e7cbb970d8/e5c54f1b-6ea4-4dd2-ae6e-9d0e138d7c2e.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
       "id": "569963c5-6b0b-4f92-b561-e1304b78b0dc",
       "title": "Bungo Stray Dogs: Wan!",
       "cover": "https://uploads.mangadex.org/covers/569963c5-6b0b-4f92-b561-e1304b78b0dc/53839189-747f-451f-9803-150b428ea77b.jpg.256.jpg",
@@ -314,41 +349,6 @@
       "id": "66147372-c339-4435-b4f6-a164099973b3",
       "title": "فصل العقول الجماعية",
       "cover": "https://uploads.mangadex.org/covers/66147372-c339-4435-b4f6-a164099973b3/7327c3c7-a2d4-4c75-9a3b-c2bd94160d42.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "29ab6984-7c1d-4d45-b925-25aa082b492e",
-      "title": "Shangri-La Frontier: From Trash-Game Hunter to God-Tier Game Master!",
-      "cover": "https://uploads.mangadex.org/covers/29ab6984-7c1d-4d45-b925-25aa082b492e/0367d616-0570-459a-9525-1d2083aad788.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "e41721c0-f7cf-49c1-9712-8543e1ea7c99",
-      "title": "Witch Hunter",
-      "cover": "https://uploads.mangadex.org/covers/e41721c0-f7cf-49c1-9712-8543e1ea7c99/1315f953-c535-4011-aed3-501f60757713.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "62b74aa6-24df-4b91-b76d-39e7ab3c3ca5",
-      "title": "حقيقي",
-      "cover": "https://uploads.mangadex.org/covers/62b74aa6-24df-4b91-b76d-39e7ab3c3ca5/447b6696-a834-444a-bf17-034648ffeef1.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "59f47645-66a9-443e-8228-788313c3ae3c",
-      "title": "Tokyo Ghoul: re",
-      "cover": "https://uploads.mangadex.org/covers/59f47645-66a9-443e-8228-788313c3ae3c/c41d1081-cdb2-4c90-8028-61844823515b.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
-      "id": "dea77c2d-dbaa-434a-b0af-0c116642434c",
-      "title": "Ichi the Witch",
-      "cover": "https://uploads.mangadex.org/covers/dea77c2d-dbaa-434a-b0af-0c116642434c/fb86f4d6-40cd-4cae-b557-fc0981d670ee.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     }
