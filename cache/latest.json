@@ -1,7 +1,77 @@
 {
-  "updated_at": "2026-11-05T13:58:13.144241+00:00",
+  "updated_at": "2026-11-05T23:14:55.332737+00:00",
   "count": 50,
   "items": [
+    {
+      "id": "b8faa8ab-cb4e-416f-829d-d2a6042ba5ac",
+      "title": "Ikoku Nikki",
+      "cover": "https://uploads.mangadex.org/covers/b8faa8ab-cb4e-416f-829d-d2a6042ba5ac/0ca2f8bf-a33c-46cb-8730-cff51b148314.png.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "62b74aa6-24df-4b91-b76d-39e7ab3c3ca5",
+      "title": "حقيقي",
+      "cover": "https://uploads.mangadex.org/covers/62b74aa6-24df-4b91-b76d-39e7ab3c3ca5/447b6696-a834-444a-bf17-034648ffeef1.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "569963c5-6b0b-4f92-b561-e1304b78b0dc",
+      "title": "Bungo Stray Dogs: Wan!",
+      "cover": "https://uploads.mangadex.org/covers/569963c5-6b0b-4f92-b561-e1304b78b0dc/53839189-747f-451f-9803-150b428ea77b.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "a1c7c817-4e59-43b7-9365-09675a149a6f",
+      "title": "ون بيس",
+      "cover": "https://uploads.mangadex.org/covers/a1c7c817-4e59-43b7-9365-09675a149a6f/2f4aca53-64c7-46ac-ae85-3bc9b3169890.png.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "c4ca02fb-8378-433b-8049-fbbea5d25cba",
+      "title": "هايميا-سينباي حسناء مهيبة!",
+      "cover": "https://uploads.mangadex.org/covers/c4ca02fb-8378-433b-8049-fbbea5d25cba/7ab29404-0ebd-4862-ad4e-e4ea1ffe231f.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "077a3fed-1634-424f-be7a-9a96b7f07b78",
+      "title": "مملكة",
+      "cover": "https://uploads.mangadex.org/covers/077a3fed-1634-424f-be7a-9a96b7f07b78/8bc7a592-764d-4a89-a0ae-741347b894ce.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "3df1a9a3-a1be-47a3-9e90-9b3e55b1d0ac",
+      "title": "الشخص الخطير في قلبي",
+      "cover": "https://uploads.mangadex.org/covers/3df1a9a3-a1be-47a3-9e90-9b3e55b1d0ac/580b9129-f75c-41d8-80b6-7146a7355452.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "b05918e4-fb1a-4b10-a919-eaecf00fd7dd",
+      "title": "Tower Dungeon",
+      "cover": "https://uploads.mangadex.org/covers/b05918e4-fb1a-4b10-a919-eaecf00fd7dd/66d623c6-4e9d-4ced-acbe-3f5fcfeecbed.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "fa85b2aa-370c-41c5-96ae-29b05c848f3d",
+      "title": "Innocent",
+      "cover": "https://uploads.mangadex.org/covers/fa85b2aa-370c-41c5-96ae-29b05c848f3d/3d562b75-ca28-4a65-87a9-2e3f73657456.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "63dbbf80-0189-4ae4-a549-68a0caa2f834",
+      "title": "ويتشريف",
+      "cover": "https://uploads.mangadex.org/covers/63dbbf80-0189-4ae4-a549-68a0caa2f834/05f68285-5512-4f20-b6be-764fa4b5789a.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
     {
       "id": "26102334-1f7b-4a5b-a64f-107c5c24a70f",
       "title": "Mao",
@@ -41,13 +111,6 @@
       "id": "87ffa375-bd2c-49ba-ba0c-6d78ea07c342",
       "title": "Medaka Kuroiwa is Impervious to My Charms",
       "cover": "https://uploads.mangadex.org/covers/87ffa375-bd2c-49ba-ba0c-6d78ea07c342/28e38262-232a-4f48-bc32-4ac04dc07c88.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "c4ca02fb-8378-433b-8049-fbbea5d25cba",
-      "title": "هايميا-سينباي حسناء مهيبة!",
-      "cover": "https://uploads.mangadex.org/covers/c4ca02fb-8378-433b-8049-fbbea5d25cba/7ab29404-0ebd-4862-ad4e-e4ea1ffe231f.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
@@ -152,7 +215,7 @@
     {
       "id": "0a580438-bc72-4503-940b-12a5da881b56",
       "title": "أنتِ زهرة الحظ",
-      "cover": "https://uploads.mangadex.org/covers/0a580438-bc72-4503-940b-12a5da881b56/58b42b36-0dc5-4e50-ac2e-cdfb311b63c6.jpg.256.jpg",
+      "cover": "https://uploads.mangadex.org/covers/0a580438-bc72-4503-940b-12a5da881b56/4b9aa4eb-4356-417a-bb74-4dc879141e19.jpg.256.jpg",
       "source": "mangadex",
       "status": "completed"
     },
@@ -286,69 +349,6 @@
       "id": "3169544f-4b87-4a14-917b-f73600941f55",
       "title": "Noa-Senpai is My Friend.",
       "cover": "https://uploads.mangadex.org/covers/3169544f-4b87-4a14-917b-f73600941f55/9ead7eb9-9959-4353-8478-b56d121ad87c.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "114f08df-91de-4504-a5c7-8eaf51ff695c",
-      "title": "Kitakubu Katsudou Kiroku",
-      "cover": "https://uploads.mangadex.org/covers/114f08df-91de-4504-a5c7-8eaf51ff695c/5951f5b7-d8cc-4f11-ba21-a01e300de2eb.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
-      "id": "d00bd104-d9b2-4ee9-a088-b5065d1c406a",
-      "title": "A Certain Scientific Railgun",
-      "cover": "https://uploads.mangadex.org/covers/d00bd104-d9b2-4ee9-a088-b5065d1c406a/47e96623-5363-4de2-908c-c649c31bba92.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
-      "id": "04c892b3-a202-46f5-ad11-0d433e712ab8",
-      "title": "Dealing with Mikadono Sisters is a Breeze",
-      "cover": "https://uploads.mangadex.org/covers/04c892b3-a202-46f5-ad11-0d433e712ab8/63756802-4e2b-4a46-a27e-2ab2654247c0.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "25e1d17b-6a4d-4698-a4f6-bf53460c10af",
-      "title": "حافلة لإثنين",
-      "cover": "https://uploads.mangadex.org/covers/25e1d17b-6a4d-4698-a4f6-bf53460c10af/64c63729-ed1c-47bb-a13f-8fc5d963693c.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "569963c5-6b0b-4f92-b561-e1304b78b0dc",
-      "title": "Bungo Stray Dogs: Wan!",
-      "cover": "https://uploads.mangadex.org/covers/569963c5-6b0b-4f92-b561-e1304b78b0dc/53839189-747f-451f-9803-150b428ea77b.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "b73371d4-02dd-4db0-b448-d9afa3d698f1",
-      "title": "Aoashi",
-      "cover": "https://uploads.mangadex.org/covers/b73371d4-02dd-4db0-b448-d9afa3d698f1/8ecd4b0f-5746-4f75-a836-c132d361d9ee.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
-      "id": "b6886009-e60b-44a7-abc2-a575765277ba",
-      "title": "الرجل الرمادي",
-      "cover": "https://uploads.mangadex.org/covers/b6886009-e60b-44a7-abc2-a575765277ba/a8ea60f1-0fef-4af0-b26e-8b761406c114.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "9661f9e7-3c6a-448f-9b1e-2c563ed1e5e9",
-      "title": "تاج الحكاية الخيالية",
-      "cover": "https://uploads.mangadex.org/covers/9661f9e7-3c6a-448f-9b1e-2c563ed1e5e9/bb9d92b7-e944-4f9f-ad18-da8083db1568.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "66147372-c339-4435-b4f6-a164099973b3",
-      "title": "فصل العقول الجماعية",
-      "cover": "https://uploads.mangadex.org/covers/66147372-c339-4435-b4f6-a164099973b3/7327c3c7-a2d4-4c75-9a3b-c2bd94160d42.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     }
