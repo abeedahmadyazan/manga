@@ -1,7 +1,28 @@
 {
-  "updated_at": "2026-11-05T23:14:55.332737+00:00",
+  "updated_at": "2026-11-06T05:01:26.215294+00:00",
   "count": 50,
   "items": [
+    {
+      "id": "ea47525d-99df-45b5-9103-dd853f49f8c3",
+      "title": "Welcome to Demon School! Iruma-kun: IruMafia Edition",
+      "cover": "https://uploads.mangadex.org/covers/ea47525d-99df-45b5-9103-dd853f49f8c3/36bf283d-531f-4937-a3a7-2a8a05ccae2e.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "eeb2ab0e-7dbc-4f0c-b476-8181d44217a8",
+      "title": "الوهم السماوي",
+      "cover": "https://uploads.mangadex.org/covers/eeb2ab0e-7dbc-4f0c-b476-8181d44217a8/77404730-da69-4765-91e2-d09b5c2c5239.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "d7037b2a-874a-4360-8a7b-07f2899152fd",
+      "title": "إيروما-كن في مدرسة الشياطين",
+      "cover": "https://uploads.mangadex.org/covers/d7037b2a-874a-4360-8a7b-07f2899152fd/59ab55ed-a537-426e-b755-6337740df580.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
     {
       "id": "b8faa8ab-cb4e-416f-829d-d2a6042ba5ac",
       "title": "Ikoku Nikki",
@@ -150,13 +171,6 @@
       "status": "completed"
     },
     {
-      "id": "d7037b2a-874a-4360-8a7b-07f2899152fd",
-      "title": "إيروما-كن في مدرسة الشياطين",
-      "cover": "https://uploads.mangadex.org/covers/d7037b2a-874a-4360-8a7b-07f2899152fd/59ab55ed-a537-426e-b755-6337740df580.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
       "id": "5ef4e73e-6fbc-456b-b7e1-4642256f666d",
       "title": "Re:ZERO -Starting Life in Another World-, Chapter 1: A Day in the Capital",
       "cover": "https://uploads.mangadex.org/covers/5ef4e73e-6fbc-456b-b7e1-4642256f666d/cd16e931-ef17-4202-a8ad-461b052a1dc1.jpg.256.jpg",
@@ -218,13 +232,6 @@
       "cover": "https://uploads.mangadex.org/covers/0a580438-bc72-4503-940b-12a5da881b56/4b9aa4eb-4356-417a-bb74-4dc879141e19.jpg.256.jpg",
       "source": "mangadex",
       "status": "completed"
-    },
-    {
-      "id": "ea47525d-99df-45b5-9103-dd853f49f8c3",
-      "title": "Welcome to Demon School! Iruma-kun: IruMafia Edition",
-      "cover": "https://uploads.mangadex.org/covers/ea47525d-99df-45b5-9103-dd853f49f8c3/36bf283d-531f-4937-a3a7-2a8a05ccae2e.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
     },
     {
       "id": "510f29a8-99b4-46af-ba5e-916e96bc6f37",
@@ -342,13 +349,6 @@
       "id": "8a38bcc4-0a52-4a46-9d02-7fc802048b1d",
       "title": "Shinobi Undercover",
       "cover": "https://uploads.mangadex.org/covers/8a38bcc4-0a52-4a46-9d02-7fc802048b1d/2fd4b15d-7575-49ec-add2-d1ff0759543a.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "3169544f-4b87-4a14-917b-f73600941f55",
-      "title": "Noa-Senpai is My Friend.",
-      "cover": "https://uploads.mangadex.org/covers/3169544f-4b87-4a14-917b-f73600941f55/9ead7eb9-9959-4353-8478-b56d121ad87c.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     }
