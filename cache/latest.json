@@ -1,7 +1,49 @@
 {
-  "updated_at": "2026-11-06T13:43:16.365233+00:00",
+  "updated_at": "2026-11-06T22:42:10.735177+00:00",
   "count": 50,
   "items": [
+    {
+      "id": "30f3ac69-21b6-45ad-a110-d011b7aaadaa",
+      "title": "Fly Me to The Moon",
+      "cover": "https://uploads.mangadex.org/covers/30f3ac69-21b6-45ad-a110-d011b7aaadaa/dec4d1c5-d2e0-4cdd-b4e2-c8243c9f4341.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "510f29a8-99b4-46af-ba5e-916e96bc6f37",
+      "title": "Fate/type Redline",
+      "cover": "https://uploads.mangadex.org/covers/510f29a8-99b4-46af-ba5e-916e96bc6f37/c1d7aed1-9cd1-426f-bfb8-7e46594d0e29.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "34b47146-a72e-43d8-9ea5-935a5956f09f",
+      "title": "أوموري",
+      "cover": "https://uploads.mangadex.org/covers/34b47146-a72e-43d8-9ea5-935a5956f09f/38d8fe5e-f9bb-433f-bbf1-a821b0d0e7e3.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "334019e1-18bb-4ac0-b35c-0e8efb1e481c",
+      "title": "JoJo’s Bizarre Adventure, Part 9: The JoJoLands - Digital Colored Comics",
+      "cover": "https://uploads.mangadex.org/covers/334019e1-18bb-4ac0-b35c-0e8efb1e481c/530583f4-80ad-4f37-92d9-441b225c9785.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "b6886009-e60b-44a7-abc2-a575765277ba",
+      "title": "الرجل الرمادي",
+      "cover": "https://uploads.mangadex.org/covers/b6886009-e60b-44a7-abc2-a575765277ba/a8ea60f1-0fef-4af0-b26e-8b761406c114.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "85a99758-de39-471e-9f6d-800547f53d0a",
+      "title": "Tougen Anki: Legend of the Cursed Blood",
+      "cover": "https://uploads.mangadex.org/covers/85a99758-de39-471e-9f6d-800547f53d0a/139b8f72-68fe-4d57-bd70-a210402eb173.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
     {
       "id": "4d6decd4-835d-4905-9534-2571dae07bcd",
       "title": "Lord El-Melloi II-sei no Jikenbo",
@@ -227,13 +269,6 @@
       "status": "ongoing"
     },
     {
-      "id": "85a99758-de39-471e-9f6d-800547f53d0a",
-      "title": "Tougen Anki: Legend of the Cursed Blood",
-      "cover": "https://uploads.mangadex.org/covers/85a99758-de39-471e-9f6d-800547f53d0a/139b8f72-68fe-4d57-bd70-a210402eb173.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
       "id": "ce89adb4-63fc-422e-9fbc-40ea6af4525c",
       "title": "Terra ForMars",
       "cover": "https://uploads.mangadex.org/covers/ce89adb4-63fc-422e-9fbc-40ea6af4525c/ce931e71-6456-469c-ac06-bad6009338bc.jpg.256.jpg",
@@ -267,13 +302,6 @@
       "cover": "https://uploads.mangadex.org/covers/0a580438-bc72-4503-940b-12a5da881b56/4b9aa4eb-4356-417a-bb74-4dc879141e19.jpg.256.jpg",
       "source": "mangadex",
       "status": "completed"
-    },
-    {
-      "id": "510f29a8-99b4-46af-ba5e-916e96bc6f37",
-      "title": "Fate/type Redline",
-      "cover": "https://uploads.mangadex.org/covers/510f29a8-99b4-46af-ba5e-916e96bc6f37/c1d7aed1-9cd1-426f-bfb8-7e46594d0e29.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
     },
     {
       "id": "0cfcda3b-0dcb-459b-9931-aa823e7bf403",
@@ -323,34 +351,6 @@
       "cover": "https://uploads.mangadex.org/covers/a0a5528a-c4a8-4495-a966-6877c12856ba/8cec91f3-ac76-460f-9d42-3d1b4163c0e3.jpg.256.jpg",
       "source": "mangadex",
       "status": "completed"
-    },
-    {
-      "id": "80c4c4bc-be9c-400a-8cc0-57b1d0b8a87f",
-      "title": "حلقت فجلبت فتاة مدرسة ثانوية إلى المنزل",
-      "cover": "https://uploads.mangadex.org/covers/80c4c4bc-be9c-400a-8cc0-57b1d0b8a87f/a0e289f6-2cb1-4886-bbfe-aa76dede0a77.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
-      "id": "5f64d517-c4ea-40c0-a463-fcc069d39d3b",
-      "title": "I Got a New Skill Every Time I Was Exiled, and After 100 Different Worlds, I Was Unmatched",
-      "cover": "https://uploads.mangadex.org/covers/5f64d517-c4ea-40c0-a463-fcc069d39d3b/6f6c4aaa-5c8b-4ef3-bdc7-30015de55663.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "908fe918-ee36-4858-b321-4ba7aadbc817",
-      "title": "فصل المانجا الدراسي الأخير",
-      "cover": "https://uploads.mangadex.org/covers/908fe918-ee36-4858-b321-4ba7aadbc817/40ab3a75-add8-46e0-8731-dc1630b6aa37.png.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "bcfe1b36-daee-40fd-9984-d9597caf9da7",
-      "title": "فَقِيْهَةُ ٱلْمَغُوْلِ",
-      "cover": "https://uploads.mangadex.org/covers/bcfe1b36-daee-40fd-9984-d9597caf9da7/5ce19283-d717-44e2-bb69-4247640d3c75.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
     }
   ]
 }
