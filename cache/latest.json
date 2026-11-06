@@ -1,7 +1,56 @@
 {
-  "updated_at": "2026-11-06T05:01:26.215294+00:00",
+  "updated_at": "2026-11-06T13:43:16.365233+00:00",
   "count": 50,
   "items": [
+    {
+      "id": "4d6decd4-835d-4905-9534-2571dae07bcd",
+      "title": "Lord El-Melloi II-sei no Jikenbo",
+      "cover": "https://uploads.mangadex.org/covers/4d6decd4-835d-4905-9534-2571dae07bcd/5f347aae-bf45-4dcb-828d-2c507db71d2f.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "38179337-1640-4927-8851-9bedd8d19e82",
+      "title": "Aren't You Too Sweet Salt-God Sato-San?",
+      "cover": "https://uploads.mangadex.org/covers/38179337-1640-4927-8851-9bedd8d19e82/5466e035-50de-4ff5-86bf-29525a862203.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "9661f9e7-3c6a-448f-9b1e-2c563ed1e5e9",
+      "title": "تاج الحكاية الخيالية",
+      "cover": "https://uploads.mangadex.org/covers/9661f9e7-3c6a-448f-9b1e-2c563ed1e5e9/bb9d92b7-e944-4f9f-ad18-da8083db1568.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "5c9d1254-f074-4b5c-8795-6f0641b2597b",
+      "title": "Girl and Science",
+      "cover": "https://uploads.mangadex.org/covers/5c9d1254-f074-4b5c-8795-6f0641b2597b/f606b3ce-4f64-400e-8a1c-265698f68d01.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "0b70b1bc-984a-4ccd-8023-d8dc06f06ed4",
+      "title": "DIGIMON EGGS",
+      "cover": "https://uploads.mangadex.org/covers/0b70b1bc-984a-4ccd-8023-d8dc06f06ed4/d5bbbbf3-0c61-4d93-b01b-5addf756b3b9.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "c4ca02fb-8378-433b-8049-fbbea5d25cba",
+      "title": "هايميا-سينباي حسناء مهيبة!",
+      "cover": "https://uploads.mangadex.org/covers/c4ca02fb-8378-433b-8049-fbbea5d25cba/7ab29404-0ebd-4862-ad4e-e4ea1ffe231f.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "936f0ba5-ca65-4de4-99b1-528c02a4454d",
+      "title": "Hunter x Hunter (Official Colored)",
+      "cover": "https://uploads.mangadex.org/covers/936f0ba5-ca65-4de4-99b1-528c02a4454d/128d80df-c5e4-4791-b3b7-08586e9db1b8.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
     {
       "id": "ea47525d-99df-45b5-9103-dd853f49f8c3",
       "title": "Welcome to Demon School! Iruma-kun: IruMafia Edition",
@@ -48,13 +97,6 @@
       "id": "a1c7c817-4e59-43b7-9365-09675a149a6f",
       "title": "ون بيس",
       "cover": "https://uploads.mangadex.org/covers/a1c7c817-4e59-43b7-9365-09675a149a6f/2f4aca53-64c7-46ac-ae85-3bc9b3169890.png.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "c4ca02fb-8378-433b-8049-fbbea5d25cba",
-      "title": "هايميا-سينباي حسناء مهيبة!",
-      "cover": "https://uploads.mangadex.org/covers/c4ca02fb-8378-433b-8049-fbbea5d25cba/7ab29404-0ebd-4862-ad4e-e4ea1ffe231f.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
@@ -106,13 +148,6 @@
       "cover": "https://uploads.mangadex.org/covers/17ce37ea-1cda-4429-b062-c4b627814225/31e31704-e6e2-474a-a857-b18580a0057b.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
-    },
-    {
-      "id": "5c9d1254-f074-4b5c-8795-6f0641b2597b",
-      "title": "Girl and Science",
-      "cover": "https://uploads.mangadex.org/covers/5c9d1254-f074-4b5c-8795-6f0641b2597b/f606b3ce-4f64-400e-8a1c-265698f68d01.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
     },
     {
       "id": "f5c25341-d6ff-4585-8548-3a48fc7654d9",
@@ -290,13 +325,6 @@
       "status": "completed"
     },
     {
-      "id": "0b70b1bc-984a-4ccd-8023-d8dc06f06ed4",
-      "title": "DIGIMON EGGS",
-      "cover": "https://uploads.mangadex.org/covers/0b70b1bc-984a-4ccd-8023-d8dc06f06ed4/d5bbbbf3-0c61-4d93-b01b-5addf756b3b9.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
       "id": "80c4c4bc-be9c-400a-8cc0-57b1d0b8a87f",
       "title": "حلقت فجلبت فتاة مدرسة ثانوية إلى المنزل",
       "cover": "https://uploads.mangadex.org/covers/80c4c4bc-be9c-400a-8cc0-57b1d0b8a87f/a0e289f6-2cb1-4886-bbfe-aa76dede0a77.jpg.256.jpg",
@@ -321,34 +349,6 @@
       "id": "bcfe1b36-daee-40fd-9984-d9597caf9da7",
       "title": "فَقِيْهَةُ ٱلْمَغُوْلِ",
       "cover": "https://uploads.mangadex.org/covers/bcfe1b36-daee-40fd-9984-d9597caf9da7/5ce19283-d717-44e2-bb69-4247640d3c75.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "a07320a4-afcd-413a-a451-d69a448d0c28",
-      "title": "Usogui",
-      "cover": "https://uploads.mangadex.org/covers/a07320a4-afcd-413a-a451-d69a448d0c28/b74c8cce-42cd-4889-b75d-7944e63f9a14.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
-      "id": "7066efc8-b73f-4b17-8b8d-6060a5412590",
-      "title": "Kill Blue",
-      "cover": "https://uploads.mangadex.org/covers/7066efc8-b73f-4b17-8b8d-6060a5412590/ccc07c8c-b896-4c2c-81c3-a684f1f1a188.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
-      "id": "22d6d048-9f9f-4c3a-95c2-3b145f110e20",
-      "title": "I'm in Love with the Villainess",
-      "cover": "https://uploads.mangadex.org/covers/22d6d048-9f9f-4c3a-95c2-3b145f110e20/38ba706a-2394-4ac4-b9ef-7fcda0c39f49.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "8a38bcc4-0a52-4a46-9d02-7fc802048b1d",
-      "title": "Shinobi Undercover",
-      "cover": "https://uploads.mangadex.org/covers/8a38bcc4-0a52-4a46-9d02-7fc802048b1d/2fd4b15d-7575-49ec-add2-d1ff0759543a.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     }
