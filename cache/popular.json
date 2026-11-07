@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-07T12:26:24.041012+00:00",
+  "updated_at": "2026-11-07T21:25:58.271251+00:00",
   "count": 50,
   "items": [
     {
@@ -87,18 +87,18 @@
       "status": "ongoing"
     },
     {
-      "id": "c52b2ce3-7f95-469c-96b0-479524fb7a1a",
-      "title": "جوجوتسو كايسن",
-      "cover": "https://uploads.mangadex.org/covers/c52b2ce3-7f95-469c-96b0-479524fb7a1a/6d9134b2-21ea-4d02-ac2b-7c0d1c6a2aaa.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
       "id": "418791c0-35cf-4f87-936b-acd9cddf0989",
       "title": "The Fragrant Flower Blooms with Dignity",
       "cover": "https://uploads.mangadex.org/covers/418791c0-35cf-4f87-936b-acd9cddf0989/6e823d0e-103a-4cf9-a312-a3a292ccb12d.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
+    },
+    {
+      "id": "c52b2ce3-7f95-469c-96b0-479524fb7a1a",
+      "title": "جوجوتسو كايسن",
+      "cover": "https://uploads.mangadex.org/covers/c52b2ce3-7f95-469c-96b0-479524fb7a1a/6d9134b2-21ea-4d02-ac2b-7c0d1c6a2aaa.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
     },
     {
       "id": "e18fe8c6-f6dc-4f05-8462-7b2083ff9a6c",
