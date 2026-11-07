@@ -1,7 +1,14 @@
 {
-  "updated_at": "2026-11-06T22:42:10.735177+00:00",
+  "updated_at": "2026-11-07T04:36:17.312236+00:00",
   "count": 50,
   "items": [
+    {
+      "id": "c4ca02fb-8378-433b-8049-fbbea5d25cba",
+      "title": "هايميا-سينباي حسناء مهيبة!",
+      "cover": "https://uploads.mangadex.org/covers/c4ca02fb-8378-433b-8049-fbbea5d25cba/7ab29404-0ebd-4862-ad4e-e4ea1ffe231f.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
     {
       "id": "30f3ac69-21b6-45ad-a110-d011b7aaadaa",
       "title": "Fly Me to The Moon",
@@ -76,13 +83,6 @@
       "id": "0b70b1bc-984a-4ccd-8023-d8dc06f06ed4",
       "title": "DIGIMON EGGS",
       "cover": "https://uploads.mangadex.org/covers/0b70b1bc-984a-4ccd-8023-d8dc06f06ed4/d5bbbbf3-0c61-4d93-b01b-5addf756b3b9.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "c4ca02fb-8378-433b-8049-fbbea5d25cba",
-      "title": "هايميا-سينباي حسناء مهيبة!",
-      "cover": "https://uploads.mangadex.org/covers/c4ca02fb-8378-433b-8049-fbbea5d25cba/7ab29404-0ebd-4862-ad4e-e4ea1ffe231f.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
