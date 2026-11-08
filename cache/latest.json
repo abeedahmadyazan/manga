@@ -1,7 +1,91 @@
 {
-  "updated_at": "2026-11-08T12:44:03.860213+00:00",
+  "updated_at": "2026-11-08T21:39:43.636896+00:00",
   "count": 50,
   "items": [
+    {
+      "id": "d78db808-93f7-498d-9368-e5767fd85057",
+      "title": "Class 2-B Hero Destroyerz",
+      "cover": "https://uploads.mangadex.org/covers/d78db808-93f7-498d-9368-e5767fd85057/946d7f0f-e48a-4df4-a789-d7688f0aa2b9.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "04c892b3-a202-46f5-ad11-0d433e712ab8",
+      "title": "Dealing with Mikadono Sisters is a Breeze",
+      "cover": "https://uploads.mangadex.org/covers/04c892b3-a202-46f5-ad11-0d433e712ab8/63756802-4e2b-4a46-a27e-2ab2654247c0.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "774f0f04-5023-4e2e-9c0b-f0ed382f078b",
+      "title": "إينيغماتيكا",
+      "cover": "https://uploads.mangadex.org/covers/774f0f04-5023-4e2e-9c0b-f0ed382f078b/9ec551ba-02ff-4b01-90fc-573efe95f6b6.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "3169544f-4b87-4a14-917b-f73600941f55",
+      "title": "Noa-Senpai is My Friend.",
+      "cover": "https://uploads.mangadex.org/covers/3169544f-4b87-4a14-917b-f73600941f55/9ead7eb9-9959-4353-8478-b56d121ad87c.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "30196491-8fc2-4961-8886-a58f898b1b3e",
+      "title": "Berserk of Gluttony: The One that Exceeds the Concept of Levels",
+      "cover": "https://uploads.mangadex.org/covers/30196491-8fc2-4961-8886-a58f898b1b3e/1790f17f-9184-4a48-8928-c45de48b778e.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "0a580438-bc72-4503-940b-12a5da881b56",
+      "title": "أنتِ زهرة الحظ",
+      "cover": "https://uploads.mangadex.org/covers/0a580438-bc72-4503-940b-12a5da881b56/4b9aa4eb-4356-417a-bb74-4dc879141e19.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "9d3d3403-1a87-4737-9803-bc3d99db1424",
+      "title": "The Guy She Was Interested in Wasn't a Guy at All",
+      "cover": "https://uploads.mangadex.org/covers/9d3d3403-1a87-4737-9803-bc3d99db1424/fac191d0-96c1-4ebb-bf79-b7616d7162ac.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "e18fe8c6-f6dc-4f05-8462-7b2083ff9a6c",
+      "title": "يوميات الصيدلة",
+      "cover": "https://uploads.mangadex.org/covers/e18fe8c6-f6dc-4f05-8462-7b2083ff9a6c/530a4ffb-87cb-4156-bdeb-61670532e20f.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "3df1a9a3-a1be-47a3-9e90-9b3e55b1d0ac",
+      "title": "الشخص الخطير في قلبي",
+      "cover": "https://uploads.mangadex.org/covers/3df1a9a3-a1be-47a3-9e90-9b3e55b1d0ac/0594a53a-1fc3-43fc-bd24-f793bdc114d7.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "9d9b04ad-9a83-49f4-8ae4-a9a3780fe9c0",
+      "title": "Sakamoto Days",
+      "cover": "https://uploads.mangadex.org/covers/9d9b04ad-9a83-49f4-8ae4-a9a3780fe9c0/f15adf2e-164b-4ad8-a446-15839013d075.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "b4c93297-b32f-4f90-b619-55456a38b0aa",
+      "title": "More than a Married Couple, but Not Lovers",
+      "cover": "https://uploads.mangadex.org/covers/b4c93297-b32f-4f90-b619-55456a38b0aa/dd1804e7-56a5-4beb-90ac-d573dee7f1d1.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "5c9d1254-f074-4b5c-8795-6f0641b2597b",
+      "title": "Girl and Science",
+      "cover": "https://uploads.mangadex.org/covers/5c9d1254-f074-4b5c-8795-6f0641b2597b/f606b3ce-4f64-400e-8a1c-265698f68d01.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
     {
       "id": "bbaa17c4-0f36-4bbb-9861-34fc8fdf20fc",
       "title": "EDENS ZERO",
@@ -15,13 +99,6 @@
       "cover": "https://uploads.mangadex.org/covers/baaa0ca4-efef-4b15-b91a-c1f85692c2a7/d195f918-5f67-46a0-925f-eabc16fb40a3.jpg.256.jpg",
       "source": "mangadex",
       "status": "completed"
-    },
-    {
-      "id": "9d3d3403-1a87-4737-9803-bc3d99db1424",
-      "title": "The Guy She Was Interested in Wasn't a Guy at All",
-      "cover": "https://uploads.mangadex.org/covers/9d3d3403-1a87-4737-9803-bc3d99db1424/fac191d0-96c1-4ebb-bf79-b7616d7162ac.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
     },
     {
       "id": "cbf174ca-af25-4410-82fa-498a6df9ad3c",
@@ -52,13 +129,6 @@
       "status": "ongoing"
     },
     {
-      "id": "3169544f-4b87-4a14-917b-f73600941f55",
-      "title": "Noa-Senpai is My Friend.",
-      "cover": "https://uploads.mangadex.org/covers/3169544f-4b87-4a14-917b-f73600941f55/9ead7eb9-9959-4353-8478-b56d121ad87c.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
       "id": "8df8074d-c9b8-4526-b74b-ee287590608f",
       "title": "Under Doctor",
       "cover": "https://uploads.mangadex.org/covers/8df8074d-c9b8-4526-b74b-ee287590608f/d129bf87-531c-4538-aac8-95e065c8a7c5.jpg.256.jpg",
@@ -71,20 +141,6 @@
       "cover": "https://uploads.mangadex.org/covers/ea47525d-99df-45b5-9103-dd853f49f8c3/36bf283d-531f-4937-a3a7-2a8a05ccae2e.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
-    },
-    {
-      "id": "3df1a9a3-a1be-47a3-9e90-9b3e55b1d0ac",
-      "title": "الشخص الخطير في قلبي",
-      "cover": "https://uploads.mangadex.org/covers/3df1a9a3-a1be-47a3-9e90-9b3e55b1d0ac/0594a53a-1fc3-43fc-bd24-f793bdc114d7.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
-      "id": "0a580438-bc72-4503-940b-12a5da881b56",
-      "title": "أنتِ زهرة الحظ",
-      "cover": "https://uploads.mangadex.org/covers/0a580438-bc72-4503-940b-12a5da881b56/4b9aa4eb-4356-417a-bb74-4dc879141e19.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
     },
     {
       "id": "25e1d17b-6a4d-4698-a4f6-bf53460c10af",
@@ -118,13 +174,6 @@
       "id": "59f47645-66a9-443e-8228-788313c3ae3c",
       "title": "Tokyo Ghoul: re",
       "cover": "https://uploads.mangadex.org/covers/59f47645-66a9-443e-8228-788313c3ae3c/c41d1081-cdb2-4c90-8028-61844823515b.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
-      "id": "5c9d1254-f074-4b5c-8795-6f0641b2597b",
-      "title": "Girl and Science",
-      "cover": "https://uploads.mangadex.org/covers/5c9d1254-f074-4b5c-8795-6f0641b2597b/f606b3ce-4f64-400e-8a1c-265698f68d01.jpg.256.jpg",
       "source": "mangadex",
       "status": "completed"
     },
@@ -300,55 +349,6 @@
       "id": "17ce37ea-1cda-4429-b062-c4b627814225",
       "title": "سيراف النهاية",
       "cover": "https://uploads.mangadex.org/covers/17ce37ea-1cda-4429-b062-c4b627814225/31e31704-e6e2-474a-a857-b18580a0057b.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "f5c25341-d6ff-4585-8548-3a48fc7654d9",
-      "title": "Akira Failing in Love",
-      "cover": "https://uploads.mangadex.org/covers/f5c25341-d6ff-4585-8548-3a48fc7654d9/26bd1cd9-bb1b-42d8-aa92-f916122c606c.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "b4c93297-b32f-4f90-b619-55456a38b0aa",
-      "title": "More than a Married Couple, but Not Lovers",
-      "cover": "https://uploads.mangadex.org/covers/b4c93297-b32f-4f90-b619-55456a38b0aa/dd1804e7-56a5-4beb-90ac-d573dee7f1d1.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "87ffa375-bd2c-49ba-ba0c-6d78ea07c342",
-      "title": "Medaka Kuroiwa is Impervious to My Charms",
-      "cover": "https://uploads.mangadex.org/covers/87ffa375-bd2c-49ba-ba0c-6d78ea07c342/28e38262-232a-4f48-bc32-4ac04dc07c88.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "d8a959f7-648e-4c8d-8f23-f1f3f8e129f3",
-      "title": "ون بنش مان",
-      "cover": "https://uploads.mangadex.org/covers/d8a959f7-648e-4c8d-8f23-f1f3f8e129f3/d22cfde3-268a-48a3-b5ed-73772834764d.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "c4b36f15-4ee5-425f-a77d-c2e7cbb970d8",
-      "title": "NIPPON SANGOKU: The Three Nations of the Crimson Sun",
-      "cover": "https://uploads.mangadex.org/covers/c4b36f15-4ee5-425f-a77d-c2e7cbb970d8/e5c54f1b-6ea4-4dd2-ae6e-9d0e138d7c2e.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "e41721c0-f7cf-49c1-9712-8543e1ea7c99",
-      "title": "Witch Hunter",
-      "cover": "https://uploads.mangadex.org/covers/e41721c0-f7cf-49c1-9712-8543e1ea7c99/1315f953-c535-4011-aed3-501f60757713.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "29ab6984-7c1d-4d45-b925-25aa082b492e",
-      "title": "Shangri-La Frontier: From Trash-Game Hunter to God-Tier Game Master!",
-      "cover": "https://uploads.mangadex.org/covers/29ab6984-7c1d-4d45-b925-25aa082b492e/0367d616-0570-459a-9525-1d2083aad788.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     }
