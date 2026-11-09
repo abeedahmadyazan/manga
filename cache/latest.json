@@ -1,7 +1,56 @@
 {
-  "updated_at": "2026-11-09T04:36:55.628783+00:00",
+  "updated_at": "2026-11-09T15:08:03.347934+00:00",
   "count": 50,
   "items": [
+    {
+      "id": "b4c93297-b32f-4f90-b619-55456a38b0aa",
+      "title": "More than a Married Couple, but Not Lovers",
+      "cover": "https://uploads.mangadex.org/covers/b4c93297-b32f-4f90-b619-55456a38b0aa/dd1804e7-56a5-4beb-90ac-d573dee7f1d1.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "a6a46436-9ed4-4c20-8b11-6f4a0f74b23a",
+      "title": "Kabuto Mushi",
+      "cover": "https://uploads.mangadex.org/covers/a6a46436-9ed4-4c20-8b11-6f4a0f74b23a/5a16e9bf-0859-4719-bd13-7e5e43e338d7.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "5c9d1254-f074-4b5c-8795-6f0641b2597b",
+      "title": "Girl and Science",
+      "cover": "https://uploads.mangadex.org/covers/5c9d1254-f074-4b5c-8795-6f0641b2597b/f606b3ce-4f64-400e-8a1c-265698f68d01.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "512cd78f-cbb8-460a-bafd-e8840c0f7c31",
+      "title": "Sword Art Online: Unital Ring",
+      "cover": "https://uploads.mangadex.org/covers/512cd78f-cbb8-460a-bafd-e8840c0f7c31/ca55cadb-356d-4d3b-b83c-1f1478a09ee6.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "37f1ddff-38a5-4e42-ba9a-ce967702dfb6",
+      "title": "Bartlet Fairy Basslet",
+      "cover": "https://uploads.mangadex.org/covers/37f1ddff-38a5-4e42-ba9a-ce967702dfb6/22ed72bc-6a4c-4a55-9d7a-059b1b2a3c9d.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "b6886009-e60b-44a7-abc2-a575765277ba",
+      "title": "الرجل الرمادي",
+      "cover": "https://uploads.mangadex.org/covers/b6886009-e60b-44a7-abc2-a575765277ba/a8ea60f1-0fef-4af0-b26e-8b761406c114.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "d553645b-03a3-4fc8-9a9c-57f91cbbab89",
+      "title": "Are You a Landmine, Chihara-san?",
+      "cover": "https://uploads.mangadex.org/covers/d553645b-03a3-4fc8-9a9c-57f91cbbab89/4878d139-e5ee-49eb-aeb6-1c2f9025624e.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
     {
       "id": "9d3d3403-1a87-4737-9803-bc3d99db1424",
       "title": "The Guy She Was Interested in Wasn't a Guy at All",
@@ -113,20 +162,6 @@
       "cover": "https://uploads.mangadex.org/covers/9d9b04ad-9a83-49f4-8ae4-a9a3780fe9c0/f15adf2e-164b-4ad8-a446-15839013d075.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
-    },
-    {
-      "id": "b4c93297-b32f-4f90-b619-55456a38b0aa",
-      "title": "More than a Married Couple, but Not Lovers",
-      "cover": "https://uploads.mangadex.org/covers/b4c93297-b32f-4f90-b619-55456a38b0aa/dd1804e7-56a5-4beb-90ac-d573dee7f1d1.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "5c9d1254-f074-4b5c-8795-6f0641b2597b",
-      "title": "Girl and Science",
-      "cover": "https://uploads.mangadex.org/covers/5c9d1254-f074-4b5c-8795-6f0641b2597b/f606b3ce-4f64-400e-8a1c-265698f68d01.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
     },
     {
       "id": "bbaa17c4-0f36-4bbb-9861-34fc8fdf20fc",
@@ -248,13 +283,6 @@
       "status": "ongoing"
     },
     {
-      "id": "b6886009-e60b-44a7-abc2-a575765277ba",
-      "title": "الرجل الرمادي",
-      "cover": "https://uploads.mangadex.org/covers/b6886009-e60b-44a7-abc2-a575765277ba/a8ea60f1-0fef-4af0-b26e-8b761406c114.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
       "id": "85a99758-de39-471e-9f6d-800547f53d0a",
       "title": "Tougen Anki: Legend of the Cursed Blood",
       "cover": "https://uploads.mangadex.org/covers/85a99758-de39-471e-9f6d-800547f53d0a/139b8f72-68fe-4d57-bd70-a210402eb173.jpg.256.jpg",
@@ -321,34 +349,6 @@
       "id": "569963c5-6b0b-4f92-b561-e1304b78b0dc",
       "title": "Bungo Stray Dogs: Wan!",
       "cover": "https://uploads.mangadex.org/covers/569963c5-6b0b-4f92-b561-e1304b78b0dc/53839189-747f-451f-9803-150b428ea77b.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "077a3fed-1634-424f-be7a-9a96b7f07b78",
-      "title": "مملكة",
-      "cover": "https://uploads.mangadex.org/covers/077a3fed-1634-424f-be7a-9a96b7f07b78/8bc7a592-764d-4a89-a0ae-741347b894ce.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "b05918e4-fb1a-4b10-a919-eaecf00fd7dd",
-      "title": "Tower Dungeon",
-      "cover": "https://uploads.mangadex.org/covers/b05918e4-fb1a-4b10-a919-eaecf00fd7dd/66d623c6-4e9d-4ced-acbe-3f5fcfeecbed.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "fa85b2aa-370c-41c5-96ae-29b05c848f3d",
-      "title": "Innocent",
-      "cover": "https://uploads.mangadex.org/covers/fa85b2aa-370c-41c5-96ae-29b05c848f3d/3d562b75-ca28-4a65-87a9-2e3f73657456.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
-      "id": "63dbbf80-0189-4ae4-a549-68a0caa2f834",
-      "title": "ويتشريف",
-      "cover": "https://uploads.mangadex.org/covers/63dbbf80-0189-4ae4-a549-68a0caa2f834/05f68285-5512-4f20-b6be-764fa4b5789a.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     }
