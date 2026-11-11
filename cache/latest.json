@@ -1,7 +1,28 @@
 {
-  "updated_at": "2026-11-10T22:49:34.639448+00:00",
+  "updated_at": "2026-11-11T04:39:54.516923+00:00",
   "count": 50,
   "items": [
+    {
+      "id": "37f1ddff-38a5-4e42-ba9a-ce967702dfb6",
+      "title": "Bartlet Fairy Basslet",
+      "cover": "https://uploads.mangadex.org/covers/37f1ddff-38a5-4e42-ba9a-ce967702dfb6/22ed72bc-6a4c-4a55-9d7a-059b1b2a3c9d.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "3169544f-4b87-4a14-917b-f73600941f55",
+      "title": "Noa-Senpai is My Friend.",
+      "cover": "https://uploads.mangadex.org/covers/3169544f-4b87-4a14-917b-f73600941f55/9ead7eb9-9959-4353-8478-b56d121ad87c.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "25e1d17b-6a4d-4698-a4f6-bf53460c10af",
+      "title": "حافلة لإثنين",
+      "cover": "https://uploads.mangadex.org/covers/25e1d17b-6a4d-4698-a4f6-bf53460c10af/64c63729-ed1c-47bb-a13f-8fc5d963693c.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
     {
       "id": "a07320a4-afcd-413a-a451-d69a448d0c28",
       "title": "Usogui",
@@ -13,13 +34,6 @@
       "id": "334019e1-18bb-4ac0-b35c-0e8efb1e481c",
       "title": "JoJo’s Bizarre Adventure, Part 9: The JoJoLands - Digital Colored Comics",
       "cover": "https://uploads.mangadex.org/covers/334019e1-18bb-4ac0-b35c-0e8efb1e481c/530583f4-80ad-4f37-92d9-441b225c9785.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "25e1d17b-6a4d-4698-a4f6-bf53460c10af",
-      "title": "حافلة لإثنين",
-      "cover": "https://uploads.mangadex.org/covers/25e1d17b-6a4d-4698-a4f6-bf53460c10af/64c63729-ed1c-47bb-a13f-8fc5d963693c.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
@@ -185,6 +199,20 @@
       "status": "ongoing"
     },
     {
+      "id": "68112dc1-2b80-4f20-beb8-2f2a8716a430",
+      "title": "داندادان",
+      "cover": "https://uploads.mangadex.org/covers/68112dc1-2b80-4f20-beb8-2f2a8716a430/b19f6cfd-cf51-49db-bc9f-e13ee272f458.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "11b74211-f4c0-4f08-b5a4-c491da0d0c0b",
+      "title": "Choujin X",
+      "cover": "https://uploads.mangadex.org/covers/11b74211-f4c0-4f08-b5a4-c491da0d0c0b/a024c8ce-5fbc-4fea-9363-6b8eee3477e7.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
       "id": "b4c93297-b32f-4f90-b619-55456a38b0aa",
       "title": "More than a Married Couple, but Not Lovers",
       "cover": "https://uploads.mangadex.org/covers/b4c93297-b32f-4f90-b619-55456a38b0aa/dd1804e7-56a5-4beb-90ac-d573dee7f1d1.jpg.256.jpg",
@@ -202,13 +230,6 @@
       "id": "512cd78f-cbb8-460a-bafd-e8840c0f7c31",
       "title": "Sword Art Online: Unital Ring",
       "cover": "https://uploads.mangadex.org/covers/512cd78f-cbb8-460a-bafd-e8840c0f7c31/ca55cadb-356d-4d3b-b83c-1f1478a09ee6.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "37f1ddff-38a5-4e42-ba9a-ce967702dfb6",
-      "title": "Bartlet Fairy Basslet",
-      "cover": "https://uploads.mangadex.org/covers/37f1ddff-38a5-4e42-ba9a-ce967702dfb6/22ed72bc-6a4c-4a55-9d7a-059b1b2a3c9d.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
@@ -269,13 +290,6 @@
       "status": "ongoing"
     },
     {
-      "id": "3169544f-4b87-4a14-917b-f73600941f55",
-      "title": "Noa-Senpai is My Friend.",
-      "cover": "https://uploads.mangadex.org/covers/3169544f-4b87-4a14-917b-f73600941f55/9ead7eb9-9959-4353-8478-b56d121ad87c.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
       "id": "30196491-8fc2-4961-8886-a58f898b1b3e",
       "title": "Berserk of Gluttony: The One that Exceeds the Concept of Levels",
       "cover": "https://uploads.mangadex.org/covers/30196491-8fc2-4961-8886-a58f898b1b3e/1790f17f-9184-4a48-8928-c45de48b778e.jpg.256.jpg",
@@ -297,9 +311,30 @@
       "status": "completed"
     },
     {
+      "id": "8df8074d-c9b8-4526-b74b-ee287590608f",
+      "title": "Under Doctor",
+      "cover": "https://uploads.mangadex.org/covers/8df8074d-c9b8-4526-b74b-ee287590608f/d129bf87-531c-4538-aac8-95e065c8a7c5.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "8a38bcc4-0a52-4a46-9d02-7fc802048b1d",
+      "title": "Shinobi Undercover",
+      "cover": "https://uploads.mangadex.org/covers/8a38bcc4-0a52-4a46-9d02-7fc802048b1d/2fd4b15d-7575-49ec-add2-d1ff0759543a.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
       "id": "9d9b04ad-9a83-49f4-8ae4-a9a3780fe9c0",
       "title": "Sakamoto Days",
       "cover": "https://uploads.mangadex.org/covers/9d9b04ad-9a83-49f4-8ae4-a9a3780fe9c0/f15adf2e-164b-4ad8-a446-15839013d075.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "6b958848-c885-4735-9201-12ee77abcb3c",
+      "title": "جاسوس x عائله",
+      "cover": "https://uploads.mangadex.org/covers/6b958848-c885-4735-9201-12ee77abcb3c/165260a4-6d0e-4164-966a-b7412a5b8a15.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
@@ -316,41 +351,6 @@
       "cover": "https://uploads.mangadex.org/covers/baaa0ca4-efef-4b15-b91a-c1f85692c2a7/d195f918-5f67-46a0-925f-eabc16fb40a3.jpg.256.jpg",
       "source": "mangadex",
       "status": "completed"
-    },
-    {
-      "id": "cbf174ca-af25-4410-82fa-498a6df9ad3c",
-      "title": "BE BLUES! ~นักเตะเลือดซามูไร~",
-      "cover": "https://uploads.mangadex.org/covers/cbf174ca-af25-4410-82fa-498a6df9ad3c/793ba37f-6b51-4293-b13c-6e8afa968197.png.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
-      "id": "d00bd104-d9b2-4ee9-a088-b5065d1c406a",
-      "title": "A Certain Scientific Railgun",
-      "cover": "https://uploads.mangadex.org/covers/d00bd104-d9b2-4ee9-a088-b5065d1c406a/47e96623-5363-4de2-908c-c649c31bba92.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
-      "id": "3b6c3a0b-8752-41fc-9d3e-1310f6f28252",
-      "title": "Giant Killing",
-      "cover": "https://uploads.mangadex.org/covers/3b6c3a0b-8752-41fc-9d3e-1310f6f28252/409bcab3-e7f6-4498-a135-72c7f1d5adf2.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "8df8074d-c9b8-4526-b74b-ee287590608f",
-      "title": "Under Doctor",
-      "cover": "https://uploads.mangadex.org/covers/8df8074d-c9b8-4526-b74b-ee287590608f/d129bf87-531c-4538-aac8-95e065c8a7c5.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "ea47525d-99df-45b5-9103-dd853f49f8c3",
-      "title": "Welcome to Demon School! Iruma-kun: IruMafia Edition",
-      "cover": "https://uploads.mangadex.org/covers/ea47525d-99df-45b5-9103-dd853f49f8c3/36bf283d-531f-4937-a3a7-2a8a05ccae2e.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
     }
   ]
 }
