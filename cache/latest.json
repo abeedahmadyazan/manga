@@ -1,7 +1,42 @@
 {
-  "updated_at": "2026-11-16T04:42:13.409517+00:00",
+  "updated_at": "2026-11-16T14:45:18.164548+00:00",
   "count": 50,
   "items": [
+    {
+      "id": "bd6d0982-0091-4945-ad70-c028ed3c0917",
+      "title": "موشوكو تينسي",
+      "cover": "https://uploads.mangadex.org/covers/bd6d0982-0091-4945-ad70-c028ed3c0917/6a9f3d32-b7bb-478a-9c76-54868276c26f.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "ef473f14-8c4d-435e-9015-b714512e69eb",
+      "title": "استدعاء اليابان",
+      "cover": "https://uploads.mangadex.org/covers/ef473f14-8c4d-435e-9015-b714512e69eb/a379fe62-b42d-4844-ba4d-2d3360f4c4b9.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "7777c3aa-fe0f-47d6-8672-6a1d60a1a9e8",
+      "title": "Blue Orchestra",
+      "cover": "https://uploads.mangadex.org/covers/7777c3aa-fe0f-47d6-8672-6a1d60a1a9e8/1ac8130d-47ad-4d0d-8989-9d5b218c405b.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "b4c93297-b32f-4f90-b619-55456a38b0aa",
+      "title": "More than a Married Couple, but Not Lovers",
+      "cover": "https://uploads.mangadex.org/covers/b4c93297-b32f-4f90-b619-55456a38b0aa/dd1804e7-56a5-4beb-90ac-d573dee7f1d1.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "d553645b-03a3-4fc8-9a9c-57f91cbbab89",
+      "title": "Are You a Landmine, Chihara-san?",
+      "cover": "https://uploads.mangadex.org/covers/d553645b-03a3-4fc8-9a9c-57f91cbbab89/4878d139-e5ee-49eb-aeb6-1c2f9025624e.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
     {
       "id": "4e421eb8-d4a0-4096-86db-ca5e3fc42c5d",
       "title": "Pumpkin Night",
@@ -122,23 +157,9 @@
       "status": "ongoing"
     },
     {
-      "id": "bd6d0982-0091-4945-ad70-c028ed3c0917",
-      "title": "موشوكو تينسي",
-      "cover": "https://uploads.mangadex.org/covers/bd6d0982-0091-4945-ad70-c028ed3c0917/6a9f3d32-b7bb-478a-9c76-54868276c26f.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
       "id": "ca33a142-58fb-4fee-88b9-36ef87f02c77",
       "title": "حب نيزومي الأول",
       "cover": "https://uploads.mangadex.org/covers/ca33a142-58fb-4fee-88b9-36ef87f02c77/7e8317ea-78bf-4090-a2ee-ab07041e4458.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "7777c3aa-fe0f-47d6-8672-6a1d60a1a9e8",
-      "title": "Blue Orchestra",
-      "cover": "https://uploads.mangadex.org/covers/7777c3aa-fe0f-47d6-8672-6a1d60a1a9e8/1ac8130d-47ad-4d0d-8989-9d5b218c405b.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
@@ -190,13 +211,6 @@
       "cover": "https://uploads.mangadex.org/covers/1f43c858-c1a6-4dcd-8183-e017d4522949/89f5ce79-8923-4047-ad4d-f410e6a8f51d.png.256.jpg",
       "source": "mangadex",
       "status": "completed"
-    },
-    {
-      "id": "d553645b-03a3-4fc8-9a9c-57f91cbbab89",
-      "title": "Are You a Landmine, Chihara-san?",
-      "cover": "https://uploads.mangadex.org/covers/d553645b-03a3-4fc8-9a9c-57f91cbbab89/4878d139-e5ee-49eb-aeb6-1c2f9025624e.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
     },
     {
       "id": "51c1e7cc-23f4-4a08-a961-c1ab75e2bb33",
@@ -306,14 +320,7 @@
     {
       "id": "6670ee28-f26d-4b61-b49c-d71149cd5a6e",
       "title": "مييروكو تشان",
-      "cover": "https://uploads.mangadex.org/covers/6670ee28-f26d-4b61-b49c-d71149cd5a6e/13d41432-d7ec-41cd-a265-5af700989aa6.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "ef473f14-8c4d-435e-9015-b714512e69eb",
-      "title": "استدعاء اليابان",
-      "cover": "https://uploads.mangadex.org/covers/ef473f14-8c4d-435e-9015-b714512e69eb/a379fe62-b42d-4844-ba4d-2d3360f4c4b9.jpg.256.jpg",
+      "cover": "https://uploads.mangadex.org/covers/6670ee28-f26d-4b61-b49c-d71149cd5a6e/3efd58ff-2ad3-4cc1-9ac7-a5d5bbdc4389.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
@@ -342,13 +349,6 @@
       "id": "85a99758-de39-471e-9f6d-800547f53d0a",
       "title": "Tougen Anki: Legend of the Cursed Blood",
       "cover": "https://uploads.mangadex.org/covers/85a99758-de39-471e-9f6d-800547f53d0a/139b8f72-68fe-4d57-bd70-a210402eb173.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "59ef045c-0712-4f15-bb54-52bffd87481b",
-      "title": "محب الهيتو",
-      "cover": "https://uploads.mangadex.org/covers/59ef045c-0712-4f15-bb54-52bffd87481b/f0e8af3d-6458-4a79-bf8a-5e970373c967.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     }
