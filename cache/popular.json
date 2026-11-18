@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-18T15:04:13.484379+00:00",
+  "updated_at": "2026-11-18T23:52:39.650940+00:00",
   "count": 50,
   "items": [
     {
@@ -143,18 +143,18 @@
       "status": "completed"
     },
     {
-      "id": "a25e46ec-30f7-4db6-89df-cacbc1d9a900",
-      "title": "هوريميا",
-      "cover": "https://uploads.mangadex.org/covers/a25e46ec-30f7-4db6-89df-cacbc1d9a900/04feed00-d919-4c72-b355-15b37555eb1e.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
       "id": "c4ca02fb-8378-433b-8049-fbbea5d25cba",
       "title": "هايميا-سينباي حسناء مهيبة!",
       "cover": "https://uploads.mangadex.org/covers/c4ca02fb-8378-433b-8049-fbbea5d25cba/7ab29404-0ebd-4862-ad4e-e4ea1ffe231f.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
+    },
+    {
+      "id": "a25e46ec-30f7-4db6-89df-cacbc1d9a900",
+      "title": "هوريميا",
+      "cover": "https://uploads.mangadex.org/covers/a25e46ec-30f7-4db6-89df-cacbc1d9a900/04feed00-d919-4c72-b355-15b37555eb1e.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
     },
     {
       "id": "9a414441-bbad-43f1-a3a7-dc262ca790a3",
