@@ -1,7 +1,105 @@
 {
-  "updated_at": "2026-11-18T00:30:31.702434+00:00",
+  "updated_at": "2026-11-18T15:04:13.484379+00:00",
   "count": 50,
   "items": [
+    {
+      "id": "ab8cbb82-d0ed-45a7-8ffe-4bfa6d43d79c",
+      "title": "JoJo's Bizarre Adventure Part 9 - The JOJOLands",
+      "cover": "https://uploads.mangadex.org/covers/ab8cbb82-d0ed-45a7-8ffe-4bfa6d43d79c/88e8a8ea-91ed-4db6-937b-4dd0048e74d5.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "512cd78f-cbb8-460a-bafd-e8840c0f7c31",
+      "title": "Sword Art Online: Unital Ring",
+      "cover": "https://uploads.mangadex.org/covers/512cd78f-cbb8-460a-bafd-e8840c0f7c31/ca55cadb-356d-4d3b-b83c-1f1478a09ee6.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "0cfcda3b-0dcb-459b-9931-aa823e7bf403",
+      "title": "تسع قمم",
+      "cover": "https://uploads.mangadex.org/covers/0cfcda3b-0dcb-459b-9931-aa823e7bf403/dc2a9c50-9063-46ee-abae-bf8f1f9eb04a.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "0b094aab-0cfb-4837-a49b-7267bdb86bec",
+      "title": "Boruto: Two Blue Vortex",
+      "cover": "https://uploads.mangadex.org/covers/0b094aab-0cfb-4837-a49b-7267bdb86bec/baf472db-4658-46fb-8130-d4abdd43f171.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "510f29a8-99b4-46af-ba5e-916e96bc6f37",
+      "title": "Fate/type Redline",
+      "cover": "https://uploads.mangadex.org/covers/510f29a8-99b4-46af-ba5e-916e96bc6f37/c1d7aed1-9cd1-426f-bfb8-7e46594d0e29.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "5c9d1254-f074-4b5c-8795-6f0641b2597b",
+      "title": "Girl and Science",
+      "cover": "https://uploads.mangadex.org/covers/5c9d1254-f074-4b5c-8795-6f0641b2597b/f606b3ce-4f64-400e-8a1c-265698f68d01.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "22d6d048-9f9f-4c3a-95c2-3b145f110e20",
+      "title": "I'm in Love with the Villainess",
+      "cover": "https://uploads.mangadex.org/covers/22d6d048-9f9f-4c3a-95c2-3b145f110e20/38ba706a-2394-4ac4-b9ef-7fcda0c39f49.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "7777c3aa-fe0f-47d6-8672-6a1d60a1a9e8",
+      "title": "Blue Orchestra",
+      "cover": "https://uploads.mangadex.org/covers/7777c3aa-fe0f-47d6-8672-6a1d60a1a9e8/397f64e7-089f-45db-a4b4-37eae348e402.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "87ffa375-bd2c-49ba-ba0c-6d78ea07c342",
+      "title": "Medaka Kuroiwa is Impervious to My Charms",
+      "cover": "https://uploads.mangadex.org/covers/87ffa375-bd2c-49ba-ba0c-6d78ea07c342/28e38262-232a-4f48-bc32-4ac04dc07c88.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "bcfe1b36-daee-40fd-9984-d9597caf9da7",
+      "title": "فَقِيْهَةُ ٱلْمَغُوْلِ",
+      "cover": "https://uploads.mangadex.org/covers/bcfe1b36-daee-40fd-9984-d9597caf9da7/5ce19283-d717-44e2-bb69-4247640d3c75.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "936f0ba5-ca65-4de4-99b1-528c02a4454d",
+      "title": "Hunter x Hunter - Digital Colored Comics",
+      "cover": "https://uploads.mangadex.org/covers/936f0ba5-ca65-4de4-99b1-528c02a4454d/128d80df-c5e4-4791-b3b7-08586e9db1b8.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "51f7d9fc-256e-4160-add1-ab9652f32ae1",
+      "title": "مغامرة جوجو الغريبة الجزء 3:",
+      "cover": "https://uploads.mangadex.org/covers/51f7d9fc-256e-4160-add1-ab9652f32ae1/3d199336-589d-432c-9db2-9eb4145df34f.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "0a580438-bc72-4503-940b-12a5da881b56",
+      "title": "أنتِ زهرة الحظ",
+      "cover": "https://uploads.mangadex.org/covers/0a580438-bc72-4503-940b-12a5da881b56/4b9aa4eb-4356-417a-bb74-4dc879141e19.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "35924437-c801-4b80-b668-c893473d6344",
+      "title": "Isekai Harry Potter",
+      "cover": "https://uploads.mangadex.org/covers/35924437-c801-4b80-b668-c893473d6344/a51358ea-46b8-4852-8f3d-3ef09c08f2c2.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
     {
       "id": "25e1d17b-6a4d-4698-a4f6-bf53460c10af",
       "title": "حافلة لإثنين",
@@ -24,13 +122,6 @@
       "status": "completed"
     },
     {
-      "id": "0cfcda3b-0dcb-459b-9931-aa823e7bf403",
-      "title": "تسع قمم",
-      "cover": "https://uploads.mangadex.org/covers/0cfcda3b-0dcb-459b-9931-aa823e7bf403/dc2a9c50-9063-46ee-abae-bf8f1f9eb04a.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
       "id": "96ae166c-d8e1-4e9e-88cb-805b65154d7e",
       "title": "Red Blue",
       "cover": "https://uploads.mangadex.org/covers/96ae166c-d8e1-4e9e-88cb-805b65154d7e/1719b5a1-f476-4822-b83a-29bad41aaf17.jpg.256.jpg",
@@ -41,13 +132,6 @@
       "id": "34b47146-a72e-43d8-9ea5-935a5956f09f",
       "title": "أوموري",
       "cover": "https://uploads.mangadex.org/covers/34b47146-a72e-43d8-9ea5-935a5956f09f/38d8fe5e-f9bb-433f-bbf1-a821b0d0e7e3.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "87ffa375-bd2c-49ba-ba0c-6d78ea07c342",
-      "title": "Medaka Kuroiwa is Impervious to My Charms",
-      "cover": "https://uploads.mangadex.org/covers/87ffa375-bd2c-49ba-ba0c-6d78ea07c342/28e38262-232a-4f48-bc32-4ac04dc07c88.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
@@ -64,20 +148,6 @@
       "cover": "https://uploads.mangadex.org/covers/29ab6984-7c1d-4d45-b925-25aa082b492e/0367d616-0570-459a-9525-1d2083aad788.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
-    },
-    {
-      "id": "7777c3aa-fe0f-47d6-8672-6a1d60a1a9e8",
-      "title": "Blue Orchestra",
-      "cover": "https://uploads.mangadex.org/covers/7777c3aa-fe0f-47d6-8672-6a1d60a1a9e8/397f64e7-089f-45db-a4b4-37eae348e402.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "51f7d9fc-256e-4160-add1-ab9652f32ae1",
-      "title": "مغامرة جوجو الغريبة الجزء 3:",
-      "cover": "https://uploads.mangadex.org/covers/51f7d9fc-256e-4160-add1-ab9652f32ae1/3d199336-589d-432c-9db2-9eb4145df34f.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
     },
     {
       "id": "a76b6b97-e434-40d6-b7c5-6026d22986d6",
@@ -101,13 +171,6 @@
       "status": "completed"
     },
     {
-      "id": "5c9d1254-f074-4b5c-8795-6f0641b2597b",
-      "title": "Girl and Science",
-      "cover": "https://uploads.mangadex.org/covers/5c9d1254-f074-4b5c-8795-6f0641b2597b/f606b3ce-4f64-400e-8a1c-265698f68d01.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
       "id": "d553645b-03a3-4fc8-9a9c-57f91cbbab89",
       "title": "Are You a Landmine, Chihara-san?",
       "cover": "https://uploads.mangadex.org/covers/d553645b-03a3-4fc8-9a9c-57f91cbbab89/4878d139-e5ee-49eb-aeb6-1c2f9025624e.jpg.256.jpg",
@@ -122,13 +185,6 @@
       "status": "ongoing"
     },
     {
-      "id": "936f0ba5-ca65-4de4-99b1-528c02a4454d",
-      "title": "Hunter x Hunter - Digital Colored Comics",
-      "cover": "https://uploads.mangadex.org/covers/936f0ba5-ca65-4de4-99b1-528c02a4454d/128d80df-c5e4-4791-b3b7-08586e9db1b8.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
       "id": "77c4966f-ead7-45bb-87e0-9ac618b11e8e",
       "title": "Kunon the Sorcerer Can See",
       "cover": "https://uploads.mangadex.org/covers/77c4966f-ead7-45bb-87e0-9ac618b11e8e/393cc1fa-a752-49aa-a688-a2a309924030.jpg.256.jpg",
@@ -139,13 +195,6 @@
       "id": "3169544f-4b87-4a14-917b-f73600941f55",
       "title": "Noa-Senpai is My Friend.",
       "cover": "https://uploads.mangadex.org/covers/3169544f-4b87-4a14-917b-f73600941f55/9ead7eb9-9959-4353-8478-b56d121ad87c.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "35924437-c801-4b80-b668-c893473d6344",
-      "title": "Isekai Harry Potter",
-      "cover": "https://uploads.mangadex.org/covers/35924437-c801-4b80-b668-c893473d6344/a51358ea-46b8-4852-8f3d-3ef09c08f2c2.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
@@ -300,55 +349,6 @@
       "id": "849b1d52-f341-4d18-a136-660a932b0267",
       "title": "HonoSuto!: Gouenji's Soliloquy",
       "cover": "https://uploads.mangadex.org/covers/849b1d52-f341-4d18-a136-660a932b0267/b1dde606-e1de-4c8f-8c34-0cf8b72f1ea0.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "04c892b3-a202-46f5-ad11-0d433e712ab8",
-      "title": "Dealing with Mikadono Sisters is a Breeze",
-      "cover": "https://uploads.mangadex.org/covers/04c892b3-a202-46f5-ad11-0d433e712ab8/63756802-4e2b-4a46-a27e-2ab2654247c0.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "569963c5-6b0b-4f92-b561-e1304b78b0dc",
-      "title": "Bungo Stray Dogs: Wan!",
-      "cover": "https://uploads.mangadex.org/covers/569963c5-6b0b-4f92-b561-e1304b78b0dc/53839189-747f-451f-9803-150b428ea77b.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "a0a5528a-c4a8-4495-a966-6877c12856ba",
-      "title": "TRUMP",
-      "cover": "https://uploads.mangadex.org/covers/a0a5528a-c4a8-4495-a966-6877c12856ba/8cec91f3-ac76-460f-9d42-3d1b4163c0e3.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
-      "id": "3b6c3a0b-8752-41fc-9d3e-1310f6f28252",
-      "title": "Giant Killing",
-      "cover": "https://uploads.mangadex.org/covers/3b6c3a0b-8752-41fc-9d3e-1310f6f28252/2f2617df-3320-4cda-b613-2bf1fd13f3aa.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "a460ab18-22c1-47eb-a08a-9ee85fe37ec8",
-      "title": "Bleach (Official Colored)",
-      "cover": "https://uploads.mangadex.org/covers/a460ab18-22c1-47eb-a08a-9ee85fe37ec8/7c8f9203-2b82-41f2-beb3-e7fb00e151e2.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
-      "id": "17a56d33-9443-433a-9e0d-70459893ed8f",
-      "title": "My Wife Is From a Thousand Years Ago",
-      "cover": "https://uploads.mangadex.org/covers/17a56d33-9443-433a-9e0d-70459893ed8f/8d105d4e-a60e-4284-8321-d0904906574e.png.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
-      "id": "dea77c2d-dbaa-434a-b0af-0c116642434c",
-      "title": "Ichi the Witch",
-      "cover": "https://uploads.mangadex.org/covers/dea77c2d-dbaa-434a-b0af-0c116642434c/fb86f4d6-40cd-4cae-b557-fc0981d670ee.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     }
