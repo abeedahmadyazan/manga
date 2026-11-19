@@ -1,7 +1,35 @@
 {
-  "updated_at": "2026-11-19T05:51:34.033273+00:00",
+  "updated_at": "2026-11-19T15:13:55.100291+00:00",
   "count": 50,
   "items": [
+    {
+      "id": "229e5177-2e71-4642-bd56-a9b0b0ba0e60",
+      "title": "فهرس السحر",
+      "cover": "https://uploads.mangadex.org/covers/229e5177-2e71-4642-bd56-a9b0b0ba0e60/ff3aeb49-5268-4228-b07c-aada1f5b4a81.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "d8a959f7-648e-4c8d-8f23-f1f3f8e129f3",
+      "title": "ون بنش مان",
+      "cover": "https://uploads.mangadex.org/covers/d8a959f7-648e-4c8d-8f23-f1f3f8e129f3/d22cfde3-268a-48a3-b5ed-73772834764d.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "63dbbf80-0189-4ae4-a549-68a0caa2f834",
+      "title": "ويتشريف",
+      "cover": "https://uploads.mangadex.org/covers/63dbbf80-0189-4ae4-a549-68a0caa2f834/05f68285-5512-4f20-b6be-764fa4b5789a.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "77c4966f-ead7-45bb-87e0-9ac618b11e8e",
+      "title": "Kunon the Sorcerer Can See",
+      "cover": "https://uploads.mangadex.org/covers/77c4966f-ead7-45bb-87e0-9ac618b11e8e/393cc1fa-a752-49aa-a688-a2a309924030.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
     {
       "id": "7777c3aa-fe0f-47d6-8672-6a1d60a1a9e8",
       "title": "Blue Orchestra",
@@ -241,13 +269,6 @@
       "status": "ongoing"
     },
     {
-      "id": "77c4966f-ead7-45bb-87e0-9ac618b11e8e",
-      "title": "Kunon the Sorcerer Can See",
-      "cover": "https://uploads.mangadex.org/covers/77c4966f-ead7-45bb-87e0-9ac618b11e8e/393cc1fa-a752-49aa-a688-a2a309924030.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
       "id": "9d9b04ad-9a83-49f4-8ae4-a9a3780fe9c0",
       "title": "Sakamoto Days",
       "cover": "https://uploads.mangadex.org/covers/9d9b04ad-9a83-49f4-8ae4-a9a3780fe9c0/f15adf2e-164b-4ad8-a446-15839013d075.jpg.256.jpg",
@@ -328,27 +349,6 @@
       "id": "b4c93297-b32f-4f90-b619-55456a38b0aa",
       "title": "More than a Married Couple, but Not Lovers",
       "cover": "https://uploads.mangadex.org/covers/b4c93297-b32f-4f90-b619-55456a38b0aa/dd1804e7-56a5-4beb-90ac-d573dee7f1d1.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "9d3d3403-1a87-4737-9803-bc3d99db1424",
-      "title": "The Guy She Was Interested in Wasn't a Guy at All",
-      "cover": "https://uploads.mangadex.org/covers/9d3d3403-1a87-4737-9803-bc3d99db1424/fac191d0-96c1-4ebb-bf79-b7616d7162ac.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "52ede55c-1584-4019-b85b-3902a423c3ab",
-      "title": "FAIRY TAIL: 100 Years Quest",
-      "cover": "https://uploads.mangadex.org/covers/52ede55c-1584-4019-b85b-3902a423c3ab/8e18a9d7-27ed-48ff-924b-a397df5ba0a0.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "04598a65-4f1f-4807-a419-d79ca7f67457",
-      "title": "Under Ninja",
-      "cover": "https://uploads.mangadex.org/covers/04598a65-4f1f-4807-a419-d79ca7f67457/4c5713f4-249e-4745-a09e-2f3c33e6497a.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     }
