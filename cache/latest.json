@@ -1,11 +1,46 @@
 {
-  "updated_at": "2026-11-18T23:52:39.650940+00:00",
+  "updated_at": "2026-11-19T05:51:34.033273+00:00",
   "count": 50,
   "items": [
+    {
+      "id": "7777c3aa-fe0f-47d6-8672-6a1d60a1a9e8",
+      "title": "Blue Orchestra",
+      "cover": "https://uploads.mangadex.org/covers/7777c3aa-fe0f-47d6-8672-6a1d60a1a9e8/397f64e7-089f-45db-a4b4-37eae348e402.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "d7037b2a-874a-4360-8a7b-07f2899152fd",
+      "title": "إيروما-كن في مدرسة الشياطين",
+      "cover": "https://uploads.mangadex.org/covers/d7037b2a-874a-4360-8a7b-07f2899152fd/59ab55ed-a537-426e-b755-6337740df580.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
     {
       "id": "77296cee-0b74-415f-914d-6f29036d3906",
       "title": "مسرحية الجبل",
       "cover": "https://uploads.mangadex.org/covers/77296cee-0b74-415f-914d-6f29036d3906/6cfbaeb6-59ae-4971-bfaa-3b026b6c9ad9.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "936f0ba5-ca65-4de4-99b1-528c02a4454d",
+      "title": "Hunter x Hunter - Digital Colored Comics",
+      "cover": "https://uploads.mangadex.org/covers/936f0ba5-ca65-4de4-99b1-528c02a4454d/128d80df-c5e4-4791-b3b7-08586e9db1b8.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "3169544f-4b87-4a14-917b-f73600941f55",
+      "title": "Noa-Senpai is My Friend.",
+      "cover": "https://uploads.mangadex.org/covers/3169544f-4b87-4a14-917b-f73600941f55/9ead7eb9-9959-4353-8478-b56d121ad87c.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "c4ca02fb-8378-433b-8049-fbbea5d25cba",
+      "title": "هايميا-سينباي حسناء مهيبة!",
+      "cover": "https://uploads.mangadex.org/covers/c4ca02fb-8378-433b-8049-fbbea5d25cba/7ab29404-0ebd-4862-ad4e-e4ea1ffe231f.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
@@ -24,13 +59,6 @@
       "status": "ongoing"
     },
     {
-      "id": "3169544f-4b87-4a14-917b-f73600941f55",
-      "title": "Noa-Senpai is My Friend.",
-      "cover": "https://uploads.mangadex.org/covers/3169544f-4b87-4a14-917b-f73600941f55/9ead7eb9-9959-4353-8478-b56d121ad87c.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
       "id": "b8faa8ab-cb4e-416f-829d-d2a6042ba5ac",
       "title": "Ikoku Nikki",
       "cover": "https://uploads.mangadex.org/covers/b8faa8ab-cb4e-416f-829d-d2a6042ba5ac/0ca2f8bf-a33c-46cb-8730-cff51b148314.png.256.jpg",
@@ -41,13 +69,6 @@
       "id": "ea47525d-99df-45b5-9103-dd853f49f8c3",
       "title": "Welcome to Demon School! Iruma-kun: IruMafia Edition",
       "cover": "https://uploads.mangadex.org/covers/ea47525d-99df-45b5-9103-dd853f49f8c3/36bf283d-531f-4937-a3a7-2a8a05ccae2e.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "c4ca02fb-8378-433b-8049-fbbea5d25cba",
-      "title": "هايميا-سينباي حسناء مهيبة!",
-      "cover": "https://uploads.mangadex.org/covers/c4ca02fb-8378-433b-8049-fbbea5d25cba/7ab29404-0ebd-4862-ad4e-e4ea1ffe231f.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
@@ -129,13 +150,6 @@
       "status": "ongoing"
     },
     {
-      "id": "7777c3aa-fe0f-47d6-8672-6a1d60a1a9e8",
-      "title": "Blue Orchestra",
-      "cover": "https://uploads.mangadex.org/covers/7777c3aa-fe0f-47d6-8672-6a1d60a1a9e8/397f64e7-089f-45db-a4b4-37eae348e402.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
       "id": "87ffa375-bd2c-49ba-ba0c-6d78ea07c342",
       "title": "Medaka Kuroiwa is Impervious to My Charms",
       "cover": "https://uploads.mangadex.org/covers/87ffa375-bd2c-49ba-ba0c-6d78ea07c342/28e38262-232a-4f48-bc32-4ac04dc07c88.jpg.256.jpg",
@@ -146,13 +160,6 @@
       "id": "bcfe1b36-daee-40fd-9984-d9597caf9da7",
       "title": "فَقِيْهَةُ ٱلْمَغُوْلِ",
       "cover": "https://uploads.mangadex.org/covers/bcfe1b36-daee-40fd-9984-d9597caf9da7/5ce19283-d717-44e2-bb69-4247640d3c75.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "936f0ba5-ca65-4de4-99b1-528c02a4454d",
-      "title": "Hunter x Hunter - Digital Colored Comics",
-      "cover": "https://uploads.mangadex.org/covers/936f0ba5-ca65-4de4-99b1-528c02a4454d/128d80df-c5e4-4791-b3b7-08586e9db1b8.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
@@ -342,13 +349,6 @@
       "id": "04598a65-4f1f-4807-a419-d79ca7f67457",
       "title": "Under Ninja",
       "cover": "https://uploads.mangadex.org/covers/04598a65-4f1f-4807-a419-d79ca7f67457/4c5713f4-249e-4745-a09e-2f3c33e6497a.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "12ac16ec-8894-420b-bc03-eade9340dfd8",
-      "title": "Trinity Seven - The 7 Magicians",
-      "cover": "https://uploads.mangadex.org/covers/12ac16ec-8894-420b-bc03-eade9340dfd8/a093eae6-712c-4305-8f33-d4b7f72eef17.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     }
