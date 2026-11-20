@@ -1,7 +1,84 @@
 {
-  "updated_at": "2026-11-20T14:52:34.160930+00:00",
+  "updated_at": "2026-11-20T23:39:49.395809+00:00",
   "count": 50,
   "items": [
+    {
+      "id": "a0a5528a-c4a8-4495-a966-6877c12856ba",
+      "title": "TRUMP",
+      "cover": "https://uploads.mangadex.org/covers/a0a5528a-c4a8-4495-a966-6877c12856ba/8cec91f3-ac76-460f-9d42-3d1b4163c0e3.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "25e1d17b-6a4d-4698-a4f6-bf53460c10af",
+      "title": "حافلة لإثنين",
+      "cover": "https://uploads.mangadex.org/covers/25e1d17b-6a4d-4698-a4f6-bf53460c10af/9c47266e-6055-4a05-bf8f-a6e4068ca92a.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "37f1ddff-38a5-4e42-ba9a-ce967702dfb6",
+      "title": "Bartlet Fairy Basslet",
+      "cover": "https://uploads.mangadex.org/covers/37f1ddff-38a5-4e42-ba9a-ce967702dfb6/22ed72bc-6a4c-4a55-9d7a-059b1b2a3c9d.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "4141c5dc-c525-4df5-afd7-cc7d192a832f",
+      "title": "Blue Lock",
+      "cover": "https://uploads.mangadex.org/covers/4141c5dc-c525-4df5-afd7-cc7d192a832f/617e530b-aed4-4825-a05a-75c656429d1f.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "ed5dddc0-999d-4fd2-a702-9fef1ec2c955",
+      "title": "Blue Box",
+      "cover": "https://uploads.mangadex.org/covers/ed5dddc0-999d-4fd2-a702-9fef1ec2c955/850f0cb1-b94b-4f4f-9e33-a1a69acd0b46.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "8847f905-550d-4fe6-bcda-ac2b896789c7",
+      "title": "Golden Kamuy",
+      "cover": "https://uploads.mangadex.org/covers/8847f905-550d-4fe6-bcda-ac2b896789c7/e96cfe6d-7876-4558-b4bc-0930deb5060a.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "7f30dfc3-0b80-4dcc-a3b9-0cd746fac005",
+      "title": "المتحري كونان",
+      "cover": "https://uploads.mangadex.org/covers/7f30dfc3-0b80-4dcc-a3b9-0cd746fac005/beb2701a-241f-4b43-a321-8cd154ef8521.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "8a1b2e8c-afd9-4c43-ba96-0eb1507a4ddf",
+      "title": "Fate/Grand Order -turas réalta-",
+      "cover": "https://uploads.mangadex.org/covers/8a1b2e8c-afd9-4c43-ba96-0eb1507a4ddf/65b8053b-a0dc-4c8e-a7d6-72d186e462ea.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "34019331-7377-4e2c-837e-f6e1ab2b5ef7",
+      "title": "The Seven Deadly Sins: Four Knights of the Apocalypse",
+      "cover": "https://uploads.mangadex.org/covers/34019331-7377-4e2c-837e-f6e1ab2b5ef7/2f2339d7-14ba-4d38-98c6-040d107a478c.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "5c9d1254-f074-4b5c-8795-6f0641b2597b",
+      "title": "Girl and Science",
+      "cover": "https://uploads.mangadex.org/covers/5c9d1254-f074-4b5c-8795-6f0641b2597b/f606b3ce-4f64-400e-8a1c-265698f68d01.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "7777c3aa-fe0f-47d6-8672-6a1d60a1a9e8",
+      "title": "Blue Orchestra",
+      "cover": "https://uploads.mangadex.org/covers/7777c3aa-fe0f-47d6-8672-6a1d60a1a9e8/397f64e7-089f-45db-a4b4-37eae348e402.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
     {
       "id": "b5b21ca1-bba5-4b9a-8cd1-6248f731650b",
       "title": "سجلات راغناروك",
@@ -43,13 +120,6 @@
       "cover": "https://uploads.mangadex.org/covers/9661f9e7-3c6a-448f-9b1e-2c563ed1e5e9/bb9d92b7-e944-4f9f-ad18-da8083db1568.jpg.256.jpg",
       "source": "mangadex",
       "status": "completed"
-    },
-    {
-      "id": "7777c3aa-fe0f-47d6-8672-6a1d60a1a9e8",
-      "title": "Blue Orchestra",
-      "cover": "https://uploads.mangadex.org/covers/7777c3aa-fe0f-47d6-8672-6a1d60a1a9e8/397f64e7-089f-45db-a4b4-37eae348e402.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
     },
     {
       "id": "5de941bb-4d52-4894-97d5-820d94ca6ff9",
@@ -164,13 +234,6 @@
       "status": "ongoing"
     },
     {
-      "id": "5c9d1254-f074-4b5c-8795-6f0641b2597b",
-      "title": "Girl and Science",
-      "cover": "https://uploads.mangadex.org/covers/5c9d1254-f074-4b5c-8795-6f0641b2597b/f606b3ce-4f64-400e-8a1c-265698f68d01.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
       "id": "3df1a9a3-a1be-47a3-9e90-9b3e55b1d0ac",
       "title": "الشخص الخطير في قلبي",
       "cover": "https://uploads.mangadex.org/covers/3df1a9a3-a1be-47a3-9e90-9b3e55b1d0ac/0594a53a-1fc3-43fc-bd24-f793bdc114d7.jpg.256.jpg",
@@ -248,13 +311,6 @@
       "status": "ongoing"
     },
     {
-      "id": "25e1d17b-6a4d-4698-a4f6-bf53460c10af",
-      "title": "حافلة لإثنين",
-      "cover": "https://uploads.mangadex.org/covers/25e1d17b-6a4d-4698-a4f6-bf53460c10af/9c47266e-6055-4a05-bf8f-a6e4068ca92a.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
       "id": "96ae166c-d8e1-4e9e-88cb-805b65154d7e",
       "title": "Red Blue",
       "cover": "https://uploads.mangadex.org/covers/96ae166c-d8e1-4e9e-88cb-805b65154d7e/1719b5a1-f476-4822-b83a-29bad41aaf17.jpg.256.jpg",
@@ -295,62 +351,6 @@
       "cover": "https://uploads.mangadex.org/covers/87ffa375-bd2c-49ba-ba0c-6d78ea07c342/28e38262-232a-4f48-bc32-4ac04dc07c88.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
-    },
-    {
-      "id": "bcfe1b36-daee-40fd-9984-d9597caf9da7",
-      "title": "فَقِيْهَةُ ٱلْمَغُوْلِ",
-      "cover": "https://uploads.mangadex.org/covers/bcfe1b36-daee-40fd-9984-d9597caf9da7/5ce19283-d717-44e2-bb69-4247640d3c75.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "51f7d9fc-256e-4160-add1-ab9652f32ae1",
-      "title": "مغامرة جوجو الغريبة الجزء 3:",
-      "cover": "https://uploads.mangadex.org/covers/51f7d9fc-256e-4160-add1-ab9652f32ae1/3d199336-589d-432c-9db2-9eb4145df34f.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
-      "id": "0a580438-bc72-4503-940b-12a5da881b56",
-      "title": "أنتِ زهرة الحظ",
-      "cover": "https://uploads.mangadex.org/covers/0a580438-bc72-4503-940b-12a5da881b56/4b9aa4eb-4356-417a-bb74-4dc879141e19.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
-      "id": "35924437-c801-4b80-b668-c893473d6344",
-      "title": "Isekai Harry Potter",
-      "cover": "https://uploads.mangadex.org/covers/35924437-c801-4b80-b668-c893473d6344/a51358ea-46b8-4852-8f3d-3ef09c08f2c2.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "4e421eb8-d4a0-4096-86db-ca5e3fc42c5d",
-      "title": "Pumpkin Night",
-      "cover": "https://uploads.mangadex.org/covers/4e421eb8-d4a0-4096-86db-ca5e3fc42c5d/7016688b-dffe-4f22-ba7f-b9c8018bec5d.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "34b47146-a72e-43d8-9ea5-935a5956f09f",
-      "title": "أوموري",
-      "cover": "https://uploads.mangadex.org/covers/34b47146-a72e-43d8-9ea5-935a5956f09f/38d8fe5e-f9bb-433f-bbf1-a821b0d0e7e3.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "356de811-ae92-48f1-b93b-cfdf0f8d02e4",
-      "title": "بما أننا نرسم الآن",
-      "cover": "https://uploads.mangadex.org/covers/356de811-ae92-48f1-b93b-cfdf0f8d02e4/60e2c515-06d0-4d61-8aec-5f180f19b1af.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "9aa3ca66-b1d0-4cc5-aec7-66990f026b78",
-      "title": "Detective Xeno and the Seven Locked Murder Rooms",
-      "cover": "https://uploads.mangadex.org/covers/9aa3ca66-b1d0-4cc5-aec7-66990f026b78/b50bde05-79d5-4f8b-a345-85d3d205396d.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
     }
   ]
 }
