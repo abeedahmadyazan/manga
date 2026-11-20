@@ -1,7 +1,105 @@
 {
-  "updated_at": "2026-11-19T15:13:55.100291+00:00",
+  "updated_at": "2026-11-20T00:16:46.670935+00:00",
   "count": 50,
   "items": [
+    {
+      "id": "30f3ac69-21b6-45ad-a110-d011b7aaadaa",
+      "title": "Fly Me to The Moon",
+      "cover": "https://uploads.mangadex.org/covers/30f3ac69-21b6-45ad-a110-d011b7aaadaa/dec4d1c5-d2e0-4cdd-b4e2-c8243c9f4341.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "c4ca02fb-8378-433b-8049-fbbea5d25cba",
+      "title": "هايميا-سينباي حسناء مهيبة!",
+      "cover": "https://uploads.mangadex.org/covers/c4ca02fb-8378-433b-8049-fbbea5d25cba/7ab29404-0ebd-4862-ad4e-e4ea1ffe231f.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "4e0ab019-afcb-4fd9-98eb-fcb28cf7fc81",
+      "title": "مانجا الملكة النحلة شوكهو ميساكي - مينتل-آوت",
+      "cover": "https://uploads.mangadex.org/covers/4e0ab019-afcb-4fd9-98eb-fcb28cf7fc81/71450b93-c970-42e6-bb65-93f45b8e9ac3.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "a07320a4-afcd-413a-a451-d69a448d0c28",
+      "title": "Usogui",
+      "cover": "https://uploads.mangadex.org/covers/a07320a4-afcd-413a-a451-d69a448d0c28/b74c8cce-42cd-4889-b75d-7944e63f9a14.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "0b094aab-0cfb-4837-a49b-7267bdb86bec",
+      "title": "Boruto: Two Blue Vortex",
+      "cover": "https://uploads.mangadex.org/covers/0b094aab-0cfb-4837-a49b-7267bdb86bec/baf472db-4658-46fb-8130-d4abdd43f171.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "4242c6d3-4ee4-4b0b-9ca0-23bd57952805",
+      "title": "ليس حُبًّا بعدُ، ولكن...",
+      "cover": "https://uploads.mangadex.org/covers/4242c6d3-4ee4-4b0b-9ca0-23bd57952805/c0df0d1a-d8a2-4fb9-844e-8e128bb81c67.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "484f94e7-35c3-4cb5-a068-53d684c1439a",
+      "title": "Baki Part 6",
+      "cover": "https://uploads.mangadex.org/covers/484f94e7-35c3-4cb5-a068-53d684c1439a/863ae891-3627-4070-8918-4a626dc9d1ff.png.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "fa85b2aa-370c-41c5-96ae-29b05c848f3d",
+      "title": "Innocent",
+      "cover": "https://uploads.mangadex.org/covers/fa85b2aa-370c-41c5-96ae-29b05c848f3d/3d562b75-ca28-4a65-87a9-2e3f73657456.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "a76b6b97-e434-40d6-b7c5-6026d22986d6",
+      "title": "رجلة الجنية السوداء ذات القوى المتلاشية",
+      "cover": "https://uploads.mangadex.org/covers/a76b6b97-e434-40d6-b7c5-6026d22986d6/8f40381d-188c-4a28-b492-25c07a7684a5.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "26102334-1f7b-4a5b-a64f-107c5c24a70f",
+      "title": "Mao",
+      "cover": "https://uploads.mangadex.org/covers/26102334-1f7b-4a5b-a64f-107c5c24a70f/156b9fd5-0bb1-441f-958c-ed273888b69b.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "9c1cd558-fba3-40f1-bb84-b320f5d1eab1",
+      "title": "Bug Ego",
+      "cover": "https://uploads.mangadex.org/covers/9c1cd558-fba3-40f1-bb84-b320f5d1eab1/a40cc882-7d6b-4e12-885c-fef2928e7b7a.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "5c9d1254-f074-4b5c-8795-6f0641b2597b",
+      "title": "Girl and Science",
+      "cover": "https://uploads.mangadex.org/covers/5c9d1254-f074-4b5c-8795-6f0641b2597b/f606b3ce-4f64-400e-8a1c-265698f68d01.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "7777c3aa-fe0f-47d6-8672-6a1d60a1a9e8",
+      "title": "Blue Orchestra",
+      "cover": "https://uploads.mangadex.org/covers/7777c3aa-fe0f-47d6-8672-6a1d60a1a9e8/397f64e7-089f-45db-a4b4-37eae348e402.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "3df1a9a3-a1be-47a3-9e90-9b3e55b1d0ac",
+      "title": "الشخص الخطير في قلبي",
+      "cover": "https://uploads.mangadex.org/covers/3df1a9a3-a1be-47a3-9e90-9b3e55b1d0ac/0594a53a-1fc3-43fc-bd24-f793bdc114d7.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
     {
       "id": "229e5177-2e71-4642-bd56-a9b0b0ba0e60",
       "title": "فهرس السحر",
@@ -31,13 +129,6 @@
       "status": "ongoing"
     },
     {
-      "id": "7777c3aa-fe0f-47d6-8672-6a1d60a1a9e8",
-      "title": "Blue Orchestra",
-      "cover": "https://uploads.mangadex.org/covers/7777c3aa-fe0f-47d6-8672-6a1d60a1a9e8/397f64e7-089f-45db-a4b4-37eae348e402.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
       "id": "d7037b2a-874a-4360-8a7b-07f2899152fd",
       "title": "إيروما-كن في مدرسة الشياطين",
       "cover": "https://uploads.mangadex.org/covers/d7037b2a-874a-4360-8a7b-07f2899152fd/59ab55ed-a537-426e-b755-6337740df580.jpg.256.jpg",
@@ -62,13 +153,6 @@
       "id": "3169544f-4b87-4a14-917b-f73600941f55",
       "title": "Noa-Senpai is My Friend.",
       "cover": "https://uploads.mangadex.org/covers/3169544f-4b87-4a14-917b-f73600941f55/9ead7eb9-9959-4353-8478-b56d121ad87c.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "c4ca02fb-8378-433b-8049-fbbea5d25cba",
-      "title": "هايميا-سينباي حسناء مهيبة!",
-      "cover": "https://uploads.mangadex.org/covers/c4ca02fb-8378-433b-8049-fbbea5d25cba/7ab29404-0ebd-4862-ad4e-e4ea1ffe231f.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
@@ -108,13 +192,6 @@
       "status": "ongoing"
     },
     {
-      "id": "a07320a4-afcd-413a-a451-d69a448d0c28",
-      "title": "Usogui",
-      "cover": "https://uploads.mangadex.org/covers/a07320a4-afcd-413a-a451-d69a448d0c28/b74c8cce-42cd-4889-b75d-7944e63f9a14.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
       "id": "29ab6984-7c1d-4d45-b925-25aa082b492e",
       "title": "Shangri-La Frontier: From Trash-Game Hunter to God-Tier Game Master!",
       "cover": "https://uploads.mangadex.org/covers/29ab6984-7c1d-4d45-b925-25aa082b492e/0367d616-0570-459a-9525-1d2083aad788.jpg.256.jpg",
@@ -150,25 +227,11 @@
       "status": "ongoing"
     },
     {
-      "id": "0b094aab-0cfb-4837-a49b-7267bdb86bec",
-      "title": "Boruto: Two Blue Vortex",
-      "cover": "https://uploads.mangadex.org/covers/0b094aab-0cfb-4837-a49b-7267bdb86bec/baf472db-4658-46fb-8130-d4abdd43f171.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
       "id": "510f29a8-99b4-46af-ba5e-916e96bc6f37",
       "title": "Fate/type Redline",
       "cover": "https://uploads.mangadex.org/covers/510f29a8-99b4-46af-ba5e-916e96bc6f37/c1d7aed1-9cd1-426f-bfb8-7e46594d0e29.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
-    },
-    {
-      "id": "5c9d1254-f074-4b5c-8795-6f0641b2597b",
-      "title": "Girl and Science",
-      "cover": "https://uploads.mangadex.org/covers/5c9d1254-f074-4b5c-8795-6f0641b2597b/f606b3ce-4f64-400e-8a1c-265698f68d01.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
     },
     {
       "id": "22d6d048-9f9f-4c3a-95c2-3b145f110e20",
@@ -234,13 +297,6 @@
       "status": "ongoing"
     },
     {
-      "id": "a76b6b97-e434-40d6-b7c5-6026d22986d6",
-      "title": "رجلة الجنية السوداء ذات القوى المتلاشية",
-      "cover": "https://uploads.mangadex.org/covers/a76b6b97-e434-40d6-b7c5-6026d22986d6/8f40381d-188c-4a28-b492-25c07a7684a5.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
       "id": "9aa3ca66-b1d0-4cc5-aec7-66990f026b78",
       "title": "Detective Xeno and the Seven Locked Murder Rooms",
       "cover": "https://uploads.mangadex.org/covers/9aa3ca66-b1d0-4cc5-aec7-66990f026b78/b50bde05-79d5-4f8b-a345-85d3d205396d.jpg.256.jpg",
@@ -295,62 +351,6 @@
       "cover": "https://uploads.mangadex.org/covers/cdae359d-5fa9-4d4e-b11a-69dd32b09742/601a10fc-61aa-4102-9387-f6bf613fb934.jpg.256.jpg",
       "source": "mangadex",
       "status": "completed"
-    },
-    {
-      "id": "59f47645-66a9-443e-8228-788313c3ae3c",
-      "title": "Tokyo Ghoul: re",
-      "cover": "https://uploads.mangadex.org/covers/59f47645-66a9-443e-8228-788313c3ae3c/c41d1081-cdb2-4c90-8028-61844823515b.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
-      "id": "34019331-7377-4e2c-837e-f6e1ab2b5ef7",
-      "title": "The Seven Deadly Sins: Four Knights of the Apocalypse",
-      "cover": "https://uploads.mangadex.org/covers/34019331-7377-4e2c-837e-f6e1ab2b5ef7/2f2339d7-14ba-4d38-98c6-040d107a478c.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "c4b36f15-4ee5-425f-a77d-c2e7cbb970d8",
-      "title": "NIPPON SANGOKU: The Three Nations of the Crimson Sun",
-      "cover": "https://uploads.mangadex.org/covers/c4b36f15-4ee5-425f-a77d-c2e7cbb970d8/e5c54f1b-6ea4-4dd2-ae6e-9d0e138d7c2e.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "68112dc1-2b80-4f20-beb8-2f2a8716a430",
-      "title": "داندادان",
-      "cover": "https://uploads.mangadex.org/covers/68112dc1-2b80-4f20-beb8-2f2a8716a430/b19f6cfd-cf51-49db-bc9f-e13ee272f458.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "8a38bcc4-0a52-4a46-9d02-7fc802048b1d",
-      "title": "Shinobi Undercover",
-      "cover": "https://uploads.mangadex.org/covers/8a38bcc4-0a52-4a46-9d02-7fc802048b1d/2fd4b15d-7575-49ec-add2-d1ff0759543a.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "bd6d0982-0091-4945-ad70-c028ed3c0917",
-      "title": "موشوكو تينسي",
-      "cover": "https://uploads.mangadex.org/covers/bd6d0982-0091-4945-ad70-c028ed3c0917/6a9f3d32-b7bb-478a-9c76-54868276c26f.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "ef473f14-8c4d-435e-9015-b714512e69eb",
-      "title": "استدعاء اليابان",
-      "cover": "https://uploads.mangadex.org/covers/ef473f14-8c4d-435e-9015-b714512e69eb/a379fe62-b42d-4844-ba4d-2d3360f4c4b9.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "b4c93297-b32f-4f90-b619-55456a38b0aa",
-      "title": "More than a Married Couple, but Not Lovers",
-      "cover": "https://uploads.mangadex.org/covers/b4c93297-b32f-4f90-b619-55456a38b0aa/dd1804e7-56a5-4beb-90ac-d573dee7f1d1.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
     }
   ]
 }
