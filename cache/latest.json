@@ -1,7 +1,28 @@
 {
-  "updated_at": "2026-11-22T05:00:09.592946+00:00",
+  "updated_at": "2026-11-22T14:01:27.171380+00:00",
   "count": 50,
   "items": [
+    {
+      "id": "7777c3aa-fe0f-47d6-8672-6a1d60a1a9e8",
+      "title": "Blue Orchestra",
+      "cover": "https://uploads.mangadex.org/covers/7777c3aa-fe0f-47d6-8672-6a1d60a1a9e8/397f64e7-089f-45db-a4b4-37eae348e402.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "d00bd104-d9b2-4ee9-a088-b5065d1c406a",
+      "title": "A Certain Scientific Railgun",
+      "cover": "https://uploads.mangadex.org/covers/d00bd104-d9b2-4ee9-a088-b5065d1c406a/47e96623-5363-4de2-908c-c649c31bba92.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "77c4966f-ead7-45bb-87e0-9ac618b11e8e",
+      "title": "Kunon the Sorcerer Can See",
+      "cover": "https://uploads.mangadex.org/covers/77c4966f-ead7-45bb-87e0-9ac618b11e8e/393cc1fa-a752-49aa-a688-a2a309924030.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
     {
       "id": "22d6d048-9f9f-4c3a-95c2-3b145f110e20",
       "title": "I'm in Love with the Villainess",
@@ -108,13 +129,6 @@
       "status": "ongoing"
     },
     {
-      "id": "7777c3aa-fe0f-47d6-8672-6a1d60a1a9e8",
-      "title": "Blue Orchestra",
-      "cover": "https://uploads.mangadex.org/covers/7777c3aa-fe0f-47d6-8672-6a1d60a1a9e8/397f64e7-089f-45db-a4b4-37eae348e402.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
       "id": "510f29a8-99b4-46af-ba5e-916e96bc6f37",
       "title": "Fate/type Redline",
       "cover": "https://uploads.mangadex.org/covers/510f29a8-99b4-46af-ba5e-916e96bc6f37/c1d7aed1-9cd1-426f-bfb8-7e46594d0e29.jpg.256.jpg",
@@ -134,13 +148,6 @@
       "cover": "https://uploads.mangadex.org/covers/f6ce20ca-73c3-4fdd-9367-e2901fca780e/fbf55840-15be-4ebd-86fc-4af2fa0368f7.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
-    },
-    {
-      "id": "d00bd104-d9b2-4ee9-a088-b5065d1c406a",
-      "title": "A Certain Scientific Railgun",
-      "cover": "https://uploads.mangadex.org/covers/d00bd104-d9b2-4ee9-a088-b5065d1c406a/47e96623-5363-4de2-908c-c649c31bba92.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
     },
     {
       "id": "4e421eb8-d4a0-4096-86db-ca5e3fc42c5d",
@@ -342,13 +349,6 @@
       "id": "4e0ab019-afcb-4fd9-98eb-fcb28cf7fc81",
       "title": "مانجا الملكة النحلة شوكهو ميساكي - مينتل-آوت",
       "cover": "https://uploads.mangadex.org/covers/4e0ab019-afcb-4fd9-98eb-fcb28cf7fc81/71450b93-c970-42e6-bb65-93f45b8e9ac3.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "0b094aab-0cfb-4837-a49b-7267bdb86bec",
-      "title": "Boruto: Two Blue Vortex",
-      "cover": "https://uploads.mangadex.org/covers/0b094aab-0cfb-4837-a49b-7267bdb86bec/baf472db-4658-46fb-8130-d4abdd43f171.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     }
