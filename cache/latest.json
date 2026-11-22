@@ -1,11 +1,39 @@
 {
-  "updated_at": "2026-11-21T22:45:06.111568+00:00",
+  "updated_at": "2026-11-22T05:00:09.592946+00:00",
   "count": 50,
   "items": [
     {
       "id": "22d6d048-9f9f-4c3a-95c2-3b145f110e20",
       "title": "I'm in Love with the Villainess",
       "cover": "https://uploads.mangadex.org/covers/22d6d048-9f9f-4c3a-95c2-3b145f110e20/38ba706a-2394-4ac4-b9ef-7fcda0c39f49.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "ea0e7020-2b2f-4f17-9251-fee3632dc135",
+      "title": "My Yandere Girlfriend Lurks in the Dungeon and Kills Me Over and Over Again",
+      "cover": "https://uploads.mangadex.org/covers/ea0e7020-2b2f-4f17-9251-fee3632dc135/4979315b-7bbd-4d17-9e61-d49f07d1245d.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "0a580438-bc72-4503-940b-12a5da881b56",
+      "title": "أنتِ زهرة الحظ",
+      "cover": "https://uploads.mangadex.org/covers/0a580438-bc72-4503-940b-12a5da881b56/4b9aa4eb-4356-417a-bb74-4dc879141e19.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "completed"
+    },
+    {
+      "id": "11b74211-f4c0-4f08-b5a4-c491da0d0c0b",
+      "title": "Choujin X",
+      "cover": "https://uploads.mangadex.org/covers/11b74211-f4c0-4f08-b5a4-c491da0d0c0b/a024c8ce-5fbc-4fea-9363-6b8eee3477e7.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "d7037b2a-874a-4360-8a7b-07f2899152fd",
+      "title": "إيروما-كن في مدرسة الشياطين",
+      "cover": "https://uploads.mangadex.org/covers/d7037b2a-874a-4360-8a7b-07f2899152fd/59ab55ed-a537-426e-b755-6337740df580.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
@@ -321,34 +349,6 @@
       "id": "0b094aab-0cfb-4837-a49b-7267bdb86bec",
       "title": "Boruto: Two Blue Vortex",
       "cover": "https://uploads.mangadex.org/covers/0b094aab-0cfb-4837-a49b-7267bdb86bec/baf472db-4658-46fb-8130-d4abdd43f171.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "484f94e7-35c3-4cb5-a068-53d684c1439a",
-      "title": "Baki Part 6",
-      "cover": "https://uploads.mangadex.org/covers/484f94e7-35c3-4cb5-a068-53d684c1439a/863ae891-3627-4070-8918-4a626dc9d1ff.png.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "fa85b2aa-370c-41c5-96ae-29b05c848f3d",
-      "title": "Innocent",
-      "cover": "https://uploads.mangadex.org/covers/fa85b2aa-370c-41c5-96ae-29b05c848f3d/3d562b75-ca28-4a65-87a9-2e3f73657456.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "completed"
-    },
-    {
-      "id": "a76b6b97-e434-40d6-b7c5-6026d22986d6",
-      "title": "رجلة الجنية السوداء ذات القوى المتلاشية",
-      "cover": "https://uploads.mangadex.org/covers/a76b6b97-e434-40d6-b7c5-6026d22986d6/8f40381d-188c-4a28-b492-25c07a7684a5.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "26102334-1f7b-4a5b-a64f-107c5c24a70f",
-      "title": "Mao",
-      "cover": "https://uploads.mangadex.org/covers/26102334-1f7b-4a5b-a64f-107c5c24a70f/156b9fd5-0bb1-441f-958c-ed273888b69b.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     }
