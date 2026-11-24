@@ -1,11 +1,67 @@
 {
-  "updated_at": "2026-11-23T17:21:19.797402+00:00",
+  "updated_at": "2026-11-24T03:47:41.982391+00:00",
   "count": 50,
   "items": [
+    {
+      "id": "c4b36f15-4ee5-425f-a77d-c2e7cbb970d8",
+      "title": "NIPPON SANGOKU: The Three Nations of the Crimson Sun",
+      "cover": "https://uploads.mangadex.org/covers/c4b36f15-4ee5-425f-a77d-c2e7cbb970d8/e5c54f1b-6ea4-4dd2-ae6e-9d0e138d7c2e.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "ca33a142-58fb-4fee-88b9-36ef87f02c77",
+      "title": "حب نيزومي الأول",
+      "cover": "https://uploads.mangadex.org/covers/ca33a142-58fb-4fee-88b9-36ef87f02c77/68d5be4b-cc6c-418f-9a3c-8ed7290d0dba.png.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "22d6d048-9f9f-4c3a-95c2-3b145f110e20",
+      "title": "I'm in Love with the Villainess",
+      "cover": "https://uploads.mangadex.org/covers/22d6d048-9f9f-4c3a-95c2-3b145f110e20/38ba706a-2394-4ac4-b9ef-7fcda0c39f49.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "3169544f-4b87-4a14-917b-f73600941f55",
+      "title": "Noa-Senpai is My Friend.",
+      "cover": "https://uploads.mangadex.org/covers/3169544f-4b87-4a14-917b-f73600941f55/9ead7eb9-9959-4353-8478-b56d121ad87c.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "da36a727-7686-4e92-8fac-94bc292b8e91",
+      "title": "ساحر المكتبة العظيم",
+      "cover": "https://uploads.mangadex.org/covers/da36a727-7686-4e92-8fac-94bc292b8e91/f40f8db2-b1d2-46de-b029-a3a10c333dc2.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "263deeff-c010-4ac7-bc01-6341f3e698ac",
+      "title": "Dragon Quest: The Great Adventure of Dai - Avan the Brave and the Demon King of Hellfire",
+      "cover": "https://uploads.mangadex.org/covers/263deeff-c010-4ac7-bc01-6341f3e698ac/774442b3-f96c-417c-a873-43b682eecf0c.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "77296cee-0b74-415f-914d-6f29036d3906",
+      "title": "مسرحية الجبل",
+      "cover": "https://uploads.mangadex.org/covers/77296cee-0b74-415f-914d-6f29036d3906/6cfbaeb6-59ae-4971-bfaa-3b026b6c9ad9.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
     {
       "id": "7777c3aa-fe0f-47d6-8672-6a1d60a1a9e8",
       "title": "Blue Orchestra",
       "cover": "https://uploads.mangadex.org/covers/7777c3aa-fe0f-47d6-8672-6a1d60a1a9e8/397f64e7-089f-45db-a4b4-37eae348e402.jpg.256.jpg",
+      "source": "mangadex",
+      "status": "ongoing"
+    },
+    {
+      "id": "ab8cbb82-d0ed-45a7-8ffe-4bfa6d43d79c",
+      "title": "JoJo's Bizarre Adventure Part 9 - The JOJOLands",
+      "cover": "https://uploads.mangadex.org/covers/ab8cbb82-d0ed-45a7-8ffe-4bfa6d43d79c/88e8a8ea-91ed-4db6-937b-4dd0048e74d5.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     },
@@ -108,13 +164,6 @@
       "status": "ongoing"
     },
     {
-      "id": "3169544f-4b87-4a14-917b-f73600941f55",
-      "title": "Noa-Senpai is My Friend.",
-      "cover": "https://uploads.mangadex.org/covers/3169544f-4b87-4a14-917b-f73600941f55/9ead7eb9-9959-4353-8478-b56d121ad87c.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
       "id": "d65c0332-3764-4c89-84bd-b1a4e7278ad7",
       "title": "Kagurabachi",
       "cover": "https://uploads.mangadex.org/covers/d65c0332-3764-4c89-84bd-b1a4e7278ad7/3edb80b9-dae6-4483-984d-2e7f8b02b702.jpg.256.jpg",
@@ -162,13 +211,6 @@
       "cover": "https://uploads.mangadex.org/covers/e1d8b192-fa28-4651-bdaf-d4e0d4418ea8/cc05ec6d-203d-4efe-9118-18f4c1953f11.jpg.256.jpg",
       "source": "mangadex",
       "status": "hiatus"
-    },
-    {
-      "id": "22d6d048-9f9f-4c3a-95c2-3b145f110e20",
-      "title": "I'm in Love with the Villainess",
-      "cover": "https://uploads.mangadex.org/covers/22d6d048-9f9f-4c3a-95c2-3b145f110e20/38ba706a-2394-4ac4-b9ef-7fcda0c39f49.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
     },
     {
       "id": "85a99758-de39-471e-9f6d-800547f53d0a",
@@ -307,48 +349,6 @@
       "id": "f6ce20ca-73c3-4fdd-9367-e2901fca780e",
       "title": "ويلات الزمان",
       "cover": "https://uploads.mangadex.org/covers/f6ce20ca-73c3-4fdd-9367-e2901fca780e/fbf55840-15be-4ebd-86fc-4af2fa0368f7.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "4e421eb8-d4a0-4096-86db-ca5e3fc42c5d",
-      "title": "Pumpkin Night",
-      "cover": "https://uploads.mangadex.org/covers/4e421eb8-d4a0-4096-86db-ca5e3fc42c5d/7016688b-dffe-4f22-ba7f-b9c8018bec5d.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "d553645b-03a3-4fc8-9a9c-57f91cbbab89",
-      "title": "Are You a Landmine, Chihara-san?",
-      "cover": "https://uploads.mangadex.org/covers/d553645b-03a3-4fc8-9a9c-57f91cbbab89/4878d139-e5ee-49eb-aeb6-1c2f9025624e.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "244c9d4f-e5fb-4590-9b96-4da191977b33",
-      "title": "Skip and Loafer",
-      "cover": "https://uploads.mangadex.org/covers/244c9d4f-e5fb-4590-9b96-4da191977b33/927b550f-516f-4600-a59f-82f2e2f4fb39.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "4d6decd4-835d-4905-9534-2571dae07bcd",
-      "title": "Lord El-Melloi II-sei no Jikenbo",
-      "cover": "https://uploads.mangadex.org/covers/4d6decd4-835d-4905-9534-2571dae07bcd/5f347aae-bf45-4dcb-828d-2c507db71d2f.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "334019e1-18bb-4ac0-b35c-0e8efb1e481c",
-      "title": "JoJo’s Bizarre Adventure, Part 9: The JoJoLands - Digital Colored Comics",
-      "cover": "https://uploads.mangadex.org/covers/334019e1-18bb-4ac0-b35c-0e8efb1e481c/530583f4-80ad-4f37-92d9-441b225c9785.jpg.256.jpg",
-      "source": "mangadex",
-      "status": "ongoing"
-    },
-    {
-      "id": "c4ca02fb-8378-433b-8049-fbbea5d25cba",
-      "title": "هايميا-سينباي حسناء مهيبة!",
-      "cover": "https://uploads.mangadex.org/covers/c4ca02fb-8378-433b-8049-fbbea5d25cba/7ab29404-0ebd-4862-ad4e-e4ea1ffe231f.jpg.256.jpg",
       "source": "mangadex",
       "status": "ongoing"
     }

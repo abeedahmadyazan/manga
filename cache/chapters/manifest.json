@@ -1,48 +1,7 @@
 {
-  "updated_at": "2026-11-23T17:25:53.497488+00:00",
+  "updated_at": "2026-11-24T03:47:58.923277+00:00",
   "manga": "one-piece",
-  "latest_chapter": 1199,
-  "chapters": {
-    "1198": {
-      "pages": [
-        "cache/chapters/1198/page-001.webp",
-        "cache/chapters/1198/page-002.webp",
-        "cache/chapters/1198/page-003.webp",
-        "cache/chapters/1198/page-004.webp",
-        "cache/chapters/1198/page-005.webp",
-        "cache/chapters/1198/page-006.webp",
-        "cache/chapters/1198/page-007.webp",
-        "cache/chapters/1198/page-008.webp",
-        "cache/chapters/1198/page-009.webp",
-        "cache/chapters/1198/page-010.webp",
-        "cache/chapters/1198/page-011.webp",
-        "cache/chapters/1198/page-012.webp",
-        "cache/chapters/1198/page-013.webp"
-      ],
-      "source": "3asq-cdn",
-      "cached_at": "2026-11-23T17:22:32.626463+00:00"
-    },
-    "1191": {
-      "pages": [
-        "cache/chapters/1191/page-001.webp",
-        "cache/chapters/1191/page-002.webp",
-        "cache/chapters/1191/page-003.webp",
-        "cache/chapters/1191/page-004.webp",
-        "cache/chapters/1191/page-005.webp",
-        "cache/chapters/1191/page-006.webp",
-        "cache/chapters/1191/page-007.webp",
-        "cache/chapters/1191/page-008.webp",
-        "cache/chapters/1191/page-009.webp",
-        "cache/chapters/1191/page-010.webp",
-        "cache/chapters/1191/page-011.webp",
-        "cache/chapters/1191/page-012.webp",
-        "cache/chapters/1191/page-013.webp",
-        "cache/chapters/1191/page-014.webp",
-        "cache/chapters/1191/page-015.webp"
-      ],
-      "source": "3asq-cdn",
-      "cached_at": "2026-11-23T17:25:33.306951+00:00"
-    }
-  },
-  "note": "Latest 10 chapters cached. Older chapters via MangaDex/3asq live."
+  "latest_chapter": null,
+  "chapters": {},
+  "note": "cache update failed"
 }
